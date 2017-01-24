@@ -1,0 +1,393 @@
+
+
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Getting Started - Bonsai</title>
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight, .highlight .w {
+  color: #f8f8f2;
+  background-color: #272822;
+}
+.highlight .err {
+  color: #272822;
+  background-color: #f92672;
+}
+.highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #f4bf75;
+}
+.highlight .nt {
+  color: #f4bf75;
+}
+.highlight .o, .highlight .ow {
+  color: #f8f8f2;
+}
+.highlight .p, .highlight .pi {
+  color: #f8f8f2;
+}
+.highlight .gi {
+  color: #a6e22e;
+}
+.highlight .gd {
+  color: #f92672;
+}
+.highlight .gh {
+  color: #66d9ef;
+  background-color: #272822;
+  font-weight: bold;
+}
+.highlight .k, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kv {
+  color: #ae81ff;
+}
+.highlight .kc {
+  color: #fd971f;
+}
+.highlight .kt {
+  color: #fd971f;
+}
+.highlight .kd {
+  color: #fd971f;
+}
+.highlight .s, .highlight .sb, .highlight .sc, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .s1 {
+  color: #a6e22e;
+}
+.highlight .sr {
+  color: #a1efe4;
+}
+.highlight .si {
+  color: #cc6633;
+}
+.highlight .se {
+  color: #cc6633;
+}
+.highlight .nn {
+  color: #f4bf75;
+}
+.highlight .nc {
+  color: #f4bf75;
+}
+.highlight .no {
+  color: #f4bf75;
+}
+.highlight .na {
+  color: #66d9ef;
+}
+.highlight .m, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mb, .highlight .mx {
+  color: #a6e22e;
+}
+.highlight .ss {
+  color: #a6e22e;
+}
+    </style>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
+	<link href="stylesheets/test.css" rel="stylesheet" media="screen" />
+    <link href="favicon.ico" rel="icon" type="image/ico" />
+      <script src="javascripts/all.js"></script>
+  </head>
+
+  <body class="getting_started" data-languages="[]">
+
+  <div id="flex-container">
+
+	<section id="primary-nav" class="navigation">
+  <div class="nav-container">
+    <div class="brand">
+     <a href="."><img class="bonsai-logo" src="https://dl.dropboxusercontent.com/s/d37ndmizplio8mw/bonsai-logo-color-docs.svg?dl=0"></a>
+    </div>
+    <nav>
+      <div class="nav-mobile"><a id="nav-toggle" href="#!"><span></span></a></div>
+      <ul class="nav-list">
+        <li>
+         <a href="getting_started.html">Getting Started</a>
+        </li>
+        <li>
+         <a href="inkling.html">Inkling</a>  
+        </li>
+        <li>
+         <a href="reference.html">References</a>
+        </li>
+       
+		<li><gcse:search></gcse:search></li>
+
+      </ul>
+    </nav>
+  </div>
+</section>
+
+
+	<div id="main-wrapper">
+
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" alt="Navbar" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <div id="toc">
+      </div>
+      
+			 
+<ul class="toc-footer">
+
+<li><a href='https://bons.ai/sign-up'>Sign Up for our Private Beta!</a></li>
+<li><a href='https://github.com/BonsaiAI/slate'>Contribute to the Docs</a></li>
+<li><a href='http://forums.bons.ai/'>Bonsai Forums</a></li>
+<li><a href='mailto:support@bons.ai?subject=I need help with'>Email Us</a></li>
+<li><a href='https://bons.ai'>Bonsai Home</a></li>
+
+</ul>
+          
+        
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        
+          <h1 id="introduction">Introduction</h1>
+
+<p>This guide starts you on the path of unlocking the world of machine learning and AI.</p>
+
+<p>We&rsquo;ll go through some of the major concepts you&rsquo;ll need before you get started writing <strong>Inkling</strong> files, connecting <strong>simulators</strong>, and training <strong>BRAIN</strong>s. We&rsquo;ll also tell you what we mean by all of that!</p>
+
+<p>Then, we&rsquo;ll walk you through the steps to:</p>
+
+<ul>
+<li>install the Bonsai CLI (one-time task)</li>
+<li>create your first BRAIN</li>
+<li>load an Inkling file and connect a simulator</li>
+<li>train your BRAIN</li>
+<li>use your BRAIN</li>
+</ul>
+
+<p>We&rsquo;ll follow all of that up with our other resources that gives you the tools to keep going, like our Inkling Guide or our CLI Reference. You can also check out our examples and tutorials. If you want to jump right into the action, you can skip down to our <a href="#let-39-s-get-started">Let&rsquo;s Get Started</a> section.</p>
+
+          <h1 id="architecture">Architecture</h1>
+
+<p>There are some things you might want to know before you get started. In this section, we&rsquo;re going to walk you through the Bonsai Platform components and some of the basic Bonsai concepts. Let&rsquo;s jump right in!</p>
+
+<h2 id="what-are-the-components-of-the-bonsai-platform">What are the components of the Bonsai Platform?</h2>
+
+<p>The image below displays all of the components of Bonsai&rsquo;s platform. It enables  developers to more efficiently Build, Teach and Use intelligence models:</p>
+
+<p><img src="https://daks2k3a4ib2z.cloudfront.net/57bf257ce45825764c5cb54b/57e5bb2cab226c7d49d033f5_bonsai_infographic_2x_1024.png" alt="The Bonsai Platform" /></p>
+
+<h2 id="build">Build</h2>
+
+<ul>
+<li><strong>CLI:</strong> the Bonsai Command Line Interface (CLI) tool.</li>
+<li><strong>brains.bons.ai:</strong> The address for Bonsai&rsquo;s web interface; this is the browser based tool that includes your BRAIN Dashboard and BRAIN Details page.</li>
+<li><strong>Simulators:</strong> are a training source. They imitate a real world situation in a virtual environment. Simulators are often a complex, interactive environment. They usually have state, which is a representation of the world inside the virtual environment.</li>
+<li><strong>Generators:</strong> are a training source. They produce labeled data programmatically. This data is effectively infinite. A generator could, for example, produce a random (but known) integer, set of line segments, etc.</li>
+<li><strong>Data:</strong> is a training source. It is information related to the concepts being trained that are used for training or test and evaluate how well the training is implemented. Non-generated data may sometimes be difficult to find, and the data that exists may be a very small set or difficult to label. An example of a data set you could train with is the MNIST database, which is a collection of handwritten digits used for training image processing systems and other machine learning systems.</li>
+</ul>
+
+<p><strong>Note:</strong> Currently, during our private beta, you can only train with simulators as your training source.</p>
+
+<h2 id="teach">Teach</h2>
+
+<ul>
+<li><strong>Inkling:</strong> our unique, special purpose, pedagogical programming language. Pedagogical programming is a new programming paradigm. It expresses the solution to a problem in terms of how you teach the computer to find the solution as opposed to how to calculate the solution.</li>
+<li><strong>Bonsai Artificial Intelligence Engine:</strong> abstracts away and automates the low-level mechanics of artificial intelligence. Each Inkling program developed is fed into the Bonsai Artificial Intelligence Engine in order to generate and train appropriate models (referred to as BRAINs).</li>
+</ul>
+
+<h2 id="use">Use</h2>
+
+<ul>
+<li><strong>Mastermind:</strong> the Bonsai AI application for building AI. This tool will contain our Integrated Development Environment (IDE). <strong>Note:</strong> This tool will not be available for the private beta.</li>
+<li><strong>SDK &amp; Libraries:</strong> enables you to connect your own simulators to the Bonsai Artificial Intelligence Engine. It also enables you to integrate your application with your BRAIN</li>
+<li><strong>HTTP API:</strong> enables AI creators and AI users to interact with the Bonsai Artificial Intelligence Engine.</li>
+</ul>
+
+<h3 id="after-your-brain-is-created-and-trained-you-can-use-it-with-your-app-ultimately-our-platform-enables-you-to-build-ai-agents-that-work-or-play-for-you-without-a-deep-knowledge-of-machine-learning">After your BRAIN is created and trained, you can use it with your app. Ultimately, our platform enables you to build AI agents that work (or play) for you without a deep knowledge of machine learning.</h3>
+
+<p>‍</p>
+
+<h1 id="what-is-a-brain-what-is-the-bonsai-artificial-intelligence-engine">What is a BRAIN? What is the Bonsai Artificial Intelligence Engine?</h1>
+
+<p>A BRAIN, <strong>Basic Recurrent Artificial Intelligence Network</strong>, is an individual AI agent, and it is programmed to learn using Inkling. Each BRAIN lives in the <strong>Bonsai Artificial Intelligence Engine</strong>, which manages and automates much of the lower level, complexities of working with artificial intelligences.</p>
+
+<p>The Bonsai AI Engine contains a vast array of machine learning algorithms, manages data streaming and data storage, and provides the efficient allocation of hardware resources. It is built with an infrastructure that supports streaming data efficiently through the system, and it uses a set of heuristics to make choices about which learning algorithms to use to train each BRAIN. The set of heuristics also make it possible for it to choose from any number of possible algorithms, topologies, etc., train all of them in parallel, and pick the best result.</p>
+
+<p>For example, if the BRAIN Server picked Deep Q-Learning, which is a machine learning algorithm, then the system also picks the appropriate topology, hyper-parameters, and initial weight values.</p>
+
+<p>The Bonsai AI Engine also determines when to train each concept, how much (or little) to train each concept based on its relevance, and, ultimately, produces a trained BRAIN. Furthermore, it does something we call <strong>meta-learning</strong>. Meta-learning means that the system keeps a kind of memory or record about each program it&rsquo;s seen, the data it used for training, and the generated AIs that it&rsquo;s made. It also records how fast those AI&rsquo;s trained and how accurate they became. The BRAIN server learns over that dataset.</p>
+
+<h3 id="you-might-say-the-system-learns-to-make-learning-systems">You might say the system learns to make learning systems.</h3>
+
+<h2 id="what-is-a-simulator">What is a simulator?</h2>
+
+<p>A simulator imitates a real world situation in a virtual environment, which enables a user to model and test situations that would often, otherwise be very complicated to set up and test. Your simulator could be a game, such as breakout, or an emulation of a real world process, such as a self driving car. Training with simulators is especially useful for optimization, or for use with complex control problems that can be modeled in a simulator.</p>
+
+<p><strong>Remember:</strong>  Currently, a simulation runs on your local machine and streams data to the BRAIN server for training. This means your computer needs to remain connected to the Bonsai Artificial Intelligence Engine while your BRAIN is training. If your computer is disconnected from the server, it automatically picks up where it left off when its reconnected. Today, we only support simulators written in python.</p>
+
+<p>To learn more about connecting your own simulator, refer to our SDK.</p>
+
+<h2 id="what-is-training">What is training?</h2>
+
+<p>Training means teaching it to get a specific outcome on a simulator. The training involves using a specific set of concepts, a curriculum, and lessons, which are described in the Inkling file.</p>
+
+<h2 id="what-is-inkling">What is Inkling?</h2>
+
+<p><strong>Inkling</strong> is a our programming language designed to express higher level abstractions related to teaching.</p>
+
+<p>Inkling enables us to use a teaching-oriented approach, also known as Pedagogical Programming, for training AI. It provides a set of foundational primitives that can be used to represent AI without specifying how the AI is created. By abstracting away the underlying algorithms and techniques, you can focus on creative ways to describe your problems and leave the heavy lifting to us.</p>
+
+<p>This means that you, the developer, can leverage your domain-specific expertise about the problem space and leverage our expertise about machine learning.</p>
+
+<p>Inkling is designed to enable you to solve any AI problem whether learning to label images or controlling a simulation. In the current version, Bonsai&rsquo;s technology is focused on solving control and optimization problems using simulation. When you train a BRAIN to solve an AI problem, you write a file in Inkling that teaches the AI to solve it. Inkling files describe the concepts that you want to teach and the curriculum and lessons for teaching them.</p>
+
+<p>To learn more about Inkling, refer to our <a href="inkling.html">Inkling Guide</a>.</p>
+
+<h2 id="what-is-the-bonsai-command-line-interface">What is the Bonsai Command Line Interface?</h2>
+
+<p>The Bonsai Command Line Interface (CLI) is a command line tool that enables you to configure the Bonsai Artificial Intelligence Engine. The CLI is especially useful for automation and connection to other tools. Currently, there are some actions that can only be performed using the CLI, such as loading your Inkling file and connecting your simulator.</p>
+
+<h2 id="beta-bons-ai">beta.bons.ai</h2>
+
+<p>The Bonsai Beta Website is a browser-based tool for configuring and analyzing BRAINs stored in the Bonsai Artificial Intelligence Engine. The website will be useful for sharing, collaborating, and learning. There is some information you can only get from beta.bons.ai, such as a visualization of a BRAIN&rsquo;s training progress.</p>
+
+<h3 id="brain-dashboard"><strong>BRAIN Dashboard</strong></h3>
+
+<p>Your BRAIN Dashboard contains all of your BRAINs. The BRAIN Dashboard is also where you can create new BRAINs.</p>
+
+<h3 id="brain-details"><strong>BRAIN Details</strong></h3>
+
+<p>There is a BRAIN Details page for each of your BRAINs. Each page shows that BRAIN&rsquo;s status, training history, and  commands you can use in the CLI for this BRAIN.</p>
+
+          <h1 id="let-39-s-get-started">Let&rsquo;s Get Started!</h1>
+
+<p>Before you begin, you will need to have access to our Beta. If you don&rsquo;t have access yet, request access at <a href="https://bons.ai">bons.ai</a>.</p>
+
+<h2 id="install-prerequisites">Install Prerequisites</h2>
+
+<p>If you have Anaconda installed on your system, go to Step 1 of our <a href="getting-started-with-anaconda.html">Getting Started with Anaconda</a> guide instead.</p>
+
+<h3 id="windows">Windows</h3>
+
+<ol>
+<li>Download and install Python from <a href="https://www.python.org">python.org</a>.</li>
+<li>Install Git (e.g. via GitHub desktop for windows).</li>
+<li>You may need to reboot your computer after installing Python and Git to make sure all install settings take effect.</li>
+</ol>
+
+<blockquote>
+<p>Mac OS</p>
+</blockquote>
+<pre class="highlight shell"><code>sudo easy_install pip
+</code></pre>
+<h3 id="mac-os-x">Mac OS X</h3>
+
+<ol>
+<li>Install pip</li>
+</ol>
+
+<p><strong>pip is a tool for installing and managing Python dependencies. For more information about pip, refer to the <a href="https://pip.pypa.io/en/stable/">Python Package Authority</a>.</strong></p>
+
+<h2 id="setup-the-bonsai-cli">Setup the Bonsai CLI</h2>
+
+<p>Install the Bonsai Command Line Interface tool and configure it. You&rsquo;ll need to have your access code (accessKey). You can find your access code in your account settings at <a href="https://beta.bons.ai/accounts/settings">Bonsai Account Settings</a>.</p>
+<pre class="highlight shell"><code>pip install bonsai-cli
+bonsai configure <span class="c"># Follow the instructions to retrieve your key, and enter it when prompted</span>
+</code></pre>
+<h2 id="clone-a-sample-project">Clone a sample project</h2>
+
+<p>Clone our sample project, Mountain Car. This project uses <a href="https://gym.openai.com/envs/MountainCar-v0">OpenAI Gym&rsquo;s</a> Mountain Car simulation.</p>
+<pre class="highlight shell"><code>git clone https://github.com/BonsaiAI/gym-mountaincar-sample
+</code></pre>
+<h2 id="install-requirements">Install requirements</h2>
+
+<p>Install the mountain car requirements from OpenAI Gym.</p>
+<pre class="highlight shell"><code><span class="nb">cd </span>gym-mountaincar-sample
+pip install -r requirements.txt
+</code></pre>
+<h2 id="create-a-brain">Create a BRAIN</h2>
+
+<p>Create your BRAIN and give it a name. You can also create a BRAIN from your beta.bons.ai BRAIN Dashboard. You will view your BRAIN&rsquo;s progress on the BRAIN Details page.</p>
+<pre class="highlight shell"><code>bonsai create myMountainCarBrain
+</code></pre>
+<h2 id="load-sample-inkling-into-your-brain">Load sample Inkling into your BRAIN</h2>
+
+<p>Load our sample Inkling file for the mountain car simulation.</p>
+<pre class="highlight shell"><code>bonsai load mountaincar.ink
+</code></pre>
+<h2 id="train">Train</h2>
+
+<p>Start the training mode for your BRAIN.</p>
+<pre class="highlight shell"><code>bonsai train start
+</code></pre>
+<h2 id="connect-the-simulator-for-training">Connect the simulator for training</h2>
+
+<p>Connect the simulator to the BRAIN. Training begins automatically. If the simulator gets disconnected, training resumes from the same point when the simulator is reconnected.</p>
+<pre class="highlight shell"><code>python mountaincar_simulator.py --train-brain<span class="o">=</span>myMountainCarBrain --headless
+</code></pre>
+<h2 id="view-your-brain-training-status">View your BRAIN training status</h2>
+
+<p>View your BRAIN&rsquo;s training status as it trains on the simulator.</p>
+
+<p><strong>Go to <a href="https://beta.bons.ai">beta.bons.ai</a>.</strong></p>
+
+<h2 id="close-the-simulator">Close the simulator</h2>
+
+<p>Training mountain car takes about 45 minutes.</p>
+
+<p><strong>Stop the simulator by closing it.</strong></p>
+
+<h2 id="stop-training">Stop training</h2>
+
+<p>Stop the training mode.</p>
+<pre class="highlight shell"><code>bonsai train stop
+</code></pre>
+<h2 id="use-your-brain">Use your BRAIN</h2>
+
+<p>After your BRAIN is finished training, it can play the mountain car game.</p>
+<pre class="highlight shell"><code>python mountaincar_simulator.py --predict-brain<span class="o">=</span>myMountainCarBrain --predict-version<span class="o">=</span>latest
+</code></pre>
+          <h1 id="what-39-s-next">What&rsquo;s Next</h1>
+
+<p>Now that you&rsquo;ve completed this guide, you can:</p>
+
+<p><strong>Check out our <a href="inkling.html">Inkling Documentation</a>.</strong></p>
+
+<p>It contains all of the concepts and components of our unique programming language. You&rsquo;ll learn:</p>
+
+<ul>
+<li>How to assess a simulation and write an Inkling file to teach a BRAIN.</li>
+<li>The core concepts behind the Inkling language.</li>
+<li>The components of the Inkling language.</li>
+</ul>
+
+<p>And we have these other resources that will enable you to maximize your AI development experience:</p>
+
+<ul>
+<li><a href="reference.html#cli-reference">CLI Reference</a></li>
+<li><a href="reference.html#http-api-reference">HTTP API Reference</a></li>
+<li><a href="https://bons.ai/blog">Blog</a></li>
+</ul>
+
+      </div>
+      <div class="dark-box">
+      </div>
+    </div>
+
+    </div>
+
+  </div>
+
+  </body>
+</html>

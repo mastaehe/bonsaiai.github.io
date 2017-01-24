@@ -1,0 +1,255 @@
+
+
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Getting Started with Anaconda - Bonsai</title>
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight, .highlight .w {
+  color: #f8f8f2;
+  background-color: #272822;
+}
+.highlight .err {
+  color: #272822;
+  background-color: #f92672;
+}
+.highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #f4bf75;
+}
+.highlight .nt {
+  color: #f4bf75;
+}
+.highlight .o, .highlight .ow {
+  color: #f8f8f2;
+}
+.highlight .p, .highlight .pi {
+  color: #f8f8f2;
+}
+.highlight .gi {
+  color: #a6e22e;
+}
+.highlight .gd {
+  color: #f92672;
+}
+.highlight .gh {
+  color: #66d9ef;
+  background-color: #272822;
+  font-weight: bold;
+}
+.highlight .k, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kv {
+  color: #ae81ff;
+}
+.highlight .kc {
+  color: #fd971f;
+}
+.highlight .kt {
+  color: #fd971f;
+}
+.highlight .kd {
+  color: #fd971f;
+}
+.highlight .s, .highlight .sb, .highlight .sc, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .s1 {
+  color: #a6e22e;
+}
+.highlight .sr {
+  color: #a1efe4;
+}
+.highlight .si {
+  color: #cc6633;
+}
+.highlight .se {
+  color: #cc6633;
+}
+.highlight .nn {
+  color: #f4bf75;
+}
+.highlight .nc {
+  color: #f4bf75;
+}
+.highlight .no {
+  color: #f4bf75;
+}
+.highlight .na {
+  color: #66d9ef;
+}
+.highlight .m, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mb, .highlight .mx {
+  color: #a6e22e;
+}
+.highlight .ss {
+  color: #a6e22e;
+}
+    </style>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
+	<link href="stylesheets/test.css" rel="stylesheet" media="screen" />
+    <link href="favicon.ico" rel="icon" type="image/ico" />
+      <script src="javascripts/all.js"></script>
+  </head>
+
+  <body class="getting-started-with-anaconda" data-languages="[]">
+
+  <div id="flex-container">
+
+	<section id="primary-nav" class="navigation">
+  <div class="nav-container">
+    <div class="brand">
+     <a href="."><img class="bonsai-logo" src="https://dl.dropboxusercontent.com/s/d37ndmizplio8mw/bonsai-logo-color-docs.svg?dl=0"></a>
+    </div>
+    <nav>
+      <div class="nav-mobile"><a id="nav-toggle" href="#!"><span></span></a></div>
+      <ul class="nav-list">
+        <li>
+         <a href="getting_started.html">Getting Started</a>
+        </li>
+        <li>
+         <a href="inkling.html">Inkling</a>  
+        </li>
+        <li>
+         <a href="reference.html">References</a>
+        </li>
+       
+		<li><gcse:search></gcse:search></li>
+
+      </ul>
+    </nav>
+  </div>
+</section>
+
+
+	<div id="main-wrapper">
+
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" alt="Navbar" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <div id="toc">
+      </div>
+      
+			 
+<ul class="toc-footer">
+
+<li><a href='https://bons.ai/sign-up'>Sign Up for our Private Beta!</a></li>
+<li><a href='https://github.com/BonsaiAI/slate'>Contribute to the Docs</a></li>
+<li><a href='http://forums.bons.ai/'>Bonsai Forums</a></li>
+<li><a href='mailto:support@bons.ai?subject=I need help with'>Email Us</a></li>
+<li><a href='https://bons.ai'>Bonsai Home</a></li>
+
+</ul>
+          
+        
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        
+          <h1 id="install-prerequisites">Install Prerequisites</h1>
+
+<p>If you <em>do not</em> have Anaconda installed on your system, go to our <a href="getting_started.html#let-39-s-get-started">Let&rsquo;s Get Started!</a> guide instead.</p>
+
+<p>conda is a tool for installing and managing Python dependencies. For more information about pip, refer to the <a href="https://pip.pypa.io/en/stable/">Pip documentation</a>.</p>
+
+<blockquote>
+<p>Windows</p>
+</blockquote>
+<pre class="highlight shell"><code>conda create -n gym-env
+activate gym-env
+conda install pip
+</code></pre>
+<blockquote>
+<p>Mac OS</p>
+</blockquote>
+<pre class="highlight shell"><code>conda create -n gym-env
+<span class="nb">source </span>activate gym-env
+conda install pip
+</code></pre>
+<h1 id="setup-the-bonsai-cli">Setup the Bonsai CLI</h1>
+
+<p>Install the Bonsai Command Line Interface tool and configure it. You&rsquo;ll need to have your access code (accessKey). You can find your access code in your account settings at <a href="https://beta.bons.ai/accounts/settings">Bonsai Account Settings</a>.</p>
+<pre class="highlight shell"><code>pip install bonsai-cli
+bonsai configure <span class="c"># Enter key when prompted</span>
+</code></pre>
+<h1 id="clone-a-sample-project">Clone a sample project</h1>
+
+<p>Clone our sample project, Mountain Car. This project uses <a href="https://gym.openai.com/envs/MountainCar-v0">OpenAI Gym&rsquo;s</a> Mountain Car simulation.</p>
+<pre class="highlight shell"><code>git clone https://github.com/BonsaiAI/gym-mountaincar-sample
+</code></pre>
+<h1 id="install-requirements">Install requirements</h1>
+
+<p>Install the mountain car requirements from OpenAI Gym.</p>
+<pre class="highlight shell"><code><span class="nb">cd </span>gym-mountaincar-sample
+pip install -r requirements.txt
+</code></pre>
+<h1 id="create-a-brain">Create a BRAIN</h1>
+
+<p>Create your BRAIN and give it a name. You can also create a BRAIN from your beta.bons.ai BRAIN Dashboard. You will view your BRAIN&rsquo;s progress on the BRAIN Details page.</p>
+<pre class="highlight shell"><code>bonsai create myMountainCarBrain
+</code></pre>
+<h1 id="load-sample-inkling-into-your-brain">Load sample Inkling into your BRAIN</h1>
+
+<p>Load our sample Inkling file for the mountain car simulation.</p>
+<pre class="highlight shell"><code>bonsai load mountaincar.ink
+</code></pre>
+<h1 id="train">Train</h1>
+
+<p>Start the training mode for your BRAIN.</p>
+<pre class="highlight shell"><code>bonsai train start
+</code></pre>
+<p>‍</p>
+
+<h1 id="connect-the-simulator-for-training">Connect the simulator for training</h1>
+
+<p>Connect the simulator to the BRAIN. Training begins automatically. If the simulator gets disconnected, training resumes from the same point when the simulator is reconnected.</p>
+<pre class="highlight shell"><code>python mountaincar_simulator.py --train-brain<span class="o">=</span>myMountainCarBrain --headless
+</code></pre>
+<h1 id="view-your-brain-training-status">View your BRAIN training status</h1>
+
+<p>View your BRAIN&rsquo;s training status as it trains on the simulator.</p>
+
+<p>Go to <a href="https://beta.bons.ai"><strong>beta.bons.ai</strong></a>.</p>
+
+<h1 id="close-the-simulator">Close the simulator</h1>
+
+<p>Training mountain car takes about 45 minutes.</p>
+
+<p><strong>Stop the simulator by closing it.</strong></p>
+
+<h1 id="stop-training">Stop training</h1>
+
+<p>Stop the training mode.</p>
+<pre class="highlight shell"><code>bonsai train stop
+</code></pre>
+<p>‍</p>
+
+<h1 id="use-your-brain">Use your BRAIN</h1>
+
+<p>After your BRAIN is finished training, it can play the mountain car game.</p>
+<pre class="highlight shell"><code>python mountaincar_simulator.py --predict-brain<span class="o">=</span>myMountainCarBrain --predict-version<span class="o">=</span>latest
+</code></pre>
+      </div>
+      <div class="dark-box">
+      </div>
+    </div>
+
+    </div>
+
+  </div>
+
+  </body>
+</html>
