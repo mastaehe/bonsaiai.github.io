@@ -241,9 +241,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <p>This guide starts you on the path of unlocking the world of machine learning and AI.</p>
 
-<p>We&rsquo;ll go through some of the major concepts you&rsquo;ll need before you get started writing <strong>Inkling</strong> files, connecting <strong>simulators</strong>, and training <strong>BRAIN</strong>s. We&rsquo;ll also tell you what we mean by all of that!</p>
-
-<p>Then, we&rsquo;ll walk you through the steps to:</p>
+<p>Let&rsquo;s first go through some of the major concepts you&rsquo;ll want to know before you get started writing <strong>Inkling</strong> files, connecting <strong>simulators</strong>, and training <strong>BRAIN</strong>s. Then, we&rsquo;ll walk you through the steps to:</p>
 
 <ul>
 <li>install the Bonsai CLI (one-time task)</li>
@@ -253,76 +251,74 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <li>use your BRAIN</li>
 </ul>
 
-<p>We&rsquo;ll follow all of that up with our other resources that gives you the tools to keep going, like our Inkling Guide or our CLI Reference. You can also check out our examples and tutorials. If you want to jump right into the action, you can skip down to our <a href="#let-39-s-get-started">Let&rsquo;s Get Started</a> section.</p>
+<p>Then, we&rsquo;ll follow all of that up with our other resources that give you the tools to keep going, like our <a href="inkling.html">Inkling Guide</a> and <a href="reference.html#cli-reference">CLI Reference</a>. You can also check out our <a href="inkling.html#example-cart-pole">examples</a> and tutorials (coming soon!).</p>
 
-          <h1 id="architecture">Architecture</h1>
+<p>If you&rsquo;re not interested in the background, and want to jump right into the action, you can skip down to our <a href="#let-39-s-get-started">Let&rsquo;s Get Started</a> section.</p>
 
-<p>There are some things you might want to know before you get started. In this section, we&rsquo;re going to walk you through the Bonsai Platform components and some of the basic Bonsai concepts. Let&rsquo;s jump right in!</p>
+          <h1 id="background-faq">Background FAQ</h1>
+
+<p>There are some things you might want to know before you get started. In this section, we&rsquo;re going to walk you through the Bonsai Platform components and some of the fundamental ideas of the Bonsai Platform that are frequently asked questions. Let&rsquo;s jump right in!</p>
 
 <h2 id="what-are-the-components-of-the-bonsai-platform">What are the components of the Bonsai Platform?</h2>
 
-<p>The image below displays all of the components of Bonsai&rsquo;s platform. It enables  developers to more efficiently Build, Teach and Use intelligence models:</p>
+<p>This image displays all the components of Bonsai&rsquo;s Platform. The Platform enables developers to more efficiently build, teach and use intelligence models. A training source is any source of data used to teach or train an AI. It includes batch data like a large spreadsheet or a set of labels and images and synthetic data like the output from a simulation.</p>
 
 <p><img src="https://daks2k3a4ib2z.cloudfront.net/57bf257ce45825764c5cb54b/57e5bb2cab226c7d49d033f5_bonsai_infographic_2x_1024.png" alt="The Bonsai Platform" /></p>
 
-<h2 id="build">Build</h2>
+<h6 id="build">Build</h6>
 
 <ul>
-<li><strong>CLI:</strong> the Bonsai Command Line Interface (CLI) tool.</li>
-<li><strong>brains.bons.ai:</strong> The address for Bonsai&rsquo;s web interface; this is the browser based tool that includes your BRAIN Dashboard and BRAIN Details page.</li>
-<li><strong>Simulators:</strong> are a training source. They imitate a real world situation in a virtual environment. Simulators are often a complex, interactive environment. They usually have state, which is a representation of the world inside the virtual environment.</li>
+<li><strong>Bonsai Command Line Interface (CLI):</strong> is a command line tool that enables you to configure and control the Bonsai Artificial Intelligence (AI) Engine.</li>
+<li><strong><a href="https://beta.bons.ai">beta.bons.ai</a>:</strong> The address for Bonsai&rsquo;s beta web interface; this is the browser based tool that includes your <em>BRAIN Dashboard</em> and <em>BRAIN Details</em> page.</li>
+<li><strong>Simulators:</strong> are currently the only training source implemented. Simulators are often a complex, interactive virtual environment. They usually have state, which is a representation of the world inside the virtual environment.</li>
 <li><strong>Generators:</strong> are a training source. They produce labeled data programmatically. This data is effectively infinite. A generator could, for example, produce a random (but known) integer, set of line segments, etc.</li>
-<li><strong>Data:</strong> is a training source. It is information related to the concepts being trained that are used for training or test and evaluate how well the training is implemented. Non-generated data may sometimes be difficult to find, and the data that exists may be a very small set or difficult to label. An example of a data set you could train with is the MNIST database, which is a collection of handwritten digits used for training image processing systems and other machine learning systems.</li>
+<li><strong>Data:</strong> is also a training source. It is information related to the scenario being trained and can also be used to test and evaluate how well the training is implemented. Data could be a collection of images and labels or the rows of a spreadsheet. An example of a data set you could train with is the <a href="http://yann.lecun.com/exdb/mnist/">MNIST database</a>, which is a collection of handwritten digits used for training image processing systems and other machine learning systems.</li>
 </ul>
 
-<p><strong>Note:</strong> Currently, during our private beta, you can only train with simulators as your training source.</p>
+<p><strong>Note:</strong> Currently, during our private beta, you can only use simulators as your training source.</p>
 
-<h2 id="teach">Teach</h2>
+<h6 id="teach">Teach</h6>
 
 <ul>
 <li><strong>Inkling:</strong> our unique, special purpose, pedagogical programming language. Pedagogical programming is a new programming paradigm. It expresses the solution to a problem in terms of how you teach the computer to find the solution as opposed to how to calculate the solution.</li>
-<li><strong>Bonsai Artificial Intelligence Engine:</strong> abstracts away and automates the low-level mechanics of artificial intelligence. Each Inkling program developed is fed into the Bonsai Artificial Intelligence Engine in order to generate and train appropriate models (referred to as BRAINs).</li>
+<li><strong>Bonsai Artificial Intelligence (AI) Engine:</strong> abstracts away and automates the low-level mechanics of artificial intelligence. Each Inkling program developed is fed into the Bonsai AI Engine in order to generate and train appropriate models (referred to as BRAINs).</li>
 </ul>
 
-<h2 id="use">Use</h2>
+<h6 id="use">Use</h6>
 
 <ul>
 <li><strong>Mastermind:</strong> the Bonsai AI application for building AI. This tool will contain our Integrated Development Environment (IDE). <strong>Note:</strong> This tool will not be available for the private beta.</li>
-<li><strong>SDK &amp; Libraries:</strong> enables you to connect your own simulators to the Bonsai Artificial Intelligence Engine. It also enables you to integrate your application with your BRAIN</li>
-<li><strong>HTTP API:</strong> enables AI creators and AI users to interact with the Bonsai Artificial Intelligence Engine.</li>
+<li><strong>SDK &amp; Libraries:</strong> enables you to connect your own simulators to the Bonsai AI Engine. They also enable you to integrate your application with your BRAIN.</li>
+<li><strong>HTTP API:</strong> enables AI creators and AI users to interact with the Bonsai AI Engine.</li>
 </ul>
 
-<h3 id="after-your-brain-is-created-and-trained-you-can-use-it-with-your-app-ultimately-our-platform-enables-you-to-build-ai-agents-that-work-or-play-for-you-without-a-deep-knowledge-of-machine-learning">After your BRAIN is created and trained, you can use it with your app. Ultimately, our platform enables you to build AI agents that work (or play) for you without a deep knowledge of machine learning.</h3>
+<p>After your BRAIN is created and trained, you can use it with your application by connecting it to the API generated by the AI Engine using the Bonsai library specific to your application&rsquo;s programming language. Ultimately, our platform enables you to build AI agents that work (or play) for you without a deep knowledge of machine learning.</p>
 
-<p>‍</p>
+<h2 id="what-is-a-brain-what-is-the-bonsai-ai-engine">What is a BRAIN? What is the Bonsai AI Engine?</h2>
 
-<h1 id="what-is-a-brain-what-is-the-bonsai-artificial-intelligence-engine">What is a BRAIN? What is the Bonsai Artificial Intelligence Engine?</h1>
-
-<p>A BRAIN, <strong>Basic Recurrent Artificial Intelligence Network</strong>, is an individual AI agent, and it is programmed to learn using Inkling. Each BRAIN lives in the <strong>Bonsai Artificial Intelligence Engine</strong>, which manages and automates much of the lower level, complexities of working with artificial intelligences.</p>
+<p>A BRAIN, <strong>Basic Recurrent Artificial Intelligence Network</strong>, is an individual AI agent, and it is programmed to learn using Inkling. Each BRAIN lives in the <strong>Bonsai Artificial Intelligence (AI) Engine</strong> which manages and automates much of the lower level complexities of working with artificial intelligence.</p>
 
 <p>The Bonsai AI Engine contains a vast array of machine learning algorithms, manages data streaming and data storage, and provides the efficient allocation of hardware resources. It is built with an infrastructure that supports streaming data efficiently through the system, and it uses a set of heuristics to make choices about which learning algorithms to use to train each BRAIN. The set of heuristics also make it possible for it to choose from any number of possible algorithms, topologies, etc., train all of them in parallel, and pick the best result.</p>
 
 <p>For example, if the BRAIN Server picked Deep Q-Learning, which is a machine learning algorithm, then the system also picks the appropriate topology, hyper-parameters, and initial weight values.</p>
 
-<p>The Bonsai AI Engine also determines when to train each concept, how much (or little) to train each concept based on its relevance, and, ultimately, produces a trained BRAIN. Furthermore, it does something we call <strong>meta-learning</strong>. Meta-learning means that the system keeps a kind of memory or record about each program it&rsquo;s seen, the data it used for training, and the generated AIs that it&rsquo;s made. It also records how fast those AI&rsquo;s trained and how accurate they became. The BRAIN server learns over that dataset.</p>
+<p>The Bonsai AI Engine also determines when to train each concept, how much (or little) to train each concept based on its relevance, and, ultimately, produces a trained BRAIN. Furthermore, it does something we call <strong>meta-learning</strong>. Meta-learning means that the system keeps a kind of memory or record about each program it&rsquo;s seen, the data it used for training, and the generated AIs that it&rsquo;s made. It also records how fast those AIs trained and how accurate they became. The BRAIN server is continuously learning and improving over that dataset.</p>
 
 <h3 id="you-might-say-the-system-learns-to-make-learning-systems">You might say the system learns to make learning systems.</h3>
 
 <h2 id="what-is-a-simulator">What is a simulator?</h2>
 
-<p>A simulator imitates a real world situation in a virtual environment, which enables a user to model and test situations that would often, otherwise be very complicated to set up and test. Your simulator could be a game, such as breakout, or an emulation of a real world process, such as a self driving car. Training with simulators is especially useful for optimization, or for use with complex control problems that can be modeled in a simulator.</p>
+<p>A simulator imitates a real-world situation in a virtual environment, which enables a user to model and test situations that would often, otherwise be very complicated to set up and test. Your simulator could be a game, such as breakout, or an emulation of a real-world process, such as a self-driving car. Training with simulators is especially useful for optimization, or for use with complex control problems that can be modeled in a simulator.</p>
 
-<p><strong>Remember:</strong>  Currently, a simulation runs on your local machine and streams data to the BRAIN server for training. This means your computer needs to remain connected to the Bonsai Artificial Intelligence Engine while your BRAIN is training. If your computer is disconnected from the server, it automatically picks up where it left off when its reconnected. Today, we only support simulators written in python.</p>
+<p>Training means teaching a BRAIN to reach a specific outcome in the simulator. The training involves using a specific set of concepts, a curriculum, and lessons, which are described in the Inkling file.</p>
 
-<p>To learn more about connecting your own simulator, refer to our SDK.</p>
+<p><strong>IMPORTANT:</strong>  Currently, a simulation runs on your local machine and streams data to the BRAIN server for training. This means your computer needs to remain connected to the Bonsai AI Engine while your BRAIN is training. If your computer is disconnected from the server you can reconnect within an hour and it will pick back up where it left off. Otherwise, your training will start on a new version (your old training is still saved to the previous version). If you want to leave your training running overnight, please make sure that your computer will stay connected by turning off sleep functionality. </p>
 
-<h2 id="what-is-training">What is training?</h2>
-
-<p>Training means teaching it to get a specific outcome on a simulator. The training involves using a specific set of concepts, a curriculum, and lessons, which are described in the Inkling file.</p>
+<p>Today, we only support simulators written in python. To learn more about connecting your own simulator, refer to our SDK Reference (Coming soon!).</p>
 
 <h2 id="what-is-inkling">What is Inkling?</h2>
 
-<p><strong>Inkling</strong> is a our programming language designed to express higher level abstractions related to teaching.</p>
+<p><strong>Inkling</strong> is our programming language designed to express higher level abstractions related to teaching.</p>
 
 <p>Inkling enables us to use a teaching-oriented approach, also known as Pedagogical Programming, for training AI. It provides a set of foundational primitives that can be used to represent AI without specifying how the AI is created. By abstracting away the underlying algorithms and techniques, you can focus on creative ways to describe your problems and leave the heavy lifting to us.</p>
 
@@ -332,13 +328,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <p>To learn more about Inkling, refer to our <a href="inkling.html">Inkling Guide</a>.</p>
 
-<h2 id="what-is-the-bonsai-command-line-interface">What is the Bonsai Command Line Interface?</h2>
+<h2 id="what-is-the-bonsai-cli">What is the Bonsai CLI?</h2>
 
-<p>The Bonsai Command Line Interface (CLI) is a command line tool that enables you to configure the Bonsai Artificial Intelligence Engine. The CLI is especially useful for automation and connection to other tools. Currently, there are some actions that can only be performed using the CLI, such as loading your Inkling file and connecting your simulator.</p>
+<p>The Bonsai Command Line Interface (CLI) is a command line tool that enables you to configure the Bonsai AI Engine. The CLI is especially useful for automation and connection to other tools. Currently, there are some actions that can only be performed using the CLI, such as loading your Inkling file and connecting your simulator.</p>
 
-<h2 id="beta-bons-ai">beta.bons.ai</h2>
+<p>To learn more about the Bonsai CLI, refer to our <a href="reference.html#cli-reference">CLI Reference</a>.</p>
 
-<p>The Bonsai Beta Website is a browser-based tool for configuring and analyzing BRAINs stored in the Bonsai Artificial Intelligence Engine. The website will be useful for sharing, collaborating, and learning. There is some information you can only get from beta.bons.ai, such as a visualization of a BRAIN&rsquo;s training progress.</p>
+<h2 id="what-is-beta-bons-ai-for">What is <a href="https://beta.bons.ai">beta.bons.ai</a> for?</h2>
+
+<p>The Bonsai Beta Website is a browser-based tool for configuring and analyzing BRAINs stored in the Bonsai AI Engine. In the future, this website will be useful for sharing BRAINs, collaborating, and learning. There is some information you can only get from beta.bons.ai, such as a visualization of a BRAIN&rsquo;s training progress.</p>
 
 <h3 id="brain-dashboard"><strong>BRAIN Dashboard</strong></h3>
 
@@ -346,13 +344,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <h3 id="brain-details"><strong>BRAIN Details</strong></h3>
 
-<p>There is a BRAIN Details page for each of your BRAINs. Each page shows that BRAIN&rsquo;s status, training history, and  commands you can use in the CLI for this BRAIN.</p>
+<p>There is a BRAIN Details page for each of your BRAINs. Each page shows that BRAIN&rsquo;s status, training graph, and commands you can use in the CLI specifically for this BRAIN.</p>
 
           <h1 id="let-39-s-get-started">Let&rsquo;s Get Started!</h1>
 
 <p>Before you begin, you will need to have access to our Beta. If you don&rsquo;t have access yet, request access at <a href="https://bons.ai">bons.ai</a>.</p>
 
-<h2 id="install-prerequisites">Install Prerequisites</h2>
+<h1 id="install-prerequisites">Install Prerequisites</h1>
 
 <p>If you have Anaconda installed on your system, go to Step 1 of our <a href="getting-started-with-anaconda.html">Getting Started with Anaconda</a> guide instead.</p>
 
@@ -377,7 +375,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <p><strong>pip is a tool for installing and managing Python dependencies. For more information about pip, refer to the <a href="https://pip.pypa.io/en/stable/">Python Package Authority</a>.</strong></p>
 
-<h2 id="setup-the-bonsai-cli">Setup the Bonsai CLI</h2>
+<h1 id="setup-the-bonsai-cli">Setup the Bonsai CLI</h1>
 
 <p>Install the Bonsai Command Line Interface tool and configure it. You&rsquo;ll need to have your access code (accessKey). You can find your access code in your account settings at <a href="https://beta.bons.ai/accounts/settings">Bonsai Account Settings</a>.</p>
 <pre class="highlight shell"><code>pip install bonsai-cli
@@ -394,7 +392,7 @@ bonsai configure <span class="c"># Follow the instructions to retrieve your key,
 <pre class="highlight shell"><code><span class="nb">cd </span>gym-mountaincar-sample
 pip install -r requirements.txt
 </code></pre>
-<h2 id="create-a-brain">Create a BRAIN</h2>
+<h1 id="create-a-brain">Create a BRAIN</h1>
 
 <p>Create your BRAIN and give it a name. You can also create a BRAIN from your beta.bons.ai BRAIN Dashboard. You will view your BRAIN&rsquo;s progress on the BRAIN Details page.</p>
 <pre class="highlight shell"><code>bonsai create myMountainCarBrain
@@ -404,7 +402,7 @@ pip install -r requirements.txt
 <p>Load our sample Inkling file for the mountain car simulation.</p>
 <pre class="highlight shell"><code>bonsai load mountaincar.ink
 </code></pre>
-<h2 id="train">Train</h2>
+<h1 id="train-a-brain">Train a BRAIN</h1>
 
 <p>Start the training mode for your BRAIN.</p>
 <pre class="highlight shell"><code>bonsai train start
@@ -431,7 +429,7 @@ pip install -r requirements.txt
 <p>Stop the training mode.</p>
 <pre class="highlight shell"><code>bonsai train stop
 </code></pre>
-<h2 id="use-your-brain">Use your BRAIN</h2>
+<h1 id="use-your-brain">Use your BRAIN</h1>
 
 <p>After your BRAIN is finished training, it can play the mountain car game.</p>
 <pre class="highlight shell"><code>python mountaincar_simulator.py --predict-brain<span class="o">=</span>myMountainCarBrain --predict-version<span class="o">=</span>latest
@@ -455,7 +453,8 @@ pip install -r requirements.txt
 <ul>
 <li><a href="reference.html#cli-reference">CLI Reference</a></li>
 <li><a href="reference.html#http-api-reference">HTTP API Reference</a></li>
-<li><a href="https://bons.ai/blog">Blog</a></li>
+<li><a href="https://bons.ai/blog">Bonsai Blog</a></li>
+<li><a href="http://forums.bons.ai/">Bonsai Forums</a></li>
 </ul>
 
       </div>
