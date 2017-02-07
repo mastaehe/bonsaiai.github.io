@@ -476,10 +476,12 @@ sets the assumed brain name for later commands.</p>
 <p>It is case insensitive, but case aware.</p>
 
 <h6 id="load">Load</h6>
-<pre class="highlight plaintext"><code>$ bonsai load inklingFile.ink
+<pre class="highlight plaintext"><code>$ bonsai load
 </code></pre>
-<p><strong>load</strong> loads an Inkling file (inklingFile.ink) into the current
-brain.  You can specify &ndash;brain brainName, to use another brain.</p>
+<p><strong>load</strong> loads an Inkling file into the current brain.  The project
+file in the current directory (<code class="prettyprint">bonsai_brain.bproj</code>) determines which
+inkling file to load.  You can specify &ndash;brain brainName, or &ndash;project
+/brain/project to use another brain.</p>
 
 <h2 id="train-group-commands">Train group commands</h2>
 
@@ -523,20 +525,25 @@ Usage: bonsai configure [OPTIONS]
 Options:
   --help  Show this message and exit.
 </code></pre>
-<h6 id="bonsai-help"><code class="prettyprint">bonsai --help</code></h6>
-<pre class="highlight plaintext"><code>$ bonsai --help
-Usage: bonsai [OPTIONS] COMMAND [ARGS]...
+<h6 id="bonsai-configure-help"><code class="prettyprint">bonsai configure --help</code></h6>
+<pre class="highlight plaintext"><code>$ bonsai configure --help
+Usage: bonsai configure [OPTIONS]
 
-  Create, load, train BRAINs.
+  Authenticate with the BRAIN Server.
 
 Options:
-  --help  Show this message and exit.
+  --key TEXT  Provide an access key.
+  --help      Show this message and exit.
+</code></pre>
+<h6 id="bonsai-create-help"><code class="prettyprint">bonsai create --help</code></h6>
+<pre class="highlight plaintext"><code>$ bonsai create --help
+Usage: bonsai create [OPTIONS] BRAIN_NAME
 
-Commands:
-  create  Creates a BRAIN.
-  list    Lists BRAINs owned by current user or by the...
-  load    Loads an Inkling file into the specified...
-  train   Start and stop training on a BRAIN, as well...
+  Creates a BRAIN and sets the default BRAIN for future commands.
+
+Options:
+  --project TEXT  Override to target another project directory.
+  --help          Show this message and exit.
 </code></pre>
 <h6 id="bonsai-train-help"><code class="prettyprint">bonsai train --help</code></h6>
 <pre class="highlight plaintext"><code>$ bonsai train --help
@@ -562,6 +569,7 @@ Usage: bonsai train status [OPTIONS] BRAIN_NAME
 Options:
   --brain TEXT    Override to target another BRAIN.
   --json          Output status as json.
+  --project TEXT  Override to target another project directory.
   --help          Show this message and exit.
 </code></pre>
 <h6 id="bonsai-train-start-help"><code class="prettyprint">bonsai train start --help</code></h6>
@@ -572,6 +580,7 @@ Usage: bonsai train start [OPTIONS] BRAIN_NAME
 
 Options:
   --brain TEXT    Override to target another BRAIN.
+  --project TEXT  Override to target another project directory.
   --help          Show this message and exit.
 </code></pre>
 <h6 id="bonsai-train-stop-help"><code class="prettyprint">bonsai train stop --help</code></h6>
@@ -582,6 +591,7 @@ Usage: bonsai train stop [OPTIONS] BRAIN_NAME
 
 Options:
   --brain TEXT    Override to target another BRAIN.
+  --project TEXT  Override to target another project directory.
   --help          Show this message and exit.
 ‍```
 </code></pre>
