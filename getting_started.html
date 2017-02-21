@@ -104,7 +104,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 	
   </head>
 
-  <body class="getting_started" data-languages="[]">
+  <body class="getting_started" data-languages="[&quot;powershell&quot;,&quot;shell&quot;]">
 	  
 	  
 	  <!-- Google Tag Manager (noscript) -->
@@ -149,6 +149,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </a>
     <div class="tocify-wrapper">
 
+        <div class="lang-selector">
+              <a href="#" data-language-name="powershell">Windows</a>
+              <a href="#" data-language-name="shell">macOS</a>
+        </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
         </div>
@@ -237,33 +241,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="dark-box"></div>
       <div class="content">
         
-          <h1 id="introduction">Introduction</h1>
+          <h1 id="overview-and-faq">Overview and FAQ</h1>
 
-<p>This guide starts you on the path of unlocking the world of machine learning and AI.</p>
+<p>Hello new Bonsai developer!</p>
 
-<p>Let&rsquo;s first go through some of the major concepts you&rsquo;ll want to know before you get started writing <strong>Inkling</strong> files, connecting <strong>simulators</strong>, and training <strong>BRAIN</strong>s. Then, we&rsquo;ll walk you through the steps to:</p>
+<p>There are some things you might want to know before you get started. In this section, we&rsquo;re going to walk you through the Bonsai Platform components and some of the fundamental ideas of the Bonsai Platform that are frequently asked questions. Next, we&rsquo;ll guide you through installing the necessary tools, connecting a simulator, training your BRAIN, and finally using your BRAIN!</p>
 
-<ul>
-<li>install the Bonsai CLI (one-time task)</li>
-<li>create your first BRAIN</li>
-<li>load an Inkling file and connect a simulator</li>
-<li>train your BRAIN</li>
-<li>use your BRAIN</li>
-</ul>
+<p>At the end of this guide we&rsquo;ll link you to resources that give you the tools to keep going, like our <a href="inkling.html">Inkling Guide</a> and <a href="reference.html#cli-reference">CLI Reference</a>. You can also check out our <a href="inkling.html#example-cart-pole">examples</a> and tutorials (coming soon!).</p>
 
-<p>Then, we&rsquo;ll follow all of that up with our other resources that give you the tools to keep going, like our <a href="inkling.html">Inkling Guide</a> and <a href="reference.html#cli-reference">CLI Reference</a>. You can also check out our <a href="inkling.html#example-cart-pole">examples</a> and tutorials (coming soon!).</p>
-
-<p>If you&rsquo;re not interested in the background, and want to jump right into the action, you can skip down to our <a href="#let-39-s-get-started">Let&rsquo;s Get Started</a> section.</p>
-
-          <h1 id="background-faq">Background FAQ</h1>
-
-<p>There are some things you might want to know before you get started. In this section, we&rsquo;re going to walk you through the Bonsai Platform components and some of the fundamental ideas of the Bonsai Platform that are frequently asked questions. Let&rsquo;s jump right in!</p>
+<p><strong>If you&rsquo;re not interested in the background, and want to jump right into the action, you can skip down to our <a href="getting_started.html#install-prerequisites">Install Prerequisites</a> section.</strong></p>
 
 <h2 id="what-are-the-components-of-the-bonsai-platform">What are the components of the Bonsai Platform?</h2>
 
 <p>This image displays all the components of Bonsai&rsquo;s Platform. The Platform enables developers to more efficiently build, teach and use intelligence models. A training source is any source of data used to teach or train an AI. It includes batch data like a large spreadsheet or a set of labels and images and synthetic data like the output from a simulation.</p>
 
-<p><img src="https://daks2k3a4ib2z.cloudfront.net/57bf257ce45825764c5cb54b/57e5bb2cab226c7d49d033f5_bonsai_infographic_2x_1024.png" alt="The Bonsai Platform" /></p>
+<p><img src="images/bonsai_infographic_1024.png" alt="The Bonsai Platform" /></p>
 
 <h6 id="build">Build</h6>
 
@@ -275,7 +267,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <li><strong>Data:</strong> is also a training source. It is information related to the scenario being trained and can also be used to test and evaluate how well the training is implemented. Data could be a collection of images and labels or the rows of a spreadsheet. An example of a data set you could train with is the <a href="http://yann.lecun.com/exdb/mnist/">MNIST database</a>, which is a collection of handwritten digits used for training image processing systems and other machine learning systems.</li>
 </ul>
 
-<p><strong>Note:</strong> Currently, during our private beta, you can only use simulators as your training source.</p>
+<aside class="notice">
+Currently, during our private beta, you can only use simulators as your training source.
+</aside> 
 
 <h6 id="teach">Teach</h6>
 
@@ -346,99 +340,229 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <p>There is a BRAIN Details page for each of your BRAINs. Each page shows that BRAIN&rsquo;s status, training graph, and commands you can use in the CLI specifically for this BRAIN.</p>
 
-          <h1 id="let-39-s-get-started">Let&rsquo;s Get Started!</h1>
+          <h1 id="install-prerequisites">Install Prerequisites</h1>
 
-<p>Before you begin, you will need to have access to our Beta. If you don&rsquo;t have access yet, request access at <a href="https://bons.ai">bons.ai</a>.</p>
+<p>Before you begin, you will need to have access to our Beta. If you don&rsquo;t have access yet, request access at <a href="http://pages.bons.ai/apply.html">bons.ai</a>.</p>
 
-<h2 id="install-prerequisites">Install Prerequisites</h2>
+<p>The next section walks you through how to install Git, Python, and pip, but if you&rsquo;re already ahead of the curve and <strong>have them all installed</strong>, skip down to <a href="#setup-the-bonsai-cli">Setup the Bonsai CLI</a>. </p>
 
-<p>If you have Anaconda installed on your system, go to Step 1 of our <a href="getting-started-with-anaconda.html">Getting Started with Anaconda</a> guide instead.</p>
+<aside class="notice">
+We highly recommend macOS users download Python directly in the Manual Install instructions or use <a href="http://brew.sh/">Homebrew</a> so you can perform the following steps on user-land Python rather than <a href="https://github.com/macOSPython/wiki/wiki/Which-Python">system Python</a>.
+</aside>
+
+<p><strong>There are three sets of install instructions, please pick the one that suits your situation:</strong></p>
+
+<ol>
+<li>If you have <strong>Anaconda</strong> installed on your system, skip down to <a href="#install-with-anaconda">Install with Anaconda</a>.</li>
+<li>If you have <strong>Chocolatey (Windows)</strong> or <strong>Homebrew (macOS)</strong> installed on your system, skip down to <a href="#install-with-chocolatey-or-homebrew">Install with Chocolatey or Homebrew</a>.</li>
+<li>If you <em>do not</em> have Chocolatey, Homebrew, or Anaconda installed on your system continue to follow our <strong>Manual Install</strong> intructions below.</li>
+</ol>
+
+<aside class="notice">
+The two tabs to the right allow you to follow this guide as a macOS or Windows user. Instructions also vary slightly between Python 2 and Python 3 so please be sure to follow your version&rsquo;s instructions.
+</aside>
+
+<h2 id="manual-install">Manual Install</h2>
 
 <h3 id="windows">Windows</h3>
 
-<ol>
-<li>Download and install Python from <a href="https://www.python.org">python.org</a>.</li>
-<li>Install Git (e.g. via GitHub desktop for windows).</li>
-<li>You may need to reboot your computer after installing Python and Git to make sure all install settings take effect.</li>
-</ol>
+<ul>
+<li><strong>Git</strong>: Download and install Git from <a href="https://git-for-windows.github.io/">Git for Windows</a>. </li>
+<li><strong>Python</strong>: Download and install Python (3.6 or 2.7) from <a href="https://www.python.org">python.org</a>.</li>
+</ul>
+
+<aside class="warning">
+For users installing <b>Python 2.7</b>: Make sure to include adding Python to your PATH when customizing your install on the third screen. <br>
+For users installing <b>Python 3.6</b>: Make sure to check the box on the first screen of the install to add Python to your PATH.
+</aside>
+
+<ul>
+<li><strong>pip</strong>: Python version 2.7.9 and greater come with pip, but if for some reason you need to use a different version of Python please follow <a href="https://pip.pypa.io/en/stable/installing/">these instructions</a>.</li>
+</ul>
+
+<aside class="notice">
+Please remember to reboot your computer after installing Python and Git to make sure all install settings take effect.
+</aside>
+
+<p><strong>Great!</strong> Now that you have Git, Python, and pip installed, you can skip down to <a href="#setup-the-bonsai-cli">Setup the Bonsai CLI</a>. </p>
+
+<h3 id="macos">macOS</h3>
+
+<ul>
+<li><strong>Git</strong>: Git is more than likely already installed on your computer if you have Xcode, but if not, run <code class="prettyprint">git</code> from your command prompt and the system will prompt you to install.</li>
+<li><strong>Python</strong>: Download and install Python (3.6 or 2.7) from <a href="https://www.python.org">python.org</a>.</li>
+</ul>
+
+<aside class="notice">
+We highly recommend macOS users download Python directly so you can follow this guide on user-land Python rather than <a href="https://github.com/macOSPython/wiki/wiki/Which-Python">system Python</a>.
+</aside>
+
+<ul>
+<li><strong>pip</strong>: Python version 2.7.9 and greater come with pip (or pip3 for version 3+), but if for some reason you need to use a different version of Python please follow <a href="https://pip.pypa.io/en/stable/installing/">these instructions</a>.</li>
+</ul>
+
+<p><strong>Great!</strong> Now that you have Git, Python, and pip installed, you can skip down to <a href="#setup-the-bonsai-cli">Setup the Bonsai CLI</a>. </p>
+
+<h2 id="install-with-chocolatey-or-homebrew">Install with Chocolatey or Homebrew</h2>
+
+<p>If you <em>do not</em> have Chocolatey or Homebrew installed on your system, please go to the <a href="#manual-install">Manual Install</a> or <a href="#install-with-anaconda">Install with Anaconda</a> instructions.</p>
 
 <blockquote>
-<p>Mac OS</p>
+<p>Python 2</p>
 </blockquote>
-<pre class="highlight shell"><code>sudo easy_install pip
+<pre class="highlight powershell"><code>choco install git
+choco install python2
+</code></pre><pre class="highlight shell"><code>brew install python
 </code></pre>
-<h3 id="mac-os-x">Mac OS X</h3>
-
-<ol>
-<li>Install pip</li>
-</ol>
-
-<p><strong>pip is a tool for installing and managing Python dependencies. For more information about pip, refer to the <a href="https://pip.pypa.io/en/stable/">Python Package Authority</a>.</strong></p>
-
-<h2 id="setup-the-bonsai-cli">Setup the Bonsai CLI</h2>
-
-<p>Install the Bonsai Command Line Interface tool and configure it. You&rsquo;ll need to have your access code (accessKey). You can find your access code in your account settings at <a href="https://beta.bons.ai/accounts/settings">Bonsai Account Settings</a>.</p>
-<pre class="highlight shell"><code>pip install bonsai-cli
-bonsai configure <span class="c"># Follow the instructions to retrieve your key, and enter it when prompted</span>
+<blockquote>
+<p>Python 3</p>
+</blockquote>
+<pre class="highlight powershell"><code>choco install git
+choco install python
+</code></pre><pre class="highlight shell"><code>brew install python3
 </code></pre>
+<h3 id="windows">Windows</h3>
+
+<p><strong>If you&rsquo;re already familiar with <a href="https://chocolatey.org/">Chocolatey</a>, follow these instructions.</strong></p>
+
+<aside class="notice">
+Please remember to run choco commands in administrator powershell or command prompt.
+</aside>
+
+<h3 id="macos">macOS</h3>
+
+<p><strong>If you&rsquo;re already familiar with <a href="http://brew.sh/">Homebrew</a>, follow these instructions.</strong></p>
+
+<ul>
+<li><strong>Git</strong>: Git is more than likely already installed on your computer if you have Xcode, but if not, run <code class="prettyprint">git</code> from your command prompt and the system will prompt you to install.</li>
+<li><strong>Python</strong>: Run the install command on the tab to the right to <code class="prettyprint">brew install</code> the Python version of your choice.</li>
+</ul>
+
+<h2 id="install-with-anaconda">Install with Anaconda</h2>
+<pre class="highlight plaintext"><code>conda install git
+</code></pre>
+<p>If you <em>do not</em> have Anaconda installed on your system, please go to the <a href="#manual-install">Manual Install</a> or <a href="#install-with-chocolatey-or-homebrew">Install with Chocolatey or Homebrew</a> instructions.</p>
+
+<p><code class="prettyprint">conda</code> is a tool for installing and managing Python and R dependencies. Anaconda includes Python and pip, so all you need to do is install Git if you haven&rsquo;t already. For more information, refer to the <a href="https://www.continuum.io/anaconda-overview">Anaconda website</a>.</p>
+
+<h1 id="setup-the-bonsai-cli">Setup the Bonsai CLI</h1>
+
+<blockquote>
+<p>Python 2 and Anaconda</p>
+</blockquote>
+<pre class="highlight plaintext"><code>pip install bonsai-cli
+bonsai configure
+</code></pre>
+<blockquote>
+<p>Python 3</p>
+</blockquote>
+<pre class="highlight powershell"><code><span class="c1"># same as above</span>
+</code></pre><pre class="highlight shell"><code>pip3 install bonsai-cli
+bonsai configure
+</code></pre>
+<p>From your command prompt, install the Bonsai Command Line Interface tool and configure it. <code class="prettyprint">bonsai configure</code> will ask for your Access Key. You can find your Access Key in your <a href="https://beta.bons.ai/accounts/settings">Bonsai Account Settings</a>.</p>
+
 <h2 id="clone-a-sample-project">Clone a sample project</h2>
 
-<p>Clone our sample project, Mountain Car. This project uses <a href="https://gym.openai.com/envs/MountainCar-v0">OpenAI Gym&rsquo;s</a> Mountain Car simulation.</p>
-<pre class="highlight shell"><code>git clone https://github.com/BonsaiAI/gym-mountaincar-sample
+<p>Clone a sample simulation project with <code class="prettyprint">git clone</code>. For this guide we&rsquo;ll be walking you through <a href="https://gym.openai.com/envs/MountainCar-v0">OpenAI Gym&rsquo;s Mountain Car</a> environment, one of the supported Bonsai simulators.</p>
+<pre class="highlight plaintext"><code>git clone https://github.com/BonsaiAI/gym-mountaincar-sample
 </code></pre>
 <h2 id="install-requirements">Install requirements</h2>
 
-<p>Install the mountain car requirements from OpenAI Gym.</p>
-<pre class="highlight shell"><code><span class="nb">cd </span>gym-mountaincar-sample
+<blockquote>
+<p>Python 2 and Anaconda</p>
+</blockquote>
+<pre class="highlight plaintext"><code>cd gym-mountaincar-sample
 pip install -r requirements.txt
 </code></pre>
-<h2 id="create-a-brain">Create a BRAIN</h2>
-
-<p>Create your BRAIN and give it a name. You can also create a BRAIN from your beta.bons.ai BRAIN Dashboard. You will view your BRAIN&rsquo;s progress on the BRAIN Details page.</p>
-<pre class="highlight shell"><code>bonsai create myMountainCarBrain
+<blockquote>
+<p>Python 3</p>
+</blockquote>
+<pre class="highlight powershell"><code><span class="c1"># same as above</span>
+</code></pre><pre class="highlight shell"><code><span class="nb">cd </span>gym-mountaincar-sample
+pip3 install -r requirements.txt
 </code></pre>
+<p>Enter into the Mountain Car folder and then install the Mountain Car requirements from OpenAI Gym.</p>
+
+<h1 id="create-your-brain">Create your BRAIN</h1>
+
+<p>Create your BRAIN and give it a name. You can also create a BRAIN from your <a href="https://beta.bons.ai">beta.bons.ai</a> BRAIN Dashboard instead of using the command line. Either way, you will view your BRAIN&rsquo;s progress on the BRAIN Details page.</p>
+
+<h3 id="create-from-web">Create from Web</h3>
+
+<p><img src="images/no_brains_image.png" alt="BRAINS Dashboard Page" /></p>
+
+<p>The dashboard has a NEW BRAIN button, pictured above. Click on it to start the BRAIN creation process, where you&rsquo;re provided a form to give your brain a name and description. Name can contain alpha, numerals, or hyphens; the description is arbitrary and should contain human-readable text that explains your intent for the BRAIN.</p>
+
+<h3 id="create-from-command-line">Create from Command Line</h3>
+<pre class="highlight plaintext"><code>bonsai create myMountainCarBrain
+</code></pre>
+<p>You may give your brain a name with <code class="prettyprint">bonsai create brainName</code> but there is no option for a description with this method but after you create your BRAIN, you can change its description from the web on the BRAIN Details page.</p>
+
+<h1 id="train-your-brain">Train your BRAIN</h1>
+
 <h2 id="load-sample-inkling-into-your-brain">Load sample Inkling into your BRAIN</h2>
-
-<p>Load our sample Inkling file for the mountain car simulation.</p>
-<pre class="highlight shell"><code>bonsai load
+<pre class="highlight plaintext"><code>bonsai load
 </code></pre>
-<h2 id="train">Train</h2>
+<p>Load your sample Inkling file for the Mountain Car simulation.</p>
 
-<p>Start the training mode for your BRAIN.</p>
-<pre class="highlight shell"><code>bonsai train start
+<h2 id="start-training-mode">Start Training Mode</h2>
+<pre class="highlight plaintext"><code>bonsai train start
 </code></pre>
+<p>Almost there! Time to tell the AI engine to prepare a new BRAIN version for training. Start the training mode for your BRAIN.</p>
+
 <h2 id="connect-the-simulator-for-training">Connect the simulator for training</h2>
 
-<p>Connect the simulator to the BRAIN. Training begins automatically. If the simulator gets disconnected, training resumes from the same point when the simulator is reconnected.</p>
-<pre class="highlight shell"><code>python mountaincar_simulator.py --train-brain<span class="o">=</span>myMountainCarBrain --headless
+<blockquote>
+<p>Python 2</p>
+</blockquote>
+<pre class="highlight plaintext"><code>python mountaincar_simulator.py --train-brain=myMountainCarBrain --headless
 </code></pre>
+<blockquote>
+<p>Python 3</p>
+</blockquote>
+<pre class="highlight powershell"><code><span class="c1"># same as above</span>
+</code></pre><pre class="highlight shell"><code>python3 mountaincar_simulator.py --train-brain<span class="o">=</span>myMountainCarBrain --headless
+</code></pre>
+<p>Everything is in place, it&rsquo;s time to start the simulator and test things out. To do this, call Python and then the simulator file. Training will begin automatically and if the simulator gets disconnected, training resumes from the same point when the simulator is reconnected if it&rsquo;s within an hour of the disconnect. Remember, as mentioned in <a href="#what-is-a-simulator">What is a simulator?</a> if you want your training to take place overnight, make sure that your computer won&rsquo;t go to sleep and disconnect for more than an hour or that training time will be lost!</p>
+
+<aside class="notice">
+We use headless here to indicate we don&rsquo;t need to see a graphical display from the simulator; if you&rsquo;d like to see it and watch the simulator learn, omit this option.
+</aside>
+
 <h2 id="view-your-brain-training-status">View your BRAIN training status</h2>
 
-<p>View your BRAIN&rsquo;s training status as it trains on the simulator.</p>
+<p>View your BRAIN&rsquo;s training status as it trains on the simulator by going to the BRAIN&rsquo;s Dashboard page on <a href="https://beta.bons.ai">beta.bons.ai</a>. Training Mountain Car takes about an hour to get sufficient training to beat the game most of the time. If you want flawless victories each time the simulator can take up to 2 hours before you&rsquo;ll see the graph level out.</p>
 
-<p><strong>Go to <a href="https://beta.bons.ai">beta.bons.ai</a>.</strong></p>
+<p><img src="images/fully_trained_brain.png" alt="Fully Trained BRAIN" /></p>
 
-<h2 id="close-the-simulator">Close the simulator</h2>
-
-<p>Training mountain car takes about 45 minutes.</p>
-
-<p><strong>Stop the simulator by closing it.</strong></p>
+<p>There is no automatic ending to training, you can train forever, but there will be diminishing returns after a couple of hours. You can play around with training for 15 mins, 30 mins, 1 hour, etc and use your BRAIN to see how well it plays each time! It takes about 700 episodes to train the BRAIN correctly. Our ideal target is an average reward of -195 or higher over 100 consecutive episodes.</p>
 
 <h2 id="stop-training">Stop training</h2>
-
-<p>Stop the training mode.</p>
-<pre class="highlight shell"><code>bonsai train stop
+<pre class="highlight plaintext"><code>bonsai train stop
 </code></pre>
-<h2 id="use-your-brain">Use your BRAIN</h2>
+<p>Once we&rsquo;ve gotten to this level of performance (or sooner if you prefer), CTRL-C to disconnect the simulator, then <code class="prettyprint">bonsai train stop</code> will end the training, and proceed to prediction.</p>
 
-<p>After your BRAIN is finished training, it can play the mountain car game.</p>
-<pre class="highlight shell"><code>python mountaincar_simulator.py --predict-brain<span class="o">=</span>myMountainCarBrain --predict-version<span class="o">=</span>latest
+<h1 id="use-your-brain">Use your BRAIN</h1>
+
+<blockquote>
+<p>Python 2</p>
+</blockquote>
+<pre class="highlight plaintext"><code>python mountaincar_simulator.py --predict-brain=myMountainCarBrain --predict-version=latest
 </code></pre>
-          <h1 id="what-39-s-next">What&rsquo;s Next</h1>
+<blockquote>
+<p>Python 3</p>
+</blockquote>
+<pre class="highlight powershell"><code><span class="c1"># same as above</span>
+</code></pre><pre class="highlight shell"><code>python3 mountaincar_simulator.py --predict-brain<span class="o">=</span>myMountainCarBrain --predict-version<span class="o">=</span>latest
+</code></pre>
+<p>After your BRAIN is finished training it can play the Mountain Car game. How well it does depends on how long you let it train! Using your BRAIN involves calling Python on the same simulator file, but now in predict mode, and <code class="prettyprint">--predict-version=latest</code> will use the latest training session that you just ran.</p>
+
+          <h1 id="next-steps">Next Steps</h1>
 
 <p>Now that you&rsquo;ve completed this guide, you can:</p>
 
-<p><strong>Check out our <a href="inkling.html">Inkling Documentation</a>.</strong></p>
+<p><strong>Check out our <a href="inkling.html">Inkling Guide</a>.</strong></p>
 
 <p>It contains all of the concepts and components of our unique programming language. You&rsquo;ll learn:</p>
 
@@ -452,13 +576,17 @@ pip install -r requirements.txt
 
 <ul>
 <li><a href="reference.html#cli-reference">CLI Reference</a></li>
-<li><a href="reference.html#http-api-reference">HTTP API Reference</a></li>
+<li><a href="reference.html#http-api-reference">API Reference</a></li>
 <li><a href="https://bons.ai/blog">Bonsai Blog</a></li>
 <li><a href="http://forums.bons.ai/">Bonsai Forums</a></li>
 </ul>
 
       </div>
       <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="powershell">Windows</a>
+                <a href="#" data-language-name="shell">macOS</a>
+          </div>
       </div>
     </div>
 
