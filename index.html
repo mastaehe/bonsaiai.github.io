@@ -114,32 +114,47 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div id="flex-container">
 
 
-	<section id="primary-nav" class="navigation">
-  <div class="nav-container">
-    <div class="brand">
-     <a href="."><img class="bonsai-logo" src="https://dl.dropboxusercontent.com/s/d37ndmizplio8mw/bonsai-logo-color-docs.svg?dl=0"></a>
-    </div>
-    <nav>
-      <div class="nav-mobile"><a id="nav-toggle" href="#!"><span></span></a></div>
-      <ul class="nav-list">
-        <li>
-         <a href="getting-started.html">Getting Started</a>
+	        <nav id="primary-nav">
+			
+			 
+			
+        <div id="logo"> <a href="."><img class="bonsai-logo" src="images/bonsai-logo.svg"></a></div>
+
+        <label for="drop" class="toggle"><img class="menu-ham" src="images/menu.svg"></label>
+        <input type="checkbox" id="drop" />
+            
+			<ul class="menu">
+                
+				<li class="header_menu_item "> <a href="getting-started.html">Getting Started</a></li>
+		
+				<li class="header_menu_item ">    <a href="inkling.html">Inkling Guide</a>  </li>
+			
+      
+        		<li class="header_menu_item">
+            <!-- First Tier Drop Down -->
+            <label for="drop-1" class="toggle">References +</label>
+            <a  href="#">References</a>
+            <input type="checkbox" id="drop-1"/>
+            <ul id="references">
+				<li class=""> <a href="api-reference.html">API</a>  </li>
+				<li class=""> <a href="cli-reference.html">CLI</a>  </li>
+		        <li class=""> <a href="inkling-reference.html">Inkling</a>  </li>
+				
+                
+            </ul> 
+
         </li>
-        <li>
-         <a href="inkling.html">Inkling</a>  
-        </li>
-        <li>
-         <a href="reference.html">References</a>
-        </li>
+		
        
+				<li><gcse:search></gcse:search></li>
+				
+				
+            </ul>
+			
+        </nav>
+		
+		
 
-      </ul>
-    </nav>
-  </div>
-</section>
-
-
-<div class="header_menu_item ">Dashboard</div>
 
 
 	<div id="main-wrapper">
@@ -168,9 +183,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		<div>
 			<p class="p2">References</p>
 			<ul>
-				<li><a href="reference.html#http-api-reference">HTTP API Reference</a></li>
-				<li><a href="reference.html#cli-reference">Command Line Interface (CLI)</a></li>
-				<li><a href="reference.html#inkling-reference">Inkling Reference</a></li>
+				<li><a href="api-reference.html">API Reference</a></li>
+				<li><a href="cli-reference.html">CLI Reference</a></li>
+				<li><a href="inkling-reference.html">Inkling Reference</a></li>
 			</ul>
 		</div>
 
@@ -180,7 +195,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			<ul>
 				<li><a href="inkling.html#example-cart-pole">See the Cartpole example</a></li>
 				<li><a href="http://forums.bons.ai/">Ask in the forums</a></li>
-				<li><a href="mailto:support@bons.ai?subject=I%20need%20help%20with">Send us an Email</a></li>
+				<li><a href="mailto:support@bons.ai?subject=I%20need%20help%20with">Send us an email</a></li>
 			</ul>
 		</div>
 </span>

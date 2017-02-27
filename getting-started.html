@@ -114,29 +114,47 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <div id="flex-container">
 
-	<section id="primary-nav" class="navigation">
-  <div class="nav-container">
-    <div class="brand">
-     <a href="."><img class="bonsai-logo" src="https://dl.dropboxusercontent.com/s/d37ndmizplio8mw/bonsai-logo-color-docs.svg?dl=0"></a>
-    </div>
-    <nav>
-      <div class="nav-mobile"><a id="nav-toggle" href="#!"><span></span></a></div>
-      <ul class="nav-list">
-        
-		<li class="header_menu_item selected"> <a href="getting-started.html">Getting Started</a></li>
-		
-		<li class="header_menu_item ">    <a href="inkling.html">Inkling</a>  </li>
-		
-		<li class="header_menu_item ">    <a href="reference.html">References</a>  </li>
-      
-        
-       
-		<li><gcse:search></gcse:search></li>
+	        <nav id="primary-nav">
+			
+			 
+			
+        <div id="logo"> <a href="."><img class="bonsai-logo" src="images/bonsai-logo.svg"></a></div>
 
-      </ul>
-    </nav>
-  </div>
-</section>
+        <label for="drop" class="toggle"><img class="menu-ham" src="images/menu.svg"></label>
+        <input type="checkbox" id="drop" />
+            
+			<ul class="menu">
+                
+				<li class="header_menu_item selected"> <a href="getting-started.html">Getting Started</a></li>
+		
+				<li class="header_menu_item ">    <a href="inkling.html">Inkling Guide</a>  </li>
+			
+      
+        		<li class="header_menu_item">
+            <!-- First Tier Drop Down -->
+            <label for="drop-1" class="toggle">References +</label>
+            <a  href="#">References</a>
+            <input type="checkbox" id="drop-1"/>
+            <ul id="references">
+				<li class=""> <a href="api-reference.html">API</a>  </li>
+				<li class=""> <a href="cli-reference.html">CLI</a>  </li>
+		        <li class=""> <a href="inkling-reference.html">Inkling</a>  </li>
+				
+                
+            </ul> 
+
+        </li>
+		
+       
+				<li><gcse:search></gcse:search></li>
+				
+				
+            </ul>
+			
+        </nav>
+		
+		
+
 
 
 	<div id="main-wrapper">
@@ -247,7 +265,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <p>There are some things you might want to know before you get started. In this section, we&rsquo;re going to walk you through the Bonsai Platform components and some of the fundamental ideas of the Bonsai Platform that are frequently asked questions. Next, we&rsquo;ll guide you through installing the necessary tools, connecting a simulator, training your BRAIN, and finally using your BRAIN!</p>
 
-<p>At the end of this guide we&rsquo;ll link you to resources that give you the tools to keep going, like our <a href="inkling.html">Inkling Guide</a> and <a href="reference.html#cli-reference">CLI Reference</a>. You can also check out our <a href="inkling.html#example-cart-pole">examples</a> and tutorials (coming soon!).</p>
+<p>At the end of this guide we&rsquo;ll link you to resources that give you the tools to keep going, like our <a href="inkling.html">Inkling Guide</a> and <a href="cli-reference.html">CLI Reference</a>. You can also check out our <a href="inkling.html#example-cart-pole">examples</a> and tutorials (coming soon!).</p>
 
 <p><strong>If you&rsquo;re not interested in the background, and want to jump right into the action, you can skip down to our <a href="#install-prerequisites">Install Prerequisites</a> section.</strong></p>
 
@@ -326,7 +344,7 @@ Currently, during our private beta, you can only use simulators as your training
 
 <p>The Bonsai Command Line Interface (CLI) is a command line tool that enables you to configure the Bonsai AI Engine. The CLI is especially useful for automation and connection to other tools. Currently, there are some actions that can only be performed using the CLI, such as loading your Inkling file and connecting your simulator.</p>
 
-<p>To learn more about the Bonsai CLI, refer to our <a href="reference.html#cli-reference">CLI Reference</a>.</p>
+<p>To learn more about the Bonsai CLI, refer to our <a href="cli-reference.html">CLI Reference</a>.</p>
 
 <h2 id="what-is-beta-bons-ai-for">What is <a href="https://beta.bons.ai">beta.bons.ai</a> for?</h2>
 
@@ -347,7 +365,7 @@ Currently, during our private beta, you can only use simulators as your training
 <p>The next section walks you through how to install Git, Python, and pip, but if you&rsquo;re already ahead of the curve and <strong>have them all installed</strong>, skip down to <a href="#setup-the-bonsai-cli">Setup the Bonsai CLI</a>. </p>
 
 <aside class="notice">
-We highly recommend macOS users download Python directly in the Manual Install instructions or use <a href="http://brew.sh/">Homebrew</a> so you can perform the following steps on user-land Python rather than <a href="https://github.com/macOSPython/wiki/wiki/Which-Python">system Python</a>.
+We highly recommend macOS users download Python directly in the Manual Install instructions or use <a href="http://brew.sh/">Homebrew</a> so you can perform the following steps on user-land Python rather than <a href="https://github.com/MacPython/wiki/wiki/Which-Python">system Python</a>.
 </aside>
 
 <p><strong>There are three sets of install instructions, please pick the one that suits your situation:</strong></p>
@@ -394,7 +412,7 @@ Please remember to reboot your computer after installing Python and Git to make 
 </ul>
 
 <aside class="notice">
-We highly recommend macOS users download Python directly so you can follow this guide on user-land Python rather than <a href="https://github.com/macOSPython/wiki/wiki/Which-Python">system Python</a>.
+We highly recommend macOS users download Python directly so you can follow this guide on user-land Python rather than <a href="https://github.com/MacPython/wiki/wiki/Which-Python">system Python</a>.
 </aside>
 
 <ul>
@@ -575,8 +593,8 @@ We use headless here to indicate we don&rsquo;t need to see a graphical display 
 <p>And we have these other resources that will enable you to maximize your AI development experience:</p>
 
 <ul>
-<li><a href="reference.html#cli-reference">CLI Reference</a></li>
-<li><a href="reference.html#http-api-reference">API Reference</a></li>
+<li><a href="cli-reference.html">CLI Reference</a></li>
+<li><a href="api-reference.html">API Reference</a></li>
 <li><a href="https://bons.ai/blog">Bonsai Blog</a></li>
 <li><a href="http://forums.bons.ai/">Bonsai Forums</a></li>
 </ul>
