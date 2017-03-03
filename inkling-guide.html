@@ -1,0 +1,605 @@
+
+
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Inkling Guide - Bonsai</title>
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight, .highlight .w {
+  color: #f8f8f2;
+  background-color: #272822;
+}
+.highlight .err {
+  color: #272822;
+  background-color: #f92672;
+}
+.highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #f4bf75;
+}
+.highlight .nt {
+  color: #f4bf75;
+}
+.highlight .o, .highlight .ow {
+  color: #f8f8f2;
+}
+.highlight .p, .highlight .pi {
+  color: #f8f8f2;
+}
+.highlight .gi {
+  color: #a6e22e;
+}
+.highlight .gd {
+  color: #f92672;
+}
+.highlight .gh {
+  color: #66d9ef;
+  background-color: #272822;
+  font-weight: bold;
+}
+.highlight .k, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kv {
+  color: #ae81ff;
+}
+.highlight .kc {
+  color: #fd971f;
+}
+.highlight .kt {
+  color: #fd971f;
+}
+.highlight .kd {
+  color: #fd971f;
+}
+.highlight .s, .highlight .sb, .highlight .sc, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .s1 {
+  color: #a6e22e;
+}
+.highlight .sr {
+  color: #a1efe4;
+}
+.highlight .si {
+  color: #cc6633;
+}
+.highlight .se {
+  color: #cc6633;
+}
+.highlight .nn {
+  color: #f4bf75;
+}
+.highlight .nc {
+  color: #f4bf75;
+}
+.highlight .no {
+  color: #f4bf75;
+}
+.highlight .na {
+  color: #66d9ef;
+}
+.highlight .m, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mb, .highlight .mx {
+  color: #a6e22e;
+}
+.highlight .ss {
+  color: #a6e22e;
+}
+    </style>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
+	<link href="stylesheets/test.css" rel="stylesheet" media="screen" />
+    <link href="favicon.ico" rel="icon" type="image/ico" />
+      <script src="javascripts/all.js"></script>
+	
+	<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WVB6MG2');</script>
+<!-- End Google Tag Manager -->
+	
+  </head>
+
+  <body class="inkling-guide" data-languages="[]">
+	  
+	  
+	  <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WVB6MG2"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) --> 
+
+  <div id="flex-container">
+
+	        <nav id="primary-nav">
+			
+			 
+			
+        <div id="logo"> <a href="."><img class="bonsai-logo" src="images/bonsai-logo.svg"></a></div>
+
+        <label for="drop" class="toggle"><img class="menu-ham" src="images/menu.svg"></label>
+        <input type="checkbox" id="drop" />
+            
+			<ul class="menu">
+                
+				<li class="header_menu_item "> <a href="getting-started.html">Getting Started</a></li>
+		
+				<li class="header_menu_item selected">    <a href="inkling-guide.html">Inkling Guide</a>  </li>
+			
+      
+        		<li class="header_menu_item">
+            <!-- First Tier Drop Down -->
+            <label for="drop-1" class="toggle">References +</label>
+            <a  href="#">References</a>
+            <input type="checkbox" id="drop-1"/>
+            <ul id="references">
+				<li class=""> <a href="api-reference.html">API</a>  </li>
+				<li class=""> <a href="cli-reference.html">CLI</a>  </li>
+		        <li class=""> <a href="inkling-reference.html">Inkling</a>  </li>
+				
+                
+            </ul> 
+
+        </li>
+		
+       
+				<li><gcse:search></gcse:search></li>
+				
+				
+            </ul>
+			
+        </nav>
+		
+		
+
+
+
+	<div id="main-wrapper">
+
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" alt="Navbar" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <div id="toc">
+      </div>
+      
+			 
+<ul class="toc-footer">
+
+<li><a href='https://bons.ai/sign-up'>Sign Up for our Private Beta!</a></li>
+<li><a href='https://github.com/BonsaiAI/slate'>Contribute to the Docs</a></li>
+<li><a href='http://forums.bons.ai/'>Bonsai Forums</a></li>
+<li><a href='mailto:support@bons.ai?subject=I need help with'>Email Us</a></li>
+<li><a href='https://bons.ai'>Bonsai Home</a></li>
+
+</ul>
+       
+        
+	   <div class="cc-bottom"><ul class="toc-footer bottom">
+<li><a href='https://creativecommons.org/licenses/by-nc-sa/4.0/'>Content:
+	<span>CC-BY-NC-SA 4.0</span></a></li>	
+
+<li><a href='https://creativecommons.org/licenses/by-nc-sa/4.0/'>
+<svg class="cc" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 70.7 13.4" style="enable-background:new 0 0 70.7 13.4;" xml:space="preserve">
+
+<g>
+	<g>
+		<circle class="st0" cx="63.8" cy="6.7" r="6.1"/>
+		<g>
+			<path d="M63.9,0c1.9,0,3.5,0.7,4.8,2c1.3,1.3,2,2.9,2,4.8c0,1.9-0.6,3.5-1.9,4.7c-1.4,1.3-3,2-4.8,2c-1.8,0-3.4-0.7-4.7-2
+				c-1.3-1.3-2-2.9-2-4.7c0-1.8,0.7-3.4,2-4.8C60.5,0.7,62.1,0,63.9,0z M64,1.2c-1.5,0-2.8,0.5-3.9,1.6c-1.1,1.1-1.6,2.4-1.6,3.9
+				c0,1.5,0.5,2.8,1.6,3.9c1.1,1.1,2.4,1.6,3.9,1.6c1.5,0,2.8-0.5,3.9-1.6c1.1-1,1.6-2.3,1.6-3.9c0-1.5-0.5-2.8-1.6-3.9
+				C66.8,1.8,65.5,1.2,64,1.2z M61,5.8c0.1-0.8,0.5-1.5,1-1.9c0.5-0.5,1.2-0.7,2-0.7c1.1,0,1.9,0.3,2.5,1c0.6,0.7,0.9,1.6,0.9,2.6
+				c0,1-0.3,1.9-1,2.6c-0.6,0.7-1.5,1-2.5,1c-0.8,0-1.4-0.2-2-0.7c-0.6-0.5-0.9-1.1-1-1.9h1.7c0,0.8,0.5,1.2,1.5,1.2
+				c0.5,0,0.9-0.2,1.1-0.6c0.3-0.4,0.4-1,0.4-1.6c0-0.7-0.1-1.3-0.4-1.6c-0.3-0.4-0.6-0.6-1.1-0.6c-0.9,0-1.4,0.4-1.5,1.2h0.5
+				l-1.3,1.3l-1.3-1.3L61,5.8L61,5.8z"/>
+		</g>
+	</g>
+	<g>
+		<circle class="st0" cx="25.8" cy="6.8" r="5.9"/>
+		<g>
+			<path d="M25.8,0c1.9,0,3.5,0.6,4.8,1.9c1.3,1.3,2,2.9,2,4.8c0,1.9-0.6,3.5-1.9,4.7c-1.4,1.3-3,2-4.8,2c-1.8,0-3.4-0.7-4.7-2
+				c-1.3-1.3-2-2.9-2-4.7c0-1.8,0.7-3.4,2-4.8C22.3,0.6,23.9,0,25.8,0z M25.8,1.2c-1.5,0-2.8,0.5-3.9,1.6c-1.1,1.1-1.6,2.4-1.6,3.9
+				c0,1.5,0.5,2.8,1.6,3.9c1.1,1.1,2.4,1.6,3.9,1.6c1.5,0,2.8-0.5,3.9-1.6c1.1-1,1.6-2.3,1.6-3.9c0-1.5-0.5-2.8-1.6-3.9
+				C28.6,1.7,27.3,1.2,25.8,1.2z M27.6,5v2.7h-0.8v3.3h-2.1V7.8H24V5c0-0.1,0-0.2,0.1-0.3c0.1-0.1,0.2-0.1,0.3-0.1h2.8
+				c0.1,0,0.2,0,0.3,0.1C27.6,4.8,27.6,4.9,27.6,5z M24.9,3.3c0-0.6,0.3-0.9,0.9-0.9s0.9,0.3,0.9,0.9c0,0.6-0.3,0.9-0.9,0.9
+				S24.9,3.9,24.9,3.3z"/>
+		</g>
+	</g>
+	<g>
+		<circle class="st0" cx="6.8" cy="6.7" r="6.1"/>
+		<path d="M6.7,0c1.9,0,3.5,0.7,4.8,2c0.6,0.6,1.1,1.4,1.4,2.2c0.3,0.8,0.5,1.7,0.5,2.6c0,0.9-0.2,1.8-0.5,2.6
+			c-0.3,0.8-0.8,1.5-1.4,2.1c-0.7,0.6-1.4,1.1-2.2,1.5c-0.8,0.3-1.7,0.5-2.6,0.5S5,13.3,4.2,12.9c-0.8-0.3-1.5-0.8-2.2-1.5
+			s-1.1-1.4-1.5-2.2S0,7.6,0,6.7C0,5.8,0.2,5,0.5,4.2S1.3,2.6,2,2C3.3,0.7,4.8,0,6.7,0z M6.7,1.2c-1.5,0-2.8,0.5-3.9,1.6
+			C2.3,3.4,1.9,4,1.6,4.6C1.4,5.3,1.2,6,1.2,6.7c0,0.7,0.1,1.4,0.4,2.1c0.3,0.7,0.7,1.3,1.2,1.8c0.5,0.5,1.1,0.9,1.8,1.2
+			c0.7,0.3,1.4,0.4,2.1,0.4c0.7,0,1.4-0.1,2.1-0.4c0.7-0.3,1.3-0.7,1.8-1.2c1-1,1.6-2.3,1.6-3.9c0-0.7-0.1-1.4-0.4-2.1
+			c-0.3-0.7-0.7-1.3-1.2-1.8C9.5,1.8,8.2,1.2,6.7,1.2z M6.6,5.6L5.7,6.1C5.6,5.9,5.5,5.7,5.4,5.6C5.3,5.6,5.1,5.5,5,5.5
+			c-0.6,0-0.9,0.4-0.9,1.2c0,0.4,0.1,0.6,0.2,0.9C4.5,7.8,4.7,7.9,5,7.9c0.4,0,0.7-0.2,0.8-0.6l0.8,0.4C6.5,8.1,6.2,8.3,5.9,8.5
+			c-0.3,0.2-0.7,0.3-1,0.3c-0.6,0-1.1-0.2-1.5-0.6C3.1,7.9,2.9,7.4,2.9,6.7c0-0.6,0.2-1.1,0.6-1.5c0.4-0.4,0.8-0.6,1.4-0.6
+			C5.7,4.6,6.3,5,6.6,5.6z M10.5,5.6L9.6,6.1C9.5,5.9,9.4,5.7,9.3,5.6C9.1,5.6,9,5.5,8.9,5.5C8.3,5.5,8,5.9,8,6.7
+			c0,0.4,0.1,0.6,0.2,0.9c0.2,0.2,0.4,0.3,0.7,0.3c0.4,0,0.7-0.2,0.8-0.6l0.8,0.4c-0.2,0.3-0.4,0.6-0.7,0.8c-0.3,0.2-0.7,0.3-1,0.3
+			c-0.6,0-1.1-0.2-1.5-0.6C7,7.9,6.8,7.4,6.8,6.7c0-0.6,0.2-1.1,0.6-1.5c0.4-0.4,0.8-0.6,1.4-0.6C9.6,4.6,10.2,5,10.5,5.6z"/>
+	</g>
+	<g>
+		<circle class="st0" cx="44.9" cy="6.8" r="6.2"/>
+		<g>
+			<path d="M44.9,0c1.9,0,3.5,0.6,4.8,1.9c1.3,1.3,2,2.9,2,4.8c0,1.9-0.6,3.5-1.9,4.7c-1.4,1.3-3,2-4.8,2c-1.8,0-3.4-0.7-4.7-2
+				c-1.3-1.3-2-2.9-2-4.7c0-1.8,0.7-3.4,2-4.8C41.4,0.6,43,0,44.9,0z M39.7,4.9c-0.2,0.6-0.3,1.2-0.3,1.8c0,1.5,0.5,2.8,1.6,3.9
+				c1.1,1.1,2.4,1.6,3.9,1.6c1.5,0,2.8-0.5,3.9-1.6c0.4-0.4,0.7-0.8,0.9-1.2l-2.5-1.1c-0.1,0.4-0.3,0.8-0.6,1
+				c-0.3,0.3-0.7,0.4-1.2,0.5v1h-0.8v-1c-0.7,0-1.4-0.3-2-0.8L43.4,8c0.4,0.4,0.9,0.6,1.5,0.6c0.2,0,0.4-0.1,0.6-0.2
+				c0.2-0.1,0.2-0.3,0.2-0.5c0-0.2-0.1-0.3-0.2-0.4l-0.6-0.3l-0.8-0.4l-1.1-0.5L39.7,4.9z M44.9,1.2c-1.5,0-2.8,0.5-3.9,1.6
+				c-0.3,0.3-0.5,0.6-0.7,0.9l2.6,1.2c0.1-0.4,0.3-0.6,0.6-0.8c0.3-0.2,0.7-0.3,1.1-0.4v-1h0.8v1c0.6,0,1.2,0.2,1.7,0.6l-0.9,0.9
+				c-0.4-0.3-0.8-0.4-1.2-0.4c-0.2,0-0.4,0-0.6,0.1c-0.2,0.1-0.2,0.2-0.2,0.4c0,0.1,0,0.1,0.1,0.2l0.9,0.4l0.6,0.3l1.1,0.5l3.4,1.5
+				c0.1-0.5,0.2-1,0.2-1.4c0-1.5-0.5-2.8-1.6-3.9C47.7,1.7,46.4,1.2,44.9,1.2z"/>
+		</g>
+	</g>
+</g>
+</svg>
+</li></a></ul></div>
+
+    </div>
+	      
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        
+          <h1 id="overview">Overview</h1>
+
+<p>Welcome to Inkling, Bonsai AI&rsquo;s special purpose programming language for training AI.</p>
+
+<p>Inkling is a declarative, strongly typed language that abstracts from the vast, dynamic AI algorithms that require expertise in machine learning. An Inkling file contains the concepts (what you want to teach the AI) and curriculum, how you want to teach the concepts, necessary to train your BRAIN.</p>
+
+<p>Inkling is a programming language specifically designed for artificial intelligence (AI); it&rsquo;s a special purpose language. It abstracts away the vast world of dynamic AI algorithms that require expertise in machine learning and enables more developers to program AI. Before you read through this section about the Inkling language, you should familiarize yourself with the various components of the Bonsai Artificial Intelligence Engine, which you can read about in our <a href="getting-started.html#overview-and-faq">Getting Started Guide</a>.</p>
+
+<p>If you&rsquo;re interesting in finding out more about what&rsquo;s going on under the hood of the AI engine, check out the <a href="ai-engine-guide.html#under-the-hood">AI Engine Guide</a>.</p>
+
+          <h2 id="inkling-a-new-language">Inkling: A New Language</h2>
+
+<h3 id="what-kind-of-language-is-inkling">What kind of language is Inkling?</h3>
+
+<p>Inkling is a special purpose language for writing AI programs. The language has a blend of declarative and functional styles; it&rsquo;s modeled after ideas in SQL and python. We like to describe Inkling as the world&rsquo;s first pedagogical programming language.  </p>
+
+<h3 id="what-is-pedagogical-programming">What is Pedagogical Programming?</h3>
+
+<h6 id="pedagogical-programming">Pedagogical Programming</h6>
+
+<p>Pedagogical programming is a new programming paradigm. It expresses the solution to a problem in terms of how you teach the computer to find the solution as opposed to how to calculate the solution. Pedagogical programming focuses on:</p>
+
+<ul>
+<li><strong>What do you want the computer to know?</strong>
+Pedagogical programming captures the concepts and their relationship to each other and forms a directed graph of the concepts.</li>
+</ul>
+
+<p>Imagine learning to play baseball; there are a lot of concepts involved. It goes beyond just the rules of the game, and includes things like batting stance, bat grip, eye hand coordination, etc.</p>
+
+<ul>
+<li><strong>How do you go about teaching those things?</strong>
+Pedagogical programming focuses on how the problem can be taught, not how it can be calculated.</li>
+</ul>
+
+<p>Imagine teaching a child to play baseball. You can&rsquo;t just explain the whole game to them and expect them to understand how to play. You&rsquo;d break down learning into pieces, and create a series of lessons that would help them learn how to play baseball.</p>
+
+<p>Let&rsquo;s say, to start, you wanted to teach them the concept of hand eye coordination. There would, likely, be a sequence of lessons to do this. You might start with a whiffle ball on a tee, progress to a tee that pops the ball up, move to underhand pitches, and then overhand pitches. You could continue to build upon your hand eye coordination concept with things like curved pitches, different styles of catching, and other exercises. It&rsquo;s all teaching one concept - eye hand coordination - but using <strong>progressive lessons</strong> to do so.</p>
+
+<h6 id="inkling-is-a-special-purpose-language">Inkling is a Special Purpose Language</h6>
+
+<p>Inkling is a special purpose language, meaning that it is a language for writing programs for a particular domain. This is as opposed to a general purpose language, which would allow you to write anything you could imagine. C++, Python, Ruby, and Java are all examples of general purpose programming languages.</p>
+
+<h6 id="inkling-is-a-functional-language">Inkling is a Functional language</h6>
+
+<p>In a functional programming language, a function defines a scope and can only modify what is in that scope. In Inkling, every concept takes data as input and sends data as output. Each concept is self contained, and there is no shared information between concepts unless you explicitly declare it. This means that no information is kept as state unless you specifically declare it. This makes Inkling a <a href="https://en.wikipedia.org/wiki/Functional_programming">functional programming</a> language.</p>
+
+<p><strong>For example:</strong></p>
+
+<ul>
+<li>Python and Javascript can be programmed in a functional way, but they are not pure functional languages.</li>
+<li>F# is a pure functional programming language.</li>
+<li>R, matlab, Java and prolog are not functional programming languages.</li>
+</ul>
+
+<h6 id="white-space-insensitive">White Space Insensitive</h6>
+
+<p>Inkling is white space insensitive. Internally, we prefer to use four spaces to indent lines. This is a stylistic choice. In this document, any mention of an &ldquo;indentation&rdquo; or a line &ldquo;being indented&rdquo; refers to using four spaces at the start of a line.</p>
+
+          <h1 id="mental-models">Mental Models</h1>
+
+<p>Mental models are a way of organizing concepts so that you can structure a solution to your AI problem as a workflow. Concepts are the ideas that you want to teach your BRAIN. When you create your concepts, you&rsquo;re going to start with the final concept that you want to teach your BRAIN and support it with other feature and skill concepts. These additional concepts appear upstream of your main concept because the information output from those concepts helps the Bonsai AI Engine teach your main concept to your BRAIN. Mental Models enable you to determine and plan the concepts that are taught to your BRAIN.</p>
+
+<p>For more information about Concepts, refer below to <a href="#concepts">Concepts</a> and the <a href="inkling-reference.html#concept">Concept Reference</a>.</p>
+
+<h2 id="determining-mental-models">Determining Mental Models</h2>
+
+<p>Your mental models should help you plan the concepts you&rsquo;re going to write in your Inkling file. Therefore, when you&rsquo;re determining your mental models, we suggest that you think about the condition that means the AI has successfully learned what you wanted it to learn. This could be:</p>
+
+<ul>
+<li>Learning to play a game</li>
+<li>Learning to recognize what a handwritten digit is</li>
+<li>Learning to tell if something is red or what color something is</li>
+<li>Learning to save electricity in your home</li>
+<li>Learning to manage a process to specific guidelines</li>
+</ul>
+
+<p>After you&rsquo;ve determined your success condition or criteria, you want to decide what the AI can do to prove it has successfully learned that condition. In a game, this could be, &ldquo;I think if the AI can get a high score, it has successfully learned to play the game.&rdquo; For recognizing red things, this could be, &ldquo;I think if the AI can successfully tell when something it is shown is red or not red it will have learned to recognize red things.&rdquo; This becomes your final <code class="prettyprint">concept</code>, and it also ties into your objective (reward), which measures how successful the AI is at learning this concept.</p>
+
+<p>For more complex goals and many use cases, you need multiple concepts that all become part of training your final concept. These additional concepts support your final concept and can also reduce the time it takes to train your BRAIN. For more information about determining concepts, refer to the next chapter.</p>
+
+<p>For each concept, you will need to determine what the AI needs to take in to make its decision and what the AI returns after it has decided. All of the information your AI needs to take in before it can train on any of the concepts is bundled together and labeled as <code class="prettyprint">input</code>. Each concept returns some information, but additional concepts feed their returned information to assist in training the final concept. Training on the final concept returns information that is sent from the BRAIN to the simulation. This is the <code class="prettyprint">output</code>.</p>
+
+<p>Your mental model can be mapped from left to right, starting with your input. Your other concepts come next, followed by your final concept, and finally, to the right, is your output. Your output is fed back through the Bonsai AI Engine to the application. You can draw arrows between the various nodes to represent data flow. Your concepts are trained in order. To visualize this more clearly, see our expanded example below.</p>
+
+<h2 id="examples">Examples</h2>
+
+<h3 id="example-breakout">Example: Breakout</h3>
+<pre class="highlight inkling"><code><span class="k">concept</span> <span class="nx">get_high_score</span>
+  <span class="k">is</span> <span class="nx">classifier</span>
+  <span class="k">predicts</span> <span class="p">(</span><span class="nx">PlayerMove</span><span class="p">)</span>
+  <span class="k">follows</span> <span class="kr">input</span><span class="p">(</span><span class="nx">GameState</span><span class="p">)</span>
+  <span class="k">feeds</span> <span class="kr">output</span>
+<span class="k">end</span>
+</code></pre>
+<p>For example, our mental model for teaching an AI to play the game Breakout looks like this:</p>
+
+<p><img src="images/mental-model.png" alt="Mental model" /></p>
+
+<p>Single concept model for learning breakout</p>
+
+<p>The <code class="prettyprint">input</code> is a snapshot of the game in its current state.</p>
+
+<p>The concept <code class="prettyprint">get_high_score</code>, is our final <code class="prettyprint">concept</code>. It describes what we want our BRAIN to learn to play the Breakout simulation, which means we&rsquo;ve decided that being able to get a high score means that it&rsquo;s learned how to play the game. This single concept mental model is sufficient to train a BRAIN to play the game, but this training may take a long time.</p>
+
+<p>The <code class="prettyprint">output</code> is the move that the AI wants to make. It chooses from left, right, or no move. The input and output are described in the schemas portion of the Inkling file.</p>
+
+<p>To speed up training time and enable to learn the <code class="prettyprint">get_high_score</code> concept more concretely, you can expand this mental model and include more concepts.</p>
+<pre class="highlight inkling"><code><span class="k">concept</span> <span class="nx">get_high_score</span>
+  <span class="k">is</span> <span class="nx">classifier</span>
+  <span class="k">predicts</span> <span class="p">(</span><span class="nx">PlayerMove</span><span class="p">)</span>
+  <span class="k">follows</span> <span class="kr">input</span><span class="p">(</span><span class="nx">GameState</span><span class="p">),</span> <span class="nx">keep_paddle_under_ball</span>
+  <span class="k">feeds</span> <span class="kr">output</span>
+<span class="k">end</span>
+
+<span class="k">concept</span> <span class="nx">keep_paddle_under_ball</span>
+  <span class="k">is</span> <span class="nx">classifier</span>
+  <span class="k">predicts</span> <span class="p">(</span><span class="nx">PlayerMove</span><span class="p">)</span>
+  <span class="k">follows</span> <span class="kr">input</span><span class="p">(</span><span class="nx">GameState</span><span class="p">),</span> <span class="nx">ball_location</span>
+  <span class="k">feeds</span> <span class="kr">output</span>
+<span class="k">end</span>
+</code></pre>
+<p>In this example, we&rsquo;ve added two extra concepts that support our final concept and give our BRAIN more information to work with. The concept of <code class="prettyprint">ball_location</code> feeds information into the concept <code class="prettyprint">keep_paddle_under_ball</code>, and that concept feeds information into <code class="prettyprint">get_high_score</code>.</p>
+
+<p>The input remains the same as above. The AI has two additional concepts to train. When it is training the ball_location concept, it takes in the input and returns the coordinates of the ball. On the <code class="prettyprint">keep_paddle_under_ball</code> concept, it takes in the input and the ball coordinates from ball_location. Then, that concept returns the best move to attempt to keep the paddle underneath the ball. The final concept, <code class="prettyprint">get_high_score</code>, takes in the input and the move returned from <code class="prettyprint">keep_paddle_under_ball</code> and returns the move it wants, which is the output sent to the simulator through the Bonsai AI Engine. Each of these concepts are trained from input to output.</p>
+
+          <h1 id="concepts">Concepts</h1>
+
+<p>A <strong>concept</strong> in Inkling is an (abstract) idea. In Inkling, the concept defines what you are going to teach the AI. For more information about using the concept keyword, refer to the <a href="inkling-reference.html#concept">Concept Reference</a>.</p>
+
+<p>Every Inkling program needs at least one concept. If there is more than one, determine which one is your main concept. You may have additional concepts to assist in teaching the main concept to your AI.</p>
+
+<h2 id="fact-and-strategy">Fact and Strategy</h2>
+
+<p>When you&rsquo;re thinking about concepts, you can categorize them into two groups: fact and strategy. A fact concept describes the <em><strong>state</strong></em> of a thing or things, such as an object, a ball, a character, an enemy, a light, a person, etc. The fact concept could be the state of whether that thing is on or off, is hot or cold, is a number or a letter, etc. It can also be a location. A strategy concept describes a <em><strong>method</strong></em> or <em><strong>behavior</strong></em>, such as &ldquo;avoid ghosts&rdquo;, &ldquo;keep the paddle under the ball&rdquo;, &ldquo;don&rsquo;t run into walls&rdquo;, &ldquo;turn lights off&rdquo;.</p>
+
+<p>For a simulator, your final concept is a strategy concept. Generator and data training sources don&rsquo;t permit strategy concepts.</p>
+
+<h3 id="in-a-game">In a Game</h3>
+
+<p>If you want to teach your AI to play a game, first choose a main concept. The result of the AI learning this concept should be that it knows how to play the game.</p>
+
+<ul>
+<li>A <strong>fact concept</strong> would describe something about the current state of the game.</li>
+<li>A <strong>strategy concept</strong> would describe a behavior that, if learned, would help the AI achieve its goal.</li>
+</ul>
+
+<p>For example, consider an Inkling program that teaches an AI to play Pacman. This is a game where you eat dots and run away from ghosts, and the higher the score you get, the better you do. Your main concept could be to get a high score.</p>
+
+<p>Supporting concepts might include <code class="prettyprint">eat_dots</code>, <code class="prettyprint">avoid_ghosts</code>, <code class="prettyprint">eat_fruit</code>, and <code class="prettyprint">avoid_blue_ghosts</code>. These are strategy concepts. You may also have concepts called <code class="prettyprint">dot_location</code>, <code class="prettyprint">ghost_location</code>, or <code class="prettyprint">ghost_color</code>. These are fact concepts.</p>
+
+<p>You can use a mental model to help you plan out your concepts and data flow.</p>
+
+<h2 id="determining-concepts">Determining Concepts</h2>
+
+<p>Determining what concepts to teach may take time. You can use mental models to work out what concepts to write and how data should flow between them.</p>
+
+<h2 id="examples">Examples</h2>
+
+<h3 id="example-tetris">Example: Tetris</h3>
+
+<p>Consider the game <a href="https://en.wikipedia.org/wiki/Tetris">Tetris</a>. The main concept we want to teach our AI will be the same as the main concept of PacMan. We want the AI to get the highest score possible. This represents that the AI has learned the game. To assist in teaching the main concept, we need to think through the various facts that the AI needs to learn. Here&rsquo;s a short list, but you might be able to think of other facts you&rsquo;d want to use:</p>
+
+<ul>
+<li><code class="prettyprint">active_tetrimino</code>: the tetrimino (piece) that is active. (fact)</li>
+<li><code class="prettyprint">tetrimino_location</code>: the location of the active tetrimino. (fact)</li>
+<li><code class="prettyprint">tetrimino_speed</code>: how fast the tetrimino is moving. (fact)</li>
+<li><code class="prettyprint">clear_base</code>: fit tetriminos into the base to clear pieces of it. (strategy)</li>
+</ul>
+
+<p>Any of these facts could be written into supporting concepts that would give information to your main concept.</p>
+
+<h3 id="example-home-automation">Example: Home Automation</h3>
+
+<p>In our home automation example, let&rsquo;s imagine that we want to save energy by turning off the lights in empty rooms. Our main concept is going to be something like <code class="prettyprint">turn_off_lights_empty_rooms</code>. If the AI learns to do the main concept, then we&rsquo;ll have solved our problem. To support this main concept, we need to think about the various facts that the AI needs to know in order to accomplish that behavior. Here&rsquo;s a short list, but you might be able to think of other facts that you&rsquo;d want to use:</p>
+
+<ul>
+<li><code class="prettyprint">light_state</code>: the on/off state of the lights in each room. (fact)</li>
+<li><code class="prettyprint">people_home</code>: The total number of people in the house. (fact)</li>
+<li><code class="prettyprint">person_location</code>: The location of each person/the room each person is in. (fact)</li>
+<li><code class="prettyprint">done_with_it</code>: The amount of time a person has been out of a room. Or, possibly, the location of the person who left this room. (fact)</li>
+<li><code class="prettyprint">definitely_empty</code>: don&rsquo;t shut off lights if someone is coming right back. (strategy)</li>
+<li><code class="prettyprint">still_in_use</code>: (a variant of the one above) don&rsquo;t turn off the lights if an empty room might be reoccupied soon.</li>
+</ul>
+
+<p>Any of these facts could be written into supporting concepts that would give information to your main concept.</p>
+
+<h2 id="writing-concept-statements">Writing Concept Statements</h2>
+
+<p>In Inkling, your concepts are written as concept statements. The Inkling concept statement includes an <strong>is</strong> clause which specifies whether the concept is a <strong>classifier</strong> or an <strong>estimator</strong>. This tells the AI what kind of information or prediction it is going to return.</p>
+
+<p>In its simplest form, a classifier is taking in input and returning a classification. In reality, the classifier is taking in input and assigning a score to the possible classifications of that input from a given set. You would specify <code class="prettyprint">is classifier</code> on your concept if your outcome set is small and unchanging. For example, you want your AI to recognize a written number from 0-10. Your outcome set is 0,1,2,3,4,5,6,7,8,9,10. For every handwritten number that it is shown, it assigns a probability to each number and returns the most likely value (the one with the highest probability).</p>
+
+<p>Estimators are used for larger outcome sets.  You would specify <code class="prettyprint">is estimator</code> on your concept if you are estimating a value in a very large range, potentially near infinite range. Estimators are often used for control. For example, if you need to turn a dial a certain amount, the AI has to return the direction and how much the dial is being turned. Your AI is estimating both of those from a potentially nearly-infinite range and returning the most likely combination.</p>
+
+<h2 id="determining-concept-statements">Determining Concept Statements</h2>
+
+<p>Determining what concepts to teach may take time. You can use mental models to work out what concepts need.  After you&rsquo;ve created your mental model, you can write your schemas (input and output) as well as your concepts. You need to:</p>
+
+<ul>
+<li>pick a descriptive name for your concept.</li>
+<li>determine whether it is a <code class="prettyprint">classifier</code> or <code class="prettyprint">estimator</code></li>
+<li>know where it comes in the mental model, and list any concepts that come before it.</li>
+</ul>
+
+<p>Every concept is trained by a curriculum. Which will be covered next.</p>
+
+<p>For more information on the concept statement, see the <a href="inkling-reference.html#concept">Concept Reference</a>.</p>
+
+          <h1 id="schemas">Schemas</h1>
+
+<p>Schemas describe a record and its fields. They contain a set of named data types that can be used throughout the system. They can include the common basic data types and native data types for working with common media formats (images, audio recordings). You add schemas in Inkling using the <code class="prettyprint">schema</code> keyword.</p>
+
+<p>Types (or <a href="https://en.wikipedia.org/wiki/Data_type">data types</a>) are representations of values of data. A type informs the system what the meaning of the data is, the possible values of that data is, what operations can be performed on that data, and the way the data can be stored. Types are the most basic building blocks of data manipulation.</p>
+
+<p>In Inkling we need types, because the AI needs to understand the data it is sent. Also the AI needs to know how to represent the prediction it sends back to the program that you have deployed it with.</p>
+
+<p>Inkling is also a strongly-typed language, which means that you are will receive an error if values are not compatible with their expected type. This means you need to pay attention to what types you choose.</p>
+
+<p>Inkling supports various types, including (but not limited to) primitive types, which include types for integers, floats,  bytes and strings, as well as types commonly used with machine learning (for example, Luminance). See the section on schemas and Inkling types for more information.</p>
+
+<h2 id="constrained-types">Constrained Types</h2>
+
+<p>Inkling supports <a href="inkling-reference.html#constrained-types">constrained types</a> in schemas (as well as for configuration of lessons). Constrained types use range expressions to constrain the values of the type to values defined by a range expression.</p>
+
+<p>A range expression has the effect of constraining the values of the type to values defined by the range expression. In a schema, this constrains the values in the field. In lessons, this constrains the values of the placeholder being configured. In both cases the syntax is the same.</p>
+
+<p>Here are some examples of constrained types:</p>
+<pre class="highlight inkling"><code><span class="k">schema</span> <span class="nx">MyOutput</span>
+  <span class="kr">UInt8</span>  <span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">}</span>   <span class="nx">label</span><span class="p">,</span>    <span class="c1"># a list of UInt8 values</span>
+  <span class="kr">String</span> <span class="p">{</span><span class="s2">"a"</span><span class="p">,</span> <span class="s2">"bc"</span><span class="p">}</span>   <span class="nx">category</span><span class="p">,</span> <span class="c1"># a list of Strings</span>
+  <span class="kr">Int64</span>  <span class="p">{</span> <span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">:</span><span class="mi">100</span> <span class="p">}</span>   <span class="nx">x</span><span class="p">,</span>        <span class="c1"># start:step:stop, step= 5,0..100</span>
+  <span class="kr">Int64</span>  <span class="p">{</span> <span class="mi">0</span><span class="p">:</span><span class="mi">100</span> <span class="p">}</span>     <span class="nx">y</span><span class="p">,</span>        <span class="c1"># start:stop, step= 1, 0..100</span>
+  <span class="kr">Int64</span>  <span class="p">{</span> <span class="mi">0</span><span class="p">..</span><span class="mi">100</span><span class="p">:</span><span class="mi">25</span> <span class="p">}</span> <span class="nx">z</span><span class="p">,</span>        <span class="c1"># start:stop, numsteps=25, step= 4, 0..100</span>
+  <span class="kr">Float32</span> <span class="p">{</span> <span class="mi">0</span><span class="p">..</span><span class="mi">2</span><span class="p">:</span><span class="mi">5</span><span class="p">}</span>    <span class="nx">a</span>         <span class="c1"># gives (0, .5., 1.0, 1.5, 2.0)</span>
+<span class="k">end</span>
+</code></pre>
+<h2 id="defining-schemas">Defining Schemas</h2>
+
+<p>Examine the input, returned data, and output of your mental model when defining your schemas. You need to match these requirements to Inkling types.</p>
+
+<h3 id="inputs-and-outputs">Inputs and Outputs</h3>
+
+<p><strong>Input</strong> is a stream of information that is fed into your BRAIN (your AI). The Bonsai AI Engine uses this information to help train the BRAIN or make a prediction.</p>
+
+<p>In Inkling, <strong>Output</strong> is a stream of information returned as a prediction that your BRAIN sends back to an application. It could be sent back to a simulator, if training is in process, or it could be send back to your deployed application, where it might be used for control or optimization. The data in input and output streams are described by schemas. Schemas are declared in your Inkling program, and they contain information about the data types contained in the stream. For example, if you want to teach your AI,  to recognize the shape &lsquo;square&rsquo;, you might give it a picture of a shape. That picture would be an input. The BRAIN answers yes (this is a square) or no (this is not a square). That answer is the output. Your Inkling file to teach your AI would contain one schema for describing the data type of the input (Luminance, an image type) and another for the output (Bool). For more information about schemas, refer to the <a href="inkling-reference.html#schema">Schema Reference</a>.</p>
+
+<h3 id="how-to-pick-types">How to pick types</h3>
+
+<ul>
+<li>If your input is an image, you will need the <code class="prettyprint">luminance</code> type.</li>
+<li>If your output is yes/no, true/false, or another dual relationship, you should use the <code class="prettyprint">bool</code> type.</li>
+<li>Inkling supports signed and unsigned integers of various sizes as well as floating point (32 and 64 bit). More details can be found under <a href="inkling-reference.html#inkling-types">Inkling Types</a>.</li>
+</ul>
+
+          <h1 id="curriculum-and-lessons">Curriculum and Lessons</h1>
+
+<p>A <strong>curriculum</strong> in Inkling is used to define what and how to teach a concept. Each concept needs a corresponding curriculum to teach it, and every Inkling program must contain at least one curriculum. A <strong>lesson</strong> is part of a curriculum; it teaches a specific piece of the concept by specifying training and testing parameters and a stopping point (<strong>until</strong>). Lessons enable the AI to learn the concept bit-by-bit instead of all at once. Lessons are contained within curriculum statements. Each curriculum must contain at least one lesson.</p>
+
+<p>Curriculum contain the lesson plan for the lessons that you are using to train your BRAINs. You must have one curriculum for every concept. A curriculum contains information about the training material that you&rsquo;re using to train the BRAIN; this is a simulator, generator, or data set, and it contains an objective, which measures the performance of the BRAIN as it learns your concept. Curricula may also contain expressions that assign portions of your training material for testing. Finally, your curriculum contains lessons. Each lesson teaches a piece of the concept. A curriculum can contain multiple lessons to teach a single concept.  Each lesson may contain different configurations for training the BRAIN. Configurations change how the Bonsai AI Engine uses the training source for training.</p>
+
+<aside class="notice">
+Currently, during our private beta, you can only train with simulators as your training sources. Additionally, you are limited to one lesson in your curriculum.
+</aside> 
+
+<h2 id="determining-curriculum">Determining Curriculum</h2>
+
+<p>Each curriculum trains a single concept, and every concept must have a curriculum. After you&rsquo;ve determined your concepts, you will know how many curricula you need for your Inkling program. Curricula contain the information the Bonsai AI Engine uses to train your BRAIN on the concepts you&rsquo;ve specified. They also specify the reward function (<strong>objective</strong>) for teaching a given concept. The reward function is a way the system concretely measures the AI&rsquo;s performance as it learns the concept.</p>
+<pre class="highlight inkling"><code><span class="k">curriculum</span> <span class="nx">balance_curriculum</span>
+    <span class="k">train</span> <span class="nx">balance</span>
+    <span class="k">with</span> <span class="k">simulator</span> <span class="nx">cartpole_simulator</span><span class="p">(</span><span class="nx">CartPoleConfig</span><span class="p">)</span> <span class="p">:</span> <span class="p">(</span><span class="nx">GameState</span><span class="p">)</span>
+    <span class="k">objective</span> <span class="nx">open_ai_gym_default_objective</span>
+      <span class="c1">#lessons</span>
+<span class="k">end</span>
+</code></pre>
+<p>For more information and examples, refer to the <a href="inkling-reference.html#curriculum">Curriculum Reference</a>.</p>
+
+<h2 id="determining-lessons">Determining Lessons</h2>
+
+<p>Each lesson specifies a portion of the training and, depending on the training sources, may contain information on configuring the training sources, training, testing, and a stopping point (<strong>until</strong>). When you&rsquo;re determining your lessons, you need to consider what your training sources are and what piece of the concept you are training. For example, if you&rsquo;re training with a simulator, you can place constraints on your simulation during training.</p>
+
+<h3 id="configure-clause">Configure Clause</h3>
+
+<p>The configure clause is part of a lesson statement. Configure clauses are used with simulators and generators. They inform the computer how to set up the simulator or generator for training. You use configure to make sure you&rsquo;re not always training from the beginning, but from a point that makes sense to enhance how your BRAIN is learning the concepts.</p>
+
+<p>The configure clause uses the <strong>constrain</strong> keyword to create a set of conditions for the AI to train on the simulator or generator with. <strong>constrain</strong> references a schema that is associated with the simulator.</p>
+<pre class="highlight inkling"><code><span class="k">lesson</span> <span class="nx">get_high_score</span>
+  <span class="k">configure</span>
+    <span class="k">constrain</span> <span class="nx">episode_length</span> <span class="k">with</span> <span class="kr">Int8</span><span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">},</span>
+    <span class="k">constrain</span> <span class="nx">num_episodes</span> <span class="k">with</span> <span class="kr">Int8</span><span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">},</span>
+    <span class="k">constrain</span> <span class="nx">deque_size</span> <span class="k">with</span> <span class="kr">UInt8</span><span class="p">{</span><span class="mi">1</span><span class="p">}</span>
+  <span class="k">until</span>
+    <span class="k">maximize</span> <span class="nx">open_ai_gym_default_objective</span>
+</code></pre>
+<p>The configure clause supports placeholders as well. The placeholder name does not hold a specific value, but is a name of a range of values that the the Bonsai AI Engine inputs during training. The configure clause provides guidance to the Bonsai AI Engine on how the training for that lesson should be configured. It is not the same as an assignment in an imperative language, because it does not represent a unique value. The AI Engine has some degree of freedom in determining how to configure for training.</p>
+
+<p>For more information and examples, refer to the <a href="inkling-reference.html#curriculum">Lesson Reference</a>.</p>
+
+<h2 id="objectives">Objectives</h2>
+
+<p>The <strong>objective</strong>, often known in machine learning (ML) as the <strong>reward function</strong>, measures how well the AI is doing at learning the concept. Or, put differently, it is what you use to reward the AI.</p>
+
+<p>This idea may be easier to understand with a few examples:</p>
+
+<p>In our Breakout example, our concept was get_high_score. The <strong>score</strong> is how we are measuring how well the AI is doing at learning that concept.</p>
+
+<p>If we are teaching the AI Pacman, and we are training the concept of <code class="prettyprint">avoid_non_blue_ghosts</code>, we may measure how well the AI is doing at learning this concept by measuring the amount of time the AI manages to avoid non-blue ghosts. Our objective clause uses <strong>time</strong> as the reward.</p>
+
+<p>In these examples, the objective, or reward, is one of the factors we use to measure how well the AI is training on the concept.</p>
+
+<h6 id="determining-objectives">Determining Objectives</h6>
+
+<p>There are several factors you can use to determine what your objective should be. Before you even start determining your objectives, you need to know what your concepts and curricula are. A good objective should reward the AI more often and be proportional to the quality of of the behavior.</p>
+
+<h3 id="frequency">Frequency</h3>
+
+<p>Frequency matters in training. The time between the AI&rsquo;s decision making and whether or not the decision was good needs to be kept short.  For example, if you&rsquo;re teaching an AI to play Pacman, you want to choose an objective like <code class="prettyprint">score</code> instead of an objective like <code class="prettyprint">level</code>.</p>
+
+<p>In Pacman, your score changes more often, probably many times during a level, but your level can only change 256 times. Your AI would have to beat an entire level to be rewarded. The length of time between a decision the AI makes and the reward should have a higher frequency and should scale with the as the AI learns.</p>
+
+<h3 id="proportional">Proportional</h3>
+
+<p>The reward should be in proportional to the quality of the behavior (or the correctness of the behavior). When you are deciding what your objective is going to be, you need to consider that the AI will learn exactly what you ask it to learn. This can result in learning what you specified but not necessarily what you wanted. For example, if you ask an AI to play Pong, and you use the objective of <code class="prettyprint">time</code>, the AI will learn that to get the longest time played, the paddle should remain in the same place. The ball will bounce back and forth between the two unmoving paddles.</p>
+
+<p>In the Pong example, the AI learned exactly what you told it to learn, how to maximize the amount of time, but it didn&rsquo;t really learn how to play the game.</p>
+
+<p>You need to think about what training with a specific reward will produce in terms of the quality or correctness of the behavior.</p>
+
+<h3 id="in-inkling">In Inkling</h3>
+
+<p>In an Inkling program, your objective is going to be part of your curriculum statement.</p>
+<pre class="highlight inkling"><code><span class="k">curriculum</span> <span class="nx">_curriculumName</span>
+    <span class="k">train</span> <span class="nx">_conceptName</span>
+    <span class="k">with</span> <span class="nx">_trainingSpecifier</span>
+  <span class="k">objective</span> <span class="nx">_objectiveName</span>
+    <span class="c1"># lessons are specified here.</span>
+<span class="k">end</span>
+</code></pre>
+      </div>
+      <div class="dark-box">
+      </div>
+    </div>
+
+    </div>
+
+  </div>
+
+  </body>
+</html>

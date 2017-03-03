@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>CLI Reference - Bonsai</title>
+    <title>AI Engine Guide - Bonsai</title>
     <style>
       .highlight table td { padding: 5px; }
 .highlight table pre { margin: 0; }
@@ -104,7 +104,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 	
   </head>
 
-  <body class="cli-reference" data-languages="[&quot;powershell&quot;,&quot;shell&quot;]">
+  <body class="ai-engine-guide" data-languages="[]">
 	  
 	  
 	  <!-- Google Tag Manager (noscript) -->
@@ -137,7 +137,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <input type="checkbox" id="drop-1"/>
             <ul id="references">
 				<li class=""> <a href="api-reference.html">API</a>  </li>
-				<li class="selected"> <a href="cli-reference.html">CLI</a>  </li>
+				<li class=""> <a href="cli-reference.html">CLI</a>  </li>
 		        <li class=""> <a href="inkling-reference.html">Inkling</a>  </li>
 				
                 
@@ -167,10 +167,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </a>
     <div class="tocify-wrapper">
 
-        <div class="lang-selector">
-              <a href="#" data-language-name="powershell">Windows</a>
-              <a href="#" data-language-name="shell">macOS</a>
-        </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
         </div>
@@ -259,208 +255,79 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="dark-box"></div>
       <div class="content">
         
-          <h1 id="cli-overview">CLI Overview</h1>
+          <h1 id="major-components">Major Components</h1>
 
-<p>The Bonsai Command Line Interface (CLI) is a text-based tool that enables you to configure and control the Bonsai Artificial Intelligence Engine. The CLI is especially useful for automation and connection to other tools. Currently, there are some actions that can only be performed using the CLI, such as loading your Inkling file and connecting your simulator. </p>
-
-          <h1 id="installation">Installation</h1>
-
-<h2 id="install">Install</h2>
-
-<blockquote>
-<p>Python 2 and Anaconda</p>
-</blockquote>
-<pre class="highlight plaintext"><code>pip install bonsai-cli
-</code></pre>
-<blockquote>
-<p>Python 3</p>
-</blockquote>
-<pre class="highlight powershell"><code><span class="c1"># same as above</span>
-</code></pre><pre class="highlight shell"><code>pip3 install bonsai-cli
-</code></pre>
-<p>The Bonsai CLI uses pip, the PyPA recommended tool for installing Python packages. Note that macOS running Python 3 requires the use of <code class="prettyprint">pip3</code> instead of <code class="prettyprint">pip</code>.</p>
-
-<h2 id="update">Update</h2>
-
-<blockquote>
-<p>Python 2 and Anaconda</p>
-</blockquote>
-<pre class="highlight plaintext"><code>pip install -U bonsai-cli
-</code></pre>
-<blockquote>
-<p>Python 3</p>
-</blockquote>
-<pre class="highlight powershell"><code><span class="c1"># same as above</span>
-</code></pre><pre class="highlight shell"><code>pip3 install -U bonsai-cli
-</code></pre>
-<p>To update the Bonsai CLI to the most recent version please run the pip command. </p>
-
-          <h1 id="commands">Commands</h1>
-<pre class="highlight plaintext"><code>bonsai --help
-Usage: bonsai [OPTIONS] COMMAND [ARGS]...
-
-  Command line interface for the Bonsai Artificial Intelligence Engine.
-
-Options:
-  --help     Show this message and exit.
-  --version  Show the version and exit.
-
-Commands:
-  brain      Create, delete BRAINs.
-  configure  Authenticate with the BRAIN Server.
-  create     Create a BRAIN and set the default BRAIN.
-  list       List BRAINs owned by the current user.
-  load       Loads an inkling file into the given BRAIN.
-  sims       Retrieve information about simulators.
-  train      Start and stop training on a BRAIN.
-</code></pre>
-<p>Use <code class="prettyprint">bonsai COMMAND --help</code> to get information about a specific command. You can use <code class="prettyprint">bonsai --help</code> to view a list of options for COMMAND.</p>
-
-<h2 id="bonsai-configure">bonsai configure</h2>
-<pre class="highlight plaintext"><code>$ bonsai configure
-</code></pre>
-<p><code class="prettyprint">configure</code> sets up authentication between you (as a user) and the server. This enables the server to verify that you are allowed to write Inkling code to a specific BRAIN.</p>
-
-<p>You can find your access key at <a href="https://beta.bons.ai/accounts/key">https://beta.bons.ai/accounts/key</a>.</p>
-<pre class="highlight plaintext"><code>$ bonsai configure --help
-Usage: bonsai configure [OPTIONS]
-
-  Authenticate with the BRAIN Server.
-
-Options:
-  --key TEXT  Provide an access key.
-  --help      Show this message and exit.
-</code></pre>
-<h2 id="bonsai-create">bonsai create</h2>
-<pre class="highlight plaintext"><code>$ bonsai create brainName
-</code></pre>
-<p><code class="prettyprint">create</code> generates a new brain and names it &ldquo;brainName&rdquo;.  It also sets the assumed BRAIN name for later commands.</p>
-<pre class="highlight plaintext"><code>$ bonsai create --help
-Usage: bonsai create [OPTIONS] BRAIN_NAME
-
-  Creates a BRAIN and sets the default BRAIN for future commands.
-
-Options:
-  --project TEXT  Override to target another project directory.
-  --help          Show this message and exit.
-</code></pre>
-<p>BRAIN names may include:</p>
+<p>Bonsai&rsquo;s AI Engine has several major components.</p>
 
 <ul>
-<li>letters</li>
-<li>numbers</li>
-<li>dashes</li>
+<li><strong>The architect</strong> :generates learning models using the Inkling program and characteristics of the provided training content.</li>
+<li><strong>The instructor:</strong> trains those topologies according to the information set out in the Inkling program</li>
+<li><strong>The learner:</strong> does the learning, and <strong>the predictor</strong> predicts.</li>
+<li>There are many other parts of our system that are more common—systems for storing and querying data, systems for streaming and manipulating data, and plumbing to expose models in the AI engine as API&rsquo;s</li>
 </ul>
 
-<p>It is case insensitive, but case aware.</p>
+<h3 id="architect">Architect</h3>
 
-<h2 id="bonsai-brain-create">bonsai brain create</h2>
-<pre class="highlight plaintext"><code>$ bonsai brain create brainName
-</code></pre>
-<p><code class="prettyprint">create</code> generates a new brain and names it &ldquo;brainName&rdquo;.  It also sets the assumed BRAIN name for later commands.</p>
-<pre class="highlight plaintext"><code>$ bonsai brain create --help
-Usage: bonsai brain create [OPTIONS] BRAIN_NAME
+<p>The architect component is responsible for creating and optimizing learning topologies (e.g. neural networks) based on mental models. In essence, it takes the codified mental model and pedagogy, and it proposes a set of candidate low level learning algorithms, topologies, and their configurations that it believes will best be able to learn the concepts in the model.  This is akin to the work that the data scientist does in the toolkit approach, or that the search system automates in the statistical data analysis tools approach. Here, the system, is guided by the provided pedagogical program instead of being a broad search.</p>
 
-  Creates a BRAIN on the server.
+<h3 id="instructor">Instructor</h3>
 
-Options:
-  --help  Show this message and exit.
-</code></pre>
-<h2 id="bonsai-load">bonsai load</h2>
-<pre class="highlight plaintext"><code>$ bonsai load
-</code></pre>
-<p><code class="prettyprint">bonsai load</code> loads an Inkling file into the current brain.  The project file in the current directory (<code class="prettyprint">bonsai_brain.bproj</code>) determines which inkling file to load.  You can specify <code class="prettyprint">--brain brainName</code>, or <code class="prettyprint">--project /brain/project</code> to use another brain.</p>
+<p>The instructor component is responsible for carrying out the training plan codified in the pedagogy. To do so, it must form internal representations about the capability level of each concept, and adapt the execution plan based on actual performance during training. While some operations can take place in a traditional, batch oriented fashion, the system is designed to work in an interactive streaming fashion wherein the system being trained is presented with data or an environment, asked to compute its output or action, has its performance assessed, and is then asked to learn accordingly.  This streaming approach allows intermixing data oriented and simulation oriented training approaches.</p>
 
-<h2 id="bonsai-train">bonsai train</h2>
-<pre class="highlight plaintext"><code>$ bonsai train --help
-Usage: bonsai train [OPTIONS] COMMAND [ARGS]...
+<h3 id="learner">Learner</h3>
 
-  Start and stop training on a BRAIN, as well as get training status
-  information.
+<p>The learner component is responsible for carrying out the actual execution of the low level, underlying artificial intelligence algorithms. In training mode, it instantiates a system conforming to what was proposed by the architect, interfaces with the instructor to set the parameters of the learning algorithm, and assess performance. Then, it executes the learning algorithm itself. In execution mode, it will instantiate an instance of the already trained system, and execute its computation when called for.</p>
 
-Options:
-  --help  Show this message and exit.
+<h3 id="transformer">Transformer</h3>
 
-Commands:
-  start   Trains the specified BRAIN.
-  status  Gets training status on the specified BRAIN.
-  stop    Stops training on the specified BRAIN.
-</code></pre>
-<h2 id="bonsai-train-start">bonsai train start</h2>
-<pre class="highlight plaintext"><code>$ bonsai train start
-</code></pre>
-<p><code class="prettyprint">start</code> turns on/enables training mode for the current BRAIN. The BRAIN trains whenever the simulator is connected. If the simulator is disconnected, the BRAIN remains in training mode, and it will train again where it left off when the simulator is reconnected.</p>
-<pre class="highlight plaintext"><code>$ bonsai train start --help
-Usage: bonsai train start [OPTIONS]
+<p>The transformer carries out any streaming data transformations that do not require learning. When authors create BRAIN models, some concepts do not require learning; code specifying explicitly how to calculate them can be specified. For example, if you want to use the concept of a moving average.  Rather than have the system learn how to calculate a moving average, you can easily specify how to calculate it explicitly. Such transformations take the form of &ldquo;stream&rdquo; statements in Inkling, which will be described in more detail below.  The transformer carries out the actual execution of such transformations when needed.</p>
 
-  Trains the specified BRAIN.
+<h3 id="predictor">Predictor</h3>
 
-Options:
-  --brain TEXT    Override to target another BRAIN.
-  --project TEXT  Override to target another project directory.
-  --help          Show this message and exit.
-</code></pre>
-<h2 id="bonsai-train-stop">bonsai train stop</h2>
-<pre class="highlight plaintext"><code>$ bonsai train stop
-</code></pre>
-<p><code class="prettyprint">stop</code> turns off training mode for the current BRAIN.</p>
-<pre class="highlight plaintext"><code>$ bonsai train stop --help
-Usage: bonsai train stop [OPTIONS] BRAIN_NAME
+<p>After an algorithm is trained, it is hosted in a &lsquo;prediction mode&rsquo;. This mode holds a neural network for use as an HTTP API endpoint.  The programmer can then send input data to the predictor and get back a prediction.</p>
 
-  Stops training on the specified BRAIN.
+<h1 id="the-architect">The Architect</h1>
 
-Options:
-  --brain TEXT    Override to target another BRAIN.
-  --project TEXT  Override to target another project directory.
-  --help          Show this message and exit.
-</code></pre>
-<h2 id="bonsai-train-status">bonsai train status</h2>
-<pre class="highlight plaintext"><code>$ bonsai train status
-</code></pre>
-<p><code class="prettyprint">bonsai train status</code> is used to see the current training status of your BRAIN.</p>
-<pre class="highlight plaintext"><code>$ bonsai train status --help
-Usage: bonsai train status [OPTIONS]
+<p>The architect component is responsible for creating and optimizing learning topologies (e.g. neural networks) based on mental models. In this section, we outline techniques used by the architect to determine reasonable architectures.</p>
 
-  Gets training status on the specified BRAIN.
+<h3 id="heuristics">Heuristics</h3>
 
-Options:
-  --brain TEXT    Override to target another BRAIN.
-  --json          Output status as json.
-  --project TEXT  Override to target another project directory.
-  --help          Show this message and exit.
-</code></pre>
-<h2 id="bonsai-list">bonsai list</h2>
-<pre class="highlight plaintext"><code>$ bonsai list
-</code></pre>
-<p><code class="prettyprint">list</code> shows you the BRAINs you currently own or by a user under a given URL.</p>
-<pre class="highlight plaintext"><code>$ bonsai list --help
-Usage: bonsai list [OPTIONS]
+<p>First, many heuristics regarding the mental model can be used to inform what types of artificial intelligence and machine learning algorithms to use.  For example, the data types used have a large influence. For this reason, Inkling contains rich native data types in addition to the basic data types. If the architect sees, for example, that an image is being used, a convolutional deep learning neural network architecture may be appropriate.  If the architect sees data that is temporal in nature (for example audio data, or sequence data), then a recursive deep learning neural network architecture like an LSTM network may be more appropriate. The collection of heuristics is generated by data science and machine learning / AI experts who work on the architect codebase, and who attempt to capture the heuristics that they themselves use in practice.</p>
 
-  Lists BRAINs owned by current user or by the user under a given URL.
+<h3 id="mental-model-signatures">Mental Model Signatures</h3>
 
-Options:
-  --help  Show this message and exit.
-</code></pre>
-<h2 id="bonsai-sims-list">bonsai sims list</h2>
-<pre class="highlight plaintext"><code>$ bonsai sims list
-</code></pre>
-<p><code class="prettyprint">bonsai sims list</code> shows you all of the simulators you have connected to the BRAIN server.</p>
-<pre class="highlight plaintext"><code>$ bonsai sims list --help
-Usage: bonsai sims list [OPTIONS]
+<p>The system also calculates a signature for a mental model. These signatures are a form of hashing such that mental models that have similar characteristics have similar signatures. These signatures can then be used in conjunction with heuristics and meta learning.</p>
 
-  List the simulators connected to the BRAIN server.
+<h3 id="statistical-distribution-inference">Statistical Distribution Inference</h3>
 
-Options:
-  --brain TEXT    Override to target another BRAIN.
-  --project TEXT  Override to target another project directory.
-  --help          Show this message and exit.
-</code></pre>
+<p>In addition to looking at the mental model, the Architect also considers the pedagogy provided in the Inkling code.  It will, for example, look at the statistical distribution of any data sets being used; in the case of simulators, it can ask the simulator to generate substantial amounts of data so as to determine the statistics of data that will be used during training. These distribution properties can further inform the heuristics used.</p>
+
+<h3 id="meta-learning">Meta Learning</h3>
+
+<p>Meta learning is an advanced technique used by the architect.  It is, as the name implies, learning about learning.  This means, as the architect generates candidate algorithm choices and topologies for training, it records this data along with the signature of the model and the resultant system performance.  This data set is then used in its own learning system (a portion of the architect is itself written in Inkling).  Thus the architect, by virtue of proposing, exploring, and optimizing learning models, can observe what works and what doesn&rsquo;t, and use that to learn what models it should try in the future when it sees similar signatures.</p>
+
+<h3 id="advanced-usage">Advanced Usage</h3>
+
+<p>For advanced users, low level details of a learning topology can be explicitly specified in part or in completely.  The architect treats any such pinning of parameters as an override on its default behavior.  In this way, specific algorithms can be provided, or a generated model can be pinned for manual refinement.</p>
+
+<h1 id="the-instructor">The Instructor</h1>
+
+<p>The instructor component is responsible for carrying out the training plan codified in the pedagogy.  In this section, we outline techniques used by the instructor.</p>
+
+<h3 id="the-execution-plan">The Execution Plan</h3>
+
+<p>When starting a training operation, the instructor first generates an execution plan. It uses this ordering when teaching the concepts, and for each concept which lessons it intends to teach in what order. While the execution plan is executing, the instructor may jump back and forth between concepts and lessons to optimize training. The major techniques used to determine when to switch between lessons and concepts for training are reinforcement learning and adaptive learning.</p>
+
+<h1 id="the-idk-and-learning-engines">The IDK and Learning Engines</h1>
+
+<p>The learning engine encodes the underlying detail needed to work with a particular artificial intelligence or machine learning algorithm. The BRAIN server provides many standard learning engines such as those used for deep learning. However, learning algorithm authors can provide their own backends if so desired. By architecting the BRAIN server in this way, Inkling code gains another level of abstraction from a particular approach. If a new learning algorithm is created that has superior performance to existing algorithms, all that need be added is a new backend. The architect will immediately start using the backend to build systems, and existing Inkling programs can be recompiled without modification to take advantage of the improved algorithms.</p>
+
+<h1 id="versioning">Versioning</h1>
+
+<p>The Bonsai AI Engine keeps versions of BRAINs. Each load operation and training session generates a new version. This way you can compare the latest version of a BRAIN with previous versions.</p>
+
       </div>
       <div class="dark-box">
-          <div class="lang-selector">
-                <a href="#" data-language-name="powershell">Windows</a>
-                <a href="#" data-language-name="shell">macOS</a>
-          </div>
       </div>
     </div>
 
