@@ -88,11 +88,11 @@
   color: #a6e22e;
 }
     </style>
-    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
-    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
-	<link href="stylesheets/test.css" rel="stylesheet" media="screen" />
-    <link href="favicon.ico" rel="icon" type="image/ico" />
-      <script src="javascripts/all.js"></script>
+    <link href="../stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="../stylesheets/print.css" rel="stylesheet" media="print" />
+	<link href="../stylesheets/test.css" rel="stylesheet" media="screen" />
+    <link href="../favicon.ico" rel="icon" type="image/ico" />
+      <script src="../javascripts/all.js"></script>
 	
 	<!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -104,7 +104,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 	
   </head>
 
-  <body class="inkling-reference" data-languages="[]">
+  <body class="references references_inkling-reference" data-languages="[]">
 	  
 	  
 	  <!-- Google Tag Manager (noscript) -->
@@ -114,46 +114,48 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <div id="flex-container">
 
-	        <nav id="primary-nav">
-			
-			 
-			
-        <div id="logo"> <a href="."><img class="bonsai-logo" src="images/bonsai-logo.svg"></a></div>
+	<nav id="primary-nav">
 
-        <label for="drop" class="toggle"><img class="menu-ham" src="images/menu.svg"></label>
-        <input type="checkbox" id="drop" />
-            
-			<ul class="menu">
-                
-				<li class="header_menu_item "> <a href="getting-started.html">Getting Started</a></li>
-		
-				<li class="header_menu_item ">    <a href="inkling-guide.html">Inkling Guide</a>  </li>
-			
-      
-        		<li class="header_menu_item">
-            <!-- First Tier Drop Down -->
-            <label for="drop-1" class="toggle">References +</label>
-            <a  href="#">References</a>
-            <input type="checkbox" id="drop-1"/>
-            <ul id="references">
+
+
+	<div id="logo"> <a href="../"><img class="bonsai-logo" src="../images/bonsai-logo.svg"></a></div>
+
+	<label for="drop" class="toggle"><img class="menu-ham" src="../images/menu.svg"></label>
+	<input type="checkbox" id="drop" />
+
+	<ul class="menu">
+
+		<li class="header_menu_item "> <a href="../guides/getting-started.html">Getting Started</a></li>
+
+	
+		<li class="header_menu_item"> <!-- First Tier Drop Down --> <label for="drop-1" class="toggle">Guides +</label><a  href="#">Guides</a>			
+			<input type="checkbox" id="drop-1"/>
+			<ul id="guides">
+				<li class=""> <a href="../guides/ai-engine-guide.html">A.I. Engine Guide</a>  </li>
+				<li class=""> <a href="../guides/getting-started.html">Getting Started</a>  </li>
+				<li class=""> <a href="../guides/inkling-guide.html">Inkling Guide</a>  </li>
+			</ul> 
+		</li>
+
+		<li class="header_menu_item"> <!-- First Tier Drop Down --> <label for="drop-1" class="toggle">References +</label><a  href="#">References</a>			
+			<input type="checkbox" id="drop-1"/>
+			<ul id="references">
 				<li class=""> <a href="api-reference.html">API</a>  </li>
 				<li class=""> <a href="cli-reference.html">CLI</a>  </li>
-		        <li class="selected"> <a href="inkling-reference.html">Inkling</a>  </li>
-				
-                
-            </ul> 
+				<li class="selected"> <a href="inkling-reference.html">Inkling</a>  </li>
+			</ul> 
+		</li>
+		
+		<li class="header_menu_item "> <a href="../examples.html">Examples</a></li>
 
-        </li>
-		
-       
-				<li><gcse:search></gcse:search></li>
-				
-				
-            </ul>
-			
-        </nav>
-		
-		
+		<li><gcse:search></gcse:search></li>
+
+
+	</ul>
+
+</nav>
+
+
 
 
 
@@ -162,7 +164,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <a href="#" id="nav-button">
       <span>
         NAV
-        <img src="images/navbar.png" alt="Navbar" />
+        <img src="../images/navbar.png" alt="Navbar" />
       </span>
     </a>
     <div class="tocify-wrapper">
@@ -654,7 +656,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <p>The <strong>objective</strong> specifies the termination condition for training.</p>
 
-<p><strong>Note:</strong> When the trainingSpecifier is <strong>data</strong>, the objective must be either the keywords <code class="prettyprint">equality</code> or <code class="prettyprint">linear_distance</code>. When the training specifier is <strong>simulator</strong> or <strong>generator</strong>, the objective names a function which is specified in the associated simulator or generator. The use of simulators or generators requires an auxiliary clause, the <code class="prettyprint">simulator</code> or <code class="prettyprint">generator</code> clause respectively. The example below uses the game Mountain Car from OpenAI Gym to illustrate the simulator clause.  To explore this example more fully, refer to it in our <a href="inkling-guide.html#example-mountain-car">Examples chapter</a>.</p>
+<p><strong>Note:</strong> When the trainingSpecifier is <strong>data</strong>, the objective must be either the keywords <code class="prettyprint">equality</code> or <code class="prettyprint">linear_distance</code>. When the training specifier is <strong>simulator</strong> or <strong>generator</strong>, the objective names a function which is specified in the associated simulator or generator. The use of simulators or generators requires an auxiliary clause, the <code class="prettyprint">simulator</code> or <code class="prettyprint">generator</code> clause respectively. The example below uses the game Mountain Car from OpenAI Gym to illustrate the simulator clause.  To explore this example more fully, refer to it in our <a href="./inkling-guide.html#example-mountain-car">Examples chapter</a>.</p>
 <pre class="highlight inkling"><code><span class="k">simulator</span> <span class="nx">mountaincar_simulator</span><span class="p">(</span><span class="nx">MountainCarConfig</span><span class="p">)</span> <span class="c1">#simulator clause</span>
   <span class="k">state</span> <span class="p">(</span><span class="nx">GameState</span><span class="p">)</span>
   <span class="nx">control</span> <span class="p">(</span><span class="nx">Action</span><span class="p">)</span>
