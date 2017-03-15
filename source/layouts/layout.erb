@@ -77,9 +77,10 @@
       <div class="dark-box"></div>
       <div class="content">
         <%= yield %>
-        <% current_page.data.includes && current_page.data.includes.each do |include| %>
-          <%= partial "includes/#{include}" %>
-        <% end %>
+		<% current_page.data.includes && current_page.data.includes.each do |include| %>
+		 <a href="<%= 'https://github.com/BonsaiAI/bonsaiai.github.io/tree/dev/source/includes/' + include.reverse.sub('/', '_/').reverse %>">Edit</a>
+		 <%= partial "includes/#{include}" %>
+		<% end %>
       </div>
       <div class="dark-box">
         <% if language_tabs.any? %>
