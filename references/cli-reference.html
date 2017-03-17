@@ -260,7 +260,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        
+        <p>-</p>
+
           <h1 id="cli-overview">CLI Overview</h1>
 
 <p>The Bonsai Command Line Interface (CLI) is a text-based tool that enables you to configure and control the Bonsai Artificial Intelligence Engine. The CLI is especially useful for automation and connection to other tools. Currently, there are some actions that can only be performed using the CLI, such as loading your Inkling file and connecting your simulator. </p>
@@ -457,6 +458,70 @@ Options:
   --project TEXT  Override to target another project directory.
   --help          Show this message and exit.
 </code></pre>
+          <h1 id="projects-and-config-files">Projects and Config Files</h1>
+
+<p>The Bonsai command-line interface works with three files.  A <code class="prettyprint">.bonsai</code> file in
+your user directory, a project file in the directory containing the Inkling 
+files and simulator configuration for a BRAIN, and a <code class="prettyprint">.brains</code> file that links
+a project file to a BRAIN in the same directory as the project file.</p>
+
+<h2 id="bonsai-file">.bonsai file</h2>
+<pre class="highlight ini"><code><span class="nn">[DEFAULT]</span>
+<span class="py">port</span> <span class="p">=</span> <span class="s">443</span>
+<span class="py">username</span> <span class="p">=</span> <span class="s">bonsaiuser</span>
+<span class="py">accesskey</span> <span class="p">=</span> <span class="s">55555555-5555-5555-5555-555555555555</span>
+<span class="py">webport</span> <span class="p">=</span> <span class="s">443</span>
+<span class="py">webhost</span> <span class="p">=</span> <span class="s">beta.bons.ai</span>
+<span class="py">host</span> <span class="p">=</span> <span class="s">api.bons.ai</span>
+<span class="py">usessl</span> <span class="p">=</span> <span class="s">True</span>
+</code></pre>
+<p>The <code class="prettyprint">.bonsai</code>, located in your user directory, file stores your username and an access token for access to the
+Bonsai servers.</p>
+
+<h2 id="bproj-file">.bproj file</h2>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"files"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"mybrain.ink"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"training"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+        </span><span class="s2">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"python my_simulator.py"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"simulator"</span><span class="p">:</span><span class="w"> </span><span class="s2">"openai.gym"</span><span class="w">
+    </span><span class="p">}]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Project files are created in the same directory as your Inkling files when
+you download or create a BRAIN with the CLI. The project file has a name like
+<code class="prettyprint">bonsai_brain.bproj</code> and contains a JSON object that ties together the Inkling
+files and simulator configuration needed to train a BRAIN.</p>
+
+<ul>
+<li><p><code class="prettyprint">files</code> is a list of files or directories to search for inkling files. All
+the Inkling listed is concatenated together to form the inkling for this BRAIN.
+There must be at least one valid path in the <code class="prettyprint">files</code> list.</p></li>
+<li><p><code class="prettyprint">training</code> is a list of objects.  The <code class="prettyprint">simulator</code> field of that object
+points to a pre-configured simulation container inside the platform. The
+<code class="prettyprint">command</code> field describes the command to run to start the simulator.</p></li>
+</ul>
+
+<h2 id="brains-file">.brains file</h2>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"brains"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+        </span><span class="s2">"default"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mybrain"</span><span class="w">
+    </span><span class="p">}]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<p>The <code class="prettyprint">.brains</code> file links a project to a BRAIN on the server. You can link one
+project to many BRAINs.  The file is located in the same directory as a
+project file.</p>
+
+<ul>
+<li><p><code class="prettyprint">name</code> is a name of one of this user&rsquo;s BRAINs.</p></li>
+<li><p><code class="prettyprint">default</code> marks a named BRAIN as the default BRAIN to use with command
+operations.</p></li>
+</ul>
+
       </div>
       <div class="dark-box">
           <div class="lang-selector">
