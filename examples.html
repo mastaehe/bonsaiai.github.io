@@ -11,81 +11,190 @@
     <style>
       .highlight table td { padding: 5px; }
 .highlight table pre { margin: 0; }
-.highlight, .highlight .w {
-  color: #f8f8f2;
-  background-color: #272822;
+.highlight .gh {
+  color: #999999;
 }
-.highlight .err {
-  color: #272822;
-  background-color: #f92672;
+.highlight .sr {
+  color: #f6aa11;
 }
-.highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
   color: #75715e;
 }
 .highlight .cp {
-  color: #f4bf75;
+  color: #75715e;
 }
-.highlight .nt {
-  color: #f4bf75;
+.highlight .c1 {
+  color: #75715e;
 }
-.highlight .o, .highlight .ow {
-  color: #f8f8f2;
+.highlight .cs {
+  color: #75715e;
 }
-.highlight .p, .highlight .pi {
-  color: #f8f8f2;
+.highlight .c, .highlight .cd {
+  color: #75715e;
 }
-.highlight .gi {
-  color: #a6e22e;
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
 }
 .highlight .gd {
-  color: #f92672;
+  color: #49483e;
 }
-.highlight .gh {
-  color: #66d9ef;
-  background-color: #272822;
-  font-weight: bold;
+.highlight .gi {
+  color: #49483e;
 }
-.highlight .k, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kv {
-  color: #ae81ff;
+.highlight .ge {
+  color: #49483e;
 }
 .highlight .kc {
-  color: #fd971f;
-}
-.highlight .kt {
-  color: #fd971f;
-}
-.highlight .kd {
-  color: #fd971f;
-}
-.highlight .s, .highlight .sb, .highlight .sc, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .s1 {
-  color: #a6e22e;
-}
-.highlight .sr {
-  color: #a1efe4;
-}
-.highlight .si {
-  color: #cc6633;
-}
-.highlight .se {
-  color: #cc6633;
-}
-.highlight .nn {
-  color: #f4bf75;
-}
-.highlight .nc {
-  color: #f4bf75;
-}
-.highlight .no {
-  color: #f4bf75;
-}
-.highlight .na {
   color: #66d9ef;
 }
-.highlight .m, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mb, .highlight .mx {
-  color: #a6e22e;
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
 }
 .highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s {
+  color: #e6db74;
+}
+.highlight .na {
   color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+}
+.highlight .nn {
+  color: #ffffff;
+}
+.highlight .nl {
+  color: #ffffff;
+}
+.highlight .ni {
+  color: #ffffff;
+}
+.highlight .bp {
+  color: #ffffff;
+}
+.highlight .vg {
+  color: #ffffff;
+}
+.highlight .vi {
+  color: #ffffff;
+}
+.highlight .nv {
+  color: #ffffff;
+}
+.highlight .w {
+  color: #ffffff;
+}
+.highlight {
+  color: #ffffff;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
 }
     </style>
     <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
@@ -267,7 +376,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <p><em>A pole is attached by an un-actuated joint to a cart, which moves along a frictionless track. The system is controlled by applying a force of +1 or -1 to the cart. The pendulum starts upright, and the goal is to prevent it from falling over. A reward of +1 is provided for every timestep that the pole remains upright. The episode ends when the pole is more than 15 degrees from vertical, or the cart moves more than 2.4 units from the center.</em></p>
 
 <h2 id="schema-gamestate-action-and-cartpoleconfig">Schema: <code class="prettyprint">GameState</code>, <code class="prettyprint">Action</code>, and <code class="prettyprint">CartPoleConfig</code></h2>
-<pre class="highlight inkling"><code><span class="k">schema</span> <span class="nx">GameState</span>
+<pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">GameState</span>
   <span class="kr">Float32</span> <span class="nx">position</span><span class="p">,</span>
   <span class="kr">Float32</span> <span class="nx">velocity</span><span class="p">,</span>
   <span class="kr">Float32</span> <span class="nx">angle</span><span class="p">,</span>
@@ -275,12 +384,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <span class="k">end</span>
 </code></pre>
 <p>The schema <code class="prettyprint">GameState</code> names four records — <code class="prettyprint">position</code>, <code class="prettyprint">velocity</code>, <code class="prettyprint">angle</code>, and <code class="prettyprint">rotation</code> — and assigns a type to them. This information is input from the simulation.</p>
-<pre class="highlight inkling"><code><span class="k">schema</span> <span class="nx">Action</span>
+<pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">Action</span>
   <span class="kr">Int8</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">}</span> <span class="k">action</span>
 <span class="k">end</span>
 </code></pre>
 <p>The schema <code class="prettyprint">Action</code> names a record — <code class="prettyprint">action</code> —  and assigns it a constrained type.</p>
-<pre class="highlight inkling"><code><span class="k">schema</span> <span class="nx">CartPoleConfig</span>
+<pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">CartPoleConfig</span>
   <span class="kr">Int8</span> <span class="nx">episode_length</span><span class="p">,</span>
   <span class="kr">Int8</span> <span class="nx">num_episodes</span><span class="p">,</span>
   <span class="kr">UInt8</span> <span class="nx">deque_size</span>
@@ -289,7 +398,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <p>The schema <code class="prettyprint">CartPoleConfig</code> names three records — <code class="prettyprint">episode_length</code>, <code class="prettyprint">num_episodes</code>, and <code class="prettyprint">deque_size</code> — and assigns each of them a type.</p>
 
 <h2 id="concept-balance">Concept: <code class="prettyprint">balance</code></h2>
-<pre class="highlight inkling"><code><span class="k">concept</span> <span class="nx">balance</span>
+<pre class="highlight inkling tab-inkling"><code><span class="k">concept</span> <span class="nx">balance</span>
   <span class="k">is</span> <span class="nx">classifier</span>
   <span class="k">predicts</span> <span class="nx">Action</span>
   <span class="k">follows</span> <span class="kr">input</span><span class="p">(</span><span class="nx">GameState</span><span class="p">)</span>
@@ -299,7 +408,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <p>The concept is named <code class="prettyprint">balance</code>, and it takes input from the simulator. That input is the records in the schema <code class="prettyprint">GameState</code>. The balance concept outputs the move the AI should make in the simulator. This output is the record in the <code class="prettyprint">Action</code> schema.</p>
 
 <h2 id="curriculum-balance_curriculum">Curriculum: <code class="prettyprint">balance_curriculum</code></h2>
-<pre class="highlight inkling"><code><span class="k">simulator</span> <span class="nx">cartpole_simulator</span><span class="p">(</span><span class="nx">CartPoleConfig</span><span class="p">)</span>
+<pre class="highlight inkling tab-inkling"><code><span class="k">simulator</span> <span class="nx">cartpole_simulator</span><span class="p">(</span><span class="nx">CartPoleConfig</span><span class="p">)</span>
   <span class="k">state</span> <span class="p">(</span><span class="nx">GameState</span><span class="p">)</span>
 <span class="k">end</span>
 
@@ -333,24 +442,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <h2 id="inkling-file">Inkling File</h2>
 
 <h6 id="schema">Schema</h6>
-<pre class="highlight inkling"><code><span class="k">schema</span> <span class="nx">GameState</span>
+<pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">GameState</span>
     <span class="kr">Int32</span> <span class="nx">value</span>
 <span class="k">end</span>
 </code></pre>
 <p>The <code class="prettyprint">GameState</code> schema has one field, <code class="prettyprint">value</code>, with type <code class="prettyprint">Int32</code>.</p>
-<pre class="highlight inkling"><code><span class="k">schema</span> <span class="nx">PlayerMove</span>
+<pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">PlayerMove</span>
     <span class="kr">Int32</span><span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">}</span> <span class="nx">delta</span>
 <span class="k">end</span>
 </code></pre>
 <p>The <code class="prettyprint">PlayerMove</code> schema has one field, <code class="prettyprint">delta</code>, with type <code class="prettyprint">Int32</code>. The <code class="prettyprint">Int32</code> type is constrained to three possible values: -1, 0, and 1.</p>
-<pre class="highlight inkling"><code><span class="k">schema</span> <span class="nx">SimConfig</span>
+<pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">SimConfig</span>
     <span class="kr">Int32</span> <span class="nx">dummy</span>
 <span class="k">end</span>
 </code></pre>
 <p>The <code class="prettyprint">SimConfig</code> schema has one field, <code class="prettyprint">dummy</code>, because there is no configuration needed in this particular example.</p>
 
 <h6 id="concept">Concept</h6>
-<pre class="highlight inkling"><code><span class="k">concept</span> <span class="nx">find_the_center</span>
+<pre class="highlight inkling tab-inkling"><code><span class="k">concept</span> <span class="nx">find_the_center</span>
     <span class="k">is</span> <span class="nx">classifier</span>
     <span class="k">predicts</span> <span class="p">(</span><span class="nx">PlayerMove</span><span class="p">)</span>
     <span class="k">follows</span> <span class="kr">input</span><span class="p">(</span><span class="nx">GameState</span><span class="p">)</span>
@@ -360,7 +469,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <p>This concept is named <code class="prettyprint">find_the_center</code>. <code class="prettyprint">find_the_center</code> expects input about the state of the game (defined by the <code class="prettyprint">GameState</code> schema) and replies with output defined by the <code class="prettyprint">PlayerMove</code> schema. This is the AI&rsquo;s next move in the simulation.</p>
 
 <h6 id="simulator">Simulator</h6>
-<pre class="highlight inkling"><code><span class="k">simulator</span> <span class="nx">find_the_center_sim</span><span class="p">(</span><span class="nx">SimConfig</span><span class="p">)</span>
+<pre class="highlight inkling tab-inkling"><code><span class="k">simulator</span> <span class="nx">find_the_center_sim</span><span class="p">(</span><span class="nx">SimConfig</span><span class="p">)</span>
     <span class="k">action</span> <span class="p">(</span><span class="nx">PlayerMove</span><span class="p">)</span>
     <span class="k">state</span> <span class="p">(</span><span class="nx">GameState</span><span class="p">)</span>
 <span class="k">end</span>
@@ -368,7 +477,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <p>The <code class="prettyprint">simulator</code> is called <code class="prettyprint">find_the_center_sim</code> (shown in #simulator-file) and takes the schema input of <code class="prettyprint">SimConfig</code> (even though it isn&rsquo;t configuring anything, it&rsquo;s required by the simulator). The <code class="prettyprint">find_the_center</code> concept will be trained using the <code class="prettyprint">find_the_center_sim</code> simulator. To define the training relationship between the simulator and the concept we must begin by defining the simulator. <code class="prettyprint">find_the_center_sim</code> expects an action defined in the <code class="prettyprint">PlayerMove</code> schema as input and replies with a state defined in the <code class="prettyprint">GameState</code> schema as output.</p>
 
 <h6 id="curriculum">Curriculum</h6>
-<pre class="highlight inkling"><code><span class="k">curriculum</span> <span class="nx">find_the_center_curriculum</span>
+<pre class="highlight inkling tab-inkling"><code><span class="k">curriculum</span> <span class="nx">find_the_center_curriculum</span>
     <span class="k">train</span> <span class="nx">find_the_center</span>
     <span class="k">with</span> <span class="k">simulator</span> <span class="nx">find_the_center_sim</span>
     <span class="k">objective</span> <span class="nx">time_at_goal</span>
@@ -384,7 +493,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <p>The lesson trains until the AI has maximized the objective <code class="prettyprint">time_at_goal</code>.</p>
 
 <h2 id="simulator-file">Simulator File</h2>
-<pre class="highlight python"><code><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
+<pre class="highlight python tab-python"><code><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
 <span class="kn">import</span> <span class="nn">bonsai</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">from</span> <span class="nn">bonsai.simulator</span> <span class="kn">import</span> <span class="n">SimState</span>
@@ -488,18 +597,18 @@ def debug(*args):
 <p><em>A car is on a one-dimensional track, positioned between two &ldquo;mountains&rdquo;. The goal is to drive up the mountain on the right; however, the car&rsquo;s engine is not strong enough to scale the mountain in a single pass. Therefore, the only way to succeed is to drive back and forth to build up momentum.</em></p>
 
 <h2 id="schema-gamestate-action-mountaincarconfig">Schema: <code class="prettyprint">GameState</code>, <code class="prettyprint">Action</code>, <code class="prettyprint">MountainCarConfig</code></h2>
-<pre class="highlight inkling"><code><span class="k">schema</span> <span class="nx">GameState</span>
+<pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">GameState</span>
    <span class="kr">Float32</span> <span class="nx">x_position</span><span class="p">,</span>
    <span class="kr">Float32</span> <span class="nx">y_velocity</span>
 <span class="k">end</span>
 </code></pre>
 <p>The GameState schema names two records — <code class="prettyprint">x_position</code> and <code class="prettyprint">y_position</code> — and assigns a type to them.</p>
-<pre class="highlight inkling"><code><span class="k">schema</span> <span class="nx">Action</span>
+<pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">Action</span>
   <span class="kr">Int8</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">}</span> <span class="k">action</span>
 <span class="k">end</span>
 </code></pre>
 <p>The Action schema names a single record — <code class="prettyprint">action</code> — and assigns a constrained type to it.</p>
-<pre class="highlight inkling"><code><span class="k">schema</span> <span class="nx">MountainCarConfig</span>
+<pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">MountainCarConfig</span>
   <span class="kr">Int8</span> <span class="nx">episode_legnth</span><span class="p">,</span>
   <span class="kr">Int8</span> <span class="nx">num_episodes</span><span class="p">,</span>
   <span class="kr">UInt8</span> <span class="nx">deque_size</span>
@@ -508,7 +617,7 @@ def debug(*args):
 <p>The <code class="prettyprint">MountainCarConfig</code> schema names three records — <code class="prettyprint">episode_length</code>, <code class="prettyprint">num_episodes</code>, and <code class="prettyprint">deque_size</code> — and assigns types to them.</p>
 
 <h2 id="concept-high_score">Concept <code class="prettyprint">high_score</code></h2>
-<pre class="highlight inkling"><code><span class="k">concept</span> <span class="nx">high_score</span>
+<pre class="highlight inkling tab-inkling"><code><span class="k">concept</span> <span class="nx">high_score</span>
   <span class="k">is</span> <span class="nx">classifier</span>
   <span class="k">predicts</span> <span class="nx">Action</span>
   <span class="k">follows</span> <span class="kr">input</span><span class="p">(</span><span class="nx">GameState</span><span class="p">)</span>
@@ -518,7 +627,7 @@ def debug(*args):
 <p>The concept is named <code class="prettyprint">high_score</code>, and it takes input from the simulator about the state of the game (<code class="prettyprint">GameState</code> schema). It outputs to the <code class="prettyprint">Action</code> schema. This is the AI&rsquo;s next move in the game.</p>
 
 <h2 id="curriculum-high_score_curriculum">Curriculum: <code class="prettyprint">high_score_curriculum</code></h2>
-<pre class="highlight inkling"><code><span class="k">simulator</span> <span class="nx">mountaincar_simulator</span><span class="p">(</span><span class="nx">MountainCarConfig</span><span class="p">)</span>
+<pre class="highlight inkling tab-inkling"><code><span class="k">simulator</span> <span class="nx">mountaincar_simulator</span><span class="p">(</span><span class="nx">MountainCarConfig</span><span class="p">)</span>
   <span class="k">state</span>  <span class="p">(</span><span class="nx">GameState</span><span class="p">)</span>
 <span class="k">end</span>
 

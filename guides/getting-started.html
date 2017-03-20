@@ -11,81 +11,190 @@
     <style>
       .highlight table td { padding: 5px; }
 .highlight table pre { margin: 0; }
-.highlight, .highlight .w {
-  color: #f8f8f2;
-  background-color: #272822;
+.highlight .gh {
+  color: #999999;
 }
-.highlight .err {
-  color: #272822;
-  background-color: #f92672;
+.highlight .sr {
+  color: #f6aa11;
 }
-.highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
   color: #75715e;
 }
 .highlight .cp {
-  color: #f4bf75;
+  color: #75715e;
 }
-.highlight .nt {
-  color: #f4bf75;
+.highlight .c1 {
+  color: #75715e;
 }
-.highlight .o, .highlight .ow {
-  color: #f8f8f2;
+.highlight .cs {
+  color: #75715e;
 }
-.highlight .p, .highlight .pi {
-  color: #f8f8f2;
+.highlight .c, .highlight .cd {
+  color: #75715e;
 }
-.highlight .gi {
-  color: #a6e22e;
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
 }
 .highlight .gd {
-  color: #f92672;
+  color: #49483e;
 }
-.highlight .gh {
-  color: #66d9ef;
-  background-color: #272822;
-  font-weight: bold;
+.highlight .gi {
+  color: #49483e;
 }
-.highlight .k, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kv {
-  color: #ae81ff;
+.highlight .ge {
+  color: #49483e;
 }
 .highlight .kc {
-  color: #fd971f;
-}
-.highlight .kt {
-  color: #fd971f;
-}
-.highlight .kd {
-  color: #fd971f;
-}
-.highlight .s, .highlight .sb, .highlight .sc, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .s1 {
-  color: #a6e22e;
-}
-.highlight .sr {
-  color: #a1efe4;
-}
-.highlight .si {
-  color: #cc6633;
-}
-.highlight .se {
-  color: #cc6633;
-}
-.highlight .nn {
-  color: #f4bf75;
-}
-.highlight .nc {
-  color: #f4bf75;
-}
-.highlight .no {
-  color: #f4bf75;
-}
-.highlight .na {
   color: #66d9ef;
 }
-.highlight .m, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mb, .highlight .mx {
-  color: #a6e22e;
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
 }
 .highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s {
+  color: #e6db74;
+}
+.highlight .na {
   color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+}
+.highlight .nn {
+  color: #ffffff;
+}
+.highlight .nl {
+  color: #ffffff;
+}
+.highlight .ni {
+  color: #ffffff;
+}
+.highlight .bp {
+  color: #ffffff;
+}
+.highlight .vg {
+  color: #ffffff;
+}
+.highlight .vi {
+  color: #ffffff;
+}
+.highlight .nv {
+  color: #ffffff;
+}
+.highlight .w {
+  color: #ffffff;
+}
+.highlight {
+  color: #ffffff;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
 }
     </style>
     <link href="../stylesheets/screen.css" rel="stylesheet" media="screen" />
@@ -431,16 +540,16 @@ We highly recommend macOS users download Python directly so you can follow this 
 <blockquote>
 <p>Python 2</p>
 </blockquote>
-<pre class="highlight powershell"><code>choco install git
+<pre class="highlight powershell tab-powershell"><code>choco install git
 choco install python2
-</code></pre><pre class="highlight shell"><code>brew install python
+</code></pre><pre class="highlight shell tab-shell"><code>brew install python
 </code></pre>
 <blockquote>
 <p>Python 3</p>
 </blockquote>
-<pre class="highlight powershell"><code>choco install git
+<pre class="highlight powershell tab-powershell"><code>choco install git
 choco install python
-</code></pre><pre class="highlight shell"><code>brew install python3
+</code></pre><pre class="highlight shell tab-shell"><code>brew install python3
 </code></pre>
 <h3 id="windows">Windows</h3>
 
@@ -477,8 +586,8 @@ bonsai configure
 <blockquote>
 <p>Python 3</p>
 </blockquote>
-<pre class="highlight powershell"><code><span class="c1"># same as above</span>
-</code></pre><pre class="highlight shell"><code>pip3 install bonsai-cli
+<pre class="highlight powershell tab-powershell"><code><span class="c1"># same as above</span>
+</code></pre><pre class="highlight shell tab-shell"><code>pip3 install bonsai-cli
 bonsai configure
 </code></pre>
 <p>From your command prompt, install the Bonsai Command Line Interface tool and configure it. <code class="prettyprint">bonsai configure</code> will ask for your Access Key. You can find your Access Key in your <a href="https://beta.bons.ai/accounts/settings">Bonsai Account Settings</a>.</p>
@@ -499,8 +608,8 @@ pip install -r requirements.txt
 <blockquote>
 <p>Python 3</p>
 </blockquote>
-<pre class="highlight powershell"><code><span class="c1"># same as above</span>
-</code></pre><pre class="highlight shell"><code><span class="nb">cd </span>gym-mountaincar-sample
+<pre class="highlight powershell tab-powershell"><code><span class="c1"># same as above</span>
+</code></pre><pre class="highlight shell tab-shell"><code><span class="nb">cd </span>gym-mountaincar-sample
 pip3 install -r requirements.txt
 </code></pre>
 <p>Enter into the Mountain Car folder and then install the Mountain Car requirements from OpenAI Gym.</p>
@@ -542,8 +651,8 @@ pip3 install -r requirements.txt
 <blockquote>
 <p>Python 3</p>
 </blockquote>
-<pre class="highlight powershell"><code><span class="c1"># same as above</span>
-</code></pre><pre class="highlight shell"><code>python3 mountaincar_simulator.py --train-brain<span class="o">=</span>myMountainCarBrain --headless
+<pre class="highlight powershell tab-powershell"><code><span class="c1"># same as above</span>
+</code></pre><pre class="highlight shell tab-shell"><code>python3 mountaincar_simulator.py --train-brain<span class="o">=</span>myMountainCarBrain --headless
 </code></pre>
 <p>Everything is in place, it&rsquo;s time to start the simulator and test things out. To do this, call Python and then the simulator file. Training will begin automatically and if the simulator gets disconnected, training resumes from the same point when the simulator is reconnected if it&rsquo;s within an hour of the disconnect. Remember, as mentioned in <a href="#what-is-a-simulator">What is a simulator?</a> if you want your training to take place overnight, make sure that your computer won&rsquo;t go to sleep and disconnect for more than an hour or that training time will be lost!</p>
 
@@ -574,8 +683,8 @@ We use headless here to indicate we don&rsquo;t need to see a graphical display 
 <blockquote>
 <p>Python 3</p>
 </blockquote>
-<pre class="highlight powershell"><code><span class="c1"># same as above</span>
-</code></pre><pre class="highlight shell"><code>python3 mountaincar_simulator.py --predict-brain<span class="o">=</span>myMountainCarBrain --predict-version<span class="o">=</span>latest
+<pre class="highlight powershell tab-powershell"><code><span class="c1"># same as above</span>
+</code></pre><pre class="highlight shell tab-shell"><code>python3 mountaincar_simulator.py --predict-brain<span class="o">=</span>myMountainCarBrain --predict-version<span class="o">=</span>latest
 </code></pre>
 <p>After your BRAIN is finished training it can play the Mountain Car game. How well it does depends on how long you let it train! Using your BRAIN involves calling Python on the same simulator file, but now in predict mode, and <code class="prettyprint">--predict-version=latest</code> will use the latest training session that you just ran.</p>
 
