@@ -1000,7 +1000,7 @@ The range end is a limit. That means that if applying the step results in landin
 <p>Select the Inkling tab to view an excerpt of the code in the game Mountain Car from
 OpenAI Gym as written in Inkling.
 This illustrates the simulator clause.  (To explore this example more fully,
-refer to it in our <a href="./inkling-guide.html#example-mountain-car">Examples chapter</a>.)</p>
+refer to it in our <a href="../examples.html#mountain-car-example">Examples chapter</a>.)</p>
 
 <p>The simulator clause declares the simulator name and two schemas. The first specifies the schema for configuration of the simulator and it appears in parentheses immediately after the simulator name. In this instance, the configuration schema is named <code class="prettyprint">MountainCarConfig</code>. In the example, the configure clause of lesson <code class="prettyprint">get_high_score</code> initializes this configuration.</p>
 <pre class="highlight inkling tab-inkling"><code><span class="c1"># Configuration schema declaration</span>
@@ -1307,9 +1307,39 @@ type constraint they are often called <strong>placeholders</strong>.  This means
 
 <p>Lesson clauses have defaults so if a clause is not specified the default will be assumed. Also in certain circumstances not all clauses are available. This table specifies the rules. Recall that the <em>trainingSpecifier</em> appears after the keyword <strong>with</strong> in the curriculum.</p>
 
-<p><img src="../images/lesson-clause-table.png" alt="Lesson clause table" /></p>
+<p><strong>Table for Lesson Clauses</strong></p>
 
-<p>Table for Lesson Clauses</p>
+<table><thead>
+<tr>
+<th>training specifier</th>
+<th>configure clause</th>
+<th>train clause</th>
+<th>test clause</th>
+<th>until clause</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>data</strong></td>
+<td>Not allowed.</td>
+<td>Must have train or test at a minimum. Defaults to none.</td>
+<td>Must have train or test at a mininum. Defaults to none.</td>
+<td>Not user specified. Will default to: <em>minimize objectiveName</em>.</td>
+</tr>
+<tr>
+<td><strong>generator</strong></td>
+<td>Required.</td>
+<td>If neither train nor test is present, defaults to: <em>from item in generator select item send item.image expects item.label</em>.</td>
+<td>If neither train nor test is present, defaults to: <em>from item in generator select item send item.image expect item.label</em>. If not present, generate default for every lesson.</td>
+<td>Not user specified. Will default to: <em>minimize objectiveName</em>.</td>
+</tr>
+<tr>
+<td><strong>simulator</strong></td>
+<td>Required.</td>
+<td>If neither train nor test is present, defaults to: <em>item in simulator select item send item</em>.</td>
+<td>If neither train nor test is present, defaults to: <em>from item in simulator select item</em>. If not present, generate default for every lesson.</td>
+<td>Required.</td>
+</tr>
+</tbody></table>
 
 <h6 id="lesson-clause-rules">Lesson Clause Rules</h6>
 
