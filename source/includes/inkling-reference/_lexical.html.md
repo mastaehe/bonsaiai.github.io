@@ -28,23 +28,22 @@ for use by Inkling and cannot be used as names in your program.
 
 **Keywords Table**
 
-
-               |                |                |                |                
--------------- | -------------- | -------------- | -------------- | -------------- 
-action | as | Bool | Byte | concept
-configure | constrain | copy | curriculum | data
-datastore | Double | easy | end | expect
-false | feeds | Float32 | Float64 | follows
-format | from | generator | hard | import
-in | Int16 | Int32 | Int64 | Int8
-into | is | lesson | let | Luminance
-Matrix | maximize | medium | minimize | objective
-predicts | schema | select | send | simulator
-state | stream | String | test | train
-true | UInt16 | UInt32 | UInt64 | UInt8
-unit | until | using | validate | where
-with | yield
-
+               |                |                |                |                |
+-------------- | -------------- | -------------- | -------------- | -------------- |
+action | and | as | Bool | Byte
+concept | configure | constrain | copy | curriculum
+data | datastore | debug | Double | easy
+end | expect | false | feeds | Float32
+Float64 | follows | format | from | generator
+hard | import | in | input | Int16
+Int32 | Int64 | Int8 | into | is
+lesson | let | Luminance | Matrix | maximize
+medium | minimize | not | objective | or
+output | predicts | schema | select | send
+simulator | state |  stream | String | test
+train | true | UInt16 | UInt32 | UInt64
+UInt8 | unit | until | using | validate
+where | with | yield
 
 ## Identifiers
 
