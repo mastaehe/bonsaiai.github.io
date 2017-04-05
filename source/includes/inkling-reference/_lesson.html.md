@@ -12,7 +12,7 @@ Lessons give you control over the training of the mental model. They allow you t
 
 ### How do I use it?
 
-```plaintext
+```inkling--syntax
 lesson lessonName
     follows prevLessonName
   configureClause
@@ -41,7 +41,7 @@ clause.
 
 ### Breakout Example
 
-```inkling
+```inkling--code
 schema BreakoutConfig   # configured in lesson configureClause
   UInt32 level,
   UInt8{1:4} paddle_width,
@@ -123,7 +123,7 @@ Lesson clauses have defaults so if a clause is not specified the default will be
 
 ## Lesson Syntax
 
-```plaintext
+```inkling--syntax
 lessonStatement ::=
   lesson <lessonName>
     [follows <lessonName>]?
@@ -138,7 +138,7 @@ clauses is displayed.
 
 ###### Lesson Configure Clause Syntax
 
-```plaintext
+```inkling--syntax
 configureClause ::=
 configure
   [constrain <configSchemaFieldName> with constrainedType]+
@@ -148,7 +148,7 @@ Select the Syntax tab for the syntax for this clause.
 
 ###### Lesson Train/Test Clause Syntax
 
-```plaintext
+```inkling--syntax
 trainClause ::=
 train
   fromClause
@@ -157,7 +157,7 @@ train
 trainingSpecifer
 ```
 
-```plaintext
+```inkling--syntax
 testClause ::=
 test
   fromClause
@@ -180,7 +180,7 @@ shows the usage of the **from** clause.
 
 ### Segments Example
 
-```inkling
+```inkling--code
 ‍generator segments_generator(UInt8 segmentCount)
   yield (segments_training_schema)     # training will yield data with this schema
 end
@@ -215,7 +215,7 @@ return. (The returned `num_segments` is expected to match the generator's
 
 ###### Lesson Until Clause Syntax
 
-```plaintext
+```inkling--syntax
 untilClause ::=
 until
       [ minimize | maximize ] <objectiveFunctionName>
