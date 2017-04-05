@@ -15,6 +15,7 @@ toc_footers:
 includes:
 - inkling-reference/inkling-reference.html.md
 - inkling-reference/lexical.html.md
+- inkling-reference/training-sources.html.md
 - inkling-reference/concept.html.md
 - inkling-reference/schema.html.md
 - inkling-reference/curriculum.html.md
