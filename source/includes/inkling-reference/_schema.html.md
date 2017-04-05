@@ -15,7 +15,7 @@ example `concept` and `curriculum`) use schema references to describe the data t
 
 ### How do I use it?
 
-```inkling
+```inkling--code
 schema MySchema                   # declare
    UInt8  field1,
    UInt32 field2
@@ -42,7 +42,7 @@ pairs can appear where a schema name could appear.
 
 ## Schema Declaration Syntax
 
-```plaintext
+```inkling--syntax
 schemaStatement ::=
   schema <schemaName>
     fieldDeclarationList
@@ -96,7 +96,7 @@ In the syntax you will see references to Inkling primitive types and structure t
 ‍
 ## Schema Reference Syntax
 
-```plaintext
+```inkling--syntax
 schemaReference ::=
   '(' <name> ')'                  # named reference
   | 
@@ -109,7 +109,7 @@ A named schema is referenced by its name. An anonymous schema is referenced by i
 
 ## Schema Example
 
-```inkling
+```inkling--code
 schema MNIST_training_data_schema
   UInt8 label,
   Luminance(28, 28) image
@@ -122,7 +122,7 @@ Select the Inkling tab to show a schema that has a field with a primitive type a
 
 ###### Primitive Types
 
-```plaintext
+```inkling--syntax
 primitiveType ::=
   Double | Float64 | Float32 | Int8 | Int16 | Int32 |
   Int64 | UInt8 | UInt16 | UInt32  | UInt64 | Bool | String
@@ -134,7 +134,7 @@ with 'U' are unsigned.
 
 ###### Structured Types
 
-```plaintext
+```inkling--syntax
 structure_type ::= 
   Luminance | Matrix
 ```
@@ -147,7 +147,7 @@ See the schema declaration syntax for the complete syntax of structure declarati
 ‍
 ###### Constrained Types
 
-```inkling
+```inkling--code
   # Example: Range expression
 
   schema Schema1
@@ -169,7 +169,7 @@ Select the Inkling tab to see an example of a constrained type in a schema defin
 
 ### Constrained Type Syntax
 
-```plaintext
+```inkling--syntax
 constrainedType ::=
 primitiveType
 '{'
@@ -190,7 +190,7 @@ Note that start, stop, step, numSteps are all numeric literals.
 There are three forms of range expressions which Inkling supports. 
 Select the Inkling tab to see an example of each type.
 
-```inkling
+```inkling--code
 # Example: Value list range expression
 schema Schema2
   UInt8  {0,1,2,3,4}   num, # a set of UInt8 values
@@ -204,7 +204,7 @@ A value list range expression is simply a list of values.
 These range expressions specify sets of values in 
 which each value is explicitly listed.
 
-```inkling
+```inkling--code
 # Example: Range expression, colon range type
 schema Schema3
   Int64  { 0:5:100 }   x,   # start:step:stop, step= 5,0..100
@@ -221,7 +221,7 @@ the step, and the stop.
 * Step can be  a floating point number.
 * The step size can be negative only if stop < start.
 
-```inkling
+```inkling--code
 # Example: Range expression, dot range type
 schema Schema4
   Int64  { 0..100:25 } z,   # start:stop, numsteps=25
@@ -242,7 +242,7 @@ The range start point is exact (to the maximum extent possible if the range expr
 
 * **Numeric Range Expression End Point**
 
-```inkling
+```inkling--code
  # Valid and Invalid Range Expressions.
 
  Int64  { 0:4:1 }  field1,  # INVALID. step size > range.

@@ -17,7 +17,7 @@ The lexical structure of Inkling includes these lexical elements:
 
 * An Inkling comment begins after the character **#** and extends to the end of the line.
 
-```inkling
+```inkling--code
   # this is a comment
 ```
 
@@ -70,7 +70,7 @@ point.
 Floating point literals can be Float32 or Float64 (double). Select the Inkling
 tab to see some floating point literals: 
 
-```inkling
+```inkling--code
  12.0, .5        # Float32 floating point literal
  1e7, 9e0        # Float64 (double) floating point literal
  13.0f7, .3f+2   # Float32 floating point literal
