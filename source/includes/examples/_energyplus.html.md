@@ -2,7 +2,7 @@
 
 The full source code for this example can be [found on GitHub][1] so you can run it yourself on the Bonsai Platform.
 
-In this example, we'll walk you through the various statements that are part of a sample implimentation of [EnergyPlus][2] on the Bonsai Platform, including the simulator file and the Inkling file which connect up to EnergyPlus. This is a real-world example of how to use the Bonsai Platform for HVAC companies using the EnergyPlus simulator.
+In this example, we'll walk you through the various statements that are part of a sample implementation of [EnergyPlus][2] on the Bonsai Platform, including the simulator and the Inkling files. This is a real-world example of how to use the Bonsai Platform for HVAC control using BCVTB and EnergyPlus.
 
 While this BRAIN is training, the Bonsai AI Engine launches the EnergyPlus simulator in the background for every episode. The *energyplus_simulator.py* then drives the simulator forward a step at a time until it finishes the episode and then relaunches it for the next episode, driving the actions into it and sending state results back to the Bonsai AI Engine.
 
