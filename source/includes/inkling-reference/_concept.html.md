@@ -17,7 +17,7 @@ A concept statement describes what the computer will learn. It can be a feature 
 
 ### How Do I Use It?
 
-```inkling
+```inkling--code
 concept conceptName
   is classifier                 # or 'is estimator'
   predicts (outputSchema)
@@ -42,7 +42,7 @@ are explained in the following sections.
 
 ## Concept Statement Syntax
 
-```plaintext
+```inkling--syntax
 conceptStatement :=
 concept
   is [ classifier | estimator ]
@@ -74,7 +74,7 @@ sources and output targets.
 
 ### get_high_score
 
-```inkling
+```inkling--code
 concept get_high_score
   is classifier
   predicts PlayerMove
@@ -98,7 +98,7 @@ In this example:
 
 ### Digit
 
-```inkling
+```inkling--code
 concept Digit
   is classifier
   predicts MNIST_output
@@ -120,7 +120,7 @@ In this example:
 
 ### Curvature
 
-```inkling
+```inkling--code
 concept Curvature
   is classifier
   predicts (curve_output)
@@ -138,7 +138,7 @@ In this example:
 
 ### Segments
 
-```inkling
+```inkling--code
 concept Segments
   is classifier
   predicts (segments_output)

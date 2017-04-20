@@ -24,7 +24,7 @@ Currently, during our private beta, you can <b>only</b> train with simulators as
 
 ## Simulator Clause Syntax
 
-```plaintext
+```inkling--syntax
 simulator <simulatorName>'('<configurationSchema>')' 
   state '('<stateSchema>')'     # simulator state
   control '('<controlSchema>')' # training concept predicts schema
@@ -39,7 +39,7 @@ The [Mountain Car example][4] of a simulator below shows the implementation of t
 
 ## Generator Clause Syntax
 
-```plaintext
+```inkling--syntax
 generator <generatorName>'('<configurationSchema>')'  
   yield '('<outputSchema>')'    # generator output (yield)
 end

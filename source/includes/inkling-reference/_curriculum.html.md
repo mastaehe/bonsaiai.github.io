@@ -12,7 +12,7 @@ A curriculum is used to teach a concept. The curriculum defines what concept is 
 
 ### How do I use it?
 
-```inkling
+```inkling--code
 curriculum curriculumName
   train conceptName
   with trainingSpecifier  # one of data, simulator, or generator
@@ -33,14 +33,14 @@ The `objective` specifies the termination condition for training.
 
 ### Mountain Car Example
 
-```inkling
+```inkling--code
 simulator mountaincar_simulator(MountainCarConfig) 
   state (GameState)
   control (Action)
 end
 ```
 
-```inkling
+```inkling--code
 curriculum high_score_curriculum
 train high_score
 with simulator mountaincar_simulator 
@@ -61,7 +61,7 @@ refer to it in our [Examples chapter][1].)
 
 The simulator clause declares the simulator name and two schemas. The first specifies the schema for configuration of the simulator and it appears in parentheses immediately after the simulator name. In this instance, the configuration schema is named `MountainCarConfig`. In the example, the configure clause of lesson `get_high_score` initializes this configuration.
 
-```inkling
+```inkling--code
 # Configuration schema declaration
 schema MountainCarConfig
   Int8 episode_length,
@@ -80,7 +80,7 @@ The second schema specified in the simulator clause is the state schema. It is
 specified after the **state** keyword in the simulator clause. This is the schema that defines what is sent to the lesson. Recall that a simulator has state. That means that input to the lesson will consist of the state of the game as a result of the previous lesson execution. For mountaincar this schema is called `GameState` and prior state consists of prior position.
 
 
-```inkling
+```inkling--code
 # State schema definition
 schema GameState
   Float32 x_position,
@@ -93,7 +93,7 @@ In order to determine what our next move will be, the training will use the prev
 Finally, note that `high_score_curriculum` trains a concept called `high_score`.  (It's quite clear what we are aiming for with this curriculum!)
 
 
-```inkling
+```inkling--code
 # Predict schema Action (see concept high_score)
 schema Action
   Int8{0, 1, 2} action # these values describe game moves
@@ -131,7 +131,7 @@ syntax for the curriculum statement, which introduces a **using** clause and a
 
 ## Curriculum Statement Syntax
 
-```plaintext
+```inkling--syntax
 curriculumStatement ::=
 curriculum <name>
     train <conceptName>
@@ -151,7 +151,7 @@ curriculum <name>
 end # curriculum
 ```
 
-```plaintext
+```inkling--syntax
 withClause ::=
 with data
   objective <objectiveFunctionName>
@@ -171,7 +171,7 @@ Any simulator or generator referenced in a curriculum must have an associated si
 
 Select the Inkling tab to see the Inkling code.
 
-```inkling
+```inkling--code
 curriculum get_high_score_curriculum
   train get_high_score
   with simulator breakout_simulator
@@ -194,7 +194,7 @@ In this example:
 
 ### digit_curriculum
 
-```inkling
+```inkling--code
 from utils import split
 
 schema MNIST_schema
