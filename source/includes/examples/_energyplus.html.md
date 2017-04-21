@@ -16,11 +16,7 @@ schema SimState
 end
 ```
 
-The `SimState` schema defines the dictionary returned from the Python simulation's advance method to the BRAIN including:
-   Double TOut,
-   Double TZone,
-   Double SolarIrradiation
-   Double FractionShadingOn
+The `SimState` schema defines the dictionary returned from the Python simulation's advance method to the BRAIN.
 
 ```inkling
 schema SimAction
@@ -88,60 +84,55 @@ This curriculum contains one lesson, called `my_first_lesson`. It configures the
 class EnergyPlusSimulator(Simulator):
     model = ePlus85Actuator()
     server = None
-    
-    #clientState = { 'TOut': 0., 'TZone': 0., 'SolarIrradiation': 0., 'FractionShadingOn': 0. }
-    clientState = { 'SolarIrradiation': 0 }
+
+    clientState = {'SolarIrradiation': 0}
     shade = 0.
     is_terminal = True
 
     def start(self):
-        print("EnergyPlusSimulator: start")
         """This method is called when training is started."""
-        pass
-
+        print("EnergyPlusSimulator: start")
 
     def stop(self):
         print("EnergyPlusSimulator: stop")
 
-        #graph = self.model.grapher()
-        #py.plot(graph, filename="graph.html")
-        pass
-
+        graph = self.model.grapher()
+        py.plot(graph, filename="graph.html")
 
     def readFromPtolemyClient(self):
         self.server.readFromClient()
-        if self.model.fromClient!=None and len(self.model.fromClient)==4:
+        if self.model.fromClient and len(self.model.fromClient) == 4:
             self.clientState = {
-                #'TOut': self.model.fromClient[0],
-                #'TZone': self.model.fromClient[1],
+                # 'TOut': self.model.fromClient[0],
+                # 'TZone': self.model.fromClient[1],
                 'SolarIrradiation': int(self.model.fromClient[2])/100
-                #'FractionShadingOn': self.model.fromClient[3]
+                # 'FractionShadingOn': self.model.fromClient[3]
                 }
 
             # save the client input in our graph
             for n in range(len(self.model.fromClient)):
                 value = self.model.fromClient[n]
                 # scale some of the values for readability
-                if n==2:
+                if n == 2:
                     value /= 100.
                 self.model.data[n].append(value)
 
-
-        self.is_terminal = self.model.exitFlag!=0
-        pass
-
+        self.is_terminal = self.model.exitFlag != 0
 
     def restartPtolemyServer(self):
         # set some default values for get_state
         self.is_terminal = True
-        #self.clientState = { 'TOut': 0., 'TZone': 0., 'SolarIrradiation': 0., 'FractionShadingOn': 0. }
-        self.clientState = { 'SolarIrradiation': 0 }
+        # self.clientState = {'TOut': 0.,
+        #                     'TZone': 0.,
+        #                     'SolarIrradiation': 0.,
+        #                     'FractionShadingOn': 0. }
+        self.clientState = {'SolarIrradiation': 0}
 
         # close the old connections if they're still open
-        if self.server != None:
+        if self.server:
             self.server.close()
 
-        # star a new episode
+        # start a new episode
         print("EnergyPlusSimulator: starting PtolemyServer")
         self.server = PtolemyServer(self.model)
 
@@ -154,20 +145,12 @@ class EnergyPlusSimulator(Simulator):
         except OSError as msg:
             print("EnergyPlusSimulator: error on restart:", msg)
             self.server = None
-        pass
-
 
     def reset(self):
-        print("EnergyPlusSimulator: reset")
-        """This method is called whenever the server resets the game. The server
-           resets the game at the beginning and the frame after
-           is_terminal==True
+        """Called by the AI Engine to reset simulator state in between training
+           and test passes.
         """
-
-        # No it doesn't. It appears to call reset after the first run has finished...
-
-        pass
-
+        print("EnergyPlusSimulator: reset")
 
     def advance(self, actions):
         print("EnergyPlusSimulator: advance ", actions)
@@ -176,9 +159,6 @@ class EnergyPlusSimulator(Simulator):
            schema in Inkling.
         """
         self.shade = actions['shade'] * 6.  # Int32[0..1]
-
-        pass
-
 
     def set_properties(self, **kwargs):
         print("EnergyPlusSimulator: set_properties")
@@ -189,25 +169,24 @@ class EnergyPlusSimulator(Simulator):
            this simulator's accompanying curriculums.
         """
         self.restartPtolemyServer()
-        pass
-
 
     def get_state(self):
-        print("EnergyPlusSimulator: get_state: terminal:", self.is_terminal)
-
         """Returns a named tuple of state and is_terminal. state is a
            dictionary matching the state schema as defined in Inkling.
            is_terminal is only true when the simulator is in a "game over"
            state.
         """
-        if self.is_terminal==True:
+
+        print("EnergyPlusSimulator: get_state: terminal:", self.is_terminal)
+
+        if self.is_terminal:
             self.restartPtolemyServer()
         else:
             self.server.writeToClient([self.shade])
             self.readFromPtolemyClient()
 
         # you like graphs? WE HAVE GRAPHS. SO MANY GRAPHS.
-        if self.is_terminal==True:
+        if self.is_terminal:
             graph = self.model.grapher()
             write_graph(graph)
 
@@ -216,16 +195,15 @@ class EnergyPlusSimulator(Simulator):
 
         return SimState(state=self.clientState, is_terminal=self.is_terminal)
 
-
     def reward_function(self):
         print("EnergyPlusSimulator: reward_function")
         # largest reward is best reward (maximize)
         reward = 0.
-        if self.model.fromClient!=None and len(self.model.fromClient)==4:
+        if self.model.fromClient and len(self.model.fromClient) == 4:
             # SolarIrradiation === Shades down === good
-            #TOut = self.model.fromClient[0]
+            # TOut = self.model.fromClient[0]
             SolarIrradiation = self.model.fromClient[2] / 100.
-            
+
             # sun is down
             if SolarIrradiation <= 1:
                 if self.shade > 0:
@@ -238,14 +216,12 @@ class EnergyPlusSimulator(Simulator):
                 if self.shade > 0: 
                     reward = 1  # shades on
                 else:
-                    reward = -1 # shades off
+                    reward = -1  # shades off
 
-            
             self.model.data[4].append(reward)
-        
+
         print("EnergyPlusSimulator reward:", reward)
         return reward
-
 ```
 
 The full simulator file *energyplus_simulator.py* for this example is with the rest of the [energyplus-sample code](1) on GitHub.
