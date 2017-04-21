@@ -1,4 +1,4 @@
-# Training Sources
+# Training Source
 
 The bonsai Platform supports training with both real and synthetic data. The `data`, `simulator` and `generator` keywords are used to describe what kind of training source you would like to use for training.
 

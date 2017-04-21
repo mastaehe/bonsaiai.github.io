@@ -23,7 +23,7 @@ end
 
 Select the Inkling tab to see a simple form of a curriculum statement.
 
-The _trainingSpecifier_ specifies either `data`, `simulator`, or `generator` as the training source. Refer back to [Training Sources][2] for more information on what the differences are.
+The _trainingSpecifier_ specifies either `data`, `simulator`, or `generator` as the training source. Refer back to [Training Source][2] for more information on what the differences are.
 
 <aside class="notice">
 When the <i>trainingSpecifier</i> is <b>data</b>, the objective must be either the keywords <i>equality</i> or <i>linear_distance</i>. When the training specifier is <b>simulator</b> or <b>generator</b>, the objective names a function which is specified in the associated simulator or generator. The use of simulators or generators requires an auxiliary clause, the <i>simulator</i> or <i>generator</i> clause respectively. 
@@ -124,7 +124,7 @@ syntax for the curriculum statement, which introduces a **using** clause and a
 * One curriculum per concept. 
 * Every concept must have a curriculum.
 * You can train with **data**, **simulators**, or **generators**. These are the values allowed as training specifiers (see the Curriculum syntax). 
-* Every simulator or generator must be declared with a [simulator clause][3] or [generator clause][4], respectively.
+* Every simulator must be declared with a [simulator clause][3].
 * Lessons, tests, and assignments can occur in any order. (Assignments are used for data handling when the training specifier is **data**.)
 * If the **using** clause is present (that is, if the simplified curriculum syntax is not being used), there must be one **using** clause for every **with** clause.
 * The objective is always required but if the _trainingSpecifier_ is **data**, the objective must be either `equality` or `linear_distance`.
@@ -165,7 +165,7 @@ with data
 
 Select the Syntax tab to see the Curriculum syntax.
 
-Any simulator or generator referenced in a curriculum must have an associated simulator or generator clause, outlined in [Training Sources][2].
+Any simulator or generator referenced in a curriculum must have an associated simulator or generator clause, outlined in [Training Source][2].
 
 ## Curriculum Examples
 
@@ -242,6 +242,5 @@ In this example:
 * **shuffle=True:** sets the shuffle parameter to true.
 
 [1]: ./../examples.html#mountain-car-example
-[2]: #training-sources
+[2]: #training-source
 [3]: #simulator-clause-syntax
-[4]: #generator-clause-syntax
