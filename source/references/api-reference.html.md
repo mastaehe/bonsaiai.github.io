@@ -1,7 +1,9 @@
 ---
-title: Getting Started - Bonsai
+title: API Reference - Bonsai
 
 language_tabs:
+  - json
+  - protobuf
 
 toc_footers:
   - <a href='https://bons.ai/sign-up'>Sign Up for our Private Beta!</a>
@@ -11,7 +13,7 @@ toc_footers:
 
 
 includes:
-  - api-reference.html.md
-  
+  - api-reference/api-reference.html.md
+
 search: true
 ---
