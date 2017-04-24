@@ -213,7 +213,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 	
   </head>
 
-  <body class="references references_inkling-reference" data-languages="[&quot;inkling&quot;,&quot;plaintext&quot;]">
+  <body class="references references_inkling-reference" data-languages="[&quot;inkling--code&quot;,&quot;inkling--syntax&quot;]">
 	  
 	  
 	  <!-- Google Tag Manager (noscript) -->
@@ -280,8 +280,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="tocify-wrapper">
 
         <div class="lang-selector">
-              <a href="#" data-language-name="inkling">Inkling</a>
-              <a href="#" data-language-name="plaintext">Syntax</a>
+              <a href="#" data-language-name="inkling--code">Inkling</a>
+              <a href="#" data-language-name="inkling--syntax">Syntax</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -377,7 +377,7 @@ programming is called pedalogical programming. </p>
 <ul>
 <li>An Inkling comment begins after the character <strong>#</strong> and extends to the end of the line.</li>
 </ul>
-<pre class="highlight inkling tab-inkling"><code>  <span class="c1"># this is a comment</span>
+<pre class="highlight inkling tab-inkling--code"><code>  <span class="c1"># this is a comment</span>
 </code></pre>
 <h2 id="keywords">Keywords</h2>
 
@@ -392,81 +392,102 @@ for use by Inkling and cannot be used as names in your program. </p>
 <th></th>
 <th></th>
 <th></th>
+<th></th>
 </tr>
 </thead><tbody>
 <tr>
 <td>action</td>
+<td>and</td>
 <td>as</td>
 <td>Bool</td>
 <td>Byte</td>
 </tr>
 <tr>
+<td>concept</td>
 <td>configure</td>
 <td>constrain</td>
 <td>copy</td>
 <td>curriculum</td>
 </tr>
 <tr>
+<td>data</td>
 <td>datastore</td>
+<td>debug</td>
 <td>Double</td>
 <td>easy</td>
-<td>end</td>
 </tr>
 <tr>
+<td>end</td>
+<td>expect</td>
 <td>false</td>
 <td>feeds</td>
 <td>Float32</td>
-<td>Float64</td>
 </tr>
 <tr>
+<td>Float64</td>
+<td>follows</td>
 <td>format</td>
 <td>from</td>
 <td>generator</td>
-<td>hard</td>
 </tr>
 <tr>
+<td>hard</td>
+<td>import</td>
 <td>in</td>
+<td>input</td>
 <td>Int16</td>
+</tr>
+<tr>
 <td>Int32</td>
 <td>Int64</td>
-</tr>
-<tr>
+<td>Int8</td>
 <td>into</td>
 <td>is</td>
+</tr>
+<tr>
 <td>lesson</td>
 <td>let</td>
-</tr>
-<tr>
+<td>Luminance</td>
 <td>Matrix</td>
 <td>maximize</td>
-<td>medium</td>
-<td>minimize</td>
 </tr>
 <tr>
+<td>medium</td>
+<td>minimize</td>
+<td>not</td>
+<td>objective</td>
+<td>or</td>
+</tr>
+<tr>
+<td>output</td>
 <td>predicts</td>
 <td>schema</td>
 <td>select</td>
 <td>send</td>
 </tr>
 <tr>
+<td>simulator</td>
 <td>state</td>
 <td>stream</td>
 <td>String</td>
 <td>test</td>
 </tr>
 <tr>
+<td>train</td>
 <td>true</td>
 <td>UInt16</td>
 <td>UInt32</td>
 <td>UInt64</td>
 </tr>
 <tr>
+<td>UInt8</td>
 <td>unit</td>
 <td>until</td>
 <td>using</td>
 <td>validate</td>
 </tr>
 <tr>
+<td>where</td>
 <td>with</td>
 <td>yield</td>
 <td></td>
@@ -503,7 +524,7 @@ point.</p>
 
 <p>Floating point literals can be Float32 or Float64 (double). Select the Inkling
 tab to see some floating point literals: </p>
-<pre class="highlight inkling tab-inkling"><code> <span class="mf">12.0</span><span class="p">,</span> <span class="p">.</span><span class="mi">5</span>        <span class="c1"># Float32 floating point literal</span>
+<pre class="highlight inkling tab-inkling--code"><code> <span class="mf">12.0</span><span class="p">,</span> <span class="p">.</span><span class="mi">5</span>        <span class="c1"># Float32 floating point literal</span>
  <span class="mi">1</span><span class="nx">e7</span><span class="p">,</span> <span class="mi">9</span><span class="nx">e0</span>        <span class="c1"># Float64 (double) floating point literal</span>
  <span class="mf">13.0f</span><span class="mi">7</span><span class="p">,</span> <span class="p">.</span><span class="mi">3</span><span class="nx">f</span><span class="o">+</span><span class="mi">2</span>   <span class="c1"># Float32 floating point literal</span>
 </code></pre>
@@ -578,7 +599,7 @@ paired grouping operators like <code class="prettyprint">{</code> and <code clas
 <p>A concept statement describes what the computer will learn. It can be a feature (such as a curvy line in an image) or a goal (such as high score in a game).</p>
 
 <h3 id="how-do-i-use-it">How Do I Use It?</h3>
-<pre class="highlight inkling tab-inkling"><code><span class="k">concept</span> <span class="nx">conceptName</span>
+<pre class="highlight inkling tab-inkling--code"><code><span class="k">concept</span> <span class="nx">conceptName</span>
   <span class="k">is</span> <span class="nx">classifier</span>                 <span class="c1"># or 'is estimator'</span>
   <span class="k">predicts</span> <span class="p">(</span><span class="nx">outputSchema</span><span class="p">)</span>
   <span class="k">follows</span> <span class="nx">preceedingConcept1</span><span class="p">,</span> <span class="kr">input</span><span class="p">(</span><span class="nx">schemaName</span><span class="p">)</span>
@@ -602,28 +623,28 @@ are explained in the following sections.</p>
 </ul>
 
 <h2 id="concept-statement-syntax">Concept Statement Syntax</h2>
-<pre class="highlight plaintext tab-plaintext"><code>conceptStatement :=
-concept
-  is [ classifier | estimator ]
-  predicts ( schemaRef )
-  [
-    follows
-      inputSource [',' inputSource ]*
-    ]?
-  [
-    feeds
-      outputTarget [',' outputTarget ]*
+<pre class="highlight inkling tab-inkling--syntax"><code><span class="nx">conceptStatement</span> <span class="p">:</span><span class="o">=</span>
+<span class="k">concept</span>
+  <span class="k">is</span> <span class="p">[</span> <span class="nx">classifier</span> <span class="o">|</span> <span class="nx">estimator</span> <span class="p">]</span>
+  <span class="k">predicts</span> <span class="p">(</span> <span class="nx">schemaRef</span> <span class="p">)</span>
+  <span class="p">[</span>
+    <span class="k">follows</span>
+      <span class="nx">inputSource</span> <span class="p">[','</span> <span class="nx">inputSource</span> <span class="p">]</span><span class="o">*</span>
+    <span class="p">]?</span>
+  <span class="p">[</span>
+    <span class="k">feeds</span>
+      <span class="nx">outputTarget</span> <span class="p">[','</span> <span class="nx">outputTarget</span> <span class="p">]</span><span class="o">*</span>
 
-  ]?
-end
+  <span class="p">]?</span>
+<span class="k">end</span>
 
-inputSource ::=
-    input '(' schemaRef? ')'
-  | &lt;name&gt;       # name of a concept or stream
+<span class="nx">inputSource</span> <span class="p">::</span><span class="o">=</span>
+    <span class="kr">input</span> <span class="p">'('</span> <span class="nx">schemaRef</span><span class="p">?</span> <span class="p">')'</span>
+  <span class="o">|</span> <span class="o">&lt;</span><span class="nx">name</span><span class="o">&gt;</span>       <span class="c1"># name of a concept or stream</span>
 
-outputTarget ::=
-    output
- |  &lt;name&gt;       # name of a concept or stream
+<span class="nx">outputTarget</span> <span class="p">::</span><span class="o">=</span>
+    <span class="kr">output</span>
+ <span class="o">|</span>  <span class="o">&lt;</span><span class="nx">name</span><span class="o">&gt;</span>       <span class="c1"># name of a concept or stream</span>
 </code></pre>
 <p>Select the Syntax tab to show syntax for the concept statement and its input
 sources and output targets.</p>
@@ -631,7 +652,7 @@ sources and output targets.</p>
 <h2 id="concept-examples">Concept Examples</h2>
 
 <h3 id="get_high_score">get_high_score</h3>
-<pre class="highlight inkling tab-inkling"><code><span class="k">concept</span> <span class="nx">get_high_score</span>
+<pre class="highlight inkling tab-inkling--code"><code><span class="k">concept</span> <span class="nx">get_high_score</span>
   <span class="k">is</span> <span class="nx">classifier</span>
   <span class="k">predicts</span> <span class="nx">PlayerMove</span>
   <span class="k">follows</span> <span class="kr">input</span><span class="p">(</span><span class="nx">GameState</span><span class="p">)</span>
@@ -653,7 +674,7 @@ sources and output targets.</p>
 </ul>
 
 <h3 id="digit">Digit</h3>
-<pre class="highlight inkling tab-inkling"><code><span class="k">concept</span> <span class="nx">Digit</span>
+<pre class="highlight inkling tab-inkling--code"><code><span class="k">concept</span> <span class="nx">Digit</span>
   <span class="k">is</span> <span class="nx">classifier</span>
   <span class="k">predicts</span> <span class="nx">MNIST_output</span>
   <span class="k">follows</span> <span class="nx">Curvature</span><span class="p">,</span> <span class="nx">Segments</span><span class="p">,</span> <span class="kr">input</span><span class="p">(</span><span class="nx">MNIST_input</span><span class="p">)</span>
@@ -673,7 +694,7 @@ sources and output targets.</p>
 </ul>
 
 <h3 id="curvature">Curvature</h3>
-<pre class="highlight inkling tab-inkling"><code><span class="k">concept</span> <span class="nx">Curvature</span>
+<pre class="highlight inkling tab-inkling--code"><code><span class="k">concept</span> <span class="nx">Curvature</span>
   <span class="k">is</span> <span class="nx">classifier</span>
   <span class="k">predicts</span> <span class="p">(</span><span class="nx">curve_output</span><span class="p">)</span>
   <span class="k">follows</span> <span class="kr">input</span><span class="p">(</span><span class="nx">MNIST_input</span><span class="p">)</span>
@@ -690,7 +711,7 @@ sources and output targets.</p>
 </ul>
 
 <h3 id="segments">Segments</h3>
-<pre class="highlight inkling tab-inkling"><code><span class="k">concept</span> <span class="nx">Segments</span>
+<pre class="highlight inkling tab-inkling--code"><code><span class="k">concept</span> <span class="nx">Segments</span>
   <span class="k">is</span> <span class="nx">classifier</span>
   <span class="k">predicts</span> <span class="p">(</span><span class="nx">segments_output</span><span class="p">)</span>
   <span class="k">follows</span> <span class="kr">input</span><span class="p">(</span><span class="nx">MNIST_input</span><span class="p">)</span>
@@ -720,7 +741,7 @@ predefined <code class="prettyprint">input</code> and <code class="prettyprint">
 example <code class="prettyprint">concept</code> and <code class="prettyprint">curriculum</code>) use schema references to describe the data that flows in and out of the construct.</p>
 
 <h3 id="how-do-i-use-it">How do I use it?</h3>
-<pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">MySchema</span>                   <span class="c1"># declare</span>
+<pre class="highlight inkling tab-inkling--code"><code><span class="k">schema</span> <span class="nx">MySchema</span>                   <span class="c1"># declare</span>
    <span class="kr">UInt8</span>  <span class="nx">field1</span><span class="p">,</span>
    <span class="kr">UInt32</span> <span class="nx">field2</span>
 <span class="k">end</span>
@@ -747,49 +768,49 @@ pairs can appear where a schema name could appear.
 </ul>
 
 <h2 id="schema-declaration-syntax">Schema Declaration Syntax</h2>
-<pre class="highlight plaintext tab-plaintext"><code>schemaStatement ::=
-  schema &lt;schemaName&gt;
-    fieldDeclarationList
-  end
+<pre class="highlight inkling tab-inkling--syntax"><code><span class="nx">schemaStatement</span> <span class="p">::</span><span class="o">=</span>
+  <span class="k">schema</span> <span class="o">&lt;</span><span class="nx">schemaName</span><span class="o">&gt;</span>
+    <span class="nx">fieldDeclarationList</span>
+  <span class="k">end</span>
 
-fieldDeclarationList ::=
-   fieldDeclaration 
-   [',' fieldDeclaration  ]*
+<span class="nx">fieldDeclarationList</span> <span class="p">::</span><span class="o">=</span>
+   <span class="nx">fieldDeclaration</span> 
+   <span class="p">[','</span> <span class="nx">fieldDeclaration</span>  <span class="p">]</span><span class="o">*</span>
 
-fieldDeclaration  ::=  
-  scalarDeclaration   
-  | 
-  structureDeclaration 
+<span class="nx">fieldDeclaration</span>  <span class="p">::</span><span class="o">=</span>  
+  <span class="nx">scalarDeclaration</span>   
+  <span class="o">|</span> 
+  <span class="nx">structureDeclaration</span> 
 
-scalarDeclaration  ::=   
-  concreteType rangeExpression?  
-    &lt;name&gt; [ '[' arraySizeLiteral ']' ]* 
+<span class="nx">scalarDeclaration</span>  <span class="p">::</span><span class="o">=</span>   
+  <span class="nx">concreteType</span> <span class="nx">rangeExpression</span><span class="p">?</span>  
+    <span class="o">&lt;</span><span class="nx">name</span><span class="o">&gt;</span> <span class="p">[</span> <span class="p">'['</span> <span class="nx">arraySizeLiteral</span> <span class="p">']'</span> <span class="p">]</span><span class="o">*</span> 
 
-structureDeclaration ::= 
-  structure_type structure_init 
-    &lt;name&gt; [ '[' arraySizeLiteral ']' ]*
+<span class="nx">structureDeclaration</span> <span class="p">::</span><span class="o">=</span> 
+  <span class="nx">structure_type</span> <span class="nx">structure_init</span> 
+    <span class="o">&lt;</span><span class="nx">name</span><span class="o">&gt;</span> <span class="p">[</span> <span class="p">'['</span> <span class="nx">arraySizeLiteral</span> <span class="p">']'</span> <span class="p">]</span><span class="o">*</span>
 
-structure_type ::= 
-  Luminance | Matrix
+<span class="nx">structure_type</span> <span class="p">::</span><span class="o">=</span> 
+  <span class="kr">Luminance</span> <span class="o">|</span> <span class="kr">Matrix</span>
 
-structure_init:= 
-  '(' 
-      luminance_init 
-   | 
-      matrix_init 
-  ')'
+<span class="nx">structure_init</span><span class="p">:</span><span class="o">=</span> 
+  <span class="p">'('</span> 
+      <span class="nx">luminance_init</span> 
+   <span class="o">|</span> 
+      <span class="nx">matrix_init</span> 
+  <span class="p">')'</span>
 
-luminance_init ::=  
-  integerLiteral ',' integerLiteral 
+<span class="nx">luminance_init</span> <span class="p">::</span><span class="o">=</span>  
+  <span class="nx">integerLiteral</span> <span class="p">','</span> <span class="nx">integerLiteral</span> 
 
-matrix_init ::= 
-  '(' concreteType 
-      [ ',' concretetype ]* 
-   ')' 
+<span class="nx">matrix_init</span> <span class="p">::</span><span class="o">=</span> 
+  <span class="p">'('</span> <span class="nx">concreteType</span> 
+      <span class="p">[</span> <span class="p">','</span> <span class="nx">concretetype</span> <span class="p">]</span><span class="o">*</span> 
+   <span class="p">')'</span> 
 
-scalarDeclaration ::=
-  primitiveType typeConstraint?
-    &lt;name&gt; [ '[' arraySizeLiteral ']' ]*
+<span class="nx">scalarDeclaration</span> <span class="p">::</span><span class="o">=</span>
+  <span class="nx">primitiveType</span> <span class="nx">typeConstraint</span><span class="p">?</span>
+    <span class="o">&lt;</span><span class="nx">name</span><span class="o">&gt;</span> <span class="p">[</span> <span class="p">'['</span> <span class="nx">arraySizeLiteral</span> <span class="p">']'</span> <span class="p">]</span><span class="o">*</span>
 </code></pre>
 <p>Select the Syntax tab to view the schema declaration syntax.</p>
 
@@ -799,17 +820,17 @@ scalarDeclaration ::=
 <p>‍</p>
 
 <h2 id="schema-reference-syntax">Schema Reference Syntax</h2>
-<pre class="highlight plaintext tab-plaintext"><code>schemaReference ::=
-  '(' &lt;name&gt; ')'                  # named reference
-  | 
-  '(' &lt;fieldDeclarationList&gt; ')'  # anonymous reference
+<pre class="highlight inkling tab-inkling--syntax"><code><span class="nx">schemaReference</span> <span class="p">::</span><span class="o">=</span>
+  <span class="p">'('</span> <span class="o">&lt;</span><span class="nx">name</span><span class="o">&gt;</span> <span class="p">')'</span>                  <span class="c1"># named reference</span>
+  <span class="o">|</span> 
+  <span class="p">'('</span> <span class="o">&lt;</span><span class="nx">fieldDeclarationList</span><span class="o">&gt;</span> <span class="p">')'</span>  <span class="c1"># anonymous reference</span>
 </code></pre>
 <p>Select the Syntax tab to view the schema reference syntax.</p>
 
 <p>A named schema is referenced by its name. An anonymous schema is referenced by its list of fields.</p>
 
 <h2 id="schema-example">Schema Example</h2>
-<pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">MNIST_training_data_schema</span>
+<pre class="highlight inkling tab-inkling--code"><code><span class="k">schema</span> <span class="nx">MNIST_training_data_schema</span>
   <span class="kr">UInt8</span> <span class="nx">label</span><span class="p">,</span>
   <span class="kr">Luminance</span><span class="p">(</span><span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">)</span> <span class="nx">image</span>
 <span class="k">end</span>
@@ -819,17 +840,17 @@ scalarDeclaration ::=
 <h2 id="inkling-types">Inkling Types</h2>
 
 <h6 id="primitive-types">Primitive Types</h6>
-<pre class="highlight plaintext tab-plaintext"><code>primitiveType ::=
-  Double | Float64 | Float32 | Int8 | Int16 | Int32 |
-  Int64 | UInt8 | UInt16 | UInt32  | UInt64 | Bool | String
+<pre class="highlight inkling tab-inkling--syntax"><code><span class="nx">primitiveType</span> <span class="p">::</span><span class="o">=</span>
+  <span class="kr">Double</span> <span class="o">|</span> <span class="kr">Float64</span> <span class="o">|</span> <span class="kr">Float32</span> <span class="o">|</span> <span class="kr">Int8</span> <span class="o">|</span> <span class="kr">Int16</span> <span class="o">|</span> <span class="kr">Int32</span> <span class="o">|</span>
+  <span class="kr">Int64</span> <span class="o">|</span> <span class="kr">UInt8</span> <span class="o">|</span> <span class="kr">UInt16</span> <span class="o">|</span> <span class="kr">UInt32</span>  <span class="o">|</span> <span class="kr">UInt64</span> <span class="o">|</span> <span class="kr">Bool</span> <span class="o">|</span> <span class="kr">String</span>
 </code></pre>
 <p>Select the Syntax tab to show the Inkling set of primitive types which are used in schema declarations. The
 integer suffix indicates the size in bits of the type. Integer types beginning
 with &lsquo;U&rsquo; are unsigned. </p>
 
 <h6 id="structured-types">Structured Types</h6>
-<pre class="highlight plaintext tab-plaintext"><code>structure_type ::= 
-  Luminance | Matrix
+<pre class="highlight inkling tab-inkling--syntax"><code><span class="nx">structure_type</span> <span class="p">::</span><span class="o">=</span> 
+  <span class="kr">Luminance</span> <span class="o">|</span> <span class="kr">Matrix</span>
 </code></pre>
 <p>Inkling currently supports the types Matrix and Luminance. (This list will be
 expanded.)</p>
@@ -839,7 +860,7 @@ expanded.)</p>
 <p>‍</p>
 
 <h6 id="constrained-types">Constrained Types</h6>
-<pre class="highlight inkling tab-inkling"><code>  <span class="c1"># Example: Range expression</span>
+<pre class="highlight inkling tab-inkling--code"><code>  <span class="c1"># Example: Range expression</span>
 
   <span class="k">schema</span> <span class="nx">Schema1</span>
     <span class="kr">Int8</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">:</span><span class="mi">10</span><span class="p">}</span> <span class="nx">field</span>   <span class="c1"># start:step:stop (all are numeric literals)</span>
@@ -858,13 +879,13 @@ expanded.)</p>
 <p>Select the Inkling tab to see an example of a constrained type in a schema definition. </p>
 
 <h3 id="constrained-type-syntax">Constrained Type Syntax</h3>
-<pre class="highlight plaintext tab-plaintext"><code>constrainedType ::=
-primitiveType
-'{'
-  start ':' [ step':']? stop      # A 'colon range'. Specifies 'step' 
-  |
-  start '.' '.' stop ':' numSteps # A 'dot range'. Specifies 'numsteps'.
-'}'
+<pre class="highlight inkling tab-inkling--syntax"><code><span class="nx">constrainedType</span> <span class="p">::</span><span class="o">=</span>
+<span class="nx">primitiveType</span>
+<span class="p">'{'</span>
+  <span class="nx">start</span> <span class="p">':'</span> <span class="p">[</span> <span class="nx">step</span><span class="p">':']?</span> <span class="nx">stop</span>      <span class="c1"># A 'colon range'. Specifies 'step' </span>
+  <span class="o">|</span>
+  <span class="nx">start</span> <span class="p">'.'</span> <span class="p">'.'</span> <span class="nx">stop</span> <span class="p">':'</span> <span class="nx">numSteps</span> <span class="c1"># A 'dot range'. Specifies 'numsteps'.</span>
+<span class="p">'}'</span>
 </code></pre>
 <p>Select the Syntax tab to view the constrained type syntax.</p>
 
@@ -876,7 +897,7 @@ primitiveType
 
 <p>There are three forms of range expressions which Inkling supports. 
 Select the Inkling tab to see an example of each type.</p>
-<pre class="highlight inkling tab-inkling"><code><span class="c1"># Example: Value list range expression</span>
+<pre class="highlight inkling tab-inkling--code"><code><span class="c1"># Example: Value list range expression</span>
 <span class="k">schema</span> <span class="nx">Schema2</span>
   <span class="kr">UInt8</span>  <span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">}</span>   <span class="nx">num</span><span class="p">,</span> <span class="c1"># a set of UInt8 values</span>
   <span class="kr">String</span> <span class="p">{</span><span class="s2">"a"</span><span class="p">,</span> <span class="s2">"bc"</span><span class="p">}</span>   <span class="nx">cat</span>  <span class="c1"># a set of Strings</span>
@@ -889,7 +910,7 @@ Select the Inkling tab to see an example of each type.</p>
 <p>A value list range expression is simply a list of values.
 These range expressions specify sets of values in 
 which each value is explicitly listed.</p>
-<pre class="highlight inkling tab-inkling"><code><span class="c1"># Example: Range expression, colon range type</span>
+<pre class="highlight inkling tab-inkling--code"><code><span class="c1"># Example: Range expression, colon range type</span>
 <span class="k">schema</span> <span class="nx">Schema3</span>
   <span class="kr">Int64</span>  <span class="p">{</span> <span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">:</span><span class="mi">100</span> <span class="p">}</span>   <span class="nx">x</span><span class="p">,</span>   <span class="c1"># start:step:stop, step= 5,0..100</span>
   <span class="kr">Int64</span>  <span class="p">{</span> <span class="mi">0</span><span class="p">:</span><span class="mi">100</span> <span class="p">}</span>     <span class="nx">y</span>    <span class="c1"># start:stop, step= 1, 0..100</span>
@@ -907,7 +928,7 @@ the step, and the stop. </p>
 <li>Step can be  a floating point number.</li>
 <li>The step size can be negative only if stop &lt; start.</li>
 </ul>
-<pre class="highlight inkling tab-inkling"><code><span class="c1"># Example: Range expression, dot range type</span>
+<pre class="highlight inkling tab-inkling--code"><code><span class="c1"># Example: Range expression, dot range type</span>
 <span class="k">schema</span> <span class="nx">Schema4</span>
   <span class="kr">Int64</span>  <span class="p">{</span> <span class="mi">0</span><span class="p">..</span><span class="mi">100</span><span class="p">:</span><span class="mi">25</span> <span class="p">}</span> <span class="nx">z</span><span class="p">,</span>   <span class="c1"># start:stop, numsteps=25</span>
   <span class="kr">Float32</span> <span class="p">{</span> <span class="mi">0</span><span class="p">..</span><span class="mi">2</span><span class="p">:</span><span class="mi">5</span><span class="p">}</span>    <span class="nx">a</span>    <span class="c1"># yields (0, .5., 1.0, 1.5, 2.0)</span>
@@ -930,7 +951,7 @@ The range start point is exact (to the maximum extent possible if the range expr
 <ul>
 <li><strong>Numeric Range Expression End Point</strong></li>
 </ul>
-<pre class="highlight inkling tab-inkling"><code> <span class="c1"># Valid and Invalid Range Expressions.</span>
+<pre class="highlight inkling tab-inkling--code"><code> <span class="c1"># Valid and Invalid Range Expressions.</span>
 
  <span class="kr">Int64</span>  <span class="p">{</span> <span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">:</span><span class="mi">1</span> <span class="p">}</span>  <span class="nx">field1</span><span class="p">,</span>  <span class="c1"># INVALID. step size &gt; range.</span>
  <span class="kr">Int64</span>  <span class="p">{</span> <span class="mi">0</span><span class="p">..</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span> <span class="p">}</span> <span class="nx">field2</span><span class="p">,</span>  <span class="c1"># INVALID. Values are floating point not integer.</span>
@@ -945,6 +966,48 @@ The range end is a limit. That means that if applying the step results in landin
 
 <p>‍</p>
 
+          <h1 id="training-source">Training Source</h1>
+
+<p>The Bonsai Platform supports training with both real and synthetic data. The <code class="prettyprint">data</code>, <code class="prettyprint">simulator</code> and <code class="prettyprint">generator</code> keywords are used to describe what kind of training source you would like to use for training.</p>
+
+<aside class="notice">
+Currently, during our private beta, you can <b>only</b> train with simulators as your training source. That is, only the <i>simulator</i> training specifier is supported.
+</aside>
+
+<h3 id="simulators">Simulators</h3>
+
+<p>Simulators are interactive virtual environments. Every simulator has state, a representation of the world inside the virtual environment. This state almost always changes over time and in response to actions taken by an AI or other agent. The AI and the simulator are in a loop where a BRAIN is receiving a frame of state from the simulator, then, the BRAIN is selecting a next action. Next, the simulator changes state in response to that action. The BRAIN then receives this new updated frame of state from the simulator and selects a new next action, so on and so on until the BRAIN learns how to best operate the simulation.</p>
+
+<p>Our <a href="library-reference.html">Library Reference</a> describes the classes and methods used to connect an existing simulator or create a new simulator in Python. <a href="../examples.html#find-the-center-example">Find the Center</a> is an example of a basic simulator implementation.</p>
+
+<h3 id="generators">Generators</h3>
+
+<p>Generators produce labeled data programmatically. This data is effectively infinite. A generator could, for example, produce a random (but known) integer, set of line segments, etc.</p>
+
+<aside class="notice">
+Currently, during our private beta, you can <b>only</b> train with simulators as your training source. That is <i>generators</i> are not supported.
+</aside>
+
+<h3 id="data">Data</h3>
+
+<p>Data is information related to the scenario being trained comprising of columns of information with input values and expected labels or desired predicted values. Data is used both for training and evaluating the quality of training. Examples of training data include a collection of images and labels or the rows and columns of a spreadsheet.</p>
+
+<aside class="notice">
+Currently, during our private beta, you can <b>only</b> train with simulators as your training source. That is <i>data</i> is not supported.
+</aside>
+
+<h2 id="simulator-clause-syntax">Simulator Clause Syntax</h2>
+<pre class="highlight inkling tab-inkling--syntax"><code><span class="k">simulator</span> <span class="o">&lt;</span><span class="nx">simulatorName</span><span class="o">&gt;</span><span class="p">'('</span><span class="o">&lt;</span><span class="nx">configurationSchema</span><span class="o">&gt;</span><span class="p">')'</span> 
+  <span class="k">state</span> <span class="p">'('</span><span class="o">&lt;</span><span class="nx">stateSchema</span><span class="o">&gt;</span><span class="p">')'</span>     <span class="c1"># simulator state</span>
+  <span class="nx">control</span> <span class="p">'('</span><span class="o">&lt;</span><span class="nx">controlSchema</span><span class="o">&gt;</span><span class="p">')'</span> <span class="c1"># training concept predicts schema</span>
+<span class="k">end</span>
+</code></pre>
+<p>Select the Syntax tab to see the Simulator clause syntax.</p>
+
+<p>When a simulator is used for training, use the simulator clause. It is <strong>required</strong> to pass a <configurationSchema> into the simulator, even if the configuration is empty.</p>
+
+<p>The <a href="#curriculum">Mountain Car example</a> of a simulator shows the implementation of this clause in a curriculum.</p>
+
           <h1 id="curriculum">Curriculum</h1>
 
 <p>Reference for the keyword <strong>curriculum</strong>. Also, describes the keywords: <strong>train</strong>, <strong>with</strong>, <strong>data</strong></p>
@@ -958,7 +1021,7 @@ The range end is a limit. That means that if applying the step results in landin
 <p>A curriculum is used to teach a concept. The curriculum defines what concept is being taught. Every concept needs a corresponding curriculum to teach it. A curriculum defines a set of lessons used to train the concept.</p>
 
 <h3 id="how-do-i-use-it">How do I use it?</h3>
-<pre class="highlight inkling tab-inkling"><code><span class="k">curriculum</span> <span class="nx">curriculumName</span>
+<pre class="highlight inkling tab-inkling--code"><code><span class="k">curriculum</span> <span class="nx">curriculumName</span>
   <span class="k">train</span> <span class="nx">conceptName</span>
   <span class="k">with</span> <span class="nx">trainingSpecifier</span>  <span class="c1"># one of data, simulator, or generator</span>
   <span class="k">objective</span> <span class="nx">objectiveName</span>
@@ -967,24 +1030,20 @@ The range end is a limit. That means that if applying the step results in landin
 </code></pre>
 <p>Select the Inkling tab to see a simple form of a curriculum statement.</p>
 
-<p>The <em>trainingSpecifier</em> specifies either <code class="prettyprint">data</code>, <code class="prettyprint">simulator</code>, or <code class="prettyprint">generator</code> as the training source. These support different approaches to training. For <strong>data</strong>, a set of labeled data is available for training and testing. A labeled dataset contains data plus meta information about the data, for example an image of a hat plus the category of the image (&lsquo;hat&rsquo;). The labels assist training and also support testing. The availability of labeled data means that coded simulators are unnecessary. After training with the labeled data of images of hats, the BRAIN is able to identify a hat in an unlabeled image.</p>
+<p>The <em>trainingSpecifier</em> specifies either <code class="prettyprint">data</code>, <code class="prettyprint">simulator</code>, or <code class="prettyprint">generator</code> as the training source. Refer back to <a href="#training-source">Training Source</a> for more information on what the differences are.</p>
 
-<p>In the <strong>simulator</strong> case, all the data is unlabeled and the response to training data will be fed back into the training. A separately coded <code class="prettyprint">simulator</code> (written in python for example) provides implementations of the lessons and keep the state of training. </p>
+<aside class="notice">
+When the <i>trainingSpecifier</i> is <b>data</b>, the objective must be either the keywords <i>equality</i> or <i>linear_distance</i>. When the training specifier is <b>simulator</b> or <b>generator</b>, the objective names a function which is specified in the associated simulator or generator. The use of simulators or generators requires an auxiliary clause, the <i>simulator</i> or <i>generator</i> clause respectively. 
+</aside>
 
-<p>The <strong>generator</strong> case is like the <strong>simulator</strong> case (in that there is a separately coded generator and the data is unlabeled), but the generator is stateless.</p>
-
-<p><strong>Note:</strong> Currently, during our private beta, you can <strong>only</strong> train with simulators as your training source. That is, training specifier <strong>simulator</strong> is supported, but <strong>data</strong> and <strong>generator</strong> are not.</p>
-
-<p>The <strong>objective</strong> specifies the termination condition for training.</p>
-
-<p><strong>Note:</strong> When the <em>trainingSpecifier</em> is <strong>data</strong>, the objective must be either the keywords <code class="prettyprint">equality</code> or <code class="prettyprint">linear_distance</code>. When the training specifier is <strong>simulator</strong> or <strong>generator</strong>, the objective names a function which is specified in the associated simulator or generator. The use of simulators or generators requires an auxiliary clause, the <code class="prettyprint">simulator</code> or <code class="prettyprint">generator</code> clause respectively. </p>
+<p>The <code class="prettyprint">objective</code> specifies the termination condition for training.</p>
 
 <h3 id="mountain-car-example">Mountain Car Example</h3>
-<pre class="highlight inkling tab-inkling"><code><span class="k">simulator</span> <span class="nx">mountaincar_simulator</span><span class="p">(</span><span class="nx">MountainCarConfig</span><span class="p">)</span> 
+<pre class="highlight inkling tab-inkling--code"><code><span class="k">simulator</span> <span class="nx">mountaincar_simulator</span><span class="p">(</span><span class="nx">MountainCarConfig</span><span class="p">)</span> 
   <span class="k">state</span> <span class="p">(</span><span class="nx">GameState</span><span class="p">)</span>
   <span class="nx">control</span> <span class="p">(</span><span class="nx">Action</span><span class="p">)</span>
 <span class="k">end</span>
-</code></pre><pre class="highlight inkling tab-inkling"><code><span class="k">curriculum</span> <span class="nx">high_score_curriculum</span>
+</code></pre><pre class="highlight inkling tab-inkling--code"><code><span class="k">curriculum</span> <span class="nx">high_score_curriculum</span>
 <span class="k">train</span> <span class="nx">high_score</span>
 <span class="k">with</span> <span class="k">simulator</span> <span class="nx">mountaincar_simulator</span> 
 <span class="k">objective</span> <span class="nx">open_ai_gym_default_objective</span>
@@ -998,12 +1057,11 @@ The range end is a limit. That means that if applying the step results in landin
 <span class="k">end</span>
 </code></pre>
 <p>Select the Inkling tab to view an excerpt of the code in the game Mountain Car from
-OpenAI Gym as written in Inkling.
-This illustrates the simulator clause.  (To explore this example more fully,
+OpenAI Gym as written in Inkling. This illustrates the <a href="#simulator-clause-syntax">simulator clause</a>.  (To explore this example more fully,
 refer to it in our <a href="../examples.html#mountain-car-example">Examples chapter</a>.)</p>
 
 <p>The simulator clause declares the simulator name and two schemas. The first specifies the schema for configuration of the simulator and it appears in parentheses immediately after the simulator name. In this instance, the configuration schema is named <code class="prettyprint">MountainCarConfig</code>. In the example, the configure clause of lesson <code class="prettyprint">get_high_score</code> initializes this configuration.</p>
-<pre class="highlight inkling tab-inkling"><code><span class="c1"># Configuration schema declaration</span>
+<pre class="highlight inkling tab-inkling--code"><code><span class="c1"># Configuration schema declaration</span>
 <span class="k">schema</span> <span class="nx">MountainCarConfig</span>
   <span class="kr">Int8</span> <span class="nx">episode_length</span><span class="p">,</span>
   <span class="kr">Int8</span> <span class="nx">num_episodes</span><span class="p">,</span>
@@ -1018,7 +1076,7 @@ range expression in the lesson configure clause for a field. </p>
 
 <p>The second schema specified in the simulator clause is the state schema. It is
 specified after the <strong>state</strong> keyword in the simulator clause. This is the schema that defines what is sent to the lesson. Recall that a simulator has state. That means that input to the lesson will consist of the state of the game as a result of the previous lesson execution. For mountaincar this schema is called <code class="prettyprint">GameState</code> and prior state consists of prior position.</p>
-<pre class="highlight inkling tab-inkling"><code><span class="c1"># State schema definition</span>
+<pre class="highlight inkling tab-inkling--code"><code><span class="c1"># State schema definition</span>
 <span class="k">schema</span> <span class="nx">GameState</span>
   <span class="kr">Float32</span> <span class="nx">x_position</span><span class="p">,</span>
   <span class="kr">Float32</span> <span class="nx">x_velocity</span>
@@ -1027,7 +1085,7 @@ specified after the <strong>state</strong> keyword in the simulator clause. This
 <p>In order to determine what our next move will be, the training will use the previous position as input.</p>
 
 <p>Finally, note that <code class="prettyprint">high_score_curriculum</code> trains a concept called <code class="prettyprint">high_score</code>.  (It&rsquo;s quite clear what we are aiming for with this curriculum!)</p>
-<pre class="highlight inkling tab-inkling"><code><span class="c1"># Predict schema Action (see concept high_score)</span>
+<pre class="highlight inkling tab-inkling--code"><code><span class="c1"># Predict schema Action (see concept high_score)</span>
 <span class="k">schema</span> <span class="nx">Action</span>
   <span class="kr">Int8</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span> <span class="k">action</span> <span class="c1"># these values describe game moves</span>
 <span class="k">end</span>
@@ -1057,84 +1115,48 @@ syntax for the curriculum statement, which introduces a <strong>using</strong> c
 <li>One curriculum per concept. </li>
 <li>Every concept must have a curriculum.</li>
 <li>You can train with <strong>data</strong>, <strong>simulators</strong>, or <strong>generators</strong>. These are the values allowed as training specifiers (see the Curriculum syntax). </li>
-<li>Every simulator or generator must be declared with a simulator or generator clause, respectively.</li>
-</ul>
-
-<p><strong>Note:</strong> Currently, during our private beta, you can <strong>only</strong> train with
-simulators as your training source. That is, only the <strong>simulator</strong> training specifier is supported.</p>
-
-<ul>
+<li>Every simulator must be declared with a <a href="#simulator-clause-syntax">simulator clause</a>.</li>
 <li>Lessons, tests, and assignments can occur in any order. (Assignments are used for data handling when the training specifier is <strong>data</strong>.)</li>
 <li>If the <strong>using</strong> clause is present (that is, if the simplified curriculum syntax is not being used), there must be one <strong>using</strong> clause for every <strong>with</strong> clause.</li>
 <li>The objective is always required but if the <em>trainingSpecifier</em> is <strong>data</strong>, the objective must be either <code class="prettyprint">equality</code> or <code class="prettyprint">linear_distance</code>.</li>
 </ul>
 
 <h2 id="curriculum-statement-syntax">Curriculum Statement Syntax</h2>
-<pre class="highlight plaintext tab-plaintext"><code>curriculumStatement ::=
-curriculum &lt;name&gt;
-    train &lt;conceptName&gt;
-[
-  withClause                        # with clause
+<pre class="highlight inkling tab-inkling--syntax"><code><span class="nx">curriculumStatement</span> <span class="p">::</span><span class="o">=</span>
+<span class="k">curriculum</span> <span class="o">&lt;</span><span class="nx">name</span><span class="o">&gt;</span>
+    <span class="k">train</span> <span class="o">&lt;</span><span class="nx">conceptName</span><span class="o">&gt;</span>
+<span class="p">[</span>
+  <span class="nx">withClause</span>                        <span class="c1"># with clause</span>
 
-]+
-[
-  using  [ &lt;simulatorName&gt; | data ] # using clause
-  [
-    assignClause # assignment for training and test data
-    lessonClause # lesson set for this simulator
-  ]+
+<span class="p">]</span><span class="o">+</span>
+<span class="p">[</span>
+  <span class="k">using</span>  <span class="p">[</span> <span class="o">&lt;</span><span class="nx">simulatorName</span><span class="o">&gt;</span> <span class="o">|</span> <span class="k">data</span> <span class="p">]</span> <span class="c1"># using clause</span>
+  <span class="p">[</span>
+    <span class="nx">assignClause</span> <span class="c1"># assignment for training and test data</span>
+    <span class="nx">lessonClause</span> <span class="c1"># lesson set for this simulator</span>
+  <span class="p">]</span><span class="o">+</span>
 
-  end # using
-]+
-end # curriculum
-</code></pre><pre class="highlight plaintext tab-plaintext"><code>withClause ::=
-with data
-  objective &lt;objectiveFunctionName&gt;
+  <span class="k">end</span> <span class="c1"># using</span>
+<span class="p">]</span><span class="o">+</span>
+<span class="k">end</span> <span class="c1"># curriculum</span>
+</code></pre><pre class="highlight inkling tab-inkling--syntax"><code><span class="nx">withClause</span> <span class="p">::</span><span class="o">=</span>
+<span class="k">with</span> <span class="k">data</span>
+  <span class="k">objective</span> <span class="o">&lt;</span><span class="nx">objectiveFunctionName</span><span class="o">&gt;</span>
 
-| with simulator
-  objective &lt;objectiveFunctionName&gt;
+<span class="o">|</span> <span class="k">with</span> <span class="k">simulator</span>
+  <span class="k">objective</span> <span class="o">&lt;</span><span class="nx">objectiveFunctionName</span><span class="o">&gt;</span>
 
-| with generator
-  objective &lt;objectiveFunctionName&gt;
+<span class="o">|</span> <span class="k">with</span> <span class="k">generator</span>
+  <span class="k">objective</span> <span class="o">&lt;</span><span class="nx">objectiveFunctionName</span><span class="o">&gt;</span>
 </code></pre>
 <p>Select the Syntax tab to see the Curriculum syntax.</p>
 
-<p>Any simulator or generator referenced in a curriculum must have an associated simulator or generator clause.</p>
-
-<h2 id="simulator-clause-syntax">Simulator Clause Syntax</h2>
-<pre class="highlight plaintext tab-plaintext"><code>simulator &lt;simulatorName&gt;'('&lt;configurationSchema&gt;')' 
-  state '('&lt;stateSchema&gt;')'     # simulator state
-  control '('&lt;controlSchema&gt;')' # training concept predicts schema
-end
-</code></pre>
-<p>Select the Syntax tab to see the Simulator Clause syntax.</p>
-
-<p>When a simulator is used for training, use the simulator clause.</p>
-
-<p>The keyword <strong>simulator</strong> indicates that the responses of the system to the training
-data will feed back into the training. Simulators are coded implementations of
-the lessons. They are time variant. A simulator coded for example in python
-keeps state and thus it will use deep-q learning. The simulator clause has a
-state schema that describes simulator state.  </p>
-
-<h2 id="generator-clause-syntax">Generator Clause Syntax</h2>
-<pre class="highlight plaintext tab-plaintext"><code>generator &lt;generatorName&gt;'('&lt;configurationSchema&gt;')'  
-  yield '('&lt;outputSchema&gt;')'    # generator output (yield)
-end
-</code></pre>
-<p>Select the Syntax tab to see the Generator Clause syntax.</p>
-
-<p>When a generator is used for training, use the generator clause.</p>
-
-<p>The keyword <strong>generator</strong> indicates that the simulator generates the training data.
-Generators can be thought of as a stateless simulators. They do have coded
-simulators but the training output does not get fed back into simulator. The
-generator clause has a yield schema that defines the training output.</p>
+<p>Any simulator or generator referenced in a curriculum must have an associated simulator or generator clause, outlined in <a href="#training-source">Training Source</a>.</p>
 
 <h2 id="curriculum-examples">Curriculum Examples</h2>
 
 <p>Select the Inkling tab to see the Inkling code.</p>
-<pre class="highlight inkling tab-inkling"><code><span class="k">curriculum</span> <span class="nx">get_high_score_curriculum</span>
+<pre class="highlight inkling tab-inkling--code"><code><span class="k">curriculum</span> <span class="nx">get_high_score_curriculum</span>
   <span class="k">train</span> <span class="nx">get_high_score</span>
   <span class="k">with</span> <span class="k">simulator</span> <span class="nx">breakout_simulator</span>
   <span class="k">objective</span> <span class="nx">score</span>
@@ -1157,7 +1179,7 @@ In this example:</p>
 </ul>
 
 <h3 id="digit_curriculum">digit_curriculum</h3>
-<pre class="highlight inkling tab-inkling"><code><span class="k">from</span> <span class="nx">utils</span> <span class="k">import</span> <span class="nx">split</span>
+<pre class="highlight inkling tab-inkling--code"><code><span class="k">from</span> <span class="nx">utils</span> <span class="k">import</span> <span class="nx">split</span>
 
 <span class="k">schema</span> <span class="nx">MNIST_schema</span>
   <span class="kr">String</span> <span class="nx">text</span><span class="p">,</span>
@@ -1217,12 +1239,12 @@ shown in the Inkling code for digit_curriculum.</p>
 <p>Lessons give you control over the training of the mental model. They allow you to break down the training of the concept into phases where each phase is implemented by a lesson.</p>
 
 <h3 id="how-do-i-use-it">How do I use it?</h3>
-<pre class="highlight plaintext tab-plaintext"><code>lesson lessonName
-    follows prevLessonName
-  configureClause
-  trainClause
-  testClause
-  untilClause
+<pre class="highlight inkling tab-inkling--syntax"><code><span class="k">lesson</span> <span class="nx">lessonName</span>
+    <span class="k">follows</span> <span class="nx">prevLessonName</span>
+  <span class="nx">configureClause</span>
+  <span class="nx">trainClause</span>
+  <span class="nx">testClause</span>
+  <span class="nx">untilClause</span>
 </code></pre>
 <p>Select the Syntax tab to show the clauses a lesson can contain.</p>
 
@@ -1245,7 +1267,7 @@ See the lesson clauses table in this chapter for the rules which apply to a spec
 clause.</p>
 
 <h3 id="breakout-example">Breakout Example</h3>
-<pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">BreakoutConfig</span>   <span class="c1"># configured in lesson configureClause</span>
+<pre class="highlight inkling tab-inkling--code"><code><span class="k">schema</span> <span class="nx">BreakoutConfig</span>   <span class="c1"># configured in lesson configureClause</span>
   <span class="kr">UInt32</span> <span class="nx">level</span><span class="p">,</span>
   <span class="kr">UInt8</span><span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">}</span> <span class="nx">paddle_width</span><span class="p">,</span>
   <span class="kr">Float32</span> <span class="nx">bricks_percent</span>
@@ -1355,37 +1377,37 @@ type constraint they are often called <strong>placeholders</strong>.  This means
 </ul>
 
 <h2 id="lesson-syntax">Lesson Syntax</h2>
-<pre class="highlight plaintext tab-plaintext"><code>lessonStatement ::=
-  lesson &lt;lessonName&gt;
-    [follows &lt;lessonName&gt;]?
-    configureClause?
-    trainClause?
-    untilClause?
-    testClause?
+<pre class="highlight inkling tab-inkling--syntax"><code><span class="nx">lessonStatement</span> <span class="p">::</span><span class="o">=</span>
+  <span class="k">lesson</span> <span class="o">&lt;</span><span class="nx">lessonName</span><span class="o">&gt;</span>
+    <span class="p">[</span><span class="k">follows</span> <span class="o">&lt;</span><span class="nx">lessonName</span><span class="o">&gt;</span><span class="p">]?</span>
+    <span class="nx">configureClause</span><span class="p">?</span>
+    <span class="nx">trainClause</span><span class="p">?</span>
+    <span class="nx">untilClause</span><span class="p">?</span>
+    <span class="nx">testClause</span><span class="p">?</span>
 </code></pre>
 <p>Select the Syntax tab to see the lesson syntax. The syntax for lesson and its subordinate
 clauses is displayed.</p>
 
 <h6 id="lesson-configure-clause-syntax">Lesson Configure Clause Syntax</h6>
-<pre class="highlight plaintext tab-plaintext"><code>configureClause ::=
-configure
-  [constrain &lt;configSchemaFieldName&gt; with constrainedType]+
+<pre class="highlight inkling tab-inkling--syntax"><code><span class="nx">configureClause</span> <span class="p">::</span><span class="o">=</span>
+<span class="k">configure</span>
+  <span class="p">[</span><span class="k">constrain</span> <span class="o">&lt;</span><span class="nx">configSchemaFieldName</span><span class="o">&gt;</span> <span class="k">with</span> <span class="nx">constrainedType</span><span class="p">]</span><span class="o">+</span>
 </code></pre>
 <p>Select the Syntax tab for the syntax for this clause.</p>
 
 <h6 id="lesson-train-test-clause-syntax">Lesson Train/Test Clause Syntax</h6>
-<pre class="highlight plaintext tab-plaintext"><code>trainClause ::=
-train
-  fromClause
-  send &lt;name&gt;
-  [expect &lt;name&gt;]?    # only valid for data or generator
-trainingSpecifer
-</code></pre><pre class="highlight plaintext tab-plaintext"><code>testClause ::=
-test
-  fromClause
-  send &lt;name&gt;
-  [expect &lt;name&gt;]?    # only valid for data or generator
-trainingSpecifer
+<pre class="highlight inkling tab-inkling--syntax"><code><span class="nx">trainClause</span> <span class="p">::</span><span class="o">=</span>
+<span class="k">train</span>
+  <span class="nx">fromClause</span>
+  <span class="k">send</span> <span class="o">&lt;</span><span class="nx">name</span><span class="o">&gt;</span>
+  <span class="p">[</span><span class="k">expect</span> <span class="o">&lt;</span><span class="nx">name</span><span class="o">&gt;</span><span class="p">]?</span>    <span class="c1"># only valid for data or generator</span>
+<span class="nx">trainingSpecifer</span>
+</code></pre><pre class="highlight inkling tab-inkling--syntax"><code><span class="nx">testClause</span> <span class="p">::</span><span class="o">=</span>
+<span class="k">test</span>
+  <span class="nx">fromClause</span>
+  <span class="k">send</span> <span class="o">&lt;</span><span class="nx">name</span><span class="o">&gt;</span>
+  <span class="p">[</span><span class="k">expect</span> <span class="o">&lt;</span><span class="nx">name</span><span class="o">&gt;</span><span class="p">]?</span>    <span class="c1"># only valid for data or generator</span>
+<span class="nx">trainingSpecifer</span>
 </code></pre>
 <p>Select the Syntax tab for the syntax for these clauses.</p>
 
@@ -1400,7 +1422,7 @@ shows the usage of the <strong>from</strong> clause.
 ‍</p>
 
 <h3 id="segments-example">Segments Example</h3>
-<pre class="highlight inkling tab-inkling"><code><span class="err">‍</span><span class="k">generator</span> <span class="nx">segments_generator</span><span class="p">(</span><span class="kr">UInt8</span> <span class="nx">segmentCount</span><span class="p">)</span>
+<pre class="highlight inkling tab-inkling--code"><code><span class="err">‍</span><span class="k">generator</span> <span class="nx">segments_generator</span><span class="p">(</span><span class="kr">UInt8</span> <span class="nx">segmentCount</span><span class="p">)</span>
   <span class="k">yield</span> <span class="p">(</span><span class="nx">segments_training_schema</span><span class="p">)</span>     <span class="c1"># training will yield data with this schema</span>
 <span class="k">end</span>
 
@@ -1432,14 +1454,14 @@ return. (The returned <code class="prettyprint">num_segments</code> is expected 
 <p>‍</p>
 
 <h6 id="lesson-until-clause-syntax">Lesson Until Clause Syntax</h6>
-<pre class="highlight plaintext tab-plaintext"><code>untilClause ::=
-until
-      [ minimize | maximize ] &lt;objectiveFunctionName&gt;
-    |
-      &lt;objectiveFunctionName&gt; relOp constantExpression
+<pre class="highlight inkling tab-inkling--syntax"><code><span class="nx">untilClause</span> <span class="p">::</span><span class="o">=</span>
+<span class="k">until</span>
+      <span class="p">[</span> <span class="k">minimize</span> <span class="o">|</span> <span class="k">maximize</span> <span class="p">]</span> <span class="o">&lt;</span><span class="nx">objectiveFunctionName</span><span class="o">&gt;</span>
+    <span class="o">|</span>
+      <span class="o">&lt;</span><span class="nx">objectiveFunctionName</span><span class="o">&gt;</span> <span class="nx">relOp</span> <span class="nx">constantExpression</span>
 
-relOp ::=
-  '==' | '&lt;' | '&gt;' | '&lt;=' | '&gt;='
+<span class="nx">relOp</span> <span class="p">::</span><span class="o">=</span>
+  <span class="p">'</span><span class="o">==</span><span class="p">'</span> <span class="o">|</span> <span class="p">'</span><span class="o">&lt;</span><span class="p">'</span> <span class="o">|</span> <span class="p">'</span><span class="o">&gt;</span><span class="p">'</span> <span class="o">|</span> <span class="p">'</span><span class="o">&lt;=</span><span class="p">'</span> <span class="o">|</span> <span class="p">'</span><span class="o">&gt;=</span><span class="p">'</span>
 </code></pre>
 <p>Select the Syntax tab for the <strong>until</strong> clause syntax.</p>
 
@@ -1470,13 +1492,13 @@ This means train until the curriculum objective (<code class="prettyprint">ball_
 <h3 id="how-do-i-use-it">How do I use it?</h3>
 
 <p>Select the Inkling tab to view two generic import statements.</p>
-<pre class="highlight inkling tab-inkling"><code><span class="k">from</span> <span class="nx">libraryName</span> <span class="k">import</span> <span class="nx">importName1</span>
+<pre class="highlight inkling tab-inkling--code"><code><span class="k">from</span> <span class="nx">libraryName</span> <span class="k">import</span> <span class="nx">importName1</span>
 <span class="k">import</span> <span class="nx">importName2</span>
 </code></pre>
 <h2 id="import-example">Import Example</h2>
 
 <p>Select the Inkling tab to view the example of an imported function.</p>
-<pre class="highlight inkling tab-inkling"><code><span class="k">from</span> <span class="nx">utils</span> <span class="k">import</span> <span class="nx">split</span>
+<pre class="highlight inkling tab-inkling--code"><code><span class="k">from</span> <span class="nx">utils</span> <span class="k">import</span> <span class="nx">split</span>
 
   <span class="k">datastore</span> <span class="nx">MNIST_data</span><span class="p">(</span><span class="nx">MNIST_training_data_schema</span><span class="p">)</span>
   <span class="k">copy</span> <span class="nx">mnist</span><span class="o">-</span><span class="nx">training</span><span class="p">.</span><span class="nx">csv</span> <span class="k">into</span> <span class="nx">MNIST_data</span> <span class="k">with</span> <span class="k">format</span><span class="o">=</span><span class="p">'</span><span class="nx">csv</span><span class="p">'</span>
@@ -1488,8 +1510,8 @@ This means train until the curriculum objective (<code class="prettyprint">ball_
       </div>
       <div class="dark-box">
           <div class="lang-selector">
-                <a href="#" data-language-name="inkling">Inkling</a>
-                <a href="#" data-language-name="plaintext">Syntax</a>
+                <a href="#" data-language-name="inkling--code">Inkling</a>
+                <a href="#" data-language-name="inkling--syntax">Syntax</a>
           </div>
       </div>
     </div>

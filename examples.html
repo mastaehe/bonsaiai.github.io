@@ -406,6 +406,217 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <li>The lesson trains until the AI has maximized the objective.</li>
 </ul>
 
+          <h1 id="energyplus-example">EnergyPlus Example</h1>
+
+<p>The full source code for this example can be <a href="https://github.com/BonsaiAI/energyplus-sample">found on GitHub</a> so you can run it yourself on the Bonsai Platform.</p>
+
+<p>In this example, we&rsquo;ll walk you through the various statements that are part of a sample implementation of <a href="https://energyplus.net/">EnergyPlus</a> on the Bonsai Platform, including the simulator and the Inkling files. This is a real-world example of how to use the Bonsai Platform for HVAC control using BCVTB and EnergyPlus.</p>
+
+<p>While this BRAIN is training, the Bonsai AI Engine launches the EnergyPlus simulator in the background for every episode. The <em>energyplus_simulator.py</em> then drives the simulator forward a step at a time until it finishes the episode and then relaunches it for the next episode, driving the actions into it and sending state results back to the Bonsai AI Engine.</p>
+
+<h2 id="inkling-file">Inkling File</h2>
+
+<h6 id="schema">Schema</h6>
+<pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">SimState</span>
+    <span class="kr">Int32</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">}</span> <span class="nx">SolarIrradiation</span>
+<span class="k">end</span>
+</code></pre>
+<p>The <code class="prettyprint">SimState</code> schema defines the dictionary returned from the Python simulation&rsquo;s advance method to the BRAIN.</p>
+<pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">SimAction</span>
+    <span class="kr">Int32</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">}</span> <span class="nx">shade</span>
+<span class="k">end</span>
+</code></pre>
+<p>The <code class="prettyprint">SimAction</code> schema defines the <code class="prettyprint">action</code> dictionary passed as a parameter to the <code class="prettyprint">advance</code> method of the Python simulator. For example: <code class="prettyprint">shade</code> == night, off, day.</p>
+<pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">SimConfig</span>
+    <span class="kr">Int32</span><span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">}</span> <span class="nx">unused</span>
+<span class="k">end</span>
+</code></pre>
+<p>The <code class="prettyprint">SimConfig</code> schema in this case is not used (but is still required to be defined in Inkling) but it would define the dictionary passed as a parameter to the <code class="prettyprint">set_properties</code> method of the Python simulator.</p>
+
+<h6 id="concept">Concept</h6>
+<pre class="highlight inkling tab-inkling"><code><span class="k">concept</span> <span class="nx">my_concept</span> <span class="k">is</span> <span class="nx">classifier</span>
+   <span class="k">predicts</span> <span class="p">(</span><span class="nx">SimAction</span><span class="p">)</span>
+   <span class="k">follows</span> <span class="kr">input</span><span class="p">(</span><span class="nx">SimState</span><span class="p">)</span>
+   <span class="k">feeds</span> <span class="kr">output</span>
+<span class="k">end</span>
+</code></pre>
+<p>This concept is named <code class="prettyprint">my_concept</code> which predicts a <code class="prettyprint">SimAction</code> given a <code class="prettyprint">SimState</code>.</p>
+
+<h6 id="simulator">Simulator</h6>
+<pre class="highlight inkling tab-inkling"><code><span class="k">simulator</span> <span class="nx">energyplus_simulator</span><span class="p">(</span><span class="nx">SimConfig</span><span class="p">)</span>
+    <span class="k">action</span> <span class="p">(</span><span class="nx">SimAction</span><span class="p">)</span>
+    <span class="k">state</span> <span class="p">(</span><span class="nx">SimState</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
+<p>This simulator is the training source for teaching <code class="prettyprint">my_concept</code>. The Python simulator identifies itself as &lsquo;energyplus_simulator&rsquo; when it connects with the AI Engine. The following statements bind the above schemas to this simulator. To define the training relationship between the simulator and the concept we must begin by defining the simulator. <code class="prettyprint">energyplus_simulator</code> expects an action defined in the <code class="prettyprint">SimAction</code> schema as input and replies with a state defined in the <code class="prettyprint">SimState</code> schema as output.</p>
+
+<h6 id="curriculum">Curriculum</h6>
+<pre class="highlight inkling tab-inkling"><code><span class="k">curriculum</span> <span class="nx">my_curriculum</span>
+    <span class="k">train</span> <span class="nx">my_concept</span>
+    <span class="k">with</span> <span class="k">simulator</span> <span class="nx">energyplus_simulator</span>
+    <span class="k">objective</span> <span class="nx">reward_function</span>
+        <span class="k">lesson</span> <span class="nx">my_first_lesson</span>
+            <span class="k">configure</span>
+                <span class="k">constrain</span> <span class="nx">unused</span> <span class="k">with</span> <span class="kr">Int32</span><span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">}</span>
+            <span class="k">until</span>
+                <span class="k">maximize</span> <span class="nx">reward_function</span>
+<span class="k">end</span>
+</code></pre>
+<p>The cirriculum <code class="prettyprint">my_curriculum</code> trains <code class="prettyprint">my_concept</code> using <code class="prettyprint">energyplus_simulator</code>. The BRAIN that runs this Inkling code will try to maximize the value returned from <code class="prettyprint">reward_function</code> until you stop training. <code class="prettyprint">reward_function</code> is a method in the Python simulator.</p>
+
+<p>This curriculum contains one lesson, called <code class="prettyprint">my_first_lesson</code>. It configures the simulation, by setting a number of constraints for the state of the simulator.</p>
+
+<h2 id="simulator-file">Simulator File</h2>
+<pre class="highlight python tab-python"><code><span class="c"># Excerpt of simulator class from the energyplus_simulator.py file</span>
+
+<span class="k">class</span> <span class="nc">EnergyPlusSimulator</span><span class="p">(</span><span class="n">Simulator</span><span class="p">):</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">ePlus85Actuator</span><span class="p">()</span>
+    <span class="n">server</span> <span class="o">=</span> <span class="bp">None</span>
+
+    <span class="n">clientState</span> <span class="o">=</span> <span class="p">{</span><span class="s">'SolarIrradiation'</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+    <span class="n">shade</span> <span class="o">=</span> <span class="mf">0.</span>
+    <span class="n">is_terminal</span> <span class="o">=</span> <span class="bp">True</span>
+
+    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">"""This method is called when training is started."""</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"EnergyPlusSimulator: start"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"EnergyPlusSimulator: stop"</span><span class="p">)</span>
+
+        <span class="n">graph</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">grapher</span><span class="p">()</span>
+        <span class="n">py</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s">"graph.html"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">readFromPtolemyClient</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">readFromClient</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">fromClient</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">fromClient</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">clientState</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="c"># 'TOut': self.model.fromClient[0],</span>
+                <span class="c"># 'TZone': self.model.fromClient[1],</span>
+                <span class="s">'SolarIrradiation'</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">fromClient</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span><span class="o">/</span><span class="mi">100</span>
+                <span class="c"># 'FractionShadingOn': self.model.fromClient[3]</span>
+                <span class="p">}</span>
+
+            <span class="c"># save the client input in our graph</span>
+            <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">fromClient</span><span class="p">)):</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">fromClient</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+                <span class="c"># scale some of the values for readability</span>
+                <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                    <span class="n">value</span> <span class="o">/=</span> <span class="mf">100.</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_terminal</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">exitFlag</span> <span class="o">!=</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="nf">restartPtolemyServer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c"># set some default values for get_state</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_terminal</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="c"># self.clientState = {'TOut': 0.,</span>
+        <span class="c">#                     'TZone': 0.,</span>
+        <span class="c">#                     'SolarIrradiation': 0.,</span>
+        <span class="c">#                     'FractionShadingOn': 0. }</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">clientState</span> <span class="o">=</span> <span class="p">{</span><span class="s">'SolarIrradiation'</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+
+        <span class="c"># close the old connections if they're still open</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+        <span class="c"># start a new episode</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"EnergyPlusSimulator: starting PtolemyServer"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">server</span> <span class="o">=</span> <span class="n">PtolemyServer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">)</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">waitForClient</span><span class="p">()</span>
+            <span class="c"># get initial state</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">readFromPtolemyClient</span><span class="p">()</span>
+
+        <span class="k">except</span> <span class="nb">OSError</span> <span class="k">as</span> <span class="n">msg</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">"EnergyPlusSimulator: error on restart:"</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">server</span> <span class="o">=</span> <span class="bp">None</span>
+
+    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">"""Called by the AI Engine to reset simulator state in between training
+           and test passes.
+        """</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"EnergyPlusSimulator: reset"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">advance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">actions</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"EnergyPlusSimulator: advance "</span><span class="p">,</span> <span class="n">actions</span><span class="p">)</span>
+        <span class="s">"""Advance the simulation forward one tick. actions contains a
+           dictionary of key values as defined by this simulator's action
+           schema in Inkling.
+        """</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">shade</span> <span class="o">=</span> <span class="n">actions</span><span class="p">[</span><span class="s">'shade'</span><span class="p">]</span> <span class="o">*</span> <span class="mf">6.</span>  <span class="c"># Int32[0..1]</span>
+
+    <span class="k">def</span> <span class="nf">set_properties</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"EnergyPlusSimulator: set_properties"</span><span class="p">)</span>
+        <span class="s">"""This method is called before training is started
+           or on the frame after is_terminal=True to set
+           configuration properties in this simulation. See
+           the configure clause of the lesson statement in
+           this simulator's accompanying curriculums.
+        """</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">restartPtolemyServer</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">get_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">"""Returns a named tuple of state and is_terminal. state is a
+           dictionary matching the state schema as defined in Inkling.
+           is_terminal is only true when the simulator is in a "game over"
+           state.
+        """</span>
+
+        <span class="k">print</span><span class="p">(</span><span class="s">"EnergyPlusSimulator: get_state: terminal:"</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_terminal</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_terminal</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">restartPtolemyServer</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">writeToClient</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">shade</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">readFromPtolemyClient</span><span class="p">()</span>
+
+        <span class="c"># you like graphs? WE HAVE GRAPHS. SO MANY GRAPHS.</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_terminal</span><span class="p">:</span>
+            <span class="n">graph</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">grapher</span><span class="p">()</span>
+            <span class="n">write_graph</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+
+            <span class="c"># clear old data</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="p">([],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[])</span>
+
+        <span class="k">return</span> <span class="n">SimState</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">clientState</span><span class="p">,</span> <span class="n">is_terminal</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">is_terminal</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">reward_function</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"EnergyPlusSimulator: reward_function"</span><span class="p">)</span>
+        <span class="c"># largest reward is best reward (maximize)</span>
+        <span class="n">reward</span> <span class="o">=</span> <span class="mf">0.</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">fromClient</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">fromClient</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+            <span class="c"># SolarIrradiation === Shades down === good</span>
+            <span class="c"># TOut = self.model.fromClient[0]</span>
+            <span class="n">SolarIrradiation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">fromClient</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">/</span> <span class="mf">100.</span>
+
+            <span class="c"># sun is down</span>
+            <span class="k">if</span> <span class="n">SolarIrradiation</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">shade</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">reward</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>  <span class="c"># shades on</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">reward</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c"># shade off</span>
+
+            <span class="c"># sun is out</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">shade</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> 
+                    <span class="n">reward</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c"># shades on</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">reward</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>  <span class="c"># shades off</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">reward</span><span class="p">)</span>
+
+        <span class="k">print</span><span class="p">(</span><span class="s">"EnergyPlusSimulator reward:"</span><span class="p">,</span> <span class="n">reward</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">reward</span>
+</code></pre>
+<p>The full simulator file <em>energyplus_simulator.py</em> for this example is with the rest of the <a href="1">energyplus-sample code</a> on GitHub.</p>
+
+<p>This is a Python simulator for integrating the EnergyPlus simulator into the Bonsai AI Engine. This <em>energyplus_simulator.py</em> file repeatedly runs the EnergyPlus simulator in the background with new actions sent from the Bonsai AI Engine by passing the state from EnergyPlus to the backend, and the action from the backend back to EnergyPlus.</p>
+
+<p>For more information on the funtions inside of this simulator class and how to impliment them see the <a href="http://docs.bons.ai/references/library-reference.html">Library Reference</a>.</p>
+
           <h1 id="find-the-center-example">Find the Center Example</h1>
 
 <p>In this example, we&rsquo;ll walk you through the various statements that are part of the <em>Find the Center</em> game, including the simulator file and the Inkling file. This is a very basic example of Inkling and how to connect to a simulator.</p>
