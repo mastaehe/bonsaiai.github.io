@@ -22,7 +22,7 @@ Commands:
   download   Downloads all the files related to a BRAIN.
   list       Lists BRAINs owned by current user.
   load       Loads an inkling file into the given BRAIN.
-  log        Displays last 1000 lines of the running...
+  log        Display logs from remote training.
   push       Uploads project file(s) to a BRAIN.
   sims       Retrieve information about simulators.
   switch     Change the active configuration section.
@@ -131,7 +131,7 @@ Options:
   --help          Show this message and exit.
 ```
 
-Displays *stderr* from the currently running simulator. This will display the last 1000 lines of the running simulator's output. You can override the BRAIN you want to log if multiple are running at the same time or the project .
+Displays *stderr* and *stdout* from the currently running simulator. This will display the last 1000 lines of the running simulator's output. You can override the BRAIN you want to log if multiple are running at the same time or the project .
 
 ## bonsai push
 
