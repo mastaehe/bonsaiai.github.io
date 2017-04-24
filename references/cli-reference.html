@@ -401,7 +401,10 @@ Commands:
   download   Downloads all the files related to a BRAIN.
   list       Lists BRAINs owned by current user.
   load       Loads an inkling file into the given BRAIN.
+  log        Display logs from remote training.
+  push       Uploads project file(s) to a BRAIN.
   sims       Retrieve information about simulators.
+  switch     Change the active configuration section.
   train      Start and stop training on a BRAIN.
 </code></pre>
 <p>Use <code class="prettyprint">bonsai COMMAND --help</code> to get information about a specific command. You can use <code class="prettyprint">bonsai --help</code> to view a list of options for COMMAND.</p>
@@ -454,6 +457,17 @@ Options:
 </code></pre>
 <p><code class="prettyprint">bonsai download</code> creates local copies of your BRAIN project files. This will contain your Inkling code and may also contain simulator code. This command works like git clone - it copies files into a new directory, and will not try and overwrite files that already exist.</p>
 
+<h2 id="bonsai-list">bonsai list</h2>
+<pre class="highlight plaintext"><code>$ bonsai list --help
+Usage: bonsai list [OPTIONS]
+
+  Lists BRAINs owned by current user or by the user under a given URL.
+
+Options:
+  --help  Show this message and exit.
+</code></pre>
+<p><code class="prettyprint">bonsai list</code> shows you the BRAINs you currently own or by a user under a given URL. You must have your Bonsai account configured with <code class="prettyprint">bonsai configure</code> before you can see this list.</p>
+
 <h2 id="bonsai-load">bonsai load</h2>
 <pre class="highlight plaintext"><code>$ bonsai load --help
 Usage: bonsai.py load [OPTIONS]
@@ -466,6 +480,34 @@ Options:
   --help          Show this message and exit.
 </code></pre>
 <p><code class="prettyprint">bonsai load</code> loads an Inkling file into the current brain.  The project file in the current directory (<code class="prettyprint">bonsai_brain.bproj</code>) determines which inkling file to load.  You can specify <code class="prettyprint">--brain BRAIN_NAME</code>, or <code class="prettyprint">--project /brain/project</code> to use another brain.</p>
+
+<h2 id="bonsai-log">bonsai log</h2>
+<pre class="highlight plaintext"><code>$ bonsai log --help
+Usage: bonsai log [OPTIONS]
+
+  Displays last 1000 lines of the running simulator's output.
+
+Options:
+  --brain TEXT    Override to target another BRAIN.
+  --project TEXT  Override to target another project directory.
+  --help          Show this message and exit.
+</code></pre>
+<p>Displays <em>stderr</em> and <em>stdout</em> from the currently running simulator. This will display the last 1000 lines of the running simulator&rsquo;s output. You can override the BRAIN you want to log if multiple are running at the same time or the project .</p>
+
+<h2 id="bonsai-push">bonsai push</h2>
+<pre class="highlight plaintext"><code>$ bonsai push --help
+Usage: bonsai push [OPTIONS]
+
+  Uploads project file(s) to a BRAIN.
+
+Options:
+  --brain TEXT    Override to target another BRAIN.
+  --project TEXT  Override to target another project directory
+  --help          Show this message and exit.
+</code></pre>
+<p><code class="prettyprint">bonsai push</code> will upload the entire project file contents and all accompanying files to the Bonsai AI Engine and can be viewed on <a href="beta.bons.ai">beta.bons.ai</a>. You can override the BRAIN you want to push to or the project directory you want to push.</p>
+
+<p>This command replaces the need for <code class="prettyprint">bonsai load</code> which is now depricated and will be removed in a future release. </p>
 
 <h2 id="bonsai-train">bonsai train</h2>
 <pre class="highlight plaintext"><code>$ bonsai train --help
@@ -522,17 +564,6 @@ Options:
   --help          Show this message and exit.
 </code></pre>
 <p><code class="prettyprint">bonsai train status</code> is used to see the current training status of your BRAIN.</p>
-
-<h2 id="bonsai-list">bonsai list</h2>
-<pre class="highlight plaintext"><code>$ bonsai list --help
-Usage: bonsai list [OPTIONS]
-
-  Lists BRAINs owned by current user or by the user under a given URL.
-
-Options:
-  --help  Show this message and exit.
-</code></pre>
-<p><code class="prettyprint">bonsai list</code> shows you the BRAINs you currently own or by a user under a given URL.</p>
 
 <h2 id="bonsai-sims-list">bonsai sims list</h2>
 <pre class="highlight plaintext"><code>$ bonsai sims list --help
