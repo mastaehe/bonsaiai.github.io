@@ -17,7 +17,7 @@ The lexical structure of Inkling includes these lexical elements:
 
 * An Inkling comment begins after the character **#** and extends to the end of the line.
 
-```inkling
+```inkling--code
   # this is a comment
 ```
 
@@ -28,23 +28,22 @@ for use by Inkling and cannot be used as names in your program.
 
 **Keywords Table**
 
-
-               |                |                |                |                
--------------- | -------------- | -------------- | -------------- | -------------- 
-action | as | Bool | Byte | concept
-configure | constrain | copy | curriculum | data
-datastore | Double | easy | end | expect
-false | feeds | Float32 | Float64 | follows
-format | from | generator | hard | import
-in | Int16 | Int32 | Int64 | Int8
-into | is | lesson | let | Luminance
-Matrix | maximize | medium | minimize | objective
-predicts | schema | select | send | simulator
-state | stream | String | test | train
-true | UInt16 | UInt32 | UInt64 | UInt8
-unit | until | using | validate | where
-with | yield
-
+               |                |                |                |                |
+-------------- | -------------- | -------------- | -------------- | -------------- |
+action | and | as | Bool | Byte
+concept | configure | constrain | copy | curriculum
+data | datastore | debug | Double | easy
+end | expect | false | feeds | Float32
+Float64 | follows | format | from | generator
+hard | import | in | input | Int16
+Int32 | Int64 | Int8 | into | is
+lesson | let | Luminance | Matrix | maximize
+medium | minimize | not | objective | or
+output | predicts | schema | select | send
+simulator | state |  stream | String | test
+train | true | UInt16 | UInt32 | UInt64
+UInt8 | unit | until | using | validate
+where | with | yield
 
 ## Identifiers
 
@@ -70,7 +69,7 @@ point.
 Floating point literals can be Float32 or Float64 (double). Select the Inkling
 tab to see some floating point literals: 
 
-```inkling
+```inkling--code
  12.0, .5        # Float32 floating point literal
  1e7, 9e0        # Float64 (double) floating point literal
  13.0f7, .3f+2   # Float32 floating point literal

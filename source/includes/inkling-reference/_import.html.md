@@ -16,7 +16,7 @@ Note: Currently, the only function you can import is **split**.
 
 Select the Inkling tab to view two generic import statements.
 
-```inkling
+```inkling--code
 from libraryName import importName1
 import importName2
 ```
@@ -25,7 +25,7 @@ import importName2
 
 Select the Inkling tab to view the example of an imported function.
 
-```inkling
+```inkling--code
 from utils import split
 
   datastore MNIST_data(MNIST_training_data_schema)
