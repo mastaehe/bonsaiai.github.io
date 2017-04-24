@@ -11,6 +11,7 @@ toc_footers:
 includes:
 
 - examples/cart-pole.html.md
+- examples/energyplus.html.md
 - examples/find-the-center.html.md
 - examples/mountain-car.html.md
 
