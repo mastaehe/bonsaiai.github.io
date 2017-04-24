@@ -22,7 +22,10 @@ Commands:
   download   Downloads all the files related to a BRAIN.
   list       Lists BRAINs owned by current user.
   load       Loads an inkling file into the given BRAIN.
+  log        Display logs from remote training.
+  push       Uploads project file(s) to a BRAIN.
   sims       Retrieve information about simulators.
+  switch     Change the active configuration section.
   train      Start and stop training on a BRAIN.
 ```
 
@@ -84,6 +87,20 @@ Options:
 `bonsai download` creates local copies of your BRAIN project files. This will contain your Inkling code and may also contain simulator code. This command works like git clone - it copies files into a new directory, and will not try and overwrite files that already exist.
 
 
+## bonsai list
+
+```
+$ bonsai list --help
+Usage: bonsai list [OPTIONS]
+
+  Lists BRAINs owned by current user or by the user under a given URL.
+
+Options:
+  --help  Show this message and exit.
+```
+
+`bonsai list` shows you the BRAINs you currently own or by a user under a given URL. You must have your Bonsai account configured with `bonsai configure` before you can see this list.
+
 ## bonsai load
 
 ```
@@ -99,6 +116,40 @@ Options:
 ```
 
 `bonsai load` loads an Inkling file into the current brain.  The project file in the current directory (`bonsai_brain.bproj`) determines which inkling file to load.  You can specify `--brain BRAIN_NAME`, or `--project /brain/project` to use another brain.
+
+## bonsai log
+
+```
+$ bonsai log --help
+Usage: bonsai log [OPTIONS]
+
+  Displays last 1000 lines of the running simulator's output.
+
+Options:
+  --brain TEXT    Override to target another BRAIN.
+  --project TEXT  Override to target another project directory.
+  --help          Show this message and exit.
+```
+
+Displays *stderr* and *stdout* from the currently running simulator. This will display the last 1000 lines of the running simulator's output. You can override the BRAIN you want to log if multiple are running at the same time or the project .
+
+## bonsai push
+
+```
+$ bonsai push --help
+Usage: bonsai push [OPTIONS]
+
+  Uploads project file(s) to a BRAIN.
+
+Options:
+  --brain TEXT    Override to target another BRAIN.
+  --project TEXT  Override to target another project directory
+  --help          Show this message and exit.
+```
+
+`bonsai push` will upload the entire project file contents and all accompanying files to the Bonsai AI Engine and can be viewed on [beta.bons.ai](beta.bons.ai). You can override the BRAIN you want to push to or the project directory you want to push.
+
+This command replaces the need for `bonsai load` which is now depricated and will be removed in a future release. 
 
 ## bonsai train
 
@@ -167,20 +218,6 @@ Options:
 ```
 
 `bonsai train status` is used to see the current training status of your BRAIN.
-
-## bonsai list
-
-```
-$ bonsai list --help
-Usage: bonsai list [OPTIONS]
-
-  Lists BRAINs owned by current user or by the user under a given URL.
-
-Options:
-  --help  Show this message and exit.
-```
-
-`bonsai list` shows you the BRAINs you currently own or by a user under a given URL.
 
 ## bonsai sims list
 
