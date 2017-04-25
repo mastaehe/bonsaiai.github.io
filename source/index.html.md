@@ -10,7 +10,7 @@ includes:
 
 search: true
 
-layout: home2
+layout: home
 
 ---
 
