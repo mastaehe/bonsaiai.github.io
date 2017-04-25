@@ -208,9 +208,18 @@ Information for a simulator connected to a BRAIN.
 | connected | count of how many simulators are connected |
 | instances | array of connected simulators with their status and episode count |
 
-## GET Websocket
 
-Upgrade to a Websocket.
+# Websocket Messages
+
+[//]: # (This section and below need to be fleshed out with content on websockets and protobuf messages)
+
+The simulator and AI Engine exchange messages in a binary protocol for training
+and prediction.
+
+## Training Protocol
+
+Connect to the server and upgrade to a websocket to initialize the training
+protocol.
 
 ### Request
 
@@ -228,9 +237,22 @@ Upgrade to a Websocket.
 | Upgrade | websocket |
 | Connection | upgrade |
 
-### Response
+### Protocol
+![Training Message Protocol](../images/training.svg)
 
-[//]: # (Need to add an Example JSON Response code sample and parameter table)
+## Prediction Protocol
+Connect to the server and upgrade to a websocket to initialize the prediction
+protocol.
+
+### Request
+
+`GET /v1/{userName}/{brainName}/{version}/predictions/ws`
+
+| Parameter | Description |
+| --- | --- |
+| userName | name of the user who has the BRAIN |
+| brainName | name of the BRAIN |
+| version | version of the BRAIN to get predictions from. Use "latest" for latest version |
 
 #### Headers
 
@@ -239,15 +261,8 @@ Upgrade to a Websocket.
 | Upgrade | websocket |
 | Connection | upgrade |
 
-# Websocket Messages
+### Protocol
 
-[//]: # (This section and below need to be fleshed out with content on websockets and protobuf messages)
-
-## Training Protocol
-
-![Training Message Protocol](../images/training.svg)
-
-## Prediction Protocol
 ![Prediction Message Protocol](../images/prediction.svg)
 
 ## Simulator to Server
