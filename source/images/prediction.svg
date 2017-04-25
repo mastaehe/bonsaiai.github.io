@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="285.4513px" style="width:321px;height:285px;" version="1.1" viewBox="0 0 321 285" width="321.6991px">
+    <defs>
+        <filter height="300%" id="f1" width="300%" x="-1" y="-1">
+            <feGaussianBlur result="blurOut" stdDeviation="2.265486725663717"/>
+            <feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/>
+            <feOffset dx="4.530973451327434" dy="4.530973451327434" in="blurOut2" result="blurOut3"/>
+            <feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/>
+        </filter>
+    </defs><g>
+        <rect fill="#FFFFFF" height="100%" width="100%" />
+        <rect fill="#FFFFFF" filter="url(#f1)" height="89.5487" style="stroke: #000000; stroke-width: 2.265486725663717;" width="297.3451" x="14.7257" y="132.885"/>
+        <line style="stroke: #A80036; stroke-width: 1.1327433628318584; stroke-dasharray: 5.0,5.0;" x1="69.0973" x2="69.0973" y1="44.8673" y2="241.6903"/>
+        <line style="stroke: #A80036; stroke-width: 1.1327433628318584; stroke-dasharray: 5.0,5.0;" x1="266.7611" x2="266.7611" y1="44.8673" y2="241.6903"/>
+        <rect fill="#FEFECE" filter="url(#f1)" height="35.8053" style="stroke: #A80036; stroke-width: 1.6991150442477876;" width="82.6903" x="26.0531" y="3.3982"/>
+        <text fill="#000000" font-family="sans-serif" font-size="15.8584" lengthAdjust="spacingAndGlyphs" textLength="66.8319" x="33.9823" y="27.7898">Simulator</text>
+        <rect fill="#FEFECE" filter="url(#f1)" height="35.8053" style="stroke: #A80036; stroke-width: 1.6991150442477876;" width="82.6903" x="26.0531" y="240.5575"/>
+        <text fill="#000000" font-family="sans-serif" font-size="15.8584" lengthAdjust="spacingAndGlyphs" textLength="66.8319" x="33.9823" y="264.9491">Simulator</text>
+        <rect fill="#FEFECE" filter="url(#f1)" height="35.8053" style="stroke: #A80036; stroke-width: 1.6991150442477876;" width="63.4336" x="232.7788" y="3.3982"/>
+        <text fill="#000000" font-family="sans-serif" font-size="15.8584" lengthAdjust="spacingAndGlyphs" textLength="47.5752" x="240.708" y="27.7898">Server</text>
+        <rect fill="#FEFECE" filter="url(#f1)" height="35.8053" style="stroke: #A80036; stroke-width: 1.6991150442477876;" width="63.4336" x="232.7788" y="240.5575"/>
+        <text fill="#000000" font-family="sans-serif" font-size="15.8584" lengthAdjust="spacingAndGlyphs" textLength="47.5752" x="240.708" y="264.9491">Server</text>
+        <polygon fill="#A80036" points="253.1681,76.5841,264.4956,81.115,253.1681,85.646,257.6991,81.115" style="stroke: #A80036; stroke-width: 1.1327433628318584;"/>
+        <line style="stroke: #A80036; stroke-width: 1.1327433628318584;" x1="69.6637" x2="259.9646" y1="81.115" y2="81.115"/>
+        <text fill="#000000" font-family="sans-serif" font-size="14.7257" lengthAdjust="spacingAndGlyphs" textLength="54.3717" x="77.5929" y="76.0122">Register</text>
+        <polygon fill="#A80036" points="82.1239,110.9646,70.7965,115.4956,82.1239,120.0265,77.5929,115.4956" style="stroke: #A80036; stroke-width: 1.1327433628318584;"/>
+        <line style="stroke: #A80036; stroke-width: 1.1327433628318584; stroke-dasharray: 2.0,2.0;" x1="75.3274" x2="265.6283" y1="115.4956" y2="115.4956"/>
+        <text fill="#000000" font-family="sans-serif" font-size="14.7257" lengthAdjust="spacingAndGlyphs" textLength="169.9115" x="88.9204" y="110.3927">Acknowledge Registration</text>
+        <rect fill="none" height="89.5487" style="stroke: #000000; stroke-width: 2.265486725663717;" width="297.3451" x="14.7257" y="132.885"/>
+        <polygon fill="#EEEEEE" points="14.7257,132.885,97.4159,132.885,97.4159,141.9469,86.0885,153.2743,14.7257,153.2743,14.7257,132.885" style="stroke: #000000; stroke-width: 2.265486725663717;"/>
+        <text fill="#000000" font-family="sans-serif" font-size="14.7257" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="31.7168" x="31.7168" y="149.3042">loop</text>
+        <line style="stroke: #A80036; stroke-width: 1.1327433628318584;" x1="264.4956" x2="253.1681" y1="178.5929" y2="174.0619"/>
+        <line style="stroke: #A80036; stroke-width: 1.1327433628318584;" x1="264.4956" x2="253.1681" y1="178.5929" y2="183.1239"/>
+        <line style="stroke: #A80036; stroke-width: 1.1327433628318584;" x1="69.6637" x2="265.6283" y1="178.5929" y2="178.5929"/>
+        <text fill="#000000" font-family="sans-serif" font-size="14.7257" lengthAdjust="spacingAndGlyphs" textLength="35.115" x="77.5929" y="173.49">State</text>
+        <line style="stroke: #A80036; stroke-width: 1.1327433628318584;" x1="69.6637" x2="80.9912" y1="212.9735" y2="208.4425"/>
+        <line style="stroke: #A80036; stroke-width: 1.1327433628318584;" x1="69.6637" x2="80.9912" y1="212.9735" y2="217.5044"/>
+        <line style="stroke: #A80036; stroke-width: 1.1327433628318584; stroke-dasharray: 2.0,2.0;" x1="69.6637" x2="265.6283" y1="212.9735" y2="212.9735"/>
+        <text fill="#000000" font-family="sans-serif" font-size="14.7257" lengthAdjust="spacingAndGlyphs" textLength="65.6991" x="88.9204" y="207.8706">Prediction</text>
+    </g>
+</svg>
