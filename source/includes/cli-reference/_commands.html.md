@@ -147,7 +147,7 @@ Options:
   --help          Show this message and exit.
 ```
 
-`bonsai push` will upload the entire project file contents and all accompanying files to the Bonsai AI Engine and can be viewed on [beta.bons.ai](beta.bons.ai). You can override the BRAIN you want to push to or the project directory you want to push.
+`bonsai push` will upload the entire project file contents and all accompanying files to the Bonsai AI Engine and can be viewed on [beta.bons.ai](https://beta.bons.ai). You can override the BRAIN you want to push to or the project directory you want to push.
 
 This command replaces the need for `bonsai load` which is now depricated and will be removed in a future release. 
 

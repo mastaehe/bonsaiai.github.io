@@ -224,7 +224,7 @@ class EnergyPlusSimulator(Simulator):
         return reward
 ```
 
-The full simulator file *energyplus_simulator.py* for this example is with the rest of the [energyplus-sample code](1) on GitHub.
+The full simulator file *energyplus_simulator.py* for this example is with the rest of the [energyplus-sample code][1] on GitHub.
 
 This is a Python simulator for integrating the EnergyPlus simulator into the Bonsai AI Engine. This *energyplus_simulator.py* file repeatedly runs the EnergyPlus simulator in the background with new actions sent from the Bonsai AI Engine by passing the state from EnergyPlus to the backend, and the action from the backend back to EnergyPlus.
 
