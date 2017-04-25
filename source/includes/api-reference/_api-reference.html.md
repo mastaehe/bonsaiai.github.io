@@ -15,7 +15,7 @@ TBD
 
 # User and BRAIN status
 
-## GET: User status
+## GET User status
 
 > Example Response
 
@@ -42,10 +42,6 @@ TBD
        "predictor": "/megan/mybrain3/12"
    }]
 }
-```
-
-```protobuf
-// There is no protobuf version of this response.
 ```
 
 List all BRAINs owned by the user.
@@ -81,10 +77,6 @@ List all BRAINs owned by the user.
    }],
    "latest": "/v1/megan/mybrain/11"
 }
-```
-
-```protobuf
-// There is no protobuf version of this response.
 ```
 
 Get information about a BRAIN.
@@ -166,10 +158,6 @@ Start or stop training mode.
        "episode": 1
    }]
 }
-```
-
-```protobuf
-// There is no protobuf version of this response.
 ```
 
 Information for a simulator connected to a BRAIN.
