@@ -9,40 +9,13 @@ The Bonsai BRAIN API has two feature areas:
 * Managing BRAINS
 * Connecting simulators for training and use.
 
-TThe root for all Bonsai Platform API requests is [https://api.bons.ai]().
+The root for all Bonsai Platform API requests is [https://api.bons.ai]().
 
 [//]: # (Add # Authentication section here)
 
 # User and BRAIN Status
 
 ## GET User Status
-
-> Example JSON Response
-
-```json
-{
-   "brains":  [{
-       "id": 1
-       "name": "mybrain1",
-       "url": "/megan/mybrain1",
-       "status": "uninitialized"
-
-   }, {
-       "id": 2
-       "name": "mybrain2",
-       "url": "/megan/mybrain2",
-       "status": "trained",
-       "training": "/megan/mybrain2/dev",
-   }, {
-       "id": 3
-       "name": "mybrain3",
-       "url": "/megan/mybrain3",
-       "status": "training",
-       "training": "/megan/mybrain3/dev",
-       "predictor": "/megan/mybrain3/12"
-   }]
-}
-```
 
 List all BRAINs owned by the user.
 
@@ -54,32 +27,48 @@ List all BRAINs owned by the user.
 | --- | --- |
 | userName | Name of the user |
 
-### Response
-
-| Parameter | Description |
-| --- | --- |
-| id | Numerical id of the BRAIN |
-| name | Name of the BRAIN |
-| url | URL of the BRAIN |
-| status | Name of the user |
-
-## GET BRAIN Status
-
 > Example JSON Response
 
 ```json
 {
-   "id": 1
-   "name": "mybrain1",
-   "simulators": [{
-       "name": "breakout",
-       "objectives": ["score", "ball_location_distance"]
-   }],
-   "latest": "/v1/megan/mybrain/11"
+   "brains":  [{
+      "url": "/v1/kgmcauliffe/Cartpole",
+      "version": 0,
+      "last_modified": "2017-04-19T00:19:46.857000Z",
+      "state": "Not Started",
+      "name": "Cartpole"
+    },
+    {
+      "url": "/v1/kgmcauliffe/MountainCar",
+      "version": 6,
+      "last_modified": "2017-03-21T18:33:17.676000Z",
+      "state": "Complete",
+      "name": "MountainCar"
+    },
+    {
+      "url": "/v1/kgmcauliffe/Starter",
+      "version": 2,
+      "last_modified": "2017-04-24T21:36:44.740000Z",
+      "state": "In Progress",
+      "name": "Starter"
+    }]
 }
 ```
 
-Get information about a BRAIN.
+### Response
+
+| Parameter | Description |
+| --- | --- |
+| url | URL of the BRAIN |
+| version | Current version number of the BRAIN |
+| last_modified | Text string of last modified date |
+| state | Current status of training |
+| name | Name of the BRAIN |
+
+## GET BRAIN Status
+
+Get information about a BRAIN. This will return every URL for
+every version of that BRAIN as well.
 
 ### Request
 
@@ -87,50 +76,59 @@ Get information about a BRAIN.
 
 | Parameter | Description |
 | --- | --- |
-| userName | name of the user who has the BRAIN |
-| brainName | name of the BRAIN |
+| userName | Name of the user who has the BRAIN |
+| brainName | Name of the BRAIN |
+
+> Example JSON Response
+
+```json
+{
+  "versions": [
+    {
+      "url": "/v1/kgmcauliffe/Starter/2",
+      "version": 2
+    },
+    {
+      "url": "/v1/kgmcauliffe/Starter/1",
+      "version": 1
+    }
+  ],
+  "description": "Basic example project.",
+  "user": "kgmcauliffe",
+  "name": "Starter"
+}
+```
 
 ### Response
 
 | Parameter | Description |
 | --- | --- |
-| id | numerical id of the BRAIN |
-| name | name of the BRAIN |
-| simulators | array of simulations used to train this BRAIN |
-| latest | URL to the latest BRAIN |
+| version | Current version number of the BRAIN |
+| description | Text description of the BRAIN |
+| user | Name of the user who has the BRAIN|
+| name | Name of the BRAIN |
 
 
 # Project Files
 
 ## GET File
 
-> Example JSON Response
-
-```json
-{
-  "inkling": "schema GameState\n    Float32 x_position,\n    Float32 x_velocity\nend\n\nschema Action\n    Int8{0, 1, 2} command\nend\n\nschema MountainCarConfig\n    Int8 episode_length,\n    Int8 num_episodes,\n    UInt8 deque_size\nend\n\nsimulator mountaincar_simulator(MountainCarConfig)\n    action (Action)\n    state (GameState)\nend\n\nconcept high_score is classifier\n    predicts (Action)\n    follows input(GameState)\n    feeds output\nend\n\ncurriculum high_score_curriculum\n    train high_score\n    with simulator mountaincar_simulator\n    objective open_ai_gym_default_objective\n\n        lesson get_high_score\n            configure\n                constrain episode_length with Int8{-1},\n                constrain num_episodes with Int8{-1},\n                constrain deque_size with UInt8{1}\n            until\n                maximize open_ai_gym_default_objective\nend\n",
-  "compiler_version": "1.8.24"
-}
-```
-
-Get the contents of a specified project file, for example, the Inkling code in the *.ink* file for a BRAIN.
+Get the contents of a specified project file, for example, the Inkling
+code in the *.ink* file for a BRAIN.
 
 ### Request
 
-`GET /v1/{userName}/[brainName]/?file={fileName}`
+`GET /v1/{userName}/[brainName]?file={fileName}`
 
 | Parameter | Description |
 | --- | --- |
-| userName | name of the user who has the BRAIN |
-| brainName | name of the BRAIN |
-| fileName | name of the file to get |
+| userName | Name of the user who has the BRAIN |
+| brainName | Name of the BRAIN |
+| fileName | Full name of the file to get |
 
 ### Response
 
-| Parameter | Description |
-| --- | --- |
-| userName | name of the user who has the BRAIN |
-| brainName | name of the BRAIN |
+The full text of the file will be returned in the body.
 
 ## PUT File
 
@@ -139,25 +137,42 @@ BRAIN. You cannot PUT new file contents while a BRAIN is training.
 
 ### Request
 
-`PUT /v1/{userName}/[brainName]/?file={fileName}`
+`PUT /v1/{userName}/[brainName]?file={fileName}`
 
 | Parameter | Description |
 | --- | --- |
-| userName | name of the user who has the BRAIN |
-| brainName | name of the BRAIN |
-| fileName | name of the file to be changed
+| userName | Name of the user who has the BRAIN |
+| brainName | Name of the BRAIN |
+| fileName | Name of the file to be changed |
 
 #### Headers
 
 | Header | Value |
-| Content‐Type | text/x-inkling or otherwise|
-| Content‐Length | size of file in bytes |
+| --- | --- |
+| Content‐Type | Set to `text/x-inkling` or `text/plain` if not Inkling code|
+| Content‐Length | Size of file in bytes |
 
-#### Body
+> Example JSON Response
 
-The text of the file.
+```json
+{
+  "success": true,
+  "errors": [],
+  "compiler_version": "1.8.25",
+  "warnings": []
+}
+```
 
+### Response
 
+| Parameter | Description |
+| --- | --- |
+| success | Whether the Inkling code was compiled successfully |
+| errors | Compiler errors will be listed if there are any |
+| compiler_version| Version of the compiler used |
+| warnings |  Compiler warnings will be listed if there are any |
+
+This is an example response for an Inkling file with no errors or warnings to report.
 
 # Training Mode
 
@@ -165,16 +180,57 @@ The text of the file.
 
 Start or stop training mode.
 
+### Request
+
 `PUT /v1/{userName}/{brainName}/train`
 
 | Parameter | Description |
 | --- | --- |
-| userName | name of the user who has the BRAIN |
-| brainName | name of the BRAIN |
+| userName | Name of the user who has the BRAIN |
+| brainName | Name of the BRAIN |
+
+> Example JSON Response
+
+```json
+{
+  "user": "kgmcauliffe",
+  "simulator_connect_url": "/v1/kgmcauliffe/Starter/sims/ws",
+  "name": "Starter",
+  "simulator_predictions_url": "/v1/kgmcauliffe/Starter/1/predictions/ws",
+  "version": 1,
+  "manage_simulator": false,
+  "compiler_version": "1.8.25",
+  "brain_url": "/v1/kgmcauliffe/Starter/1"
+}
+```
+
+### Response
+
+| Parameter | Description |
+| --- | --- |
+| user | Name of the user who has the BRAIN |
+| simulator_connect_url | URL the simulator connects to for training |
+| name | Name of the BRAIN |
+| simulator_predictions_url | URL the simulator connects to for prediction |
+| version | Current version number of the BRAIN |
+| manage_simulator | Whether or not the simulator is managed |
+| compiler_version| Version of the compiler used |
+| brain_url | URL of the BRAIN |
 
 # Simulators
 
 ## GET Simulator Information
+
+Information for a simulator connected to a BRAIN.
+
+### Request
+
+`GET /v1/{userName}/{brainName}/sims`
+
+| Parameter | Description |
+| --- | --- |
+| userName | Name of the user who has the BRAIN |
+| brainName | Name of the BRAIN |
 
 > Example Response (JSON)
 
@@ -189,24 +245,14 @@ Start or stop training mode.
 }
 ```
 
-Information for a simulator connected to a BRAIN.
-
-### Request
-
-`GET /v1/{userName}/{brainName}/sims`
-
-| Parameter | Description |
-| --- | --- |
-| userName | name of the user who has the BRAIN |
-| brainName | name of the BRAIN |
-
 ### Response
 
 | Parameter | Description |
 | --- | --- |
-| name | name of the simulator |
-| connected | count of how many simulators are connected |
-| instances | array of connected simulators with their status and episode count |
+| name | Name of the simulator |
+| connected | Count of how many simulators are connected |
+| instances | Array of connected simulators with their status and episode count |
+
 
 
 # Websocket Messages
@@ -238,9 +284,11 @@ protocol.
 | Connection | upgrade |
 
 ### Protocol
+
 ![Training Message Protocol](../images/training.svg)
 
 ## Prediction Protocol
+
 Connect to the server and upgrade to a websocket to initialize the prediction
 protocol.
 
