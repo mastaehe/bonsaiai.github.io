@@ -15,7 +15,11 @@ TThe root for all Bonsai Platform API requests is [https://api.bons.ai]().
 
 # User and BRAIN Status
 
+<<<<<<< HEAD
 ## GET User Status
+=======
+## GET User status
+>>>>>>> a8fd8579c60ba4d2d9e453cf6bb0443e7bff15e1
 
 > Example JSON Response
 
