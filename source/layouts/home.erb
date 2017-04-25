@@ -1,88 +1,147 @@
 
 
-
 <% language_tabs = current_page.data.language_tabs || [] %>
 <!doctype html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title><%= current_page.data.title || "Bonsai Documentation" %></title>
-    <style>
-      <%= Rouge::Themes::Base16::Monokai.render(:scope => '.highlight') %>
-    </style>
-    <%= stylesheet_link_tag :screen, media: :screen %>
-    <%= stylesheet_link_tag :print, media: :print %>
-	  <%= stylesheet_link_tag :test, media: :screen %>
-    <%= favicon_tag '/favicon.ico' %>
-    <% if current_page.data.search %>
-      <%= javascript_include_tag  "all" %>
-    <% else %>
-      <%= javascript_include_tag  "all_nosearch" %>
-    <% end %>
+
+<head>
+	<meta charset="utf-8">
+	<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title><%= current_page.data.title || "Bonsai Documentation" %></title>
+	<style>
+	  <%= Rouge::Themes::Base16::Monokai.render(:scope => '.highlight') %>
+	</style>
+	<%= stylesheet_link_tag :screen, media: :screen %>
+	<%= stylesheet_link_tag :print, media: :print %>
+	<%= stylesheet_link_tag :test, media: :screen %>
+	<%= favicon_tag '/favicon.ico' %>
+	<% if current_page.data.search %>
+	<%= javascript_include_tag  "all" %>
+	<% else %>
+	<%= javascript_include_tag  "all_nosearch" %>
+	<% end %>
+	<%= partial "partials/google-gtm" %>
+</head>
+	  	
+<body class="<%= page_classes %>" data-languages="<%=h language_tabs.map{ |lang| lang.is_a?(Hash) ? lang.keys.first : lang }.to_json %>">
 	
-		<%= partial "partials/google-gtm" %>
-	
-  </head>
+		  
+	<%= partial "partials/hide-gtm" %>
 
-  <body class="<%= page_classes %>" data-languages="<%=h language_tabs.map{ |lang| lang.is_a?(Hash) ? lang.keys.first : lang }.to_json %>">
+	<div id="flex-container">	  
 
-<%= partial "partials/hide-gtm" %>
+		<%= partial "partials/primary-nav" %>	
 
-  <div id="flex-container">
+		<div id="main-wrapper">
 
+			<div id="top">
 
-	<%= partial "partials/primary-nav" %>
+				<div >
 
-	<div id="main-wrapper">
+					<p class="welcome">Bonsai Docs</p>
+					<p class="sub-text-1">Bonsai enables developers to build, teach, and use intelligence models</p>
 
+					<div class="flex-desktop-center-rows margin-top-1 max-width-x row-override">
+					<a class="green-button" href="/guides/getting-started.html">Get Started</a>
+					<a class="green-button" href="#help">Get Help</a>
+					</div>
 
-	<div id="top">
-	<p class="welcome">Welcome to Bonsai Docs</p>
-	<gcse:search></gcse:search>
-	
-</div>
+				</div>
 
+			</div>
 
-	<div id="browse">
-		<span id="browse-divs">
+			<div id="browse">
 
-		<div>
-			<p class="p2">Inkling Docs</p>
-			<ul>
-				<li><% link_to '/inkling-guide.html#inkling-a-new-language.html' do %>Inkling: A New Language<% end %></li>
-				<li><% link_to '/inkling-guide.html#curriculum-and-lessons' do %>Curriculum & Lessons<% end %></li>
-				<li><% link_to '/ai-engine-guide.html#under-the-hood' do %>Under the Hood<% end %></li>
-			</ul>
+				<span id="browse-divs">
+
+					<div>
+						
+						<p class="p2">Guides</p>
+						
+						<ul>
+							<li> <a href="/guides/ai-engine-guide.html">A.I. Engine Guide</a> </li>
+							<li> <a href="/guides/getting-started.html">Getting Started Guide</a> </li>
+							<li> <a href="/guides/inkling-guide.html">Inkling Guide</a> </li>
+						</ul>
+					
+					</div>
+
+					<div>
+						
+						<p class="p2">References</p>
+						
+						<ul>
+							<li> <a href="/references/api-reference.html">API Reference</a> </li>
+							<li> <a href="/references/cli-reference.html">CLI Reference</a> </li>
+							<li> <a href="/references/inkling-reference.html">Inkling Reference</a> </li>
+							<li> <a href="/references/library-reference.html">Library Reference</a> </li>
+						
+					</div>
+
+					<div>
+						
+						<p class="p2">Examples</p>
+						
+						<ul>
+							<li> <a href="/examples.html#cart-pole-example">Cart Pole</a></li>
+							<li> <a href="/examples.html#energyplus-example">EnergyPlus</a></li>
+							<li> <a href="/examples.html#find-the-center-example">Find the Center</a></li>
+							<li> <a href="/examples.html#mountain-car-example">Mountain Car</a></li>  
+						</ul>
+						
+					</div>
+					
+				</span>
+
+			</div>
+			
+			<div id ="help" class="light-background ">
+
+				<div class="flex-desktop-center-column more-padding-1">
+
+					<p class="welcome">Need more help?</p>
+					<p class="sub-text-1">Can't find what you're looking for, or have more questions about Bonsai?</p>
+
+					<div class="flex-desktop-center-rows more-help-links sub-text-1">
+					<a href="http://forums.bons.ai/"><img src="/images/forums.svg">Bonsai Forums</a>
+					<a href="https://bons.ai/"><img src="/images/tree.svg">Bonsai Home</a>
+					<a href="https://bons.ai/contact-us#contact-page-form"><img src="/images/email.svg">Contact Us</a>
+					
+					</div> 
+
+				</div>
+
+			</div>
+			
+			<div id="bottom" class="more-help-padding border-top-ccc">
+
+				<div >
+
+					<div class="footer-links-home flex-footer stretched">
+						<a href="https://bons.ai">Bonsai Home</a>
+						<a class="flex-cc" href="https://github.com/BonsaiAI/slate">Contribute to the Docs on GitHub</a>
+						
+						
+						<a class="home-cc-icon" href='https://creativecommons.org/licenses/by-sa/4.0/' >
+							
+				
+		
+						
+						CC-BY-SA </a>
+						
+						
+
+					</div>
+
+				</div>
+
+			</div>	
+
 		</div>
-
-
-		<div>
-			<p class="p2">References</p>
-			<ul>
-				<li><% link_to '/api-reference.html' do %>API Reference<% end %></li>
-				<li><% link_to '/cli-reference.html' do %>CLI Reference<% end %></li>
-				<li><% link_to '/inkling-reference.html' do %>Inkling Reference<% end %></li>
-			</ul>
-		</div>
-
-
-		<div>
-			<p class="p2">Get Help</p>
-			<ul>
-				<li><% link_to '/examples.html' do %>See Our Examples<% end %></li>
-				<li><% link_to 'http://forums.bons.ai/' do %>Ask in the forums<% end %></li>
-				<li><% link_to 'mailto:support@bons.ai?subject=I need help with' do %>Send us an email<% end %></li>
-			</ul>
-		</div>
-</span>
 
 	</div>
 
-    </div>
+</body>
 
-  </div>
-
-  </body>
 </html>
