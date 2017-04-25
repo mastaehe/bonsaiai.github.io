@@ -9,15 +9,15 @@ The Bonsai BRAIN API has two feature areas:
 * Managing BRAINS
 * Connecting simulators for training and use.
 
-# Authentication
+TThe root for all Bonsai Platform API requests is [https://api.bons.ai]().
 
-TBD
+[//]: # (Add # Authentication section here)
 
-# User and BRAIN status
+# User and BRAIN Status
 
-## GET: User status
+## GET User Status
 
-> Example Response
+> Example JSON Response
 
 ```json
 {
@@ -34,7 +34,7 @@ TBD
        "status": "trained",
        "training": "/megan/mybrain2/dev",
    }, {
-       "id": 2
+       "id": 3
        "name": "mybrain3",
        "url": "/megan/mybrain3",
        "status": "training",
@@ -42,10 +42,6 @@ TBD
        "predictor": "/megan/mybrain3/12"
    }]
 }
-```
-
-```protobuf
-// There is no protobuf version of this response.
 ```
 
 List all BRAINs owned by the user.
@@ -67,9 +63,9 @@ List all BRAINs owned by the user.
 | url | URL of the BRAIN |
 | status | Name of the user |
 
-## GET BRAIN status
+## GET BRAIN Status
 
-> Example Response
+> Example JSON Response
 
 ```json
 {
@@ -81,10 +77,6 @@ List all BRAINs owned by the user.
    }],
    "latest": "/v1/megan/mybrain/11"
 }
-```
-
-```protobuf
-// There is no protobuf version of this response.
 ```
 
 Get information about a BRAIN.
@@ -108,34 +100,63 @@ Get information about a BRAIN.
 | latest | URL to the latest BRAIN |
 
 
-# Inkling
+# Project Files
 
-## GET Inkling
+## GET File
+
+> Example JSON Response
+
+```json
+{
+  "inkling": "schema GameState\n    Float32 x_position,\n    Float32 x_velocity\nend\n\nschema Action\n    Int8{0, 1, 2} command\nend\n\nschema MountainCarConfig\n    Int8 episode_length,\n    Int8 num_episodes,\n    UInt8 deque_size\nend\n\nsimulator mountaincar_simulator(MountainCarConfig)\n    action (Action)\n    state (GameState)\nend\n\nconcept high_score is classifier\n    predicts (Action)\n    follows input(GameState)\n    feeds output\nend\n\ncurriculum high_score_curriculum\n    train high_score\n    with simulator mountaincar_simulator\n    objective open_ai_gym_default_objective\n\n        lesson get_high_score\n            configure\n                constrain episode_length with Int8{-1},\n                constrain num_episodes with Int8{-1},\n                constrain deque_size with UInt8{1}\n            until\n                maximize open_ai_gym_default_objective\nend\n",
+  "compiler_version": "1.8.24"
+}
+```
+
+Get the contents of a specified project file, for example, the Inkling code in the *.ink* file for a BRAIN.
 
 ### Request
 
-`GET /v1/{userName}/{brainName}/{brainVersion}/ink`
+`GET /v1/{userName}/[brainName]/?file={fileName}`
 
-Inkling code for a BRAIN.
+| Parameter | Description |
+| --- | --- |
+| userName | name of the user who has the BRAIN |
+| brainName | name of the BRAIN |
+| fileName | name of the file to get |
 
-## POST Inkling
+### Response
 
-Uses the POST request method to post a new version of the Inkling code for a
-BRAIN. You cannot POST new Inkling while a BRAIN is training.
+| Parameter | Description |
+| --- | --- |
+| userName | name of the user who has the BRAIN |
+| brainName | name of the BRAIN |
+
+## PUT File
+
+Uses the PUT request method to change a project file for the given
+BRAIN. You cannot PUT new file contents while a BRAIN is training.
 
 ### Request
 
-`POST /v1/{userName}/{brainName}/ink`
+`PUT /v1/{userName}/[brainName]/?file={fileName}`
+
+| Parameter | Description |
+| --- | --- |
+| userName | name of the user who has the BRAIN |
+| brainName | name of the BRAIN |
+| fileName | name of the file to be changed
 
 #### Headers
-| Header | Description |
-| --- | --- |
 
-| Content‐Type | text/x‐bonsai‐inkling |
-| Content‐Length | size of inkling file in bytes |
+| Header | Value |
+| Content‐Type | text/x-inkling or otherwise|
+| Content‐Length | size of file in bytes |
 
 #### Body
-The text of the Inkling file.
+
+The text of the file.
+
 
 
 # Training Mode
@@ -155,7 +176,7 @@ Start or stop training mode.
 
 ## GET Simulator Information
 
-> Example Response
+> Example Response (JSON)
 
 ```json
 {
@@ -168,15 +189,11 @@ Start or stop training mode.
 }
 ```
 
-```protobuf
-// There is no protobuf version of this response.
-```
-
 Information for a simulator connected to a BRAIN.
 
 ### Request
 
-`GET /{userName}/{brainName}/sims`
+`GET /v1/{userName}/{brainName}/sims`
 
 | Parameter | Description |
 | --- | --- |
@@ -191,14 +208,13 @@ Information for a simulator connected to a BRAIN.
 | connected | count of how many simulators are connected |
 | instances | array of connected simulators with their status and episode count |
 
-
 ## GET Websocket
 
-Upgrade to a Websocket
+Upgrade to a Websocket.
 
 ### Request
 
-`GET /V1/{userName}/{brainName}/sims/ws`
+`GET /v1/{userName}/{brainName}/sims/ws`
 
 | Parameter | Description |
 | --- | --- |
@@ -214,6 +230,8 @@ Upgrade to a Websocket
 
 ### Response
 
+[//]: # (Need to add an Example JSON Response code sample and parameter table)
+
 #### Headers
 
 | Header | Value |
@@ -222,6 +240,8 @@ Upgrade to a Websocket
 | Connection | upgrade |
 
 # Websocket Messages
+
+[//]: # (This section and below need to be fleshed out with content on websockets and protobuf messages)
 
 ## Training Protocol
 
