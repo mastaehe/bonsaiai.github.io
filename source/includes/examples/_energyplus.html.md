@@ -1,4 +1,4 @@
-# EnergyPlus Example
+# HVAC (EnergyPlus)
 
 The full source code for this example can be [found on GitHub][1] so you can run it yourself on the Bonsai Platform.
 

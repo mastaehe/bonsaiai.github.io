@@ -1,4 +1,4 @@
-# Cart Pole Example
+# OpenAI Gym: Cart Pole
 
 In this example, we'll walk you through the various statements that are part of the Cart Pole Inkling file. Each statement is followed by an explanation of the statement.
 

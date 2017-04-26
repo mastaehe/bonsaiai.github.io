@@ -1,8 +1,8 @@
-# Mountain Car Example
+# OpenAI Gym: Mountain Car
 
 We've used pieces of code from this example in several places, but here we'll walk you through all the various statements that are part of the Mountain Car Inkling file. Each statement is followed by an explanation of the statement.
 
-Mountain car is a classic control problem. [OpenAI Gym][1] describes it as:
+Mountain Car is a classic control problem. [OpenAI Gym][1] describes it as:
 
 _A car is on a one-dimensional track, positioned between two "mountains". The goal is to drive up the mountain on the right; however, the car's engine is not strong enough to scale the mountain in a single pass. Therefore, the only way to succeed is to drive back and forth to build up momentum._
 

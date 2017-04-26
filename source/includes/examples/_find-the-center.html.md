@@ -1,6 +1,6 @@
-# Find the Center Example
+# Basic Simulator (Find the Center)
 
-In this example, we'll walk you through the various statements that are part of the *Find the Center* game, including the simulator file and the Inkling file. This is a very basic example of Inkling and how to connect to a simulator.
+In this example, we'll walk you through the various statements that are part of the *Find the Center* game, including the python simulator file and the Inkling file. This is a very basic example of Inkling and how to connect to a simulator.
 
 *Find the Center* is a simple game where the AI seeks the average value between two numbers. In this game, the AI begins at a random value of 0, 1, or 2. The AI then can move to a lower number by outputing -1, a higher number by outputing +1, or staying on the same number by outputing 0. The goal of *Find the Center* is to remain in the center of 0 and 2 (the number 1).
 
@@ -173,4 +173,4 @@ if __name__ == "__main__":
                         base_args.brain_url, base_args.access_key)
 ```
 
-This is a Basic simulator for learning the simulator interface. In this case it is used to find the center between two numbers, 0 and 2. The goal, as outlined in the Inkling file, is to reach 1. The moves that the simulator is able to make are sent from the Inkling file to the simulator and the state of the simulator is sent back to Inkling.
+This is a basic python simulator for learning the simulator library. In this case it is used to find the center between two numbers, 0 and 2. The goal, as outlined in the Inkling file, is to reach 1. The moves that the simulator is able to make are sent from the Inkling file to the simulator and the state of the simulator is sent back to Inkling.
