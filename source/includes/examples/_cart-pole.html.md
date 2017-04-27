@@ -1,5 +1,7 @@
 # OpenAI Gym: Cart Pole
 
+> ![Cart Pole Balance](../images/cart-pole-balance.gif)
+
 In this example, we'll walk you through the various statements that are part of the Cart Pole Inkling file. Each statement is followed by an explanation of the statement.
 
 Cart Pole is a classic control problem. [OpenAI Gym][1] describes it as:

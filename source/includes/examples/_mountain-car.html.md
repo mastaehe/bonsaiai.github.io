@@ -1,5 +1,7 @@
 # OpenAI Gym: Mountain Car
 
+> ![Mountain Car Control](../images/mountain-car-control.gif)
+
 We've used pieces of code from this example in several places, but here we'll walk you through all the various statements that are part of the Mountain Car Inkling file. Each statement is followed by an explanation of the statement.
 
 Mountain Car is a classic control problem. [OpenAI Gym][1] describes it as:

@@ -1,5 +1,7 @@
 # HVAC (EnergyPlus)
 
+> ![EnergyPlus Graph](../images/energyplus-graph.png)
+
 The full source code for this example can be [found on GitHub][1] so you can run it yourself on the Bonsai Platform.
 
 In this example, we'll walk you through the various statements that are part of a sample implementation of [EnergyPlus][2] on the Bonsai Platform, including the simulator and the Inkling files. This is a real-world example of how to use the Bonsai Platform for HVAC control using BCVTB and EnergyPlus.
