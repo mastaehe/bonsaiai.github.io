@@ -13,7 +13,15 @@ The root for all Bonsai Platform API requests is [https://api.bons.ai]().
 
 # Authentication
 
-To make an API call, you must include an `Authorization` header for the request to succeed. The value of this header should be your access key. This can be found [on BRAIN web in your Account Settings](https://beta.bons.ai/accounts/key).
+To make an API call, you must include an `Authorization` header for the request
+to succeed. The value of this header should be your access key. This can be found
+[on BRAIN web in your Account Settings](https://beta.bons.ai/accounts/key).
+
+#### Headers
+
+| Header | Value |
+| --- | --- |
+| Authorization | Access key |
 
 # User and BRAIN Status
 
