@@ -171,10 +171,9 @@ class BasicSimulator(bonsai.Simulator):
         return self.goal_count
 
 if __name__ == "__main__":
-    base_args = bonsai.parse_base_arguments()
+
     sim = BasicSimulator()
-    bonsai.run_with_url('find_the_center_sim', sim,
-                        base_args.brain_url, base_args.access_key)
+    bonsai.run_for_training_or_prediction("find_the_center_sim", sim)
 ```
 
 This is a basic python simulator for learning the simulator library. In this case it is used to find the center between two numbers, 0 and 2. The goal, as outlined in the Inkling file, is to reach 1. The moves that the simulator is able to make are sent from the Inkling file to the simulator and the state of the simulator is sent back to Inkling.
