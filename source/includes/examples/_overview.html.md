@@ -1,8 +1,8 @@
 # Examples Overview
 
-This page contains working examples of Inkling code in conjunction with python simulator files. All of these examples and the libraries that acompany them can be found on [BonsaiAI's GitHub page][1] and are also linked within each Example.
+This page contains working examples of Inkling code in conjunction with python simulator files. All of these examples and the libraries that accompany them can be found on [BonsaiAI's GitHub page][1] and are also linked within each Example.
 
-If you have any suggestions of examples you'd like to see us impliment please [contact the support team][2].
+If you have any suggestions of examples you'd like to see us implement please [contact the support team][2].
 
 ### Basic Walkthrough Examples
 * **Basic Simulator**: A project called *Find the Center* which walks you through how to create a simple Inkling file that connects to a basic python simulator.

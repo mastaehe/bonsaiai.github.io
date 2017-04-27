@@ -6,7 +6,7 @@
 
 In this example, we'll walk you through the various statements that are part of the *Find the Center* game, including the python simulator file and the Inkling file. This is a very basic example of Inkling and how to connect to a simulator.
 
-*Find the Center* is a simple game where the AI seeks the average value between two numbers. In this game, the AI begins at a random value of 0, 1, or 2. The AI then can move to a lower number by outputing -1, a higher number by outputing +1, or staying on the same number by outputing 0. The goal of *Find the Center* is to remain in the center of 0 and 2 (the number 1).
+*Find the Center* is a simple game where the AI seeks the average value between two numbers. In this game, the AI begins at a random value of 0, 1, or 2. The AI then can move to a lower number by outputting -1, a higher number by outputting +1, or staying on the same number by outputting 0. The goal of *Find the Center* is to remain in the center of 0 and 2 (the number 1).
 
 ## Inkling File
 
