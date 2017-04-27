@@ -2,9 +2,11 @@
 
 > ![Mountain Car Control](../images/mountain-car-control.gif)
 
+**Download the full source code** [on GitHub][1] so you can run it yourself on the Bonsai Platform.
+
 We've used pieces of code from this example in several places, but here we'll walk you through all the various statements that are part of the Mountain Car Inkling file. Each statement is followed by an explanation of the statement.
 
-Mountain Car is a classic control problem. [OpenAI Gym][1] describes it as:
+Mountain Car is a classic control problem. [OpenAI Gym][2] describes it as:
 
 _A car is on a one-dimensional track, positioned between two "mountains". The goal is to drive up the mountain on the right; however, the car's engine is not strong enough to scale the mountain in a single pass. Therefore, the only way to succeed is to drive back and forth to build up momentum._
 
@@ -76,4 +78,5 @@ end
 * This curriculum contains one lesson, called `get_high_score`. It configures the simulation, by setting a number of constraints for the state of the simulator.
 * The lesson trains until the AI has maximized the objective.
 
-[1]: https://gym.openai.com/envs/MountainCar-v0
+[1]: https://github.com/BonsaiAI/gym-mountaincar-sample
+[2]: https://gym.openai.com/envs/MountainCar-v0

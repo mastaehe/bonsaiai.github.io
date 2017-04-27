@@ -2,9 +2,11 @@
 
 > ![Cart Pole Balance](../images/cart-pole-balance.gif)
 
+**Download the full source code** [on GitHub][1] so you can run it yourself on the Bonsai Platform.
+
 In this example, we'll walk you through the various statements that are part of the Cart Pole Inkling file. Each statement is followed by an explanation of the statement.
 
-Cart Pole is a classic control problem. [OpenAI Gym][1] describes it as:
+Cart Pole is a classic control problem. [OpenAI Gym][2] describes it as:
 
 _A pole is attached by an un-actuated joint to a cart, which moves along a frictionless track. The system is controlled by applying a force of +1 or -1 to the cart. The pendulum starts upright, and the goal is to prevent it from falling over. A reward of +1 is provided for every timestep that the pole remains upright. The episode ends when the pole is more than 15 degrees from vertical, or the cart moves more than 2.4 units from the center._
 
@@ -79,4 +81,5 @@ end
 * This curriculum contains one lesson, called balancing. It configures the simulation, by setting a number of constraints for the state of the simulator.
 * The lesson trains until the AI has maximized the objective.
 
-[1]: https://gym.openai.com/envs/CartPole-v1
+[1]: https://github.com/BonsaiAI/gym-cartpole-sample
+[2]: https://gym.openai.com/envs/CartPole-v1
