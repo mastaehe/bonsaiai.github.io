@@ -2,7 +2,7 @@
 
 > ![Find the Center Diagram](../images/find-the-center.png)
 
-**Download the full source code** [on GitHub][1] so you can run it yourself on the Bonsai Platform.
+[**Download the full source code on GitHub**][1] so you can run it yourself on the Bonsai Platform.
 
 In this example, we'll walk you through the various statements that are part of the *Find the Center* game, including the python simulator file and the Inkling file. This is a very basic example of Inkling and how to connect to a simulator.
 
@@ -75,9 +75,9 @@ curriculum find_the_center_curriculum
 end
 ```
 
-The curriculum is named `find_the_center_curriculum`, and it trains the `find_the_center` concept using the `find_the_center_sim`. This curriculum contains one lesson, called `seek_center`. It configures the simulation, by setting a number of constraints for the state of the simulator.
+The curriculum is named `find_the_center_curriculum`, and it trains the `find_the_center` concept using the `find_the_center_sim`.
 
-The lesson trains until the AI has maximized the objective `time_at_goal`.
+This curriculum contains one lesson, called `seek_center`. It configures the simulation, by setting a number of constraints for the state of the simulator. The lesson trains until the AI has maximized the objective `time_at_goal`.
 
 
 ## Simulator File

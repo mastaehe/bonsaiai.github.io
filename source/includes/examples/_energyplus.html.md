@@ -2,7 +2,7 @@
 
 > ![EnergyPlus Graph](../images/energyplus-graph.png)
 
-The full source code for this example can be [found on GitHub][1] so you can run it yourself on the Bonsai Platform.
+[**Download the full source code on GitHub**][1] so you can run it yourself on the Bonsai Platform.
 
 In this example, we'll walk you through the various statements that are part of a sample implementation of [EnergyPlus][2] on the Bonsai Platform, including the simulator and the Inkling files. This is a real-world example of how to use the Bonsai Platform for HVAC control using BCVTB and EnergyPlus.
 
@@ -18,7 +18,7 @@ schema SimState
 end
 ```
 
-The `SimState` schema defines the dictionary returned from the Python simulation's advance method to the BRAIN.
+The `SimState` schema defines the dictionary returned from the Python simulation's `advance` method to the BRAIN.
 
 ```inkling
 schema SimAction
@@ -26,7 +26,7 @@ schema SimAction
 end
 ```
 
-The `SimAction` schema defines the `action` dictionary passed as a parameter to the `advance` method of the Python simulator. For example: `shade` == night, off, day.
+The `SimAction` schema defines the 'actions', a dictionary of control signals this AI can send to the climate control. For example: `shade` == night, off, day.
 
 ```inkling
 schema SimConfig
@@ -46,7 +46,7 @@ concept my_concept is classifier
 end
 ```
 
-This concept is named `my_concept` which predicts a `SimAction` given a `SimState`.
+This concept is named `my_concept` which predicts a `SimAction` given a `SimState`. In this simple demo we just ask the Bonsai Platform to generate any model that can learn to control the server using these inputs and outputs.
 
 ###### Simulator
 
@@ -57,7 +57,8 @@ simulator energyplus_simulator(SimConfig)
 end
 ```
 
-This simulator is the training source for teaching `my_concept`. The Python simulator identifies itself as 'energyplus_simulator' when it connects with the AI Engine. The following statements bind the above schemas to this simulator. To define the training relationship between the simulator and the concept we must begin by defining the simulator. `energyplus_simulator` expects an action defined in the `SimAction` schema as input and replies with a state defined in the `SimState` schema as output.
+
+The simulator clause declares that a simulator named `energyplus_simulator` will be connecting to the server for training. This code snippet binds the previous schemas to this simulator. To define the training relationship between the simulator and the concept we must begin by defining the simulator. `energyplus_simulator` expects an action defined in the `SimAction` schema as input and replies with a state defined in the `SimState` schema as output.
 
 ###### Curriculum
 
@@ -74,11 +75,11 @@ curriculum my_curriculum
 end
 ```
 
-The cirriculum `my_curriculum` trains `my_concept` using `energyplus_simulator`. The BRAIN that runs this Inkling code will try to maximize the value returned from `reward_function` until you stop training. `reward_function` is a method in the Python simulator.
+The curriculum `my_curriculum` trains `my_concept` using `energyplus_simulator`. The BRAIN that runs this Inkling code will try to maximize the value returned from `reward_function` until you stop training. `reward_function` is a method in the Python simulator.
 
 This curriculum contains one lesson, called `my_first_lesson`. It configures the simulation, by setting a number of constraints for the state of the simulator.
 
-## Simulator File
+## Simulator Excerpt
 
 ```python
 # Excerpt of simulator class from the energyplus_simulator.py file
@@ -230,7 +231,7 @@ The full simulator file *energyplus_simulator.py* for this example is with the r
 
 This is a Python simulator for integrating the EnergyPlus simulator into the Bonsai AI Engine. This *energyplus_simulator.py* file repeatedly runs the EnergyPlus simulator in the background with new actions sent from the Bonsai AI Engine by passing the state from EnergyPlus to the backend, and the action from the backend back to EnergyPlus.
 
-For more information on the funtions inside of this simulator class and how to impliment them see the [Library Reference][3].
+For more information on the functions inside of this simulator class and how to implement them see the [Library Reference][3].
 
 [1]: https://github.com/BonsaiAI/energyplus-sample
 [2]: https://energyplus.net/
