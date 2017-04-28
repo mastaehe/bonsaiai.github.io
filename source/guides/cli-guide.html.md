@@ -1,5 +1,9 @@
 ---
-title: Getting Started - Bonsai
+title: CLI Guide - Bonsai
+
+language_tabs:
+    - powershell: Windows
+    - shell: macOS
 
 toc_footers:
   - <a href='https://bons.ai/sign-up'>Sign Up for our Private Beta!</a>
@@ -9,8 +13,8 @@ toc_footers:
 
 
 includes:
-  - getting-started/overview-and-faq.html.md
-  - getting-started/next-steps.html.md
+  - cli-guide/cli-overview.html.md
+  - cli-guide/install.html.md
   
 search: true
 ---
