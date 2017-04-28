@@ -1,4 +1,4 @@
-# HVAC (EnergyPlus)
+# EnergyPlus HVAC Optimization
 
 > ![EnergyPlus Graph](../images/energyplus-graph.png)
 
