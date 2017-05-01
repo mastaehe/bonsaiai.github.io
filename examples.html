@@ -340,7 +340,198 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="dark-box"></div>
       <div class="content">
         
-          <h1 id="cart-pole-example">Cart Pole Example</h1>
+          <h1 id="examples-overview">Examples Overview</h1>
+
+<p>This page contains working examples of Inkling code in conjunction with python simulator files. All of these examples and the libraries that accompany them can be found on <a href="https://github.com/BonsaiAI">BonsaiAI&rsquo;s GitHub page</a> and are also linked within each Example.</p>
+
+<p>If you have any suggestions of examples you&rsquo;d like to see us implement please <a href="https://bons.ai/contact-us#contact-page-form">contact the support team</a>.</p>
+
+<h3 id="basic-walkthrough-examples">Basic Walkthrough Examples</h3>
+
+<ul>
+<li><strong>Basic Simulator</strong>: A project called <em>Find the Center</em> which walks you through how to create a simple Inkling file that connects to a basic python simulator.</li>
+</ul>
+
+<h3 id="openai-gym-examples">OpenAI Gym Examples</h3>
+
+<ul>
+<li><strong>Cart Pole</strong>: A simple control problem where a cart must make a simple move to keep a pole balanced on top.</li>
+<li><strong>Mountain Car</strong>: A simple control problem where a car must build up enough momentum to climb a hill.</li>
+</ul>
+
+<h3 id="real-world-examples">Real World Examples</h3>
+
+<ul>
+<li><strong>HVAC with EnergyPlus</strong>: An example of climate control machine teaching using EnergyPlus and BCVTB for simulation. </li>
+</ul>
+
+          <h1 id="basic-simulator-find-the-center">Basic Simulator (Find the Center)</h1>
+
+<blockquote>
+<p><img src="images/find-the-center.png" alt="Find the Center Diagram" /></p>
+</blockquote>
+
+<p><a href="https://github.com/BonsaiAI/find-the-center"><strong>Download the full source code on GitHub</strong></a> so you can run it yourself on the Bonsai Platform.</p>
+
+<p>In this example, we&rsquo;ll walk you through the various statements that are part of the <em>Find the Center</em> game, including the python simulator file and the Inkling file. This is a very basic example of Inkling and how to connect to a custom python simulator.</p>
+
+<p><em>Find the Center</em> is a simple game where the AI seeks the average value between two numbers. In this game, the AI begins at a random value of 0, 1, or 2. The AI then can move to a lower number by outputting -1, a higher number by outputting +1, or staying on the same number by outputting 0. The goal of <em>Find the Center</em> is to remain in the center of 0 and 2 (the number 1).</p>
+
+<h2 id="inkling-file">Inkling File</h2>
+
+<h6 id="schema">Schema</h6>
+<pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">GameState</span>
+    <span class="kr">Int32</span> <span class="nx">value</span>
+<span class="k">end</span>
+</code></pre>
+<p>The <code class="prettyprint">GameState</code> schema has one field, <code class="prettyprint">value</code>, with type <code class="prettyprint">Int32</code>.</p>
+<pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">PlayerMove</span>
+    <span class="kr">Int32</span><span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">}</span> <span class="nx">delta</span>
+<span class="k">end</span>
+</code></pre>
+<p>The <code class="prettyprint">PlayerMove</code> schema has one field, <code class="prettyprint">delta</code>, with type <code class="prettyprint">Int32</code>. The <code class="prettyprint">Int32</code> type is constrained to three possible values: -1, 0, and 1.</p>
+<pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">SimConfig</span>
+    <span class="kr">Int32</span> <span class="nx">dummy</span>
+<span class="k">end</span>
+</code></pre>
+<p>The <code class="prettyprint">SimConfig</code> schema has one field, <code class="prettyprint">dummy</code>, because there is no configuration needed in this particular example.</p>
+
+<h6 id="concept">Concept</h6>
+<pre class="highlight inkling tab-inkling"><code><span class="k">concept</span> <span class="nx">find_the_center</span>
+    <span class="k">is</span> <span class="nx">classifier</span>
+    <span class="k">predicts</span> <span class="p">(</span><span class="nx">PlayerMove</span><span class="p">)</span>
+    <span class="k">follows</span> <span class="kr">input</span><span class="p">(</span><span class="nx">GameState</span><span class="p">)</span>
+    <span class="k">feeds</span> <span class="kr">output</span>
+<span class="k">end</span>
+</code></pre>
+<p>This concept is named <code class="prettyprint">find_the_center</code>. <code class="prettyprint">find_the_center</code> expects input about the state of the game (defined by the <code class="prettyprint">GameState</code> schema) and replies with output defined by the <code class="prettyprint">PlayerMove</code> schema. This is the AI&rsquo;s next move in the simulation.</p>
+
+<h6 id="simulator">Simulator</h6>
+<pre class="highlight inkling tab-inkling"><code><span class="k">simulator</span> <span class="nx">find_the_center_sim</span><span class="p">(</span><span class="nx">SimConfig</span><span class="p">)</span>
+    <span class="k">action</span> <span class="p">(</span><span class="nx">PlayerMove</span><span class="p">)</span>
+    <span class="k">state</span> <span class="p">(</span><span class="nx">GameState</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
+<p>The <code class="prettyprint">simulator</code> is called <code class="prettyprint">find_the_center_sim</code> (shown in #simulator-file) and takes the schema input of <code class="prettyprint">SimConfig</code> (even though it isn&rsquo;t configuring anything, it&rsquo;s required by the simulator). The <code class="prettyprint">find_the_center</code> concept will be trained using the <code class="prettyprint">find_the_center_sim</code> simulator. To define the training relationship between the simulator and the concept we must begin by defining the simulator. <code class="prettyprint">find_the_center_sim</code> expects an action defined in the <code class="prettyprint">PlayerMove</code> schema as input and replies with a state defined in the <code class="prettyprint">GameState</code> schema as output.</p>
+
+<h6 id="curriculum">Curriculum</h6>
+<pre class="highlight inkling tab-inkling"><code><span class="k">curriculum</span> <span class="nx">find_the_center_curriculum</span>
+    <span class="k">train</span> <span class="nx">find_the_center</span>
+    <span class="k">with</span> <span class="k">simulator</span> <span class="nx">find_the_center_sim</span>
+    <span class="k">objective</span> <span class="nx">time_at_goal</span>
+        <span class="k">lesson</span> <span class="nx">seek_center</span>
+            <span class="k">configure</span>
+                <span class="k">constrain</span> <span class="nx">dummy</span> <span class="k">with</span> <span class="kr">Int32</span><span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">}</span>
+            <span class="k">until</span>
+                <span class="k">maximize</span> <span class="nx">time_at_goal</span>
+<span class="k">end</span>
+</code></pre>
+<p>The curriculum is named <code class="prettyprint">find_the_center_curriculum</code>, and it trains the <code class="prettyprint">find_the_center</code> concept using the <code class="prettyprint">find_the_center_sim</code>.</p>
+
+<p>This curriculum contains one lesson, called <code class="prettyprint">seek_center</code>. It configures the simulation, by setting a number of constraints for the state of the simulator. The lesson trains until the AI has maximized the objective <code class="prettyprint">time_at_goal</code>.</p>
+
+<h2 id="simulator-file">Simulator File</h2>
+<pre class="highlight python tab-python"><code><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
+<span class="kn">import</span> <span class="nn">bonsai</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">bonsai.simulator</span> <span class="kn">import</span> <span class="n">SimState</span>
+<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>
+
+<span class="s">""" If you would like to debug your code add this back in.
+def debug(*args):
+    print(*args, file=sys.stderr)
+"""</span>
+
+
+<span class="k">class</span> <span class="nc">BasicSimulator</span><span class="p">(</span><span class="n">bonsai</span><span class="o">.</span><span class="n">Simulator</span><span class="p">):</span>
+    <span class="s">""" A basic simulator class that takes in a move from the inkling file,
+    and returns the state as a result of that move.
+    """</span>
+
+    <span class="nb">min</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="nb">max</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">goal</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">BasicSimulator</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">goal_count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="nb">min</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="nb">max</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">old_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="nb">min</span>
+
+    <span class="k">def</span> <span class="nf">get_terminal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">""" Restarts the simulation if the AI moved out of bounds.
+        """</span>
+        <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="nb">min</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="nb">max</span><span class="p">):</span>
+            <span class="c"># (self.value == self.goal and self.old_value == self.goal)):</span>
+
+            <span class="c"># debug("terminal")</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+            <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>
+
+    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">""" Start the episode by initializing value to a random number
+        between the min and max.
+        """</span>
+        <span class="c"># debug("start")</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">goal_count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">old_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="nb">min</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="nb">min</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="nb">max</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">""" Stop is called after a training session is complete.
+        This simple game requires no cleanup after training.
+        """</span>
+        <span class="c"># debug("stop")</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">""" Reset is called to reset simulator state before the next training session.
+        """</span>
+        <span class="c"># debug("reset")</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">goal_count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">old_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="nb">min</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="nb">min</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="nb">max</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">advance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">actions</span><span class="p">):</span>
+        <span class="s">""" Function to make a move based on output from the BRAIN as
+        defined in the Inkling file.
+        """</span>
+        <span class="c"># debug("advance", actions["delta"])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">+=</span> <span class="n">actions</span><span class="p">[</span><span class="s">"delta"</span><span class="p">]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">goal</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">goal_count</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">get_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">""" Gets the state of the simulator, whether it be a valid value or
+        terminal ("game over") state.
+        """</span>
+        <span class="c"># debug("get_state")</span>
+        <span class="c"># debug("state", self.value)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">old_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span>
+        <span class="k">return</span> <span class="n">SimState</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="p">{</span><span class="s">"value"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">},</span>
+                        <span class="n">is_terminal</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_terminal</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="nf">time_at_goal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">""" Function to return how long the simulation has maintained the goal.
+        """</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">goal_count</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+
+    <span class="n">sim</span> <span class="o">=</span> <span class="n">BasicSimulator</span><span class="p">()</span>
+    <span class="n">bonsai</span><span class="o">.</span><span class="n">run_for_training_or_prediction</span><span class="p">(</span><span class="s">"find_the_center_sim"</span><span class="p">,</span> <span class="n">sim</span><span class="p">)</span>
+</code></pre>
+<p>This is a basic python simulator for learning the simulator library. In this case it is used to find the center between two numbers, 0 and 2. The goal, as outlined in the Inkling file, is to reach 1. The moves that the simulator is able to make are sent from the Inkling file to the simulator and the state of the simulator is sent back to Inkling.</p>
+
+          <h1 id="openai-gym-cart-pole">OpenAI Gym: Cart Pole</h1>
+
+<blockquote>
+<p><img src="images/cart-pole-balance.gif" alt="Cart Pole Balance" /></p>
+</blockquote>
+
+<p><a href="https://github.com/BonsaiAI/gym-cartpole-sample"><strong>Download the full source code on GitHub</strong></a> so you can run it yourself on the Bonsai Platform.</p>
 
 <p>In this example, we&rsquo;ll walk you through the various statements that are part of the Cart Pole Inkling file. Each statement is followed by an explanation of the statement.</p>
 
@@ -348,7 +539,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <p><em>A pole is attached by an un-actuated joint to a cart, which moves along a frictionless track. The system is controlled by applying a force of +1 or -1 to the cart. The pendulum starts upright, and the goal is to prevent it from falling over. A reward of +1 is provided for every timestep that the pole remains upright. The episode ends when the pole is more than 15 degrees from vertical, or the cart moves more than 2.4 units from the center.</em></p>
 
-<h2 id="schema-gamestate-action-and-cartpoleconfig">Schema: <code class="prettyprint">GameState</code>, <code class="prettyprint">Action</code>, and <code class="prettyprint">CartPoleConfig</code></h2>
+<h2 id="inkling-file">Inkling File</h2>
+
+<h6 id="schema">Schema</h6>
 <pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">GameState</span>
   <span class="kr">Float32</span> <span class="nx">position</span><span class="p">,</span>
   <span class="kr">Float32</span> <span class="nx">velocity</span><span class="p">,</span>
@@ -370,7 +563,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </code></pre>
 <p>The schema <code class="prettyprint">CartPoleConfig</code> names three records — <code class="prettyprint">episode_length</code>, <code class="prettyprint">num_episodes</code>, and <code class="prettyprint">deque_size</code> — and assigns each of them a type.</p>
 
-<h2 id="concept-balance">Concept: <code class="prettyprint">balance</code></h2>
+<h6 id="concept">Concept</h6>
 <pre class="highlight inkling tab-inkling"><code><span class="k">concept</span> <span class="nx">balance</span>
   <span class="k">is</span> <span class="nx">classifier</span>
   <span class="k">predicts</span> <span class="nx">Action</span>
@@ -380,12 +573,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </code></pre>
 <p>The concept is named <code class="prettyprint">balance</code>, and it takes input from the simulator. That input is the records in the schema <code class="prettyprint">GameState</code>. The balance concept outputs the move the AI should make in the simulator. This output is the record in the <code class="prettyprint">Action</code> schema.</p>
 
-<h2 id="curriculum-balance_curriculum">Curriculum: <code class="prettyprint">balance_curriculum</code></h2>
+<h6 id="simulator">Simulator</h6>
 <pre class="highlight inkling tab-inkling"><code><span class="k">simulator</span> <span class="nx">cartpole_simulator</span><span class="p">(</span><span class="nx">CartPoleConfig</span><span class="p">)</span>
   <span class="k">state</span> <span class="p">(</span><span class="nx">GameState</span><span class="p">)</span>
 <span class="k">end</span>
+</code></pre>
+<p>The <code class="prettyprint">cartpole_simulator</code> gets information from two schemas. The first schema, <code class="prettyprint">CartPoleConfig</code>, specifies the schema for configuration of the simulation. The second schema contains the state of the simulator that is sent to the lesson.</p>
 
-<span class="k">curriculum</span> <span class="nx">balance_curriculum</span>
+<h6 id="curriculum">Curriculum</h6>
+<pre class="highlight inkling tab-inkling"><code><span class="k">curriculum</span> <span class="nx">balance_curriculum</span>
   <span class="k">train</span> <span class="nx">balance</span>
   <span class="k">with</span> <span class="k">simulator</span> <span class="nx">cartpole_simulator</span>
   <span class="k">objective</span> <span class="nx">up_time</span>
@@ -398,17 +594,149 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <span class="k">maximize</span> <span class="nx">up_time</span>
 <span class="k">end</span>
 </code></pre>
-<ul>
-<li>The curriculum&rsquo;s name is balance_curriculum. It trains the balance concept with a simulator, specifically the cartpole_simulator.</li>
-<li>The cartpole_simulator gets information from two schemas. The first schema, CartPoleConfig, specifies the schema for configuration of the simulation. The second schema contains the state of the simulator that is sent to the lesson.</li>
-<li>The objective for this curriculum is up_time. The objective measures how long the pole stays upright.</li>
-<li>This curriculum contains one lesson, called balancing. It configures the simulation, by setting a number of constraints for the state of the simulator.</li>
-<li>The lesson trains until the AI has maximized the objective.</li>
-</ul>
+<p>The curriculum&rsquo;s name is <code class="prettyprint">balance_curriculum</code>. It trains the <code class="prettyprint">balance</code> concept with the <code class="prettyprint">cartpole_simulator</code>. The objective for this curriculum is <code class="prettyprint">up_time</code>. The objective measures how long the pole stays upright.</p>
 
-          <h1 id="energyplus-example">EnergyPlus Example</h1>
+<p>This curriculum contains one lesson, called <code class="prettyprint">balancing</code>. It configures the simulation, by setting a number of constraints for the state of the simulator. The lesson trains until the AI has maximized the objective.</p>
 
-<p>The full source code for this example can be <a href="https://github.com/BonsaiAI/energyplus-sample">found on GitHub</a> so you can run it yourself on the Bonsai Platform.</p>
+<h2 id="simulator-file">Simulator File</h2>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">gym</span>
+
+<span class="kn">import</span> <span class="nn">bonsai</span>
+<span class="kn">from</span> <span class="nn">bonsai_gym_common</span> <span class="kn">import</span> <span class="n">GymSimulator</span>
+
+<span class="n">ENVIRONMENT</span> <span class="o">=</span> <span class="s">'CartPole-v0'</span>
+<span class="n">RECORD_PATH</span> <span class="o">=</span> <span class="bp">None</span>
+
+<span class="k">class</span> <span class="nc">CartPoleSimulator</span><span class="p">(</span><span class="n">GymSimulator</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">env</span><span class="p">,</span> <span class="n">record_path</span><span class="p">):</span>
+        <span class="n">GymSimulator</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span> <span class="n">env</span><span class="p">,</span> <span class="n">skip_frame</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">record_path</span><span class="o">=</span><span class="n">record_path</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">parent_state</span> <span class="o">=</span> <span class="n">GymSimulator</span><span class="o">.</span><span class="n">get_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">state_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s">"position"</span><span class="p">:</span> <span class="n">parent_state</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                      <span class="s">"velocity"</span><span class="p">:</span> <span class="n">parent_state</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                      <span class="s">"angle"</span><span class="p">:</span> <span class="n">parent_state</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                      <span class="s">"rotation"</span><span class="p">:</span> <span class="n">parent_state</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="mi">3</span><span class="p">]}</span>
+        <span class="k">return</span> <span class="n">bonsai</span><span class="o">.</span><span class="n">simulator</span><span class="o">.</span><span class="n">SimState</span><span class="p">(</span><span class="n">state_dict</span><span class="p">,</span> <span class="n">parent_state</span><span class="o">.</span><span class="n">is_terminal</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+    <span class="n">env</span> <span class="o">=</span> <span class="n">gym</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">ENVIRONMENT</span><span class="p">)</span>
+    <span class="n">simulator</span> <span class="o">=</span> <span class="n">CartPoleSimulator</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">RECORD_PATH</span><span class="p">)</span>
+    <span class="n">bonsai</span><span class="o">.</span><span class="n">run_for_training_or_prediction</span><span class="p">(</span><span class="s">"cartpole_simulator"</span><span class="p">,</span> <span class="n">simulator</span><span class="p">)</span>
+</code></pre>
+<p>This is an OpenAI Gym example which uses the OpenAI environment as its simulator. For more information about the simulator used see the <a href="https://github.com/BonsaiAI/bonsai-gym-common">Bonsai Gym Common GitHub repo</a> which is a python library for integrating a Bonsai BRAIN with Open AI Gym environments.</p>
+
+          <h1 id="openai-gym-mountain-car">OpenAI Gym: Mountain Car</h1>
+
+<blockquote>
+<p><img src="images/mountain-car-control.gif" alt="Mountain Car Control" /></p>
+</blockquote>
+
+<p><a href="https://github.com/BonsaiAI/gym-mountaincar-sample"><strong>Download the full source code on GitHub</strong></a> so you can run it yourself on the Bonsai Platform.</p>
+
+<p>We&rsquo;ve used pieces of code from this example in several places, but here we&rsquo;ll walk you through all the various statements that are part of the Mountain Car Inkling file. Each statement is followed by an explanation of the statement.</p>
+
+<p>Mountain Car is a classic control problem. <a href="https://gym.openai.com/envs/MountainCar-v0">OpenAI Gym</a> describes it as:</p>
+
+<p><em>A car is on a one-dimensional track, positioned between two &ldquo;mountains&rdquo;. The goal is to drive up the mountain on the right; however, the car&rsquo;s engine is not strong enough to scale the mountain in a single pass. Therefore, the only way to succeed is to drive back and forth to build up momentum.</em></p>
+
+<h2 id="inkling-file">Inkling File</h2>
+
+<h6 id="schema">Schema</h6>
+<pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">GameState</span>
+   <span class="kr">Float32</span> <span class="nx">x_position</span><span class="p">,</span>
+   <span class="kr">Float32</span> <span class="nx">y_velocity</span>
+<span class="k">end</span>
+</code></pre>
+<p>The <code class="prettyprint">GameState</code> schema names two records — <code class="prettyprint">x_position</code> and <code class="prettyprint">y_position</code> — and assigns a type to them.</p>
+<pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">Action</span>
+  <span class="kr">Int8</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">}</span> <span class="k">action</span>
+<span class="k">end</span>
+</code></pre>
+<p>The <code class="prettyprint">Action</code> schema names a single record — <code class="prettyprint">action</code> — and assigns a constrained type to it.</p>
+<pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">MountainCarConfig</span>
+  <span class="kr">Int8</span> <span class="nx">episode_legnth</span><span class="p">,</span>
+  <span class="kr">Int8</span> <span class="nx">num_episodes</span><span class="p">,</span>
+  <span class="kr">UInt8</span> <span class="nx">deque_size</span>
+<span class="k">end</span>
+</code></pre>
+<p>The <code class="prettyprint">MountainCarConfig</code> schema names three records — <code class="prettyprint">episode_length</code>, <code class="prettyprint">num_episodes</code>, and <code class="prettyprint">deque_size</code> — and assigns types to them.</p>
+
+<h6 id="concept">Concept</h6>
+<pre class="highlight inkling tab-inkling"><code><span class="k">concept</span> <span class="nx">high_score</span>
+  <span class="k">is</span> <span class="nx">classifier</span>
+  <span class="k">predicts</span> <span class="nx">Action</span>
+  <span class="k">follows</span> <span class="kr">input</span><span class="p">(</span><span class="nx">GameState</span><span class="p">)</span>
+  <span class="k">feeds</span> <span class="kr">output</span>
+<span class="k">end</span>
+</code></pre>
+<p>The concept is named <code class="prettyprint">high_score</code>, and it takes input from the simulator about the state of the game (<code class="prettyprint">GameState</code> schema). It outputs to the <code class="prettyprint">Action</code> schema. This is the AI&rsquo;s next move in the game.</p>
+
+<h6 id="simulator">Simulator</h6>
+<pre class="highlight inkling tab-inkling"><code><span class="k">simulator</span> <span class="nx">mountaincar_simulator</span><span class="p">(</span><span class="nx">MountainCarConfig</span><span class="p">)</span>
+  <span class="k">state</span>  <span class="p">(</span><span class="nx">GameState</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
+<p>The <code class="prettyprint">mountaincar_simulator</code> gets information from two schemas. The first schema, <code class="prettyprint">MountainCarConfig</code>, specifies the schema for configuration of the simulation. The second schema contains the state of the simulator that is sent to the lesson.</p>
+
+<h6 id="curriculum">Curriculum</h6>
+<pre class="highlight inkling tab-inkling"><code><span class="k">curriculum</span> <span class="nx">high_score_curriculum</span>
+  <span class="k">train</span> <span class="nx">high_score</span>
+  <span class="k">with</span> <span class="k">simulator</span> <span class="nx">mountaincar_simulator</span>
+  <span class="k">objective</span> <span class="nx">score</span>
+  <span class="k">lesson</span> <span class="nx">get_high_score</span>
+    <span class="k">configure</span>
+      <span class="k">constrain</span> <span class="nx">episode_length</span> <span class="k">with</span> <span class="kr">Int8</span><span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">},</span>
+      <span class="k">constrain</span> <span class="nx">num_episodes</span> <span class="k">with</span> <span class="kr">Int8</span><span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">},</span>
+      <span class="k">constrain</span> <span class="nx">deque_size</span> <span class="k">with</span> <span class="kr">UInt8</span><span class="p">{</span><span class="mi">1</span><span class="p">}</span>
+    <span class="k">until</span>
+      <span class="k">maximize</span> <span class="nx">score</span>
+<span class="k">end</span>
+</code></pre>
+<p>The curriculum is named <code class="prettyprint">high_score_curriculum</code>, and it trains the <code class="prettyprint">high_score</code> concept using the <code class="prettyprint">mountaincar_simulator</code>. This curriculum contains one lesson, called <code class="prettyprint">get_high_score</code>. It configures the simulation, by setting a number of constraints for the state of the simulator.</p>
+
+<p>The lesson trains until the AI has maximized the objective named <code class="prettyprint">score</code>.</p>
+
+<h2 id="simulator-file">Simulator File</h2>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">gym</span>
+
+<span class="kn">import</span> <span class="nn">bonsai</span>
+<span class="kn">from</span> <span class="nn">bonsai_gym_common</span> <span class="kn">import</span> <span class="n">GymSimulator</span>
+
+<span class="n">ENVIRONMENT</span> <span class="o">=</span> <span class="s">'MountainCar-v0'</span>
+<span class="n">RECORD_PATH</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="n">SKIPPED_FRAME</span> <span class="o">=</span> <span class="mi">4</span>
+
+<span class="k">class</span> <span class="nc">MountainCarSimulator</span><span class="p">(</span><span class="n">GymSimulator</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">env</span><span class="p">,</span> <span class="n">skip_frame</span><span class="p">,</span> <span class="n">record_path</span><span class="p">):</span>
+        <span class="n">GymSimulator</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span> <span class="n">env</span><span class="p">,</span> <span class="n">skip_frame</span><span class="o">=</span><span class="n">skip_frame</span><span class="p">,</span>
+            <span class="n">record_path</span><span class="o">=</span><span class="n">record_path</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">parent_state</span> <span class="o">=</span> <span class="n">GymSimulator</span><span class="o">.</span><span class="n">get_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">state_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s">"x_position"</span><span class="p">:</span> <span class="n">parent_state</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                      <span class="s">"x_velocity"</span><span class="p">:</span> <span class="n">parent_state</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="mi">1</span><span class="p">]}</span>
+        <span class="k">return</span> <span class="n">bonsai</span><span class="o">.</span><span class="n">simulator</span><span class="o">.</span><span class="n">SimState</span><span class="p">(</span><span class="n">state_dict</span><span class="p">,</span> <span class="n">parent_state</span><span class="o">.</span><span class="n">is_terminal</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+    <span class="n">env</span> <span class="o">=</span> <span class="n">gym</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">ENVIRONMENT</span><span class="p">)</span>
+    <span class="n">simulator</span> <span class="o">=</span> <span class="n">MountainCarSimulator</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">SKIPPED_FRAME</span><span class="p">,</span> <span class="n">RECORD_PATH</span><span class="p">)</span>
+    <span class="n">bonsai</span><span class="o">.</span><span class="n">run_for_training_or_prediction</span><span class="p">(</span><span class="s">"mountaincar_simulator"</span><span class="p">,</span> <span class="n">simulator</span><span class="p">)</span>
+</code></pre>
+<p>This is an OpenAI Gym example which uses the OpenAI environment as its simulator. For more information about the simulator used see the <a href="https://github.com/BonsaiAI/bonsai-gym-common">Bonsai Gym Common GitHub repo</a> which is a python library for integrating a Bonsai BRAIN with Open AI Gym environments.</p>
+
+          <h1 id="energyplus-hvac-optimization">EnergyPlus HVAC Optimization</h1>
+
+<blockquote>
+<p><img src="images/energyplus-graph.png" alt="EnergyPlus Graph" /></p>
+</blockquote>
+
+<p><a href="https://github.com/BonsaiAI/energyplus-sample"><strong>Download the full source code on GitHub</strong></a> so you can run it yourself on the Bonsai Platform.</p>
 
 <p>In this example, we&rsquo;ll walk you through the various statements that are part of a sample implementation of <a href="https://energyplus.net/">EnergyPlus</a> on the Bonsai Platform, including the simulator and the Inkling files. This is a real-world example of how to use the Bonsai Platform for HVAC control using BCVTB and EnergyPlus.</p>
 
@@ -421,12 +749,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <span class="kr">Int32</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">}</span> <span class="nx">SolarIrradiation</span>
 <span class="k">end</span>
 </code></pre>
-<p>The <code class="prettyprint">SimState</code> schema defines the dictionary returned from the Python simulation&rsquo;s advance method to the BRAIN.</p>
+<p>The <code class="prettyprint">SimState</code> schema defines the dictionary returned from the Python simulation&rsquo;s <code class="prettyprint">advance</code> method to the BRAIN.</p>
 <pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">SimAction</span>
     <span class="kr">Int32</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">}</span> <span class="nx">shade</span>
 <span class="k">end</span>
 </code></pre>
-<p>The <code class="prettyprint">SimAction</code> schema defines the <code class="prettyprint">action</code> dictionary passed as a parameter to the <code class="prettyprint">advance</code> method of the Python simulator. For example: <code class="prettyprint">shade</code> == night, off, day.</p>
+<p>The <code class="prettyprint">SimAction</code> schema defines the &lsquo;actions&rsquo;, a dictionary of control signals this AI can send to the climate control. For example: <code class="prettyprint">shade</code> == night, off, day.</p>
 <pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">SimConfig</span>
     <span class="kr">Int32</span><span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">}</span> <span class="nx">unused</span>
 <span class="k">end</span>
@@ -440,7 +768,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
    <span class="k">feeds</span> <span class="kr">output</span>
 <span class="k">end</span>
 </code></pre>
-<p>This concept is named <code class="prettyprint">my_concept</code> which predicts a <code class="prettyprint">SimAction</code> given a <code class="prettyprint">SimState</code>.</p>
+<p>This concept is named <code class="prettyprint">my_concept</code> which predicts a <code class="prettyprint">SimAction</code> given a <code class="prettyprint">SimState</code>. In this simple demo we just ask the Bonsai Platform to generate any model that can learn to control the server using these inputs and outputs.</p>
 
 <h6 id="simulator">Simulator</h6>
 <pre class="highlight inkling tab-inkling"><code><span class="k">simulator</span> <span class="nx">energyplus_simulator</span><span class="p">(</span><span class="nx">SimConfig</span><span class="p">)</span>
@@ -448,7 +776,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <span class="k">state</span> <span class="p">(</span><span class="nx">SimState</span><span class="p">)</span>
 <span class="k">end</span>
 </code></pre>
-<p>This simulator is the training source for teaching <code class="prettyprint">my_concept</code>. The Python simulator identifies itself as &lsquo;energyplus_simulator&rsquo; when it connects with the AI Engine. The following statements bind the above schemas to this simulator. To define the training relationship between the simulator and the concept we must begin by defining the simulator. <code class="prettyprint">energyplus_simulator</code> expects an action defined in the <code class="prettyprint">SimAction</code> schema as input and replies with a state defined in the <code class="prettyprint">SimState</code> schema as output.</p>
+<p>The simulator clause declares that a simulator named <code class="prettyprint">energyplus_simulator</code> will be connecting to the server for training. This code snippet binds the previous schemas to this simulator. To define the training relationship between the simulator and the concept we must begin by defining the simulator. <code class="prettyprint">energyplus_simulator</code> expects an action defined in the <code class="prettyprint">SimAction</code> schema as input and replies with a state defined in the <code class="prettyprint">SimState</code> schema as output.</p>
 
 <h6 id="curriculum">Curriculum</h6>
 <pre class="highlight inkling tab-inkling"><code><span class="k">curriculum</span> <span class="nx">my_curriculum</span>
@@ -462,11 +790,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <span class="k">maximize</span> <span class="nx">reward_function</span>
 <span class="k">end</span>
 </code></pre>
-<p>The cirriculum <code class="prettyprint">my_curriculum</code> trains <code class="prettyprint">my_concept</code> using <code class="prettyprint">energyplus_simulator</code>. The BRAIN that runs this Inkling code will try to maximize the value returned from <code class="prettyprint">reward_function</code> until you stop training. <code class="prettyprint">reward_function</code> is a method in the Python simulator.</p>
+<p>The curriculum <code class="prettyprint">my_curriculum</code> trains <code class="prettyprint">my_concept</code> using <code class="prettyprint">energyplus_simulator</code>. The BRAIN that runs this Inkling code will try to maximize the value returned from <code class="prettyprint">reward_function</code> until you stop training. <code class="prettyprint">reward_function</code> is a method in the Python simulator.</p>
 
 <p>This curriculum contains one lesson, called <code class="prettyprint">my_first_lesson</code>. It configures the simulation, by setting a number of constraints for the state of the simulator.</p>
 
-<h2 id="simulator-file">Simulator File</h2>
+<h2 id="simulator-excerpt">Simulator Excerpt</h2>
 <pre class="highlight python tab-python"><code><span class="c"># Excerpt of simulator class from the energyplus_simulator.py file</span>
 
 <span class="k">class</span> <span class="nc">EnergyPlusSimulator</span><span class="p">(</span><span class="n">Simulator</span><span class="p">):</span>
@@ -615,225 +943,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <p>This is a Python simulator for integrating the EnergyPlus simulator into the Bonsai AI Engine. This <em>energyplus_simulator.py</em> file repeatedly runs the EnergyPlus simulator in the background with new actions sent from the Bonsai AI Engine by passing the state from EnergyPlus to the backend, and the action from the backend back to EnergyPlus.</p>
 
-<p>For more information on the funtions inside of this simulator class and how to impliment them see the <a href="http://docs.bons.ai/references/library-reference.html">Library Reference</a>.</p>
-
-          <h1 id="find-the-center-example">Find the Center Example</h1>
-
-<p>In this example, we&rsquo;ll walk you through the various statements that are part of the <em>Find the Center</em> game, including the simulator file and the Inkling file. This is a very basic example of Inkling and how to connect to a simulator.</p>
-
-<p><em>Find the Center</em> is a simple game where the AI seeks the average value between two numbers. In this game, the AI begins at a random value of 0, 1, or 2. The AI then can move to a lower number by outputing -1, a higher number by outputing +1, or staying on the same number by outputing 0. The goal of <em>Find the Center</em> is to remain in the center of 0 and 2 (the number 1).</p>
-
-<h2 id="inkling-file">Inkling File</h2>
-
-<h6 id="schema">Schema</h6>
-<pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">GameState</span>
-    <span class="kr">Int32</span> <span class="nx">value</span>
-<span class="k">end</span>
-</code></pre>
-<p>The <code class="prettyprint">GameState</code> schema has one field, <code class="prettyprint">value</code>, with type <code class="prettyprint">Int32</code>.</p>
-<pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">PlayerMove</span>
-    <span class="kr">Int32</span><span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">}</span> <span class="nx">delta</span>
-<span class="k">end</span>
-</code></pre>
-<p>The <code class="prettyprint">PlayerMove</code> schema has one field, <code class="prettyprint">delta</code>, with type <code class="prettyprint">Int32</code>. The <code class="prettyprint">Int32</code> type is constrained to three possible values: -1, 0, and 1.</p>
-<pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">SimConfig</span>
-    <span class="kr">Int32</span> <span class="nx">dummy</span>
-<span class="k">end</span>
-</code></pre>
-<p>The <code class="prettyprint">SimConfig</code> schema has one field, <code class="prettyprint">dummy</code>, because there is no configuration needed in this particular example.</p>
-
-<h6 id="concept">Concept</h6>
-<pre class="highlight inkling tab-inkling"><code><span class="k">concept</span> <span class="nx">find_the_center</span>
-    <span class="k">is</span> <span class="nx">classifier</span>
-    <span class="k">predicts</span> <span class="p">(</span><span class="nx">PlayerMove</span><span class="p">)</span>
-    <span class="k">follows</span> <span class="kr">input</span><span class="p">(</span><span class="nx">GameState</span><span class="p">)</span>
-    <span class="k">feeds</span> <span class="kr">output</span>
-<span class="k">end</span>
-</code></pre>
-<p>This concept is named <code class="prettyprint">find_the_center</code>. <code class="prettyprint">find_the_center</code> expects input about the state of the game (defined by the <code class="prettyprint">GameState</code> schema) and replies with output defined by the <code class="prettyprint">PlayerMove</code> schema. This is the AI&rsquo;s next move in the simulation.</p>
-
-<h6 id="simulator">Simulator</h6>
-<pre class="highlight inkling tab-inkling"><code><span class="k">simulator</span> <span class="nx">find_the_center_sim</span><span class="p">(</span><span class="nx">SimConfig</span><span class="p">)</span>
-    <span class="k">action</span> <span class="p">(</span><span class="nx">PlayerMove</span><span class="p">)</span>
-    <span class="k">state</span> <span class="p">(</span><span class="nx">GameState</span><span class="p">)</span>
-<span class="k">end</span>
-</code></pre>
-<p>The <code class="prettyprint">simulator</code> is called <code class="prettyprint">find_the_center_sim</code> (shown in #simulator-file) and takes the schema input of <code class="prettyprint">SimConfig</code> (even though it isn&rsquo;t configuring anything, it&rsquo;s required by the simulator). The <code class="prettyprint">find_the_center</code> concept will be trained using the <code class="prettyprint">find_the_center_sim</code> simulator. To define the training relationship between the simulator and the concept we must begin by defining the simulator. <code class="prettyprint">find_the_center_sim</code> expects an action defined in the <code class="prettyprint">PlayerMove</code> schema as input and replies with a state defined in the <code class="prettyprint">GameState</code> schema as output.</p>
-
-<h6 id="curriculum">Curriculum</h6>
-<pre class="highlight inkling tab-inkling"><code><span class="k">curriculum</span> <span class="nx">find_the_center_curriculum</span>
-    <span class="k">train</span> <span class="nx">find_the_center</span>
-    <span class="k">with</span> <span class="k">simulator</span> <span class="nx">find_the_center_sim</span>
-    <span class="k">objective</span> <span class="nx">time_at_goal</span>
-        <span class="k">lesson</span> <span class="nx">seek_center</span>
-            <span class="k">configure</span>
-                <span class="k">constrain</span> <span class="nx">dummy</span> <span class="k">with</span> <span class="kr">Int32</span><span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">}</span>
-            <span class="k">until</span>
-                <span class="k">maximize</span> <span class="nx">time_at_goal</span>
-<span class="k">end</span>
-</code></pre>
-<p>The curriculum is named <code class="prettyprint">find_the_center_curriculum</code>, and it trains the <code class="prettyprint">find_the_center</code> concept using the <code class="prettyprint">find_the_center_sim</code>. This curriculum contains one lesson, called <code class="prettyprint">seek_center</code>. It configures the simulation, by setting a number of constraints for the state of the simulator.</p>
-
-<p>The lesson trains until the AI has maximized the objective <code class="prettyprint">time_at_goal</code>.</p>
-
-<h2 id="simulator-file">Simulator File</h2>
-<pre class="highlight python tab-python"><code><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
-<span class="kn">import</span> <span class="nn">bonsai</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">from</span> <span class="nn">bonsai.simulator</span> <span class="kn">import</span> <span class="n">SimState</span>
-<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>
-
-<span class="s">""" If you would like to debug your code add this back in.
-def debug(*args):
-    print(*args, file=sys.stderr)
-"""</span>
-
-
-<span class="k">class</span> <span class="nc">BasicSimulator</span><span class="p">(</span><span class="n">bonsai</span><span class="o">.</span><span class="n">Simulator</span><span class="p">):</span>
-    <span class="s">""" A basic simulator class that takes in a move from the inkling file,
-    and returns the state as a result of that move.
-    """</span>
-
-    <span class="nb">min</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="nb">max</span> <span class="o">=</span> <span class="mi">2</span>
-    <span class="n">goal</span> <span class="o">=</span> <span class="mi">1</span>
-
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">BasicSimulator</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">goal_count</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="nb">min</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="nb">max</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">old_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="nb">min</span>
-
-    <span class="k">def</span> <span class="nf">get_terminal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="s">""" Restarts the simulation if the AI moved out of bounds.
-        """</span>
-        <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="nb">min</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="nb">max</span><span class="p">):</span>
-            <span class="c"># (self.value == self.goal and self.old_value == self.goal)):</span>
-
-            <span class="c"># debug("terminal")</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
-            <span class="k">return</span> <span class="bp">True</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">False</span>
-
-    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="s">""" Start the episode by initializing value to a random number
-        between the min and max.
-        """</span>
-        <span class="c"># debug("start")</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">goal_count</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">old_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="nb">min</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="nb">min</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="nb">max</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="s">""" Stop is called after a training session is complete.
-        This simple game requires no cleanup after training.
-        """</span>
-        <span class="c"># debug("stop")</span>
-        <span class="k">pass</span>
-
-    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="s">""" Reset is called to reset simulator state before the next training session.
-        """</span>
-        <span class="c"># debug("reset")</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">goal_count</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">old_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="nb">min</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="nb">min</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="nb">max</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">advance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">actions</span><span class="p">):</span>
-        <span class="s">""" Function to make a move based on output from the BRAIN as
-        defined in the Inkling file.
-        """</span>
-        <span class="c"># debug("advance", actions["delta"])</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">+=</span> <span class="n">actions</span><span class="p">[</span><span class="s">"delta"</span><span class="p">]</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">goal</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">goal_count</span> <span class="o">+=</span> <span class="mi">1</span>
-
-    <span class="k">def</span> <span class="nf">get_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="s">""" Gets the state of the simulator, whether it be a valid value or
-        terminal ("game over") state.
-        """</span>
-        <span class="c"># debug("get_state")</span>
-        <span class="c"># debug("state", self.value)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">old_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span>
-        <span class="k">return</span> <span class="n">SimState</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="p">{</span><span class="s">"value"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">},</span>
-                        <span class="n">is_terminal</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_terminal</span><span class="p">())</span>
-
-    <span class="k">def</span> <span class="nf">time_at_goal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="s">""" Function to return how long the simulation has maintained the goal.
-        """</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">goal_count</span>
-
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
-    <span class="n">base_args</span> <span class="o">=</span> <span class="n">bonsai</span><span class="o">.</span><span class="n">parse_base_arguments</span><span class="p">()</span>
-    <span class="n">sim</span> <span class="o">=</span> <span class="n">BasicSimulator</span><span class="p">()</span>
-    <span class="n">bonsai</span><span class="o">.</span><span class="n">run_with_url</span><span class="p">(</span><span class="s">'find_the_center_sim'</span><span class="p">,</span> <span class="n">sim</span><span class="p">,</span>
-                        <span class="n">base_args</span><span class="o">.</span><span class="n">brain_url</span><span class="p">,</span> <span class="n">base_args</span><span class="o">.</span><span class="n">access_key</span><span class="p">)</span>
-</code></pre>
-<p>This is a Basic simulator for learning the simulator interface. In this case it is used to find the center between two numbers, 0 and 2. The goal, as outlined in the Inkling file, is to reach 1. The moves that the simulator is able to make are sent from the Inkling file to the simulator and the state of the simulator is sent back to Inkling.</p>
-
-          <h1 id="mountain-car-example">Mountain Car Example</h1>
-
-<p>We&rsquo;ve used pieces of code from this example in several places, but here we&rsquo;ll walk you through all the various statements that are part of the Mountain Car Inkling file. Each statement is followed by an explanation of the statement.</p>
-
-<p>Mountain car is a classic control problem. <a href="https://gym.openai.com/envs/MountainCar-v0">OpenAI Gym</a> describes it as:</p>
-
-<p><em>A car is on a one-dimensional track, positioned between two &ldquo;mountains&rdquo;. The goal is to drive up the mountain on the right; however, the car&rsquo;s engine is not strong enough to scale the mountain in a single pass. Therefore, the only way to succeed is to drive back and forth to build up momentum.</em></p>
-
-<h2 id="schema-gamestate-action-mountaincarconfig">Schema: <code class="prettyprint">GameState</code>, <code class="prettyprint">Action</code>, <code class="prettyprint">MountainCarConfig</code></h2>
-<pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">GameState</span>
-   <span class="kr">Float32</span> <span class="nx">x_position</span><span class="p">,</span>
-   <span class="kr">Float32</span> <span class="nx">y_velocity</span>
-<span class="k">end</span>
-</code></pre>
-<p>The GameState schema names two records — <code class="prettyprint">x_position</code> and <code class="prettyprint">y_position</code> — and assigns a type to them.</p>
-<pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">Action</span>
-  <span class="kr">Int8</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">}</span> <span class="k">action</span>
-<span class="k">end</span>
-</code></pre>
-<p>The Action schema names a single record — <code class="prettyprint">action</code> — and assigns a constrained type to it.</p>
-<pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">MountainCarConfig</span>
-  <span class="kr">Int8</span> <span class="nx">episode_legnth</span><span class="p">,</span>
-  <span class="kr">Int8</span> <span class="nx">num_episodes</span><span class="p">,</span>
-  <span class="kr">UInt8</span> <span class="nx">deque_size</span>
-<span class="k">end</span>
-</code></pre>
-<p>The <code class="prettyprint">MountainCarConfig</code> schema names three records — <code class="prettyprint">episode_length</code>, <code class="prettyprint">num_episodes</code>, and <code class="prettyprint">deque_size</code> — and assigns types to them.</p>
-
-<h2 id="concept-high_score">Concept <code class="prettyprint">high_score</code></h2>
-<pre class="highlight inkling tab-inkling"><code><span class="k">concept</span> <span class="nx">high_score</span>
-  <span class="k">is</span> <span class="nx">classifier</span>
-  <span class="k">predicts</span> <span class="nx">Action</span>
-  <span class="k">follows</span> <span class="kr">input</span><span class="p">(</span><span class="nx">GameState</span><span class="p">)</span>
-  <span class="k">feeds</span> <span class="kr">output</span>
-<span class="k">end</span>
-</code></pre>
-<p>The concept is named <code class="prettyprint">high_score</code>, and it takes input from the simulator about the state of the game (<code class="prettyprint">GameState</code> schema). It outputs to the <code class="prettyprint">Action</code> schema. This is the AI&rsquo;s next move in the game.</p>
-
-<h2 id="curriculum-high_score_curriculum">Curriculum: <code class="prettyprint">high_score_curriculum</code></h2>
-<pre class="highlight inkling tab-inkling"><code><span class="k">simulator</span> <span class="nx">mountaincar_simulator</span><span class="p">(</span><span class="nx">MountainCarConfig</span><span class="p">)</span>
-  <span class="k">state</span>  <span class="p">(</span><span class="nx">GameState</span><span class="p">)</span>
-<span class="k">end</span>
-
-<span class="k">curriculum</span> <span class="nx">high_score_curriculum</span>
-  <span class="k">train</span> <span class="nx">high_score</span>
-  <span class="k">with</span> <span class="k">simulator</span> <span class="nx">mountaincar_simulator</span>
-  <span class="k">objective</span> <span class="nx">score</span>
-  <span class="k">lesson</span> <span class="nx">get_high_score</span>
-    <span class="k">configure</span>
-      <span class="k">constrain</span> <span class="nx">episode_length</span> <span class="k">with</span> <span class="kr">Int8</span><span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">},</span>
-      <span class="k">constrain</span> <span class="nx">num_episodes</span> <span class="k">with</span> <span class="kr">Int8</span><span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">},</span>
-      <span class="k">constrain</span> <span class="nx">deque_size</span> <span class="k">with</span> <span class="kr">UInt8</span><span class="p">{</span><span class="mi">1</span><span class="p">}</span>
-    <span class="k">until</span>
-      <span class="k">maximize</span> <span class="nx">score</span>
-<span class="k">end</span>
-</code></pre>
-<ul>
-<li>The curriculum is named high_score_curriculum, and it trains the high_score concept using the mountaincar_simulator.</li>
-<li>The mountain_car simulator gets information from two schemas. The first (<code class="prettyprint">MountainCarConfig</code>) specifies the schema for configuration of the simulation. The second schema contains the state of the simulator that is sent to the lesson.</li>
-<li>This curriculum contains one lesson, called <code class="prettyprint">get_high_score</code>. It configures the simulation, by setting a number of constraints for the state of the simulator.</li>
-<li>The lesson trains until the AI has maximized the objective.</li>
-</ul>
+<p>For more information on the functions inside of this simulator class and how to implement them see the <a href="http://docs.bons.ai/references/library-reference.html">Library Reference</a>.</p>
 
       </div>
       <div class="dark-box">
