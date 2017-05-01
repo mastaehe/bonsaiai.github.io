@@ -1,8 +1,12 @@
-# Find the Center Example
+# Basic Simulator (Find the Center)
 
-In this example, we'll walk you through the various statements that are part of the *Find the Center* game, including the simulator file and the Inkling file. This is a very basic example of Inkling and how to connect to a simulator.
+> ![Find the Center Diagram](../images/find-the-center.png)
 
-*Find the Center* is a simple game where the AI seeks the average value between two numbers. In this game, the AI begins at a random value of 0, 1, or 2. The AI then can move to a lower number by outputing -1, a higher number by outputing +1, or staying on the same number by outputing 0. The goal of *Find the Center* is to remain in the center of 0 and 2 (the number 1).
+[**Download the full source code on GitHub**][1] so you can run it yourself on the Bonsai Platform.
+
+In this example, we'll walk you through the various statements that are part of the *Find the Center* game, including the python simulator file and the Inkling file. This is a very basic example of Inkling and how to connect to a custom python simulator.
+
+*Find the Center* is a simple game where the AI seeks the average value between two numbers. In this game, the AI begins at a random value of 0, 1, or 2. The AI then can move to a lower number by outputting -1, a higher number by outputting +1, or staying on the same number by outputting 0. The goal of *Find the Center* is to remain in the center of 0 and 2 (the number 1).
 
 ## Inkling File
 
@@ -71,9 +75,9 @@ curriculum find_the_center_curriculum
 end
 ```
 
-The curriculum is named `find_the_center_curriculum`, and it trains the `find_the_center` concept using the `find_the_center_sim`. This curriculum contains one lesson, called `seek_center`. It configures the simulation, by setting a number of constraints for the state of the simulator.
+The curriculum is named `find_the_center_curriculum`, and it trains the `find_the_center` concept using the `find_the_center_sim`.
 
-The lesson trains until the AI has maximized the objective `time_at_goal`.
+This curriculum contains one lesson, called `seek_center`. It configures the simulation, by setting a number of constraints for the state of the simulator. The lesson trains until the AI has maximized the objective `time_at_goal`.
 
 
 ## Simulator File
@@ -167,10 +171,11 @@ class BasicSimulator(bonsai.Simulator):
         return self.goal_count
 
 if __name__ == "__main__":
-    base_args = bonsai.parse_base_arguments()
+
     sim = BasicSimulator()
-    bonsai.run_with_url('find_the_center_sim', sim,
-                        base_args.brain_url, base_args.access_key)
+    bonsai.run_for_training_or_prediction("find_the_center_sim", sim)
 ```
 
-This is a Basic simulator for learning the simulator interface. In this case it is used to find the center between two numbers, 0 and 2. The goal, as outlined in the Inkling file, is to reach 1. The moves that the simulator is able to make are sent from the Inkling file to the simulator and the state of the simulator is sent back to Inkling.
+This is a basic python simulator for learning the simulator library. In this case it is used to find the center between two numbers, 0 and 2. The goal, as outlined in the Inkling file, is to reach 1. The moves that the simulator is able to make are sent from the Inkling file to the simulator and the state of the simulator is sent back to Inkling.
+
+[1]: https://github.com/BonsaiAI/find-the-center
