@@ -13,7 +13,7 @@ We highly recommend macOS users download Python directly in the Manual Install i
 **There are three sets of install instructions, please pick the one that suits your situation:**
 
 1. If you have **Anaconda** installed on your system, skip down to [Install with Anaconda][9].
-2. If you have **Chocolatey (Windows)** or **Homebrew (macOS)** installed on your system, skip down to [Install with Chocolatey or Homebrew][17].
+2. If you have **Chocolatey (Windows)** or **Homebrew (macOS)** installed on your system, skip down to [Install with Chocolatey or Homebrew][7].
 3. If you *do not* have Chocolatey, Homebrew, or Anaconda installed on your system continue to follow our **Manual Install** intructions below.
 
 <aside class="notice">
@@ -51,11 +51,11 @@ We highly recommend macOS users download Python directly so you can follow this 
 
 * **pip**: Python version 2.7.9 and greater come with pip (or pip3 for version 3+), but if for some reason you need to use a different version of Python please follow [these instructions][12].
 
-**Great!** Now that you have Git, Python, and pip installed, you can skip down to [Setup the Bonsai CLI][2]. 
+**Great!** Now that you have Git, Python, and pip installed, you can skip down to [Install the Bonsai CLI][2]. 
 
 ## Install with Chocolatey or Homebrew
 
-If you *do not* have Chocolatey or Homebrew installed on your system, please go to the [Manual Install][18] or [Install with Anaconda][9] instructions.
+If you *do not* have Chocolatey or Homebrew installed on your system, please go to the [Manual Install][15] or [Install with Anaconda][9] instructions.
 
 > Python 2
 
@@ -98,17 +98,17 @@ Please remember to run choco commands in administrator powershell or command pro
 conda install git
 ```
 
-If you *do not* have Anaconda installed on your system, please go to the [Manual Install][18] or [Install with Chocolatey or Homebrew][17] instructions.
+If you *do not* have Anaconda installed on your system, please go to the [Manual Install][15] or [Install with Chocolatey or Homebrew][7] instructions.
 
 `conda` is a tool for installing and managing Python and R dependencies. Anaconda includes Python and pip, so all you need to do is install Git if you haven't already. For more information, refer to the [Anaconda website][10].
 
-# Setup the Bonsai CLI
+# Install the Bonsai CLI
 
 > Python 2 and Anaconda
 
 ```
 pip install bonsai-cli
-bonsai configure
+bonsai configure # for authentication
 ```
 
 > Python 3
@@ -118,20 +118,24 @@ bonsai configure
 ```
 ```shell
 pip3 install bonsai-cli
-bonsai configure
+bonsai configure # for authentication
 ```
 
-From your command prompt, install the Bonsai Command Line Interface tool and configure it. `bonsai configure` will ask for your Access Key. You can find your Access Key in your [Bonsai Account Settings][8].
+From your command prompt, install the Bonsai Command Line Interface tool and configure (authenticate) it. [`bonsai configure`][17] will ask for your Access Key. You can find your Access Key in your [Bonsai Account Settings][8].
 
-## Clone a sample project
+# Setup Your Project
 
-Clone a sample simulation project with `git clone`. For this guide we'll be walking you through [OpenAI Gym's Mountain Car][4] environment, one of the supported Bonsai simulators.
+## Clone a Sample Project
 
 ```
 git clone https://github.com/BonsaiAI/gym-mountaincar-sample
 ```
 
-## Install requirements
+Clone a sample simulation project with `git clone`. For this guide we'll be walking you through [OpenAI Gym's Mountain Car][4] environment, one of the supported Bonsai simulators.
+
+If you wish to experiment with your own project at this stage you can. Your project will need an Inkling (.ink) file and a simulator file. Many other projects can be found on the [BonsaiAI GitHub page][22].
+
+## Install Project Requirements
 
 > Python 2 and Anaconda
 
@@ -149,34 +153,23 @@ cd gym-mountaincar-sample
 pip3 install -r requirements.txt
 ```
 
-Enter into the Mountain Car folder and then install the Mountain Car requirements from OpenAI Gym.
+Enter into the Mountain Car folder and then install the Mountain Car requirements from OpenAI Gym with pip.
 
-# Create your BRAIN
-
-Create your BRAIN and give it a name. You can also create a BRAIN from your [beta.bons.ai][5] BRAIN Dashboard instead of using the command line. Either way, you will view your BRAIN's progress on the BRAIN Details page.
-
-### Create from Web
-
-![BRAINS Dashboard Page][15]
-
-The dashboard has a NEW BRAIN button, pictured above. Click on it to start the BRAIN creation process, where you're provided a form to give your brain a name and description. Name can contain alpha, numerals, or hyphens; the description is arbitrary and should contain human-readable text that explains your intent for the BRAIN.
-
-### Create from Command Line
+# Create Your BRAIN
 
 ```
 bonsai create myMountainCarBrain
 ```
-You may give your brain a name with `bonsai create brainName` but there is no option for a description with this method but after you create your BRAIN, you can change its description from the web on the BRAIN Details page.
 
-# Train your BRAIN
-
-## Load sample Inkling into your BRAIN
+Create your BRAIN (and its related project file) with [`bonsai create`][18] and give it a name. We used *myMountainCarBrain* in the example code but you can name it whatever you'd like. You will view your BRAIN's training progress on the BRAIN's Details page which can be found on the [BRAIN dashboard][5].
 
 ```
-bonsai load
+bonsai push
 ```
 
-Load your sample Inkling file for the Mountain Car simulation.
+Uae [`bonsai push`][19] to upload the cloned Mountain Car project and its associated files to the Bonsai AI Engine for training.
+
+# Train Your BRAIN
 
 ## Start Training Mode
 
@@ -184,9 +177,9 @@ Load your sample Inkling file for the Mountain Car simulation.
 bonsai train start
 ```
 
-Almost there! Time to tell the AI engine to prepare a new BRAIN version for training. Start the training mode for your BRAIN.
+Almost there! Time to tell the Bonsai AI Engine to prepare a new BRAIN version for training. Start the training mode for your BRAIN with [`bonsai train start`][20].
 
-## Connect the simulator for training
+## Connect the Simulator
 
 > Python 2
 
@@ -202,7 +195,7 @@ python mountaincar_simulator.py --train-brain=myMountainCarBrain --headless
 python3 mountaincar_simulator.py --train-brain=myMountainCarBrain --headless
 ```
 
-Everything is in place, it's time to start the simulator and test things out. To do this, call Python and then the simulator file. Training will begin automatically and if the simulator gets disconnected, training resumes from the same point when the simulator is reconnected if it's within an hour of the disconnect. Remember, as mentioned in [What is a simulator?][7] if you want your training to take place overnight, make sure that your computer won't go to sleep and disconnect for more than an hour or that training time will be lost!
+Everything is in place, it's time to start the simulator and test things out. To do this, call Python and then the simulator file. Training will begin automatically and if the simulator gets disconnected, training resumes from the same point when the simulator is reconnected if it's within an hour of the disconnect. If you want your training to take place overnight, make sure that your computer won't go to sleep and disconnect for more than an hour or that training time will be lost!
 
 <aside class="notice">
 We use headless here to indicate we don't need to see a graphical display from the simulator; if you'd like to see it and watch the simulator learn, omit this option.
@@ -218,15 +211,15 @@ There is no automatic ending to training, you can train forever, but there will 
 
 [//]: # (Update this when we have multiple concepts and smart ending)
 
-## Stop training
+## Stop Training
 
 ```
 bonsai train stop
 ```
 
-Once we've gotten to this level of performance (or sooner if you prefer), CTRL-C to disconnect the simulator, then `bonsai train stop` will end the training, and proceed to prediction.
+Once we've gotten to this level of performance (or sooner if you prefer), CTRL-C to disconnect the simulator, then [`bonsai train stop`][21] will end the training, and proceed to prediction.
 
-# Use your BRAIN
+# Predict with Your BRAIN
 
 > Python 2
 
@@ -242,16 +235,16 @@ python mountaincar_simulator.py --predict-brain=myMountainCarBrain --predict-ver
 python3 mountaincar_simulator.py --predict-brain=myMountainCarBrain --predict-version=latest
 ```
 
-After your BRAIN is finished training it can play the Mountain Car game. How well it does depends on how long you let it train! Using your BRAIN involves calling Python on the same simulator file, but now in predict mode, and `--predict-version=latest` will use the latest training session that you just ran.
+After your BRAIN is finished training it can play the Mountain Car game. How well it does depends on how long you let it train! Using your BRAIN involves calling Python on the same simulator file, but now in prediction mode, and `--predict-version=latest` will use the version of the latest training session that you just ran.
 
 
 [1]: http://pages.bons.ai/apply.html
-[2]: #setup-the-bonsai-cli
+[2]: #install-the-bonsai-cli
 [3]: https://www.python.org
 [4]: https://gym.openai.com/envs/MountainCar-v0
 [5]: https://beta.bons.ai
 [6]: http://brew.sh/
-[7]: #what-is-a-simulator
+[7]: #install-with-chocolatey-or-homebrew
 [8]: https://beta.bons.ai/accounts/key
 [9]: #install-with-anaconda
 [10]: https://www.continuum.io/anaconda-overview
@@ -259,7 +252,11 @@ After your BRAIN is finished training it can play the Mountain Car game. How wel
 [12]: https://pip.pypa.io/en/stable/installing/
 [13]: https://github.com/MacPython/wiki/wiki/Which-Python
 [14]: https://chocolatey.org/
-[15]: ../images/no_brains_image.png
+[15]: #manual-install
 [16]: ../images/fully_trained_brain.png
-[17]: #install-with-chocolatey-or-homebrew
-[18]: #manual-install
+[17]: ../references/cli-reference.html#bonsai-configure
+[18]: ../references/cli-reference.html#bonsai-create
+[19]: ../references/cli-reference.html#bonsai-push
+[20]: ../references/cli-reference.html#bonsai-train-start
+[21]: ../references/cli-reference.html#bonsai-train-stop
+[22]: https://github.com/BonsaiAI
