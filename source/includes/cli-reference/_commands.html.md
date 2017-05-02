@@ -131,7 +131,9 @@ Options:
   --help          Show this message and exit.
 ```
 
-Displays *stderr* and *stdout* from the currently running simulator. This will display the last 1000 lines of the running simulator's output. You can override the BRAIN you want to log if multiple are running at the same time or the project .
+Displays *stderr* and *stdout* from the currently running simulator. This will display the last 1000 lines of the running simulator's output. You can override the BRAIN you want to log if multiple are running at the same time or the project.
+
+This command is meant for simulators running remotely on Bonsai's servers using `bonsai train start --remote`. Simulators running locally will generally output this information at the command prompt.
 
 ## bonsai push
 
@@ -143,7 +145,7 @@ Usage: bonsai push [OPTIONS]
 
 Options:
   --brain TEXT    Override to target another BRAIN.
-  --project TEXT  Override to target another project directory
+  --project TEXT  Override to target another project directory.
   --help          Show this message and exit.
 ```
 
@@ -181,10 +183,15 @@ Usage: bonsai train start [OPTIONS]
 Options:
   --brain TEXT    Override to target another BRAIN.
   --project TEXT  Override to target another project directory.
+  --remote        Run a simulator remotely on Bonsai’s servers.
   --help          Show this message and exit.
 ```
 
-`bonsai start` turns on/enables training mode for the current BRAIN. The BRAIN trains whenever the simulator is connected. If the simulator is disconnected, the BRAIN remains in training mode, and it will train again where it left off when the simulator is reconnected.
+`bonsai train start` turns on/enables training mode for the current BRAIN. The BRAIN trains whenever a simulator is connected. 
+
+When training locally, if the simulator is disconnected, the BRAIN remains in training mode, and it will train again where it left off when the simulator is reconnected up to an hour after being disconnected.
+
+If `bonsai train start --remote` is used, then the server will run remotely on Bonsai's servers for supported simulators.
 
 ## bonsai train stop
 
@@ -200,7 +207,7 @@ Options:
   --help          Show this message and exit.
 ```
 
-`bonsai stop` turns off training mode for the current BRAIN.
+`bonsai train stop` turns off training mode for the current BRAIN.
 
 ## bonsai train status
 

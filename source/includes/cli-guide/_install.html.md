@@ -102,6 +102,9 @@ If you *do not* have Anaconda installed on your system, please go to the [Manual
 
 `conda` is a tool for installing and managing Python and R dependencies. Anaconda includes Python and pip, so all you need to do is install Git if you haven't already. For more information, refer to the [Anaconda website][10].
 
+
+
+
 # Install the Bonsai CLI
 
 > Python 2 and Anaconda
@@ -122,6 +125,9 @@ bonsai configure # for authentication
 ```
 
 From your command prompt, install the Bonsai Command Line Interface tool and configure (authenticate) it. [`bonsai configure`][17] will ask for your Access Key. You can find your Access Key in your [Bonsai Account Settings][8].
+
+
+
 
 # Setup Your Project
 
@@ -155,6 +161,9 @@ pip3 install -r requirements.txt
 
 Enter into the Mountain Car folder and then install the Mountain Car requirements from OpenAI Gym with pip.
 
+
+
+
 # Create Your BRAIN
 
 ```
@@ -169,17 +178,30 @@ bonsai push
 
 Uae [`bonsai push`][19] to upload the cloned Mountain Car project and its associated files to the Bonsai AI Engine for training.
 
+
+
+
 # Train Your BRAIN
 
-## Start Training Mode
+Almost there! Time to tell the Bonsai AI Engine to prepare a new BRAIN version for training. There are currently two options for training a BRAIN, one is to run a simulator remotely using Bonsai's servers, and the other is to run a simulator locally with your own computer.
+
+Most common simulators can be trained remotely on our servers such as EnergyPlus, OpenAI Gym's, and simple simulators all found on our [Examples documentation][23]. If the simulator is not one that we support remotely, you'll need to run it locally.
+
+## Train Remotely
+
+```
+bonsai train start --remote
+```
+
+Start the training mode for your BRAIN with [`bonsai train start --remote`][20].
+
+Remote training is the best way to train BRAINs that need to ran overnight or for multiple days at a time. There is no disconnection of the simulator to the server like there can be when training locally.
+
+## Train Locally
 
 ```
 bonsai train start
 ```
-
-Almost there! Time to tell the Bonsai AI Engine to prepare a new BRAIN version for training. Start the training mode for your BRAIN with [`bonsai train start`][20].
-
-## Connect the Simulator
 
 > Python 2
 
@@ -195,7 +217,9 @@ python mountaincar_simulator.py --train-brain=myMountainCarBrain --headless
 python3 mountaincar_simulator.py --train-brain=myMountainCarBrain --headless
 ```
 
-Everything is in place, it's time to start the simulator and test things out. To do this, call Python and then the simulator file. Training will begin automatically and if the simulator gets disconnected, training resumes from the same point when the simulator is reconnected if it's within an hour of the disconnect. If you want your training to take place overnight, make sure that your computer won't go to sleep and disconnect for more than an hour or that training time will be lost!
+Start the training mode for your BRAIN with [`bonsai train start`][20].
+
+Once you have started training mode it's time to start running your simulator locally by calling Python and then the simulator file. Training will begin automatically and if the simulator gets disconnected, training resumes from the same point when the simulator is reconnected if it's within an hour of the disconnect. If you want your training to take place overnight, make sure that your computer won't go to sleep and disconnect for more than an hour or that training time will be lost!
 
 <aside class="notice">
 We use headless here to indicate we don't need to see a graphical display from the simulator; if you'd like to see it and watch the simulator learn, omit this option.
@@ -217,7 +241,10 @@ There is no automatic ending to training, you can train forever, but there will 
 bonsai train stop
 ```
 
-Once we've gotten to this level of performance (or sooner if you prefer), CTRL-C to disconnect the simulator, then [`bonsai train stop`][21] will end the training, and proceed to prediction.
+Once we've gotten to this level of performance (or sooner if you prefer), CTRL-C to disconnect the simulator (if you are running it locally), then [`bonsai train stop`][21] will end the training, and proceed to prediction.
+
+
+
 
 # Predict with Your BRAIN
 
@@ -235,7 +262,7 @@ python mountaincar_simulator.py --predict-brain=myMountainCarBrain --predict-ver
 python3 mountaincar_simulator.py --predict-brain=myMountainCarBrain --predict-version=latest
 ```
 
-After your BRAIN is finished training it can play the Mountain Car game. How well it does depends on how long you let it train! Using your BRAIN involves calling Python on the same simulator file, but now in prediction mode, and `--predict-version=latest` will use the version of the latest training session that you just ran.
+After your BRAIN is finished training it can play the Mountain Car game. How well it does depends on how long you let it train! Using your BRAIN involves calling Python on your simulator file, but now in prediction mode with `--predict-version=latest` which will use the version of the latest training session that you just ran.
 
 
 [1]: http://pages.bons.ai/apply.html
@@ -260,3 +287,4 @@ After your BRAIN is finished training it can play the Mountain Car game. How wel
 [20]: ../references/cli-reference.html#bonsai-train-start
 [21]: ../references/cli-reference.html#bonsai-train-stop
 [22]: https://github.com/BonsaiAI
+[23]: ../examples.html
