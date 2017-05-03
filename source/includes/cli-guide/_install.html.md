@@ -185,7 +185,7 @@ Uae [`bonsai push`][19] to upload the cloned Mountain Car project and its associ
 
 Almost there! Time to tell the Bonsai AI Engine to prepare a new BRAIN version for training. There are currently two options for training a BRAIN, one is to run a simulator remotely using Bonsai's servers, and the other is to run a simulator locally with your own computer.
 
-Most common simulators can be trained remotely on our servers such as EnergyPlus, OpenAI Gym's, and simple simulators all found on our [Examples documentation][23]. If the simulator is not one that we support remotely, you'll need to run it locally.
+Simulators which can be trained remotely include EnergyPlus, OpenAI Gym's, and simple simulators all found on our [Examples documentation][23]. If the simulator is not one that we support remotely, you'll need to run it locally.
 
 ## Train Remotely
 
@@ -193,7 +193,7 @@ Most common simulators can be trained remotely on our servers such as EnergyPlus
 bonsai train start --remote
 ```
 
-Start the training mode for your BRAIN with [`bonsai train start --remote`][20].
+Start training your BRAIN with [`bonsai train start --remote`][20].
 
 Remote training is the best way to train BRAINs that need to ran overnight or for multiple days at a time. There is no disconnection of the simulator to the server like there can be when training locally.
 
@@ -217,7 +217,7 @@ python mountaincar_simulator.py --train-brain=myMountainCarBrain --headless
 python3 mountaincar_simulator.py --train-brain=myMountainCarBrain --headless
 ```
 
-Start the training mode for your BRAIN with [`bonsai train start`][20].
+Start training your BRAIN with [`bonsai train start`][20].
 
 Once you have started training mode it's time to start running your simulator locally by calling Python and then the simulator file. Training will begin automatically and if the simulator gets disconnected, training resumes from the same point when the simulator is reconnected if it's within an hour of the disconnect. If you want your training to take place overnight, make sure that your computer won't go to sleep and disconnect for more than an hour or that training time will be lost!
 
