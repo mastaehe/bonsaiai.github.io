@@ -58,19 +58,24 @@ Usage: bonsai create [OPTIONS] BRAIN_NAME
 
 Options:
   --project TEXT       Override to target another project directory.
-  --project-type TEXT  Specify to download and use demo/starter project files.
+  --project-type TEXT  Specify to download and use demo/starter project files
+                       (i.e. "demos/cartpole")
   --help               Show this message and exit.
 ```
 
 `bonsai create` generates a new brain and names it BRAIN_NAME.  It also sets the assumed BRAIN name for later commands.
 
-BRAIN names may include:
+BRAIN names may include (case insensitive, but case aware):
 
 * letters
 * numbers
 * dashes
 
-It is case insensitive, but case aware.
+If you'd like to use one of our pre-populated projects, you may run `bonsai create --project-type TEXT` in an empty directory where `TEXT` is any of the following projects:
+
+* `demos/cartpole`
+* `demos/mountain-car`
+* `templates/starter-project`
 
 ## bonsai download
 
