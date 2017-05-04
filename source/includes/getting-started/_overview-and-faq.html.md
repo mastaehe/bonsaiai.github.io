@@ -67,11 +67,11 @@ Training means teaching a BRAIN to reach a specific outcome in the simulator. Th
 
 **IMPORTANT:**  Currently, a simulation runs on your local machine and streams data to the BRAIN server for training. This means your computer needs to remain connected to the Bonsai AI Engine while your BRAIN is training. If your computer is disconnected from the server you can reconnect within an hour and it will pick back up where it left off. Otherwise, your training will start on a new version (your old training is still saved to the previous version). If you want to leave your training running overnight, please make sure that your computer will stay connected by turning off sleep functionality. 
 
-[//]: # (1 hour timeout, no auto-reconnect)
+[//]: # (1 hour timeout, no auto-reconnect, no managed sims)
 
-Today, we only support simulators written in python. To learn more about connecting your own simulator, refer to our SDK Reference (Coming soon!).
+Today, we only support simulators written in python. To learn more about connecting your own simulator, refer to our [Library Reference][8].
 
-[//]: # (Simulators only in Python, No SDK Reference)
+[//]: # (Simulators only in Python)
 
 ## What is Inkling?
 
@@ -112,3 +112,4 @@ There is a BRAIN Details page for each of your BRAINs. Each page shows that BRAI
 [5]: http://yann.lecun.com/exdb/mnist/
 [6]: #install-prerequisites
 [7]: ./../examples.html
+[8]: ./../references/library-reference.html

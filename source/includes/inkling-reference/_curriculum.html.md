@@ -1,6 +1,6 @@
 # Curriculum
 
-Reference for the keyword **curriculum**. Also, describes the keywords: **train**, **with**, **data**
+Reference for the keyword **curriculum**. Also, describes the keywords: **train**, **with**
 
 ### What is it?
 
@@ -26,7 +26,7 @@ Select the Inkling tab to see a simple form of a curriculum statement.
 The _trainingSpecifier_ specifies either `data`, `simulator`, or `generator` as the training source. Refer back to [Training Source][2] for more information on what the differences are.
 
 <aside class="notice">
-When the <i>trainingSpecifier</i> is <b>data</b>, the objective must be either the keywords <i>equality</i> or <i>linear_distance</i>. When the training specifier is <b>simulator</b> or <b>generator</b>, the objective names a function which is specified in the associated simulator or generator. The use of simulators or generators requires an auxiliary clause, the <i>simulator</i> or <i>generator</i> clause respectively. 
+Currently, only simulator training sources are supported. When the <i>trainingspecifier</i> is <b>simulator</b>, the objective names a function which is specified in the associated simulator. The use of simulators requires an auxiliary <i>simulator</i> clause. 
 </aside>
 
 The `objective` specifies the termination condition for training.
@@ -123,11 +123,13 @@ syntax for the curriculum statement, which introduces a **using** clause and a
 
 * One curriculum per concept. 
 * Every concept must have a curriculum.
-* You can train with **data**, **simulators**, or **generators**. These are the values allowed as training specifiers (see the Curriculum syntax). 
 * Every simulator must be declared with a [simulator clause][3].
-* Lessons, tests, and assignments can occur in any order. (Assignments are used for data handling when the training specifier is **data**.)
+* Lessons and tests can occur in any order.
 * If the **using** clause is present (that is, if the simplified curriculum syntax is not being used), there must be one **using** clause for every **with** clause.
-* The objective is always required but if the _trainingSpecifier_ is **data**, the objective must be either `equality` or `linear_distance`.
+* The objective is always required.
+
+[//]: # (Assignments are used for data handling when the training specifier is **data**.)
+
 
 ## Curriculum Statement Syntax
 
@@ -140,9 +142,8 @@ curriculum <name>
 
 ]+
 [
-  using  [ <simulatorName> | data ] # using clause
+  using <simulatorName>             # using clause
   [
-    assignClause # assignment for training and test data
     lessonClause # lesson set for this simulator
   ]+
 
@@ -153,93 +154,15 @@ end # curriculum
 
 ```inkling--syntax
 withClause ::=
-with data
-  objective <objectiveFunctionName>
-
-| with simulator
-  objective <objectiveFunctionName>
-
-| with generator
+with simulator
   objective <objectiveFunctionName>
 ```
 
 Select the Syntax tab to see the Curriculum syntax.
 
-Any simulator or generator referenced in a curriculum must have an associated simulator or generator clause, outlined in [Training Source][2].
+Any simulator referenced in a curriculum must have an associated simulator clause, outlined in [Training Source][2].
 
-## Curriculum Examples
-
-Select the Inkling tab to see the Inkling code.
-
-```inkling--code
-curriculum get_high_score_curriculum
-  train get_high_score
-  with simulator breakout_simulator
-  objective score
-    # lessons listed here
-end
-```
-
-### get_high_score_curriculum
-‍
-This curriculum will train the concept `get_high_score`.
-In this example:
-
-* **curriculumName:** get_high_score_curriculum
-* **conceptName:** get_high_score
-* **trainingSpecifier:** simulator
-* **simulator** the keyword to indicate that this is training on a simulator
-* **simulatorName**: breakout_simulator
-* **objectiveName:** score
-
-### digit_curriculum
-
-```inkling--code
-from utils import split
-
-schema MNIST_schema
-  String text,
-  Luminance(28, 28) image
-end
-
-# Here the MNIST labeled data set is brought into Inkling:
-
-datastore MNIST_data(MNIST_schema)
-copy "mnist-training.csv" into MNIST_data with format = "csv"
-
-# Training 'with data'
-curriculum digit_curriculum
-  train Digit
-  with data
-  objective equality  
-  training_data, test_data = split(MNIST_data, 0.8, shuffle=True)
-    # lessons specified here
-end
-```
-
-This curriculum trains the `Digit` concept. 
-
-This example references the MNIST database which is used to train for
-recognition of handwritten digits.  This example shows the use of the **data**
-training specifier (which is not supported during private beta) for that data
-set. When training **with data** the labeled data set must be read in from a
-file and then prepared and split into training and test partitions. That is
-shown in the Inkling code for digit_curriculum.
-
-In this example:
-
-* **curriculumName:** digit_curriculum
-* **conceptName:** Digit
-* **trainingSpecifier:** data
-* **objectiveName:** equality
-* **assignment**:
-* **training_data:** variable name for subset of data portioned aside for training.
-* **test_data:** variable name for subset of data portioned aside for testing.
-* '**=**': represents the assignment of the result of the split function to the two variable names.
-* **split function:** splits the data and labels it.
-* **MNIST_data:** the data set used for training and testing.
-* **0.8:** the amount to split the data by. 80% of the data goes to training. The remaining data (20%) goes to testing.
-* **shuffle=True:** sets the shuffle parameter to true.
+[//]: # (Reinsert data example when it is a training source option.)
 
 [1]: ./../examples.html#mountain-car-example
 [2]: #training-source
