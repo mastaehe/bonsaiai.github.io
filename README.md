@@ -1,4 +1,4 @@
-#The Bonsai Platform Documentation
+# The Bonsai Platform Documentation
 
 This project is the public home for the source code for the Bonsai Platform documentation. You can find our documentation at http://docs.bons.ai/.
 
