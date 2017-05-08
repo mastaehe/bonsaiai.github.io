@@ -7,7 +7,7 @@ Our hope is that open-sourcing our documentation on GitHub helps our docs stay a
 ## Frequently Asked Questions
 --------------------------
 
-**What is this source code stufff? Where can I see the actual documentation?**
+**What is this source code stuff? Where can I see the actual documentation?**
 
 You'll want to go to http://docs.bons.ai/ for the compiled version. This project shows the source code we used to generate it so that you can submit issues or pull requests to it.
 
@@ -55,5 +55,5 @@ If you'd prefer to use Docker, instructions are available [in the wiki](https://
 ## Need Help? Found a bug?
 -----------------------
 
-[Submit an issue](https://github.com/issues) to the Bonsai documentation repo if you need any help. And, of course, feel free to submit pull requests with bug fixes or changes if that's more your style.
+[Submit an issue](https://github.com/BonsaiAI/bonsaiai.github.io/issues) to the Bonsai documentation repo if you need any help. And, of course, feel free to submit pull requests with bug fixes or changes if that's more your style.
 
