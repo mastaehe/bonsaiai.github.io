@@ -1,5 +1,11 @@
 # Overview
 
+```
+##########
+# Inkling Code Snippets will be shown here
+##########
+```
+
 Welcome to Inkling, Bonsai AI's special purpose programming language for training AI.
 
 Inkling is a declarative, strongly typed language that abstracts from the vast, dynamic AI algorithms that require expertise in machine learning. An Inkling file contains the concepts (what you want to teach the AI) and curriculum, how you want to teach the concepts, necessary to train your BRAIN.
