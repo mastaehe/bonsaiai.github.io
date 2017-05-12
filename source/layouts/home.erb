@@ -8,7 +8,7 @@
 	<meta charset="utf-8">
 	<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<title><%= current_page.data.title || "Bonsai Documentation" %></title>
+	<title><%= current_page.data.title || "Bonsai Documentation" %> - Bonsai</title>
 	<style>
 	  <%= Rouge::Themes::Base16::Monokai.render(:scope => '.highlight') %>
 	</style>
@@ -22,6 +22,10 @@
 	<%= javascript_include_tag  "all_nosearch" %>
 	<% end %>
 	<%= partial "partials/google-gtm" %>
+
+	<!-- at the end of the HEAD -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+	
 </head>
 	  	
 <body class="<%= page_classes %>" data-languages="<%=h language_tabs.map{ |lang| lang.is_a?(Hash) ? lang.keys.first : lang }.to_json %>">
@@ -141,7 +145,15 @@
 		</div>
 
 	</div>
-
+	<!-- at the end of the BODY -->
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+	<script type="text/javascript"> docsearch({
+	apiKey: '49fa6f01d7ff94a85b9b7434b1c2b7cf',
+	indexName: 'bon-sai',
+	inputSelector: '#docs-search',
+	debug: false // Set debug to true if you want to inspect the dropdown
+	});
+	</script>
 </body>
 
 </html>
