@@ -1010,7 +1010,7 @@ Currently, during our private beta, you can <b>only</b> train with simulators as
 
           <h1 id="curriculum">Curriculum</h1>
 
-<p>Reference for the keyword <strong>curriculum</strong>. Also, describes the keywords: <strong>train</strong>, <strong>with</strong>, <strong>data</strong></p>
+<p>Reference for the keyword <strong>curriculum</strong>. Also, describes the keywords: <strong>train</strong>, <strong>with</strong></p>
 
 <h3 id="what-is-it">What is it?</h3>
 
@@ -1033,7 +1033,7 @@ Currently, during our private beta, you can <b>only</b> train with simulators as
 <p>The <em>trainingSpecifier</em> specifies either <code class="prettyprint">data</code>, <code class="prettyprint">simulator</code>, or <code class="prettyprint">generator</code> as the training source. Refer back to <a href="#training-source">Training Source</a> for more information on what the differences are.</p>
 
 <aside class="notice">
-When the <i>trainingSpecifier</i> is <b>data</b>, the objective must be either the keywords <i>equality</i> or <i>linear_distance</i>. When the training specifier is <b>simulator</b> or <b>generator</b>, the objective names a function which is specified in the associated simulator or generator. The use of simulators or generators requires an auxiliary clause, the <i>simulator</i> or <i>generator</i> clause respectively. 
+Currently, only simulator training sources are supported. When the <i>trainingspecifier</i> is <b>simulator</b>, the objective names a function which is specified in the associated simulator. The use of simulators requires an auxiliary <i>simulator</i> clause. 
 </aside>
 
 <p>The <code class="prettyprint">objective</code> specifies the termination condition for training.</p>
@@ -1114,11 +1114,10 @@ syntax for the curriculum statement, which introduces a <strong>using</strong> c
 <ul>
 <li>One curriculum per concept. </li>
 <li>Every concept must have a curriculum.</li>
-<li>You can train with <strong>data</strong>, <strong>simulators</strong>, or <strong>generators</strong>. These are the values allowed as training specifiers (see the Curriculum syntax). </li>
 <li>Every simulator must be declared with a <a href="#simulator-clause-syntax">simulator clause</a>.</li>
-<li>Lessons, tests, and assignments can occur in any order. (Assignments are used for data handling when the training specifier is <strong>data</strong>.)</li>
+<li>Lessons and tests can occur in any order.</li>
 <li>If the <strong>using</strong> clause is present (that is, if the simplified curriculum syntax is not being used), there must be one <strong>using</strong> clause for every <strong>with</strong> clause.</li>
-<li>The objective is always required but if the <em>trainingSpecifier</em> is <strong>data</strong>, the objective must be either <code class="prettyprint">equality</code> or <code class="prettyprint">linear_distance</code>.</li>
+<li>The objective is always required.</li>
 </ul>
 
 <h2 id="curriculum-statement-syntax">Curriculum Statement Syntax</h2>
@@ -1130,9 +1129,8 @@ syntax for the curriculum statement, which introduces a <strong>using</strong> c
 
 <span class="p">]</span><span class="o">+</span>
 <span class="p">[</span>
-  <span class="k">using</span>  <span class="p">[</span> <span class="o">&lt;</span><span class="nx">simulatorName</span><span class="o">&gt;</span> <span class="o">|</span> <span class="k">data</span> <span class="p">]</span> <span class="c1"># using clause</span>
+  <span class="k">using</span> <span class="o">&lt;</span><span class="nx">simulatorName</span><span class="o">&gt;</span>             <span class="c1"># using clause</span>
   <span class="p">[</span>
-    <span class="nx">assignClause</span> <span class="c1"># assignment for training and test data</span>
     <span class="nx">lessonClause</span> <span class="c1"># lesson set for this simulator</span>
   <span class="p">]</span><span class="o">+</span>
 
@@ -1140,91 +1138,12 @@ syntax for the curriculum statement, which introduces a <strong>using</strong> c
 <span class="p">]</span><span class="o">+</span>
 <span class="k">end</span> <span class="c1"># curriculum</span>
 </code></pre><pre class="highlight inkling tab-inkling--syntax"><code><span class="nx">withClause</span> <span class="p">::</span><span class="o">=</span>
-<span class="k">with</span> <span class="k">data</span>
-  <span class="k">objective</span> <span class="o">&lt;</span><span class="nx">objectiveFunctionName</span><span class="o">&gt;</span>
-
-<span class="o">|</span> <span class="k">with</span> <span class="k">simulator</span>
-  <span class="k">objective</span> <span class="o">&lt;</span><span class="nx">objectiveFunctionName</span><span class="o">&gt;</span>
-
-<span class="o">|</span> <span class="k">with</span> <span class="k">generator</span>
+<span class="k">with</span> <span class="k">simulator</span>
   <span class="k">objective</span> <span class="o">&lt;</span><span class="nx">objectiveFunctionName</span><span class="o">&gt;</span>
 </code></pre>
 <p>Select the Syntax tab to see the Curriculum syntax.</p>
 
-<p>Any simulator or generator referenced in a curriculum must have an associated simulator or generator clause, outlined in <a href="#training-source">Training Source</a>.</p>
-
-<h2 id="curriculum-examples">Curriculum Examples</h2>
-
-<p>Select the Inkling tab to see the Inkling code.</p>
-<pre class="highlight inkling tab-inkling--code"><code><span class="k">curriculum</span> <span class="nx">get_high_score_curriculum</span>
-  <span class="k">train</span> <span class="nx">get_high_score</span>
-  <span class="k">with</span> <span class="k">simulator</span> <span class="nx">breakout_simulator</span>
-  <span class="k">objective</span> <span class="nx">score</span>
-    <span class="c1"># lessons listed here</span>
-<span class="k">end</span>
-</code></pre>
-<h3 id="get_high_score_curriculum">get_high_score_curriculum</h3>
-
-<p>‍
-This curriculum will train the concept <code class="prettyprint">get_high_score</code>.
-In this example:</p>
-
-<ul>
-<li><strong>curriculumName:</strong> get_high_score_curriculum</li>
-<li><strong>conceptName:</strong> get_high_score</li>
-<li><strong>trainingSpecifier:</strong> simulator</li>
-<li><strong>simulator</strong> the keyword to indicate that this is training on a simulator</li>
-<li><strong>simulatorName</strong>: breakout_simulator</li>
-<li><strong>objectiveName:</strong> score</li>
-</ul>
-
-<h3 id="digit_curriculum">digit_curriculum</h3>
-<pre class="highlight inkling tab-inkling--code"><code><span class="k">from</span> <span class="nx">utils</span> <span class="k">import</span> <span class="nx">split</span>
-
-<span class="k">schema</span> <span class="nx">MNIST_schema</span>
-  <span class="kr">String</span> <span class="nx">text</span><span class="p">,</span>
-  <span class="kr">Luminance</span><span class="p">(</span><span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">)</span> <span class="nx">image</span>
-<span class="k">end</span>
-
-<span class="c1"># Here the MNIST labeled data set is brought into Inkling:</span>
-
-<span class="k">datastore</span> <span class="nx">MNIST_data</span><span class="p">(</span><span class="nx">MNIST_schema</span><span class="p">)</span>
-<span class="k">copy</span> <span class="s2">"mnist-training.csv"</span> <span class="k">into</span> <span class="nx">MNIST_data</span> <span class="k">with</span> <span class="k">format</span> <span class="o">=</span> <span class="s2">"csv"</span>
-
-<span class="c1"># Training 'with data'</span>
-<span class="k">curriculum</span> <span class="nx">digit_curriculum</span>
-  <span class="k">train</span> <span class="nx">Digit</span>
-  <span class="k">with</span> <span class="k">data</span>
-  <span class="k">objective</span> <span class="nx">equality</span>  
-  <span class="nx">training_data</span><span class="p">,</span> <span class="nx">test_data</span> <span class="o">=</span> <span class="nx">split</span><span class="p">(</span><span class="nx">MNIST_data</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="nx">shuffle</span><span class="o">=</span><span class="nx">True</span><span class="p">)</span>
-    <span class="c1"># lessons specified here</span>
-<span class="k">end</span>
-</code></pre>
-<p>This curriculum trains the <code class="prettyprint">Digit</code> concept. </p>
-
-<p>This example references the MNIST database which is used to train for
-recognition of handwritten digits.  This example shows the use of the <strong>data</strong>
-training specifier (which is not supported during private beta) for that data
-set. When training <strong>with data</strong> the labeled data set must be read in from a
-file and then prepared and split into training and test partitions. That is
-shown in the Inkling code for digit_curriculum.</p>
-
-<p>In this example:</p>
-
-<ul>
-<li><strong>curriculumName:</strong> digit_curriculum</li>
-<li><strong>conceptName:</strong> Digit</li>
-<li><strong>trainingSpecifier:</strong> data</li>
-<li><strong>objectiveName:</strong> equality</li>
-<li><strong>assignment</strong>:</li>
-<li><strong>training_data:</strong> variable name for subset of data portioned aside for training.</li>
-<li><strong>test_data:</strong> variable name for subset of data portioned aside for testing.</li>
-<li>&lsquo;<strong>=</strong>&rsquo;: represents the assignment of the result of the split function to the two variable names.</li>
-<li><strong>split function:</strong> splits the data and labels it.</li>
-<li><strong>MNIST_data:</strong> the data set used for training and testing.</li>
-<li><strong>0.8:</strong> the amount to split the data by. 80% of the data goes to training. The remaining data (20%) goes to testing.</li>
-<li><strong>shuffle=True:</strong> sets the shuffle parameter to true.</li>
-</ul>
+<p>Any simulator referenced in a curriculum must have an associated simulator clause, outlined in <a href="#training-source">Training Source</a>.</p>
 
           <h1 id="lesson">Lesson</h1>
 
@@ -1363,6 +1282,10 @@ type constraint they are often called <strong>placeholders</strong>.  This means
 </tr>
 </tbody></table>
 
+<aside class="notice">
+Currently, during our private beta, you can only use simulators as your training source.
+</aside> 
+
 <h6 id="lesson-clause-rules">Lesson Clause Rules</h6>
 
 <ul>
@@ -1400,58 +1323,22 @@ clauses is displayed.</p>
 <span class="k">train</span>
   <span class="nx">fromClause</span>
   <span class="k">send</span> <span class="o">&lt;</span><span class="nx">name</span><span class="o">&gt;</span>
-  <span class="p">[</span><span class="k">expect</span> <span class="o">&lt;</span><span class="nx">name</span><span class="o">&gt;</span><span class="p">]?</span>    <span class="c1"># only valid for data or generator</span>
 <span class="nx">trainingSpecifer</span>
 </code></pre><pre class="highlight inkling tab-inkling--syntax"><code><span class="nx">testClause</span> <span class="p">::</span><span class="o">=</span>
 <span class="k">test</span>
   <span class="nx">fromClause</span>
   <span class="k">send</span> <span class="o">&lt;</span><span class="nx">name</span><span class="o">&gt;</span>
-  <span class="p">[</span><span class="k">expect</span> <span class="o">&lt;</span><span class="nx">name</span><span class="o">&gt;</span><span class="p">]?</span>    <span class="c1"># only valid for data or generator</span>
 <span class="nx">trainingSpecifer</span>
 </code></pre>
 <p>Select the Syntax tab for the syntax for these clauses.</p>
 
 <p>The <strong>test</strong> clause and the <strong>train</strong> clause have identical syntax except for
 their keyword (<strong>train</strong> or <strong>test</strong>).  However they both vary depending on the
-<em>trainingSpecifier</em> in the curriculum. Note that the <strong>expect</strong> is only available in those cases that have known expected values, and that occurs when the <em>trainingSpecifier</em> is <strong>data</strong> or <strong>generator</strong>.</p>
+<em>trainingSpecifier</em> in the curriculum. </p>
 
 <p>The <strong>from</strong> clause in the test/train syntax is used to name and describe the
 training data that is sent by the system (either from a labeled data set, in the
-<strong>data</strong> case, or by the generator or simulator) to the lesson. The next example
-shows the usage of the <strong>from</strong> clause.
-‍</p>
-
-<h3 id="segments-example">Segments Example</h3>
-<pre class="highlight inkling tab-inkling--code"><code><span class="err">‍</span><span class="k">generator</span> <span class="nx">segments_generator</span><span class="p">(</span><span class="kr">UInt8</span> <span class="nx">segmentCount</span><span class="p">)</span>
-  <span class="k">yield</span> <span class="p">(</span><span class="nx">segments_training_schema</span><span class="p">)</span>     <span class="c1"># training will yield data with this schema</span>
-<span class="k">end</span>
-
-<span class="k">schema</span> <span class="nx">segments_training_schema</span>
-  <span class="kr">UInt8</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">}</span> <span class="nx">num_segments</span><span class="p">,</span>
-  <span class="kr">Luminance</span><span class="p">(</span><span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">)</span> <span class="nx">image</span>
-<span class="k">end</span>
-
-<span class="k">curriculum</span> <span class="nx">segments_curriculum</span>
-  <span class="k">train</span> <span class="nx">Segments</span>
-  <span class="k">with</span> <span class="k">generator</span> <span class="nx">segments_generator</span>
-  <span class="k">objective</span> <span class="nx">segments_objective</span>
-    <span class="k">lesson</span> <span class="nx">segments</span>
-      <span class="k">configure</span>
-        <span class="k">constrain</span> <span class="nx">segmentCount</span> <span class="k">with</span> <span class="kr">UInt8</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">}</span>
-    <span class="k">train</span>
-      <span class="k">from</span> <span class="nx">item</span> <span class="k">in</span> <span class="nx">segments_generator</span> <span class="c1"># segments_generator's yield clause</span>
-        <span class="k">select</span> <span class="nx">item</span>                 <span class="c1"># specifies the appropriate schema.</span>
-        <span class="k">send</span> <span class="nx">item</span><span class="p">.</span><span class="nx">image</span>             <span class="c1"># A field in segments_training_schema</span>
-        <span class="k">expect</span> <span class="nx">item</span><span class="p">.</span><span class="nx">num_segments</span>    <span class="c1"># A field in segments_training_schema</span>
-<span class="k">end</span>
-</code></pre>
-<p>Select the Inkling tab to show an example of the <strong>from</strong> clause in a
-curricululm which trains the machine to recognize line segments in an image. The
-generator <code class="prettyprint">segments_generator</code> sends an image and expects <code class="prettyprint">num_segments</code> in
-return. (The returned <code class="prettyprint">num_segments</code> is expected to match the generator&rsquo;s
-<code class="prettyprint">num_segments</code> value.)</p>
-
-<p>‍</p>
+<strong>data</strong> case, or by the generator or simulator) to the lesson.</p>
 
 <h6 id="lesson-until-clause-syntax">Lesson Until Clause Syntax</h6>
 <pre class="highlight inkling tab-inkling--syntax"><code><span class="nx">untilClause</span> <span class="p">::</span><span class="o">=</span>
@@ -1465,10 +1352,9 @@ return. (The returned <code class="prettyprint">num_segments</code> is expected 
 </code></pre>
 <p>Select the Syntax tab for the <strong>until</strong> clause syntax.</p>
 
-<p>The <strong>until</strong> clause is only required if the curriculum <em>trainingSpecifier</em> is <strong>simulator</strong>.  If this curriculum has a <em>trainingSpecifier</em> of <strong>data</strong> or <strong>generator</strong>, the <strong>until</strong> clause is optional. If it is not present, a default with value minimize will be created.</p>
+<p>The <strong>until</strong> clause is required if the curriculum <em>trainingSpecifier</em> is <strong>simulator</strong>. If it is not present, a default with value minimize will be created.</p>
 
-<p>‍
-The <strong>until</strong> clause in the lesson specifies the termination condition for training. The <strong>until</strong> clause in our breakout example above was this:</p>
+<p>The <strong>until</strong> clause in the lesson specifies the termination condition for training. The <strong>until</strong> clause in our breakout example above was this:</p>
 
 <p><em>until minimize ball_location_distance</em></p>
 

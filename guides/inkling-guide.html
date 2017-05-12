@@ -475,7 +475,7 @@ Pedagogical programming focuses on how the problem can be taught, not how it can
 
 <p>When you&rsquo;re thinking about concepts, you can categorize them into two groups: fact and strategy. A fact concept describes the <em><strong>state</strong></em> of a thing or things, such as an object, a ball, a character, an enemy, a light, a person, etc. The fact concept could be the state of whether that thing is on or off, is hot or cold, is a number or a letter, etc. It can also be a location. A strategy concept describes a <em><strong>method</strong></em> or <em><strong>behavior</strong></em>, such as &ldquo;avoid ghosts&rdquo;, &ldquo;keep the paddle under the ball&rdquo;, &ldquo;don&rsquo;t run into walls&rdquo;, &ldquo;turn lights off&rdquo;.</p>
 
-<p>For a simulator, your final concept is a strategy concept. Generator and data training sources don&rsquo;t permit strategy concepts.</p>
+<p>For a simulator, your final concept is a strategy concept. </p>
 
 <h3 id="in-a-game">In a Game</h3>
 
@@ -558,7 +558,7 @@ Pedagogical programming focuses on how the problem can be taught, not how it can
 
 <p>Inkling is also a strongly-typed language, which means that you are will receive an error if values are not compatible with their expected type. This means you need to pay attention to what types you choose.</p>
 
-<p>Inkling supports various types, including (but not limited to) primitive types, which include types for integers, floats,  bytes and strings, as well as types commonly used with machine learning (for example, Luminance). See the section on schemas and Inkling types for more information.</p>
+<p>Inkling supports various types, including (but not limited to) primitive types, which include types for integers, floats, bytes and strings, as well as types commonly used with machine learning (for example, Luminance). See the section on <a href="../references/inkling-reference.html#inkling-types">Inkling types</a> for more information.</p>
 
 <h2 id="constrained-types">Constrained Types</h2>
 
@@ -573,7 +573,7 @@ Pedagogical programming focuses on how the problem can be taught, not how it can
   <span class="kr">Int64</span>  <span class="p">{</span> <span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">:</span><span class="mi">100</span> <span class="p">}</span>   <span class="nx">x</span><span class="p">,</span>        <span class="c1"># start:step:stop, step= 5,0..100</span>
   <span class="kr">Int64</span>  <span class="p">{</span> <span class="mi">0</span><span class="p">:</span><span class="mi">100</span> <span class="p">}</span>     <span class="nx">y</span><span class="p">,</span>        <span class="c1"># start:stop, step= 1, 0..100</span>
   <span class="kr">Int64</span>  <span class="p">{</span> <span class="mi">0</span><span class="p">..</span><span class="mi">100</span><span class="p">:</span><span class="mi">25</span> <span class="p">}</span> <span class="nx">z</span><span class="p">,</span>        <span class="c1"># start:stop, numsteps=25, step= 4, 0..100</span>
-  <span class="kr">Float32</span> <span class="p">{</span> <span class="mi">0</span><span class="p">..</span><span class="mi">2</span><span class="p">:</span><span class="mi">5</span><span class="p">}</span>    <span class="nx">a</span>         <span class="c1"># gives (0, .5., 1.0, 1.5, 2.0)</span>
+  <span class="kr">Float32</span> <span class="p">{</span> <span class="mi">0</span><span class="p">..</span><span class="mi">2</span><span class="p">:</span><span class="mf">0.5</span><span class="p">}</span>    <span class="nx">a</span>         <span class="c1"># gives (0, 0.5, 1.0, 1.5, 2.0)</span>
 <span class="k">end</span>
 </code></pre>
 <h2 id="defining-schemas">Defining Schemas</h2>
@@ -589,7 +589,6 @@ Pedagogical programming focuses on how the problem can be taught, not how it can
 <h3 id="how-to-pick-types">How to pick types</h3>
 
 <ul>
-<li>If your input is an image, you will need the <code class="prettyprint">luminance</code> type.</li>
 <li>If your output is yes/no, true/false, or another dual relationship, you should use the <code class="prettyprint">bool</code> type.</li>
 <li>Inkling supports signed and unsigned integers of various sizes as well as floating point (32 and 64 bit). More details can be found under <a href="../references/inkling-reference.html#inkling-types">Inkling Types</a>.</li>
 </ul>
@@ -622,9 +621,9 @@ Currently, during our private beta, you can only train with simulators as your t
 
 <h3 id="configure-clause">Configure Clause</h3>
 
-<p>The configure clause is part of a lesson statement. Configure clauses are used with simulators and generators. They inform the computer how to set up the simulator or generator for training. You use configure to make sure you&rsquo;re not always training from the beginning, but from a point that makes sense to enhance how your BRAIN is learning the concepts.</p>
+<p>The configure clause is part of a lesson statement. They inform the computer how to set up the simulator for training. You use configure to make sure you&rsquo;re not always training from the beginning, but from a point that makes sense to enhance how your BRAIN is learning the concepts.</p>
 
-<p>The configure clause uses the <strong>constrain</strong> keyword to create a set of conditions for the AI to train on the simulator or generator with. <strong>constrain</strong> references a schema that is associated with the simulator.</p>
+<p>The configure clause uses the <strong>constrain</strong> keyword to create a set of conditions for the AI to train on the simulator. <strong>constrain</strong> references a schema that is associated with the simulator.</p>
 <pre class="highlight inkling tab-inkling"><code><span class="k">lesson</span> <span class="nx">get_high_score</span>
   <span class="k">configure</span>
     <span class="k">constrain</span> <span class="nx">episode_length</span> <span class="k">with</span> <span class="kr">Int8</span><span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">},</span>
