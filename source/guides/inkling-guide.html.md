@@ -1,5 +1,5 @@
 ---
-title: Inkling Documentation
+title: Inkling Guide
 
 language_tabs:
 
