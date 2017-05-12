@@ -8,7 +8,7 @@ In Inkling we need types, because the AI needs to understand the data it is sent
 
 Inkling is also a strongly-typed language, which means that you are will receive an error if values are not compatible with their expected type. This means you need to pay attention to what types you choose.
 
-Inkling supports various types, including (but not limited to) primitive types, which include types for integers, floats,  bytes and strings, as well as types commonly used with machine learning (for example, Luminance). See the section on schemas and Inkling types for more information.
+Inkling supports various types, including (but not limited to) primitive types, which include types for integers, floats, bytes and strings, as well as types commonly used with machine learning (for example, Luminance). See the section on [Inkling types][3] for more information.
 
 ## Constrained Types
 
@@ -25,7 +25,7 @@ schema MyOutput
   Int64  { 0:5:100 }   x,        # start:step:stop, step= 5,0..100
   Int64  { 0:100 }     y,        # start:stop, step= 1, 0..100
   Int64  { 0..100:25 } z,        # start:stop, numsteps=25, step= 4, 0..100
-  Float32 { 0..2:5}    a         # gives (0, .5., 1.0, 1.5, 2.0)
+  Float32 { 0..2:0.5}    a         # gives (0, 0.5, 1.0, 1.5, 2.0)
 end
 ```
 
@@ -41,7 +41,6 @@ In Inkling, **Output** is a stream of information returned as a prediction that 
 
 ### How to pick types
 
-* If your input is an image, you will need the `luminance` type.
 * If your output is yes/no, true/false, or another dual relationship, you should use the `bool` type.
 * Inkling supports signed and unsigned integers of various sizes as well as floating point (32 and 64 bit). More details can be found under [Inkling Types][3].
 

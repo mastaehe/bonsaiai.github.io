@@ -139,6 +139,8 @@ structure_type ::=
   Luminance | Matrix
 ```
 
+[//]: # (Are structured types used for simulators ever?)
+
 Inkling currently supports the types Matrix and Luminance. (This list will be
 expanded.)
 

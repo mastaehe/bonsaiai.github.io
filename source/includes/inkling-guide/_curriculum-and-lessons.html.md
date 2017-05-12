@@ -29,9 +29,9 @@ Each lesson specifies a portion of the training and, depending on the training s
 
 ### Configure Clause
 
-The configure clause is part of a lesson statement. Configure clauses are used with simulators and generators. They inform the computer how to set up the simulator or generator for training. You use configure to make sure you're not always training from the beginning, but from a point that makes sense to enhance how your BRAIN is learning the concepts.
+The configure clause is part of a lesson statement. They inform the computer how to set up the simulator for training. You use configure to make sure you're not always training from the beginning, but from a point that makes sense to enhance how your BRAIN is learning the concepts.
 
-The configure clause uses the **constrain** keyword to create a set of conditions for the AI to train on the simulator or generator with. **constrain** references a schema that is associated with the simulator.
+The configure clause uses the **constrain** keyword to create a set of conditions for the AI to train on the simulator. **constrain** references a schema that is associated with the simulator.
 
 ```inkling
 lesson get_high_score
