@@ -1,5 +1,5 @@
 ---
-title: Getting Started - Bonsai
+title: Getting Started
 
 language_tabs:
     - powershell: Windows

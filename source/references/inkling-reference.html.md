@@ -1,5 +1,5 @@
 ---
-title: Inkling Reference - Bonsai
+title: Inkling Reference
 
 language_tabs:
   - inkling--code: Inkling

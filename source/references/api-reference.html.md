@@ -1,5 +1,5 @@
 ---
-title: API Reference - Bonsai
+title: API Reference
 
 toc_footers:
   - <a href='https://bons.ai/sign-up'>Sign Up for our Private Beta!</a>
