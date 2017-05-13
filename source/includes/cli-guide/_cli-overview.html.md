@@ -2,13 +2,13 @@
 
 ```powershell
 ##########
-# Windows specfic command prompt instructions shown here
+# Windows specific command prompt instructions shown here
 ##########
 ```
 
 ```shell
 ##########
-# macOS specfic command prompt instructions shown here
+# macOS specific command prompt instructions shown here
 ##########
 ```
 
