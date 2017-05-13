@@ -8,7 +8,9 @@ Every Inkling program needs at least one concept. If there is more than one, det
 
 When you're thinking about concepts, you can categorize them into two groups: fact and strategy. A fact concept describes the _**state**_ of a thing or things, such as an object, a ball, a character, an enemy, a light, a person, etc. The fact concept could be the state of whether that thing is on or off, is hot or cold, is a number or a letter, etc. It can also be a location. A strategy concept describes a _**method**_ or _**behavior**_, such as "avoid ghosts", "keep the paddle under the ball", "don't run into walls", "turn lights off".
 
-For a simulator, your final concept is a strategy concept. Generator and data training sources don't permit strategy concepts.
+For a simulator, your final concept is a strategy concept. 
+
+[//]: # (Generator and data training sources don't permit strategy concepts.)
 
 ### In a Game
 

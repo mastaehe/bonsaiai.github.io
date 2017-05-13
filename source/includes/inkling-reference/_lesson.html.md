@@ -113,6 +113,10 @@ Lesson clauses have defaults so if a clause is not specified the default will be
 **generator** | Required.    | If neither train nor test is present, defaults to: *from item in generator select item send item.image expects item.label*. | If neither train nor test is present, defaults to: *from item in generator select item send item.image expect item.label*. If not present, generate default for every lesson. | Not user specified. Will default to: *minimize objectiveName*.
 **simulator** | Required.    | If neither train nor test is present, defaults to: *item in simulator select item send item*. | If neither train nor test is present, defaults to: *from item in simulator select item*. If not present, generate default for every lesson. | Required.
 
+<aside class="notice">
+Currently, during our private beta, you can only use simulators as your training source.
+</aside> 
+
 ###### Lesson Clause Rules
 
 * To summarize the table above, for a lesson associated with a _trainingSpecifier_ of **data**: one or both of the lesson clauses **train** and **test** are required (and there are no default versions of these clauses).
@@ -153,7 +157,6 @@ trainClause ::=
 train
   fromClause
   send <name>
-  [expect <name>]?    # only valid for data or generator
 trainingSpecifer
 ```
 
@@ -162,56 +165,23 @@ testClause ::=
 test
   fromClause
   send <name>
-  [expect <name>]?    # only valid for data or generator
 trainingSpecifer
 ```
+
+[//]: # (  [expect <name>]?    # only valid for data or generator)
+
 
 Select the Syntax tab for the syntax for these clauses.
 
 The **test** clause and the **train** clause have identical syntax except for
 their keyword (**train** or **test**).  However they both vary depending on the
-_trainingSpecifier_ in the curriculum. Note that the **expect** is only available in those cases that have known expected values, and that occurs when the _trainingSpecifier_ is **data** or **generator**.
+_trainingSpecifier_ in the curriculum. 
+
+[//]: # (Note that the **expect** is only available in those cases that have known expected values, and that occurs when the _trainingSpecifier_ is **data** or **generator**.)
 
 The **from** clause in the test/train syntax is used to name and describe the
 training data that is sent by the system (either from a labeled data set, in the
-**data** case, or by the generator or simulator) to the lesson. The next example
-shows the usage of the **from** clause.
-‍
-
-### Segments Example
-
-```inkling--code
-‍generator segments_generator(UInt8 segmentCount)
-  yield (segments_training_schema)     # training will yield data with this schema
-end
-
-schema segments_training_schema
-  UInt8{0:10} num_segments,
-  Luminance(28, 28) image
-end
-
-curriculum segments_curriculum
-  train Segments
-  with generator segments_generator
-  objective segments_objective
-    lesson segments
-      configure
-        constrain segmentCount with UInt8{0:10}
-    train
-      from item in segments_generator # segments_generator's yield clause
-        select item                 # specifies the appropriate schema.
-        send item.image             # A field in segments_training_schema
-        expect item.num_segments    # A field in segments_training_schema
-end
-```
-
-Select the Inkling tab to show an example of the **from** clause in a
-curricululm which trains the machine to recognize line segments in an image. The
-generator `segments_generator` sends an image and expects `num_segments` in
-return. (The returned `num_segments` is expected to match the generator's
-`num_segments` value.)
-
-‍
+**data** case, or by the generator or simulator) to the lesson.
 
 ###### Lesson Until Clause Syntax
 
@@ -228,9 +198,8 @@ relOp ::=
 
 Select the Syntax tab for the **until** clause syntax.
 
-The **until** clause is only required if the curriculum _trainingSpecifier_ is **simulator**.  If this curriculum has a _trainingSpecifier_ of **data** or **generator**, the **until** clause is optional. If it is not present, a default with value minimize will be created.
+The **until** clause is required if the curriculum _trainingSpecifier_ is **simulator**. If it is not present, a default with value minimize will be created.
 
-‍
 The **until** clause in the lesson specifies the termination condition for training. The **until** clause in our breakout example above was this:
 
   *until minimize ball_location_distance*

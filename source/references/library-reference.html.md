@@ -1,5 +1,5 @@
 ---
-title: Library Reference - Bonsai
+title: Library Reference
 
 language_tabs:
   - python

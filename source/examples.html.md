@@ -1,5 +1,5 @@
 ---
-title: Examples - Bonsai
+title: Examples
 
 language_tabs:
 
