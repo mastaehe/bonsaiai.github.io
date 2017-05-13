@@ -1,0 +1,595 @@
+
+
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>CLI Guide - Bonsai - Bonsai</title>
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .gh {
+  color: #999999;
+}
+.highlight .sr {
+  color: #f6aa11;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #75715e;
+}
+.highlight .c1 {
+  color: #75715e;
+}
+.highlight .cs {
+  color: #75715e;
+}
+.highlight .c, .highlight .cd {
+  color: #75715e;
+}
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
+}
+.highlight .gd {
+  color: #49483e;
+}
+.highlight .gi {
+  color: #49483e;
+}
+.highlight .ge {
+  color: #49483e;
+}
+.highlight .kc {
+  color: #66d9ef;
+}
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
+}
+.highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s {
+  color: #e6db74;
+}
+.highlight .na {
+  color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+}
+.highlight .nn {
+  color: #ffffff;
+}
+.highlight .nl {
+  color: #ffffff;
+}
+.highlight .ni {
+  color: #ffffff;
+}
+.highlight .bp {
+  color: #ffffff;
+}
+.highlight .vg {
+  color: #ffffff;
+}
+.highlight .vi {
+  color: #ffffff;
+}
+.highlight .nv {
+  color: #ffffff;
+}
+.highlight .w {
+  color: #ffffff;
+}
+.highlight {
+  color: #ffffff;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
+}
+    </style>
+    <link href="../stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="../stylesheets/print.css" rel="stylesheet" media="print" />
+	<link href="../stylesheets/test.css" rel="stylesheet" media="screen" />
+    <link href="../favicon.ico" rel="icon" type="image/ico" />
+      <script src="../javascripts/all.js"></script>
+	
+	<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WVB6MG2');</script>
+<!-- End Google Tag Manager -->
+	
+  </head>
+
+  <body class="guides guides_cli-guide" data-languages="[&quot;powershell&quot;,&quot;shell&quot;]">
+	  
+	  
+	  <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WVB6MG2"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) --> 
+
+  <div id="flex-container">
+
+	<nav id="primary-nav">
+
+
+
+	<div id="logo"> <a href="../"><img class="bonsai-logo" src="../images/bonsai-logo.svg"></a></div>
+
+	<label for="drop" class="toggle"><img class="menu-ham" src="../images/menu.svg"></label>
+	<input type="checkbox" id="drop" />
+
+	<ul class="menu">
+
+		<li class="header_menu_item "> <a href="getting-started.html">Quick Start</a></li>
+
+	
+		<li class="header_menu_item"> <!-- First Tier Drop Down --> <label for="drop-1" class="toggle">Guides +</label><a  href="#">Guides</a>			
+			<input type="checkbox" id="drop-1"/>
+			<ul id="guides">
+				<li class=""> <a href="ai-engine-guide.html">AI Engine Guide</a>  </li>
+				<li class="selected"> <a href="cli-guide.html">CLI Guide</a>  </li>
+				<li class=""> <a href="inkling-guide.html">Inkling Guide</a>  </li>
+			</ul> 
+		</li>
+
+		<li class="header_menu_item"> <!-- First Tier Drop Down --> <label for="drop-2" class="toggle">References +</label><a  href="#">References</a>			
+			<input type="checkbox" id="drop-2"/>
+			<ul id="references">
+				<li class=""> <a href="../references/api-reference.html">API</a>  </li>
+				<li class=""> <a href="../references/cli-reference.html">CLI</a>  </li>
+				<li class=""> <a href="../references/inkling-reference.html">Inkling</a>  </li>
+				<li class=""> <a href="../references/library-reference.html">Library</a>  </li>
+			</ul> 
+		</li>
+		
+		<li class="header_menu_item "> <a href="../examples.html">Examples</a></li>
+
+		<li><gcse:search  linktarget="_parent"></gcse:search></li>
+
+
+	</ul>
+
+</nav>
+
+
+
+
+
+	<div id="main-wrapper">
+
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="../images/navbar.png" alt="Navbar" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+
+        <div class="lang-selector">
+              <a href="#" data-language-name="powershell">Windows</a>
+              <a href="#" data-language-name="shell">macOS</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <div class="page-title">CLI Guide - Bonsai</div>
+      <div id="toc">
+      </div>
+      
+			 
+<ul class="toc-footer">
+
+
+<li><a href='https://github.com/BonsaiAI/slate'>Contribute to the Docs</a></li>
+<li><a href='http://forums.bons.ai/'>Bonsai Forums</a></li>
+<li><a href='https://bons.ai/contact-us#contact-page-form'>Contact Us</a></li>
+<li><a href='https://bons.ai'>Bonsai Home</a></li>
+
+</ul>
+       
+        
+	   <div class="cc-bottom">
+	
+	<div class="toc-footer bottom cc-info">
+
+		<a href='https://creativecommons.org/licenses/by-sa/4.0/' class="cc-icon-width" >
+			<svg class="cc" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+			viewBox="0 0 70.7 13.4" style="enable-background:new 0 0 70.7 13.4;" xml:space="preserve">
+
+				<g>
+
+				<g>
+				<circle class="st0" cx="6.8" cy="6.7" r="6.1"/>
+				<path d="M6.7,0c1.9,0,3.5,0.7,4.8,2c0.6,0.6,1.1,1.4,1.4,2.2c0.3,0.8,0.5,1.7,0.5,2.6c0,0.9-0.2,1.8-0.5,2.6
+				c-0.3,0.8-0.8,1.5-1.4,2.1c-0.7,0.6-1.4,1.1-2.2,1.5c-0.8,0.3-1.7,0.5-2.6,0.5S5,13.3,4.2,12.9c-0.8-0.3-1.5-0.8-2.2-1.5
+				s-1.1-1.4-1.5-2.2S0,7.6,0,6.7C0,5.8,0.2,5,0.5,4.2S1.3,2.6,2,2C3.3,0.7,4.8,0,6.7,0z M6.7,1.2c-1.5,0-2.8,0.5-3.9,1.6
+				C2.3,3.4,1.9,4,1.6,4.6C1.4,5.3,1.2,6,1.2,6.7c0,0.7,0.1,1.4,0.4,2.1c0.3,0.7,0.7,1.3,1.2,1.8c0.5,0.5,1.1,0.9,1.8,1.2
+				c0.7,0.3,1.4,0.4,2.1,0.4c0.7,0,1.4-0.1,2.1-0.4c0.7-0.3,1.3-0.7,1.8-1.2c1-1,1.6-2.3,1.6-3.9c0-0.7-0.1-1.4-0.4-2.1
+				c-0.3-0.7-0.7-1.3-1.2-1.8C9.5,1.8,8.2,1.2,6.7,1.2z M6.6,5.6L5.7,6.1C5.6,5.9,5.5,5.7,5.4,5.6C5.3,5.6,5.1,5.5,5,5.5
+				c-0.6,0-0.9,0.4-0.9,1.2c0,0.4,0.1,0.6,0.2,0.9C4.5,7.8,4.7,7.9,5,7.9c0.4,0,0.7-0.2,0.8-0.6l0.8,0.4C6.5,8.1,6.2,8.3,5.9,8.5
+				c-0.3,0.2-0.7,0.3-1,0.3c-0.6,0-1.1-0.2-1.5-0.6C3.1,7.9,2.9,7.4,2.9,6.7c0-0.6,0.2-1.1,0.6-1.5c0.4-0.4,0.8-0.6,1.4-0.6
+				C5.7,4.6,6.3,5,6.6,5.6z M10.5,5.6L9.6,6.1C9.5,5.9,9.4,5.7,9.3,5.6C9.1,5.6,9,5.5,8.9,5.5C8.3,5.5,8,5.9,8,6.7
+				c0,0.4,0.1,0.6,0.2,0.9c0.2,0.2,0.4,0.3,0.7,0.3c0.4,0,0.7-0.2,0.8-0.6l0.8,0.4c-0.2,0.3-0.4,0.6-0.7,0.8c-0.3,0.2-0.7,0.3-1,0.3
+				c-0.6,0-1.1-0.2-1.5-0.6C7,7.9,6.8,7.4,6.8,6.7c0-0.6,0.2-1.1,0.6-1.5c0.4-0.4,0.8-0.6,1.4-0.6C9.6,4.6,10.2,5,10.5,5.6z"/>
+				</g>
+
+				</g>
+			</svg>
+		</a>
+		
+		<a href='https://creativecommons.org/licenses/by-sa/4.0/'>Content:
+		CC-BY-SA </a>
+		
+	</div>
+
+</div>
+
+    </div>
+	      
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        
+          <h1 id="cli-overview">CLI Overview</h1>
+<pre class="highlight powershell tab-powershell"><code><span class="c1">##########</span>
+<span class="c1"># Windows specific command prompt instructions shown here</span>
+<span class="c1">##########</span>
+</code></pre><pre class="highlight shell tab-shell"><code><span class="c">##########</span>
+<span class="c"># macOS specific command prompt instructions shown here</span>
+<span class="c">##########</span>
+</code></pre>
+<p>The Bonsai Command Line Interface (CLI) is a text-based tool that enables you to configure and control the Bonsai Artificial Intelligence Engine. The CLI is especially useful for automation and connection to other tools. Currently, there are some actions that can only be performed using the CLI, such as loading your Inkling file and connecting your simulator.</p>
+
+<p>This guide will walk you through how to install the Bonsai CLI, setup your first project, and get a simulator running, all from your local computer. If you haven&rsquo;t yet, it will be helpful to read the <a href="getting-started.html">Quick Start Overview</a> to give context to the commands you&rsquo;ll be running in this guide.</p>
+
+<p>The reference document for all of the commands you will see in this guide can be found in the <a href="../references/cli-reference.html">CLI Reference</a>.</p>
+
+          <h1 id="install-prerequisites">Install Prerequisites</h1>
+
+<p>Before you begin, you will need to have access to our Beta. If you don&rsquo;t have access yet, request access at <a href="http://pages.bons.ai/apply.html">bons.ai</a>.</p>
+
+<p>The next section walks you through how to install Git, Python, and pip, but if you&rsquo;re already ahead of the curve and <strong>have them all installed</strong>, skip down to <a href="#install-the-bonsai-cli">Setup the Bonsai CLI</a>. </p>
+
+<aside class="notice">
+We highly recommend macOS users download Python directly in the Manual Install instructions or use <a href="http://brew.sh/">Homebrew</a> so you can perform the following steps on user-land Python rather than <a href="https://github.com/MacPython/wiki/wiki/Which-Python">system Python</a>.
+</aside>
+
+<p><strong>There are three sets of install instructions, please pick the one that suits your situation:</strong></p>
+
+<ol>
+<li>If you have <strong>Anaconda</strong> installed on your system, skip down to <a href="#install-with-anaconda">Install with Anaconda</a>.</li>
+<li>If you have <strong>Chocolatey (Windows)</strong> or <strong>Homebrew (macOS)</strong> installed on your system, skip down to <a href="#install-with-chocolatey-or-homebrew">Install with Chocolatey or Homebrew</a>.</li>
+<li>If you <em>do not</em> have Chocolatey, Homebrew, or Anaconda installed on your system continue to follow our <strong>Manual Install</strong> intructions below.</li>
+</ol>
+
+<aside class="notice">
+The two tabs to the right allow you to follow this guide as a macOS or Windows user. Instructions also vary slightly between Python 2 and Python 3 so please be sure to follow your version&rsquo;s instructions.
+</aside>
+
+<h2 id="manual-install">Manual Install</h2>
+
+<h3 id="windows">Windows</h3>
+
+<ul>
+<li><strong>Git</strong>: Download and install Git from <a href="https://git-for-windows.github.io/">Git for Windows</a>. </li>
+<li><strong>Python</strong>: Download and install Python (3.6 or 2.7) from <a href="https://www.python.org">python.org</a>.</li>
+</ul>
+
+<aside class="warning">
+For users installing <b>Python 2.7</b>: Make sure to include adding Python to your PATH when customizing your install on the third screen. <br>
+For users installing <b>Python 3.6</b>: Make sure to check the box on the first screen of the install to add Python to your PATH.
+</aside>
+
+<ul>
+<li><strong>pip</strong>: Python version 2.7.9 and greater come with pip, but if for some reason you need to use a different version of Python please follow <a href="https://pip.pypa.io/en/stable/installing/">these instructions</a>.</li>
+</ul>
+
+<aside class="notice">
+Please remember to reboot your computer after installing Python and Git to make sure all install settings take effect.
+</aside>
+
+<p><strong>Great!</strong> Now that you have Git, Python, and pip installed, you can skip down to <a href="#install-the-bonsai-cli">Setup the Bonsai CLI</a>. </p>
+
+<h3 id="macos">macOS</h3>
+
+<ul>
+<li><strong>Git</strong>: Git is more than likely already installed on your computer if you have Xcode, but if not, run <code class="prettyprint">git</code> from your command prompt and the system will prompt you to install.</li>
+<li><strong>Python</strong>: Download and install Python (3.6 or 2.7) from <a href="https://www.python.org">python.org</a>.</li>
+</ul>
+
+<aside class="notice">
+We highly recommend macOS users download Python directly so you can follow this guide on user-land Python rather than <a href="https://github.com/MacPython/wiki/wiki/Which-Python">system Python</a>.
+</aside>
+
+<ul>
+<li><strong>pip</strong>: Python version 2.7.9 and greater come with pip (or pip3 for version 3+), but if for some reason you need to use a different version of Python please follow <a href="https://pip.pypa.io/en/stable/installing/">these instructions</a>.</li>
+</ul>
+
+<p><strong>Great!</strong> Now that you have Git, Python, and pip installed, you can skip down to <a href="#install-the-bonsai-cli">Install the Bonsai CLI</a>. </p>
+
+<h2 id="install-with-chocolatey-or-homebrew">Install with Chocolatey or Homebrew</h2>
+
+<p>If you <em>do not</em> have Chocolatey or Homebrew installed on your system, please go to the <a href="#manual-install">Manual Install</a> or <a href="#install-with-anaconda">Install with Anaconda</a> instructions.</p>
+
+<blockquote>
+<p>Python 2</p>
+</blockquote>
+<pre class="highlight powershell tab-powershell"><code>choco install git
+choco install python2
+</code></pre><pre class="highlight shell tab-shell"><code>brew install python
+</code></pre>
+<blockquote>
+<p>Python 3</p>
+</blockquote>
+<pre class="highlight powershell tab-powershell"><code>choco install git
+choco install python
+</code></pre><pre class="highlight shell tab-shell"><code>brew install python3
+</code></pre>
+<h3 id="windows">Windows</h3>
+
+<p><strong>If you&rsquo;re already familiar with <a href="https://chocolatey.org/">Chocolatey</a>, follow these instructions.</strong></p>
+
+<aside class="notice">
+Please remember to run choco commands in administrator powershell or command prompt.
+</aside>
+
+<h3 id="macos">macOS</h3>
+
+<p><strong>If you&rsquo;re already familiar with <a href="http://brew.sh/">Homebrew</a>, follow these instructions.</strong></p>
+
+<ul>
+<li><strong>Git</strong>: Git is more than likely already installed on your computer if you have Xcode, but if not, run <code class="prettyprint">git</code> from your command prompt and the system will prompt you to install.</li>
+<li><strong>Python</strong>: Run the install command on the tab to the right to <code class="prettyprint">brew install</code> the Python version of your choice.</li>
+</ul>
+
+<h2 id="install-with-anaconda">Install with Anaconda</h2>
+<pre class="highlight plaintext"><code>conda install git
+</code></pre>
+<p>If you <em>do not</em> have Anaconda installed on your system, please go to the <a href="#manual-install">Manual Install</a> or <a href="#install-with-chocolatey-or-homebrew">Install with Chocolatey or Homebrew</a> instructions.</p>
+
+<p><code class="prettyprint">conda</code> is a tool for installing and managing Python and R dependencies. Anaconda includes Python and pip, so all you need to do is install Git if you haven&rsquo;t already. For more information, refer to the <a href="https://www.continuum.io/anaconda-overview">Anaconda website</a>.</p>
+
+<h1 id="install-the-bonsai-cli">Install the Bonsai CLI</h1>
+
+<blockquote>
+<p>Python 2 and Anaconda</p>
+</blockquote>
+<pre class="highlight plaintext"><code>pip install bonsai-cli
+bonsai configure # for authentication
+</code></pre>
+<blockquote>
+<p>Python 3</p>
+</blockquote>
+<pre class="highlight powershell tab-powershell"><code><span class="c1"># same as above</span>
+</code></pre><pre class="highlight shell tab-shell"><code>pip3 install bonsai-cli
+bonsai configure <span class="c"># for authentication</span>
+</code></pre>
+<p>From your command prompt, install the Bonsai Command Line Interface tool and configure (authenticate) it. <a href="../references/cli-reference.html#bonsai-configure"><code class="prettyprint">bonsai configure</code></a> will ask for your Access Key. You can find your Access Key in your <a href="https://beta.bons.ai/accounts/key">Bonsai Account Settings</a>.</p>
+
+<h1 id="setup-your-project">Setup Your Project</h1>
+
+<h2 id="clone-a-sample-project">Clone a Sample Project</h2>
+<pre class="highlight plaintext"><code>git clone https://github.com/BonsaiAI/gym-mountaincar-sample
+</code></pre>
+<p>Clone a sample simulation project with <code class="prettyprint">git clone</code>. For this guide we&rsquo;ll be walking you through <a href="https://gym.openai.com/envs/MountainCar-v0">OpenAI Gym&rsquo;s Mountain Car</a> environment, one of the supported Bonsai simulators.</p>
+
+<p>If you wish to experiment with your own project at this stage you can. Your project will need an Inkling (.ink) file and a simulator file. Many other projects can be found on the <a href="https://github.com/BonsaiAI">BonsaiAI GitHub page</a>.</p>
+
+<h2 id="install-project-requirements">Install Project Requirements</h2>
+
+<blockquote>
+<p>Python 2 and Anaconda</p>
+</blockquote>
+<pre class="highlight plaintext"><code>cd gym-mountaincar-sample
+pip install -r requirements.txt
+</code></pre>
+<blockquote>
+<p>Python 3</p>
+</blockquote>
+<pre class="highlight powershell tab-powershell"><code><span class="c1"># same as above</span>
+</code></pre><pre class="highlight shell tab-shell"><code><span class="nb">cd </span>gym-mountaincar-sample
+pip3 install -r requirements.txt
+</code></pre>
+<p>Enter into the Mountain Car folder and then install the Mountain Car requirements from OpenAI Gym with pip.</p>
+
+<h1 id="create-your-brain">Create Your BRAIN</h1>
+<pre class="highlight plaintext"><code>bonsai create myMountainCarBrain
+</code></pre>
+<p>Create your BRAIN (and its related project file) with <a href="../references/cli-reference.html#bonsai-create"><code class="prettyprint">bonsai create</code></a> and give it a name. We used <em>myMountainCarBrain</em> in the example code but you can name it whatever you&rsquo;d like. You will view your BRAIN&rsquo;s training progress on the BRAIN&rsquo;s Details page which can be found on the <a href="https://beta.bons.ai">BRAIN dashboard</a>.</p>
+<pre class="highlight plaintext"><code>bonsai push
+</code></pre>
+<p>Uae <a href="../references/cli-reference.html#bonsai-push"><code class="prettyprint">bonsai push</code></a> to upload the cloned Mountain Car project and its associated files to the Bonsai AI Engine for training.</p>
+
+<h1 id="train-your-brain">Train Your BRAIN</h1>
+
+<p>Almost there! Time to tell the Bonsai AI Engine to prepare a new BRAIN version for training. There are currently two options for training a BRAIN, one is to run a simulator remotely using Bonsai&rsquo;s servers, and the other is to run a simulator locally with your own computer.</p>
+
+<p>Simulators which can be trained remotely include EnergyPlus, OpenAI Gym&rsquo;s, and simple simulators all found on our <a href="../examples.html">Examples documentation</a>. If the simulator is not one that we support remotely, you&rsquo;ll need to run it locally.</p>
+
+<h2 id="train-remotely">Train Remotely</h2>
+<pre class="highlight plaintext"><code>bonsai train start --remote
+</code></pre>
+<p>Start training your BRAIN with <a href="../references/cli-reference.html#bonsai-train-start"><code class="prettyprint">bonsai train start --remote</code></a>.</p>
+
+<p>Remote training is the best way to train BRAINs that need to ran overnight or for multiple days at a time. There is no disconnection of the simulator to the server like there can be when training locally.</p>
+
+<h2 id="train-locally">Train Locally</h2>
+<pre class="highlight plaintext"><code>bonsai train start
+</code></pre>
+<blockquote>
+<p>Python 2</p>
+</blockquote>
+<pre class="highlight plaintext"><code>python mountaincar_simulator.py --train-brain=myMountainCarBrain --headless
+</code></pre>
+<blockquote>
+<p>Python 3</p>
+</blockquote>
+<pre class="highlight powershell tab-powershell"><code><span class="c1"># same as above</span>
+</code></pre><pre class="highlight shell tab-shell"><code>python3 mountaincar_simulator.py --train-brain<span class="o">=</span>myMountainCarBrain --headless
+</code></pre>
+<p>Start training your BRAIN with <a href="../references/cli-reference.html#bonsai-train-start"><code class="prettyprint">bonsai train start</code></a>.</p>
+
+<p>Once you have started training mode it&rsquo;s time to start running your simulator locally by calling Python and then the simulator file. Training will begin automatically and if the simulator gets disconnected, training resumes from the same point when the simulator is reconnected if it&rsquo;s within an hour of the disconnect. If you want your training to take place overnight, make sure that your computer won&rsquo;t go to sleep and disconnect for more than an hour or that training time will be lost!</p>
+
+<aside class="notice">
+We use headless here to indicate we don&rsquo;t need to see a graphical display from the simulator; if you&rsquo;d like to see it and watch the simulator learn, omit this option.
+</aside>
+
+<h2 id="view-your-brain-training-status">View your BRAIN training status</h2>
+
+<p>View your BRAIN&rsquo;s training status as it trains on the simulator by going to the BRAIN&rsquo;s Dashboard page on <a href="https://beta.bons.ai">beta.bons.ai</a>. Training Mountain Car takes about an hour to get sufficient training to beat the game most of the time. If you want flawless victories each time the simulator can take up to 2 hours before you&rsquo;ll see the graph level out.</p>
+
+<p><img src="../images/fully_trained_brain.png" alt="Fully Trained BRAIN" /></p>
+
+<p>There is no automatic ending to training, you can train forever, but there will be diminishing returns after a couple of hours. You can play around with training for 15 mins, 30 mins, 1 hour, etc and use your BRAIN to see how well it plays each time! It takes about 700 episodes to train the BRAIN correctly. Our ideal target is an average reward of -195 or higher over 100 consecutive episodes.</p>
+
+<h2 id="stop-training">Stop Training</h2>
+<pre class="highlight plaintext"><code>bonsai train stop
+</code></pre>
+<p>Once we&rsquo;ve gotten to this level of performance (or sooner if you prefer), CTRL-C to disconnect the simulator (if you are running it locally), then <a href="../references/cli-reference.html#bonsai-train-stop"><code class="prettyprint">bonsai train stop</code></a> will end the training, and proceed to prediction.</p>
+
+<h1 id="predict-with-your-brain">Predict with Your BRAIN</h1>
+
+<blockquote>
+<p>Python 2</p>
+</blockquote>
+<pre class="highlight plaintext"><code>python mountaincar_simulator.py --predict-brain=myMountainCarBrain --predict-version=latest
+</code></pre>
+<blockquote>
+<p>Python 3</p>
+</blockquote>
+<pre class="highlight powershell tab-powershell"><code><span class="c1"># same as above</span>
+</code></pre><pre class="highlight shell tab-shell"><code>python3 mountaincar_simulator.py --predict-brain<span class="o">=</span>myMountainCarBrain --predict-version<span class="o">=</span>latest
+</code></pre>
+<p>After your BRAIN is finished training it can play the Mountain Car game. How well it does depends on how long you let it train! Using your BRAIN involves calling Python on your simulator file, but now in prediction mode with <code class="prettyprint">--predict-version=latest</code> which will use the version of the latest training session that you just ran.</p>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="powershell">Windows</a>
+                <a href="#" data-language-name="shell">macOS</a>
+          </div>
+      </div>
+    </div>
+
+    </div>
+
+  </div>
+
+  </body>
+</html>

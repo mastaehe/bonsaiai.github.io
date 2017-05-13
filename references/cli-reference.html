@@ -234,14 +234,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 	<ul class="menu">
 
-		<li class="header_menu_item "> <a href="../guides/getting-started.html">Getting Started</a></li>
+		<li class="header_menu_item "> <a href="../guides/getting-started.html">Quick Start</a></li>
 
 	
 		<li class="header_menu_item"> <!-- First Tier Drop Down --> <label for="drop-1" class="toggle">Guides +</label><a  href="#">Guides</a>			
 			<input type="checkbox" id="drop-1"/>
 			<ul id="guides">
 				<li class=""> <a href="../guides/ai-engine-guide.html">AI Engine Guide</a>  </li>
-				<li class=""> <a href="../guides/getting-started.html">Getting Started</a>  </li>
+				<li class=""> <a href="../guides/cli-guide.html">CLI Guide</a>  </li>
 				<li class=""> <a href="../guides/inkling-guide.html">Inkling Guide</a>  </li>
 			</ul> 
 		</li>
@@ -432,12 +432,13 @@ Usage: bonsai create [OPTIONS] BRAIN_NAME
 
 Options:
   --project TEXT       Override to target another project directory.
-  --project-type TEXT  Specify to download and use demo/starter project files.
+  --project-type TEXT  Specify to download and use demo/starter project files
+                       (i.e. "demos/cartpole")
   --help               Show this message and exit.
 </code></pre>
 <p><code class="prettyprint">bonsai create</code> generates a new brain and names it BRAIN_NAME.  It also sets the assumed BRAIN name for later commands.</p>
 
-<p>BRAIN names may include:</p>
+<p>BRAIN names may include (case insensitive, but case aware):</p>
 
 <ul>
 <li>letters</li>
@@ -445,7 +446,13 @@ Options:
 <li>dashes</li>
 </ul>
 
-<p>It is case insensitive, but case aware.</p>
+<p>If you&rsquo;d like to use one of our pre-populated projects, you may run <code class="prettyprint">bonsai create --project-type TEXT</code> in an empty directory where <code class="prettyprint">TEXT</code> is any of the following projects:</p>
+
+<ul>
+<li><code class="prettyprint">demos/cartpole</code></li>
+<li><code class="prettyprint">demos/mountain-car</code></li>
+<li><code class="prettyprint">templates/starter-project</code></li>
+</ul>
 
 <h2 id="bonsai-download">bonsai download</h2>
 <pre class="highlight plaintext"><code>$ bonsai download --help
@@ -493,7 +500,9 @@ Options:
   --project TEXT  Override to target another project directory.
   --help          Show this message and exit.
 </code></pre>
-<p>Displays <em>stderr</em> and <em>stdout</em> from the currently running simulator. This will display the last 1000 lines of the running simulator&rsquo;s output. You can override the BRAIN you want to log if multiple are running at the same time or the project .</p>
+<p>Displays <em>stderr</em> and <em>stdout</em> from the currently running simulator. This will display the last 1000 lines of the running simulator&rsquo;s output. You can override the BRAIN you want to log if multiple are running at the same time or the project.</p>
+
+<p>This command is meant for simulators running remotely on Bonsai&rsquo;s servers using <code class="prettyprint">bonsai train start --remote</code>. Simulators running locally will generally output this information at the command prompt.</p>
 
 <h2 id="bonsai-push">bonsai push</h2>
 <pre class="highlight plaintext"><code>$ bonsai push --help
@@ -503,7 +512,7 @@ Usage: bonsai push [OPTIONS]
 
 Options:
   --brain TEXT    Override to target another BRAIN.
-  --project TEXT  Override to target another project directory
+  --project TEXT  Override to target another project directory.
   --help          Show this message and exit.
 </code></pre>
 <p><code class="prettyprint">bonsai push</code> will upload the entire project file contents and all accompanying files to the Bonsai AI Engine and can be viewed on <a href="https://beta.bons.ai">beta.bons.ai</a>. You can override the BRAIN you want to push to or the project directory you want to push.</p>
@@ -535,9 +544,14 @@ Usage: bonsai train start [OPTIONS]
 Options:
   --brain TEXT    Override to target another BRAIN.
   --project TEXT  Override to target another project directory.
+  --remote        Run a simulator remotely on Bonsai’s servers.
   --help          Show this message and exit.
 </code></pre>
-<p><code class="prettyprint">bonsai start</code> turns on/enables training mode for the current BRAIN. The BRAIN trains whenever the simulator is connected. If the simulator is disconnected, the BRAIN remains in training mode, and it will train again where it left off when the simulator is reconnected.</p>
+<p><code class="prettyprint">bonsai train start</code> turns on/enables training mode for the current BRAIN. The BRAIN trains whenever a simulator is connected. </p>
+
+<p>When training locally, if the simulator is disconnected, the BRAIN remains in training mode, and it will train again where it left off when the simulator is reconnected up to an hour after being disconnected.</p>
+
+<p>If <code class="prettyprint">bonsai train start --remote</code> is used, then the server will run remotely on Bonsai&rsquo;s servers for supported simulators.</p>
 
 <h2 id="bonsai-train-stop">bonsai train stop</h2>
 <pre class="highlight plaintext"><code>$ bonsai train stop --help
@@ -550,7 +564,7 @@ Options:
   --project TEXT  Override to target another project directory.
   --help          Show this message and exit.
 </code></pre>
-<p><code class="prettyprint">bonsai stop</code> turns off training mode for the current BRAIN.</p>
+<p><code class="prettyprint">bonsai train stop</code> turns off training mode for the current BRAIN.</p>
 
 <h2 id="bonsai-train-status">bonsai train status</h2>
 <pre class="highlight plaintext"><code>$ bonsai train status --help

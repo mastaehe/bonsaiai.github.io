@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Getting Started - Bonsai</title>
+    <title>Quick Start - Bonsai</title>
     <style>
       .highlight table td { padding: 5px; }
 .highlight table pre { margin: 0; }
@@ -213,7 +213,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 	
   </head>
 
-  <body class="guides guides_getting-started" data-languages="[&quot;powershell&quot;,&quot;shell&quot;]">
+  <body class="guides guides_getting-started" data-languages="[]">
 	  
 	  
 	  <!-- Google Tag Manager (noscript) -->
@@ -234,14 +234,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 	<ul class="menu">
 
-		<li class="header_menu_item selected"> <a href="getting-started.html">Getting Started</a></li>
+		<li class="header_menu_item selected"> <a href="getting-started.html">Quick Start</a></li>
 
 	
 		<li class="header_menu_item"> <!-- First Tier Drop Down --> <label for="drop-1" class="toggle">Guides +</label><a  href="#">Guides</a>			
 			<input type="checkbox" id="drop-1"/>
 			<ul id="guides">
 				<li class=""> <a href="ai-engine-guide.html">AI Engine Guide</a>  </li>
-				<li class="selected"> <a href="getting-started.html">Getting Started</a>  </li>
+				<li class=""> <a href="cli-guide.html">CLI Guide</a>  </li>
 				<li class=""> <a href="inkling-guide.html">Inkling Guide</a>  </li>
 			</ul> 
 		</li>
@@ -279,15 +279,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </a>
     <div class="tocify-wrapper">
 
-        <div class="lang-selector">
-              <a href="#" data-language-name="powershell">Windows</a>
-              <a href="#" data-language-name="shell">macOS</a>
-        </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
         </div>
         <ul class="search-results"></ul>
-      <div class="page-title">Getting Started</div>
+      <div class="page-title">Quick Start</div>
       <div id="toc">
       </div>
       
@@ -345,322 +341,267 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="dark-box"></div>
       <div class="content">
         
-          <h1 id="overview-and-faq">Overview and FAQ</h1>
+          <h1 id="overview">Overview</h1>
 
 <p>Hello new Bonsai developer!</p>
 
-<p>There are some things you might want to know before you get started. In this section, we&rsquo;re going to walk you through the Bonsai Platform components and some of the fundamental ideas of the Bonsai Platform that are frequently asked questions. Next, we&rsquo;ll guide you through installing the necessary tools, connecting a simulator, training your BRAIN, and finally using your BRAIN!</p>
+<p>There are some things you might want to know before you get started. In this section, we&rsquo;re going
+to walk you through the components and fundamental ideas of the Bonsai
+Platform. Read through the Quick Start guide to learn how to get set up with Bonsai’s platform and what you can do with it.</p>
 
-<p>At the end of this guide we&rsquo;ll link you to resources that give you the tools to keep going, like our <a href="inkling-guide.html">Inkling Guide</a> and <a href="../references/cli-reference.html">CLI Reference</a>. You can also check out our <a href="../examples.html">examples</a> and tutorials (coming soon!).</p>
+<p>If you&rsquo;re the type of developer who wants to dive right in and see the Bonsai Platform working,
+however, <strong>skip down to <a href="#create-your-brain">Create Your BRAIN</a></strong> below. We&rsquo;ll guide you through setting up your
+first BRAIN with the Cartpole template, how to get that BRAIN training, and then explain what
+to do with it!</p>
 
-<p><strong>If you&rsquo;re not interested in the background, and want to jump right into the action, you can skip down to our <a href="#install-prerequisites">Install Prerequisites</a> section.</strong></p>
+<p>If you&rsquo;d prefer not to use our web interface, head to our <a href="cli-guide.html">CLI Guide</a> to follow a similar guide
+using tools on your local computer.</p>
 
-<h2 id="what-are-the-components-of-the-bonsai-platform">What are the components of the Bonsai Platform?</h2>
+<h2 id="the-bonsai-platform">The Bonsai Platform</h2>
 
-<p>This image displays all the components of Bonsai&rsquo;s Platform. The Platform enables developers to more efficiently build, teach and use intelligence models. A training source is any source of data used to teach or train an AI. It includes batch data like a large spreadsheet or a set of labels and images and synthetic data like the output from a simulation.</p>
+<blockquote>
+<p><img src="../images/bonsai-platform.png" alt="The Bonsai Platform" /></p>
+</blockquote>
 
-<p><img src="../images/bonsai_infographic_1024.png" alt="The Bonsai Platform" /></p>
-
-<h6 id="build">Build</h6>
+<h3 id="build">Build</h3>
 
 <ul>
-<li><strong>Bonsai Command Line Interface (CLI):</strong> is a command line tool that enables you to configure and control the Bonsai Artificial Intelligence (AI) Engine.</li>
-<li><strong><a href="https://beta.bons.ai">beta.bons.ai</a>:</strong> The address for Bonsai&rsquo;s beta web interface; this is the browser based tool that includes your <em>BRAIN Dashboard</em> and <em>BRAIN Details</em> page.</li>
-<li><strong>Simulators:</strong> are currently the only training source implemented. Simulators are often a complex, interactive virtual environment. They usually have state, which is a representation of the world inside the virtual environment.</li>
-<li><strong>Generators:</strong> are a training source. They produce labeled data programmatically. This data is effectively infinite. A generator could, for example, produce a random (but known) integer, set of line segments, etc.</li>
-<li><strong>Data:</strong> is also a training source. It is information related to the scenario being trained and can also be used to test and evaluate how well the training is implemented. Data could be a collection of images and labels or the rows of a spreadsheet. An example of a data set you could train with is the <a href="http://yann.lecun.com/exdb/mnist/">MNIST database</a>, which is a collection of handwritten digits used for training image processing systems and other machine learning systems.</li>
+<li><strong>Bonsai Command Line Interface (CLI):</strong> is a command line tool that enables you to configure and
+control the Bonsai Artificial Intelligence (AI) Engine. This is an alternative to using the Web
+Interface and is not covered in this guide. See the <a href="cli-guide.html">CLI Guide</a> if you prefer to run the platform locally.</li>
+<li><strong>Web Interface:</strong> is the browser-based tool found at <a href="https://beta.bons.ai">beta.bons.ai</a> for creating and analyzing
+BRAINs stored in the Bonsai AI Engine. You can also visualize the BRAIN&rsquo;s training on this page.
+This is what we will use for this Quick Start guide because you can get up and running on the
+Bonsai Platform in just a few clicks!</li>
+<li><strong>Simulators:</strong> are often a complex interactive virtual environment. For this project, you&rsquo;ll
+be using a simple simulator from OpenAI. Simulators usually have state, which is a representation of the
+world inside the virtual environment and receive actions which change that state.</li>
 </ul>
 
 <aside class="notice">
-Currently, during our private beta, you can only use simulators as your training source.
+Currently, during our beta, you can only use simulators as your training source. Generators
+and Data sources will be released at a future time.
 </aside> 
 
-<h6 id="teach">Teach</h6>
+<h3 id="teach">Teach</h3>
 
 <ul>
-<li><strong>Inkling:</strong> our unique, special purpose, pedagogical programming language. Pedagogical programming is a new programming paradigm. It expresses the solution to a problem in terms of how you teach the computer to find the solution as opposed to how to calculate the solution.</li>
-<li><strong>Bonsai Artificial Intelligence (AI) Engine:</strong> abstracts away and automates the low-level mechanics of artificial intelligence. Each Inkling program developed is fed into the Bonsai AI Engine in order to generate and train appropriate models (referred to as BRAINs).</li>
+<li><strong>Inkling:</strong> our special purpose programming language for machine teaching. It expresses the
+solution to a problem in terms of how you teach the computer to find the solution as opposed to
+how to calculate the solution. This means that you, the developer, can leverage your domain-specific
+expertise about the problem space and leverage our expertise about machine learning. To learn more
+about Inkling, refer to our <a href="inkling-guide.html">Inkling Guide</a>.</li>
+<li><strong>Bonsai Artificial Intelligence (AI) Engine:</strong> abstracts away and automates the low-level
+mechanics of artificial intelligence. Each Inkling program developed is fed into the Bonsai AI
+Engine in order to generate and train appropriate models (referred to as <a href="#bonsai-brains">BRAINs</a>).</li>
 </ul>
 
-<h6 id="use">Use</h6>
+<h3 id="use">Use</h3>
 
 <ul>
-<li><strong>Mastermind:</strong> the Bonsai AI application for building AI. This tool will contain our Integrated Development Environment (IDE). <strong>Note:</strong> This tool will not be available for the private beta.</li>
-<li><strong>SDK &amp; Libraries:</strong> enables you to connect your own simulators to the Bonsai AI Engine. They also enable you to integrate your application with your BRAIN.</li>
-<li><strong>HTTP API:</strong> enables AI creators and AI users to interact with the Bonsai AI Engine.</li>
+<li><strong>SDK/Library:</strong> can be used after your BRAIN is created and trained. Use with your own
+application by connecting it to the API generated by the AI Engine using the <a href="../references/library-reference.html">Bonsai library</a>. </li>
+<li><strong>APIs:</strong> enables AI creators and AI users to interact with the Bonsai AI Engine. To learn more
+about our APIs, refer to our <a href="../references/api-reference.html">API Reference</a>.</li>
 </ul>
 
-<p>After your BRAIN is created and trained, you can use it with your application by connecting it to the API generated by the AI Engine using the Bonsai library specific to your application&rsquo;s programming language. Ultimately, our platform enables you to build AI agents that work (or play) for you without a deep knowledge of machine learning.</p>
+<p>Ultimately, our platform enables you to build AI agents that work (or play) for you without a deep
+knowledge of machine learning.</p>
 
-<h2 id="what-is-a-brain-what-is-the-bonsai-ai-engine">What is a BRAIN? What is the Bonsai AI Engine?</h2>
+<h2 id="what-are-brains">What are BRAINs?</h2>
 
-<p>A BRAIN, <strong>Basic Recurrent Artificial Intelligence Network</strong>, is an individual AI agent, and it is programmed to learn using Inkling. Each BRAIN lives in the <strong>Bonsai Artificial Intelligence (AI) Engine</strong> which manages and automates much of the lower level complexities of working with artificial intelligence.</p>
+<p>A BRAIN, <strong>Basic Recurrent Artificial Intelligence Network</strong>, is an individual AI agent, and it is
+programmed to learn using Inkling. Each BRAIN lives in the <strong>Bonsai Artificial Intelligence (AI)
+Engine</strong> which manages and automates much of the lower level complexities of working with artificial intelligence.</p>
 
-<p>The Bonsai AI Engine contains a vast array of machine learning algorithms, manages data streaming and data storage, and provides the efficient allocation of hardware resources. It is built with an infrastructure that supports streaming data efficiently through the system, and it uses a set of heuristics to make choices about which learning algorithms to use to train each BRAIN. The set of heuristics also make it possible for it to choose from any number of possible algorithms, topologies, etc., train all of them in parallel, and pick the best result.</p>
+<p>The Bonsai AI Engine contains a vast array of machine learning algorithms, manages data streaming
+and data storage, and provides the efficient allocation of hardware resources. It is built with an
+infrastructure that supports streaming data efficiently through the system, and it uses a set of
+heuristics to make choices about which learning algorithms to use to train each BRAIN. The set of
+heuristics also make it possible for it to choose from any number of possible algorithms, topologies,
+etc., train all of them in parallel, and pick the best result.</p>
 
-<p>For example, if the BRAIN Server picked Deep Q-Learning, which is a machine learning algorithm, then the system also picks the appropriate topology, hyper-parameters, and initial weight values.</p>
+<p>For example, if the BRAIN Server picked Deep Q-Learning, which is a machine learning algorithm,
+then the system also picks the appropriate topology, hyper-parameters, and initial weight values.</p>
 
-<p>The Bonsai AI Engine also determines when to train each concept, how much (or little) to train each concept based on its relevance, and, ultimately, produces a trained BRAIN. Furthermore, it does something we call <strong>meta-learning</strong>. Meta-learning means that the system keeps a kind of memory or record about each program it&rsquo;s seen, the data it used for training, and the generated AIs that it&rsquo;s made. It also records how fast those AIs trained and how accurate they became. The BRAIN server is continuously learning and improving over that dataset.</p>
+<p>The Bonsai AI Engine also determines when to train each concept, how much (or little) to train each
+concept based on its relevance, and, ultimately, produces a trained BRAIN. Furthermore, it does
+something we call <strong>meta-learning</strong>. Meta-learning means that the system keeps a kind of memory or
+record about each program it&rsquo;s seen, the data it used for training, and the generated AIs that it&rsquo;s
+made. It also records how fast those AIs trained and how accurate they became. The BRAIN server is
+continuously learning and improving over that dataset.</p>
 
-<h3 id="you-might-say-the-system-learns-to-make-learning-systems">You might say the system learns to make learning systems.</h3>
+<p>Read more about how the Bonsai AI Engine works in our <a href="ai-engine-guide.html">AI Engine Guide</a>.</p>
 
 <h2 id="what-is-a-simulator">What is a simulator?</h2>
 
-<p>A simulator imitates a real-world situation in a virtual environment, which enables a user to model and test situations that would often, otherwise be very complicated to set up and test. Your simulator could be a game, such as breakout, or an emulation of a real-world process, such as a self-driving car. Training with simulators is especially useful for optimization, or for use with complex control problems that can be modeled in a simulator.</p>
+<p>A simulator imitates a real-world situation in a virtual environment, which enables a user to model
+and test situations that would often, otherwise be very complicated to set up and test. Your
+simulator could be a game, such as Cartpole, or an emulation of a real-world process, such as a
+self-driving car. Training with simulators is especially useful for optimization, or for use with
+complex control problems that can be modeled in a simulator.</p>
 
-<p>Training means teaching a BRAIN to reach a specific outcome in the simulator. The training involves using a specific set of concepts, a curriculum, and lessons, which are described in the Inkling file.</p>
+<p>Training means teaching a BRAIN to reach a specific outcome in the simulator. The training involves
+using a specific set of concepts, a curriculum, and lessons, which are described in the Inkling file.</p>
 
-<p><strong>IMPORTANT:</strong>  Currently, a simulation runs on your local machine and streams data to the BRAIN server for training. This means your computer needs to remain connected to the Bonsai AI Engine while your BRAIN is training. If your computer is disconnected from the server you can reconnect within an hour and it will pick back up where it left off. Otherwise, your training will start on a new version (your old training is still saved to the previous version). If you want to leave your training running overnight, please make sure that your computer will stay connected by turning off sleep functionality. </p>
+<p>Today, we only support simulators written in python. To learn more about connecting your own
+simulator, refer to our <a href="../references/library-reference.html">Library Reference</a>.</p>
 
-<p>Today, we only support simulators written in python. To learn more about connecting your own simulator, refer to our <a href="../references/library-reference.html">Library Reference</a>.</p>
-
-<h2 id="what-is-inkling">What is Inkling?</h2>
-
-<p><strong>Inkling</strong> is our programming language designed to express higher level abstractions related to teaching.</p>
-
-<p>Inkling enables us to use a teaching-oriented approach, also known as Pedagogical Programming, for training AI. It provides a set of foundational primitives that can be used to represent AI without specifying how the AI is created. By abstracting away the underlying algorithms and techniques, you can focus on creative ways to describe your problems and leave the heavy lifting to us.</p>
-
-<p>This means that you, the developer, can leverage your domain-specific expertise about the problem space and leverage our expertise about machine learning.</p>
-
-<p>Inkling is designed to enable you to solve any AI problem whether learning to label images or controlling a simulation. In the current version, Bonsai&rsquo;s technology is focused on solving control and optimization problems using simulation. When you train a BRAIN to solve an AI problem, you write a file in Inkling that teaches the AI to solve it. Inkling files describe the concepts that you want to teach and the curriculum and lessons for teaching them.</p>
-
-<p>To learn more about Inkling, refer to our <a href="inkling-guide.html">Inkling Guide</a>.</p>
-
-<h2 id="what-is-the-bonsai-cli">What is the Bonsai CLI?</h2>
-
-<p>The Bonsai Command Line Interface (CLI) is a command line tool that enables you to configure the Bonsai AI Engine. The CLI is especially useful for automation and connection to other tools. Currently, there are some actions that can only be performed using the CLI, such as loading your Inkling file and connecting your simulator.</p>
-
-<p>To learn more about the Bonsai CLI, refer to our <a href="../references/cli-reference.html">CLI Reference</a>.</p>
-
-<h2 id="what-is-beta-bons-ai-for">What is <a href="https://beta.bons.ai">beta.bons.ai</a> for?</h2>
-
-<p>The Bonsai Beta Website is a browser-based tool for configuring and analyzing BRAINs stored in the Bonsai AI Engine. In the future, this website will be useful for sharing BRAINs, collaborating, and learning. There is some information you can only get from beta.bons.ai, such as a visualization of a BRAIN&rsquo;s training progress.</p>
-
-<h3 id="brain-dashboard"><strong>BRAIN Dashboard</strong></h3>
-
-<p>Your BRAIN Dashboard contains all of your BRAINs. The BRAIN Dashboard is also where you can create new BRAINs.</p>
-
-<h3 id="brain-details"><strong>BRAIN Details</strong></h3>
-
-<p>There is a BRAIN Details page for each of your BRAINs. Each page shows that BRAIN&rsquo;s status, training graph, and commands you can use in the CLI specifically for this BRAIN.</p>
-
-          <h1 id="install-prerequisites">Install Prerequisites</h1>
-
-<p>Before you begin, you will need to have access to our Beta. If you don&rsquo;t have access yet, request access at <a href="http://pages.bons.ai/apply.html">bons.ai</a>.</p>
-
-<p>The next section walks you through how to install Git, Python, and pip, but if you&rsquo;re already ahead of the curve and <strong>have them all installed</strong>, skip down to <a href="#setup-the-bonsai-cli">Setup the Bonsai CLI</a>. </p>
-
-<aside class="notice">
-We highly recommend macOS users download Python directly in the Manual Install instructions or use <a href="http://brew.sh/">Homebrew</a> so you can perform the following steps on user-land Python rather than <a href="https://github.com/MacPython/wiki/wiki/Which-Python">system Python</a>.
-</aside>
-
-<p><strong>There are three sets of install instructions, please pick the one that suits your situation:</strong></p>
-
-<ol>
-<li>If you have <strong>Anaconda</strong> installed on your system, skip down to <a href="#install-with-anaconda">Install with Anaconda</a>.</li>
-<li>If you have <strong>Chocolatey (Windows)</strong> or <strong>Homebrew (macOS)</strong> installed on your system, skip down to <a href="#install-with-chocolatey-or-homebrew">Install with Chocolatey or Homebrew</a>.</li>
-<li>If you <em>do not</em> have Chocolatey, Homebrew, or Anaconda installed on your system continue to follow our <strong>Manual Install</strong> intructions below.</li>
-</ol>
-
-<aside class="notice">
-The two tabs to the right allow you to follow this guide as a macOS or Windows user. Instructions also vary slightly between Python 2 and Python 3 so please be sure to follow your version&rsquo;s instructions.
-</aside>
-
-<h2 id="manual-install">Manual Install</h2>
-
-<h3 id="windows">Windows</h3>
-
-<ul>
-<li><strong>Git</strong>: Download and install Git from <a href="https://git-for-windows.github.io/">Git for Windows</a>. </li>
-<li><strong>Python</strong>: Download and install Python (3.6 or 2.7) from <a href="https://www.python.org">python.org</a>.</li>
-</ul>
-
-<aside class="warning">
-For users installing <b>Python 2.7</b>: Make sure to include adding Python to your PATH when customizing your install on the third screen. <br>
-For users installing <b>Python 3.6</b>: Make sure to check the box on the first screen of the install to add Python to your PATH.
-</aside>
-
-<ul>
-<li><strong>pip</strong>: Python version 2.7.9 and greater come with pip, but if for some reason you need to use a different version of Python please follow <a href="https://pip.pypa.io/en/stable/installing/">these instructions</a>.</li>
-</ul>
-
-<aside class="notice">
-Please remember to reboot your computer after installing Python and Git to make sure all install settings take effect.
-</aside>
-
-<p><strong>Great!</strong> Now that you have Git, Python, and pip installed, you can skip down to <a href="#setup-the-bonsai-cli">Setup the Bonsai CLI</a>. </p>
-
-<h3 id="macos">macOS</h3>
-
-<ul>
-<li><strong>Git</strong>: Git is more than likely already installed on your computer if you have Xcode, but if not, run <code class="prettyprint">git</code> from your command prompt and the system will prompt you to install.</li>
-<li><strong>Python</strong>: Download and install Python (3.6 or 2.7) from <a href="https://www.python.org">python.org</a>.</li>
-</ul>
-
-<aside class="notice">
-We highly recommend macOS users download Python directly so you can follow this guide on user-land Python rather than <a href="https://github.com/MacPython/wiki/wiki/Which-Python">system Python</a>.
-</aside>
-
-<ul>
-<li><strong>pip</strong>: Python version 2.7.9 and greater come with pip (or pip3 for version 3+), but if for some reason you need to use a different version of Python please follow <a href="https://pip.pypa.io/en/stable/installing/">these instructions</a>.</li>
-</ul>
-
-<p><strong>Great!</strong> Now that you have Git, Python, and pip installed, you can skip down to <a href="#setup-the-bonsai-cli">Setup the Bonsai CLI</a>. </p>
-
-<h2 id="install-with-chocolatey-or-homebrew">Install with Chocolatey or Homebrew</h2>
-
-<p>If you <em>do not</em> have Chocolatey or Homebrew installed on your system, please go to the <a href="#manual-install">Manual Install</a> or <a href="#install-with-anaconda">Install with Anaconda</a> instructions.</p>
+          <h1 id="create-your-brain">Create Your BRAIN</h1>
 
 <blockquote>
-<p>Python 2</p>
+<p>Open AI&rsquo;s Cartpole Gym
+<img src="../images/cart-pole-balance.gif" alt="Cartpole Trained" /></p>
 </blockquote>
-<pre class="highlight powershell tab-powershell"><code>choco install git
-choco install python2
-</code></pre><pre class="highlight shell tab-shell"><code>brew install python
-</code></pre>
-<blockquote>
-<p>Python 3</p>
-</blockquote>
-<pre class="highlight powershell tab-powershell"><code>choco install git
-choco install python
-</code></pre><pre class="highlight shell tab-shell"><code>brew install python3
-</code></pre>
-<h3 id="windows">Windows</h3>
 
-<p><strong>If you&rsquo;re already familiar with <a href="https://chocolatey.org/">Chocolatey</a>, follow these instructions.</strong></p>
+<p>Before you begin, you will need to have access to our private beta. If you don&rsquo;t have access yet,
+request access at <a href="http://pages.bons.ai/apply.html">bons.ai</a>.</p>
 
-<aside class="notice">
-Please remember to run choco commands in administrator powershell or command prompt.
-</aside>
+<p>In this guide, we’ll walk you through creating a BRAIN to train the <a href="https://gym.openai.com/envs/CartPole-v1">OpenAI Gym</a> environment for
+Cartpole, a simple balance control problem. The walkthrough of the Inkling code and simulator
+interface can be found in our <a href="../examples.html#openai-gym-cart-pole">Examples</a> and the full source code for you to take a look at
+is on <a href="https://github.com/BonsaiAI/gym-cartpole-sample">Bonsai&rsquo;s GitHub</a>.</p>
 
-<h3 id="macos">macOS</h3>
+<p>If you&rsquo;d prefer not to use our web interface, head to our <a href="cli-guide.html">CLI Guide</a> to follow a similar guide
+to this one on your local computer.</p>
 
-<p><strong>If you&rsquo;re already familiar with <a href="http://brew.sh/">Homebrew</a>, follow these instructions.</strong></p>
-
-<ul>
-<li><strong>Git</strong>: Git is more than likely already installed on your computer if you have Xcode, but if not, run <code class="prettyprint">git</code> from your command prompt and the system will prompt you to install.</li>
-<li><strong>Python</strong>: Run the install command on the tab to the right to <code class="prettyprint">brew install</code> the Python version of your choice.</li>
-</ul>
-
-<h2 id="install-with-anaconda">Install with Anaconda</h2>
-<pre class="highlight plaintext"><code>conda install git
-</code></pre>
-<p>If you <em>do not</em> have Anaconda installed on your system, please go to the <a href="#manual-install">Manual Install</a> or <a href="#install-with-chocolatey-or-homebrew">Install with Chocolatey or Homebrew</a> instructions.</p>
-
-<p><code class="prettyprint">conda</code> is a tool for installing and managing Python and R dependencies. Anaconda includes Python and pip, so all you need to do is install Git if you haven&rsquo;t already. For more information, refer to the <a href="https://www.continuum.io/anaconda-overview">Anaconda website</a>.</p>
-
-<h1 id="setup-the-bonsai-cli">Setup the Bonsai CLI</h1>
+<h2 id="brain-dashboard">BRAIN Dashboard</h2>
 
 <blockquote>
-<p>Python 2 and Anaconda</p>
-</blockquote>
-<pre class="highlight plaintext"><code>pip install bonsai-cli
-bonsai configure
-</code></pre>
-<blockquote>
-<p>Python 3</p>
-</blockquote>
-<pre class="highlight powershell tab-powershell"><code><span class="c1"># same as above</span>
-</code></pre><pre class="highlight shell tab-shell"><code>pip3 install bonsai-cli
-bonsai configure
-</code></pre>
-<p>From your command prompt, install the Bonsai Command Line Interface tool and configure it. <code class="prettyprint">bonsai configure</code> will ask for your Access Key. You can find your Access Key in your <a href="https://beta.bons.ai/accounts/key">Bonsai Account Settings</a>.</p>
+<p><img src="../images/no_brains_image.png" alt="No BRAIN Dashboard" /></p>
 
-<h2 id="clone-a-sample-project">Clone a sample project</h2>
+<p><img src="../images/quick-start-create-brain.png" alt="Setup Cartpole BRAIN" /></p>
+</blockquote>
 
-<p>Clone a sample simulation project with <code class="prettyprint">git clone</code>. For this guide we&rsquo;ll be walking you through <a href="https://gym.openai.com/envs/MountainCar-v0">OpenAI Gym&rsquo;s Mountain Car</a> environment, one of the supported Bonsai simulators.</p>
-<pre class="highlight plaintext"><code>git clone https://github.com/BonsaiAI/gym-mountaincar-sample
-</code></pre>
-<h2 id="install-requirements">Install requirements</h2>
+<p>The dashboard has a New BRAIN button as pictured. Click on it to create a BRAIN.</p>
+
+<h3 id="create-new-brain">Create New BRAIN</h3>
+
+<p>Select ‘Cartpole’ from the set of BRAIN templates. The Cartpole simulation can be managed on Bonsai’s
+servers, so you don&rsquo;t need to run anything locally on your computer to train this simulation. At
+this time, you will also be asked to give your BRAIN a name and a description.</p>
+
+<p>Click on the &ldquo;Create&rdquo; button which will take you to the BRAIN Details page.</p>
+
+<h2 id="brain-details">BRAIN Details</h2>
 
 <blockquote>
-<p>Python 2 and Anaconda</p>
+<p>BRAIN Graph
+<img src="../images/quick-start-no-training.png" alt="Untrained BRAIN graph" /></p>
 </blockquote>
-<pre class="highlight plaintext"><code>cd gym-mountaincar-sample
-pip install -r requirements.txt
+
+<h3 id="brain-training-graph">BRAIN Training Graph</h3>
+
+<p>Do not be afraid! You don&rsquo;t have data yet because you haven&rsquo;t trained your new BRAIN! That&rsquo;s the
+next step. This graph will display each of your concepts to be trained (if you look in the Inkling
+code you&rsquo;ll see that Cartpole only has one).</p>
+
+<blockquote>
+<p>Code Editor Window
+<img src="../images/quick-start-code-editor.png" alt="Code Editor Window" /></p>
+</blockquote>
+
+<h3 id="code-editor-window">Code Editor Window</h3>
+
+<p>The code editor shows you all of the files that are contained within your project and the contents
+of each file if you click on them on the left.</p>
+
+<p>Your code will automatically compile (if it&rsquo;s Inkling) and save every few seconds while you are
+editing. You never need to edit code in the browser if you don&rsquo;t want to. Check out our
+<a href="cli-guide.html">CLI Guide</a> to install the Bonsai CLI locally, download these files, and run the rest of this
+guide locally if you want.</p>
+
+<h1 id="train-your-brain">Train Your BRAIN</h1>
+
+<blockquote>
+<p><img src="../images/quick-start-start-training.png" alt="Start Training BRAIN" /></p>
+
+<p><img src="../images/quick-start-trained-brain.png" alt="Trained BRAIN" /></p>
+</blockquote>
+
+<p>When you&rsquo;re done checking out the code editor and ready to start training this BRAIN on the
+Cartpole simulator, simply click the <strong>Start Training</strong> button below the graph.</p>
+
+<p>What this is going to do is spin up a container for the <a href="#what-are-brains">AI Engine</a>, connect up to the
+<code class="prettyprint">cartpole_simulator.py</code> file, and start the BRAIN training. All with one button!</p>
+
+<p>Training Cartpole for ~2,000 episodes is ideal, and might take between 15-30 minutes depending on
+how well your BRAIN is performing. You can see in the images that it only took about a minute for
+the first ~1,000 episodes but the second half took 14 minutes. Your graphs will vary greatly so
+don&rsquo;t worry if they don&rsquo;t look like these.</p>
+
+<p>The server will automatically end training once the BRAIN reaches past a certain accuracy, but you
+will most likely want to stop training before it gets there because there will be diminishing returns
+for training past about 2,000 episodes. You can play around with training for
+15 mins, 30 mins, or even 1 hour and use your BRAIN to see how well it plays each time!</p>
+
+<h1 id="use-your-brain">Use Your BRAIN</h1>
+
+<blockquote>
+<p><img src="../images/cart-pole-balance.gif" alt="Cartpole Trained" /></p>
+</blockquote>
+
+<p>Congratulations on training your first BRAIN! &ldquo;What do I do with it now?&rdquo; you may ask.</p>
+
+<p>To use the BRAIN you&rsquo;ve just trained you&rsquo;ll need to locally run the python simulator for OpenAI Gym.
+If this was your own simulation you had written, this would be the part where you hook it up to
+your application and get a prediction of your own!</p>
+
+<p>If you <strong>decide to skip this setup</strong> for any reason or have trouble installing the Bonsai CLI you
+can get the satisfaction of what the simulation would look like by watching this pole balance on
+the cart in gif form.</p>
+
+<h2 id="install-bonsai-cli">Install Bonsai CLI</h2>
+
+<blockquote>
+<p>Install Bonsai CLI</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>pip install bonsai-cli
+
+<span class="c"># If you're running python3 on macOS:</span>
+pip3 install bonsai-cli
+</code></pre>
+<p>The Bonsai Command Line Interface (CLI) is a command line tool that enables you to configure the
+Bonsai AI Engine. The CLI is especially useful for automation and connection to other tools.
+Currently, there are some actions that can only be performed using the CLI, such as simulator prediction.</p>
+
+<p>If you already <strong>have python installed</strong> you should be able to run the python package manager <code class="prettyprint">pip</code>
+to install the Bonsai CLI. Otherwise, check out the <a href="cli-guide.html#install-prerequisites">CLI Guide Install Prerequisites</a> section
+to get everything installed and then come back here.</p>
+
+<h2 id="run-prediction">Run Prediction</h2>
+
+<blockquote>
+<p>Download Project Files</p>
+</blockquote>
+<pre class="highlight plaintext"><code>bonsai download myCartpole
+cd myCartpole
 </code></pre>
 <blockquote>
-<p>Python 3</p>
+<p>Install Simulator&rsquo;s Requirements</p>
 </blockquote>
-<pre class="highlight powershell tab-powershell"><code><span class="c1"># same as above</span>
-</code></pre><pre class="highlight shell tab-shell"><code><span class="nb">cd </span>gym-mountaincar-sample
+<pre class="highlight shell tab-shell"><code>pip install -r requirements.txt
+
+<span class="c"># If you're running python3 on macOS:</span>
 pip3 install -r requirements.txt
 </code></pre>
-<p>Enter into the Mountain Car folder and then install the Mountain Car requirements from OpenAI Gym.</p>
+<p>The <code class="prettyprint">cartpole_simulator.py</code> simulator file that you need to run is one of the project files the
+server created when you made your BRAIN. You can download these project files locally with the
+<code class="prettyprint">download</code> command, and then <code class="prettyprint">cd</code> into that folder to look around.</p>
 
-<h1 id="create-your-brain">Create your BRAIN</h1>
-
-<p>Create your BRAIN and give it a name. You can also create a BRAIN from your <a href="https://beta.bons.ai">beta.bons.ai</a> BRAIN Dashboard instead of using the command line. Either way, you will view your BRAIN&rsquo;s progress on the BRAIN Details page.</p>
-
-<h3 id="create-from-web">Create from Web</h3>
-
-<p><img src="../images/no_brains_image.png" alt="BRAINS Dashboard Page" /></p>
-
-<p>The dashboard has a NEW BRAIN button, pictured above. Click on it to start the BRAIN creation process, where you&rsquo;re provided a form to give your brain a name and description. Name can contain alpha, numerals, or hyphens; the description is arbitrary and should contain human-readable text that explains your intent for the BRAIN.</p>
-
-<h3 id="create-from-command-line">Create from Command Line</h3>
-<pre class="highlight plaintext"><code>bonsai create myMountainCarBrain
-</code></pre>
-<p>You may give your brain a name with <code class="prettyprint">bonsai create brainName</code> but there is no option for a description with this method but after you create your BRAIN, you can change its description from the web on the BRAIN Details page.</p>
-
-<h1 id="train-your-brain">Train your BRAIN</h1>
-
-<h2 id="load-sample-inkling-into-your-brain">Load sample Inkling into your BRAIN</h2>
-<pre class="highlight plaintext"><code>bonsai load
-</code></pre>
-<p>Load your sample Inkling file for the Mountain Car simulation.</p>
-
-<h2 id="start-training-mode">Start Training Mode</h2>
-<pre class="highlight plaintext"><code>bonsai train start
-</code></pre>
-<p>Almost there! Time to tell the AI engine to prepare a new BRAIN version for training. Start the training mode for your BRAIN.</p>
-
-<h2 id="connect-the-simulator-for-training">Connect the simulator for training</h2>
+<p>You&rsquo;ll also want to run the <code class="prettyprint">requirements.txt</code> file which contains all of the packages your simulator needs to run. This <code class="prettyprint">pip</code> command will make sure all of them are installed, and if not, install them for you.</p>
 
 <blockquote>
-<p>Python 2</p>
+<p>Use Your BRAIN</p>
 </blockquote>
-<pre class="highlight plaintext"><code>python mountaincar_simulator.py --train-brain=myMountainCarBrain --headless
+<pre class="highlight shell tab-shell"><code>python cartpole_simulator.py --predict-brain<span class="o">=</span>myCartpole --predict-version<span class="o">=</span>latest
+
+<span class="c"># If you're running python3 on macOS:</span>
+python3 cartpole_simulator.py --predict-brain<span class="o">=</span>myCartpole --predict-version<span class="o">=</span>latest
 </code></pre>
-<blockquote>
-<p>Python 3</p>
-</blockquote>
-<pre class="highlight powershell tab-powershell"><code><span class="c1"># same as above</span>
-</code></pre><pre class="highlight shell tab-shell"><code>python3 mountaincar_simulator.py --train-brain<span class="o">=</span>myMountainCarBrain --headless
-</code></pre>
-<p>Everything is in place, it&rsquo;s time to start the simulator and test things out. To do this, call Python and then the simulator file. Training will begin automatically and if the simulator gets disconnected, training resumes from the same point when the simulator is reconnected if it&rsquo;s within an hour of the disconnect. Remember, as mentioned in <a href="#what-is-a-simulator">What is a simulator?</a> if you want your training to take place overnight, make sure that your computer won&rsquo;t go to sleep and disconnect for more than an hour or that training time will be lost!</p>
-
-<aside class="notice">
-We use headless here to indicate we don&rsquo;t need to see a graphical display from the simulator; if you&rsquo;d like to see it and watch the simulator learn, omit this option.
-</aside>
-
-<h2 id="view-your-brain-training-status">View your BRAIN training status</h2>
-
-<p>View your BRAIN&rsquo;s training status as it trains on the simulator by going to the BRAIN&rsquo;s Dashboard page on <a href="https://beta.bons.ai">beta.bons.ai</a>. Training Mountain Car takes about an hour to get sufficient training to beat the game most of the time. If you want flawless victories each time the simulator can take up to 2 hours before you&rsquo;ll see the graph level out.</p>
-
-<p><img src="../images/fully_trained_brain.png" alt="Fully Trained BRAIN" /></p>
-
-<p>There is no automatic ending to training, you can train forever, but there will be diminishing returns after a couple of hours. You can play around with training for 15 mins, 30 mins, 1 hour, etc and use your BRAIN to see how well it plays each time! It takes about 700 episodes to train the BRAIN correctly. Our ideal target is an average reward of -195 or higher over 100 consecutive episodes.</p>
-
-<h2 id="stop-training">Stop training</h2>
-<pre class="highlight plaintext"><code>bonsai train stop
-</code></pre>
-<p>Once we&rsquo;ve gotten to this level of performance (or sooner if you prefer), CTRL-C to disconnect the simulator, then <code class="prettyprint">bonsai train stop</code> will end the training, and proceed to prediction.</p>
-
-<h1 id="use-your-brain">Use your BRAIN</h1>
-
-<blockquote>
-<p>Python 2</p>
-</blockquote>
-<pre class="highlight plaintext"><code>python mountaincar_simulator.py --predict-brain=myMountainCarBrain --predict-version=latest
-</code></pre>
-<blockquote>
-<p>Python 3</p>
-</blockquote>
-<pre class="highlight powershell tab-powershell"><code><span class="c1"># same as above</span>
-</code></pre><pre class="highlight shell tab-shell"><code>python3 mountaincar_simulator.py --predict-brain<span class="o">=</span>myMountainCarBrain --predict-version<span class="o">=</span>latest
-</code></pre>
-<p>After your BRAIN is finished training it can play the Mountain Car game. How well it does depends on how long you let it train! Using your BRAIN involves calling Python on the same simulator file, but now in predict mode, and <code class="prettyprint">--predict-version=latest</code> will use the latest training session that you just ran.</p>
+<p>It&rsquo;s finally time to run the simulator using predictions from your BRAIN! How well it does depends
+on how long you let it train. Using your BRAIN involves calling Python on the project&rsquo;s simulator
+file, in predict mode, and <code class="prettyprint">--predict-version=latest</code> will use the latest training session that you just ran.</p>
 
           <h1 id="next-steps">Next Steps</h1>
 
@@ -687,10 +628,6 @@ We use headless here to indicate we don&rsquo;t need to see a graphical display 
 
       </div>
       <div class="dark-box">
-          <div class="lang-selector">
-                <a href="#" data-language-name="powershell">Windows</a>
-                <a href="#" data-language-name="shell">macOS</a>
-          </div>
       </div>
     </div>
 
