@@ -1371,6 +1371,7 @@ nav li > a:only-child:after {content: '';}
 		-ms-flex-direction: column-reverse;
 		flex-direction: column-reverse;
 		margin-top: 16px;
+    width: 100%;
 	}
 
 	/* Change menu item's width to 100% */
@@ -1500,6 +1501,7 @@ nav li > a:only-child:after {content: '';}
   background-repeat: no-repeat;
   background-size: 20px;
   margin-bottom: 0;
+  width: 90%;
 }
 
 .algolia-autocomplete .algolia-docsearch-suggestion--highlight {
@@ -1518,6 +1520,10 @@ nav li > a:only-child:after {content: '';}
 
 .algolia-autocomplete .algolia-docsearch-suggestion--text .algolia-docsearch-suggestion--highlight {
     box-shadow: inset 0 -2px 0 0 #3bb94f;
+}
+
+.algolia-autocomplete {
+  width: 90%;
 }
 
 /* For bigger screens, when displaying results in two columns */
