@@ -197,20 +197,20 @@
   color: #f92672;
 }
     </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
     <link href="../stylesheets/screen.css" rel="stylesheet" media="screen" />
     <link href="../stylesheets/print.css" rel="stylesheet" media="print" />
-	<link href="../stylesheets/test.css" rel="stylesheet" media="screen" />
+	  <link href="../stylesheets/test.css" rel="stylesheet" media="screen" />
     <link href="../favicon.ico" rel="icon" type="image/ico" />
       <script src="../javascripts/all.js"></script>
 	
-	<!-- Google Tag Manager -->
+	  <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-WVB6MG2');</script>
 <!-- End Google Tag Manager -->
-	
   </head>
 
   <body class="references references_inkling-reference" data-languages="[&quot;inkling--code&quot;,&quot;inkling--syntax&quot;]">
@@ -258,7 +258,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		
 		<li class="header_menu_item "> <a href="../examples.html">Examples</a></li>
 
-		<li><gcse:search  linktarget="_parent"></gcse:search></li>
+		<li>
+			<input type="search" id="docs-search" placeholder="Search Bonsai Docs">
+		</li>
 
 
 	</ul>
@@ -1406,6 +1408,14 @@ This means train until the curriculum objective (<code class="prettyprint">ball_
     </div>
 
   </div>
-
+  <!-- at the end of the BODY -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+  <script type="text/javascript"> docsearch({
+  apiKey: '49fa6f01d7ff94a85b9b7434b1c2b7cf',
+  indexName: 'bon-sai',
+  inputSelector: '#docs-search',
+  debug: false // Set debug to true if you want to inspect the dropdown
+  });
+  </script>
   </body>
 </html>
