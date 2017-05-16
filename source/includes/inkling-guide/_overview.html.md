@@ -1,9 +1,9 @@
 # Overview
 
 ```
-##########
-# Inkling Code Snippets will be shown here
-##########
+############################################
+# Inkling Code Snippets will be shown here #
+############################################
 ```
 
 Welcome to Inkling, Bonsai AI's special purpose programming language for training AI.

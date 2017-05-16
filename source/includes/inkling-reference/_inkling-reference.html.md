@@ -1,17 +1,17 @@
 # Inkling Overview
 
 ```inkling--code
-##########
-# Inkling Code Snippets will be shown here
-# Click the "Syntax" tab for Inkling Syntax
-##########
+#############################################
+# Inkling Code Snippets will be shown here  #
+# Click the "Syntax" tab for Inkling Syntax #
+#############################################
 ```
 
 ```inkling--syntax
-##########
-# Inkling Syntax will be shown here
-# Click the "Code" tab for Inkling Code Snippets
-##########
+##################################################
+# Inkling Syntax will be shown here              #
+# Click the "Code" tab for Inkling Code Snippets #
+##################################################
 ```
 
 This reference contains comprehensive specifications and usage for the Inkling language, Bonsai’s special purpose programming language for training AI.
