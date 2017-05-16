@@ -1371,6 +1371,7 @@ nav li > a:only-child:after {content: '';}
 		-ms-flex-direction: column-reverse;
 		flex-direction: column-reverse;
 		margin-top: 16px;
+    width: 100%;
 	}
 
 	/* Change menu item's width to 100% */
@@ -1484,3 +1485,78 @@ nav li > a:only-child:after {content: '';}
 
 
 // #nav-links {flex-grow:1; text-align:-webkit-right;}
+
+
+///////
+// SEARCH
+//
+
+#docs-search {
+  height: 34px !important;
+  border-radius: 3px;
+  border: solid 1px #e3e3e3 !important;
+  padding: 0 0 0 35px;
+  background-image: url('/images/search.svg');
+  background-position: 10px center;
+  background-repeat: no-repeat;
+  background-size: 20px;
+  margin-bottom: 0;
+  width: 90%;
+}
+
+.algolia-autocomplete .algolia-docsearch-suggestion--highlight {
+  background: none;
+  color: #3bb94f;
+}
+
+.algolia-autocomplete .ds-dropdown-menu .ds-suggestion.ds-cursor .algolia-docsearch-suggestion:not(.suggestion-layout-simple) .algolia-docsearch-suggestion--content {
+  background: #fffdf0;
+}
+
+/* Bottom border of each suggestion */
+.algolia-docsearch-suggestion {
+  border-bottom-color: #3bb94f;
+}
+
+.algolia-autocomplete .algolia-docsearch-suggestion--text .algolia-docsearch-suggestion--highlight {
+    box-shadow: inset 0 -2px 0 0 #3bb94f;
+}
+
+// Since some values are added by Javascript, we have 
+// To add the !important option to override these values
+.algolia-autocomplete {
+  width: 90%;
+  // On a max-width of 768px
+  @media (max-width: 768px) {
+    .ds-dropdown-menu {
+      max-width: calc(100vw - 32px) !important;
+      min-width: calc(100vw - 32px) !important;      
+      width: calc(100vw - 32px) !important;
+      margin-left: 16px !important;
+    }
+    .algolia-docsearch-suggestion--content {
+      width: 100% !important;
+      padding-left: 0 !important;
+    }
+    .algolia-docsearch-suggestion--content:before  {
+      display: none !important;
+    }
+    .algolia-docsearch-suggestion--subcategory-column {
+      display: none !important;
+    }
+  }
+}
+
+/* For bigger screens, when displaying results in two columns */
+@media (min-width: 768px) {
+  /* Bottom border of each suggestion */
+  .algolia-docsearch-suggestion {
+    border-bottom-color: #3bb94f;
+  }
+  /* Left column, with secondary category header */
+  .algolia-docsearch-suggestion--subcategory-column {
+    border-right-color: #3bb94f;
+    color: #4E4726;
+  }
+}
+
