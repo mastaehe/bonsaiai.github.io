@@ -33,8 +33,8 @@ You're going to need:
 ### Getting Set Up
 
 1. Fork this repository on Github.
-2. Clone *your forked repository* (not our original one) to your hard drive with `git clone https://github.com/YOURUSERNAME/slate.git`
-3. `cd slate`
+2. Clone *your forked repository* (not our original one) to your hard drive with `git clone https://github.com/YOURUSERNAME/bonsaiai.github.io.git`
+3. `cd bonsaiai.github.io`
 4. Initialize and start Slate. You can either do this locally, or with Vagrant:
 
 ```shell
@@ -44,13 +44,16 @@ bundle exec middleman server
 
 # OR run this to run with vagrant
 vagrant up
+
+# OR run this to run with Docker
+docker-compose up
 ```
 
 You can now see the docs at http://localhost:4567. Whoa! That was fast!
 
 Now that Slate is all set up on your machine, you'll probably want to learn more about [editing Slate markdown](https://github.com/lord/slate/wiki/Markdown-Syntax), or [how to publish your docs](https://github.com/lord/slate/wiki/Deploying-Slate).
 
-If you'd prefer to use Docker, instructions are available [in the wiki](https://github.com/lord/slate/wiki/Docker).
+For more information on using Docker, instructions are available [in the Slate wiki](https://github.com/lord/slate/wiki/Docker).
 
 ## Need Help? Found a bug?
 -----------------------
