@@ -1,5 +1,12 @@
 # API Overview
 
+```
+#####################################################
+# JSON output will be shown here for REST API       #
+# protobuf output will be shown here for Websockets #
+#####################################################
+```
+
 The Bonsai Platform provides programmers and data scientists with a new way of
 building sophisticated ML and AI applications. This API is at the core of how
 programmers interact with the AI Engine.
