@@ -122,6 +122,8 @@ Options:
 
 `bonsai load` loads an Inkling file into the current brain.  The project file in the current directory (`bonsai_brain.bproj`) determines which inkling file to load.  You can specify `--brain BRAIN_NAME`, or `--project /brain/project` to use another brain.
 
+This command has been deprecated and will be removed in a future release.  Please use `bonsai push` instead.
+
 ## bonsai log
 
 ```
