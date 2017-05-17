@@ -16,13 +16,11 @@ The Bonsai BRAIN API has two feature areas:
 * Managing BRAINS
 * Connecting simulators for training and use.
 
-The root for all Bonsai Platform API requests is [https://api.bons.ai]().
+The root for all Bonsai Platform API requests is [https://api.bons.ai][1].
 
 # Authentication
 
-To make an API call, you must include an `Authorization` header for the request
-to succeed. The value of this header should be your access key. This can be found
-[on BRAIN web in your Account Settings](https://beta.bons.ai/accounts/key).
+API calls must include an Authorization header. The value of this header is your [Access Key][2].
 
 #### Headers
 
@@ -302,7 +300,7 @@ protocol.
 
 ### Protocol
 
-![Training Message Protocol](../images/training.svg)
+![Training Message Protocol][3]
 
 ## Prediction Protocol
 
@@ -328,7 +326,7 @@ protocol.
 
 ### Protocol
 
-![Prediction Message Protocol](../images/prediction.svg)
+![Prediction Message Protocol][4]
 
 ## Simulator to Server
 
@@ -445,3 +443,9 @@ cancel training to upload new Inkling.
 * **trained:** If training is cancelled or completes the BRAIN version is in
 the trained state. Trained BRAIN versions can give predictions or receive more
 training. version is NOT incremented upon training completion.
+
+
+[1]: https://api.bons.ai
+[2]: https://beta.bons.ai/accounts/key
+[3]: ../images/training.svg
+[4]: ../images/prediction.svg
