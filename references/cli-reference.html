@@ -555,7 +555,7 @@ Options:
 
 <p>When training locally, if the simulator is disconnected, the BRAIN remains in training mode, and it will train again where it left off when the simulator is reconnected up to an hour after being disconnected.</p>
 
-<p>If <code class="prettyprint">bonsai train start --remote</code> is used, then the server will run remotely on Bonsai&rsquo;s servers for supported simulators.</p>
+<p>If <code class="prettyprint">bonsai train start --remote</code> is used, then the simulator will run remotely on Bonsai&rsquo;s servers for supported simulators.</p>
 
 <h2 id="bonsai-train-stop">bonsai train stop</h2>
 <pre class="highlight plaintext"><code>$ bonsai train stop --help
@@ -614,30 +614,34 @@ a project file to a BRAIN in the same directory as the project file.</p>
 <span class="py">host</span> <span class="p">=</span> <span class="s">api.bons.ai</span>
 <span class="py">usessl</span> <span class="p">=</span> <span class="s">True</span>
 </code></pre>
-<p>The <code class="prettyprint">.bonsai</code>, located in your user directory, file stores your username and an access token for access to the
-Bonsai servers.</p>
+<p>The <code class="prettyprint">.bonsai</code> file is located in your user directory. It stores your username and an access token for access to the
+Bonsai servers. The <code class="prettyprint">bonsai configure</code> CLI command will update this file and create it if it does not exist.</p>
 
 <h2 id="bproj-file">.bproj file</h2>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"files"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="s2">"mybrain.ink"</span><span class="w">
+        </span><span class="s2">"mybrain.ink"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"my_simulator.py"</span><span class="w">
     </span><span class="p">],</span><span class="w">
-    </span><span class="s2">"training"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+    </span><span class="s2">"training"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"python my_simulator.py"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"simulator"</span><span class="p">:</span><span class="w"> </span><span class="s2">"openai.gym"</span><span class="w">
-    </span><span class="p">}]</span><span class="w">
+        </span><span class="s2">"simulator"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bonsai.python"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Project files are created in the same directory as your Inkling files when
 you download or create a BRAIN with the CLI. The project file has a name like
 <code class="prettyprint">bonsai_brain.bproj</code> and contains a JSON object that ties together the Inkling
-files and simulator configuration needed to train a BRAIN.</p>
+files, simulator files, and simulator configuration needed to train a BRAIN.</p>
 
 <ul>
-<li><p><code class="prettyprint">files</code> is a list of files or directories to search for inkling files. All
-the Inkling listed is concatenated together to form the inkling for this BRAIN.
+<li><p><code class="prettyprint">files</code> is a list of files to be included in this BRAIN. Directories
+may also be in the <code class="prettyprint">files</code> list. When a directory is specified, every file
+within that directory is included in the BRAIN. Currently, only one inkling
+file per BRAIN is supported. If <code class="prettyprint">files</code> specifies multiple Inkling files,
+only the first will be used and the remainder will be ingored.
 There must be at least one valid path in the <code class="prettyprint">files</code> list.</p></li>
-<li><p><code class="prettyprint">training</code> is a list of objects.  The <code class="prettyprint">simulator</code> field of that object
+<li><p><code class="prettyprint">training</code> is an object.  The <code class="prettyprint">simulator</code> field of that object
 points to a pre-configured simulation container inside the platform. The
 <code class="prettyprint">command</code> field describes the command to run to start the simulator.</p></li>
 </ul>
