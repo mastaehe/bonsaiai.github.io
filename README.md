@@ -15,9 +15,9 @@ You'll want to go to http://docs.bons.ai/ for the compiled version. This project
 
 Check out [Slate](lord.github.io/slate).
 
-**Where do I go to get into the Bonsai private beta?**
+**Where do I go to get into the Bonsai Platform preview?**
 
-[Apply here](http://pages.bons.ai/apply.html) for access to our private beta.
+[Apply here](http://pages.bons.ai/apply.html) for access to our preview of the Bonsai Platform.
 
 ## If You Want to Contribute
 ------------------------------
