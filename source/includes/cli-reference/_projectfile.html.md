@@ -18,8 +18,8 @@ host = api.bons.ai
 usessl = True
 ```
 
-The `.bonsai`, located in your user directory, file stores your username and an access token for access to the
-Bonsai servers.
+The `.bonsai` file is located in your user directory. It stores your username and an access token for access to the
+Bonsai servers. The `bonsai configure` CLI command will update this file and create it if it does not exist.
 
 
 ## .bproj file
@@ -27,25 +27,29 @@ Bonsai servers.
 ```json
 {
     "files": [
-        "mybrain.ink"
+        "mybrain.ink",
+        "my_simulator.py"
     ],
-    "training": [{
+    "training": {
         "command": "python my_simulator.py",
-        "simulator": "openai.gym"
-    }]
+        "simulator": "bonsai.python"
+    }
 }
 ```
 
 Project files are created in the same directory as your Inkling files when
 you download or create a BRAIN with the CLI. The project file has a name like
 `bonsai_brain.bproj` and contains a JSON object that ties together the Inkling
-files and simulator configuration needed to train a BRAIN.
+files, simulator files, and simulator configuration needed to train a BRAIN.
 
- * `files` is a list of files or directories to search for inkling files. All
-the Inkling listed is concatenated together to form the inkling for this BRAIN.
+ * `files` is a list of files to be included in this BRAIN. Directories
+may also be in the `files` list. When a directory is specified, every file
+within that directory is included in the BRAIN. Currently, only one inkling
+file per BRAIN is supported. If `files` specifies multiple Inkling files,
+only the first will be used and the remainder will be ingored.
 There must be at least one valid path in the `files` list.
 
- * `training` is a list of objects.  The `simulator` field of that object
+ * `training` is an object.  The `simulator` field of that object
 points to a pre-configured simulation container inside the platform. The
 `command` field describes the command to run to start the simulator.
 

@@ -198,7 +198,7 @@ Options:
 
 When training locally, if the simulator is disconnected, the BRAIN remains in training mode, and it will train again where it left off when the simulator is reconnected up to an hour after being disconnected.
 
-If `bonsai train start --remote` is used, then the server will run remotely on Bonsai's servers for supported simulators.
+If `bonsai train start --remote` is used, then the simulator will run remotely on Bonsai's servers for supported simulators.
 
 ## bonsai train stop
 
