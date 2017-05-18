@@ -114,7 +114,7 @@ Lesson clauses have defaults so if a clause is not specified the default will be
 **simulator** | Required.    | If neither train nor test is present, defaults to: *item in simulator select item send item*. | If neither train nor test is present, defaults to: *from item in simulator select item*. If not present, generate default for every lesson. | Required.
 
 <aside class="notice">
-Currently, during our private beta, you can only use simulators as your training source.
+Currently, during the Bonsai Platform preview, you can only use simulators as your training source.
 </aside> 
 
 ###### Lesson Clause Rules

@@ -2,7 +2,7 @@
 
 [//]: # (If any commented statements become false, change prior text)
 
-Before you begin, you will need to have access to our Beta. If you don't have access yet, request access at [bons.ai][1].
+Before you begin, you will need to have access to the Bonsai Platform preview. If you don't have access yet, request access at [bons.ai][1].
 
 The next section walks you through how to install Git, Python, and pip, but if you're already ahead of the curve and **have them all installed**, skip down to [Setup the Bonsai CLI][2]. 
 

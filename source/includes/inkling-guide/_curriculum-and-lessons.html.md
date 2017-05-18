@@ -5,7 +5,7 @@ A **curriculum** in Inkling is used to define what and how to teach a concept. E
 Curriculum contain the lesson plan for the lessons that you are using to train your BRAINs. You must have one curriculum for every concept. A curriculum contains information about the training material that you're using to train the BRAIN; this is a simulator, generator, or data set, and it contains an objective, which measures the performance of the BRAIN as it learns your concept. Curricula may also contain expressions that assign portions of your training material for testing. Finally, your curriculum contains lessons. Each lesson teaches a piece of the concept. A curriculum can contain multiple lessons to teach a single concept.  Each lesson may contain different configurations for training the BRAIN. Configurations change how the Bonsai AI Engine uses the training source for training.
 
 <aside class="notice">
-Currently, during our private beta, you can only train with simulators as your training sources. Additionally, you are limited to one lesson in your curriculum.
+Currently, during the Bonsai Platform preview, you can only train with simulators as your training sources. Additionally, you are limited to one lesson in your curriculum.
 </aside> 
 
 ## Determining Curriculum

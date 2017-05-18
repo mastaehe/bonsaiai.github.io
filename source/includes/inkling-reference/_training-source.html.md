@@ -3,7 +3,7 @@
 The Bonsai Platform supports training with both real and synthetic data. The `data`, `simulator` and `generator` keywords are used to describe what kind of training source you would like to use for training.
 
 <aside class="notice">
-Currently, during our private beta, you can <b>only</b> train with simulators as your training source. That is, only the <i>simulator</i> training specifier is supported.
+Currently, during the Bonsai Platform preview, you can <b>only</b> train with simulators as your training source. That is, only the <i>simulator</i> training specifier is supported.
 </aside>
 
 ### Simulators
@@ -17,7 +17,7 @@ Our [Library Reference][1] describes the classes and methods used to connect an 
 Generators produce labeled data programmatically. This data is effectively infinite. A generator could, for example, produce a random (but known) integer, set of line segments, etc.
 
 <aside class="notice">
-Currently, during our private beta, you can <b>only</b> train with simulators as your training source. That is <i>generators</i> are not supported.
+Currently, during the Bonsai Platform preview, you can <b>only</b> train with simulators as your training source. That is <i>generators</i> are not supported.
 </aside>
 
 ### Data
@@ -25,7 +25,7 @@ Currently, during our private beta, you can <b>only</b> train with simulators as
 Data is information related to the scenario being trained comprising of columns of information with input values and expected labels or desired predicted values. Data is used both for training and evaluating the quality of training. Examples of training data include a collection of images and labels or the rows and columns of a spreadsheet.
 
 <aside class="notice">
-Currently, during our private beta, you can <b>only</b> train with simulators as your training source. That is <i>data</i> is not supported.
+Currently, during the Bonsai Platform preview, you can <b>only</b> train with simulators as your training source. That is <i>data</i> is not supported.
 </aside>
 
 ## Simulator Clause Syntax

@@ -34,7 +34,7 @@ be using a simple simulator from OpenAI. Simulators usually have state, which is
 world inside the virtual environment and receive actions which change that state.
 
 <aside class="notice">
-Currently, during our beta, you can only use simulators as your training source. Generators
+Currently, during the Bonsai Platform preview, you can only use simulators as your training source. Generators
 and Data sources will be released at a future time.
 </aside> 
 
