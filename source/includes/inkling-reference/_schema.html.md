@@ -227,7 +227,7 @@ the step, and the stop.
 # Example: Range expression, dot range type
 schema Schema4
   Int64  { 0..100:25 } z,   # start:stop, numsteps=25
-  Float32 { 0..2:5}    a    # yields (0, .5., 1.0, 1.5, 2.0)
+  Float32 { 0..2:0.5}    a    # yields (0, 0.5, 1.0, 1.5, 2.0)
 end
 ```
 
