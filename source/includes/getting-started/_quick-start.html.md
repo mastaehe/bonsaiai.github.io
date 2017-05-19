@@ -3,7 +3,7 @@
 > Open AI's Cartpole Gym
 > ![Cartpole Trained][12]
 
-Before you begin, you will need to have access to our private beta. If you don't have access yet,
+Before you begin, you will need to have access to the Bonsai Platform preview. If you don't have access yet,
 request access at [bons.ai][1].
 
 In this guide, we’ll walk you through creating a BRAIN to train the [OpenAI Gym][4] environment for
