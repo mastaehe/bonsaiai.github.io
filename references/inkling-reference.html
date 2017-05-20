@@ -943,7 +943,7 @@ the step, and the stop. </p>
 <pre class="highlight inkling tab-inkling--code"><code><span class="c1"># Example: Range expression, dot range type</span>
 <span class="k">schema</span> <span class="nx">Schema4</span>
   <span class="kr">Int64</span>  <span class="p">{</span> <span class="mi">0</span><span class="p">..</span><span class="mi">100</span><span class="p">:</span><span class="mi">25</span> <span class="p">}</span> <span class="nx">z</span><span class="p">,</span>   <span class="c1"># start:stop, numsteps=25</span>
-  <span class="kr">Float32</span> <span class="p">{</span> <span class="mi">0</span><span class="p">..</span><span class="mi">2</span><span class="p">:</span><span class="mi">5</span><span class="p">}</span>    <span class="nx">a</span>    <span class="c1"># yields (0, .5., 1.0, 1.5, 2.0)</span>
+  <span class="kr">Float32</span> <span class="p">{</span> <span class="mi">0</span><span class="p">..</span><span class="mi">2</span><span class="p">:</span><span class="mi">5</span><span class="p">}</span>    <span class="nx">a</span>    <span class="c1"># yields (0, 0.5, 1.0, 1.5, 2.0)</span>
 <span class="k">end</span>
 </code></pre>
 <ul>
