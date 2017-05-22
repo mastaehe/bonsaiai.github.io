@@ -135,7 +135,7 @@ Usage: bonsai log [OPTIONS]
 Options:
   --brain TEXT    Override to target another BRAIN.
   --project TEXT  Override to target another project directory.
-  --follow        Continually follow simulator's output
+  --follow        Continually follow simulator's output.
   --help          Show this message and exit.
 ```
 
