@@ -135,12 +135,15 @@ Usage: bonsai log [OPTIONS]
 Options:
   --brain TEXT    Override to target another BRAIN.
   --project TEXT  Override to target another project directory.
+  --follow        Continually follow simulator's output
   --help          Show this message and exit.
 ```
 
 Displays *stderr* and *stdout* from the currently running simulator. This will display the last 1000 lines of the running simulator's output. You can override the BRAIN you want to log if multiple are running at the same time or the project.
 
 This command is meant for simulators running remotely on Bonsai's servers using `bonsai train start --remote`. Simulators running locally will generally output this information at the command prompt.
+
+If `bonsai log --follow` is used, then display will update when new logs exist.  Use `Ctrl-c` to stop this command.
 
 ## bonsai push
 
