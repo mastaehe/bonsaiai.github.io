@@ -21,7 +21,6 @@ Commands:
   create     Create a BRAIN and set the default BRAIN.
   download   Downloads all the files related to a BRAIN.
   list       Lists BRAINs owned by current user.
-  load       Loads an inkling file into the given BRAIN.
   log        Display logs from remote training.
   push       Uploads project file(s) to a BRAIN.
   sims       Retrieve information about simulators.
@@ -91,7 +90,6 @@ Options:
 
 `bonsai download` creates local copies of your BRAIN project files. This will contain your Inkling code and may also contain simulator code. This command works like git clone - it copies files into a new directory, and will not try and overwrite files that already exist.
 
-
 ## bonsai list
 
 ```
@@ -105,24 +103,6 @@ Options:
 ```
 
 `bonsai list` shows you the BRAINs you currently own or by a user under a given URL. You must have your Bonsai account configured with `bonsai configure` before you can see this list.
-
-## bonsai load
-
-```
-$ bonsai load --help
-Usage: bonsai.py load [OPTIONS]
-
-  Loads an inkling file into the given BRAIN.
-
-Options:
-  --brain TEXT    Override to target another BRAIN.
-  --project TEXT  Override to target another project directory.
-  --help          Show this message and exit.
-```
-
-`bonsai load` loads an Inkling file into the current brain.  The project file in the current directory (`bonsai_brain.bproj`) determines which inkling file to load.  You can specify `--brain BRAIN_NAME`, or `--project /brain/project` to use another brain.
-
-This command has been deprecated and will be removed in a future release.  Please use `bonsai push` instead.
 
 ## bonsai log
 
@@ -158,8 +138,6 @@ Options:
 
 `bonsai push` will upload the entire project file contents and all accompanying files to the Bonsai AI Engine and can be viewed on [beta.bons.ai](https://beta.bons.ai). You can override the BRAIN you want to push to or the project directory you want to push.
 
-This command replaces the need for `bonsai load` which is now depricated and will be removed in a future release. 
-
 ## bonsai train
 
 ```
@@ -194,7 +172,7 @@ Options:
   --help          Show this message and exit.
 ```
 
-`bonsai train start` turns on/enables training mode for the current BRAIN. The BRAIN trains whenever a simulator is connected. 
+`bonsai train start` turns on/enables training mode for the current BRAIN. The BRAIN trains whenever a simulator is connected.
 
 When training locally, if the simulator is disconnected, the BRAIN remains in training mode, and it will train again where it left off when the simulator is reconnected up to an hour after being disconnected.
 
