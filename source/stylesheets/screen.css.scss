@@ -598,7 +598,7 @@ h6:before {
     color: #fff;
 
     padding: 2em $main-padding;
-    margin: 0;
+    margin: 0 0 10px;
     width: $examples-width;
 
     float:right;
@@ -1560,3 +1560,32 @@ nav li > a:only-child:after {content: '';}
   }
 }
 
+
+//////////
+// CODE COPY BUTTONS
+//////////
+
+.highlight {
+  position: relative;
+}
+
+.code-copy-button {
+  transition: opacity 0.3s ease-in-out;
+  opacity: 0;
+  padding: 2px 6px;
+  position: absolute;
+  right: 28px;
+  top: 21px;
+  background-color: #eee;
+  display: inline-block;
+
+  img {
+    margin-top: -3px;
+    position: relative;
+    top: 3px;
+  }
+}
+
+.highlight:hover .code-copy-button {
+  opacity: 1;
+}
