@@ -1,5 +1,5 @@
 ---
-title: CLI Guide - Bonsai
+title: CLI Guide
 
 language_tabs:
     - powershell: Windows
