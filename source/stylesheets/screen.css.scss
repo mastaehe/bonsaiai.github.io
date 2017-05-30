@@ -598,7 +598,7 @@ h6:before {
     color: #fff;
 
     padding: 2em $main-padding;
-    margin: 0 0 10px;
+    margin: 0;
     width: $examples-width;
 
     float:right;
@@ -620,6 +620,7 @@ h6:before {
 
   pre {
     @extend %code-font;
+    margin-bottom: 10px;
   }
 
   blockquote {
