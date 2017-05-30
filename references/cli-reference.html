@@ -404,7 +404,6 @@ Commands:
   create     Create a BRAIN and set the default BRAIN.
   download   Downloads all the files related to a BRAIN.
   list       Lists BRAINs owned by current user.
-  load       Loads an inkling file into the given BRAIN.
   log        Display logs from remote training.
   push       Uploads project file(s) to a BRAIN.
   sims       Retrieve information about simulators.
@@ -479,21 +478,6 @@ Options:
 </code></pre>
 <p><code class="prettyprint">bonsai list</code> shows you the BRAINs you currently own or by a user under a given URL. You must have your Bonsai account configured with <code class="prettyprint">bonsai configure</code> before you can see this list.</p>
 
-<h2 id="bonsai-load">bonsai load</h2>
-<pre class="highlight plaintext"><code>$ bonsai load --help
-Usage: bonsai.py load [OPTIONS]
-
-  Loads an inkling file into the given BRAIN.
-
-Options:
-  --brain TEXT    Override to target another BRAIN.
-  --project TEXT  Override to target another project directory.
-  --help          Show this message and exit.
-</code></pre>
-<p><code class="prettyprint">bonsai load</code> loads an Inkling file into the current brain.  The project file in the current directory (<code class="prettyprint">bonsai_brain.bproj</code>) determines which inkling file to load.  You can specify <code class="prettyprint">--brain BRAIN_NAME</code>, or <code class="prettyprint">--project /brain/project</code> to use another brain.</p>
-
-<p>This command has been deprecated and will be removed in a future release.  Please use <code class="prettyprint">bonsai push</code> instead.</p>
-
 <h2 id="bonsai-log">bonsai log</h2>
 <pre class="highlight plaintext"><code>$ bonsai log --help
 Usage: bonsai log [OPTIONS]
@@ -503,11 +487,14 @@ Usage: bonsai log [OPTIONS]
 Options:
   --brain TEXT    Override to target another BRAIN.
   --project TEXT  Override to target another project directory.
+  --follow        Continually follow simulator's output.
   --help          Show this message and exit.
 </code></pre>
 <p>Displays <em>stderr</em> and <em>stdout</em> from the currently running simulator. This will display the last 1000 lines of the running simulator&rsquo;s output. You can override the BRAIN you want to log if multiple are running at the same time or the project.</p>
 
 <p>This command is meant for simulators running remotely on Bonsai&rsquo;s servers using <code class="prettyprint">bonsai train start --remote</code>. Simulators running locally will generally output this information at the command prompt.</p>
+
+<p>If <code class="prettyprint">bonsai log --follow</code> is used, then display will update when new logs exist.  Use <code class="prettyprint">Ctrl-c</code> to stop this command.</p>
 
 <h2 id="bonsai-push">bonsai push</h2>
 <pre class="highlight plaintext"><code>$ bonsai push --help
@@ -521,8 +508,6 @@ Options:
   --help          Show this message and exit.
 </code></pre>
 <p><code class="prettyprint">bonsai push</code> will upload the entire project file contents and all accompanying files to the Bonsai AI Engine and can be viewed on <a href="https://beta.bons.ai">beta.bons.ai</a>. You can override the BRAIN you want to push to or the project directory you want to push.</p>
-
-<p>This command replaces the need for <code class="prettyprint">bonsai load</code> which is now depricated and will be removed in a future release. </p>
 
 <h2 id="bonsai-train">bonsai train</h2>
 <pre class="highlight plaintext"><code>$ bonsai train --help
@@ -552,7 +537,7 @@ Options:
   --remote        Run a simulator remotely on Bonsai’s servers.
   --help          Show this message and exit.
 </code></pre>
-<p><code class="prettyprint">bonsai train start</code> turns on/enables training mode for the current BRAIN. The BRAIN trains whenever a simulator is connected. </p>
+<p><code class="prettyprint">bonsai train start</code> turns on/enables training mode for the current BRAIN. The BRAIN trains whenever a simulator is connected.</p>
 
 <p>When training locally, if the simulator is disconnected, the BRAIN remains in training mode, and it will train again where it left off when the simulator is reconnected up to an hour after being disconnected.</p>
 
