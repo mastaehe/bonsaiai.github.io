@@ -53,6 +53,13 @@ There must be at least one valid path in the `files` list.
 points to a pre-configured simulation container inside the platform. The
 `command` field describes the command to run to start the simulator.
 
+Current list of supported simulators for Docker cloud-hosted training:
+
+ * [`openai.gym`][1]
+ * [`bonsai.python`][2]
+ * [`bonsai.energyplus`][3]
+ * `bonsai.gazebo`
+
 ## .brains file
 
 ```json
@@ -74,3 +81,8 @@ project file.
 
  * `default` marks a named BRAIN as the default BRAIN to use with command
    operations.
+
+
+[1]: https://github.com/BonsaiAI/bonsai-gym-common
+[2]: https://github.com/BonsaiAI/bonsai-python
+[3]: https://github.com/BonsaiAI/energyplus-sample
