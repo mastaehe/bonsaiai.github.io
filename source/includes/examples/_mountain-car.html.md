@@ -2,7 +2,7 @@
 
 > ![Mountain Car Control](../images/mountain-car-control.gif)
 
-[**Download the full source code on GitHub**][1] so you can run it yourself on the Bonsai Platform.
+[**Download the full source code on GitHub**][1] if you want to run this simulator locally or create a new BRAIN on [beta.bons.ai][4] to run it yourself on the Bonsai Platform.
 
 We've used pieces of code from this example in several places, but here we'll walk you through all the various statements that are part of the Mountain Car Inkling file. Each statement is followed by an explanation of the statement.
 
@@ -121,3 +121,5 @@ This is an OpenAI Gym example which uses the OpenAI environment as its simulator
 [1]: https://github.com/BonsaiAI/gym-mountaincar-sample
 [2]: https://gym.openai.com/envs/MountainCar-v0
 [3]: https://github.com/BonsaiAI/bonsai-gym-common
+[4]: https://beta.bons.ai/new
+

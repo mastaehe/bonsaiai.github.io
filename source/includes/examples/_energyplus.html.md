@@ -2,7 +2,7 @@
 
 > ![EnergyPlus Graph](../images/energyplus-graph.png)
 
-[**Download the full source code on GitHub**][1] so you can run it yourself on the Bonsai Platform.
+[**Download the full source code on GitHub**][1] if you want to run this simulator locally or create a new BRAIN on [beta.bons.ai][4] to run it yourself on the Bonsai Platform.
 
 In this example, we'll walk you through the various statements that are part of a sample implementation of [EnergyPlus][2] on the Bonsai Platform, including the simulator and the Inkling files. This is a real-world example of how to use the Bonsai Platform for HVAC control using BCVTB and EnergyPlus.
 
@@ -236,3 +236,4 @@ For more information on the functions inside of this simulator class and how to 
 [1]: https://github.com/BonsaiAI/energyplus-sample
 [2]: https://energyplus.net/
 [3]: http://docs.bons.ai/references/library-reference.html
+[4]: https://beta.bons.ai/new
