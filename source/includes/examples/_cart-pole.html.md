@@ -2,7 +2,7 @@
 
 > ![Cart Pole Balance](../images/cart-pole-balance.gif)
 
-[**Download the full source code on GitHub**][1] so you can run it yourself on the Bonsai Platform.
+[**Download the full source code on GitHub**][1] if you want to run this simulator locally. If you want to run Cart Pole remotely on the Bonsai Platform as a managed simulator, create a new BRAIN selecting the Cart Pole demo on [beta.bons.ai][4].
 
 In this example, we'll walk you through the various statements that are part of the Cart Pole Inkling file. Each statement is followed by an explanation of the statement.
 
@@ -124,3 +124,4 @@ This is an OpenAI Gym example which uses the OpenAI environment as its simulator
 [1]: https://github.com/BonsaiAI/gym-cartpole-sample
 [2]: https://gym.openai.com/envs/CartPole-v1
 [3]: https://github.com/BonsaiAI/bonsai-gym-common
+[4]: https://beta.bons.ai/new
