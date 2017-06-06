@@ -58,7 +58,6 @@ Current list of supported simulators for Docker cloud-hosted training:
  * [`openai.gym`][1]
  * [`bonsai.python`][2]
  * [`bonsai.energyplus`][3]
- * `bonsai.gazebo`
 
 ## .brains file
 
@@ -83,6 +82,6 @@ project file.
    operations.
 
 
-[1]: https://github.com/BonsaiAI/bonsai-gym-common
-[2]: https://github.com/BonsaiAI/bonsai-python
-[3]: https://github.com/BonsaiAI/energyplus-sample
+[1]: https://quay.io/repository/bonsai/gym
+[2]: https://quay.io/repository/bonsai/python
+[3]: https://quay.io/repository/bonsai/energyplus

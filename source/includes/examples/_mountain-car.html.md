@@ -2,7 +2,7 @@
 
 > ![Mountain Car Control](../images/mountain-car-control.gif)
 
-[**Download the full source code on GitHub**][1] if you want to run this simulator locally or create a new BRAIN on [beta.bons.ai][4] to run it yourself on the Bonsai Platform.
+[**Download the full source code on GitHub**][1] if you want to run this simulator locally. If you want to run Mountain Car remotely on the Bonsai Platform as a managed simulator, create a new BRAIN selecting the Mountain Car demo on [beta.bons.ai][4]
 
 We've used pieces of code from this example in several places, but here we'll walk you through all the various statements that are part of the Mountain Car Inkling file. Each statement is followed by an explanation of the statement.
 

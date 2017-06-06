@@ -2,7 +2,7 @@
 
 > ![Find the Center Diagram](../images/find-the-center.png)
 
-[**Download the full source code on GitHub**][1] if you want to run this simulator locally on the Bonsai Platform.
+[**Download the full source code on GitHub**][1] if you want to run this simulator locally.
 
 In this example, we'll walk you through the various statements that are part of the *Find the Center* game, including the python simulator file and the Inkling file. This is a very basic example of Inkling and how to connect to a custom python simulator.
 
