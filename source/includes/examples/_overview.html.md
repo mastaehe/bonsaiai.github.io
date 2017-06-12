@@ -15,6 +15,7 @@ If you have any suggestions of examples you'd like to see us implement please [c
 
 ### Real World Examples
 * **HVAC with EnergyPlus**: An example of climate control machine teaching using EnergyPlus and BCVTB for simulation. 
+* **Gazebo Simulated Turtlebot**: A robotics example of a Turtlebot robot navigating an environment in Gazebo.
 
 [1]: https://github.com/BonsaiAI
 [2]: https://bons.ai/contact-us#contact-page-form
