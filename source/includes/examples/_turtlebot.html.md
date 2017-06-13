@@ -16,6 +16,9 @@ using [Gazebo and ROS][3] (Robotic Operating System).
 
 This Example also includes scripts for integrating Gazebo and ROS into the
 Bonsai Platform which can be found below in the [Simulator Files][8] section.
+In this case, ROS is relaying information between the simulator Gazebo and the
+Bonsai Platform. Turtlebot is being simulated inside of Gazebo, and ROS is
+communicating the action and state of the simulation back to the Bonsai servers for training.
 
  A graphical display is not part of the Docker container (when training remotely),
  but a Gazebo client may additionally connect to the Gazebo server (that *is*
@@ -123,15 +126,6 @@ the simulator. In this simple example however, there are no constraints.
 The three full Python files for this example are with the rest of the
 [gazebo-turtlebot-sample code][1] on GitHub.
 
-### bonsai_gazebo.py
-
-> Source code too long to display, please click Github link.
-
-This Python file extends the BonsaiROS interface with methods for controlling
-Gazebo simulations in accordance with the Bonsai simulator protocol. 
-
-See the [**bonsai_gazebo.py file**][5] on GitHub.
-
 ### bonsai_ros.py
 
 > Source code too long to display, please click Github link.
@@ -140,16 +134,33 @@ This Python file mainly contains a class that acts as a basic interface between
 ROS and Bonsai's protocols. It can bring up and down the ROS stack and parse a
 variety of basic messages.
 
+The purpose of this file is to manage the interactions between the BRAIN server
+interface and many ROS topics that are available to subscribe or publish to.
+
 See the [**bonsai_ros.py file**][6] on GitHub.
+
+### bonsai_gazebo.py
+
+> Source code too long to display, please click Github link.
+
+This Python file extends the BonsaiROS interface with methods for controlling
+Gazebo simulations in accordance with the Bonsai simulator protocol.
+
+The purpose of this file is to extend `bonsai_ros.py` to also handle interacting
+with the Gazebo specific services and topics made available when using a Gazebo
+simulation with ROS.
+
+See the [**bonsai_gazebo.py file**][5] on GitHub.
 
 ### turtlebot_office_experiment.py
 
 > Source code too long to display, please click Github link.
 
-This is a Python simulator for integrating the Gazebo simulator and ROS into
-the Bonsai AI Engine. This file repeatedly runs the Gazebo simulator in the
-background with new actions sent from the Bonsai AI Engine by passing Turtlebot's
-`State` to the backend, and then takes in the `Command` as an input.
+This is a Python file for integrating the Gazebo simulator through ROS into
+the Bonsai AI Engine. This file repeatedly runs each "episode" and the `State`
+of the simulation in Gazebo gets passed through ROS to the Bonsai AI Engine
+which then proceeds with the next `Command` for Turtlebot and passes that back
+through ROS to Gazebo. 
 
 See the [**turtlebot_office_experiment.py file**][7] on GitHub.
 
