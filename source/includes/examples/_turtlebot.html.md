@@ -41,7 +41,7 @@ end
 
 The `State` schema provides the BRAIN with the current x, y coordinates of the
 turtlebot, as well as its orientation. We also supply a heading vector to and
-relative orientation of the goal with respect to the turlebot. This provides an
+relative orientation of the goal with respect to the Turtlebot. This provides an
 invariant representation across goal positions.
 
 ```inkling
@@ -54,7 +54,7 @@ end
 The `Command` schema defines `lin_vel` as the linear velocity and `ang_vel` as
 the angular velocity of Turtlebot in the simulation. These are the two actions
 that can be taken to move Turtlebot. Our BRAIN will output the desired linear
-and angular velocities in m/s and rad/s, respectievly. A PID controller will
+and angular velocities in m/s and rad/s, respectively. A PID controller will
 make a best effort to achieve these targets within the time limit of the iteration.
 
 ```inkling
