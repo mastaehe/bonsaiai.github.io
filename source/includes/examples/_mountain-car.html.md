@@ -34,12 +34,11 @@ The `Action` schema names a single record — `action` — and assigns a constra
 ```inkling
 schema MountainCarConfig
   Int8 episode_legnth,
-  Int8 num_episodes,
   UInt8 deque_size
 end
 ```
 
-The `MountainCarConfig` schema names three records — `episode_length`, `num_episodes`, and `deque_size` — and assigns types to them.
+The `MountainCarConfig` schema names two records — `episode_length` and `deque_size` — and assigns types to them.
 
 ###### Concept
 
@@ -74,14 +73,13 @@ curriculum high_score_curriculum
   lesson get_high_score
     configure
       constrain episode_length with Int8{-1},
-      constrain num_episodes with Int8{-1},
       constrain deque_size with UInt8{1}
     until
       maximize score
 end
 ```
 
-The curriculum is named `high_score_curriculum`, and it trains the `high_score` concept using the `mountaincar_simulator`. This curriculum contains one lesson, called `get_high_score`. It configures the simulation, by setting a number of constraints for the state of the simulator.
+The curriculum is named `high_score_curriculum`, and it trains the `high_score` concept using the `mountaincar_simulator`. This curriculum contains one lesson, called `get_high_score`. It configures the simulation, by setting two constraints for the state of the simulator.
 
 The lesson trains until the AI has maximized the objective named `score`.
 
