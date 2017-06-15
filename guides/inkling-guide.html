@@ -634,7 +634,6 @@ Currently, during the Bonsai Platform preview, you can only train with simulator
 <pre class="highlight inkling tab-inkling"><code><span class="k">lesson</span> <span class="nx">get_high_score</span>
   <span class="k">configure</span>
     <span class="k">constrain</span> <span class="nx">episode_length</span> <span class="k">with</span> <span class="kr">Int8</span><span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">},</span>
-    <span class="k">constrain</span> <span class="nx">num_episodes</span> <span class="k">with</span> <span class="kr">Int8</span><span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">},</span>
     <span class="k">constrain</span> <span class="nx">deque_size</span> <span class="k">with</span> <span class="kr">UInt8</span><span class="p">{</span><span class="mi">1</span><span class="p">}</span>
   <span class="k">until</span>
     <span class="k">maximize</span> <span class="nx">open_ai_gym_default_objective</span>

@@ -563,11 +563,10 @@ def debug(*args):
 <p>The schema <code class="prettyprint">Action</code> names a record — <code class="prettyprint">action</code> —  and assigns it a constrained type.</p>
 <pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">CartPoleConfig</span>
   <span class="kr">Int8</span> <span class="nx">episode_length</span><span class="p">,</span>
-  <span class="kr">Int8</span> <span class="nx">num_episodes</span><span class="p">,</span>
   <span class="kr">UInt8</span> <span class="nx">deque_size</span>
 <span class="k">end</span>
 </code></pre>
-<p>The schema <code class="prettyprint">CartPoleConfig</code> names three records — <code class="prettyprint">episode_length</code>, <code class="prettyprint">num_episodes</code>, and <code class="prettyprint">deque_size</code> — and assigns each of them a type.</p>
+<p>The schema <code class="prettyprint">CartPoleConfig</code> names two records — <code class="prettyprint">episode_length</code> and <code class="prettyprint">deque_size</code> — and assigns each of them a type.</p>
 
 <h6 id="concept">Concept</h6>
 <pre class="highlight inkling tab-inkling"><code><span class="k">concept</span> <span class="nx">balance</span>
@@ -593,8 +592,7 @@ def debug(*args):
   <span class="k">objective</span> <span class="nx">up_time</span>
   <span class="k">lesson</span> <span class="nx">balancing</span>
     <span class="k">configure</span>
-      <span class="k">constrain</span> <span class="nx">episode_length</span> <span class="k">with</span> <span class="kr">Int8</span><span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">}</span>
-      <span class="k">constrain</span> <span class="nx">num_episodes</span> <span class="k">with</span> <span class="kr">Int8</span><span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">}</span>
+      <span class="k">constrain</span> <span class="nx">episode_length</span> <span class="k">with</span> <span class="kr">Int8</span><span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">},</span>
       <span class="k">constrain</span> <span class="nx">deque_size</span> <span class="k">with</span> <span class="kr">UInt8</span><span class="p">{</span><span class="mi">1</span><span class="p">}</span>
     <span class="k">until</span>
       <span class="k">maximize</span> <span class="nx">up_time</span>
@@ -602,7 +600,7 @@ def debug(*args):
 </code></pre>
 <p>The curriculum&rsquo;s name is <code class="prettyprint">balance_curriculum</code>. It trains the <code class="prettyprint">balance</code> concept with the <code class="prettyprint">cartpole_simulator</code>. The objective for this curriculum is <code class="prettyprint">up_time</code>. The objective measures how long the pole stays upright.</p>
 
-<p>This curriculum contains one lesson, called <code class="prettyprint">balancing</code>. It configures the simulation, by setting a number of constraints for the state of the simulator. The lesson trains until the AI has maximized the objective.</p>
+<p>This curriculum contains one lesson, called <code class="prettyprint">balancing</code>. It configures the simulation, by setting two constraints for the state of the simulator. The lesson trains until the AI has maximized the objective.</p>
 
 <h2 id="simulator-file">Simulator File</h2>
 <pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">gym</span>
@@ -665,11 +663,10 @@ def debug(*args):
 <p>The <code class="prettyprint">Action</code> schema names a single record — <code class="prettyprint">action</code> — and assigns a constrained type to it.</p>
 <pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">MountainCarConfig</span>
   <span class="kr">Int8</span> <span class="nx">episode_legnth</span><span class="p">,</span>
-  <span class="kr">Int8</span> <span class="nx">num_episodes</span><span class="p">,</span>
   <span class="kr">UInt8</span> <span class="nx">deque_size</span>
 <span class="k">end</span>
 </code></pre>
-<p>The <code class="prettyprint">MountainCarConfig</code> schema names three records — <code class="prettyprint">episode_length</code>, <code class="prettyprint">num_episodes</code>, and <code class="prettyprint">deque_size</code> — and assigns types to them.</p>
+<p>The <code class="prettyprint">MountainCarConfig</code> schema names two records — <code class="prettyprint">episode_length</code> and <code class="prettyprint">deque_size</code> — and assigns types to them.</p>
 
 <h6 id="concept">Concept</h6>
 <pre class="highlight inkling tab-inkling"><code><span class="k">concept</span> <span class="nx">high_score</span>
@@ -696,13 +693,12 @@ def debug(*args):
   <span class="k">lesson</span> <span class="nx">get_high_score</span>
     <span class="k">configure</span>
       <span class="k">constrain</span> <span class="nx">episode_length</span> <span class="k">with</span> <span class="kr">Int8</span><span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">},</span>
-      <span class="k">constrain</span> <span class="nx">num_episodes</span> <span class="k">with</span> <span class="kr">Int8</span><span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">},</span>
       <span class="k">constrain</span> <span class="nx">deque_size</span> <span class="k">with</span> <span class="kr">UInt8</span><span class="p">{</span><span class="mi">1</span><span class="p">}</span>
     <span class="k">until</span>
       <span class="k">maximize</span> <span class="nx">score</span>
 <span class="k">end</span>
 </code></pre>
-<p>The curriculum is named <code class="prettyprint">high_score_curriculum</code>, and it trains the <code class="prettyprint">high_score</code> concept using the <code class="prettyprint">mountaincar_simulator</code>. This curriculum contains one lesson, called <code class="prettyprint">get_high_score</code>. It configures the simulation, by setting a number of constraints for the state of the simulator.</p>
+<p>The curriculum is named <code class="prettyprint">high_score_curriculum</code>, and it trains the <code class="prettyprint">high_score</code> concept using the <code class="prettyprint">mountaincar_simulator</code>. This curriculum contains one lesson, called <code class="prettyprint">get_high_score</code>. It configures the simulation, by setting two constraints for the state of the simulator.</p>
 
 <p>The lesson trains until the AI has maximized the objective named <code class="prettyprint">score</code>.</p>
 

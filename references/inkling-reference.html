@@ -1062,7 +1062,6 @@ Currently, only simulator training sources are supported. When the <i>trainingsp
   <span class="k">lesson</span> <span class="nx">get_high_score</span>
     <span class="k">configure</span>
       <span class="k">constrain</span> <span class="nx">episode_length</span> <span class="k">with</span> <span class="kr">Int8</span><span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">},</span>
-      <span class="k">constrain</span> <span class="nx">num_episodes</span> <span class="k">with</span> <span class="kr">Int8</span><span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">},</span>
       <span class="k">constrain</span> <span class="nx">deque_size</span> <span class="k">with</span> <span class="kr">UInt8</span><span class="p">{</span><span class="mi">1</span><span class="p">}</span>
     <span class="k">until</span>
       <span class="k">maximize</span> <span class="nx">open_ai_gym_default_objective</span>
@@ -1076,7 +1075,6 @@ refer to it in our <a href="../examples.html#mountain-car-example">Examples chap
 <pre class="highlight inkling tab-inkling--code"><code><span class="c1"># Configuration schema declaration</span>
 <span class="k">schema</span> <span class="nx">MountainCarConfig</span>
   <span class="kr">Int8</span> <span class="nx">episode_length</span><span class="p">,</span>
-  <span class="kr">Int8</span> <span class="nx">num_episodes</span><span class="p">,</span>
   <span class="kr">UInt8</span> <span class="nx">deque_size</span>
 <span class="k">end</span>
 </code></pre>
