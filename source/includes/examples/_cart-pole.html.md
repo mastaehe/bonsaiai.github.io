@@ -36,12 +36,11 @@ The schema `Action` names a record — `action` —  and assigns it a constraine
 ```inkling
 schema CartPoleConfig
   Int8 episode_length,
-  Int8 num_episodes,
   UInt8 deque_size
 end
 ```
 
- The schema `CartPoleConfig` names three records — `episode_length`, `num_episodes`, and `deque_size` — and assigns each of them a type.
+ The schema `CartPoleConfig` names two records — `episode_length` and `deque_size` — and assigns each of them a type.
 
 ###### Concept
 
@@ -75,8 +74,7 @@ curriculum balance_curriculum
   objective up_time
   lesson balancing
     configure
-      constrain episode_length with Int8{-1}
-      constrain num_episodes with Int8{-1}
+      constrain episode_length with Int8{-1},
       constrain deque_size with UInt8{1}
     until
       maximize up_time
@@ -85,7 +83,7 @@ end
 
 The curriculum's name is `balance_curriculum`. It trains the `balance` concept with the `cartpole_simulator`. The objective for this curriculum is `up_time`. The objective measures how long the pole stays upright.
 
-This curriculum contains one lesson, called `balancing`. It configures the simulation, by setting a number of constraints for the state of the simulator. The lesson trains until the AI has maximized the objective.
+This curriculum contains one lesson, called `balancing`. It configures the simulation, by setting two constraints for the state of the simulator. The lesson trains until the AI has maximized the objective.
 
 ## Simulator File
 

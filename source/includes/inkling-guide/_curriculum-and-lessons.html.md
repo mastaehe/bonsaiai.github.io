@@ -37,7 +37,6 @@ The configure clause uses the **constrain** keyword to create a set of condition
 lesson get_high_score
   configure
     constrain episode_length with Int8{-1},
-    constrain num_episodes with Int8{-1},
     constrain deque_size with UInt8{1}
   until
     maximize open_ai_gym_default_objective

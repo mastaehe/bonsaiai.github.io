@@ -48,7 +48,6 @@ objective open_ai_gym_default_objective
   lesson get_high_score
     configure
       constrain episode_length with Int8{-1},
-      constrain num_episodes with Int8{-1},
       constrain deque_size with UInt8{1}
     until
       maximize open_ai_gym_default_objective
@@ -65,7 +64,6 @@ The simulator clause declares the simulator name and two schemas. The first spec
 # Configuration schema declaration
 schema MountainCarConfig
   Int8 episode_length,
-  Int8 num_episodes,
   UInt8 deque_size
 end
 ```
