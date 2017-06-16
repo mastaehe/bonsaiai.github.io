@@ -14,7 +14,7 @@ Turtlebot is a low-cost mobile base for basic robotics and AI-driven robotics
 R&D. This is a real-world example of how to use the Bonsai Platform for robotics
 using [Gazebo and ROS][3] (Robotic Operating System).
 
-This Example also includes scripts for integrating Gazebo and ROS into the
+This example also includes scripts for integrating Gazebo and ROS into the
 Bonsai Platform which can be found below in the [Simulator Files][8] section.
 In this case, ROS is relaying information between the simulator Gazebo and the
 Bonsai Platform. Turtlebot is being simulated inside of Gazebo, and ROS is
@@ -40,7 +40,7 @@ end
 ```
 
 The `State` schema provides the BRAIN with the current x, y coordinates of the
-turtlebot, as well as its orientation. We also supply a heading vector to and
+turtlebot, as well as its orientation. We also supply a heading vector to the
 relative orientation of the goal with respect to the Turtlebot. This provides an
 invariant representation across goal positions.
 
@@ -76,7 +76,7 @@ concept go_to_point is estimator
 end
 ```
 
-This concept is named `go_to_point` which predicts a `Command` given a `State`
+This concept is named `go_to_point`, which predicts a `Command` given a `State`
 of the simulation. This concept of `go_to_point` is based on the x, y position
 set as the goal.
 
@@ -152,17 +152,21 @@ simulation with ROS.
 
 See the [**bonsai_gazebo.py file**][5] on GitHub.
 
-### turtlebot_office_experiment.py
+### turtlebot_office_simulator.py
 
 > Source code too long to display, please click Github link.
 
 This is a Python file for integrating the Gazebo simulator through ROS into
-the Bonsai AI Engine. This file repeatedly runs each "episode" and the `State`
+the Bonsai AI Engine. This contains the main Bonsai-specific simulator functionality,
+which is the main interface that communicates with the Bonsai AI engine
+to drive AI training and prediction.
+
+This file repeatedly runs each "episode" and the `State`
 of the simulation in Gazebo gets passed through ROS to the Bonsai AI Engine
 which then proceeds with the next `Command` for Turtlebot and passes that back
 through ROS to Gazebo. 
 
-See the [**turtlebot_office_experiment.py file**][7] on GitHub.
+See the [**turtlebot_office_simulator.py file**][7] on GitHub.
 
 [1]: https://github.com/BonsaiAI/gazebo-turtlebot-sample
 [2]: http://www.turtlebot.com/
@@ -170,5 +174,5 @@ See the [**turtlebot_office_experiment.py file**][7] on GitHub.
 [4]: https://beta.bons.ai/new
 [5]: https://github.com/BonsaiAI/gazebo-turtlebot-sample/blob/master/scripts/bonsai_gazebo.py
 [6]: https://github.com/BonsaiAI/gazebo-turtlebot-sample/blob/master/scripts/bonsai_ros.py
-[7]: https://github.com/BonsaiAI/gazebo-turtlebot-sample/blob/master/scripts/turtlebot_office_experiment.py
+[7]: https://github.com/BonsaiAI/gazebo-turtlebot-sample/blob/master/scripts/turtlebot_office_simulator.py
 [8]: #simulator-files
