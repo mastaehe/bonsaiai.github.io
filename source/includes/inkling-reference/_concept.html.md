@@ -34,8 +34,8 @@ are explained in the following sections.
 * The concept must be named after the `concept` keyword.
 * The `is` keyword specifies the kind of prediction the trained concept will produce. For example, a concept can specify is classifier. This means that the trained concept will categorize its input. Email, for example, can be classified as spam or not spam. Another option with this keyword is estimator.
 * The concept must declare an output schema after `predicts`. The output schema describes the data produced by the trained concept. For example if this concept classifies email into spam and not spam, the output schema for the concept would be a Bool. The output schema can be a named schema, where the name refers to a full schema definition elsewhere, or it can be anonymous, which is a parenthesized list of name, type pairs. See the section on schema declarations for more information.
-* A trained concept gets input from streams or (if multiple concepts are used) from another concept. Input (the keyword) refers to the stream that is the original input to the system. All data flowing through the system has a schema associated with it. In some cases this is calculated rather than explicit.
-* If the `input` keyword appears in the `follows` list, it means that the input stream flowing into this concept comes from outside the BRAIN. The `input` keyword must always be accompanied by a schema (named or anonymous) because the data stream originates outside the Brain; if no schema was present, data types and formats being input would be unknown.
+* A trained concept gets input from streams or (if multiple concepts are used) from another concept. `input` (the keyword) refers to the stream that is the original input to the system. All data flowing through the system has a schema associated with it. In some cases this is calculated rather than explicit.
+* If the `input` keyword appears in the `follows` list, it means that the input stream flowing into this concept comes from outside the BRAIN. The `input` keyword must always be accompanied by a schema (named or anonymous) because the data stream originates outside the BRAIN; if no schema was present, data types and formats being input would be unknown.
 * The `feeds` list is a list of concepts and streams (including the predefined output stream) for which this concept's output is a source.
 * The `input` keyword cannot not appear in the feeds list and the `output` keyword cannot appear in the follows list.
 * The concept statement is terminated by the `end` keyword.
@@ -72,6 +72,10 @@ sources and output targets.
 
 ## Concept Examples
 
+We show Inkling for the concepts get_high_score, Digit, Curvature, and Segments. 
+
+Select the Inkling tab to display the Inkling source. 
+
 ### get_high_score
 
 ```inkling--code
@@ -83,14 +87,10 @@ concept get_high_score
 end
 ```
 
-We show Inkling for the concepts get_high_score, Digit, Curvature, and Segments. 
-
-Select the Inkling tab to display the Inklng source. 
-
 In this example:
 
 * `conceptName`: get_high_score
-* `class`: classifier
+* `kind`: classifier
 * `predicts`: PlayerMove
 * `input(schemaName)`: input(GameState)
 * `dependent`: output
@@ -111,10 +111,9 @@ In this example:
 * `conceptName`: Digit
 * `kind`: classifier
 * `predicts`: MNIST_output
-* `follows`
 * `Curvature`: a concept
 * `Segments`: another concept
-* `input(MNIST_input)`: The `input` keyword indicates the predefined input    stream with data formats defined by schema MNIST_input.
+* `input(schemaName)`: `input(MNIST_input)`
 * `feeds:` output
 
 
@@ -133,8 +132,7 @@ In this example:
 * `conceptName`: Curvature
 * `kind`: classifier
 * `predicts`: curve_output
-* `follows`:
-* `input(MNIST_input)`: The `input` keyword indicates the predefined input    stream with data formats defined by schema MNIST_input.
+* `input(schemaName)`: `input(MNIST_input)`
 
 ### Segments
 
@@ -149,5 +147,4 @@ end
 * `conceptName`: Segments
 * `kind`: classifier
 * `predicts`: segments_output
-* `follows`:
-* `input(MNIST_input)`: The `input` keyword indicates the predefined input    stream with data formats defined by schema MNIST_input.
+* `input(schemaName)`: `input(MNIST_input)`
