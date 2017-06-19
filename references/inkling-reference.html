@@ -627,8 +627,8 @@ are explained in the following sections.</p>
 <li>The concept must be named after the <code class="prettyprint">concept</code> keyword.</li>
 <li>The <code class="prettyprint">is</code> keyword specifies the kind of prediction the trained concept will produce. For example, a concept can specify is classifier. This means that the trained concept will categorize its input. Email, for example, can be classified as spam or not spam. Another option with this keyword is estimator.</li>
 <li>The concept must declare an output schema after <code class="prettyprint">predicts</code>. The output schema describes the data produced by the trained concept. For example if this concept classifies email into spam and not spam, the output schema for the concept would be a Bool. The output schema can be a named schema, where the name refers to a full schema definition elsewhere, or it can be anonymous, which is a parenthesized list of name, type pairs. See the section on schema declarations for more information.</li>
-<li>A trained concept gets input from streams or (if multiple concepts are used) from another concept. Input (the keyword) refers to the stream that is the original input to the system. All data flowing through the system has a schema associated with it. In some cases this is calculated rather than explicit.</li>
-<li>If the <code class="prettyprint">input</code> keyword appears in the <code class="prettyprint">follows</code> list, it means that the input stream flowing into this concept comes from outside the BRAIN. The <code class="prettyprint">input</code> keyword must always be accompanied by a schema (named or anonymous) because the data stream originates outside the Brain; if no schema was present, data types and formats being input would be unknown.</li>
+<li>A trained concept gets input from streams or (if multiple concepts are used) from another concept. <code class="prettyprint">input</code> (the keyword) refers to the stream that is the original input to the system. All data flowing through the system has a schema associated with it. In some cases this is calculated rather than explicit.</li>
+<li>If the <code class="prettyprint">input</code> keyword appears in the <code class="prettyprint">follows</code> list, it means that the input stream flowing into this concept comes from outside the BRAIN. The <code class="prettyprint">input</code> keyword must always be accompanied by a schema (named or anonymous) because the data stream originates outside the BRAIN; if no schema was present, data types and formats being input would be unknown.</li>
 <li>The <code class="prettyprint">feeds</code> list is a list of concepts and streams (including the predefined output stream) for which this concept&rsquo;s output is a source.</li>
 <li>The <code class="prettyprint">input</code> keyword cannot not appear in the feeds list and the <code class="prettyprint">output</code> keyword cannot appear in the follows list.</li>
 <li>The concept statement is terminated by the <code class="prettyprint">end</code> keyword.</li>
@@ -663,6 +663,10 @@ sources and output targets.</p>
 
 <h2 id="concept-examples">Concept Examples</h2>
 
+<p>We show Inkling for the concepts get_high_score, Digit, Curvature, and Segments. </p>
+
+<p>Select the Inkling tab to display the Inkling source. </p>
+
 <h3 id="get_high_score">get_high_score</h3>
 <pre class="highlight inkling tab-inkling--code"><code><span class="k">concept</span> <span class="nx">get_high_score</span>
   <span class="k">is</span> <span class="nx">classifier</span>
@@ -671,15 +675,11 @@ sources and output targets.</p>
   <span class="k">feeds</span> <span class="kr">output</span>
 <span class="k">end</span>
 </code></pre>
-<p>We show Inkling for the concepts get_high_score, Digit, Curvature, and Segments. </p>
-
-<p>Select the Inkling tab to display the Inklng source. </p>
-
 <p>In this example:</p>
 
 <ul>
 <li><code class="prettyprint">conceptName</code>: get_high_score</li>
-<li><code class="prettyprint">class</code>: classifier</li>
+<li><code class="prettyprint">kind</code>: classifier</li>
 <li><code class="prettyprint">predicts</code>: PlayerMove</li>
 <li><code class="prettyprint">input(schemaName)</code>: input(GameState)</li>
 <li><code class="prettyprint">dependent</code>: output</li>
@@ -698,10 +698,9 @@ sources and output targets.</p>
 <li><code class="prettyprint">conceptName</code>: Digit</li>
 <li><code class="prettyprint">kind</code>: classifier</li>
 <li><code class="prettyprint">predicts</code>: MNIST_output</li>
-<li><code class="prettyprint">follows</code></li>
 <li><code class="prettyprint">Curvature</code>: a concept</li>
 <li><code class="prettyprint">Segments</code>: another concept</li>
-<li><code class="prettyprint">input(MNIST_input)</code>: The <code class="prettyprint">input</code> keyword indicates the predefined input    stream with data formats defined by schema MNIST_input.</li>
+<li><code class="prettyprint">input(schemaName)</code>: <code class="prettyprint">input(MNIST_input)</code></li>
 <li><code class="prettyprint">feeds:</code> output</li>
 </ul>
 
@@ -718,8 +717,7 @@ sources and output targets.</p>
 <li><code class="prettyprint">conceptName</code>: Curvature</li>
 <li><code class="prettyprint">kind</code>: classifier</li>
 <li><code class="prettyprint">predicts</code>: curve_output</li>
-<li><code class="prettyprint">follows</code>:</li>
-<li><code class="prettyprint">input(MNIST_input)</code>: The <code class="prettyprint">input</code> keyword indicates the predefined input    stream with data formats defined by schema MNIST_input.</li>
+<li><code class="prettyprint">input(schemaName)</code>: <code class="prettyprint">input(MNIST_input)</code></li>
 </ul>
 
 <h3 id="segments">Segments</h3>
@@ -733,8 +731,7 @@ sources and output targets.</p>
 <li><code class="prettyprint">conceptName</code>: Segments</li>
 <li><code class="prettyprint">kind</code>: classifier</li>
 <li><code class="prettyprint">predicts</code>: segments_output</li>
-<li><code class="prettyprint">follows</code>:</li>
-<li><code class="prettyprint">input(MNIST_input)</code>: The <code class="prettyprint">input</code> keyword indicates the predefined input    stream with data formats defined by schema MNIST_input.</li>
+<li><code class="prettyprint">input(schemaName)</code>: <code class="prettyprint">input(MNIST_input)</code></li>
 </ul>
 
           <h1 id="schema">Schema</h1>
