@@ -348,7 +348,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <p>This page contains working examples of Inkling code in conjunction with python simulator files. All of these examples and the libraries that accompany them can be found on <a href="https://github.com/BonsaiAI">BonsaiAI&rsquo;s GitHub page</a> and are also linked within each Example.</p>
 
-<p>All of the <strong>OpenAI Gym Examples</strong> and <strong>EnergyPlus</strong> can be trained in the cloud with Bonsai managed simulators. A full list of supported Docker containers for remotely managed simulators can be found in the <a href="references/cli-reference.html#bproj-file">Project File Reference</a>.</p>
+<p>All of the <strong>OpenAI Gym</strong>, <strong>EnergyPlus</strong> and <strong>Gazebo</strong> examples can be trained in the cloud with Bonsai managed simulators. A full list of supported Docker containers for remotely managed simulators can be found in the <a href="references/cli-reference.html#bproj-file">Project File Reference</a>.</p>
 
 <p>If you have any suggestions of examples you&rsquo;d like to see us implement please <a href="https://bons.ai/contact-us#contact-page-form">contact the support team</a>.</p>
 
@@ -369,6 +369,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <ul>
 <li><strong>HVAC with EnergyPlus</strong>: An example of climate control machine teaching using EnergyPlus and BCVTB for simulation. </li>
+<li><strong>Gazebo Simulated Turtlebot</strong>: A robotics example of a Turtlebot robot navigating an environment in Gazebo.</li>
 </ul>
 
           <h1 id="basic-simulator-find-the-center">Basic Simulator (Find the Center)</h1>
@@ -946,6 +947,165 @@ def debug(*args):
 <p>This is a Python simulator for integrating the EnergyPlus simulator into the Bonsai AI Engine. This <em>energyplus_simulator.py</em> file repeatedly runs the EnergyPlus simulator in the background with new actions sent from the Bonsai AI Engine by passing the state from EnergyPlus to the backend, and the action from the backend back to EnergyPlus.</p>
 
 <p>For more information on the functions inside of this simulator class and how to implement them see the <a href="http://docs.bons.ai/references/library-reference.html">Library Reference</a>.</p>
+
+          <h1 id="gazebo-turtlebot">Gazebo: Turtlebot</h1>
+
+<blockquote>
+<p><img src="images/bonsai-turtlebot-demo.png" alt="Turtlebot Demo Image" /></p>
+</blockquote>
+
+<p><a href="https://github.com/BonsaiAI/gazebo-turtlebot-sample"><strong>Download the full source code on GitHub</strong></a> if you want to run this simulator
+locally. If you want to run Gazebo Turtlebot remotely on the Bonsai Platform as
+a managed simulator (highly recommended), create a new BRAIN selecting the
+Gazebo Turtlebot demo on <a href="https://beta.bons.ai/new">beta.bons.ai</a>.</p>
+
+<p>In this example, we&rsquo;ll walk you through the various Inkling components and
+simulation scripts that are part of a sample implementation of training
+<a href="http://www.turtlebot.com/">Turtlebot</a> to navigate the Willow Garage office on the Bonsai Platform.
+Turtlebot is a low-cost mobile base for basic robotics and AI-driven robotics
+R&amp;D. This is a real-world example of how to use the Bonsai Platform for robotics
+using <a href="http://gazebosim.org/tutorials?tut=ros_overview">Gazebo and ROS</a> (Robotic Operating System).</p>
+
+<p>This example also includes scripts for integrating Gazebo and ROS into the
+Bonsai Platform which can be found below in the <a href="#simulator-files">Simulator Files</a> section.
+In this case, ROS is relaying information between the simulator Gazebo and the
+Bonsai Platform. Turtlebot is being simulated inside of Gazebo, and ROS is
+communicating the action and state of the simulation back to the Bonsai servers for training.</p>
+
+<p>A graphical display is not part of the Docker container (when training remotely),
+ but a Gazebo client may additionally connect to the Gazebo server (that <em>is</em>
+ part of the container) to visualize the simulation environment.</p>
+
+<h2 id="inkling-file">Inkling File</h2>
+
+<h6 id="schema">Schema</h6>
+<pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">State</span>
+    <span class="kr">Float32</span> <span class="nx">heading_x</span><span class="p">,</span>
+    <span class="kr">Float32</span> <span class="nx">heading_y</span><span class="p">,</span>
+    <span class="kr">Float32</span> <span class="nx">heading_yaw</span><span class="p">,</span>
+    <span class="kr">Float32</span> <span class="nx">yaw</span><span class="p">,</span>
+    <span class="kr">Float32</span> <span class="nx">x</span><span class="p">,</span>
+    <span class="kr">Float32</span> <span class="nx">y</span>
+<span class="k">end</span>
+</code></pre>
+<p>The <code class="prettyprint">State</code> schema provides the BRAIN with the current x, y coordinates of the
+turtlebot, as well as its orientation. We also supply a heading vector to the
+relative orientation of the goal with respect to the Turtlebot. This provides an
+invariant representation across goal positions.</p>
+<pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">Command</span>
+    <span class="kr">Float32</span> <span class="nx">lin_vel</span><span class="p">,</span>
+    <span class="kr">Float32</span> <span class="nx">ang_vel</span>
+<span class="k">end</span>
+</code></pre>
+<p>The <code class="prettyprint">Command</code> schema defines <code class="prettyprint">lin_vel</code> as the linear velocity and <code class="prettyprint">ang_vel</code> as
+the angular velocity of Turtlebot in the simulation. These are the two actions
+that can be taken to move Turtlebot. Our BRAIN will output the desired linear
+and angular velocities in m/s and rad/s, respectively. A PID controller will
+make a best effort to achieve these targets within the time limit of the iteration.</p>
+<pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">TurtlebotConfig</span>
+    <span class="kr">Int8</span> <span class="nx">unused</span>
+<span class="k">end</span>
+</code></pre>
+<p>The <code class="prettyprint">TurtlebotConfig</code> schema in this case is not used (but is still required to
+be defined in Inkling).</p>
+
+<h6 id="concept">Concept</h6>
+<pre class="highlight inkling tab-inkling"><code><span class="k">concept</span> <span class="nx">go_to_point</span> <span class="k">is</span> <span class="nx">estimator</span>
+    <span class="k">predicts</span> <span class="p">(</span><span class="nx">Command</span><span class="p">)</span>
+    <span class="k">follows</span> <span class="kr">input</span><span class="p">(</span><span class="nx">State</span><span class="p">)</span>
+    <span class="k">feeds</span> <span class="kr">output</span>
+<span class="k">end</span>
+</code></pre>
+<p>This concept is named <code class="prettyprint">go_to_point</code>, which predicts a <code class="prettyprint">Command</code> given a <code class="prettyprint">State</code>
+of the simulation. This concept of <code class="prettyprint">go_to_point</code> is based on the x, y position
+set as the goal.</p>
+
+<h6 id="simulator">Simulator</h6>
+<pre class="highlight inkling tab-inkling"><code><span class="k">simulator</span> <span class="nx">turtlebot_office_simulator</span><span class="p">(</span><span class="nx">TurtlebotConfig</span><span class="p">)</span>
+    <span class="k">action</span> <span class="p">(</span><span class="nx">Command</span><span class="p">)</span>
+    <span class="k">state</span> <span class="p">(</span><span class="nx">State</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
+<p>The simulator clause declares that a simulator named <code class="prettyprint">turtlebot_office_simulator</code>
+will be connecting to the server for training. This code snippet binds the
+previous schemas to this simulator. To define the training relationship between
+the simulator and the concept we must begin by defining the simulator.
+<code class="prettyprint">turtlebot_office_simulator</code> expects an action defined in the <code class="prettyprint">Command</code> schema
+as input and replies with a state defined in the <code class="prettyprint">State</code> schema as output.</p>
+
+<h6 id="curriculum">Curriculum</h6>
+<pre class="highlight inkling tab-inkling"><code><span class="k">curriculum</span> <span class="nx">go_to_point_curriculum</span>
+    <span class="k">train</span> <span class="nx">go_to_point</span>
+    <span class="k">with</span> <span class="k">simulator</span> <span class="nx">turtlebot_office_simulator</span>
+    <span class="k">objective</span> <span class="nx">get_reward</span>
+        <span class="k">lesson</span> <span class="nx">get_to_point</span>
+            <span class="k">configure</span>
+                <span class="k">constrain</span> <span class="nx">unused</span> <span class="k">with</span> <span class="kr">Int8</span><span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">}</span>
+            <span class="k">until</span>
+                <span class="k">maximize</span> <span class="nx">get_reward</span>
+<span class="k">end</span>
+</code></pre>
+<p>The curriculum <code class="prettyprint">go_to_point_curriculum</code> trains <code class="prettyprint">go_to_point</code> using
+<code class="prettyprint">turtlebot_office_simulator</code>. The BRAIN that runs this Inkling code will try to
+maximize the value returned from <code class="prettyprint">get_reward</code> until you stop training.
+<code class="prettyprint">get_reward</code> is a method in the Python simulator.</p>
+
+<p>This curriculum contains one lesson, called <code class="prettyprint">get_to_point</code>. If used, it would
+configure the simulation by setting a number of constraints for the state of
+the simulator. In this simple example however, there are no constraints.</p>
+
+<h2 id="simulator-files">Simulator Files</h2>
+
+<p>The three full Python files for this example are with the rest of the
+<a href="https://github.com/BonsaiAI/gazebo-turtlebot-sample">gazebo-turtlebot-sample code</a> on GitHub.</p>
+
+<h3 id="bonsai_ros-py">bonsai_ros.py</h3>
+
+<blockquote>
+<p>Source code too long to display, please click Github link.</p>
+</blockquote>
+
+<p>This Python file mainly contains a class that acts as a basic interface between
+ROS and Bonsai&rsquo;s protocols. It can bring up and down the ROS stack and parse a
+variety of basic messages.</p>
+
+<p>The purpose of this file is to manage the interactions between the BRAIN server
+interface and many ROS topics that are available to subscribe or publish to.</p>
+
+<p>See the <a href="https://github.com/BonsaiAI/gazebo-turtlebot-sample/blob/master/scripts/bonsai_ros.py"><strong>bonsai_ros.py file</strong></a> on GitHub.</p>
+
+<h3 id="bonsai_gazebo-py">bonsai_gazebo.py</h3>
+
+<blockquote>
+<p>Source code too long to display, please click Github link.</p>
+</blockquote>
+
+<p>This Python file extends the BonsaiROS interface with methods for controlling
+Gazebo simulations in accordance with the Bonsai simulator protocol.</p>
+
+<p>The purpose of this file is to extend <code class="prettyprint">bonsai_ros.py</code> to also handle interacting
+with the Gazebo specific services and topics made available when using a Gazebo
+simulation with ROS.</p>
+
+<p>See the <a href="https://github.com/BonsaiAI/gazebo-turtlebot-sample/blob/master/scripts/bonsai_gazebo.py"><strong>bonsai_gazebo.py file</strong></a> on GitHub.</p>
+
+<h3 id="turtlebot_office_simulator-py">turtlebot_office_simulator.py</h3>
+
+<blockquote>
+<p>Source code too long to display, please click Github link.</p>
+</blockquote>
+
+<p>This is a Python file for integrating the Gazebo simulator through ROS into
+the Bonsai AI Engine. This contains the main Bonsai-specific simulator functionality,
+which is the main interface that communicates with the Bonsai AI engine
+to drive AI training and prediction.</p>
+
+<p>This file repeatedly runs each &ldquo;episode&rdquo; and the <code class="prettyprint">State</code>
+of the simulation in Gazebo gets passed through ROS to the Bonsai AI Engine
+which then proceeds with the next <code class="prettyprint">Command</code> for Turtlebot and passes that back
+through ROS to Gazebo. </p>
+
+<p>See the <a href="https://github.com/BonsaiAI/gazebo-turtlebot-sample/blob/master/scripts/turtlebot_office_simulator.py"><strong>turtlebot_office_simulator.py file</strong></a> on GitHub.</p>
 
       </div>
       <div class="dark-box">
