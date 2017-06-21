@@ -1,124 +1,139 @@
-# Schema
+# Schemas
+
+A schema describes a record and its fields. Schemas can be referenced by name. Statements (such as stream) can also use anonymous schemas. Schemas can be declared and referenced.
+
+------> from web
 
 This is the reference for the keyword **schema**. Also covered are the
 definitions and uses of Inkling types, including type constraints.  These are used in schema declarations.
 
-### What is it?
-
 In Inkling a **schema** describes a named record and its contained fields. Each field in a schema has a name and a type. A field may also have a type constraint that constrains the values that the datum described by this field will take.
-
-### Why do I use it?
 
 Schemas describe the structure of data in Inkling  streams, such as the
 predefined `input` and `output` streams. In addition, many Inkling statements (for
 example `concept` and `curriculum`) use schema references to describe the data that flows in and out of the construct.
 
-### How do I use it?
 
-```inkling--code
-schema MySchema                   # declare
-   UInt8  field1,
-   UInt32 field2
+## Schema Declarations
+
+[Insert text here for introduction]
+
+### Syntax
+
+```inkling--syntax
+schemaStmt := 
+schema <name>                      
+     fieldDclnList 
 end
 
-concept MyConcept
-  is classifier
-    predicts (MySchema)           # use
-    follows input(UInt64 i)       # anonymous
-    feeds output
-end
+fieldDclnList   :=  fieldDcln [',' fieldDcln  ]*  
+
+fieldDcln       :=  scalarDcln   | structureDcln 
+
+scalarDcln      :=  concreteType   rangeExpression? <name>
+                                           
+structureDcln   :=  structure_type   structure_init <name> 
+                                
+structure_type  :=  Luminance | Matrix | Vector
+
+structure_init  :=  '(' 
+                        luminance_init | matrix_init | vector_init
+                    ')'
+
+luminance_init  :=  integerLiteral  ',' integerLiteral 
+
+matrix_init     :=  '(' concreteType [ ',' concretetype ]* ')' 
+                        ',' integerLiteral [ ',' integerLiteral]* 
+
+vector_init     :=  concreteType   rangeExpression? ','  integerLiteral 
 ```
 
-Select the Inkling tab to show a sample schema declaration and an example of its use.
-Note that a schema reference can be anonymous. That means a list of name, type
-pairs can appear where a schema name could appear.
-‍
-## Schema Rules
+In the syntax you will see references to Inkling primitive types and structure types
+(Luminance, Matrix). These are discussed in in the Inkling Types section. 
+
+### Usage
+
+The set of concrete types includes the integer and string types, floats, etc. See the Concrete Types section for the set of Inkling concrete types.
+
+The structureDcln is intended to support common ML types. The ML types currently supported includes Luminance and Matrix. See Machine Learning Types. 
+
+In the matrix_init expression, a parenthesized list of types is followed by a list of dimensions. The number of types and the number of dimensions must match.
+
+The schema rule allows both scalar and structure types to be arrays. The array size must be an integral constant.  
+
+------> from web
 
 * Inkling statements can reference schemas by name. Above, `MyConcept` uses `MySchema` as its `predicts` schema.
 * Statements can use anonymous schemas. That means that a list of fields appears where a schema name could appear. Above, after `follows`, the predefined stream `input` has an anonymous schema with one field. This is useful in cases where you will only need that information once. In general, anywhere a schema name can appear, an anonymous schema can appear.
 * The set of types supported with schema fields consists of the set of Inkling primitive types and the set of Inkling structured types. These sets are specified in the [Inkling Types][3] section.
 * A schema field that has a primitive type can also have a type constraint that constrains the set of potential values for that field. Examples and syntax of type constraints are included in this chapter.
 
-## Schema Declaration Syntax
 
-```inkling--syntax
-schemaStatement ::=
-  schema <schemaName>
-    fieldDeclarationList
-  end
+### Discussion
 
-fieldDeclarationList ::=
-   fieldDeclaration 
-   [',' fieldDeclaration  ]*
+[Insert discussion text here]
 
-fieldDeclaration  ::=  
-  scalarDeclaration   
-  | 
-  structureDeclaration 
-
-scalarDeclaration  ::=   
-  concreteType rangeExpression?  
-    <name> [ '[' arraySizeLiteral ']' ]* 
-
-structureDeclaration ::= 
-  structure_type structure_init 
-    <name> [ '[' arraySizeLiteral ']' ]*
-
-structure_type ::= 
-  Luminance | Matrix
-
-structure_init:= 
-  '(' 
-      luminance_init 
-   | 
-      matrix_init 
-  ')'
-
-luminance_init ::=  
-  integerLiteral ',' integerLiteral 
-
-matrix_init ::= 
-  '(' concreteType 
-      [ ',' concretetype ]* 
-   ')' 
-
-scalarDeclaration ::=
-  primitiveType typeConstraint?
-    <name> [ '[' arraySizeLiteral ']' ]*
-```
-
-Select the Syntax tab to view the schema declaration syntax.
-
-In the syntax you will see references to Inkling primitive types and structure types
-(Luminance, Matrix). These are discussed in in the Inkling Types section. 
-
-‍
-## Schema Reference Syntax
-
-```inkling--syntax
-schemaReference ::=
-  '(' <name> ')'                  # named reference
-  | 
-  '(' <fieldDeclarationList> ')'  # anonymous reference
-```
-
-Select the Syntax tab to view the schema reference syntax.
-
-A named schema is referenced by its name. An anonymous schema is referenced by its list of fields.
-
-## Schema Example
+### Example(s)
 
 ```inkling--code
-schema MNIST_training_data_schema
-  UInt8 label,
-  Luminance(28, 28) image
-end
+  schema MNIST_schema
+    String label, 
+    Luminance(28, 28) image
+  end
+
+  schema my_schema
+    Int32 x, 
+    Int32{1:5} z 
+  end
+  
+  stream foo from item in input(my_schema) select item.x, item.z 
+```
+  
+Note item in the above stream statement corresponds to a record declaration in a Linq statement. It is dereferenced in the select to access the fields but it does not appear in the schema itself. 
+
+The last field z in  my_schema has constrained type Int32{1:5}. For more information on this feature see Constrained Types.
+
+
+
+## Schema References
+
+[Insert text here for introduction]
+
+### Syntax
+
+```inkling--syntax
+schemaRef :=                 
+     '('   ')'                  // empty anonymous schema
+ |   '(' <name> ')'             // named schema
+ |   '('  <fieldDclnList> ')    // non-empty anonymous schema
 ```
 
-Select the Inkling tab to show a schema that has a field with a primitive type and a field with a structured type.
+### Discussion
+
+```inkling--code
+from item in input() select "something"
+```
+
+Schemas can be empty. Here is an empty (null) schema. 
+
+```inkling--code
+from item in input(Int32 x, Int32 y) select item.y
+```
+  
+Here is an anonymous schema. The schema does not have a name though it does have named fields.
+
+Schemas tell the learning backend how to translate big matrices to usable values.
+Note the inkling compiler does not enforce the schema, it is the streaming demon which enforces the schema. However the inkling compiler performs static checks to verify that the schemas are valid in the context in which they are used.
+
+### Example(s)
+
+[Insert Example and text here]
+
+
 
 ## Inkling Types
+
+-----> from web [not sure we have come to a conclusion about this area yet]
 
 ###### Primitive Types
 
