@@ -53,9 +53,9 @@ In the syntax you will see references to Inkling primitive types and structure t
 
 ### Usage
 
-The set of concrete types includes the integer and string types, floats, etc. See the Concrete Types section for the set of Inkling concrete types.
+The set of concrete types includes the integer and string types, floats, etc. See the [Concrete Types][] section for the set of Inkling concrete types.
 
-The structureDcln is intended to support common ML types. The ML types currently supported includes Luminance and Matrix. See Machine Learning Types. 
+The structureDcln is intended to support common ML types. The ML types currently supported includes `Luminance` and `Matrix`. See [Machine Learning Types][]. 
 
 In the matrix_init expression, a parenthesized list of types is followed by a list of dimensions. The number of types and the number of dimensions must match.
 
@@ -91,7 +91,7 @@ The schema rule allows both scalar and structure types to be arrays. The array s
   
 Note item in the above stream statement corresponds to a record declaration in a Linq statement. It is dereferenced in the select to access the fields but it does not appear in the schema itself. 
 
-The last field z in  my_schema has constrained type Int32{1:5}. For more information on this feature see Constrained Types.
+The last field `z` in `my_schema` has constrained type `Int32{1:5}`. For more information on this feature see [Constrained Types[].
 
 
 
@@ -276,5 +276,5 @@ Select the Inkling tab to view some examples of valid and invalid ranges.
 
 ‍
 
-[1]: #lesson
+[1]: #lessons
 [3]: #inkling-types
