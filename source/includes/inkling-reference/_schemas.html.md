@@ -18,7 +18,7 @@ example `concept` and `curriculum`) use schema references to describe the data t
 
 [Insert text here for introduction]
 
-### Syntax
+> Schema Declaration Syntax
 
 ```inkling--syntax
 schemaStmt := 
@@ -99,7 +99,7 @@ The last field `z` in `my_schema` has constrained type `Int32{1:5}`. For more in
 
 [Insert text here for introduction]
 
-### Syntax
+> Schema Reference Syntax
 
 ```inkling--syntax
 schemaRef :=                 
@@ -110,17 +110,13 @@ schemaRef :=
 
 ### Discussion
 
-```inkling--code
-from item in input() select "something"
-```
-
 Schemas can be empty. Here is an empty (null) schema. 
 
-```inkling--code
-from item in input(Int32 x, Int32 y) select item.y
-```
+`from item in input() select "something"`
   
 Here is an anonymous schema. The schema does not have a name though it does have named fields.
+
+`from item in input(Int32 x, Int32 y) select item.y`
 
 Schemas tell the learning backend how to translate big matrices to usable values.
 Note the inkling compiler does not enforce the schema, it is the streaming demon which enforces the schema. However the inkling compiler performs static checks to verify that the schemas are valid in the context in which they are used.
@@ -131,11 +127,13 @@ Note the inkling compiler does not enforce the schema, it is the streaming demon
 
 
 
-## Inkling Types
+## Types
 
------> from web [not sure we have come to a conclusion about this area yet]
+[Insert introduction text here]
 
 ###### Primitive Types
+
+> Primitive Type Syntax
 
 ```inkling--syntax
 primitiveType ::=
@@ -143,138 +141,232 @@ primitiveType ::=
   Int64 | UInt8 | UInt16 | UInt32  | UInt64 | Bool | String
 ```
 
-Select the Syntax tab to show the Inkling set of primitive types which are used in schema declarations. The
+This shows a set of primitive types which are used in schema declarations. The
 integer suffix indicates the size in bits of the type. Integer types beginning
 with 'U' are unsigned. 
 
 ###### Structured Types
+
+> Structured Type Syntax
 
 ```inkling--syntax
 structure_type ::= 
   Luminance | Matrix
 ```
 
-[//]: # (Are structured types used for simulators ever?)
-
 Inkling currently supports the types Matrix and Luminance. (This list will be
 expanded.)
 
-See the schema declaration syntax for the complete syntax of structure declaration.
+### Example(s)
 
-‍
-###### Constrained Types
+[Insert Example and text here]
+
+###### Constrained Types and Range Expressions
+
+[Insert introduction text here]
+
+Constrained types are supported in schemas and in lesson clauses. They are constrained by means of range expressions.
+
+A range expression on a type has the effect of constraining the values of the type to values defined by the range expression. In a schema this constrains the values in the field. In lessons this constrains the values of the placeholder being configured.
+
+The syntax for a constrained type is the same for schema fields and placeholder expressions.
+
+Here are some examples of this syntax as it would appear in a schema definition. Curly braces delineate the range expression.
 
 ```inkling--code
-  # Example: Range expression
-
-  schema Schema1
-    Int8 {0:3:10} field   # start:step:stop (all are numeric literals)
-  end
- 
- # Curly braces delineate the range expression.
- # The values in this range are: (0, 3, 6, 9).
- # Note that the specification of 10 as the stop does not mean
- # 10 must be in the range (because it is a limit, not 
- # necessarily an endpoint).
+schema MyOutput 
+   UInt8 {0,1,2,3,4}    label,       # a list of UInt8 values
+   String {"a", "bc"}   category,    # a list of Strings
+   Int64 {0:5:100}      x,           # start:step:stop, step= 5, 0..100
+   Int64 {0:100}        y,           # start:stop, step= 1, 0..100
+   Int64 {0..100:25}    z,           # start:stop, numsteps=25, step= 4, 0..100
+   Float32 {0..2:5}     a            # gives (0, .5., 1.0, 1.5, 2.0)
+end
 ```
 
-Constrained types are supported in schemas and also in [lessons][1]. They are constrained by means of a special type of expression called a range expression.
-
-A range expression has the effect of constraining the values of the type to values defined by the range expression. In a schema this constrains the values in the field. In lessons this constrains the values of the placeholder being configured. In both cases the syntax is the same.
-
-Select the Inkling tab to see an example of a constrained type in a schema definition. 
-
-### Constrained Type Syntax
+> Range Expression (Constrained Type) Syntax
 
 ```inkling--syntax
-constrainedType ::=
-primitiveType
-'{'
-  start ':' [ step':']? stop      # A 'colon range'. Specifies 'step' 
-  |
-  start '.' '.' stop ':' numSteps # A 'dot range'. Specifies 'numsteps'.
-'}'
+numericType          
+    '{' 
+ start ':' [ step':']? stop          # 1:2:10.   Called a 'colon range'. Specifies 'step' (default=1).
+ |  
+ start '.' '.' stop ':' numSteps     # 1..10:5  Called a 'dot range'. Specifies 'numsteps'.
+    '}' 
+ 
+ numericType := Double | Float64 | Float32 | Int8 | Int16 | Int32 | Int64 | UInt8 | UInt16 | UInt32 | UInt64
 ```
 
-Select the Syntax tab to view the constrained type syntax.
-
-Note that start, stop, step, numSteps are all numeric literals.
-
-‍
-
-###### Range Expression Rules
-
-There are three forms of range expressions which Inkling supports. 
-Select the Inkling tab to see an example of each type.
+### Numeric Range Rules
 
 ```inkling--code
-# Example: Value list range expression
-schema Schema2
-  UInt8  {0,1,2,3,4}   num, # a set of UInt8 values
-  String {"a", "bc"}   cat  # a set of Strings
+Int64  { 0:4:1 }   is invalid. The step size is larger than the range.
+Int64  { 0..1:4 }  is invalid. Values generated are floating point not integer. 
+Float32{-1..1:10 } is valid. Negative bounds allowed.
+Int8   {0:-4:-100}   is valid. stop  < start is valid if and only if step is negative. 
+UInt32 {-10:10}    is invalid. Unsigned integer range contains signed values.
+```
+
+A dot range allows the programmer to specify a number of steps. In some contexts it is the number of steps that is significant. A colon range supports specifying the step size, which may be more important in other contexts. Here are some other characteristics of these constructs:
+
+For numeric ranges:
+
+* For colon range, step can be a floating point number. 
+* For colon range, the step size can be negative only if stop < start.
+* For dot range, number of steps (numSteps) is a positive integer.
+
+For numeric ranges the start point is inclusive (it is included in the values of the range) and fixed. The end point may or may not be included in the values of the range. If you land on it exactly it is in the range. If you don't land on it exactly it is not in the range. For example `Int8 { 0:3:10}` gives you (0, 3, 6, 9). Note that the specification of 10 as the stop is not an error (because it is a limit, not necessarily an endpoint). 
+
+The range stop must be reachable from the range start by applying the step. (The range must be bounded.) The step is optional. If it is not specified the default value is 1. The step can be negative. 
+
+The range start is exact (to the maximum extent possible if the range expression type is floating point). The range end is a limit. That means that if applying the step results in landing exactly on the end point, then the end point is part of the range. Otherwise the highest value landed on that is less than the end point is the final value in the range. 
+
+ 
+> Value List Constrained Type Syntax
+
+```inkling--syntax
+concreteType 
+    '{' 
+     [ integerLiteral [ ',' integerLiteral ]* ]
+  |  [ floatLiteral [ ',' floatLiteral ]* ]
+  |  [ stringLiteral [ ',' stringLiteral ]* ]
+  |  [ booleanLiteral [ ',' booleanLiteral ]? ]
+    '}' 
+```
+
+The concrete types include `Bool` and `String` in addition to the numeric types. 
+
+Here are a few examples:
+
+```inkling--code
+    String {"red", "3", "green"}    is valid.
+    String {"red", 3, "green"}      is invalid (integer value in string range).
+    UInt8  {7, 7, 7, 7}             is valid.
+    UInt8  {7, -7, 7, 7}            is invalid (negative integer in unsigned range).
+```
+
+### Schema Matching
+
+Inkling uses schemas to understand and interpret the data format of streams.  The Inkling compiler performs schema match checking and will report errors if schemas which are expected to match do not. 
+
+Matching for schemas is structural, not name based. Field names don't matter. 
+* Two references by name to the same schema match because a schema matches itself. 
+* Two references to different schema names match if both schemas define the same list of field types in the same order. For structured types with size, the sizes must be equal.
+* Two anonymous schemas match if both define the same field types in the same order. 
+* A schema referenced by name matches an anonymous schema if both define the same field types in the same order. 
+
+For example every Inkling program has the predefined stream input available to it. Since there is a single stream associated with the keyword input, there can be only one definition of the data format of that stream. Once defined, the data format of a stream cannot change dynamically.  If that schema changes inkling compiler will flag that change as an error. Thus any reference to the input stream must have a schema that matches all other schemas used with the input stream. 
+
+```inkling--code
+concept keep_paddle_under_ball is classifier
+  predicts (PlayerMove)
+  follows ball_location, 
+          input(GameState)      <------- (1) uses Gamestate with input
+end
+ 
+concept high_score is classifier
+  predicts (PlayerMove)
+  follows keep_paddle_under_ball, 
+          input(GameState)              <------- (1) uses Gamestate with input
+  feeds output
+end
+ 
+schema GameState
+  Luminance(84, 336) pixels
+end
+ 
+concept ball_location is estimator
+  predicts (Matrix(UInt32, 1, 2) location)
+  follows input(Luminance(84, 336) p) <------- (2) matches Gamestate 
+end
+ 
+concept ball_X_location is estimator
+  predicts (Uint32 X_location)
+  follows input(Luminance(84, 330) p) <-- (3) fails to matches Gamestate 
 end
 ```
 
-* **Value list range expression**
-
-A value list range expression is simply a list of values.
-These range expressions specify sets of values in 
-which each value is explicitly listed.
-
+Above (1) shows a valid schema match by name. (2) shows a valid match by field type (and size). (3) shows a failed match (size is not equal). 
+ 
+### Schemas and Constraint Compatibility
+ 
+Constraints can be applied to schemas on declaration and in the lesson configure clause. The constraints must be compatible with the schema. Below we have excerpted some Inkling code from the breakout program to show an example. 
+ 
 ```inkling--code
-# Example: Range expression, colon range type
-schema Schema3
-  Int64  { 0:5:100 }   x,   # start:step:stop, step= 5,0..100
-  Int64  { 0:100 }     y    # start:stop, step= 1, 0..100
+simulator breakout_simulator(BreakoutConfig)
+   state (GameState)
+   action(PlayerMove)
+End
+ 
+schema BreakoutConfig
+  UInt32 level,
+  UInt8{1:4} paddle_width,
+  Float32 bricks_percent
+end
+ 
+curriculum ball_location_curriculum
+  train ball_location
+  with simulator breakout_simulator
+  objective ball_location_distance
+   
+    lesson more_bricks follows no_bricks
+      configure
+        constrain bricks_percent with Float32{0.1:0.01:1.0},
+        constrain level with UInt32{1:100},
+        constrain paddle_width with UInt8{1:4}
+      train
+        from frame in breakout_simulator
+        select frame
+        send frame
+      test
+        from frame in breakout_simulator
+        select frame
+        send frame
+      until
+        minimize ball_location_distance
 end
 ```
 
-* **Colon range expression**
+The constraints in a lesson configure clause are constraints on the fields of the configuration schema of the simulator associated with the curriculum. In this example that means that the constraints are constraining the fields of schema `BreakoutConfig`.
 
-Colon range expressions specify values for the start, 
-the step, and the stop. 
+Given simulator `breakout_simulator`, the constraints in the lesson configure section of `ball_location_curriculum` must have these characteristics to be compatible with schema `BreakoutConfig`:
 
-* If the step value is missing, 1 is the default. 
-* Step can be  a floating point number.
-* The step size can be negative only if stop < start.
+1. They must specify exactly the same type and field name as the schema declaration. A constraint cannot use an Int8 where a UInt32 was originally specified.
+2. For the range expression, the range in the configure must specify exactly the same range or a subrange as the schema declaration.
+3. You cannot specify a step size or a number of steps in the constraint in a configuration schema declaration. That means that in the `BreakoutConfig` schema above, `UInt8{1:4} paddle_width` is valid but `UInt8{1:2:4} paddle_width` would not be valid. The latter specifies a step size of 2.
+
+For the field `level` in schema `BreakoutConfig` here is the constraint that is specified in the lesson `more_bricks` configure clause:
+
+`constrain level with UInt32{1:100}`
+
+Here is the original field declaration in the schema:
 
 ```inkling--code
-# Example: Range expression, dot range type
-schema Schema4
-  Int64  { 0..100:25 } z,   # start:stop, numsteps=25
-  Float32 { 0..2:5}    a    # yields (0, 0.5, 1.0, 1.5, 2.0)
+schema BreakoutConfig
+  UInt32 level,        # no range expression, called a 'natural range'
+  UInt8{1:4} paddle_width,
+  Float32 bricks_percent
 end
 ```
 
-* **Dot range expression**
+This is a compatible range expression because the field in the schema declared no range at all (the range was the natural range) and any range expression is a subrange of a natural range. A natural range is just the complete range of values supported with the data type. For example the natural range of an Int8 is -127..127.
 
-Dot range expressions specify values for start, stop, and number of steps. 
+The field `paddle_width` does specify a range expression on the original field declaration in the schema, using values 1 to 4. The constraint is compatible with this because it is identical:
 
-* The number of steps (numSteps) must be a positive integer.
+`constrain paddle_width with UInt8{1:4}`
 
-* **Numeric Range Expression Start Point**
-
-The start point of a numeric range is inclusive (it is included in the values of the range) and fixed. 
-The range start point is exact (to the maximum extent possible if the range expression type is floating point). 
-
-* **Numeric Range Expression End Point**
+> Examples of valid constraints:
 
 ```inkling--code
- # Valid and Invalid Range Expressions.
+constrain paddle_width with UInt8{1:3}    # ok: a subset of constraint set
 
- Int64  { 0:4:1 }  field1,  # INVALID. step size > range.
- Int64  { 0..1:4 } field2,  # INVALID. Values are floating point not integer.
- Float32{-1..1:10 } field3, # VALID.   Negative bounds allowed.
- Int8 {0:-4:-100} field4,   # VALID.   stop  < start is valid if step is negative.
- UInt32 {-10:10}  field4    # INVALID. Unsigned integer range contains signed values.
+constrain paddle_width with UInt8{2}      # ok: value in constraint set
 ```
 
-The end point specified in the range expression may or may not be included in the values of the range. 
-The range end is a limit. That means that if applying the step results in landing exactly on the end point, then the end point is part of the range. Otherwise the highest value landed on that is less than the end point is the final value in the range.
+> Examples of invalid constraints
 
-Select the Inkling tab to view some examples of valid and invalid ranges.
+```inkling--code
+constrain paddle_width with UInt8{1:5}    # not a subset of constraint set
 
-‍
-
-[1]: #lessons
-[3]: #inkling-types
+constrain paddle_width with UInt8{7}      # value not in constraint set
+```
