@@ -35,7 +35,8 @@ The schema `Action` names a record — `action` —  and assigns it a constraine
 
 ```inkling
 schema CartPoleConfig
-  Int8 episode_length,
+  # Note: this is a signed Int8 because -1 is used for "run until pole drops"
+  Int8 episode_length,   
   UInt8 deque_size
 end
 ```

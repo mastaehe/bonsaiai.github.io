@@ -20,7 +20,7 @@ Pedagogical programming focuses on how the problem can be taught, not how it can
 
 Imagine teaching a child to play baseball. You can't just explain the whole game to them and expect them to understand how to play. You'd break down learning into pieces, and create a series of lessons that would help them learn how to play baseball.
 
-Let's say, to start, you wanted to teach them the concept of hand eye coordination. There would, likely, be a sequence of lessons to do this. You might start with a whiffle ball on a tee, progress to a tee that pops the ball up, move to underhand pitches, and then overhand pitches. You could continue to build upon your hand eye coordination concept with things like curved pitches, different styles of catching, and other exercises. It's all teaching one concept - eye hand coordination - but using **progressive lessons** to do so.
+Let's say, to start, you wanted to teach them the concept of hand-eye coordination. There would be a sequence of lessons to do this. You might start with a whiffle ball on a tee, progress to a tee that pops the ball up, move to underhand pitches, and then overhand pitches. You could continue to build upon your hand eye coordination concept with things like curved pitches, different styles of catching, and other exercises. It's all teaching one concept - hand-eye coordination - using **progressive lessons** to do so.
 
 ###### Inkling is a Special Purpose Language
 

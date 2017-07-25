@@ -61,17 +61,17 @@ In Inkling, your concepts are written as concept statements. The Inkling concept
 
 In its simplest form, a classifier is taking in input and returning a classification. In reality, the classifier is taking in input and assigning a score to the possible classifications of that input from a given set. You would specify `is classifier` on your concept if your outcome set is small and unchanging. For example, you want your AI to recognize a written number from 0-10. Your outcome set is 0,1,2,3,4,5,6,7,8,9,10. For every handwritten number that it is shown, it assigns a probability to each number and returns the most likely value (the one with the highest probability).
 
-Estimators are used for larger outcome sets.  You would specify `is estimator` on your concept if you are estimating a value in a very large range, potentially near infinite range. Estimators are often used for control. For example, if you need to turn a dial a certain amount, the AI has to return the direction and how much the dial is being turned. Your AI is estimating both of those from a potentially nearly-infinite range and returning the most likely combination.
+Estimators are used for larger outcome sets.  You would specify `is estimator` on your concept if you are estimating a value in a very large range, like integers from 1 to 1000, or a continuous value like a fraction between 0 and 1. Estimators are often used for control. For example, if you need to turn a dial a certain amount, the AI has to return the direction and how much the dial is being turned. The direction is discrete, left or right, but the amount of turning could be modeled as an continuous number. 
 
 ## Determining Concept Statements
 
-Determining what concepts to teach may take time. You can use mental models to work out what concepts need.  After you've created your mental model, you can write your schemas (input and output) as well as your concepts. You need to:
+Deciding what concepts to teach may take time. Use your mental models to work out what concepts to use.  After you've created your mental model, you can write your schemas (input and output) as well as your concepts. You need to:
 
 * pick a descriptive name for your concept.
 * determine whether it is a `classifier` or `estimator`
 * know where it comes in the mental model, and list any concepts that come before it.
 
-Every concept is trained by a curriculum. Which will be covered next.
+Every concept is trained by a curriculum. These will be covered below.
 
 For more information on the concept statement, see the [Concept Reference][1].
 
