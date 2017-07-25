@@ -62,11 +62,11 @@ In these examples, the objective, or reward, is one of the factors we use to mea
 
 There are several factors you can use to determine what your objective should be. Before you even start determining your objectives, you need to know what your concepts and curricula are. A good objective should reward the AI more often and be proportional to the quality of of the behavior.
 
-### Frequency of feedback
+### Frequency of Feedback
 
 The frequency of feedback affects the speed of training. Ideally, the time between the AI's decision making and whether or not the decision was good needs to be kept short.  For example, if you're teaching an AI to play Pacman, you want to choose an objective like `score` instead of an objective like `beat level`: in Pacman, your score changes often, typically many times during a level, but your level can only change 256 times, and only after many many actions. Your AI would have to beat an entire level to be rewarded, which is difficult to do without getting intermediate feedback about which actions along the way were good ones. 
 
-### Proportional feedback
+### Proportional Feedback
 
 The reward should be in proportional to the quality of the behavior (or the correctness of the behavior). When you are deciding what your objective is going to be, you need to consider that the AI will learn exactly what you ask it to learn. This can result in learning what you specified but not necessarily what you wanted. For example, if you ask an AI to play Pong (controlling both agents), and you use the objective of `game time`, the AI may learn that to get the longest time played, the paddle should remain in the same place. The ball will bounce back and forth between the two unmoving paddles -- the AI learned exactly what you told it to learn, how to maximize the amount of time, but it didn't really learn how to play the game.
 
