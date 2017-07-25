@@ -35,12 +35,14 @@ The schema `Action` names a record — `action` —  and assigns it a constraine
 
 ```inkling
 schema CartPoleConfig
-  Int8 episode_length,
+  Int8 episode_length,   
   UInt8 deque_size
 end
 ```
 
- The schema `CartPoleConfig` names two records — `episode_length` and `deque_size` — and assigns each of them a type.
+ The schema `CartPoleConfig` names two records — `episode_length` and
+ `deque_size` — and assigns each of them a type.   `episode_length` is a signed `Int8` because -1 is used for "run until pole drops".
+
 
 ###### Concept
 
