@@ -563,11 +563,12 @@ def debug(*args):
 </code></pre>
 <p>The schema <code class="prettyprint">Action</code> names a record — <code class="prettyprint">action</code> —  and assigns it a constrained type.</p>
 <pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">CartPoleConfig</span>
-  <span class="kr">Int8</span> <span class="nx">episode_length</span><span class="p">,</span>
+  <span class="kr">Int8</span> <span class="nx">episode_length</span><span class="p">,</span>   
   <span class="kr">UInt8</span> <span class="nx">deque_size</span>
 <span class="k">end</span>
 </code></pre>
-<p>The schema <code class="prettyprint">CartPoleConfig</code> names two records — <code class="prettyprint">episode_length</code> and <code class="prettyprint">deque_size</code> — and assigns each of them a type.</p>
+<p>The schema <code class="prettyprint">CartPoleConfig</code> names two records — <code class="prettyprint">episode_length</code> and
+ <code class="prettyprint">deque_size</code> — and assigns each of them a type.   <code class="prettyprint">episode_length</code> is a signed <code class="prettyprint">Int8</code> because -1 is used for &ldquo;run until pole drops&rdquo;.</p>
 
 <h6 id="concept">Concept</h6>
 <pre class="highlight inkling tab-inkling"><code><span class="k">concept</span> <span class="nx">balance</span>

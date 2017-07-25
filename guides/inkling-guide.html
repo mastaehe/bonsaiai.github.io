@@ -351,9 +351,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </code></pre>
 <p>Welcome to Inkling, Bonsai AI&rsquo;s special purpose programming language for training AI.</p>
 
-<p>Inkling is a declarative, strongly typed language that abstracts from the vast, dynamic AI algorithms that require expertise in machine learning. An Inkling file contains the concepts (what you want to teach the AI) and curriculum, how you want to teach the concepts, necessary to train your BRAIN.</p>
-
-<p>Inkling is a programming language specifically designed for artificial intelligence (AI); it&rsquo;s a special purpose language. It abstracts away the vast world of dynamic AI algorithms that require expertise in machine learning and enables more developers to program AI. Before you read through this section about the Inkling language, you should familiarize yourself with the various components of the Bonsai Artificial Intelligence Engine, which you can read about in our <a href="getting-started.html#the-bonsai-platform">Getting Started Guide</a>.</p>
+<p>Inkling is a declarative, strongly typed programming language specifically designed for artificial intelligence (AI). It abstracts away the vast world of dynamic AI algorithms that require expertise in machine learning and enables more developers to program AI. An Inkling file contains the concepts &ndash; what you want to teach the AI &ndash; and the curriculum, &ndash; how you want to teach the concepts &ndash; necessary to train your BRAIN. Before you read through this section about the Inkling language, you should familiarize yourself with the various components of the Bonsai Artificial Intelligence Engine, which you can read about in our <a href="getting-started.html#the-bonsai-platform">Getting Started Guide</a>.</p>
 
 <p>If you&rsquo;re interesting in finding out more about what&rsquo;s going on under the hood of the AI engine, check out the <a href="ai-engine-guide.html#under-the-hood">AI Engine Guide</a>.</p>
 
@@ -383,7 +381,7 @@ Pedagogical programming focuses on how the problem can be taught, not how it can
 
 <p>Imagine teaching a child to play baseball. You can&rsquo;t just explain the whole game to them and expect them to understand how to play. You&rsquo;d break down learning into pieces, and create a series of lessons that would help them learn how to play baseball.</p>
 
-<p>Let&rsquo;s say, to start, you wanted to teach them the concept of hand eye coordination. There would, likely, be a sequence of lessons to do this. You might start with a whiffle ball on a tee, progress to a tee that pops the ball up, move to underhand pitches, and then overhand pitches. You could continue to build upon your hand eye coordination concept with things like curved pitches, different styles of catching, and other exercises. It&rsquo;s all teaching one concept - eye hand coordination - but using <strong>progressive lessons</strong> to do so.</p>
+<p>Let&rsquo;s say, to start, you wanted to teach them the concept of hand-eye coordination. There would be a sequence of lessons to do this. You might start with a whiffle ball on a tee, progress to a tee that pops the ball up, move to underhand pitches, and then overhand pitches. You could continue to build upon your hand eye coordination concept with things like curved pitches, different styles of catching, and other exercises. It&rsquo;s all teaching one concept - hand-eye coordination - using <strong>progressive lessons</strong> to do so.</p>
 
 <h6 id="inkling-is-a-special-purpose-language">Inkling is a Special Purpose Language</h6>
 
@@ -407,7 +405,7 @@ Pedagogical programming focuses on how the problem can be taught, not how it can
 
           <h1 id="mental-models">Mental Models</h1>
 
-<p>Mental models are a way of organizing concepts so that you can structure a solution to your AI problem as a workflow. Concepts are the ideas that you want to teach your BRAIN. When you create your concepts, you&rsquo;re going to start with the final concept that you want to teach your BRAIN and support it with other feature and skill concepts. These additional concepts appear upstream of your main concept because the information output from those concepts helps the Bonsai AI Engine teach your main concept to your BRAIN. Mental Models enable you to determine and plan the concepts that are taught to your BRAIN.</p>
+<p>Mental models are a way of organizing concepts so that you can structure a solution to your AI problem as a workflow. Concepts are the ideas that you want to teach your BRAIN. When you create your concepts, you&rsquo;re going to start with the final concept that you want to teach your BRAIN and support it with other feature and skill concepts. These additional concepts appear upstream of your main concept, and the information output from those concepts helps the Bonsai AI Engine teach your main concept to your BRAIN. Mental Models enable you to determine and plan the concepts that are taught to your BRAIN.</p>
 
 <p>For more information about Concepts, refer below to <a href="#concepts">Concepts</a> and the <a href="../references/inkling-reference.html#concept">Concept Reference</a>.</p>
 
@@ -435,8 +433,8 @@ Pedagogical programming focuses on how the problem can be taught, not how it can
 
 <h3 id="example-breakout">Example: Breakout</h3>
 <pre class="highlight inkling tab-inkling"><code><span class="k">concept</span> <span class="nx">get_high_score</span>
-  <span class="k">is</span> <span class="nx">classifier</span>
-  <span class="k">predicts</span> <span class="p">(</span><span class="nx">PlayerMove</span><span class="p">)</span>
+  <span class="k">is</span> <span class="nx">classifier</span>   <span class="c1"># classifiers pick one of a small set of actions</span>
+  <span class="k">predicts</span> <span class="p">(</span><span class="nx">PlayerMove</span><span class="p">)</span>   <span class="c1"># this concept's output will be a move</span>
   <span class="k">follows</span> <span class="kr">input</span><span class="p">(</span><span class="nx">GameState</span><span class="p">)</span>
   <span class="k">feeds</span> <span class="kr">output</span>
 <span class="k">end</span>
@@ -539,11 +537,11 @@ Pedagogical programming focuses on how the problem can be taught, not how it can
 
 <p>In its simplest form, a classifier is taking in input and returning a classification. In reality, the classifier is taking in input and assigning a score to the possible classifications of that input from a given set. You would specify <code class="prettyprint">is classifier</code> on your concept if your outcome set is small and unchanging. For example, you want your AI to recognize a written number from 0-10. Your outcome set is 0,1,2,3,4,5,6,7,8,9,10. For every handwritten number that it is shown, it assigns a probability to each number and returns the most likely value (the one with the highest probability).</p>
 
-<p>Estimators are used for larger outcome sets.  You would specify <code class="prettyprint">is estimator</code> on your concept if you are estimating a value in a very large range, potentially near infinite range. Estimators are often used for control. For example, if you need to turn a dial a certain amount, the AI has to return the direction and how much the dial is being turned. Your AI is estimating both of those from a potentially nearly-infinite range and returning the most likely combination.</p>
+<p>Estimators are used for larger outcome sets.  You would specify <code class="prettyprint">is estimator</code> on your concept if you are estimating a value in a very large range, like integers from 1 to 1000, or a continuous value like a fraction between 0 and 1. Estimators are often used for control. For example, if you need to turn a dial a certain amount, the AI has to return the direction and how much the dial is being turned. The direction is discrete, left or right, but the amount of turning could be modeled as an continuous number. </p>
 
 <h2 id="determining-concept-statements">Determining Concept Statements</h2>
 
-<p>Determining what concepts to teach may take time. You can use mental models to work out what concepts need.  After you&rsquo;ve created your mental model, you can write your schemas (input and output) as well as your concepts. You need to:</p>
+<p>Deciding what concepts to teach may take time. Use your mental models to work out what concepts to use.  After you&rsquo;ve created your mental model, you can write your schemas (input and output) as well as your concepts. You need to:</p>
 
 <ul>
 <li>pick a descriptive name for your concept.</li>
@@ -551,7 +549,7 @@ Pedagogical programming focuses on how the problem can be taught, not how it can
 <li>know where it comes in the mental model, and list any concepts that come before it.</li>
 </ul>
 
-<p>Every concept is trained by a curriculum. Which will be covered next.</p>
+<p>Every concept is trained by a curriculum. These will be covered below.</p>
 
 <p>For more information on the concept statement, see the <a href="../references/inkling-reference.html#concept">Concept Reference</a>.</p>
 
@@ -577,10 +575,10 @@ Pedagogical programming focuses on how the problem can be taught, not how it can
 <pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">MyOutput</span>
   <span class="kr">UInt8</span>  <span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">}</span>   <span class="nx">label</span><span class="p">,</span>    <span class="c1"># a list of UInt8 values</span>
   <span class="kr">String</span> <span class="p">{</span><span class="s2">"a"</span><span class="p">,</span> <span class="s2">"bc"</span><span class="p">}</span>   <span class="nx">category</span><span class="p">,</span> <span class="c1"># a list of Strings</span>
-  <span class="kr">Int64</span>  <span class="p">{</span> <span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">:</span><span class="mi">100</span> <span class="p">}</span>   <span class="nx">x</span><span class="p">,</span>        <span class="c1"># start:step:stop, step= 5,0..100</span>
-  <span class="kr">Int64</span>  <span class="p">{</span> <span class="mi">0</span><span class="p">:</span><span class="mi">100</span> <span class="p">}</span>     <span class="nx">y</span><span class="p">,</span>        <span class="c1"># start:stop, step= 1, 0..100</span>
-  <span class="kr">Int64</span>  <span class="p">{</span> <span class="mi">0</span><span class="p">..</span><span class="mi">100</span><span class="p">:</span><span class="mi">25</span> <span class="p">}</span> <span class="nx">z</span><span class="p">,</span>        <span class="c1"># start:stop, numsteps=25, step= 4, 0..100</span>
-  <span class="kr">Float32</span> <span class="p">{</span> <span class="mi">0</span><span class="p">..</span><span class="mi">2</span><span class="p">:</span><span class="mf">0.5</span><span class="p">}</span>    <span class="nx">a</span>         <span class="c1"># gives (0, 0.5, 1.0, 1.5, 2.0)</span>
+  <span class="kr">Int64</span>  <span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">:</span><span class="mi">100</span><span class="p">}</span>   <span class="nx">x</span><span class="p">,</span>        <span class="c1"># start:step:stop, {0,5,10,...,95,100}</span>
+  <span class="kr">Int64</span>  <span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="mi">100</span><span class="p">}</span>     <span class="nx">y</span><span class="p">,</span>        <span class="c1"># start:stop, default step= 1, {0,1,...,99,100}</span>
+  <span class="kr">Int64</span>  <span class="p">{</span><span class="mi">0</span><span class="p">..</span><span class="mi">100</span><span class="p">:</span><span class="mi">25</span><span class="p">}</span> <span class="nx">z</span><span class="p">,</span>        <span class="c1"># start..stop:numsteps, so step= 4, {0,4,8,...,96,100}</span>
+  <span class="kr">Float32</span> <span class="p">{</span><span class="mi">0</span><span class="p">..</span><span class="mi">2</span><span class="p">:</span><span class="mi">5</span><span class="p">}</span>    <span class="nx">a</span>         <span class="c1"># start..stop:numsteps, gives {0, 0.5, 1.0, 1.5, 2.0}</span>
 <span class="k">end</span>
 </code></pre>
 <h2 id="defining-schemas">Defining Schemas</h2>
@@ -658,19 +656,13 @@ Currently, during the Bonsai Platform preview, you can only train with simulator
 
 <p>There are several factors you can use to determine what your objective should be. Before you even start determining your objectives, you need to know what your concepts and curricula are. A good objective should reward the AI more often and be proportional to the quality of of the behavior.</p>
 
-<h3 id="frequency">Frequency</h3>
+<h3 id="frequency-of-feedback">Frequency of Feedback</h3>
 
-<p>Frequency matters in training. The time between the AI&rsquo;s decision making and whether or not the decision was good needs to be kept short.  For example, if you&rsquo;re teaching an AI to play Pacman, you want to choose an objective like <code class="prettyprint">score</code> instead of an objective like <code class="prettyprint">level</code>.</p>
+<p>The frequency of feedback affects the speed of training. Ideally, the time between the AI&rsquo;s decision making and whether or not the decision was good needs to be kept short.  For example, if you&rsquo;re teaching an AI to play Pacman, you want to choose an objective like <code class="prettyprint">score</code> instead of an objective like <code class="prettyprint">beat level</code>: in Pacman, your score changes often, typically many times during a level, but your level can only change 256 times, and only after many many actions. Your AI would have to beat an entire level to be rewarded, which is difficult to do without getting intermediate feedback about which actions along the way were good ones. </p>
 
-<p>In Pacman, your score changes more often, probably many times during a level, but your level can only change 256 times. Your AI would have to beat an entire level to be rewarded. The length of time between a decision the AI makes and the reward should have a higher frequency and should scale with the as the AI learns.</p>
+<h3 id="proportional-feedback">Proportional Feedback</h3>
 
-<h3 id="proportional">Proportional</h3>
-
-<p>The reward should be in proportional to the quality of the behavior (or the correctness of the behavior). When you are deciding what your objective is going to be, you need to consider that the AI will learn exactly what you ask it to learn. This can result in learning what you specified but not necessarily what you wanted. For example, if you ask an AI to play Pong, and you use the objective of <code class="prettyprint">time</code>, the AI will learn that to get the longest time played, the paddle should remain in the same place. The ball will bounce back and forth between the two unmoving paddles.</p>
-
-<p>In the Pong example, the AI learned exactly what you told it to learn, how to maximize the amount of time, but it didn&rsquo;t really learn how to play the game.</p>
-
-<p>You need to think about what training with a specific reward will produce in terms of the quality or correctness of the behavior.</p>
+<p>The reward should be in proportional to the quality of the behavior (or the correctness of the behavior). When you are deciding what your objective is going to be, you need to consider that the AI will learn exactly what you ask it to learn. This can result in learning what you specified but not necessarily what you wanted. For example, if you ask an AI to play Pong (controlling both agents), and you use the objective of <code class="prettyprint">game time</code>, the AI may learn that to get the longest time played, the paddle should remain in the same place. The ball will bounce back and forth between the two unmoving paddles &ndash; the AI learned exactly what you told it to learn, how to maximize the amount of time, but it didn&rsquo;t really learn how to play the game.</p>
 
 <h3 id="in-inkling">In Inkling</h3>
 
