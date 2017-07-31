@@ -8,12 +8,13 @@ Because concepts are learned, their declarations tend to be fairly simple unless
 concept AbstractConceptName
   is classifier
   predicts ConceptSchema
-  follows Antecedent1, Antecedent2      // 'follows' concept, block, or stream
-  feeds Dependent1                      // 'feeds' concept, block, or stream
+  follows Antecedent1, Antecedent2      // 'follows' concept or the input stream
+  feeds Dependent1                      // 'feeds' concept or the output stream
 end
 ```
 
-The `follows` and `feeds` keywords establish connectivity in the BRAIN directed graph in the same way that the `from` and `into` keywords do in stream declarations. The `is` keyword specifies the overall class of concept that is being modeled. For example, a classifier will learn to identify a label corresponding to its input, an estimator will learn to predict a value, a predictor will learn sequences and predict subsequent items in a sequence, etcetera.
+The `follows` and `feeds` keywords establish connectivity in the BRAIN directed
+graph. The `is` keyword specifies the overall class of concept that is being modeled. For example, a classifier will learn to identify a label corresponding to its input, an estimator will learn to predict a value, a predictor will learn sequences and predict subsequent items in a sequence, etcetera.
 
 ------> from web
 
@@ -66,23 +67,23 @@ The `is` clause characterizes output. The `is classifier` form specifies that th
 ------> from web
 
 * The concept must be named after the `concept` keyword.
-* The `is` keyword specifies the kind of prediction the trained concept will produce. For example, a concept can specify is classifier. This means that the trained concept will categorize its input. Email, for example, can be classified as spam or not spam. Another option with this keyword is estimator.
+* The `is` keyword specifies the kind of prediction the trained concept will produce. For example, a concept can specify `is classifier`. This means that the trained concept will categorize its input. Email, for example, can be classified as spam or not spam. Another option with this keyword is `estimator`.
 * The concept must declare an output schema after `predicts`. The output schema describes the data produced by the trained concept. For example if this concept classifies email into spam and not spam, the output schema for the concept would be a Bool. The output schema can be a named schema, where the name refers to a full schema definition elsewhere, or it can be anonymous, which is a parenthesized list of name, type pairs. See the section on schema declarations for more information.
-* A trained concept gets input from streams or (if multiple concepts are used) from another concept. Input (the keyword) refers to the stream that is the original input to the system. All data flowing through the system has a schema associated with it. In some cases this is calculated rather than explicit.
+* A trained concept gets input from streams or (if multiple concepts are used) from another concept. The `input` keyword refers to the stream that is the original input to the system. All data flowing through the system has a schema associated with it. In some cases this is calculated rather than explicit.
 * If the `input` keyword appears in the `follows` list, it means that the input stream flowing into this concept comes from outside the BRAIN. The `input` keyword must always be accompanied by a schema (named or anonymous) because the data stream originates outside the Brain; if no schema was present, data types and formats being input would be unknown.
-* The `feeds` list is a list of concepts and streams (including the predefined output stream) for which this concept's output is a source.
+* The `feeds` list is a list of concepts and streams (including the predefined output stream) for which the output of this concept is a source.
 * The `input` keyword cannot not appear in the feeds list and the `output` keyword cannot appear in the follows list.
 * The concept statement is terminated by the `end` keyword.
 
 ### Discussion
 
-Concept input can come from a stream or another concept. (Blocks will be supported later.)
+Concept input can come from a stream or another concept.
 
 When input comes from a concept, the type of the input doesn't matter. This is because concepts don’t act on normal data science data structures. The concept input is a matrix which has no type. 
 
 Concepts do care about their input types when input comes from a stream. This is because the input needs to go through an encoder to become a tensor and the encoder must know the input types. In this case the input types are defined by the output schema of the stream feeding the concept. 
 
-The 'predicts' output of a concept is also a matrix which has no type (a tensor). The function of the 'predicts' output schema is to select a decoder for that output matrix. This output schema decodes concepts. The decoding is used for debugging and also as hints for training. However note that it is advisable to avoid collapsing arbitrary encodings to CS values because it's a loss of  info - it's a compression of data. In general concepts feeding concepts (with no intervening stream) results in better learning (because when concepts feed concepts they are not collapsed). 
+The `predicts` output of a concept is also a matrix which has no type (a tensor). The function of the `predicts` output schema is to select a decoder for that output matrix. This output schema decodes concepts. The decoding is used for debugging and also as hints for training. However note that it is advisable to avoid collapsing arbitrary encodings to CS values because it's a loss of  information - it's a compression of data. In general concepts feeding concepts (with no intervening stream) results in better learning (because when concepts feed concepts they are not collapsed). 
 
 ### Example(s)
 
