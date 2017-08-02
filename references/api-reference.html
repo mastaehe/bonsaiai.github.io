@@ -345,10 +345,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="content">
         
           <h1 id="api-overview">API Overview</h1>
-<pre class="highlight plaintext"><code>#####################################################
-# JSON output will be shown here for REST API       #
-# protobuf output will be shown here for Websockets #
-#####################################################
+<pre class="highlight plaintext"><code>#######################################################
+# REST API request and response will be shown here    #
+# protobuf messages will be shown here for Websockets #
+#######################################################
 </code></pre>
 <p>The Bonsai Platform provides programmers and data scientists with a new way of
 building sophisticated ML and AI applications. This API is at the core of how
@@ -383,14 +383,15 @@ programmers interact with the AI Engine.</p>
 
 <h1 id="user-and-brain-status">User and BRAIN Status</h1>
 
-<h2 id="get-user-status">GET User Status</h2>
+<h2 id="user-status">User Status</h2>
 
-<p>List all BRAINs owned by the user.</p>
+<p>Use GET to list all BRAINs owned by the user.</p>
 
-<h3 id="request">Request</h3>
-
-<p><code class="prettyprint">GET /v1/{userName}</code></p>
-
+<blockquote>
+<p>Request</p>
+</blockquote>
+<pre class="highlight plaintext"><code>GET /v1/{userName}
+</code></pre>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -460,15 +461,16 @@ programmers interact with the AI Engine.</p>
 </tr>
 </tbody></table>
 
-<h2 id="get-brain-status">GET BRAIN Status</h2>
+<h2 id="brain-status">BRAIN Status</h2>
 
-<p>Get information about a BRAIN. This will return every URL for
+<p>Use GET for information about a BRAIN. This will return every URL for
 every version of that BRAIN as well.</p>
 
-<h3 id="request">Request</h3>
-
-<p><code class="prettyprint">GET /v1/{userName}/{brainName}</code></p>
-
+<blockquote>
+<p>Request</p>
+</blockquote>
+<pre class="highlight plaintext"><code>GET /v1/{userName}/{brainName}
+</code></pre>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -513,8 +515,8 @@ every version of that BRAIN as well.</p>
 </tr>
 </thead><tbody>
 <tr>
-<td>version</td>
-<td>Current version number of the BRAIN</td>
+<td>versions</td>
+<td>Lists URL for every version of the BRAIN</td>
 </tr>
 <tr>
 <td>description</td>
@@ -532,15 +534,16 @@ every version of that BRAIN as well.</p>
 
 <h1 id="project-files">Project Files</h1>
 
-<h2 id="get-file">GET File</h2>
+<h2 id="retrieve-file">Retrieve File</h2>
 
-<p>Get the contents of a specified project file, for example, the Inkling
+<p>GET the contents of a specified project file, for example, the Inkling
 code in the <em>.ink</em> file for a BRAIN.</p>
 
-<h3 id="request">Request</h3>
-
-<p><code class="prettyprint">GET /v1/{userName}/[brainName]?file={fileName}</code></p>
-
+<blockquote>
+<p>Request</p>
+</blockquote>
+<pre class="highlight plaintext"><code>GET /v1/{userName}/[brainName]?file={fileName}
+</code></pre>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -565,15 +568,16 @@ code in the <em>.ink</em> file for a BRAIN.</p>
 
 <p>The full text of the file will be returned in the body.</p>
 
-<h2 id="put-file">PUT File</h2>
+<h2 id="change-file">Change File</h2>
 
 <p>Uses the PUT request method to change a project file for the given
 BRAIN. You cannot PUT new file contents while a BRAIN is training.</p>
 
-<h3 id="request">Request</h3>
-
-<p><code class="prettyprint">PUT /v1/{userName}/[brainName]?file={fileName}</code></p>
-
+<blockquote>
+<p>Request</p>
+</blockquote>
+<pre class="highlight plaintext"><code>PUT /v1/{userName}/[brainName]?file={fileName}
+</code></pre>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -650,16 +654,78 @@ BRAIN. You cannot PUT new file contents while a BRAIN is training.</p>
 
 <p>This is an example response for an Inkling file with no errors or warnings to report.</p>
 
-<h1 id="training-mode">Training Mode</h1>
+<h1 id="simulators">Simulators</h1>
 
-<h2 id="put-training-mode">PUT Training Mode</h2>
+<h2 id="simulator-information">Simulator Information</h2>
 
-<p>Start or stop training mode.</p>
+<p>GET information for a simulator connected to a BRAIN.</p>
 
-<h3 id="request">Request</h3>
+<blockquote>
+<p>Request</p>
+</blockquote>
+<pre class="highlight plaintext"><code>GET /v1/{userName}/{brainName}/sims
+</code></pre>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>userName</td>
+<td>Name of the user who has the BRAIN</td>
+</tr>
+<tr>
+<td>brainName</td>
+<td>Name of the BRAIN</td>
+</tr>
+</tbody></table>
 
-<p><code class="prettyprint">PUT /v1/{userName}/{brainName}/train</code></p>
+<blockquote>
+<p>Example Response (JSON)</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+   </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"breakout"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"connected"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"instances"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+       </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ready_to_play"</span><span class="err">.</span><span class="w">
+       </span><span class="s2">"episode"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+   </span><span class="p">}]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id="response">Response</h3>
 
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>Name of the simulator</td>
+</tr>
+<tr>
+<td>connected</td>
+<td>Count of how many simulators are connected</td>
+</tr>
+<tr>
+<td>instances</td>
+<td>Array of connected simulators with their status and episode count</td>
+</tr>
+</tbody></table>
+
+<h1 id="training">Training</h1>
+
+<h2 id="start-stop-training">Start/Stop Training</h2>
+
+<p>Use PUT to start or stop training.</p>
+
+<blockquote>
+<p>Request</p>
+</blockquote>
+<pre class="highlight plaintext"><code>PUT /v1/{userName}/{brainName}/train
+</code></pre>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -732,80 +798,16 @@ BRAIN. You cannot PUT new file contents while a BRAIN is training.</p>
 </tr>
 </tbody></table>
 
-<h1 id="simulators">Simulators</h1>
-
-<h2 id="get-simulator-information">GET Simulator Information</h2>
-
-<p>Information for a simulator connected to a BRAIN.</p>
-
-<h3 id="request">Request</h3>
-
-<p><code class="prettyprint">GET /v1/{userName}/{brainName}/sims</code></p>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>userName</td>
-<td>Name of the user who has the BRAIN</td>
-</tr>
-<tr>
-<td>brainName</td>
-<td>Name of the BRAIN</td>
-</tr>
-</tbody></table>
-
-<blockquote>
-<p>Example Response (JSON)</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-   </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"breakout"</span><span class="p">,</span><span class="w">
-   </span><span class="s2">"connected"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-   </span><span class="s2">"instances"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
-       </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ready_to_play"</span><span class="err">.</span><span class="w">
-       </span><span class="s2">"episode"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
-   </span><span class="p">}]</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<h3 id="response">Response</h3>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>name</td>
-<td>Name of the simulator</td>
-</tr>
-<tr>
-<td>connected</td>
-<td>Count of how many simulators are connected</td>
-</tr>
-<tr>
-<td>instances</td>
-<td>Array of connected simulators with their status and episode count</td>
-</tr>
-</tbody></table>
-
-<h1 id="websocket-messages">Websocket Messages</h1>
-
-<p>The simulator and AI Engine exchange messages in a binary protocol for training
-and prediction.</p>
-
 <h2 id="training-protocol">Training Protocol</h2>
 
 <p>Connect to the server and upgrade to a websocket to initialize the training
 protocol.</p>
 
-<h3 id="request">Request</h3>
-
-<p><code class="prettyprint">GET /v1/{userName}/{brainName}/sims/ws</code></p>
-
+<blockquote>
+<p>Request</p>
+</blockquote>
+<pre class="highlight plaintext"><code>GET /v1/{userName}/{brainName}/sims/ws
+</code></pre>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -842,17 +844,107 @@ protocol.</p>
 
 <h3 id="protocol">Protocol</h3>
 
+<blockquote>
+<p>Simulator to Server</p>
+</blockquote>
+<pre class="highlight proto tab-protobuf"><code><span class="kd">message</span> <span class="nc">SimulatorToServer</span> <span class="p">{</span>
+    <span class="kd">enum</span> <span class="n">MessageType</span> <span class="p">{</span>
+        <span class="na">UNKNOWN</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="na">REGISTER</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="na">READY</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+        <span class="na">STATE</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">MessageType</span> <span class="na">message_type</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+    <span class="c1">// Nested message data. Which of these fields is populated depends
+</span>    <span class="c1">// upon the message type. Some message types do not have any
+</span>    <span class="c1">// additional data.
+</span>    <span class="n">RegisterData</span> <span class="na">register_data</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="k">repeated</span> <span class="n">SimulationSourceData</span> <span class="na">state_data</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+    <span class="kt">fixed32</span> <span class="na">sim_id</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+<blockquote>
+<p>Server to Simulator</p>
+</blockquote>
+<pre class="highlight proto tab-protobuf"><code><span class="kd">message</span> <span class="nc">ServerToSimulator</span> <span class="p">{</span>
+    <span class="kd">enum</span> <span class="n">MessageType</span> <span class="p">{</span>
+        <span class="na">UNKNOWN</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="na">ACKNOWLEDGE_REGISTER</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="na">SET_PROPERTIES</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+        <span class="na">START</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+        <span class="na">STOP</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+        <span class="na">PREDICTION</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+        <span class="na">RESET</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span>
+        <span class="na">FINISHED</span> <span class="o">=</span> <span class="mi">7</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">MessageType</span> <span class="na">message_type</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+    <span class="c1">// Nested message data. Which of these fields is populated depends
+</span>    <span class="c1">// upon the message type. Some message types do not have any
+</span>    <span class="c1">// additional data.
+</span>    <span class="n">AcknowledgeRegisterData</span> <span class="na">acknowledge_register_data</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="n">SetPropertiesData</span> <span class="na">set_properties_data</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+    <span class="k">repeated</span> <span class="n">PredictionData</span> <span class="na">prediction_data</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+<blockquote>
+<p>Register</p>
+</blockquote>
+<pre class="highlight proto tab-protobuf"><code><span class="kd">message</span> <span class="nc">RegisterData</span> <span class="p">{</span>
+    <span class="kt">string</span> <span class="na">simulator_name</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+<blockquote>
+<p>Acknowledge Register</p>
+</blockquote>
+<pre class="highlight proto tab-protobuf"><code><span class="kd">message</span> <span class="nc">AcknowledgeRegisterData</span> <span class="p">{</span>
+    <span class="n">google.protobuf.DescriptorProto</span> <span class="na">properties_schema</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">google.protobuf.DescriptorProto</span> <span class="na">output_schema</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="n">google.protobuf.DescriptorProto</span> <span class="na">prediction_schema</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+    <span class="kt">fixed32</span> <span class="na">sim_id</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+<blockquote>
+<p>Set Properties</p>
+</blockquote>
+<pre class="highlight proto tab-protobuf"><code><span class="kd">message</span> <span class="nc">SetPropertiesData</span> <span class="p">{</span>
+    <span class="kt">bytes</span> <span class="na">dynamic_properties</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="kt">string</span> <span class="na">reward_name</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="n">google.protobuf.DescriptorProto</span> <span class="na">prediction_schema</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+<blockquote>
+<p>State</p>
+</blockquote>
+<pre class="highlight proto tab-protobuf"><code><span class="kd">message</span> <span class="nc">SimulationSourceData</span> <span class="p">{</span>
+    <span class="kt">bytes</span> <span class="na">state</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="kt">float</span> <span class="na">reward</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="kt">bool</span> <span class="na">terminal</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+    <span class="kt">bytes</span> <span class="na">action_taken</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+<blockquote>
+<p>Prediction</p>
+</blockquote>
+<pre class="highlight proto tab-protobuf"><code><span class="kd">message</span> <span class="nc">PredictionData</span> <span class="p">{</span>
+    <span class="kt">bytes</span> <span class="na">dynamic_prediction</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
 <p><img src="../images/training.svg" alt="Training Message Protocol" /></p>
+
+<h1 id="prediction">Prediction</h1>
 
 <h2 id="prediction-protocol">Prediction Protocol</h2>
 
 <p>Connect to the server and upgrade to a websocket to initialize the prediction
 protocol.</p>
 
-<h3 id="request">Request</h3>
-
-<p><code class="prettyprint">GET /v1/{userName}/{brainName}/{version}/predictions/ws</code></p>
-
+<blockquote>
+<p>Request</p>
+</blockquote>
+<pre class="highlight plaintext"><code>GET /v1/{userName}/{brainName}/{version}/predictions/ws
+</code></pre>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -893,9 +985,9 @@ protocol.</p>
 
 <h3 id="protocol">Protocol</h3>
 
-<p><img src="../images/prediction.svg" alt="Prediction Message Protocol" /></p>
-
-<h2 id="simulator-to-server">Simulator to Server</h2>
+<blockquote>
+<p>Simulator to Server</p>
+</blockquote>
 <pre class="highlight proto tab-protobuf"><code><span class="kd">message</span> <span class="nc">SimulatorToServer</span> <span class="p">{</span>
     <span class="kd">enum</span> <span class="n">MessageType</span> <span class="p">{</span>
         <span class="na">UNKNOWN</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
@@ -913,20 +1005,9 @@ protocol.</p>
     <span class="kt">fixed32</span> <span class="na">sim_id</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre>
-<h2 id="register">Register</h2>
-<pre class="highlight proto tab-protobuf"><code><span class="kd">message</span> <span class="nc">RegisterData</span> <span class="p">{</span>
-    <span class="kt">string</span> <span class="na">simulator_name</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre>
-<h2 id="state">State</h2>
-<pre class="highlight proto tab-protobuf"><code><span class="kd">message</span> <span class="nc">SimulationSourceData</span> <span class="p">{</span>
-    <span class="kt">bytes</span> <span class="na">state</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="kt">float</span> <span class="na">reward</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
-    <span class="kt">bool</span> <span class="na">terminal</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
-    <span class="kt">bytes</span> <span class="na">action_taken</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre>
-<h2 id="server-to-simulator">Server to Simulator</h2>
+<blockquote>
+<p>Server to Simulator</p>
+</blockquote>
 <pre class="highlight proto tab-protobuf"><code><span class="kd">message</span> <span class="nc">ServerToSimulator</span> <span class="p">{</span>
     <span class="kd">enum</span> <span class="n">MessageType</span> <span class="p">{</span>
         <span class="na">UNKNOWN</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
@@ -948,7 +1029,16 @@ protocol.</p>
     <span class="k">repeated</span> <span class="n">PredictionData</span> <span class="na">prediction_data</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre>
-<h2 id="acknowledge-register">Acknowledge Register</h2>
+<blockquote>
+<p>Register</p>
+</blockquote>
+<pre class="highlight proto tab-protobuf"><code><span class="kd">message</span> <span class="nc">RegisterData</span> <span class="p">{</span>
+    <span class="kt">string</span> <span class="na">simulator_name</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+<blockquote>
+<p>Acknowledge Register</p>
+</blockquote>
 <pre class="highlight proto tab-protobuf"><code><span class="kd">message</span> <span class="nc">AcknowledgeRegisterData</span> <span class="p">{</span>
     <span class="n">google.protobuf.DescriptorProto</span> <span class="na">properties_schema</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
     <span class="n">google.protobuf.DescriptorProto</span> <span class="na">output_schema</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
@@ -956,18 +1046,25 @@ protocol.</p>
     <span class="kt">fixed32</span> <span class="na">sim_id</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre>
-<h2 id="set-properties">Set Properties</h2>
-<pre class="highlight proto tab-protobuf"><code><span class="kd">message</span> <span class="nc">SetPropertiesData</span> <span class="p">{</span>
-    <span class="kt">bytes</span> <span class="na">dynamic_properties</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="kt">string</span> <span class="na">reward_name</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
-    <span class="n">google.protobuf.DescriptorProto</span> <span class="na">prediction_schema</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<blockquote>
+<p>State</p>
+</blockquote>
+<pre class="highlight proto tab-protobuf"><code><span class="kd">message</span> <span class="nc">SimulationSourceData</span> <span class="p">{</span>
+    <span class="kt">bytes</span> <span class="na">state</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="kt">float</span> <span class="na">reward</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="kt">bool</span> <span class="na">terminal</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+    <span class="kt">bytes</span> <span class="na">action_taken</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre>
-<h2 id="prediction">Prediction</h2>
+<blockquote>
+<p>Prediction</p>
+</blockquote>
 <pre class="highlight proto tab-protobuf"><code><span class="kd">message</span> <span class="nc">PredictionData</span> <span class="p">{</span>
     <span class="kt">bytes</span> <span class="na">dynamic_prediction</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre>
+<p><img src="../images/prediction.svg" alt="Prediction Message Protocol" /></p>
+
 <h1 id="brain-versions-and-modes">BRAIN Versions and Modes</h1>
 
 <h2 id="brain-versions">BRAIN Versions</h2>
