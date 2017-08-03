@@ -131,6 +131,10 @@ GET /v1/{userName}/{brainName}
 | user | Name of the user who has the BRAIN|
 | name | Name of the BRAIN |
 
+## BRAIN Status Websocket
+
+\\Ryan to add new content here.
+\\ Not sure what you want to name this to differentiate from the REST API section above?
 
 
 # Project Files
@@ -242,6 +246,13 @@ GET /v1/{userName}/{brainName}/sims
 | connected | Count of how many simulators are connected |
 | instances | Array of connected simulators with their status and episode count |
 
+## Simulator Logs
+
+\\ Ryan to add new content here.
+
+## Simulator 
+
+\\ Ryan to add new content here.
 
 
 # Training
@@ -410,6 +421,11 @@ message PredictionData {
 
 
 ![Training Message Protocol][3]
+
+## Training Graph
+
+\\ Ryan to add new content here.
+
 
 
 
