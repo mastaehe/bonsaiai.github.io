@@ -159,29 +159,29 @@ GET /v1/{userName}/{brainName}/ws'
 }
 
 {
-    'type': 'PROPERTY_CHANGED',
-    'property': 'status',
-    'value': 'In Progress'
+    "type": "PROPERTY_CHANGED",
+    "property": "status",
+    "value": "In Progress"
 }
 
 {
-    'type': 'CONCEPTS_SET',
-    'concepts': [{
-        'name': 'balance',
-        'state': 'Not Started',
+    "type": "CONCEPTS_SET",
+    "concepts": [{
+        "name": "balance",
+        "state": "Not Started",
     }],
 }
 
 {
-    'type': 'CONCEPT_CHANGED',
-    'concept': 'balance',
-    'state': 'In Progress'
+    "type": "CONCEPT_CHANGED",
+    "concept": "balance",
+    "state": "In Progress"
 }
 
 {
-    'type': 'FILE_UPDATED',
-    'filename': 'cartpole.ink',
-    'hash': 'c06edf7bc96dd461af1357a274734633b0ff2932'
+    "type": "FILE_UPDATED",
+    "filename": "cartpole.ink",
+    "hash": "c06edf7bc96dd461af1357a274734633b0ff2932"
 }
 ```
 
