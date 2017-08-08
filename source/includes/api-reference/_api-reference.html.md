@@ -191,7 +191,7 @@ The websocket will send JSON messages for events in the BRAIN. Every message wil
 
 There are 6 types of messages that are sent on this socket: `ADD_DATA_POINT`, `PROPERTY_CHANGED`, `CONCEPTS_SET`, `CONCEPT_CHANGED`, `FILE_UPDATED`, `FILES_UPDATED`, and `TRAINING_INITIALIZED`.
 
-## ADD_DATA_POINT
+#### ADD_DATA_POINT
 | Parameter | Description |
 | --- | --- |
 | metric | The data series for this data, will always be `episode_value` |
@@ -200,33 +200,33 @@ There are 6 types of messages that are sent on this socket: `ADD_DATA_POINT`, `P
 | concept | The concept the value corresponds to |
 | lesson | The lesson the value corresponds to |
 
-## PROPERTY_CHANGED
+#### PROPERTY_CHANGED
 | Parameter | Description |
 | --- | --- |
 | property | The property that has changed |
 | value | The new value for this parameter |
 
-## CONCEPTS_SET
+#### CONCEPTS_SET
 | Parameter | Description |
 | --- | --- |
 | concepts | An array of name and state JSON per concept in the BRAIN |
 
-## CONCEPT_CHANGED
+#### CONCEPT_CHANGED
 | Parameter | Description |
 | --- | --- |
 | concept | The concept that has changed |
 | state | What the concept's state changed to |
 
-## FILE_UPDATED
+#### FILE_UPDATED
 | Parameter | Description |
 | --- | --- |
 | filename | The file that has changed |
 | hash | A hash of the file's content |
 
-## FILES_UPDATED
+#### FILES_UPDATED
 This message has no extra data.
 
-## TRAINING_INITIALIZED
+#### TRAINING_INITIALIZED
 This message has no extra data.
 
 # Project Files
@@ -342,13 +342,27 @@ GET /v1/{userName}/{brainName}/sims
 
 GET log messages from platform-managed simulators.
 
-> HTTP Request
+> Request
 
 ```text
 GET /v1/{userName}/{brainName}/{brainVersion}/sims/1/logs
 ```
 
-> Websocket Request
+| Parameter | Description |
+| --- | --- |
+| userName | Name of the user who has the BRAIN |
+| brainName | Name of the BRAIN |
+| brainVersion | Version of the BRAIN |
+
+### Response
+
+The request will return an array of strings (each string representing one log message). 
+
+## Simulator Logs Websocket
+
+Use the websocket connection to get real-time simulator messages during training.
+
+> Request
 
 ```text
 GET /v1/{userName}/{brainName}/{brainVersion}/sims/1/logs/ws
@@ -362,9 +376,7 @@ GET /v1/{userName}/{brainName}/{brainVersion}/sims/1/logs/ws
 
 ### Response
 
-The HTTP request will return an array of strings (each string representing one log message). 
-
-The websocket will send one message for each log message. This websocket will automatically close when all log messages have been sent.
+The websocket will send one message for each log message (starting with the first message logged in the simulator). This websocket will automatically close when all log messages have been sent or training is complete.
 
 ## Simulator State
 
