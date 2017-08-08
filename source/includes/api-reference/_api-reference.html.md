@@ -131,7 +131,103 @@ GET /v1/{userName}/{brainName}
 | user | Name of the user who has the BRAIN|
 | name | Name of the BRAIN |
 
+## BRAIN Status Websocket
 
+Use a websocket connection to get live updates about a BRAIN.
+
+> Request
+
+```text
+GET /v1/{userName}/{brainName}/ws'
+```
+
+| Parameter | Description |
+| --- | --- |
+| userName | Name of the user who has the BRAIN |
+| brainName | Name of the BRAIN |
+
+> Example JSON Response
+
+```json
+{
+    "type": "ADD_DATA_POINT",
+    "metric": "episode_value",
+    "value": 34.0,
+    "episode": 83,
+    "concept": "balance",
+    "lesson": "balancing"
+}
+
+{
+    "type": "PROPERTY_CHANGED",
+    "property": "status",
+    "value": "In Progress"
+}
+
+{
+    "type": "CONCEPTS_SET",
+    "concepts": [{
+        "name": "balance",
+        "state": "Not Started",
+    }],
+}
+
+{
+    "type": "CONCEPT_CHANGED",
+    "concept": "balance",
+    "state": "In Progress"
+}
+
+{
+    "type": "FILE_UPDATED",
+    "filename": "cartpole.ink",
+    "hash": "c06edf7bc96dd461af1357a274734633b0ff2932"
+}
+```
+
+### Response
+
+The websocket will send JSON messages for events in the BRAIN. Every message will have a `type` field which can be used to determine what the rest of the payload is.
+
+There are 6 types of messages that are sent on this socket: `ADD_DATA_POINT`, `PROPERTY_CHANGED`, `CONCEPTS_SET`, `CONCEPT_CHANGED`, `FILE_UPDATED`, `FILES_UPDATED`, and `TRAINING_INITIALIZED`.
+
+#### ADD_DATA_POINT
+| Parameter | Description |
+| --- | --- |
+| metric | The data series for this data, will always be `episode_value` |
+| value | The reward value for an episode |
+| episode | Which episode the value corresponds to |
+| concept | The concept the value corresponds to |
+| lesson | The lesson the value corresponds to |
+
+#### PROPERTY_CHANGED
+| Parameter | Description |
+| --- | --- |
+| property | The property that has changed |
+| value | The new value for this parameter |
+
+#### CONCEPTS_SET
+| Parameter | Description |
+| --- | --- |
+| concepts | An array of name and state JSON per concept in the BRAIN |
+
+#### CONCEPT_CHANGED
+| Parameter | Description |
+| --- | --- |
+| concept | The concept that has changed |
+| state | What the concept's state changed to |
+
+#### FILE_UPDATED
+| Parameter | Description |
+| --- | --- |
+| filename | The file that has changed |
+| hash | A hash of the file's content |
+
+#### FILES_UPDATED
+This message has no extra data.
+
+#### TRAINING_INITIALIZED
+This message has no extra data.
 
 # Project Files
 
@@ -242,7 +338,87 @@ GET /v1/{userName}/{brainName}/sims
 | connected | Count of how many simulators are connected |
 | instances | Array of connected simulators with their status and episode count |
 
+## Simulator Logs
 
+GET log messages from platform-managed simulators.
+
+> Request
+
+```text
+GET /v1/{userName}/{brainName}/{brainVersion}/sims/1/logs
+```
+
+| Parameter | Description |
+| --- | --- |
+| userName | Name of the user who has the BRAIN |
+| brainName | Name of the BRAIN |
+| brainVersion | Version of the BRAIN |
+
+### Response
+
+The request will return an array of strings (each string representing one log message). 
+
+## Simulator Logs Websocket
+
+Use the websocket connection to get real-time simulator messages during training.
+
+> Request
+
+```text
+GET /v1/{userName}/{brainName}/{brainVersion}/sims/1/logs/ws
+```
+
+| Parameter | Description |
+| --- | --- |
+| userName | Name of the user who has the BRAIN |
+| brainName | Name of the BRAIN |
+| brainVersion | Version of the BRAIN |
+
+### Response
+
+The websocket will send one message for each log message (starting with the first message logged in the simulator). This websocket will automatically close when all log messages have been sent or training is complete.
+
+## Simulator State
+
+Use a websocket to GET the state of values in the simulator during training.
+
+> Request
+
+```text
+GET, /v1/{userName}/{brainName}/{brainVersion}/sims/1/state/ws'
+```
+
+| Parameter | Description |
+| --- | --- |
+| userName | Name of the user who has the BRAIN |
+| brainName | Name of the BRAIN |
+| brainVersion | Version of the BRAIN |
+
+
+> Example Response (JSON)
+
+```json
+{
+   "action": { 
+      "command": { 
+         "value": 0 
+      }
+   },
+   "reward": 1,
+   "state": {
+       "angle": {
+         "value": 0.1234
+       },
+       "position": {
+         "value": 0.02521
+       }
+   }
+}
+```
+
+### Response
+
+The websocket will send JSON messages for each state transition in the simulator. The payload will have `action`, `reward`, and `state` keys. The `reward` value will be the reward the simulator gives for this state transition. The `action` will be JSON with keys which correspond to the Inkling's action schema and the `state` will be JSON with keys corresponding to the Inkling's state schema.
 
 # Training
 
