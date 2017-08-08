@@ -532,6 +532,181 @@ every version of that BRAIN as well.</p>
 </tr>
 </tbody></table>
 
+<h2 id="brain-status-websocket">BRAIN Status Websocket</h2>
+
+<p>Use a websocket connection to get live updates about a BRAIN.</p>
+
+<blockquote>
+<p>Request</p>
+</blockquote>
+<pre class="highlight plaintext"><code>GET /v1/{userName}/{brainName}/ws'
+</code></pre>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>userName</td>
+<td>Name of the user who has the BRAIN</td>
+</tr>
+<tr>
+<td>brainName</td>
+<td>Name of the BRAIN</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Example JSON Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ADD_DATA_POINT"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"metric"</span><span class="p">:</span><span class="w"> </span><span class="s2">"episode_value"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">34.0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"episode"</span><span class="p">:</span><span class="w"> </span><span class="mi">83</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"concept"</span><span class="p">:</span><span class="w"> </span><span class="s2">"balance"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"lesson"</span><span class="p">:</span><span class="w"> </span><span class="s2">"balancing"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PROPERTY_CHANGED"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"property"</span><span class="p">:</span><span class="w"> </span><span class="s2">"status"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"In Progress"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CONCEPTS_SET"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"concepts"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"balance"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Not Started"</span><span class="p">,</span><span class="w">
+    </span><span class="p">}],</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CONCEPT_CHANGED"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"concept"</span><span class="p">:</span><span class="w"> </span><span class="s2">"balance"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"In Progress"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FILE_UPDATED"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cartpole.ink"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c06edf7bc96dd461af1357a274734633b0ff2932"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id="response">Response</h3>
+
+<p>The websocket will send JSON messages for events in the BRAIN. Every message will have a <code class="prettyprint">type</code> field which can be used to determine what the rest of the payload is.</p>
+
+<p>There are 6 types of messages that are sent on this socket: <code class="prettyprint">ADD_DATA_POINT</code>, <code class="prettyprint">PROPERTY_CHANGED</code>, <code class="prettyprint">CONCEPTS_SET</code>, <code class="prettyprint">CONCEPT_CHANGED</code>, <code class="prettyprint">FILE_UPDATED</code>, <code class="prettyprint">FILES_UPDATED</code>, and <code class="prettyprint">TRAINING_INITIALIZED</code>.</p>
+
+<h4 id="add_data_point">ADD_DATA_POINT</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>metric</td>
+<td>The data series for this data, will always be <code class="prettyprint">episode_value</code></td>
+</tr>
+<tr>
+<td>value</td>
+<td>The reward value for an episode</td>
+</tr>
+<tr>
+<td>episode</td>
+<td>Which episode the value corresponds to</td>
+</tr>
+<tr>
+<td>concept</td>
+<td>The concept the value corresponds to</td>
+</tr>
+<tr>
+<td>lesson</td>
+<td>The lesson the value corresponds to</td>
+</tr>
+</tbody></table>
+
+<h4 id="property_changed">PROPERTY_CHANGED</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>property</td>
+<td>The property that has changed</td>
+</tr>
+<tr>
+<td>value</td>
+<td>The new value for this parameter</td>
+</tr>
+</tbody></table>
+
+<h4 id="concepts_set">CONCEPTS_SET</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>concepts</td>
+<td>An array of name and state JSON per concept in the BRAIN</td>
+</tr>
+</tbody></table>
+
+<h4 id="concept_changed">CONCEPT_CHANGED</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>concept</td>
+<td>The concept that has changed</td>
+</tr>
+<tr>
+<td>state</td>
+<td>What the concept&rsquo;s state changed to</td>
+</tr>
+</tbody></table>
+
+<h4 id="file_updated">FILE_UPDATED</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>filename</td>
+<td>The file that has changed</td>
+</tr>
+<tr>
+<td>hash</td>
+<td>A hash of the file&rsquo;s content</td>
+</tr>
+</tbody></table>
+
+<h4 id="files_updated">FILES_UPDATED</h4>
+
+<p>This message has no extra data.</p>
+
+<h4 id="training_initialized">TRAINING_INITIALIZED</h4>
+
+<p>This message has no extra data.</p>
+
 <h1 id="project-files">Project Files</h1>
 
 <h2 id="retrieve-file">Retrieve File</h2>
@@ -714,6 +889,125 @@ BRAIN. You cannot PUT new file contents while a BRAIN is training.</p>
 <td>Array of connected simulators with their status and episode count</td>
 </tr>
 </tbody></table>
+
+<h2 id="simulator-logs">Simulator Logs</h2>
+
+<p>GET log messages from platform-managed simulators.</p>
+
+<blockquote>
+<p>Request</p>
+</blockquote>
+<pre class="highlight plaintext"><code>GET /v1/{userName}/{brainName}/{brainVersion}/sims/1/logs
+</code></pre>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>userName</td>
+<td>Name of the user who has the BRAIN</td>
+</tr>
+<tr>
+<td>brainName</td>
+<td>Name of the BRAIN</td>
+</tr>
+<tr>
+<td>brainVersion</td>
+<td>Version of the BRAIN</td>
+</tr>
+</tbody></table>
+
+<h3 id="response">Response</h3>
+
+<p>The request will return an array of strings (each string representing one log message). </p>
+
+<h2 id="simulator-logs-websocket">Simulator Logs Websocket</h2>
+
+<p>Use the websocket connection to get real-time simulator messages during training.</p>
+
+<blockquote>
+<p>Request</p>
+</blockquote>
+<pre class="highlight plaintext"><code>GET /v1/{userName}/{brainName}/{brainVersion}/sims/1/logs/ws
+</code></pre>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>userName</td>
+<td>Name of the user who has the BRAIN</td>
+</tr>
+<tr>
+<td>brainName</td>
+<td>Name of the BRAIN</td>
+</tr>
+<tr>
+<td>brainVersion</td>
+<td>Version of the BRAIN</td>
+</tr>
+</tbody></table>
+
+<h3 id="response">Response</h3>
+
+<p>The websocket will send one message for each log message (starting with the first message logged in the simulator). This websocket will automatically close when all log messages have been sent or training is complete.</p>
+
+<h2 id="simulator-state">Simulator State</h2>
+
+<p>Use a websocket to GET the state of values in the simulator during training.</p>
+
+<blockquote>
+<p>Request</p>
+</blockquote>
+<pre class="highlight plaintext"><code>GET, /v1/{userName}/{brainName}/{brainVersion}/sims/1/state/ws'
+</code></pre>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>userName</td>
+<td>Name of the user who has the BRAIN</td>
+</tr>
+<tr>
+<td>brainName</td>
+<td>Name of the BRAIN</td>
+</tr>
+<tr>
+<td>brainVersion</td>
+<td>Version of the BRAIN</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Example Response (JSON)</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+   </span><span class="s2">"action"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> 
+      </span><span class="s2">"command"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> 
+         </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> 
+      </span><span class="p">}</span><span class="w">
+   </span><span class="p">},</span><span class="w">
+   </span><span class="s2">"reward"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+       </span><span class="s2">"angle"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+         </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1234</span><span class="w">
+       </span><span class="p">},</span><span class="w">
+       </span><span class="s2">"position"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+         </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.02521</span><span class="w">
+       </span><span class="p">}</span><span class="w">
+   </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id="response">Response</h3>
+
+<p>The websocket will send JSON messages for each state transition in the simulator. The payload will have <code class="prettyprint">action</code>, <code class="prettyprint">reward</code>, and <code class="prettyprint">state</code> keys. The <code class="prettyprint">reward</code> value will be the reward the simulator gives for this state transition. The <code class="prettyprint">action</code> will be JSON with keys which correspond to the Inkling&rsquo;s action schema and the <code class="prettyprint">state</code> will be JSON with keys corresponding to the Inkling&rsquo;s state schema.</p>
 
 <h1 id="training">Training</h1>
 
