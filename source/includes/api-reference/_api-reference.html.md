@@ -317,7 +317,7 @@ GET /v1/{userName}/{brainName}/sims
 | userName | Name of the user who has the BRAIN |
 | brainName | Name of the BRAIN |
 
-> Example Response (JSON)
+> Example JSON Response
 
 ```json
 {
@@ -395,7 +395,7 @@ GET, /v1/{userName}/{brainName}/{brainVersion}/sims/1/state/ws'
 | brainVersion | Version of the BRAIN |
 
 
-> Example Response (JSON)
+> Example JSON Response
 
 ```json
 {
