@@ -137,8 +137,6 @@ lessonStatement ::=
     testClause?
 ```
 
-Select the Syntax tab to see the lesson syntax. The syntax for lesson and its subordinate
-clauses is displayed.
 
 ###### Lesson Configure Clause Syntax
 

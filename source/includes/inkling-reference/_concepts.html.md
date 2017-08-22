@@ -1,33 +1,31 @@
 # Concepts
 
-The `concept` keyword declares an abstract concept that is to be learned by the system. Ultimately, this takes the form of a transformation of data, but no information need be provided about how to perform the calculation. By declaring a concept, you are instructing the BRAIN server that this is a node in the basic recurrent artificial intelligence network that must be learned. Consequently, concept nodes must have corresponding curricula to teach them.
+The `concept` keyword declares an abstract concept that is to be learned by the system. It could be a feature (such as a curvy line in an image) or a goal (such as high score in a game).  Ultimately, a concept takes the form of a transformation of data, but no information need be provided about how to perform the calculation. By declaring a concept, you are instructing the BRAIN server that this is a node in the basic recurrent artificial intelligence network that must be learned. Consequently, concept nodes must have corresponding curricula to teach them.
 
-Because concepts are learned, their declarations tend to be fairly simple unless one wants to explicitly tell the BRAIN server what learning algorithms and architecture to use (which is an unusual case).  A typical statement will look something like this:
+Because concepts are learned, their declarations tend to be fairly simple unless one wants to explicitly tell the BRAIN server what learning algorithms and
+architecture to use (which is an unusual case).  
+
+The typical components of a concept statement are shown to the right. 
 
 ```inkling--code
 concept AbstractConceptName
   is classifier
   predicts ConceptSchema
-  follows Antecedent1, Antecedent2      // 'follows' concept or the input stream
-  feeds Dependent1                      // 'feeds' concept or the output stream
+  follows Antecedent1, Antecedent2   
+  feeds Dependent1                 
 end
 ```
 
-The `follows` and `feeds` keywords establish connectivity in the BRAIN directed
-graph. The `is` keyword specifies the overall class of concept that is being modeled. For example, a classifier will learn to identify a label corresponding to its input, an estimator will learn to predict a value, a predictor will learn sequences and predict subsequent items in a sequence, etcetera.
+The `is` keyword specifies the overall class of concept that is being modeled. For example, a classifier will learn to identify a label corresponding to its input, an estimator will learn to predict a value, a predictor will learn sequences and predict subsequent items in a sequence, etcetera.
 
-------> from web
+The `predicts` keyword declares the concept's output.
 
-Reference for the keyword **concept**. Also, describes the keywords: **predicts**, **input**, **output**, **is**, **follows**, **end**, and **feeds**.
+The `follows` and `feeds` keywords establish connectivity in the BRAIN directed graph. 
 
-* `concept`: (the keyword) declares an abstract concept for the system to learn.
-* `is`: specifies the kind of prediction the trained concept will produce (**classifier** or **estimator**).
-* `predicts`: declares the concept's output.
-* `follows`: declares the concepts or streams the concept gets input from.
-* `feeds`: declares the list of concepts and streams that have this concept's output as input.
-* `end`: delimiter that declares the end of this statement.
+The `follows`, `feeds`, and `predicts` clauses can be in any order. 
 
-A concept statement describes what the computer will learn. It can be a feature (such as a curvy line in an image) or a goal (such as high score in a game).
+Like all Inkling toplevel statements, the `end` keyword declares the end of the
+statement. 
 
 > Concept Syntax
 
@@ -56,38 +54,35 @@ outputTarget ::=
 
 ### Usage
 
-Each instance of the `input` keyword must have a schema. 
+The concept statement specifies input sources and output targets. Input sources
+are listed after the `follows` keyword and output sources are listed after the
+`feeds` keyword. 
 
-This schema is required but it can be anonymous. The `output` keyword must not have a schema. 
+Input sources can be other concepts or the `input` stream.  The `input` stream
+is the original input to the system. It flows into the system from outside the
+BRAIN. Each reference to the `input` stream must have a schema, which can be
+anonymous. (An [anonymous schema][1] is a list of schema fields in place of a schema name).
 
-The concept must declare an output schema after `predicts` keyword. This schema is required but it can be anonymous.
+Output targets can also be other concepts or the `output` stream. The `output` stream refers to the output of the BRAIN. 
+The `output` stream is never referenced with a schema.
 
-The `is` clause characterizes output. The `is classifier` form specifies that the output is an enum. 
+The concept output is described in the `predicts` clause. The schema after the
+`predicts` keyword describes the data produced by the trained concept.  (This
+schema is required but it can be [anonymous][1].)
+For example, if this concept classifies email into spam and not spam, the output schema for the concept would be a Bool. 
 
-------> from web
+The `is` clause characterizes the output. The `is classifier` form specifies that the output is an enum. 
+The `is estimator` form specifies that the output is a value.
 
-* The concept must be named after the `concept` keyword.
-* The `is` keyword specifies the kind of prediction the trained concept will produce. For example, a concept can specify `is classifier`. This means that the trained concept will categorize its input. Email, for example, can be classified as spam or not spam. Another option with this keyword is `estimator`.
-* The concept must declare an output schema after `predicts`. The output schema describes the data produced by the trained concept. For example if this concept classifies email into spam and not spam, the output schema for the concept would be a Bool. The output schema can be a named schema, where the name refers to a full schema definition elsewhere, or it can be anonymous, which is a parenthesized list of name, type pairs. See the section on schema declarations for more information.
-* A trained concept gets input from streams or (if multiple concepts are used) from another concept. The `input` keyword refers to the stream that is the original input to the system. All data flowing through the system has a schema associated with it. In some cases this is calculated rather than explicit.
-* If the `input` keyword appears in the `follows` list, it means that the input stream flowing into this concept comes from outside the BRAIN. The `input` keyword must always be accompanied by a schema (named or anonymous) because the data stream originates outside the Brain; if no schema was present, data types and formats being input would be unknown.
-* The `feeds` list is a list of concepts and streams (including the predefined output stream) for which the output of this concept is a source.
-* The `input` keyword cannot not appear in the feeds list and the `output` keyword cannot appear in the follows list.
-* The concept statement is terminated by the `end` keyword.
-
-### Discussion
-
-Concept input can come from a stream or another concept.
+Concept input can come from a concept as well as the `input` stream.
 
 When input comes from a concept, the type of the input doesn't matter. This is because concepts don’t act on normal data science data structures. The concept input is a matrix which has no type. 
 
 Concepts do care about their input types when input comes from a stream. This is because the input needs to go through an encoder to become a tensor and the encoder must know the input types. In this case the input types are defined by the output schema of the stream feeding the concept. 
 
-The `predicts` output of a concept is also a matrix which has no type (a tensor). The function of the `predicts` output schema is to select a decoder for that output matrix. This output schema decodes concepts. The decoding is used for debugging and also as hints for training. However note that it is advisable to avoid collapsing arbitrary encodings to CS values because it's a loss of  information - it's a compression of data. In general concepts feeding concepts (with no intervening stream) results in better learning (because when concepts feed concepts they are not collapsed). 
+The `predicts` output of a concept is also a matrix which has no type (a tensor). The function of the `predicts` output schema is to select a decoder for that output matrix. This output schema decodes concepts. 
 
-### Example(s)
-
-------> from web
+### Examples
 
 **get_high_score**
 
@@ -102,15 +97,13 @@ end
 
 We show Inkling for the concepts get_high_score, Digit, Curvature, and Segments. 
 
-Select the Inkling tab to display the Inklng source. 
-
 In this example:
 
 * `conceptName`: get_high_score
-* `class`: classifier
+* `is`: classifier
 * `predicts`: PlayerMove
 * `input(schemaName)`: input(GameState)
-* `dependent`: output
+* `feeds`: output
 
 
 **Digit**
@@ -124,13 +117,10 @@ end
 ```
 
 * `conceptName`: Digit
-* `kind`: classifier
+* `is`: classifier
 * `predicts`: MNIST_output
-* `follows`
-* `Curvature`: a concept
-* `Segments`: another concept
-* `input(MNIST_input)`: The `input` keyword indicates the predefined input    stream with data formats defined by schema MNIST_input.
-* `feeds:` output
+* `follows`: Curvature and Segments are concepts and `input(MNIST_input)` is
+the `input` stream with the MNIST_input schema
 
 **Curvature**
 
@@ -143,10 +133,14 @@ end
 ```
 
 * `conceptName`: Curvature
-* `kind`: classifier
+* `is`: classifier
 * `predicts`: curve_output
-* `follows`:
-* `input(MNIST_input)`: The `input` keyword indicates the predefined input    stream with data formats defined by schema MNIST_input.
+* `follows`: `input(MNIST_input)`
+
+Note that Digit specifies Curvature in its `follows` clause. That means logically
+that Curvature `feeds` Digit. But specifying this relationship in one place is
+enough. There would be nothing wrong with adding a `feeds` Digit clause to
+Curvature but it isn't required. 
 
 **Segments**
 
@@ -159,7 +153,7 @@ end
 ```
 
 * `conceptName`: Segments
-* `kind`: classifier
+* `is`: classifier
 * `predicts`: segments_output
-* `follows`:
-* `input(MNIST_input)`: The `input` keyword indicates the predefined input    stream with data formats defined by schema MNIST_input.
+* `follows`: `input(MNIST_input)`
+[1]:#schema-rules
