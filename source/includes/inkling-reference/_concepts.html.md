@@ -2,11 +2,6 @@
 
 The `concept` keyword declares an abstract concept that is to be learned by the system. It could be a feature (such as a curvy line in an image) or a goal (such as high score in a game).  Ultimately, a concept takes the form of a transformation of data, but no information need be provided about how to perform the calculation. By declaring a concept, you are instructing the BRAIN server that this is a node in the basic recurrent artificial intelligence network that must be learned. Consequently, concept nodes must have corresponding curricula to teach them.
 
-Because concepts are learned, their declarations tend to be fairly simple unless one wants to explicitly tell the BRAIN server what learning algorithms and
-architecture to use (which is an unusual case).  
-
-The typical components of a concept statement are shown to the right. 
-
 ```inkling--code
 concept AbstractConceptName
   is classifier
@@ -16,16 +11,10 @@ concept AbstractConceptName
 end
 ```
 
-The `is` keyword specifies the overall class of concept that is being modeled. For example, a classifier will learn to identify a label corresponding to its input, an estimator will learn to predict a value, a predictor will learn sequences and predict subsequent items in a sequence, etcetera.
+Because concepts are learned, their declarations tend to be fairly simple unless one wants to explicitly tell the BRAIN server what learning algorithms and
+architecture to use (which is an unusual case).  
 
-The `predicts` keyword declares the concept's output.
-
-The `follows` and `feeds` keywords establish connectivity in the BRAIN directed graph. 
-
-The `follows`, `feeds`, and `predicts` clauses can be in any order. 
-
-Like all Inkling toplevel statements, the `end` keyword declares the end of the
-statement. 
+The typical components of a concept statement are shown to the right. 
 
 > Concept Syntax
 
@@ -51,6 +40,18 @@ inputSource ::=
 outputTarget ::=
     output |  <name>                      # name of a concept or stream
 ```
+
+The `is` keyword specifies the overall class of concept that is being modeled. For example, a classifier will learn to identify a label corresponding to its input, an estimator will learn to predict a value, a predictor will learn sequences and predict subsequent items in a sequence, etcetera.
+
+The `predicts` keyword declares the concept's output.
+
+The `follows` and `feeds` keywords establish connectivity in the BRAIN directed graph. 
+
+The `follows`, `feeds`, and `predicts` clauses can be in any order. 
+
+Like all Inkling toplevel statements, the `end` keyword declares the end of the
+statement. 
+
 
 ### Usage
 
@@ -84,6 +85,8 @@ The `predicts` output of a concept is also a matrix which has no type (a tensor)
 
 ### Examples
 
+We show Inkling for the concepts get_high_score, Digit, Curvature, and Segments. 
+
 **get_high_score**
 
 ```inkling--code
@@ -94,10 +97,6 @@ concept get_high_score
   feeds output
 end
 ```
-
-We show Inkling for the concepts get_high_score, Digit, Curvature, and Segments. 
-
-In this example:
 
 * `conceptName`: get_high_score
 * `is`: classifier
@@ -156,4 +155,6 @@ end
 * `is`: classifier
 * `predicts`: segments_output
 * `follows`: `input(MNIST_input)`
+
+
 [1]:#schema-rules
