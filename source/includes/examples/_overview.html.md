@@ -6,8 +6,9 @@ All of the **OpenAI Gym**, **EnergyPlus** and **Gazebo** examples can be trained
 
 If you have any suggestions of examples you'd like to see us implement please [contact the support team][2].
 
-### Basic Walkthrough Examples
-* **Basic Simulator**: A project called *Find the Center* which walks you through how to create a simple Inkling file that connects to a basic python simulator.
+### Custom Simulator Examples
+* **Basic Python Simulator**: A project called *Find the Center* which walks you through how to create a simple Inkling file that connects to a basic python simulator.
+* **SimPy Simulator**: A basic example of how to use SimPy to simulate a scenario. This one is an elevator dropping people off on 3 floors.
 
 ### OpenAI Gym Examples
 * **Cart Pole**: A simple control problem where a cart must make a simple move to keep a pole balanced on top.
