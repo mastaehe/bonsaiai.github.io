@@ -1,4 +1,4 @@
-# Basic Simulator (Find the Center)
+# Basic Python Simulator
 
 > ![Find the Center Diagram](../images/find-the-center.png)
 
