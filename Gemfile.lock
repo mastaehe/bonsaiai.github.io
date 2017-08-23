@@ -123,5 +123,8 @@ DEPENDENCIES
   redcarpet (~> 3.4.0)
   rouge!
 
+RUBY VERSION
+   ruby 2.3.1p112
+
 BUNDLED WITH
-   1.14.2
+   1.15.4
