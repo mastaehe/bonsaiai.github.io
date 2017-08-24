@@ -194,6 +194,8 @@ The `_elevator_objective` function returns a negative waiting value because this
 
 For more information on the functions inside of this simulator class and how to implement them see the [Library Reference][3].
 
+Also note that if you would like to see how this simulator can be run without Bonsai - to demonstrate how the emulator behaves with a hard-coded algorithm - you can do so by running elevator.py simply with Python itself.
+
 [1]: https://github.com/BonsaiAI/simpy-elevator-sample
 [2]: https://simpy.readthedocs.io/en/latest/index.html
 [3]: http://docs.bons.ai/references/library-reference.html
