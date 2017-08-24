@@ -6,7 +6,7 @@ Types (or [data types][2]) are representations of values of data. A type informs
 
 In Inkling we need types, because the AI needs to understand the data it is sent. Also the AI needs to know how to represent the prediction it sends back to the program that you have deployed it with.
 
-Inkling is also a strongly-typed language, which means that you are will receive an error if values are not compatible with their expected type. This means you need to pay attention to what types you choose.
+Inkling is also a strongly typed language, which means that you will receive an error if values are not compatible with their expected type. This means you need to pay attention to what types you choose.
 
 Inkling supports various types, including (but not limited to) primitive types, which include types for integers, floats, bytes and strings, as well as types commonly used with machine learning (for example, Luminance). See the section on [Inkling types][3] for more information.
 
