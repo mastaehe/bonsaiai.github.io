@@ -66,22 +66,15 @@ structureDeclaration ::=
     <name> [ '[' arraySizeLiteral ']' ]*
 
 structure_type ::= 
-  Luminance | Matrix
+  Luminance
 
 structure_init:= 
   '(' 
-      luminance_init 
-   | 
-      matrix_init 
+      luminance_init
   ')'
 
 luminance_init ::=  
   integerLiteral ',' integerLiteral 
-
-matrix_init ::= 
-  '(' concreteType 
-      [ ',' concretetype ]* 
-   ')' 
 
 scalarDeclaration ::=
   primitiveType typeConstraint?
@@ -91,7 +84,7 @@ scalarDeclaration ::=
 Select the Syntax tab to view the schema declaration syntax.
 
 In the syntax you will see references to Inkling primitive types and structure types
-(Luminance, Matrix). These are discussed in in the Inkling Types section. 
+(Luminance). These are discussed in in the Inkling Types section. 
 
 ‍
 ## Schema Reference Syntax
@@ -136,12 +129,12 @@ with 'U' are unsigned.
 
 ```inkling--syntax
 structure_type ::= 
-  Luminance | Matrix
+  Luminance
 ```
 
-[//]: # (Are structured types used for simulators ever?)
+[//]: # (Add Matrix back when implemented in SDK)
 
-Inkling currently supports the types Matrix and Luminance. (This list will be
+Inkling currently supports the type Luminance. (This list will be
 expanded.)
 
 See the schema declaration syntax for the complete syntax of structure declaration.

@@ -37,7 +37,7 @@ end | expect | false | feeds | Float32
 Float64 | follows | format | from | generator
 hard | import | in | input | Int16
 Int32 | Int64 | Int8 | into | is
-lesson | let | Luminance | Matrix | maximize
+lesson | let | Luminance | maximize
 medium | minimize | not | objective | or
 output | predicts | schema | select | send
 simulator | state |  stream | String | test
