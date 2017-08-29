@@ -460,8 +460,8 @@ for use by Inkling and cannot be used as names in your program. </p>
 <td>lesson</td>
 <td>let</td>
 <td>Luminance</td>
-<td>Matrix</td>
 <td>maximize</td>
+<td></td>
 </tr>
 <tr>
 <td>medium</td>
@@ -800,22 +800,15 @@ pairs can appear where a schema name could appear.
     <span class="o">&lt;</span><span class="nx">name</span><span class="o">&gt;</span> <span class="p">[</span> <span class="p">'['</span> <span class="nx">arraySizeLiteral</span> <span class="p">']'</span> <span class="p">]</span><span class="o">*</span>
 
 <span class="nx">structure_type</span> <span class="p">::</span><span class="o">=</span> 
-  <span class="kr">Luminance</span> <span class="o">|</span> <span class="kr">Matrix</span>
+  <span class="kr">Luminance</span>
 
 <span class="nx">structure_init</span><span class="p">:</span><span class="o">=</span> 
   <span class="p">'('</span> 
-      <span class="nx">luminance_init</span> 
-   <span class="o">|</span> 
-      <span class="nx">matrix_init</span> 
+      <span class="nx">luminance_init</span>
   <span class="p">')'</span>
 
 <span class="nx">luminance_init</span> <span class="p">::</span><span class="o">=</span>  
   <span class="nx">integerLiteral</span> <span class="p">','</span> <span class="nx">integerLiteral</span> 
-
-<span class="nx">matrix_init</span> <span class="p">::</span><span class="o">=</span> 
-  <span class="p">'('</span> <span class="nx">concreteType</span> 
-      <span class="p">[</span> <span class="p">','</span> <span class="nx">concretetype</span> <span class="p">]</span><span class="o">*</span> 
-   <span class="p">')'</span> 
 
 <span class="nx">scalarDeclaration</span> <span class="p">::</span><span class="o">=</span>
   <span class="nx">primitiveType</span> <span class="nx">typeConstraint</span><span class="p">?</span>
@@ -824,7 +817,7 @@ pairs can appear where a schema name could appear.
 <p>Select the Syntax tab to view the schema declaration syntax.</p>
 
 <p>In the syntax you will see references to Inkling primitive types and structure types
-(Luminance, Matrix). These are discussed in in the Inkling Types section. </p>
+(Luminance). These are discussed in in the Inkling Types section. </p>
 
 <p>‍</p>
 
@@ -859,9 +852,9 @@ with &lsquo;U&rsquo; are unsigned. </p>
 
 <h6 id="structured-types">Structured Types</h6>
 <pre class="highlight inkling tab-inkling--syntax"><code><span class="nx">structure_type</span> <span class="p">::</span><span class="o">=</span> 
-  <span class="kr">Luminance</span> <span class="o">|</span> <span class="kr">Matrix</span>
+  <span class="kr">Luminance</span>
 </code></pre>
-<p>Inkling currently supports the types Matrix and Luminance. (This list will be
+<p>Inkling currently supports the type Luminance. (This list will be
 expanded.)</p>
 
 <p>See the schema declaration syntax for the complete syntax of structure declaration.</p>
