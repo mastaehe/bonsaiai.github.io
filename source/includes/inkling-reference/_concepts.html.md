@@ -59,6 +59,25 @@ The concept statement specifies input sources and output targets. Input sources
 are listed after the `follows` keyword and output sources are listed after the
 `feeds` keyword. 
 
+```inkling--code
+concept bar is classifier
+  predicts (Move)
+  # feeds foo            not necessary 
+  follows input(UInt8 x)
+end
+
+concept foo is classifier
+  predicts (Action)
+  follows bar     
+  feeds output
+end
+```
+
+Note that `follows` and `feeds` can be redundant. If our concept foo `follows`
+our concept bar then we know that bar is an input source for foo, and it isn't 
+necessary to also specify that concept bar `feeds` concept foo.  Specifying foo 
+`follows` bar is enough. However, specifying both (foo `follows` bar and bar `feeds` foo) is valid. 
+
 Input sources can be other concepts or the `input` stream.  The `input` stream
 is the original input to the system. It flows into the system from outside the
 BRAIN. Each reference to the `input` stream must have a schema, which can be
