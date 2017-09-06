@@ -76,6 +76,8 @@ are terminated by the `end` keyword.
 Field types can be any of the [Inkling primitive types][4] and [Inkling structured
 types][2]. 
 
+**Note: Matrix and Vector are not yet implemented.**
+
 In matrix initialization, a parenthesized list of types is followed by a list of dimensions. The number of types and the number of dimensions must match.
 
 Matrix size must be an integral constant.  
@@ -168,11 +170,9 @@ end
 ```
 
 Structured types in Inkling are intended to support common
-Machine Learning types. The Machine Learning types currently supported include
-`Luminance` and `Matrix`.
-  
-Inkling currently supports the types Matrix and Luminance. (This list will be
-expanded.)
+Machine Learning types. The Machine Learning type currently supported is
+`Luminance`. This support will be expanded to `Matrix` and `Vector`, among
+others.
 
 
 ###### Constrained Types and Range Expressions
