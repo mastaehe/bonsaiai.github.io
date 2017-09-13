@@ -1,62 +1,39 @@
 # Lessons
 
-Lessons are contained within curriculums. For a specification of curriculums see [Curriculums][]. What clauses are required depends on the type of simulator (data, simulator, or generator). For a table with these rules see [Lesson Clauses Table][].
+Lesson syntax and semantics can vary slightly depending on the curriculum training type. 
+A curriculum specifies its training type by specifying that it trains with a
+simulator, with data, or with a generator. 
 
-------> below is from the current web intro section
+This section presents the lesson syntax and semantics for
+curriculums which specify training with simulators only. Future support is expected for training with
+generators and with data, and those training types will be documented when
+the features are supported. 
 
-```inkling--code
-lesson lessonName
-    follows prevLessonName
-  configureClause
-  trainClause
-  testClause
-  untilClause
-```
+The `lesson` declares an individual lesson for the concept being trained by the curriculum.  Lessons are contained within curriculum statements. A curriculum can contain multiple lessons.
 
-The `lesson` (keyword) declares an individual lesson for the concept being trained by the curriculum.  Lessons are contained within curriculum statements. A curriculum can contain multiple lessons.
-
-Lessons give you control over the training of the mental model. They allow you to break down the training of the concept into phases where each phase is implemented by a lesson.
+Lessons provide control over the training of the mental model. They allow 
+the training of the concept to be broken down into phases where each phase is implemented by a lesson.
+Lessons allow the machine to learn the concept in stages rather than all at once. 
 
 > Lesson Syntax
 
 ```inkling--syntax
 lessonStatement ::=
   lesson <lessonName>
-    [follows <lessonName>]?
-    configureClause?
+    followsClause?
+    configureClause
     trainClause?
-    untilClause?
     testClause?
+    untilClause
 ```
-
-Lessons allow the machine to learn the concept in stages rather than all at
-once. 
-
-Here are the overall lesson rules:
-
-* Lesson statements appear within curriculum statements.
-* Lesson statements may contain the following keywords: `configure`, `train`, `test`, and `until`.
-* Lessons appear after the objective clause in curriculums.
-* Lessons can be ordered, using the `follows` clause. Note that this ordering is a suggestion to the instructor, not a hard and fast rule.
-
-Lessons have `configure`, `test`, `train`, and `until` clauses. 
-Some lesson clauses have defaults so if a clause is not specified the default
-will be in effect. Also in certain circumstances not all clauses are available.
-See the lesson clauses table in this chapter for the rules which apply to a specific
-clause.
 
 ### Usage
 
-------> below is from the current web "rules" section
+The `configure` and the `until` clauses are required. 
 
-* To summarize the table above, for a lesson associated with a _trainingSpecifier_ of `data`: one or both of the lesson clauses `train` and `test` are required (and there are no default versions of these clauses).
-* The `test` clause is optional for any particular lesson. However if the last lesson has no `test` clause it is an error.
-* The `follows` clause on the lesson is optional. If there is no `follows` clause and the lessons are executed in parallel, training will be slower.
-* For a lesson associated with a _trainingSpecifier_ of `generator` or `simulator` if neither the `test` or `train` lesson clauses are present, defaults for both clauses are generated (See the [Lesson Clauses Table][] for default details). Otherwise, no defaults are generated.
+The `train` and `test` clauses are optional.
 
-### Dicussion
-
-[Fill in or remove as needed.]
+Lessons can be ordered, using the `follows` clause. Note that this ordering is a suggestion to the instructor, not a hard and fast rule.  If there is no `follows` clause and the lessons are executed in parallel, training will be slower.
 
 ### Example
 
@@ -107,39 +84,58 @@ end
 ```
 
 In this example we show lessons that break into stages the task of  playing
-the game breakout. The first lesson, `constant_breakout`, trains the machine
-with a set of fixed values as configuration parameters. The second lesson,
-`vary_breakout`, which **follows** `constant_breakout`, trains the machine with a set of configuration parameters that vary according to specified type constraints.
+the game breakout. 
+
+* The first lesson, `constant_breakout`, trains the machine
+with a set of fixed values as configuration parameters. 
+* The second lesson,
+`vary_breakout`, which follows `constant_breakout`, trains the machine with a set of configuration parameters that vary according to specified type constraints.
 
 The two lessons in our example, `constant_breakout` and `vary_breakout`, are different in their configure clause. The first sets the fields in the configuration schema to constant values and the second lesson, `vary_breakout`, generates sets of values constrained by the type constraint. 
 
-Note that the **constrain** name in our example specifies a field in the
+Note that the identifiers specified after the `constrain` keyword in our example
+specify fields in the
 configuration schema for the simulator. These fields are `bricks_percent`,
 `level`, and `paddle_width`. When such fields are initialized with values from a
-type constraint they are often called **placeholders**.  This means that the name is is not the name of a specific value but rather it is the name of a range of values which will be input during training.
+type constraint they are called *placeholders*.  This means that the name is is not the name of a specific value but rather it is the name of a range of values which will be input during training.
 
 You can find more discussion of type constraint rules in the schema section. (Schema declarations can also use type constraints.)
 
 
 ## Lesson Subclauses
 
-Lessons can be ordered, using the followsClause. This will specify the order of lessons in training and can be more efficient.
+In this section we discuss the `follows` clause, the `configure` clause, the
+`test` and `train` clause, and the `until` clause.
 
-Lessons must be configured, using the configureClause. This configures data for the lesson. Other clauses may be optional, depending on whether this is a lesson for a simulator, generator or batched training with labeled data. That includes the trainClause, which describes training, and the untilClause, which describes success for the objective function. NOTE optional versus required is under specified.
+* Lessons can be ordered, using the `follows` clause. This will specify the order of lessons in training and can be more efficient.
 
-The test clause is optional for any particular lesson. However if the last lesson has no test clause it is an error.
+* Lessons are configured, using the `configure` clause. This configures data for the lesson. 
 
-### Placeholder
+* The `test` and `train` clauses describe testing and training, and are optional. 
+Note that whereas the `test` clause is optional for any particular lesson, if
+the last lesson has no `test` clause it is an error.
 
-Training uses placeholders. In the following configuration level is a placeholder name.
+* The `until` clause describes success for the objective function. 
 
-```inkling--code
-constrain level with Int32{1:10}   # level is a placeholder name. 
+###### Follows clause
+
+> Follows Clause Syntax
+
+```inkling--syntax
+lesson <lessonName>
+   followsClause?
+
+followsClause ::=
+follows 
+    lessonName [ ',' lessonName]* 
 ```
 
-It is not the name of a specific value but rather it is the name of a range of values which will be input by the instructor during training. In this context the type constrained by the range expression provides guidance to the instructor about training values.
+The `follows` clause 
+can be used to order lessons. Note that this ordering is a suggestion to the instructor, not a hard and fast rule.  If there is no `follows` clause and the lessons are executed in parallel, training will be slower.
 
-The type `Int32 {1:10}` is called a constrained type. This syntax can also be used in schemas and is discussed in the section on [Constrained Types][]. Type constraints which are lists of values are also supported.
+### Usage
+
+The `follows` clause is optional.
 
 ###### Configure Clause
 
@@ -156,24 +152,43 @@ constrain <schemaFieldName> with
     ( constrainedType )
 ```
 
-[Needs some general (not example specific) information about this clause.]
-
+The `configure` clause function is to configure data for training and testing.
 
 ### Usage
 
-A configure clause is required for the simulator and generator cases. Generally it is not used in the data case because labeled data should not be configured.
+A `configure` clause is required.
+
+### Placeholder
+
+The constraints in the `configure` clause configure the fields in the
+configuration schema for the simulator. These fields are called placeholders. In the accompanying
+example `level` is a placeholder. It is also a field in the configuration schema. 
+
+```inkling--code
+constrain level with Int32{1:10}   # level is a placeholder name. 
+```
+
+A placeholder is not the name of a specific value but rather it is the name
+associated with a set of possible values which will be input by the instructor
+during training. The characteristics of this set are specified in the
+constraint. In this case, the values will be integers between 1 and 10. Note
+there is no assumption of order. The instructor will randomly choose members
+from this set. 
+
+The type `Int32 {1:10}` is called a constrained type. The syntax `{1:10}` is
+called a range expression.  These topics are discussed in depth in the Schema chapter. 
+
 
 ### Example
 
-The example below gives an overview of configuration using the above Inkling code fragments in the context of a curriculum.  The simulator in the curriculum uses the `BreakoutConfig` schema. Note how the field names and types in the simulator schema match up with the names and types of the placeholders in the constrain clauses. This is required.
+The accompanying example gives an overview of configuration using these Inkling code fragments in the context of a curriculum.  The simulator in the curriculum uses the `BreakoutConfig` schema. Note how the field names and types in the simulator schema match up with the names and types of the placeholders in the constrain clauses. 
 
 ```inkling--code
 schema BreakoutConfig 
-( 
   UInt32  level,                     # 'level', 'paddle_width', 'bricks_percent' 
   UInt8   paddle_width,              # are matched below in constrain clauses 
   Float32 bricks_percent 
-) 
+end
  
 curriculum keep_paddle_under_ball_curriculum 
   train keep_paddle_under_ball 
@@ -182,134 +197,146 @@ curriculum keep_paddle_under_ball_curriculum
  
     lesson track_ball 
       configure breakout_sim 
-        let x = from item in datastore1(InputConfig) select item 
-        constrain paddle_width  
-            from paddle_width in  
-               range(x.lower_bound, x.upper_bound, x.numsteps) 
-            select paddle_width, 
-        constrain level with Int32{1:10}, 
+        constrain paddle_width  with UInt8{1:10},
+        constrain level with UInt32{1:10}, 
         constrain bricks_percent with Float32{0.1:0.01:1.0}  
       until 
-        minimize ball_paddle_distance 
+        maximize ball_paddle_distance 
 end
 ```
 
-First I will show some examples of the `configureClause` for `bricks_percent`.  Note the schema reference associated with this simulator in the curriculum statement has a field called `bricks_percent` with a `Float32` type.
+In this example we show how configuration works for `bricks_percent`.
 
-In this example the instructor selects values for `bricks_percent` from the given range. `Float32 {0.1:0.01:1.0}` is an Inkling specification for a constrained type. In a constrained type the values are all `Float32` but they also obey the constraint specified.
+The instructor selects values for `bricks_percent` from the given range. `Float32 {0.1:0.01:1.0}` is an Inkling specification for a constrained type. In a constrained type the values are all `Float32` but they also obey the constraint specified.
 
-The `configureClause` supports placeholders. The `bricks_percent` name in this configuration is the name of a placeholder. A placeholder name is not a variable holding a specific value but rather it is the name of a range of values which will be input by the instructor during training. The configureClause provides guidance to the instructor as to how to configure for training but it is not like an assignment in an imperative language because it does not mean initialization to a unique value. In general the instructor has some degrees of freedom in determining how to configure for training.
-
-Here is a configuration for bricks_percent for a different lesson. This example shows how you can configure it to take a constant value.
+We can also configure `bricks_percent` to take a constant value:
 
  `constrain bricks_percent with Float32 {1.0}`
 
-`Float32 {1.0}` is a Float32 constrained to take the value 1.0. This is the valueList form of the range constraint. You can add values to the list as long as they are of the same type, so the following is also valid:
+`Float32 {1.0}` is a Float32 constrained to take the value 1.0. This is the
+value list form of the range expression. You can add values to the list as long as they are of the same type, so the following is also valid:
 
 `constrain bricks_percent with Float32 {1.0, 1.5}`
 
 ###### Train and Test Clause
 
-[Needs some general (not example specific) information about this clause.]
+The `test` and `train` clauses describe testing and training.
+
+The `from` subclause in the test/train syntax is used to name, describe, and select the
+training data that is sent by the simulator to the lesson.
+
+The `test` clause and the `train` clause have identical syntax except for
+their keyword (`train` or `test`).  
 
 > Train and Test Clause Syntax
 
 ```inkling--syntax
 trainClause ::=
 train
-  fromClause
-  send <name>
-trainingSpecifer
+  from <item_name> in <simulator_name>
+  select <item_name>
+  send <item_name>
 
 testClause ::=
 test
-  fromClause
-  send <name>
-trainingSpecifer
+  from <item_name> in <simulator_name>
+  select <item_name>
+  send <item_name>
 ```
-
-The `test` clause and the `train` clause have identical syntax except for
-their keyword (train or test).  However they both vary depending on the
-_trainingSpecifier_ in the curriculum. 
-
-The `from` clause in the test/train syntax is used to name and describe the
-training data that is sent by the simulator to the lesson.
 
 ### Usage
 
-In the case of data, the train clause is required. In the case of simulator or generator, if the train clause is not present, the return schema of the simulator must exactly match the input schema to the network.
+The `test` and `train` clauses are optional. 
 
-The test clause is not required for any particular lesson. But if the final lesson does not have a test clause that is an error.
+If neither the `test` or `train` lesson clauses are present, defaults for both
+clauses are generated. The default in both cases is:
+
+`from item in <simulator_name> select item send item`
+
+(Here `<simulator_name>` refers to the name of the simulator being used by the
+lesson.)
+
+If one of the `train` and `test` clauses is present, no defaults are generated.
+
+If the `train` clause is not present, the return schema of the simulator must exactly match the input schema to the network.
+
+The `test` clause is not required for any particular lesson. But if the final lesson does not have a `test` clause that is an error.
 
 ### Example
 
-This example shows a train clause with no `expect`. That is because the is a simulator with no labeled data.
-
+In this example we show `train` and `test` clauses. 
+ 
 ```inkling--code
-schema GameState 
-    Luminance(48, 48) pixels 
-end 
-schema BreakoutConfig 
-    UInt32 level, 
-    UInt8{1:4} paddleWidth, 
-    Float32 bricks_percent 
-end 
- 
-concept ball_location : <Matrix(UInt32, 1, 2) location>  
-  is estimator 
-  follows input<GameState> 
- 
-curriculum ball_location_curriculum 
-  train ball_location 
-  with simulator breakout_sim 
-   <Matrix(UInt32, 1, 2) location>  # input to sim is same as the output of the concept  
-   : <GameState> # by default the schema assoc with the input keyword for the system 
-  objective ball_location_distance 
- 
-# The train statement allows the programmer to use linq to 
-# transform the output from the simulator before sending it on  
-# to the mental model. In the case of simulators, there is no  
-# “expect” as we don’t know what to expect from the neural network 
-# (we know the type the system will output, but not the value) 
-# configure schema is optional and it will be calculated from the  
-# constraints. However is a linq statement (not constrain) is used 
-# a schema is necessary (now, could be relaxed later).  
-    lesson no_bricks 
-      configure breakout_sim<BreakoutConfig> 
-        constrain bricks_percent with Float32{0.0}, 
-        constrain level with UInt32{1}, 
-        constrain paddle_width with UInt8{4} 
-      train 
-        from frame in breakout_sim # GameState is the type of frame 
-        select frame.pixels 
-        send frame.pixels                         
-      until 
-        minimize ball_location_distance 
+simulator breakout_simulator(BreakoutConfig)
+  action  (PlayerMove)
+  state (GameState)
+end
+
+schema GameState
+  Luminance(84, 336) pixels
+end
+
+schema PlayerMove
+  Int8{-1, 0, 1} move
+end
+
+schema BreakoutConfig
+  UInt32 level,
+  UInt8{1:4} paddle_width,
+  Float32 bricks_percent
+end
+
+concept high_score is classifier
+  predicts (PlayerMove)
+  follows keep_paddle_under_ball, input(GameState)
+  feeds output
+end
+
+curriculum high_score_curriculum
+  train high_score
+  with simulator breakout_simulator
+  objective score
+    lesson score_lesson
+      configure
+        constrain bricks_percent with Float32{1.0},
+        constrain level with UInt32{1:100},
+        constrain paddle_width with UInt8{1:4}
+      train
+        from frame in breakout_simulator
+        select frame
+        send frame
+      test
+        from frame in breakout_simulator
+        select frame
+        send frame
+      until
+        maximize score
+end
+
 ```
 
 What is sent (via `send`) to the neural network as a result of the `train` must have the same schema as the system's input schema. In this case that is `GameState`.  Note that `GameState` is declared as the output schema of the simulator.
 
-The trained statement will conform to the input schema of the system. The data that comes out of the lesson will always flow into the input keyword. The system is calculating a subgraph between the input and that node and that portion is involved in the training.
+The data that comes out of the lesson will always flow into the input keyword.
+The system is calculating a subgraph between the input and the concept being
+trained and that portion of the mental model is involved in the training.
 
-The curriculum represent a collection of lessons which train a subgraph of the mental model. The lesson represents a phase in training a subgraph of the mental model. The lessons represent the phases of training.
+The curriculum represents a collection of lessons which collectively train a subgraph of the mental model. The lesson represents a phase in training a subgraph of the mental model. The lessons represent the phases of training.
 
 All subgraphs begin with input and end with the concept under training and contain all nodes in between.
 
-For training with data, the trained statement will be a query.
-
-For a simulator, the trained statement equals the simulator output.
-
-For a generator, the trained statement equals some functions output. That function returns the input and the output
+For training with a simulator, the trained statement equals the simulator output.
 
 The trained statement can be understood as the input data to the trained network (or mental model).
 
-It is the instructors responsibility to guide training by specifying which streams and concepts in the subgraph will be active in the training and to decide on the terminating condition. Transformd will execute any streams and stream operatons (linq statements) which are part of the subgraph.
-
-The train clause is optional. If it is not present a default is generated which consists of a `from..select..send` that will send the simulator output, conforming to the simulator output schema, to the neural network. This is what is shown above.
+The `train` clause is optional. If it is not present a default is generated that
+will send the simulator output (conforming to the simulator output schema) to the neural network. 
 
 ###### Until Clause
 
 > Until Clause Syntax
+
+The `until` clause in the lesson specifies the termination condition for training.
 
 ```inkling--syntax
 untilClause ::=
@@ -322,70 +349,28 @@ relOp ::=
   '==' | '<' | '>' | '<=' | '>='
 ```
 
-The `until` clause is required if the curriculum _trainingSpecifier_ is `simulator`. If it is not present, a default with value minimize will be created.
-
-The `until` clause in the lesson specifies the termination condition for training.
+Future support of the `until` clause will include `minimize` and constant
+expressions. Current support is limited to `maximize`.
 
 ### Usage
 
-If this is data or a generator, the until clause is optional and if it is not present a default with value minimize will be created.
-
-If this is a simulator the until clause is required.
+The `until` clause is required.
 
 ### Example
 
-There are several examples of the until clause above, including:
+There are several examples of the `until` clause above, including:
 
 ```inkling--code
-     until 
-        minimize ball_location_distance
+      until 
+        maximize ball_paddle_distance 
 ```
 
-This specifies that training should continue until the return value of the objective function is minimized. The keyword `maximize` can also be used. It is also possible to specify a constant expression, for example:
 
 ```inkling--code
-     until 
-        ball_location_distance == 7
+      until
+        maximize score
 ```
 
-## Lesson Clauses Table
+These both specify that training should continue until the return value of the
+objective function is maximized. 
 
-[Is it possible to use the 5 column format currently on the web that doesn't run off the page?]
-
-This table shows which lesson clauses are required and under what conditions.
-
-|   | **objective** | **configure** | **train** | **test** | **until** |
-| --- | --- | --- | --- | --- | --- |
-| **data** | required, baked into platform only (equality, linear distance) | not allowed | must have train OR test at minimum. Defaults to none in protobuf. | must have train OR test at minimum, defaults to None | not allowed, defaults to: baked into the platform (minimize whatUserSpecified) |
-| **generator** | required. | required | If neither train or test present, defaults to: from item in generator select item send item.image expects item.label | If neither train or test present, defaults to: from item in generator select item send item.image expect item.label.Generate default for every lesson. | not allowed, baked into the platform (minimize whatUserSpecified) |
-| **simulator** | required, defined in the simulator | required | If neither train or test present, defaults to:  from item in simulator select item send item | If neither train or test present, defaults to: from item in simulator select item. Generate default for every lesson | required |
-
-**Summary for train/test clauses:**
-
-for `data`:
-
-* one or both of `train` and `test` are required, else error.
-* No defaults.
-
-for `generator` and `simulator`:
-
-- if neither `test` or `train` are present, default `test` and `train` are generated.
-- if one or both are present, there are no defaults generated.
-
-------> below is from the current web version
-
-Lesson clauses have defaults so if a clause is not specified the default will be assumed. Also in certain circumstances not all clauses are available. This table specifies the rules. Recall that the _trainingSpecifier_ appears after the keyword **with** in the curriculum.
-
-        training specifier       |     configure clause           |        train clause        |       test clause         |      until clause          
--------------- | -------------- | -------------- | -------------- | -------------- 
-**data**      | Not allowed. | Must have train or test at a minimum. Defaults to none.| Must have train or test at a mininum. Defaults to none. | Not user specified. Will default to: *minimize objectiveName*.
-**generator** | Required.    | If neither train nor test is present, defaults to: *from item in generator select item send item.image expects item.label*. | If neither train nor test is present, defaults to: *from item in generator select item send item.image expect item.label*. If not present, generate default for every lesson. | Not user specified. Will default to: *minimize objectiveName*.
-**simulator** | Required.    | If neither train nor test is present, defaults to: *item in simulator select item send item*. | If neither train nor test is present, defaults to: *from item in simulator select item*. If not present, generate default for every lesson. | Required.
-
-<aside class="notice">
-Currently, during the Bonsai Platform preview, you can only use simulators as your training source.
-</aside> 
-
-
-
-[1]:
