@@ -39,8 +39,8 @@ Lessons can be ordered, using the `follows` clause. Note that this ordering is a
 
 ```inkling--code
 schema BreakoutConfig   # configured in lesson configureClause
-  UInt32 level,
-  UInt8{1:4} paddle_width,
+  Int32 level,
+  Int8{1:4} paddle_width,
   Float32 bricks_percent
 end
 
@@ -52,8 +52,8 @@ curriculum ball_location_curriculum
     lesson constant_breakout
       configure           # configure to constant values
         constrain bricks_percent with Float32{0.5},
-        constrain level with UInt32{1},    # e.g. level = 1
-        constrain paddle_width with UInt8{4}
+        constrain level with Int32{1},    # e.g. level = 1
+        constrain paddle_width with Int8{4}
       train
         from frame in breakout_simulator
         select frame
@@ -68,8 +68,8 @@ curriculum ball_location_curriculum
     lesson vary_breakout follows constant_breakout
       configure          # configure to type constraints
       constrain bricks_percent with Float32{0.1:0.01:1.0},
-      constrain level with UInt32{1:100}, # e.g. level varies from 1..100
-      constrain paddle_width with UInt8{1:4}
+      constrain level with Int32{1:100}, # e.g. level varies from 1..100
+      constrain paddle_width with Int8{1:4}
     train
       from frame in breakout_simulator
       select frame
@@ -153,6 +153,9 @@ constrain <schemaFieldName> with
 ```
 
 The `configure` clause function is to configure data for training and testing.
+The `configure` clause has `constrain` subclauses that each specify a
+placeholder for a field in the configuration schema. The placeholder specifies a
+range of values for the field through constrained types and range expressions.
 
 ### Usage
 
@@ -178,6 +181,13 @@ from this set.
 The type `Int32 {1:10}` is called a constrained type. The syntax `{1:10}` is
 called a range expression.  These topics are discussed in depth in the Schema chapter. 
 
+The field definition of `level` in schema `BreakoutConfig` is `Int32  level`.
+In order to be a valid constraint, the placeholder definition for `level` must
+be conformant to the field definition. This means the types must be identical.
+Also the range expression on the placeholder must specify a subset of the values on
+the field definition. If there is no range expression on the field definition,
+the maximum range of values for the type is assumed, so any valid range
+expression on the placeholder would be valid.
 
 ### Example
 
@@ -185,8 +195,8 @@ The accompanying example gives an overview of configuration using these Inkling 
 
 ```inkling--code
 schema BreakoutConfig 
-  UInt32  level,                     # 'level', 'paddle_width', 'bricks_percent' 
-  UInt8   paddle_width,              # are matched below in constrain clauses 
+  Int32  level,                     # 'level', 'paddle_width', 'bricks_percent' 
+  Int8   paddle_width,              # are matched below in constrain clauses 
   Float32 bricks_percent 
 end
  
@@ -197,8 +207,8 @@ curriculum keep_paddle_under_ball_curriculum
  
     lesson track_ball 
       configure breakout_sim 
-        constrain paddle_width  with UInt8{1:10},
-        constrain level with UInt32{1:10}, 
+        constrain paddle_width  with Int8{1:10},
+        constrain level with Int32{1:10}, 
         constrain bricks_percent with Float32{0.1:0.01:1.0}  
       until 
         maximize ball_paddle_distance 
@@ -281,8 +291,8 @@ schema PlayerMove
 end
 
 schema BreakoutConfig
-  UInt32 level,
-  UInt8{1:4} paddle_width,
+  Int32 level,
+  Int8{1:4} paddle_width,
   Float32 bricks_percent
 end
 
@@ -299,8 +309,8 @@ curriculum high_score_curriculum
     lesson score_lesson
       configure
         constrain bricks_percent with Float32{1.0},
-        constrain level with UInt32{1:100},
-        constrain paddle_width with UInt8{1:4}
+        constrain level with Int32{1:100},
+        constrain paddle_width with Int8{1:4}
       train
         from frame in breakout_simulator
         select frame
@@ -358,7 +368,8 @@ The `until` clause is required.
 
 ### Example
 
-There are several examples of the `until` clause above, including:
+There are several examples of the `until` clause above. They are excerpted in
+the panel to the left.
 
 ```inkling--code
       until 
