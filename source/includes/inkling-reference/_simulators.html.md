@@ -1,34 +1,21 @@
-# Training Source
+# Simulators
 
-The Bonsai Platform supports training with both real and synthetic data. The `data`, `simulator` and `generator` keywords are used to describe what kind of training source you would like to use for training.
+```inkling--code
+simulator MySimulator(MySchemaConfig)
+  state (MyStateSchema)
+  action (MyActionSchema)
+end
+```
 
-<aside class="notice">
-Currently, during the Bonsai Platform preview, you can <b>only</b> train with simulators as your training source. That is, only the <i>simulator</i> training specifier is supported.
-</aside>
+Curriculum statements reference an associated simulator in the `with` clause. Each
+simulator used in a curriculum must be declared in a `simulator` statement.  
 
-### Simulators
+The `simulator` statement describes the interface to a simulator. Simulators are
+generally implemented in python or C++. The Inkling program does not contain
+code for the simulator itself. Instead the Inkling program defines how the
+simulator is used to train Inkling concepts.
 
-Simulators are interactive virtual environments. Every simulator has state, a representation of the world inside the virtual environment. This state almost always changes over time and in response to actions taken by an AI or other agent. The AI and the simulator are in a loop where a BRAIN is receiving a frame of state from the simulator, then, the BRAIN is selecting a next action. Next, the simulator changes state in response to that action. The BRAIN then receives this new updated frame of state from the simulator and selects a new next action, so on and so on until the BRAIN learns how to best operate the simulation.
-
-Our [Library Reference][1] describes the classes and methods used to connect an existing simulator or create a new simulator in Python. [Find the Center][2] is an example of a basic simulator implementation.
-
-### Generators
-
-Generators produce labeled data programmatically. This data is effectively infinite. A generator could, for example, produce a random (but known) integer, set of line segments, etc.
-
-<aside class="notice">
-Currently, during the Bonsai Platform preview, you can <b>only</b> train with simulators as your training source. That is <i>generators</i> are not supported.
-</aside>
-
-### Data
-
-Data is information related to the scenario being trained comprising of columns of information with input values and expected labels or desired predicted values. Data is used both for training and evaluating the quality of training. Examples of training data include a collection of images and labels or the rows and columns of a spreadsheet.
-
-<aside class="notice">
-Currently, during the Bonsai Platform preview, you can <b>only</b> train with simulators as your training source. That is <i>data</i> is not supported.
-</aside>
-
-## Simulator Clause Syntax
+> Simulator Clause Syntax
 
 ```inkling--syntax
 simulator <simulatorName>'('<configurationSchema>')' 
@@ -37,11 +24,99 @@ simulator <simulatorName>'('<configurationSchema>')'
 end
 ```
 
-Select the Syntax tab to see the Simulator clause syntax.
+A `simulator` statement associates a set of schemas with the simulator. 
 
-When a simulator is used for training, use the simulator clause. It is **required** to pass a <configurationSchema> into the simulator, even if the configuration is empty.
+* The configuration schema is used for initialization. 
+* The action schema describes the simulator input.
+* The state schema describes the simulator output.
 
-The [Mountain Car example][3] of a simulator shows the implementation of this clause in a curriculum.
+### Usage
+
+```inkling--code
+curriculum ball_location_curriculum
+  train ball_location
+  with simulator breakout_simulator
+  objective ball_location_distance
+  ... 
+```
+
+The curriculum specifies which simulator it uses. The example in the code panel
+shows the use of simulator `breakout_simulator`. 
+
+### Discussion
+
+Simulators are virtual environments designed to simulate a real world situation
+or problem. Every simulator has a state, a representation of the world inside the
+virtual environment. This state changes over time in response to actions taken
+by an agent. 
+
+The simulator and the BRAIN are in a loop where a BRAIN is receiving a frame 
+of state from the simulator, followed by the BRAIN selecting a next action. 
+The simulator then changes state in response to that action. The BRAIN then
+receives this new updated frame of state from the simulator and selects a new
+next action, so on and so on, until the BRAIN learns how to best operate the simulation.
+
+Our [Library Reference][1] describes the classes and methods used to connect an existing simulator or create a new simulator in Python. [Find the Center][2] is an example of a basic simulator implementation.
+
+### Example
+
+```inkling--code
+
+simulator breakout_simulator(BreakoutConfig)
+  action  (PlayerMove)
+  state (GameState)
+end
+
+schema GameState
+  Luminance(84, 336) pixels
+end
+
+schema PlayerMove
+  Int8{-1, 0, 1} move
+end
+
+schema BreakoutConfig
+  UInt32 level,
+  UInt8{1:4} paddle_width,
+  Float32 bricks_percent
+end
+
+concept high_score is classifier
+  predicts (PlayerMove)
+  follows input(GameState)
+  feeds output
+end
+
+curriculum high_score_curriculum
+  train high_score
+  with simulator breakout_simulator
+  objective score
+    lesson score_lesson
+      configure
+        constrain bricks_percent with Float32{1.0},
+        constrain level with UInt32{1:100},
+        constrain paddle_width with UInt8{1:4}
+      train
+        from frame in breakout_simulator
+        select frame
+        send frame
+      test
+        from frame in breakout_simulator
+        select frame
+        send frame
+      until
+        maximize score
+end
+```
+
+In this example we show some of the Inkling code for training the game Breakout.
+The curriculum `with` clause specifies `breakout_simulator`, and the
+`simulator` statement specifies the action, state, and configuration schemas. 
+
+The curriculum specifies the `objective` function, in this case it is
+`score`. The `objective` function (which is sometimes called 
+the reward function in the literature) is implemented in the simulator. 
+(Eventually implementing objective functions in Inkling will be supported.)
 
 [1]: ./library-reference.html
 [2]: ./../examples.html#find-the-center-example
