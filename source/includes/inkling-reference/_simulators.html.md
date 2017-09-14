@@ -7,11 +7,11 @@ simulator MySimulator(MySchemaConfig)
 end
 ```
 
-Curriculum statements reference an associated simulator in the with clause. Each
-simulator used in a curriculum must be declared in a simulator statement.  
+Curriculum statements reference an associated simulator in the `with` clause. Each
+simulator used in a curriculum must be declared in a `simulator` statement.  
 
-The simulator statement describes the interface to a simulator. Simulators are
-generally implemented in python or C++. The inkling program does not contain
+The `simulator` statement describes the interface to a simulator. Simulators are
+generally implemented in python or C++. The Inkling program does not contain
 code for the simulator itself. Instead the Inkling program defines how the
 simulator is used to train Inkling concepts.
 
@@ -24,7 +24,7 @@ simulator <simulatorName>'('<configurationSchema>')'
 end
 ```
 
-A simulator statement associates a set of schemas with the simulator. 
+A `simulator` statement associates a set of schemas with the simulator. 
 
 * The configuration schema is used for initialization. 
 * The action schema describes the simulator input.
@@ -40,13 +40,13 @@ curriculum ball_location_curriculum
   ... 
 ```
 
-The curriculum specifies which simulator it uses. The example in the panel to
-the right shows the use of simulator `breakout_simulator`. 
+The curriculum specifies which simulator it uses. The example in the code panel
+shows the use of simulator `breakout_simulator`. 
 
 ### Discussion
 
 Simulators are virtual environments designed to simulate a real world situation
-or problem. Every simulator has state, a representation of the world inside the
+or problem. Every simulator has a state, a representation of the world inside the
 virtual environment. This state changes over time in response to actions taken
 by an agent. 
 
@@ -109,9 +109,9 @@ curriculum high_score_curriculum
 end
 ```
 
-In this example we show some of the Inkling code for training breakout.
+In this example we show some of the Inkling code for training the game Breakout.
 The curriculum `with` clause specifies `breakout_simulator`, and the
-simulator statement specifies the action, state, and configuration schemas. 
+`simulator` statement specifies the action, state, and configuration schemas. 
 
 The curriculum specifies the `objective` function, in this case it is
 `score`. The `objective` function (which is sometimes called 
