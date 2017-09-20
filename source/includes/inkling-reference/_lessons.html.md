@@ -4,16 +4,9 @@ Lesson syntax and semantics can vary slightly depending on the curriculum traini
 A curriculum specifies its training type by specifying that it trains with a
 simulator, with data, or with a generator. 
 
-This section presents the lesson syntax and semantics for
-curriculums which specify training with simulators only. Future support is expected for training with
-generators and with data, and those training types will be documented when
-the features are supported. 
-
-The `lesson` declares an individual lesson for the concept being trained by the curriculum.  Lessons are contained within curriculum statements. A curriculum can contain multiple lessons.
-
-Lessons provide control over the training of the mental model. They allow 
-the training of the concept to be broken down into phases where each phase is implemented by a lesson.
-Lessons allow the machine to learn the concept in stages rather than all at once. 
+<aside class="notice">
+Future support is expected for training with generators and with data, and those training types will be documented when the features are supported. 
+</aside>
 
 > Lesson Syntax
 
@@ -27,6 +20,12 @@ lessonStatement ::=
     untilClause
 ```
 
+The `lesson` declares an individual lesson for the concept being trained by the curriculum.  Lessons are contained within curriculum statements. A curriculum can contain multiple lessons.
+
+Lessons provide control over the training of the mental model. They allow 
+the training of the concept to be broken down into phases where each phase is implemented by a lesson.
+Lessons allow the machine to learn the concept in stages rather than all at once. 
+
 ### Usage
 
 The `configure` and the `until` clauses are required. 
@@ -38,10 +37,29 @@ Lessons can be ordered, using the `follows` clause. Note that this ordering is a
 ### Example
 
 ```inkling--code
-schema BreakoutConfig   # configured in lesson configureClause
+simulator breakout_simulator(BreakoutConfig)
+  action  (PlayerMove)
+  state (GameState)
+end
+
+schema GameState
+  Luminance(84, 336) pixels
+end
+
+schema PlayerMove
+  Int8{-1, 0, 1} move
+end
+
+schema BreakoutConfig # configured in lesson configureClause
   Int32 level,
   Int8{1:4} paddle_width,
   Float32 bricks_percent
+end
+
+concept high_score is classifier
+  predicts (PlayerMove)
+  follows keep_paddle_under_ball, input(GameState)
+  feeds output
 end
 
 curriculum ball_location_curriculum
@@ -83,7 +101,7 @@ curriculum ball_location_curriculum
 end
 ```
 
-In this example we show lessons that break into stages the task of  playing
+In this example we show lessons that break into stages the task of playing
 the game breakout. 
 
 * The first lesson, `constant_breakout`, trains the machine
@@ -117,7 +135,7 @@ the last lesson has no `test` clause it is an error.
 
 * The `until` clause describes success for the objective function. 
 
-###### Follows clause
+###### Follows Clause
 
 > Follows Clause Syntax
 
@@ -183,15 +201,13 @@ called a range expression.  These topics are discussed in depth in the Schema ch
 
 The field definition of `level` in schema `BreakoutConfig` is `Int32  level`.
 In order to be a valid constraint, the placeholder definition for `level` must
-be conformant to the field definition. This means the types must be identical.
+conform to the field definition. This means the types must be identical.
 Also the range expression on the placeholder must specify a subset of the values on
 the field definition. If there is no range expression on the field definition,
 the maximum range of values for the type is assumed, so any valid range
 expression on the placeholder would be valid.
 
 ### Example
-
-The accompanying example gives an overview of configuration using these Inkling code fragments in the context of a curriculum.  The simulator in the curriculum uses the `BreakoutConfig` schema. Note how the field names and types in the simulator schema match up with the names and types of the placeholders in the constrain clauses. 
 
 ```inkling--code
 schema BreakoutConfig 
@@ -215,6 +231,8 @@ curriculum keep_paddle_under_ball_curriculum
 end
 ```
 
+The accompanying example gives an overview of configuration using these Inkling code fragments in the context of a curriculum.  The simulator in the curriculum uses the `BreakoutConfig` schema. Note how the field names and types in the simulator schema match up with the names and types of the placeholders in the constrain clauses. 
+
 In this example we show how configuration works for `bricks_percent`.
 
 The instructor selects values for `bricks_percent` from the given range. `Float32 {0.1:0.01:1.0}` is an Inkling specification for a constrained type. In a constrained type the values are all `Float32` but they also obey the constraint specified.
@@ -229,14 +247,6 @@ value list form of the range expression. You can add values to the list as long 
 `constrain bricks_percent with Float32 {1.0, 1.5}`
 
 ###### Train and Test Clause
-
-The `test` and `train` clauses describe testing and training.
-
-The `from` subclause in the test/train syntax is used to name, describe, and select the
-training data that is sent by the simulator to the lesson.
-
-The `test` clause and the `train` clause have identical syntax except for
-their keyword (`train` or `test`).  
 
 > Train and Test Clause Syntax
 
@@ -253,6 +263,14 @@ test
   select <item_name>
   send <item_name>
 ```
+
+The `test` and `train` clauses describe testing and training.
+
+The `from` subclause in the test/train syntax is used to name, describe, and select the
+training data that is sent by the simulator to the lesson.
+
+The `test` clause and the `train` clause have identical syntax except for
+their keyword (`train` or `test`).  
 
 ### Usage
 
@@ -277,31 +295,6 @@ The `test` clause is not required for any particular lesson. But if the final le
 In this example we show `train` and `test` clauses. 
  
 ```inkling--code
-simulator breakout_simulator(BreakoutConfig)
-  action  (PlayerMove)
-  state (GameState)
-end
-
-schema GameState
-  Luminance(84, 336) pixels
-end
-
-schema PlayerMove
-  Int8{-1, 0, 1} move
-end
-
-schema BreakoutConfig
-  Int32 level,
-  Int8{1:4} paddle_width,
-  Float32 bricks_percent
-end
-
-concept high_score is classifier
-  predicts (PlayerMove)
-  follows keep_paddle_under_ball, input(GameState)
-  feeds output
-end
-
 curriculum high_score_curriculum
   train high_score
   with simulator breakout_simulator
@@ -369,7 +362,7 @@ The `until` clause is required.
 ### Example
 
 There are several examples of the `until` clause above. They are excerpted in
-the panel to the left.
+the code panel.
 
 ```inkling--code
       until 
