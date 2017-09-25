@@ -1,16 +1,29 @@
-# Curriculum
+# Curriculums
 
-Reference for the keyword **curriculum**. Also, describes the keywords: **train**, **with**
-
-### What is it?
-
-The **curriculum** (keyword) declares a set of lessons that are used to teach concepts. Each curriculum contains a lesson or set of lessons and trains a single concept.
-
-### Why do I use it?
+The keyword `curriculum` declares a set of lessons that are used to teach concepts. Each `curriculum` contains a `lesson` or set of lessons and trains a single `concept`.
 
 A curriculum is used to teach a concept. The curriculum defines what concept is being taught. Every concept needs a corresponding curriculum to teach it. A curriculum defines a set of lessons used to train the concept.
 
-### How do I use it?
+> Curriculum (top level) Syntax
+
+```inkling--syntax
+curriculumStmt ::=
+curriculum <name>
+    train <conceptName>
+[
+  withClause                        # with clause
+
+]+
+[
+  using <simulatorName>             # using clause
+  [
+    lessonClause # lesson set for this simulator
+  ]+
+
+  end # using
+]+
+end # curriculum
+```   
 
 ```inkling--code
 curriculum curriculumName
@@ -21,7 +34,9 @@ curriculum curriculumName
 end
 ```
 
-Select the Inkling tab to see a simple form of a curriculum statement.
+The `train` keyword indicates which concept this curriculum trains, the _with data_ keywords specify that training with labeled data should be used with this curriculum, and the _objective_ keyword specifies the objective function used to evaluate the learning system&#39;s performance.
+
+Curricula contain one or more lessons which themselves form a directed graph for use by the instructor.
 
 The _trainingSpecifier_ specifies either `data`, `simulator`, or `generator` as the training source. Refer back to [Training Source][2] for more information on what the differences are.
 
@@ -30,6 +45,44 @@ Currently, only simulator training sources are supported. When the <i>trainingsp
 </aside>
 
 The `objective` specifies the termination condition for training.
+
+
+
+**(Previously there was a ### Rules section, do we want that?)**
+
+There can be only one curriculum per concept.
+
+Lessons, tests, and assignments can occur in any order.
+
+The test clause is optional for any particular lesson. However if the last lesson has no test clause it is an error.
+
+The `follows` clause on the lesson is optional. Note that if there is no `follows` clause and the lessons are executed in parallel, training will be slower.
+
+If the usingClause is present (that is, if the simplified curriculum syntax is not being used), there must be one usingClause for every withClause.
+
+---------> Current web rules section below
+
+* One curriculum per concept. 
+* Every concept must have a curriculum.
+* Every simulator must be declared with a [simulator clause][3].
+* Lessons and tests can occur in any order.
+* If the **using** clause is present (that is, if the simplified curriculum syntax is not being used), there must be one **using** clause for every **with** clause.
+* The objective is always required.
+
+### Discussion
+
+```inkling--syntax
+curriculum <name>                              # single curriculum                    
+train  <conceptName>                           # single concept   
+[ 
+  with simulator <simulatorName>  
+  objective <objectiveFunctionName> 
+]+ 
+```
+
+The architect hands the instructor a laid out concept graph. The instructor will look for starting point among the concepts and their corresponding curriculums. At the highest level the instructor will use the curriculum to train the concept; thus there is one curriculum per concept. Note how the curriculum syntax associates a curriculum with a single concept.
+
+A curriculum (and its concept) is associated with a set of simulators and each simulator has an objective function and a schema. The instructor trains each concept using a simulator with a dedicated objective function. The schema used in the curriculum statement identifies placeholders. Placeholders are discussed in the [lessons][] section.
 
 ### Mountain Car Example
 
@@ -119,38 +172,154 @@ multiple simulators and generators within a single curriculum. Here is the full
 syntax for the curriculum statement, which introduces a **using** clause and a
 **with** clause (where **using** and **with** will specify simulators). These were not needed in our example above because we were using a single simulator.
 
-## Curriculum Rules
 
-* One curriculum per concept. 
-* Every concept must have a curriculum.
-* Every simulator must be declared with a [simulator clause][3].
-* Lessons and tests can occur in any order.
-* If the **using** clause is present (that is, if the simplified curriculum syntax is not being used), there must be one **using** clause for every **with** clause.
-* The objective is always required.
+### Breakout Example
 
-[//]: # (Assignments are used for data handling when the training specifier is **data**.)
+[This is what was in OneNote. Do we want to use this one or the Mountain Car example? We could use this one in the reference and just link to Mountain Car but it has more text around it to explain. Up to you.]
+
+Here is a concept and its curriculum for training for the computer game breakout. It is simplified but shows the various Inkling statements and includes some code fragments for a python simulator.  Included are the curriculum, lessons,  concepts, schemas, and simulator. (This example uses compiler version 1.1.1 syntax.) 
+
+As there is only one simulator, this example uses the simplified syntax where 'using <simulatorName>' is unnecessary.  
+
+```inkling--code
+simulator breakout_simulator(BreakoutConfig) 
+   state (GameState) 
+   action(PlayerMove) 
+end 
+schema GameState 
+  Luminance(84, 336) pixels 
+end 
+ 
+schema PlayerMove 
+  Int8{-1, 0, 1} move 
+end 
+ 
+schema BreakoutConfig 
+  UInt32 level, 
+  UInt8{1:4} paddle_width, 
+  Float32 bricks_percent 
+end 
+ 
+concept ball_location is estimator 
+  predicts (Matrix(UInt32, 1, 2) location) 
+  follows input(GameState) 
+end 
+concept keep_paddle_under_ball is classifier 
+    predicts (PlayerMove) 
+  follows ball_location, input(GameState) 
+end 
+concept high_score is classifier 
+  predicts (PlayerMove) 
+  follows keep_paddle_under_ball, input(GameState) 
+  feeds output 
+end 
+ 
+curriculum ball_location_curriculum 
+  train ball_location 
+  with simulator breakout_simulator 
+  objective ball_location_distance 
+    lesson no_bricks 
+      configure 
+        constrain bricks_percent with Float32{0.0}, 
+        constrain level with UInt32{1}, 
+        constrain paddle_width with UInt8{4} 
+      train 
+        from frame in breakout_simulator 
+        select frame 
+        send frame 
+      test 
+        from frame in breakout_simulator 
+        select frame 
+        send frame 
+      until 
+        minimize ball_location_distance 
+ 
+    lesson more_bricks follows no_bricks 
+      configure 
+        constrain bricks_percent with Float32{0.1:0.01:1.0}, 
+        constrain level with UInt32{1:100}, 
+        constrain paddle_width with UInt8{1:4} 
+      train 
+        from frame in breakout_simulator 
+        select frame 
+        send frame 
+      test 
+        from frame in breakout_simulator 
+        select frame 
+        send frame 
+      until 
+        minimize ball_location_distance 
+end 
+ 
+curriculum keep_paddle_under_ball_curriculum 
+  train keep_paddle_under_ball 
+  with simulator breakout_simulator 
+  objective ball_paddle_distance 
+    lesson track_ball 
+      configure 
+        constrain bricks_percent with Float32{1.0}, 
+        constrain level with UInt32{1:100}, 
+        constrain paddle_width with UInt8{1:4} 
+      train 
+        from frame in breakout_simulator 
+        select frame 
+        send frame 
+      test 
+        from frame in breakout_simulator 
+        select frame 
+        send frame 
+      until 
+        minimize ball_paddle_distance 
+end 
+ 
+curriculum high_score_curriculum 
+  train high_score 
+  with simulator breakout_simulator 
+  objective score 
+    lesson score_lesson 
+      configure 
+        constrain bricks_percent with Float32{1.0}, 
+        constrain level with UInt32{1:100}, 
+        constrain paddle_width with UInt8{1:4} 
+      train 
+        from frame in breakout_simulator 
+        select frame 
+        send frame 
+      test 
+        from frame in breakout_simulator 
+        select frame 
+        send frame 
+      until 
+        maximize score 
+end
+```
 
 
-## Curriculum Statement Syntax
+## Curriculum Subclauses 
+
+The curriculum statement has subclauses including the withClause and the lessonClause.
+
+### With Clause
+
+The set of withClauses specifies the set of simulators this curriculum will use. The usingClause associates a set of lessons with each simulator.  
+ 
+There is a simplified syntax for the curriculum in which the usingClause is not necessary because the curriculum contains only one simulator.  
+
+> With Clause Syntax
 
 ```inkling--syntax
-curriculumStatement ::=
-curriculum <name>
-    train <conceptName>
-[
-  withClause                        # with clause
-
-]+
-[
-  using <simulatorName>             # using clause
-  [
-    lessonClause # lesson set for this simulator
-  ]+
-
-  end # using
-]+
-end # curriculum
+curriculumStmt :=  
+curriculum <name>                      
+   train  <conceptName>    
+   withClause 
+   [                                                           
+      assignClause       
+      lessonClause 
+   ]+ 
+end   # curriculum
 ```
+
+---------> Current web syntax
 
 ```inkling--syntax
 withClause ::=
@@ -158,12 +327,23 @@ with simulator
   objective <objectiveFunctionName>
 ```
 
-Select the Syntax tab to see the Curriculum syntax.
+The withClause specifies the simulators.
 
-Any simulator referenced in a curriculum must have an associated simulator clause, outlined in [Training Source][2].
+[Can we get rid of data and generator and just keep simulator?]
 
-[//]: # (Reinsert data example when it is a training source option.)
+The keyword **data** indicates that this is batch based training using labeled data. This is generally accompanied with the assignClause which specifies how to prepare the training data. The type of training is time invariant. Training will result in a classifier. In this case the training does not use coded simulators.
 
-[1]: ./../examples.html#mountain-car-example
-[2]: #training-source
-[3]: #simulator-clause-syntax
+If the keyword **data** is not used the simulator or generator clause will define some schemas, which are described below.
+
+The keyword **generator** indicates that the simulator generates the training data. Generators can be thought of as a stateless simulators. They do have coded simulators but the training output does not get fed back into simulator. The generator clause has a **yield** schema that defines the training output.
+
+The keyword **simulator** indicates that the responses of the system to the training data will feed back into the training. Simulators are coded implementations of the lessons. They are time variant. A simulator coded for example in python keeps state and thus it will use deep-q learning. The simulator clause has a **state** schema that describes simulator state.
+
+### Lesson Clause (link to lesson section)
+
+The lessonClause and the assignClause are discussed in detail in their respective sections.
+
+The lessonClause contains subclauses to configure the lesson and to describe training and objective. A lesson may also include a test subclause. For more information see the section on [lessons][].
+
+The assign clause prepares the data for training. More information on the assignClause can be found in the section on [assignment][].
+
