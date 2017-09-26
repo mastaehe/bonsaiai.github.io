@@ -1,19 +1,29 @@
 # Curriculums
 
-The keyword `curriculum` declares a set of lessons that are used to teach concepts. Each `curriculum` contains a `lesson` or set of lessons and trains a single `concept`.
+```inkling--code
+curriculum MyCurriculum
+  train MyConcept
+  with simulator MySimulator
+  objective MyObjective
+    # lessons are specified here.
+end
+```
 
-A curriculum is used to teach a concept. The curriculum defines what concept is being taught. Every concept needs a corresponding curriculum to teach it. A curriculum defines a set of lessons used to train the concept.
+The Inkling curriculum statement is used to specify the training of Inkling concepts. 
 
-> Curriculum (top level) Syntax
+The curriculum specifies the concept which is being taught. (Every
+concept needs a corresponding curriculum to teach it.) The lessons defined within
+the curriculum are used to train that concept.
+
+> Curriculum Syntax
 
 ```inkling--syntax
-curriculumStmt ::=
-curriculum <name>
-    train <conceptName>
-[
-  withClause                        # with clause
-
-]+
+curriculum <name>                            
+train  <conceptName>                        
+[ 
+  with simulator <simulatorName>  
+  objective <objectiveFunctionName> 
+]+ 
 [
   using <simulatorName>             # using clause
   [
@@ -25,36 +35,18 @@ curriculum <name>
 end # curriculum
 ```   
 
-```inkling--code
-curriculum curriculumName
-  train conceptName
-  with trainingSpecifier  # one of data, simulator, or generator
-  objective objectiveName
-    # lessons are specified here.
-end
-```
+The `train` keyword indicates which concept this curriculum trains and the
+`objective` keyword specifies the objective function.  This function specifies the termination condition for training.
 
-The `train` keyword indicates which concept this curriculum trains, the _with data_ keywords specify that training with labeled data should be used with this curriculum, and the _objective_ keyword specifies the objective function used to evaluate the learning system&#39;s performance.
+The lessons contained in the `using` clause form a directed graph for use by the instructor.
 
-Curricula contain one or more lessons which themselves form a directed graph for use by the instructor.
-
-The _trainingSpecifier_ specifies either `data`, `simulator`, or `generator` as the training source. Refer back to [Training Source][2] for more information on what the differences are.
-
-<aside class="notice">
-Currently, only simulator training sources are supported. When the <i>trainingspecifier</i> is <b>simulator</b>, the objective names a function which is specified in the associated simulator. The use of simulators requires an auxiliary <i>simulator</i> clause. 
-</aside>
-
-The `objective` specifies the termination condition for training.
+There can be only one curriculum per concept.
 
 
 
 **(Previously there was a ### Rules section, do we want that?)**
 
-There can be only one curriculum per concept.
 
-Lessons, tests, and assignments can occur in any order.
-
-The test clause is optional for any particular lesson. However if the last lesson has no test clause it is an error.
 
 The `follows` clause on the lesson is optional. Note that if there is no `follows` clause and the lessons are executed in parallel, training will be slower.
 
