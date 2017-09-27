@@ -9,7 +9,7 @@ curriculum MyCurriculum
 end
 ```
 
-The Inkling curriculum statement is used to specify the training of Inkling concepts. 
+The `curriculum` statement is used to specify the training of Inkling concepts. 
 
 The curriculum specifies the concept which is being taught. 
 The lessons defined within the curriculum are used to train that concept.
@@ -24,14 +24,15 @@ train  <conceptName>
   objective <objectiveFunctionName> 
 ]+ 
 [
-  using <simulatorName>             # using clause
+  using <simulatorName>         # using clause
   [
-    lessonClause # lesson set for this simulator
+    lessonClause                # lesson set for this simulator
   ]+
-  end # using
+  end
 ]+
-end # curriculum
+end
 ```   
+
 ### Usage
 
 There can be only one curriculum per concept.
@@ -52,7 +53,7 @@ clause for every simulator specified in the `with simulator` clause.
 
 ### Discussion
 
-The concept graph is laid out by the architect and then handed to the
+The concept graph is laid out by the [architect][] and then handed to the
 instructor. The instructor will look for the starting point among the concepts and
 their corresponding curriculums, and then will use the curriculum to train
 the concept.
@@ -75,7 +76,7 @@ simulator breakout_simulator(BreakoutConfig)
 end
 ```
 
-The simulator clause declares the simulator name and several schemas. The first
+The `simulator` clause declares the simulator name and several schemas. The first
 schema specifies the schema for configuration of the simulator and it appears in
 parentheses immediately after the simulator name. In this instance, the
 configuration schema is named `BreakoutConfig`. In the example, the configure
@@ -129,7 +130,7 @@ selection of the next move.
 ```inkling--code
 # predict schema for high_score and action schema for simulator
 schema PlayerMove               # action schema
-    Int8{-1, 0, 1} move         # these values describe game moves
+    Int8{-1, 0, 1} move         # possible game moves
 end
 
 concept high_score is classifier
@@ -141,7 +142,7 @@ end
 
 The `action` schema (which is `PlayerMove`) is the third schema specified in the simulator clause.
 The simulator `action` schema must match the `predicts` schema of the concept being trained.
-In our example the concept `high_score` trains the Brain to select the next move, which will have
+In our example the concept `high_score` trains the BRAIN to select the next move, which will have
 one of the values specified in the `PlayerMove` schema range expression. 
 
 ```inkling--code
