@@ -176,7 +176,7 @@ Create your BRAIN (and its related project file) with [`bonsai create`][18] and 
 bonsai push
 ```
 
-Uae [`bonsai push`][19] to upload the cloned Mountain Car project and its associated files to the Bonsai AI Engine for training.
+Use [`bonsai push`][19] to upload the cloned Mountain Car project and its associated files to the Bonsai AI Engine for training.
 
 
 

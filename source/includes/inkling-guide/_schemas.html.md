@@ -6,7 +6,7 @@ Types (or [data types][2]) are representations of values of data. A type informs
 
 In Inkling we need types, because the AI needs to understand the data it is sent. Also the AI needs to know how to represent the prediction it sends back to the program that you have deployed it with.
 
-Inkling is also a strongly-typed language, which means that you are will receive an error if values are not compatible with their expected type. This means you need to pay attention to what types you choose.
+Inkling is also a strongly typed language, which means that you will receive an error if values are not compatible with their expected type. This means you need to pay attention to what types you choose.
 
 Inkling supports various types, including (but not limited to) primitive types, which include types for integers, floats, bytes and strings, as well as types commonly used with machine learning (for example, Luminance). See the section on [Inkling types][3] for more information.
 
@@ -22,10 +22,10 @@ Here are some examples of constrained types:
 schema MyOutput
   UInt8  {0,1,2,3,4}   label,    # a list of UInt8 values
   String {"a", "bc"}   category, # a list of Strings
-  Int64  { 0:5:100 }   x,        # start:step:stop, step= 5,0..100
-  Int64  { 0:100 }     y,        # start:stop, step= 1, 0..100
-  Int64  { 0..100:25 } z,        # start:stop, numsteps=25, step= 4, 0..100
-  Float32 { 0..2:0.5}    a         # gives (0, 0.5, 1.0, 1.5, 2.0)
+  Int64  {0:5:100}   x,        # start:step:stop, {0,5,10,...,95,100}
+  Int64  {0:100}     y,        # start:stop, default step= 1, {0,1,...,99,100}
+  Int64  {0..100:25} z,        # start..stop:numsteps, so step= 4, {0,4,8,...,96,100}
+  Float32 {0..2:5}    a         # start..stop:numsteps, gives {0, 0.5, 1.0, 1.5, 2.0}
 end
 ```
 

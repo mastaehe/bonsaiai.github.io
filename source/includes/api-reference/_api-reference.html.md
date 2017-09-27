@@ -1,10 +1,10 @@
 # API Overview
 
 ```
-#####################################################
-# JSON output will be shown here for REST API       #
-# protobuf output will be shown here for Websockets #
-#####################################################
+#######################################################
+# REST API request and response will be shown here    #
+# protobuf messages will be shown here for Websockets #
+#######################################################
 ```
 
 The Bonsai Platform provides programmers and data scientists with a new way of
@@ -18,6 +18,8 @@ The Bonsai BRAIN API has two feature areas:
 
 The root for all Bonsai Platform API requests is [https://api.bons.ai][1].
 
+
+
 # Authentication
 
 API calls must include an Authorization header. The value of this header is your [Access Key][2].
@@ -28,15 +30,19 @@ API calls must include an Authorization header. The value of this header is your
 | --- | --- |
 | Authorization | Access key |
 
+
+
 # User and BRAIN Status
 
-## GET User Status
+## User Status
 
-List all BRAINs owned by the user.
+Use GET to list all BRAINs owned by the user.
 
-### Request
+> Request
 
-`GET /v1/{userName}`
+```text
+GET /v1/{userName}
+```
 
 | Parameter | Description |
 | --- | --- |
@@ -80,14 +86,16 @@ List all BRAINs owned by the user.
 | state | Current status of training |
 | name | Name of the BRAIN |
 
-## GET BRAIN Status
+## BRAIN Status
 
-Get information about a BRAIN. This will return every URL for
+Use GET for information about a BRAIN. This will return every URL for
 every version of that BRAIN as well.
 
-### Request
+> Request
 
-`GET /v1/{userName}/{brainName}`
+```text
+GET /v1/{userName}/{brainName}
+```
 
 | Parameter | Description |
 | --- | --- |
@@ -118,22 +126,121 @@ every version of that BRAIN as well.
 
 | Parameter | Description |
 | --- | --- |
-| version | Current version number of the BRAIN |
+| versions | Lists URL for every version of the BRAIN |
 | description | Text description of the BRAIN |
 | user | Name of the user who has the BRAIN|
 | name | Name of the BRAIN |
 
+## BRAIN Status Websocket
+
+Use a websocket connection to get live updates about a BRAIN.
+
+> Request
+
+```text
+GET /v1/{userName}/{brainName}/ws'
+```
+
+| Parameter | Description |
+| --- | --- |
+| userName | Name of the user who has the BRAIN |
+| brainName | Name of the BRAIN |
+
+> Example JSON Response
+
+```json
+{
+    "type": "ADD_DATA_POINT",
+    "metric": "episode_value",
+    "value": 34.0,
+    "episode": 83,
+    "concept": "balance",
+    "lesson": "balancing"
+}
+
+{
+    "type": "PROPERTY_CHANGED",
+    "property": "status",
+    "value": "In Progress"
+}
+
+{
+    "type": "CONCEPTS_SET",
+    "concepts": [{
+        "name": "balance",
+        "state": "Not Started",
+    }],
+}
+
+{
+    "type": "CONCEPT_CHANGED",
+    "concept": "balance",
+    "state": "In Progress"
+}
+
+{
+    "type": "FILE_UPDATED",
+    "filename": "cartpole.ink",
+    "hash": "c06edf7bc96dd461af1357a274734633b0ff2932"
+}
+```
+
+### Response
+
+The websocket will send JSON messages for events in the BRAIN. Every message will have a `type` field which can be used to determine what the rest of the payload is.
+
+There are 6 types of messages that are sent on this socket: `ADD_DATA_POINT`, `PROPERTY_CHANGED`, `CONCEPTS_SET`, `CONCEPT_CHANGED`, `FILE_UPDATED`, `FILES_UPDATED`, and `TRAINING_INITIALIZED`.
+
+#### ADD_DATA_POINT
+| Parameter | Description |
+| --- | --- |
+| metric | The data series for this data, will always be `episode_value` |
+| value | The reward value for an episode |
+| episode | Which episode the value corresponds to |
+| concept | The concept the value corresponds to |
+| lesson | The lesson the value corresponds to |
+
+#### PROPERTY_CHANGED
+| Parameter | Description |
+| --- | --- |
+| property | The property that has changed |
+| value | The new value for this parameter |
+
+#### CONCEPTS_SET
+| Parameter | Description |
+| --- | --- |
+| concepts | An array of name and state JSON per concept in the BRAIN |
+
+#### CONCEPT_CHANGED
+| Parameter | Description |
+| --- | --- |
+| concept | The concept that has changed |
+| state | What the concept's state changed to |
+
+#### FILE_UPDATED
+| Parameter | Description |
+| --- | --- |
+| filename | The file that has changed |
+| hash | A hash of the file's content |
+
+#### FILES_UPDATED
+This message has no extra data.
+
+#### TRAINING_INITIALIZED
+This message has no extra data.
 
 # Project Files
 
-## GET File
+## Retrieve File
 
-Get the contents of a specified project file, for example, the Inkling
+GET the contents of a specified project file, for example, the Inkling
 code in the *.ink* file for a BRAIN.
 
-### Request
+> Request
 
-`GET /v1/{userName}/[brainName]?file={fileName}`
+```text
+GET /v1/{userName}/[brainName]?file={fileName}
+```
 
 | Parameter | Description |
 | --- | --- |
@@ -145,14 +252,16 @@ code in the *.ink* file for a BRAIN.
 
 The full text of the file will be returned in the body.
 
-## PUT File
+## Change File
 
 Uses the PUT request method to change a project file for the given
 BRAIN. You cannot PUT new file contents while a BRAIN is training.
 
-### Request
+> Request
 
-`PUT /v1/{userName}/[brainName]?file={fileName}`
+```text
+PUT /v1/{userName}/[brainName]?file={fileName}
+```
 
 | Parameter | Description |
 | --- | --- |
@@ -189,15 +298,139 @@ BRAIN. You cannot PUT new file contents while a BRAIN is training.
 
 This is an example response for an Inkling file with no errors or warnings to report.
 
-# Training Mode
 
-## PUT Training Mode
 
-Start or stop training mode.
+# Simulators
 
-### Request
+## Simulator Information
 
-`PUT /v1/{userName}/{brainName}/train`
+GET information for a simulator connected to a BRAIN.
+
+> Request
+
+```text
+GET /v1/{userName}/{brainName}/sims
+```
+
+| Parameter | Description |
+| --- | --- |
+| userName | Name of the user who has the BRAIN |
+| brainName | Name of the BRAIN |
+
+> Example JSON Response
+
+```json
+{
+   "name": "breakout",
+   "connected": 2,
+   "instances": [{
+       "state": "ready_to_play".
+       "episode": 1
+   }]
+}
+```
+
+### Response
+
+| Parameter | Description |
+| --- | --- |
+| name | Name of the simulator |
+| connected | Count of how many simulators are connected |
+| instances | Array of connected simulators with their status and episode count |
+
+## Simulator Logs
+
+GET log messages from platform-managed simulators.
+
+> Request
+
+```text
+GET /v1/{userName}/{brainName}/{brainVersion}/sims/1/logs
+```
+
+| Parameter | Description |
+| --- | --- |
+| userName | Name of the user who has the BRAIN |
+| brainName | Name of the BRAIN |
+| brainVersion | Version of the BRAIN |
+
+### Response
+
+The request will return an array of strings (each string representing one log message). 
+
+## Simulator Logs Websocket
+
+Use the websocket connection to get real-time simulator messages during training.
+
+> Request
+
+```text
+GET /v1/{userName}/{brainName}/{brainVersion}/sims/1/logs/ws
+```
+
+| Parameter | Description |
+| --- | --- |
+| userName | Name of the user who has the BRAIN |
+| brainName | Name of the BRAIN |
+| brainVersion | Version of the BRAIN |
+
+### Response
+
+The websocket will send one message for each log message (starting with the first message logged in the simulator). This websocket will automatically close when all log messages have been sent or training is complete.
+
+## Simulator State
+
+Use a websocket to GET the state of values in the simulator during training.
+
+> Request
+
+```text
+GET, /v1/{userName}/{brainName}/{brainVersion}/sims/1/state/ws'
+```
+
+| Parameter | Description |
+| --- | --- |
+| userName | Name of the user who has the BRAIN |
+| brainName | Name of the BRAIN |
+| brainVersion | Version of the BRAIN |
+
+
+> Example JSON Response
+
+```json
+{
+   "action": { 
+      "command": { 
+         "value": 0 
+      }
+   },
+   "reward": 1,
+   "state": {
+       "angle": {
+         "value": 0.1234
+       },
+       "position": {
+         "value": 0.02521
+       }
+   }
+}
+```
+
+### Response
+
+The websocket will send JSON messages for each state transition in the simulator. The payload will have `action`, `reward`, and `state` keys. The `reward` value will be the reward the simulator gives for this state transition. The `action` will be JSON with keys which correspond to the Inkling's action schema and the `state` will be JSON with keys corresponding to the Inkling's state schema.
+
+# Training
+
+## Start/Stop Training
+
+Use PUT to start or stop training.
+
+> Request
+
+```text
+PUT /v1/{userName}/{brainName}/train
+```
 
 | Parameter | Description |
 | --- | --- |
@@ -232,59 +465,16 @@ Start or stop training mode.
 | compiler_version| Version of the compiler used |
 | brain_url | URL of the BRAIN |
 
-# Simulators
-
-## GET Simulator Information
-
-Information for a simulator connected to a BRAIN.
-
-### Request
-
-`GET /v1/{userName}/{brainName}/sims`
-
-| Parameter | Description |
-| --- | --- |
-| userName | Name of the user who has the BRAIN |
-| brainName | Name of the BRAIN |
-
-> Example Response (JSON)
-
-```json
-{
-   "name": "breakout",
-   "connected": 2,
-   "instances": [{
-       "state": "ready_to_play".
-       "episode": 1
-   }]
-}
-```
-
-### Response
-
-| Parameter | Description |
-| --- | --- |
-| name | Name of the simulator |
-| connected | Count of how many simulators are connected |
-| instances | Array of connected simulators with their status and episode count |
-
-
-
-# Websocket Messages
-
-[//]: # (This section and below need to be fleshed out with content on websockets and protobuf messages)
-
-The simulator and AI Engine exchange messages in a binary protocol for training
-and prediction.
-
 ## Training Protocol
 
 Connect to the server and upgrade to a websocket to initialize the training
 protocol.
 
-### Request
+> Request
 
-`GET /v1/{userName}/{brainName}/sims/ws`
+```text
+GET /v1/{userName}/{brainName}/sims/ws
+```
 
 | Parameter | Description |
 | --- | --- |
@@ -300,35 +490,7 @@ protocol.
 
 ### Protocol
 
-![Training Message Protocol][3]
-
-## Prediction Protocol
-
-Connect to the server and upgrade to a websocket to initialize the prediction
-protocol.
-
-### Request
-
-`GET /v1/{userName}/{brainName}/{version}/predictions/ws`
-
-| Parameter | Description |
-| --- | --- |
-| userName | name of the user who has the BRAIN |
-| brainName | name of the BRAIN |
-| version | version of the BRAIN to get predictions from. Use "latest" for latest version |
-
-#### Headers
-
-| Header | Value |
-| --- | --- |
-| Upgrade | websocket |
-| Connection | upgrade |
-
-### Protocol
-
-![Prediction Message Protocol][4]
-
-## Simulator to Server
+> Simulator to Server
 
 ```proto
 message SimulatorToServer {
@@ -349,26 +511,7 @@ message SimulatorToServer {
 }
 ```
 
-## Register
-
-```proto
-message RegisterData {
-    string simulator_name = 1;
-}
-```
-
-## State
-
-```proto
-message SimulationSourceData {
-    bytes state = 1;
-    float reward = 2;
-    bool terminal = 3;
-    bytes action_taken = 4;
-}
-```
-
-## Server to Simulator
+> Server to Simulator
 
 ```proto
 message ServerToSimulator {
@@ -393,7 +536,15 @@ message ServerToSimulator {
 }
 ```
 
-## Acknowledge Register
+> Register
+
+```proto
+message RegisterData {
+    string simulator_name = 1;
+}
+```
+
+> Acknowledge Register
 
 ```proto
 message AcknowledgeRegisterData {
@@ -404,7 +555,7 @@ message AcknowledgeRegisterData {
 }
 ```
 
-## Set Properties
+> Set Properties
 
 ```proto
 message SetPropertiesData {
@@ -414,13 +565,145 @@ message SetPropertiesData {
 }
 ```
 
-## Prediction
+> State
+
+```proto
+message SimulationSourceData {
+    bytes state = 1;
+    float reward = 2;
+    bool terminal = 3;
+    bytes action_taken = 4;
+}
+```
+
+> Prediction
 
 ```proto
 message PredictionData {
     bytes dynamic_prediction = 1;
 }
 ```
+
+
+![Training Message Protocol][3]
+
+
+
+# Prediction
+
+## Prediction Protocol
+
+Connect to the server and upgrade to a websocket to initialize the prediction
+protocol.
+
+> Request
+
+```text
+GET /v1/{userName}/{brainName}/{version}/predictions/ws
+```
+
+| Parameter | Description |
+| --- | --- |
+| userName | name of the user who has the BRAIN |
+| brainName | name of the BRAIN |
+| version | version of the BRAIN to get predictions from. Use "latest" for latest version |
+
+#### Headers
+
+| Header | Value |
+| --- | --- |
+| Upgrade | websocket |
+| Connection | upgrade |
+
+### Protocol
+
+> Simulator to Server
+
+```proto
+message SimulatorToServer {
+    enum MessageType {
+        UNKNOWN = 0;
+        REGISTER = 1;
+        READY = 2;
+        STATE = 3;
+    }
+    MessageType message_type = 1;
+
+    // Nested message data. Which of these fields is populated depends
+    // upon the message type. Some message types do not have any
+    // additional data.
+    RegisterData register_data = 2;
+    repeated SimulationSourceData state_data = 3;
+    fixed32 sim_id = 4;
+}
+```
+
+> Server to Simulator
+
+```proto
+message ServerToSimulator {
+    enum MessageType {
+        UNKNOWN = 0;
+        ACKNOWLEDGE_REGISTER = 1;
+        SET_PROPERTIES = 2;
+        START = 3;
+        STOP = 4;
+        PREDICTION = 5;
+        RESET = 6;
+        FINISHED = 7;
+    }
+    MessageType message_type = 1;
+
+    // Nested message data. Which of these fields is populated depends
+    // upon the message type. Some message types do not have any
+    // additional data.
+    AcknowledgeRegisterData acknowledge_register_data = 2;
+    SetPropertiesData set_properties_data = 3;
+    repeated PredictionData prediction_data = 4;
+}
+```
+
+> Register
+
+```proto
+message RegisterData {
+    string simulator_name = 1;
+}
+```
+
+> Acknowledge Register
+
+```proto
+message AcknowledgeRegisterData {
+    google.protobuf.DescriptorProto properties_schema = 1;
+    google.protobuf.DescriptorProto output_schema = 2;
+    google.protobuf.DescriptorProto prediction_schema = 3;
+    fixed32 sim_id = 4;
+}
+```
+
+> State
+
+```proto
+message SimulationSourceData {
+    bytes state = 1;
+    float reward = 2;
+    bool terminal = 3;
+    bytes action_taken = 4;
+}
+```
+
+> Prediction
+
+```proto
+message PredictionData {
+    bytes dynamic_prediction = 1;
+}
+```
+
+![Prediction Message Protocol][4]
+
+
 
 # BRAIN Versions and Modes
 

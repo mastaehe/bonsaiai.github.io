@@ -864,9 +864,9 @@ a {}
 
 .flex-cc {display:-ms-flexbox;display:flex;-ms-flex-direction:row;-ms-flex-align: center;align-items: center;-ms-flex-pack: end;justify-content: flex-end;border-right: none !important;}
 
-.footer-links-home a {color: #327833;text-decoration:none;padding-right: 15px;padding-left: 15px;}
+.footer-links-home a {color: #327833;text-decoration:none;padding-right: 15px;padding-left: 15px; border-left: solid 1px #EDEBE8; text-align: center;}
 
-.footer-links-home a:nth-child(-n+2) {border-right: solid 1px #EDEBE8 !important;}
+.footer-links-home a:first-child, .footer-links-home a:last-child {border-left: 0;}
 
 .footer-links-home a:hover {color:#3B453B;}
 /* ui */

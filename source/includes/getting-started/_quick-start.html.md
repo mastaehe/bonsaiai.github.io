@@ -70,8 +70,8 @@ What this is going to do is spin up a container for the [AI Engine][14], connect
 
 Training Cartpole for ~2,000 episodes is ideal, and might take between 15-30 minutes depending on
 how well your BRAIN is performing. You can see in the images that it only took about a minute for
-the first ~1,000 episodes but the second half took 14 minutes. Your graphs will vary greatly so
-don't worry if they don't look like these.
+the first ~1,000 episodes but the second half took 14 minutes. Your graphs will vary because the
+training takes random actions, so don't worry if they don't look like these.
 
 The server will automatically end training once the BRAIN reaches past a certain accuracy, but you
 will most likely want to stop training before it gets there because there will be diminishing returns
@@ -88,10 +88,10 @@ Congratulations on training your first BRAIN! "What do I do with it now?" you ma
 
 To use the BRAIN you've just trained you'll need to locally run the python simulator for OpenAI Gym.
 If this was your own simulation you had written, this would be the part where you hook it up to
-your application and get a prediction of your own!
+your application and get predictions of your own!
 
-If you **decide to skip this setup** for any reason or have trouble installing the Bonsai CLI you
-can get the satisfaction of what the simulation would look like by watching this pole balance on
+If you decide to skip this setup or have trouble installing the Bonsai CLI you
+can get the satisfaction of seeing what the simulation would look like by watching this pole balance on
 the cart in gif form.
 
 ## Install Bonsai CLI
@@ -107,7 +107,7 @@ pip3 install bonsai-cli
 
 The Bonsai Command Line Interface (CLI) is a command line tool that enables you to configure the
 Bonsai AI Engine. The CLI is especially useful for automation and connection to other tools.
-Currently, there are some actions that can only be performed using the CLI, such as simulator prediction.
+Currently, there are some actions that can only be performed using the CLI, such as getting predictions.
 
 If you already **have python installed** you should be able to run the python package manager `pip`
 to install the Bonsai CLI. Otherwise, check out the [CLI Guide Install Prerequisites][13] section
