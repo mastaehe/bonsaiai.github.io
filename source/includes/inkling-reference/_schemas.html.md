@@ -28,7 +28,7 @@ Statements (such as the `concept` statement) can reference schemas by name.
       predicts (Bool field1, Int8 field2) # anonymous schema
    end
 ```
-Schemas can also be anonymous. In that case, instead of a schema name, a list of named fields is present.
+Schemas can also be [anonymous][5]. In that case, instead of a schema name, a list of named fields is present.
 
 Schemas describe the structure of data in Inkling streams, such as the
 predefined `input` and `output` streams. In addition, many Inkling statements (for
@@ -90,11 +90,11 @@ type constraints are included in the [Constrained Types][1] section.
 
 ### Discussion
 
-Schemas tell the BRAIN system how to translate big matrices to usable
+Schemas tell the BRAIN system how to translate large matrices (tensors) to usable
 values.
 
-Note the inkling compiler does not do this translation, it is the streaming demon
-which does this. However the inkling compiler performs static checks
+Note the inkling compiler does not do this translation, that is a runtime
+transformation.  However the inkling compiler performs static checks
 to verify that the schemas are valid in the context in which they are used. 
 
 ```inkling--code
@@ -115,6 +115,28 @@ The last field `z` in `my_schema` has constrained type `Int32{1:5}`. For more in
 
 ## Schema References
 
+Inkling statements can reference schemas by name. 
+
+```inkling--code
+   concept MyConcept
+      is classifier
+      predicts (MySchema)       # a schema reference
+   end
+```
+###### Anonymous Schema 
+
+Anywhere a schema name can
+be referenced, a list of fields can appear. This is an **anonymous schema**. 
+Anonymous schema can also be empty (that is, they can contain no
+field definitions), if allowed in context.
+
+```inkling--code
+   concept MyConcept
+      is classifier
+      predicts (UInt8 MyField)  # a anonymous schema 
+   end
+```
+
 > Schema Reference Syntax
 
 ```inkling--syntax
@@ -123,10 +145,6 @@ schemaRef :=
  |   '(' <name> ')'             # named schema
  |   '('  <fieldDclnList> ')    # non-empty anonymous schema
 ```
-
-Inkling statements can reference schemas by name. In addition, anywhere a schema name can
-be referenced, a list of fields can appear. This is an anonymous schema. 
-Anonymous schema references can also be empty, if allowed in context.
 
 ## Types
 
@@ -142,6 +160,10 @@ primitiveType ::=
   Double | Float64 | Float32 | Int8 | Int16 | Int32 |
   Int64 | UInt8 | UInt16 | UInt32  | UInt64 | Bool | String
 ```
+
+<aside class="warning">
+String is not yet implemented.
+</aside>
 
 The Inkling set of primitive types includes numeric, string, and boolean types.
 
@@ -373,13 +395,13 @@ Types matter.
 * Two anonymous schemas match if both define the same field types in the same order with the same names. 
 * A schema referenced by name matches an anonymous schema if both define the same field types in the same order with the same names. 
 
-The example to the right shows successful schema matching and failed schema matching. 
+The associated example shows successful schema matching and failed schema matching. 
+The rule being checked is that all uses of `input` use the same schema. 
 
-* (1) shows a valid schema match by name. 
-* (2) shows a valid match by field type, field name, and size. 
-* (3) shows a failed match (size is not equal). 
+* (1) shows a valid schema match by name (for `input`). 
+* (2) shows a valid match by field type, field name, and size (for `input`). 
+* (3) shows a failed match (size is not equal, for `input`). 
 
-In this example we are matching against the schema associated with `input`.
 Every Inkling program has the predefined stream `input` available to it. Since there is a single stream associated with the keyword `input`, there can be only one definition of the data format of that stream. Once defined, the data format of a stream cannot change dynamically.  If that schema changes inkling compiler will flag that change as an error. Thus any reference to the `input` stream must have a schema that matches all other schemas used with the `input` stream. 
 
 ###### Constraint Compatibility in the Lesson Configure Clause
@@ -483,3 +505,4 @@ configure constraints for the field `paddle_width`.
 [2]:#structured-types
 [3]:#types
 [4]:#primitive-types
+[5]:#anonymous-schema

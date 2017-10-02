@@ -117,7 +117,8 @@ configuration schema for the simulator. These fields are `bricks_percent`,
 `level`, and `paddle_width`. When such fields are initialized with values from a
 type constraint they are called *placeholders*.  This means that the name is is not the name of a specific value but rather it is the name of a range of values which will be input during training.
 
-You can find more discussion of type constraint rules in the schema section. (Schema declarations can also use type constraints.)
+Schema declarations can also use type constraints. They are discussed in depth
+[here][1].
 
 
 ## Lesson Subclauses
@@ -173,7 +174,7 @@ constrain <schemaFieldName> with
 The `configure` clause function is to configure data for training and testing.
 The `configure` clause has `constrain` subclauses that each specify a
 placeholder for a field in the configuration schema. The placeholder specifies a
-range of values for the field through constrained types and range expressions.
+range of values for the field through [constrained types and range expressions][1].
 
 ### Usage
 
@@ -196,8 +197,8 @@ constraint. In this case, the values will be integers between 1 and 10. Note
 there is no assumption of order. The instructor will randomly choose members
 from this set. 
 
-The type `Int32 {1:10}` is called a constrained type. The syntax `{1:10}` is
-called a range expression.  These topics are discussed in depth in the Schema chapter. 
+The type `Int32 {1:10}` is called a [constrained type][1]. The syntax `{1:10}` is
+called a [range expression][1].  These topics are discussed in depth in the Schema chapter. 
 
 The field definition of `level` in schema `BreakoutConfig` is `Int32  level`.
 In order to be a valid constraint, the placeholder definition for `level` must
@@ -378,3 +379,4 @@ the code panel.
 These both specify that training should continue until the return value of the
 objective function is maximized. 
 
+[1]: #constrained-types-and-range-expressions

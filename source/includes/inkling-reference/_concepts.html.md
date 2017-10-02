@@ -11,10 +11,12 @@ concept AbstractConceptName
 end
 ```
 
-Because concepts are learned, their declarations tend to be fairly simple unless one wants to explicitly tell the BRAIN server what learning algorithms and
-architecture to use (which is an unusual case).  
+Because concepts are learned, their declarations tend to be fairly simple.
+Inkling will support the ability to explicitly tell the BRAIN server what learning algorithms and
+architecture to use but this is not yet implemented. (It is an unusual case).  
 
-The typical components of a concept statement are shown to the right. 
+The typical components of a concept statement are shown in the accompanying
+panel. 
 
 > Concept Syntax
 
@@ -35,13 +37,16 @@ concept
 end
 
 inputSource ::=
-    input '(' schemaRef? ')' | <name>     # name of a concept or stream
+    input '(' schemaRef? ')' | <name>     # name of a concept or input
 
 outputTarget ::=
-    output |  <name>                      # name of a concept or stream
+    output |  <name>                      # name of a concept or output
 ```
 
-The `is` keyword specifies the overall class of concept that is being modeled. For example, a classifier will learn to identify a label corresponding to its input, an estimator will learn to predict a value, a predictor will learn sequences and predict subsequent items in a sequence, etcetera.
+The `is` keyword specifies the overall class of concept that is being modeled.
+For example, a classifier will learn to identify a label corresponding to its
+input, an estimator will learn to predict a value, and a predictor (not yet
+implemented) will learn sequences and predict subsequent items in a sequence.
 
 The `predicts` keyword declares the concept's output.
 
@@ -80,15 +85,15 @@ necessary to also specify that concept bar `feeds` concept foo.  Specifying foo
 
 Input sources can be other concepts or the `input` stream.  The `input` stream
 is the original input to the system. It flows into the system from outside the
-BRAIN. Each reference to the `input` stream must have a schema, which can be
-anonymous. (An [anonymous schema][1] is a list of schema fields in place of a schema name).
+BRAIN. Each reference to the `input` stream must have a schema, which can be an
+[anonymous schema][1].
 
 Output targets can also be other concepts or the `output` stream. The `output` stream refers to the output of the BRAIN. 
 The `output` stream is never referenced with a schema.
 
-The concept output is described in the `predicts` clause. The schema after the
+The concept output is described in the `predicts` clause. The schema reference after the
 `predicts` keyword describes the data produced by the trained concept.  (This
-schema is required but it can be [anonymous][1].)
+schema reference is required but it can be [anonymous][1].)
 For example, if this concept classifies email into spam and not spam, the output schema for the concept would be a Bool. 
 
 The `is` clause characterizes the output. The `is classifier` form specifies that the output is an enum. 
@@ -100,7 +105,8 @@ When input comes from a concept, the type of the input doesn't matter. This is b
 
 Concepts do care about their input types when input comes from a stream. This is because the input needs to go through an encoder to become a tensor and the encoder must know the input types. In this case the input types are defined by the output schema of the stream feeding the concept. 
 
-The `predicts` output of a concept is also a matrix which has no type (a tensor). The function of the `predicts` output schema is to select a decoder for that output matrix. This output schema decodes concepts. 
+The `predicts` output of a concept is also a matrix which has no type (a
+tensor). The `predicts` output schema represents the typed output of the decoder for that output matrix. 
 
 ### Examples
 
@@ -176,4 +182,4 @@ end
 * `follows`: `input(MNIST_input)`
 
 
-[1]:#schema-rules
+[1]: #anonymous-schema

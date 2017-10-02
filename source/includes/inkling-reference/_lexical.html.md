@@ -2,11 +2,11 @@
 
 The lexical structure of Inkling includes these lexical elements:
 
-* `keyword`: the keyword set consists of the words that Inkling reserves for its own use.
-* `identifier`: user defined names in Inkling. For example, concept names.
-* `literal`: Inkling supports numeric literals.
-* `operator`: Inkling supports operators such as math operators and grouping operators.
-* `comment`: specifies comment format.
+* [`keyword`][1]: the keyword set consists of the words that Inkling reserves for its own use.
+* [`identifier`][2]: user defined names in Inkling. For example, concept names.
+* [`literal`][3]: Inkling supports numeric and string literals.
+* [`operator`][4]: Inkling supports operators such as math operators and grouping operators.
+* [`comment`][5]: specifies comment format.
 
 
 ## Keywords
@@ -103,3 +103,9 @@ paired grouping operators like `{` and `}`.
 ```
 
 * An Inkling comment begins after the character **#** and extends to the end of the line.
+
+[1]: #keywords
+[2]: #identifiers
+[3]: #literals
+[4]: #operators
+[5]: #comments

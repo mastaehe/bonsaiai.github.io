@@ -11,8 +11,8 @@ end
 
 The `curriculum` statement is used to specify the training of Inkling concepts. 
 
-The curriculum specifies the concept which is being taught. 
-The lessons defined within the curriculum are used to train that concept.
+The curriculum specifies the [concept][2] which is being taught. 
+The [lessons][1] defined within the curriculum are used to train that concept.
 
 > Curriculum Syntax
 
@@ -46,23 +46,28 @@ The `train` keyword indicates which concept this curriculum trains.
 The `objective` keyword specifies the objective function.  This function
 specifies the termination condition for training. It is always required. 
 
-If the curriculum uses one simulator, the `using simulator` clause is optional. For more
-than one simulator, the `using simulator` clause is required to associate a lesson set
-with a specified simulator. In that case, there must be one `using simulator` 
+If the curriculum uses one simulator, the `using simulator` clause is optional. 
+Currently, only one simulator per curriculum is supported, but support for 
+multiple simulators per curriculum is anticipated. In that case, for more
+than one simulator, the `using simulator` clause is required, to associate a lesson set
+with a specified simulator. When there are multiple simulators per curriculum, 
+there must be one `using simulator` 
 clause for every simulator specified in the `with simulator` clause. 
 
 ### Discussion
 
-The concept graph is laid out by the [architect][] and then handed to the
-instructor. The instructor will look for the starting point among the concepts and
+The concept graph is laid out by the [architect][3] and then handed to the
+[instructor][4]. The instructor will look for the starting point among the concepts and
 their corresponding curriculums, and then will use the curriculum to train
 the concept.
 
-A curriculum (and its concept) is associated with a set of simulators and each
+A curriculum (and its concept) is associated with a simulator and that
 simulator has an objective function and a schema. The instructor trains each
-concept using a simulator with the specified objective function. 
+concept using a simulator with the specified objective function. (Support for 
+multiple simulators per curriculum is anticipated.) 
 
-The lesson clause configures the lesson and describes training and the objective. For more information see the section on [lessons][].
+The lesson clause configures the lesson and describes training and the
+objective. For more information see the section on [lessons][1].
 
 
 ### Breakout Example
@@ -174,9 +179,14 @@ end
 
 One other concept which helps with playing Breakout is `keep_paddle_under_ball`.
 In the curriculum for this concept, there are two lessons. One of the lessons,
-`track_ball_any_paddle`, varies paddle width from 1 to 4. The other lesson, 
+`track_ball_any_paddle`, uses a [range expression][5] to vary paddle width from 1 to 4. The other lesson, 
 `track_ball_wide_paddle`, has a fixed paddle width of 4. In training this
 concept, the fixed wide width paddle lesson is easier to train, and that one
 would be trained first, resulting in faster and more effective training time
 overall.  
 
+[1]: #lessons
+[2]: #concepts
+[3]: ../guides/ai-engine-guide.html#architect
+[4]: ../guides/ai-engine-guide.html#instructor
+[5]: #constrained-types-and-range-expressions
