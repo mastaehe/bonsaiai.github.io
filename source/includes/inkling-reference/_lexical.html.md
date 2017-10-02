@@ -54,7 +54,6 @@ letter, followed by any combination of alphanumeric characters and underscore.
     remember_me?    # invalid identifier
 ```
 
-
 ## Literals
 
 Inkling supports numeric literals (floating point and integer). 
