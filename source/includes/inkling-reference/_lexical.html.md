@@ -4,7 +4,7 @@ The lexical structure of Inkling includes these lexical elements:
 
 * `keyword`: the keyword set consists of the words that Inkling reserves for its own use.
 * `identifier`: user defined names in Inkling. For example, concept names.
-* `literal`: Inkling supports numeric and string literals.
+* `literal`: Inkling supports numeric literals.
 * `operator`: Inkling supports operators such as math operators and grouping operators.
 * `comment`: specifies comment format.
 
@@ -37,9 +37,11 @@ UInt16 | UInt32 | UInt64 | UInt8
 unit | until | using | validate
 where | with | yield
 
+<aside class="notice">
 Most of these keywords are used by the currently supported Inkling version.
-A few are not used in the currently supported Inkling version and these are
-reserved for future development.
+A few are not used in the currently supported Inkling version and are
+reserved for future development such as Matrix, minimize, and String.
+</aside>
 
 ## Identifiers
 
@@ -55,16 +57,7 @@ letter, followed by any combination of alphanumeric characters and underscore.
 
 ## Literals
 
-Inkling supports numeric literals (floating point and integer) as well as string
-literals. 
-
-```inkling--code
-   "hello, world"
-```
-
-* **String Literals**
-
-String literals are enclosed in double quotes. 
+Inkling supports numeric literals (floating point and integer). 
 
 ```inkling--code
    +999

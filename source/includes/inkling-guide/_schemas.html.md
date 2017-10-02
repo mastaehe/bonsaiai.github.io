@@ -21,7 +21,6 @@ Here are some examples of constrained types:
 ```inkling
 schema MyOutput
   UInt8  {0,1,2,3,4}   label,    # a list of UInt8 values
-  String {"a", "bc"}   category, # a list of Strings
   Int64  {0:5:100}   x,        # start:step:stop, {0,5,10,...,95,100}
   Int64  {0:100}     y,        # start:stop, default step= 1, {0,1,...,99,100}
   Int64  {0..100:25} z,        # start..stop:numsteps, so step= 4, {0,4,8,...,96,100}

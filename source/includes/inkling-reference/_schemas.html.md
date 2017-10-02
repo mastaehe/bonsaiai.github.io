@@ -99,7 +99,6 @@ to verify that the schemas are valid in the context in which they are used.
 
 ```inkling--code
   schema MNIST_schema
-    String label,           # primitive type
     Luminance(28, 28) image # structured type
   end
 
@@ -146,7 +145,11 @@ primitiveType ::=
 
 The Inkling set of primitive types includes numeric, string, and boolean types.
 
-To the right you will see the set of primitive types which are used in schema declarations. 
+<aside class="warning">
+String is not yet implemented.
+</aside>
+
+In the code panel you will see the set of primitive types which are used in schema declarations. 
 
 The integer suffix indicates the size in bits of the type. 
 
@@ -206,7 +209,6 @@ A range expression on a type has the effect of constraining the values of the ty
 ```inkling--code
 schema MyOutput 
    UInt8 {0,1,2,3,4}    label,       # a list of UInt8 values
-   String {"a", "bc"}   category,    # a list of Strings
    Int64 {0:5:100}      x,           # start:step:stop, step= 5, 0..100
    Int64 {0:100}        y,           # start:stop, step= 1, 0..100
    Int64 {0..100:25}    z,           # start:stop, numsteps=25, step= 4, 0..100
@@ -216,7 +218,7 @@ end
 
 The syntax for a constrained type is the same for schema fields and placeholder expressions.
 
-To the right are some examples of type constraints as they could appear in a schema definition. Curly braces delineate the range expression.
+In the code panel are some examples of type constraints as they could appear in a schema definition. Curly braces delineate the range expression.
 
 Inkling supports **numeric range expressions** and **value list range
 expressions**. 
@@ -301,20 +303,17 @@ primitiveType
     '{' 
         [ integerLiteral [ ',' integerLiteral ]* ]
      |  [ floatLiteral [ ',' floatLiteral ]* ]
-     |  [ stringLiteral [ ',' stringLiteral ]* ]
      |  [ booleanLiteral [ ',' booleanLiteral ]? ]
     '}' 
 ```
 
 A value list range
 expression can be defined for numeric types
-and the primitive types `Bool` and `String`.
+and the primitive type `Bool`.
 
 ### Usage
 
 ```inkling--code
-    String {"red", "3", "green"}    # is valid.
-    String {"red", 3, "green"}      # is invalid (integer value in string range).
     UInt8  {7, 7, 7, 7}             # is valid.
     UInt8  {7, -7, 7, 7}            # is invalid (negative integer in unsigned range).
 ```
