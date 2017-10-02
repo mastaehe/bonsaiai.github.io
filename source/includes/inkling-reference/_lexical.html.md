@@ -52,12 +52,7 @@ letter, followed by any combination of alphanumeric characters and underscore.
 
 ## Literals
 
-Inkling supports numeric literals (floating point and integer) as well as string
-literals. 
-
-* **String Literals**
-
-String literals are enclosed in double quotes. 
+Inkling supports numeric literals (floating point and integer).
 
 * **Integer Literals**
 
