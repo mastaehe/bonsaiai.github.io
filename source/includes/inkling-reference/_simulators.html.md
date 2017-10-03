@@ -7,7 +7,7 @@ simulator MySimulator(MySchemaConfig)
 end
 ```
 
-Curriculum statements reference an associated simulator in the `with` clause. Each
+Curriculum statements reference an associated simulator in the [with clause][3]. Each
 simulator used in a curriculum must be declared in a `simulator` statement.  
 
 The `simulator` statement describes the interface to a simulator. Simulators are

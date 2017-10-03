@@ -14,10 +14,10 @@ algorithms that require expertise in machine learning. Inkling allows you to
 focus at a conceptual level on what you want the machine to learn. That is why this model of
 programming is called machine teaching. 
 
-An Inkling file contains the concepts (what you want to teach the AI), a set of
-schemas (which describe the data) and the curriculum (how you want to teach the concepts) necessary to train your BRAIN.
-Training your BRAIN will also require a simulator. Python simulators are
-introduced [here][1].
+An Inkling file contains the [concepts][1] (what you want to teach the AI), a set of
+[schemas][2] (which describe the data) and the [curriculums][3] (how you want to teach the concepts) necessary to train your BRAIN.
+Training your BRAIN will also require a [simulator][4]. Python simulators are
+introduced in the [Quick Start][5].
 
 ### Purpose
 
@@ -32,4 +32,8 @@ examples and explanation so that you can understand Inkling better.
 Use the Inkling Reference for quick lookups while coding and also for deep dives
 into subjects like schema conformance and range expressions.
 
-[1]: ../guides/getting-started.html#what-is-a-simulator
+[1]: #concepts
+[2]: #schemas
+[3]: #curriculums
+[4]: #simulators
+[5]: ../guides/getting-started.html#what-is-a-simulator

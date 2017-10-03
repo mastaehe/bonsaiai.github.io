@@ -73,8 +73,7 @@ In the Schema Declaration Syntax to the right, you will see references to Inklin
 Schema fields must be separated from each other by commas. Schema declarations
 are terminated by the `end` keyword.
 
-Field types can be any of the [Inkling primitive types][4] and [Inkling structured
-types][2]. 
+Field types can be any of the [Inkling primitive types][4] and [Inkling structured types][2]. 
 
 In matrix initialization, a parenthesized list of types is followed by a list of dimensions. The number of types and the number of dimensions must match.
 
@@ -160,10 +159,6 @@ primitiveType ::=
   Double | Float64 | Float32 | Int8 | Int16 | Int32 |
   Int64 | UInt8 | UInt16 | UInt32  | UInt64 | Bool | String
 ```
-
-<aside class="warning">
-String is not yet implemented.
-</aside>
 
 The Inkling set of primitive types includes numeric, string, and boolean types.
 

@@ -1,8 +1,8 @@
 # Lessons
 
-Lesson syntax and semantics can vary slightly depending on the curriculum training type. 
+Lesson syntax and semantics can vary slightly depending on the [curriculum][2] training type. 
 A curriculum specifies its training type by specifying that it trains with a
-simulator, with data, or with a generator. 
+[simulator][3], with data, or with a generator. 
 
 <aside class="notice">
 Future support is expected for training with generators and with data, and those training types will be documented when the features are supported. 
@@ -380,3 +380,5 @@ These both specify that training should continue until the return value of the
 objective function is maximized. 
 
 [1]: #constrained-types-and-range-expressions
+[2]: #curriculums
+[3]: #simulators
