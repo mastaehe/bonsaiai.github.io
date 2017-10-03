@@ -13,4 +13,4 @@ Inkling is a declarative, strongly typed programming language specifically desig
 If you're interesting in finding out more about what's going on under the hood of the AI engine, check out the [AI Engine Guide][2].
 
 [1]: ./getting-started.html#the-bonsai-platform
-[2]: ./ai-engine-guide.html#under-the-hood
+[2]: ./ai-engine-guide.html

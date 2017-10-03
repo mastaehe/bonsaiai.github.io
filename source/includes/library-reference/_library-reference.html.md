@@ -183,6 +183,6 @@ call blocks and drives the simulator loop until training stops.
 For a more complete example of the `FindCenterSimulation`, see [examples][3].
 
 
-[1]: inkling-reference.html#lesson-configure-clause-syntax
+[1]: inkling-reference.html#configure-clause
 [2]: #simstate
-[3]: ../examples.html#find-the-center-example
+[3]: ../examples.html#basic-simulator-find-the-center
