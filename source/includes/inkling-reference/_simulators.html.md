@@ -119,5 +119,5 @@ the reward function in the literature) is implemented in the simulator.
 (Eventually implementing objective functions in Inkling will be supported.)
 
 [1]: ./library-reference.html
-[2]: ./../examples.html#find-the-center-example
-[3]: #curriculum
+[2]: ./../examples.html#basic-simulator-find-the-center
+[3]: #curriculums

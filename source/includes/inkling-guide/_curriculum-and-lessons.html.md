@@ -83,5 +83,5 @@ curriculum _curriculumName
 end
 ```
 
-[1]: ./../references/inkling-reference.html#curriculum
-[2]: ./../references/inkling-reference.html#lesson
+[1]: ./../references/inkling-reference.html#curriculums
+[2]: ./../references/inkling-reference.html#lessons

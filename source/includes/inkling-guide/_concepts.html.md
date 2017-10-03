@@ -75,5 +75,5 @@ Every concept is trained by a curriculum. These will be covered below.
 
 For more information on the concept statement, see the [Concept Reference][1].
 
-[1]: ./../references/inkling-reference.html#concept
+[1]: ./../references/inkling-reference.html#concepts
 [2]: https://en.wikipedia.org/wiki/Tetris
