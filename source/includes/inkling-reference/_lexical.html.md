@@ -40,7 +40,7 @@ where | with | yield
 <aside class="notice">
 Most of these keywords are used by the currently supported Inkling version.
 A few are not used in the currently supported Inkling version and are
-reserved for future development such as Matrix, minimize, and String.
+reserved for future development such as Byte, Matrix, minimize, and String.
 </aside>
 
 ## Identifiers
