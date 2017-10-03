@@ -352,7 +352,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <p>Inkling is a declarative, strongly typed programming language specifically designed for artificial intelligence (AI). It abstracts away the vast world of dynamic AI algorithms that require expertise in machine learning and enables more developers to program AI. An Inkling file contains the concepts &ndash; what you want to teach the AI &ndash; and the curriculum, &ndash; how you want to teach the concepts &ndash; necessary to train your BRAIN. Before you read through this section about the Inkling language, you should familiarize yourself with the various components of the Bonsai Artificial Intelligence Engine, which you can read about in our <a href="getting-started.html#the-bonsai-platform">Getting Started Guide</a>.</p>
 
-<p>If you&rsquo;re interesting in finding out more about what&rsquo;s going on under the hood of the AI engine, check out the <a href="ai-engine-guide.html#under-the-hood">AI Engine Guide</a>.</p>
+<p>If you&rsquo;re interesting in finding out more about what&rsquo;s going on under the hood of the AI engine, check out the <a href="ai-engine-guide.html">AI Engine Guide</a>.</p>
 
           <h2 id="inkling-a-new-language">Inkling: A New Language</h2>
 
@@ -406,7 +406,7 @@ Pedagogical programming focuses on how the problem can be taught, not how it can
 
 <p>Mental models are a way of organizing concepts so that you can structure a solution to your AI problem as a workflow. Concepts are the ideas that you want to teach your BRAIN. When you create your concepts, you&rsquo;re going to start with the final concept that you want to teach your BRAIN and support it with other feature and skill concepts. These additional concepts appear upstream of your main concept, and the information output from those concepts helps the Bonsai AI Engine teach your main concept to your BRAIN. Mental Models enable you to determine and plan the concepts that are taught to your BRAIN.</p>
 
-<p>For more information about Concepts, refer below to <a href="#concepts">Concepts</a> and the <a href="../references/inkling-reference.html#concept">Concept Reference</a>.</p>
+<p>For more information about Concepts, refer below to <a href="#concepts">Concepts</a> and the <a href="../references/inkling-reference.html#concepts">Concept Reference</a>.</p>
 
 <h2 id="determining-mental-models">Determining Mental Models</h2>
 
@@ -471,7 +471,7 @@ Pedagogical programming focuses on how the problem can be taught, not how it can
 
           <h1 id="concepts">Concepts</h1>
 
-<p>A <strong>concept</strong> in Inkling is an (abstract) idea. In Inkling, the concept defines what you are going to teach the AI. For more information about using the concept keyword, refer to the <a href="../references/inkling-reference.html#concept">Concept Reference</a>.</p>
+<p>A <strong>concept</strong> in Inkling is an (abstract) idea. In Inkling, the concept defines what you are going to teach the AI. For more information about using the concept keyword, refer to the <a href="../references/inkling-reference.html#concepts">Concept Reference</a>.</p>
 
 <p>Every Inkling program needs at least one concept. If there is more than one, determine which one is your main concept. You may have additional concepts to assist in teaching the main concept to your AI.</p>
 
@@ -550,7 +550,7 @@ Pedagogical programming focuses on how the problem can be taught, not how it can
 
 <p>Every concept is trained by a curriculum. These will be covered below.</p>
 
-<p>For more information on the concept statement, see the <a href="../references/inkling-reference.html#concept">Concept Reference</a>.</p>
+<p>For more information on the concept statement, see the <a href="../references/inkling-reference.html#concepts">Concept Reference</a>.</p>
 
           <h1 id="schemas">Schemas</h1>
 
@@ -562,11 +562,11 @@ Pedagogical programming focuses on how the problem can be taught, not how it can
 
 <p>Inkling is also a strongly typed language, which means that you will receive an error if values are not compatible with their expected type. This means you need to pay attention to what types you choose.</p>
 
-<p>Inkling supports various types, including (but not limited to) primitive types, which include types for integers, floats, bytes and strings, as well as types commonly used with machine learning (for example, Luminance). See the section on <a href="../references/inkling-reference.html#inkling-types">Inkling types</a> for more information.</p>
+<p>Inkling supports various types, including (but not limited to) primitive types, which include types for integers, floats, bytes and strings, as well as types commonly used with machine learning (for example, Luminance). See the section on <a href="../references/inkling-reference.html#types">Inkling types</a> for more information.</p>
 
 <h2 id="constrained-types">Constrained Types</h2>
 
-<p>Inkling supports <a href="../references/inkling-reference.html#constrained-types">constrained types</a> in schemas (as well as for configuration of lessons). Constrained types use range expressions to constrain the values of the type to values defined by a range expression.</p>
+<p>Inkling supports <a href="../references/inkling-reference.html#constrained-types-and-range-expressions">constrained types</a> in schemas (as well as for configuration of lessons). Constrained types use range expressions to constrain the values of the type to values defined by a range expression.</p>
 
 <p>A range expression has the effect of constraining the values of the type to values defined by the range expression. In a schema, this constrains the values in the field. In lessons, this constrains the values of the placeholder being configured. In both cases the syntax is the same.</p>
 
@@ -587,13 +587,13 @@ Pedagogical programming focuses on how the problem can be taught, not how it can
 
 <p><strong>Input</strong> is a stream of information that is fed into your BRAIN (your AI). The Bonsai AI Engine uses this information to help train the BRAIN or make a prediction.</p>
 
-<p>In Inkling, <strong>Output</strong> is a stream of information returned as a prediction that your BRAIN sends back to an application. It could be sent back to a simulator, if training is in process, or it could be send back to your deployed application, where it might be used for control or optimization. The data in input and output streams are described by schemas. Schemas are declared in your Inkling program, and they contain information about the data types contained in the stream. For example, if you want to teach your AI,  to recognize the shape &lsquo;square&rsquo;, you might give it a picture of a shape. That picture would be an input. The BRAIN answers yes (this is a square) or no (this is not a square). That answer is the output. Your Inkling file to teach your AI would contain one schema for describing the data type of the input (Luminance, an image type) and another for the output (Bool). For more information about schemas, refer to the <a href="../references/inkling-reference.html#schema">Schema Reference</a>.</p>
+<p>In Inkling, <strong>Output</strong> is a stream of information returned as a prediction that your BRAIN sends back to an application. It could be sent back to a simulator, if training is in process, or it could be send back to your deployed application, where it might be used for control or optimization. The data in input and output streams are described by schemas. Schemas are declared in your Inkling program, and they contain information about the data types contained in the stream. For example, if you want to teach your AI,  to recognize the shape &lsquo;square&rsquo;, you might give it a picture of a shape. That picture would be an input. The BRAIN answers yes (this is a square) or no (this is not a square). That answer is the output. Your Inkling file to teach your AI would contain one schema for describing the data type of the input (Luminance, an image type) and another for the output (Bool). For more information about schemas, refer to the <a href="../references/inkling-reference.html#schemas">Schema Reference</a>.</p>
 
 <h3 id="how-to-pick-types">How to pick types</h3>
 
 <ul>
 <li>If your output is yes/no, true/false, or another dual relationship, you should use the <code class="prettyprint">bool</code> type.</li>
-<li>Inkling supports signed and unsigned integers of various sizes as well as floating point (32 and 64 bit). More details can be found under <a href="../references/inkling-reference.html#inkling-types">Inkling Types</a>.</li>
+<li>Inkling supports signed and unsigned integers of various sizes as well as floating point (32 and 64 bit). More details can be found under <a href="../references/inkling-reference.html#types">Inkling Types</a>.</li>
 </ul>
 
           <h1 id="curriculum-and-lessons">Curriculum and Lessons</h1>
@@ -616,7 +616,7 @@ Currently, during the Bonsai Platform preview, you can only train with simulator
       <span class="c1">#lessons</span>
 <span class="k">end</span>
 </code></pre>
-<p>For more information and examples, refer to the <a href="../references/inkling-reference.html#curriculum">Curriculum Reference</a>.</p>
+<p>For more information and examples, refer to the <a href="../references/inkling-reference.html#curriculums">Curriculum Reference</a>.</p>
 
 <h2 id="determining-lessons">Determining Lessons</h2>
 
@@ -636,7 +636,7 @@ Currently, during the Bonsai Platform preview, you can only train with simulator
 </code></pre>
 <p>The configure clause supports placeholders as well. The placeholder name does not hold a specific value, but is a name of a range of values that the the Bonsai AI Engine inputs during training. The configure clause provides guidance to the Bonsai AI Engine on how the training for that lesson should be configured. It is not the same as an assignment in an imperative language, because it does not represent a unique value. The AI Engine has some degree of freedom in determining how to configure for training.</p>
 
-<p>For more information and examples, refer to the <a href="../references/inkling-reference.html#curriculum">Lesson Reference</a>.</p>
+<p>For more information and examples, refer to the <a href="../references/inkling-reference.html#curriculums">Lesson Reference</a>.</p>
 
 <h2 id="objectives">Objectives</h2>
 
