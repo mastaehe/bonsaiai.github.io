@@ -45,14 +45,14 @@ reserved for future development such as Matrix, minimize, and String.
 
 ## Identifiers
 
-An Inkling identifier (user defined name) must begin with an underscore or
-letter, followed by any combination of alphanumeric characters and underscore.
-
 ```inkling--code
     1st_name        # invalid identifier
     -primary-key    # invalid identifier
     remember_me?    # invalid identifier
 ```
+
+An Inkling identifier (user defined name) must begin with an underscore or
+letter, followed by any combination of alphanumeric characters and underscore.
 
 ## Literals
 

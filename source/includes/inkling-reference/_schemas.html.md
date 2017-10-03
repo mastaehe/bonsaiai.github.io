@@ -65,7 +65,7 @@ matrix_init     :=  '(' primitiveType [ ',' primitivetype ]* ')'
 vector_init     :=  primitiveType   rangeExpression? ','  integerLiteral 
 ```
 
-In the Schema Declaration Syntax to the right, you will see references to Inkling primitive types and structured types
+In the Schema Declaration Syntax, you will see references to Inkling primitive types and structured types
 (Luminance, Matrix). These are discussed in in the [Structured Types][2] section. 
 
 ### Usage
@@ -107,14 +107,12 @@ to verify that the schemas are valid in the context in which they are used.
   end
 ```
 
-To the right you will see a few example schemas. 
+The code panel contains a few example schemas. 
 The last field `z` in `my_schema` has constrained type `Int32{1:5}`. For more information on this feature see [Constrained Types][1].
 
 
 
 ## Schema References
-
-Inkling statements can reference schemas by name. 
 
 ```inkling--code
    concept MyConcept
@@ -122,12 +120,10 @@ Inkling statements can reference schemas by name.
       predicts (MySchema)       # a schema reference
    end
 ```
-###### Anonymous Schema 
 
-Anywhere a schema name can
-be referenced, a list of fields can appear. This is an **anonymous schema**. 
-Anonymous schema can also be empty (that is, they can contain no
-field definitions), if allowed in context.
+Inkling statements can reference schemas by name. 
+
+###### Anonymous Schema 
 
 ```inkling--code
    concept MyConcept
@@ -135,6 +131,11 @@ field definitions), if allowed in context.
       predicts (UInt8 MyField)  # a anonymous schema 
    end
 ```
+
+Anywhere a schema name can
+be referenced, a list of fields can appear. This is an **anonymous schema**. 
+Anonymous schema can also be empty (that is, they can contain no
+field definitions), if allowed in context.
 
 > Schema Reference Syntax
 
@@ -213,7 +214,7 @@ A constrained type is a type which is associated with a constraint.
 The type plus constraint is effectively a set definition. 
 A field declared with a
 constrained type can only take values that are a member of the set defined by
-the constraint. In the example to the right, the field `z` can only take on
+the constraint. In the example in the code panel, the field `z` can only take on
 values between `1` and `5`. 
 
 Constrained types are supported in schemas and in lesson clauses. Types are
@@ -284,7 +285,7 @@ Int8   {0:-4:-100}   # is valid. stop < start is valid if and only if step is ne
 UInt32 {-10:10}      # is invalid. Unsigned integer range contains signed values.
 ```
 
-To the right are some examples of valid and invalid ranges. 
+The code panel contains some examples of valid and invalid ranges. 
 
 For **colon range**, step can be a floating point number. 
 
@@ -310,8 +311,6 @@ applying the (step or numSteps) expression, you land on it exactly.
 Otherwise the highest value landed on which is less than the end point is the final value in the range. 
 
 ###### Value List Range Expressions
-
-Inkling supports range expressions for value lists. 
  
 > Value List Range Expression Syntax
 
@@ -323,6 +322,8 @@ primitiveType
      |  [ booleanLiteral [ ',' booleanLiteral ]? ]
     '}' 
 ```
+
+Inkling supports range expressions for value lists. 
 
 A value list range
 expression can be defined for numeric types
@@ -401,11 +402,6 @@ Every Inkling program has the predefined stream `input` available to it. Since t
 
 ###### Constraint Compatibility in the Lesson Configure Clause
 
-Constraints can be specified in the lesson configure clause. 
-These constraints must be compatible with the configuration schema of the
-associated simulator. 
-Below we have excerpted some Inkling code from the breakout program to show an example. 
-
 ```inkling--code
 simulator breakout_simulator(BreakoutConfig)
    state (GameState)
@@ -440,6 +436,11 @@ curriculum ball_location_curriculum
         minimize ball_location_distance
 end
 ```
+
+Constraints can be specified in the lesson configure clause. 
+These constraints must be compatible with the configuration schema of the
+associated simulator. 
+The code panel contains some Inkling code from the breakout program to show an example. 
 
 The constraints in a lesson configure clause are constraints on the fields of
 the configuration schema of the simulator.
@@ -493,7 +494,7 @@ The corresponding range expression in the lesson configure clause is identical:
 
 These are compatible.
 
-In the examples to the right, we show more examples of valid and invalid lesson
+In the examples in the code panel, we show more examples of valid and invalid lesson
 configure constraints for the field `paddle_width`.
 
 [1]:#constrained-types-and-range-expressions
