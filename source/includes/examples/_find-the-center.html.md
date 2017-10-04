@@ -14,23 +14,23 @@ In this example, we'll walk you through the various statements that are part of 
 
 ```inkling
 schema GameState
-    Int32 value
+    Int8 value
 end
 ```
 
-The `GameState` schema has one field, `value`, with type `Int32`.
+The `GameState` schema has one field, `value`, with type `Int8`.
 
 ```inkling
 schema PlayerMove
-    Int32{-1, 0, 1} delta
+    Int8{-1, 0, 1} delta
 end
 ```
 
-The `PlayerMove` schema has one field, `delta`, with type `Int32`. The `Int32` type is constrained to three possible values: -1, 0, and 1.
+The `PlayerMove` schema has one field, `delta`, with type `Int8`. The `Int8` type is constrained to three possible values: -1, 0, and 1.
 
 ```inkling
 schema SimConfig
-    Int32 dummy
+    Int8 dummy
 end
 ```
 
@@ -69,7 +69,7 @@ curriculum find_the_center_curriculum
     objective time_at_goal
         lesson seek_center
             configure
-                constrain dummy with Int32{-1}
+                constrain dummy with Int8{-1}
             until
                 maximize time_at_goal
 end
