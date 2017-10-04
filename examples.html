@@ -387,17 +387,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <h6 id="schema">Schema</h6>
 <pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">GameState</span>
-    <span class="kr">Int32</span> <span class="nx">value</span>
+    <span class="kr">Int8</span> <span class="nx">value</span>
 <span class="k">end</span>
 </code></pre>
-<p>The <code class="prettyprint">GameState</code> schema has one field, <code class="prettyprint">value</code>, with type <code class="prettyprint">Int32</code>.</p>
+<p>The <code class="prettyprint">GameState</code> schema has one field, <code class="prettyprint">value</code>, with type <code class="prettyprint">Int8</code>.</p>
 <pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">PlayerMove</span>
-    <span class="kr">Int32</span><span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">}</span> <span class="nx">delta</span>
+    <span class="kr">Int8</span><span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">}</span> <span class="nx">delta</span>
 <span class="k">end</span>
 </code></pre>
-<p>The <code class="prettyprint">PlayerMove</code> schema has one field, <code class="prettyprint">delta</code>, with type <code class="prettyprint">Int32</code>. The <code class="prettyprint">Int32</code> type is constrained to three possible values: -1, 0, and 1.</p>
+<p>The <code class="prettyprint">PlayerMove</code> schema has one field, <code class="prettyprint">delta</code>, with type <code class="prettyprint">Int8</code>. The <code class="prettyprint">Int8</code> type is constrained to three possible values: -1, 0, and 1.</p>
 <pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">SimConfig</span>
-    <span class="kr">Int32</span> <span class="nx">dummy</span>
+    <span class="kr">Int8</span> <span class="nx">dummy</span>
 <span class="k">end</span>
 </code></pre>
 <p>The <code class="prettyprint">SimConfig</code> schema has one field, <code class="prettyprint">dummy</code>, because there is no configuration needed in this particular example.</p>
@@ -427,7 +427,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <span class="k">objective</span> <span class="nx">time_at_goal</span>
         <span class="k">lesson</span> <span class="nx">seek_center</span>
             <span class="k">configure</span>
-                <span class="k">constrain</span> <span class="nx">dummy</span> <span class="k">with</span> <span class="kr">Int32</span><span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">}</span>
+                <span class="k">constrain</span> <span class="nx">dummy</span> <span class="k">with</span> <span class="kr">Int8</span><span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">}</span>
             <span class="k">until</span>
                 <span class="k">maximize</span> <span class="nx">time_at_goal</span>
 <span class="k">end</span>
