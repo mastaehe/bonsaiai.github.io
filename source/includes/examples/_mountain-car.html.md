@@ -16,8 +16,8 @@ _A car is on a one-dimensional track, positioned between two "mountains". The go
 
 ```inkling
 schema GameState
-   Float32 x_position,
-   Float32 y_velocity
+    Float32 x_position,
+    Float32 x_velocity
 end
 ```
 
@@ -25,7 +25,7 @@ The `GameState` schema names two records — `x_position` and `y_position` — a
 
 ```inkling
 schema Action
-  Int8{0,1,2} action
+    Int8{0, 1, 2} command
 end
 ```
 
@@ -33,8 +33,8 @@ The `Action` schema names a single record — `action` — and assigns a constra
 
 ```inkling
 schema MountainCarConfig
-  Int8 episode_legnth,
-  UInt8 deque_size
+    Int8 episode_length,
+    UInt8 deque_size
 end
 ```
 
@@ -43,11 +43,10 @@ The `MountainCarConfig` schema names two records — `episode_length` and `deque
 ###### Concept
 
 ```inkling
-concept high_score
-  is classifier
-  predicts Action
-  follows input(GameState)
-  feeds output
+concept high_score is classifier
+    predicts (Action)
+    follows input(GameState)
+    feeds output
 end
 ```
 
@@ -57,7 +56,8 @@ The concept is named `high_score`, and it takes input from the simulator about t
 
 ```inkling
 simulator mountaincar_simulator(MountainCarConfig)
-  state  (GameState)
+    action (Action)
+    state (GameState)
 end
 ```
 
@@ -67,15 +67,16 @@ The `mountaincar_simulator` gets information from two schemas. The first schema,
 
 ```inkling
 curriculum high_score_curriculum
-  train high_score
-  with simulator mountaincar_simulator
-  objective score
-  lesson get_high_score
-    configure
-      constrain episode_length with Int8{-1},
-      constrain deque_size with UInt8{1}
-    until
-      maximize score
+    train high_score
+    with simulator mountaincar_simulator
+    objective open_ai_gym_default_objective
+
+        lesson get_high_score
+            configure
+                constrain episode_length with Int8{-1},
+                constrain deque_size with UInt8{1}
+            until
+                maximize open_ai_gym_default_objective
 end
 ```
 

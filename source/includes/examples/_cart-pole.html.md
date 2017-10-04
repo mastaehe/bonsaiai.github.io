@@ -16,10 +16,10 @@ _A pole is attached by an un-actuated joint to a cart, which moves along a frict
 
 ```inkling
 schema GameState
-  Float32 position,
-  Float32 velocity,
-  Float32 angle,
-  Float32 rotation
+    Float32 position,
+    Float32 velocity,
+    Float32 angle,
+    Float32 rotation
 end
 ```
 
@@ -27,7 +27,7 @@ The schema `GameState` names four records — `position`, `velocity`, `angle`, a
 
 ```inkling
 schema Action
-  Int8{0,1} action
+    Int8{0, 1} command
 end
 ```
 
@@ -35,8 +35,8 @@ The schema `Action` names a record — `action` —  and assigns it a constraine
 
 ```inkling
 schema CartPoleConfig
-  Int8 episode_length,   
-  UInt8 deque_size
+    Int8 episode_length,
+    UInt8 deque_size
 end
 ```
 
@@ -47,11 +47,10 @@ end
 ###### Concept
 
 ```inkling
-concept balance
-  is classifier
-  predicts Action
-  follows input(GameState)
-  feeds output
+concept balance is classifier
+    predicts (Action)
+    follows input(GameState)
+    feeds output
 end
 ```
 
@@ -60,8 +59,9 @@ The concept is named `balance`, and it takes input from the simulator. That inpu
 ###### Simulator
 
 ```inkling
-simulator cartpole_simulator(CartPoleConfig)
-  state (GameState)
+simulator cartpole_simulator(CartPoleConfig) 
+    action (Action)
+    state (GameState)
 end
 ```
 
@@ -71,15 +71,16 @@ The `cartpole_simulator` gets information from two schemas. The first schema, `C
 
 ```inkling
 curriculum balance_curriculum
-  train balance
-  with simulator cartpole_simulator
-  objective up_time
-  lesson balancing
-    configure
-      constrain episode_length with Int8{-1},
-      constrain deque_size with UInt8{1}
-    until
-      maximize up_time
+    train balance
+    with simulator cartpole_simulator
+    objective open_ai_gym_default_objective
+
+        lesson balancing
+            configure
+                constrain episode_length with Int8{-1},
+                constrain deque_size with UInt8{1}
+            until
+                maximize open_ai_gym_default_objective
 end
 ```
 
@@ -93,17 +94,16 @@ This curriculum contains one lesson, called `balancing`. It configures the simul
 import gym
 
 import bonsai
-from bonsai_gym_common import GymSimulator
+from bonsai_gym_common import GymSimulator, logging_basic_config
 
 ENVIRONMENT = 'CartPole-v0'
 RECORD_PATH = None
 
+
 class CartPoleSimulator(GymSimulator):
 
     def __init__(self, env, record_path):
-        GymSimulator.__init__(
-            self, env, skip_frame=1,
-            record_path=record_path)
+        super(CartPoleSimulator, self).__init__(env, record_path=record_path)
 
     def get_state(self):
         parent_state = GymSimulator.get_state(self)
@@ -113,7 +113,9 @@ class CartPoleSimulator(GymSimulator):
                       "rotation": parent_state.state[3]}
         return bonsai.simulator.SimState(state_dict, parent_state.is_terminal)
 
+
 if __name__ == "__main__":
+    logging_basic_config()
     env = gym.make(ENVIRONMENT)
     simulator = CartPoleSimulator(env, RECORD_PATH)
     bonsai.run_for_training_or_prediction("cartpole_simulator", simulator)
