@@ -68,6 +68,11 @@ vector_init     :=  primitiveType   rangeExpression? ','  integerLiteral
 In the Schema Declaration Syntax, you will see references to Inkling primitive types and structured types
 (Luminance, Matrix). These are discussed in in the [Structured Types][2] section. 
 
+
+<aside class="warning">
+Due to limitations with Inkling’s communication with Tensorflow you can’t end your schema variables with an underscore and number such as `variable_1`, `variable_22`, etc.
+</aside>
+
 ### Usage
 
 Schema fields must be separated from each other by commas. Schema declarations
