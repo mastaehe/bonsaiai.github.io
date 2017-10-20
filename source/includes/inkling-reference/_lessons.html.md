@@ -342,6 +342,10 @@ will send the simulator output (conforming to the simulator output schema) to th
 
 The `until` clause in the lesson specifies the termination condition for training.
 
+<aside class="notice">
+Currently, there may be issues with termination of lessons in series. If you intend to use multiple lessons in a curriculum please <a href="https://bons.ai/contact-us#contact-page-form">contact support</a> if you have issues with training.
+</aside>
+
 ```inkling--syntax
 untilClause ::=
 until
@@ -353,12 +357,16 @@ relOp ::=
   '==' | '<' | '>' | '<=' | '>='
 ```
 
+<aside class="notice">
 Future support of the `until` clause will include `minimize` and constant
 expressions. Current support is limited to `maximize`.
+</aside>
 
 ### Usage
 
 The `until` clause is required.
+
+
 
 ### Example
 
