@@ -1277,6 +1277,10 @@ will send the simulator output (conforming to the simulator output schema) to th
 </blockquote>
 
 <p>The <code class="prettyprint">until</code> clause in the lesson specifies the termination condition for training.</p>
+
+<aside class="notice">
+Currently, there may be issues with termination of lessons in series. If you intend to use multiple lessons in a curriculum please <a href="https://bons.ai/contact-us#contact-page-form">contact support</a> if you have issues with training.
+</aside>
 <pre class="highlight inkling tab-inkling--syntax"><code><span class="nx">untilClause</span> <span class="p">::</span><span class="o">=</span>
 <span class="k">until</span>
       <span class="p">[</span> <span class="k">minimize</span> <span class="o">|</span> <span class="k">maximize</span> <span class="p">]</span> <span class="o">&lt;</span><span class="nx">objectiveFunctionName</span><span class="o">&gt;</span>
@@ -1286,8 +1290,10 @@ will send the simulator output (conforming to the simulator output schema) to th
 <span class="nx">relOp</span> <span class="p">::</span><span class="o">=</span>
   <span class="p">'</span><span class="o">==</span><span class="p">'</span> <span class="o">|</span> <span class="p">'</span><span class="o">&lt;</span><span class="p">'</span> <span class="o">|</span> <span class="p">'</span><span class="o">&gt;</span><span class="p">'</span> <span class="o">|</span> <span class="p">'</span><span class="o">&lt;=</span><span class="p">'</span> <span class="o">|</span> <span class="p">'</span><span class="o">&gt;=</span><span class="p">'</span>
 </code></pre>
-<p>Future support of the <code class="prettyprint">until</code> clause will include <code class="prettyprint">minimize</code> and constant
-expressions. Current support is limited to <code class="prettyprint">maximize</code>.</p>
+<aside class="notice">
+Future support of the `until` clause will include `minimize` and constant
+expressions. Current support is limited to `maximize`.
+</aside>
 
 <h3 id="usage">Usage</h3>
 
@@ -1367,6 +1373,10 @@ example <code class="prettyprint">concept</code> and <code class="prettyprint">c
 </code></pre>
 <p>In the Schema Declaration Syntax, you will see references to Inkling primitive types and structured types
 (Luminance, Matrix). These are discussed in in the <a href="#structured-types">Structured Types</a> section. </p>
+
+<aside class="warning">
+Due to limitations with Inkling’s communication with Tensorflow you can’t end your schema variables with an underscore and number such as `variable_1`, `variable_22`, etc.
+</aside>
 
 <h3 id="usage">Usage</h3>
 
