@@ -2,6 +2,7 @@
 title: Library Reference
 
 language_tabs:
+  - cpp
   - python
 
 toc_footers:
@@ -10,7 +11,8 @@ toc_footers:
 
 
 includes:
-  - library-reference/libbonsai.html.md
-  
+  - library-reference/_simulator.html.md
+
+
 search: true
 ---
