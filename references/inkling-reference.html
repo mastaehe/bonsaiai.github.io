@@ -1547,10 +1547,13 @@ expressions</strong>. </p>
 <li><strong>dot range</strong> </li>
 </ul>
 
-<p>A <strong>colon range</strong> specifies a <strong>step</strong> size (the default step size is one). </p>
+<p>A <strong>dot range</strong> must specify numSteps. numSteps must be a positive integer constant. Today, <strong>dot range</strong> expressions cannot be used in <code class="prettyprint">predicts</code> schemas with <code class="prettyprint">is estimator</code> concepts. </p>
 
-<p>A <strong>dot range</strong> specifies <strong>numSteps</strong> (there is no default numSteps). It must be a
-positive integer constant.</p>
+<p>A <strong>colon range</strong> can specifies an optional <strong>step size</strong>. If step size is omitted, the range includes all values of the given type between <strong>start</strong> and <strong>end</strong>. For example, in <strong>colon range</strong> expressions with integer types, if an explicit step is not specified, the default step size is 1.</p>
+
+<p>Step size is required for FloatXX fields in the output schemas for <code class="prettyprint">is classifier</code> concepts. </p>
+
+<p>Note that today, all fields in schemas used in the predicts clause of <code class="prettyprint">is estimator</code> concepts must have type FloatXX with no explicit step.</p>
 
 <h3 id="usage">Usage</h3>
 
