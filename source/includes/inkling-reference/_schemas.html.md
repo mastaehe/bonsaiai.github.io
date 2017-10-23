@@ -264,10 +264,13 @@ For numeric range expressions there are two types:
 * **colon range** 
 * **dot range** 
 
-A **colon range** specifies a **step** size (the default step size is one). 
+A **dot range** must specify numSteps. numSteps must be a positive integer constant. Today, **dot range** expressions cannot be used in `predicts` schemas with `is estimator` concepts. 
 
-A **dot range** specifies **numSteps** (there is no default numSteps). It must be a
-positive integer constant.
+A **colon range** can specifies an optional **step size**. If step size is omitted, the range includes all values of the given type between **start** and **end**. For example, in **colon range** expressions with integer types, if an explicit step is not specified, the default step size is 1.
+
+Step size is required for FloatXX fields in the output schemas for `is classifier` concepts. 
+
+Note that today, all fields in schemas used in the predicts clause of `is estimator` concepts must have type FloatXX with no explicit step.
 
 
 ### Usage
