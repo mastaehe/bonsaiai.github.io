@@ -18,5 +18,9 @@ This guide will walk you through how to install the Bonsai CLI, setup your first
 
 The reference document for all of the commands you will see in this guide can be found in the [CLI Reference][1].
 
+<aside class="notice">
+EMACS USERS: There is an inkling-mode for local development found on <a href="https://github.com/BonsaiAI/inkling-mode">Bonsai's GitHub</a>
+</aside>
+
 [1]: ../references/cli-reference.html
 [2]: ./getting-started.html
