@@ -69,7 +69,7 @@ There must be at least one valid path in the `files` list.
 }
 ```
 
-For users familiar with the Unix command line, file path expansion in the CLI will behave mostly as expected. There is no ~ expansion (in a Unix shell, this expands to the home directory), but *, ?, and character ranges expressed with [ ] will be correctly matched. Wikipedia has detailed information on [globbing syntax][5].
+For users familiar with the Unix command line, file path expansion in the CLI will behave mostly as expected. There is no ~ expansion (in a Unix shell, this expands to the home directory), but `*`, `?`, and character ranges expressed with `[ ]` will be correctly matched. Wikipedia has detailed information on [globbing syntax][5].
 
 You can test these on a generic shell under OSX and try the pattern from your project directory using the ls command, whose globbing support should mirror the Bonsai CLI's in most cases.
 
