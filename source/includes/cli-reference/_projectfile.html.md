@@ -42,14 +42,40 @@ you download or create a BRAIN with the CLI. The project file has a name like
 `bonsai_brain.bproj` and contains a JSON object that ties together the Inkling
 files, simulator files, and simulator configuration needed to train a BRAIN.
 
- * `files` is a list of files to be included in this BRAIN. Directories
+### Files
+
+`files` is a list of files to be included in this BRAIN. Directories
 may also be in the `files` list. When a directory is specified, every file
 within that directory is included in the BRAIN. Currently, only one inkling
 file per BRAIN is supported. If `files` specifies multiple Inkling files,
-only the first will be used and the remainder will be ingored.
+only the first will be used and the remainder will be ignored.
+
 There must be at least one valid path in the `files` list.
 
- * `training` is an object.  The `simulator` field of that object
+#### Globbing
+
+> Examples of globbing
+
+```json
+{
+    "files": [
+        "*.ink",    # All inkling files in the current directory
+        "*/*.py"    # All python source files from every subdirectory one level below cwd
+    ],
+    "training": {
+        "command": "python my_simulator.py",
+        "simulator": "bonsai.python"
+    }
+}
+```
+
+For users familiar with the Unix command line, file path expansion in the CLI will behave mostly as expected. There is no ~ expansion (in a Unix shell, this expands to the home directory), but `*`, `?`, and character ranges expressed with `[ ]` will be correctly matched. Wikipedia has detailed information on [globbing syntax][5].
+
+You can test these on a generic shell under OSX and try the pattern from your project directory using the ls command, whose globbing support should mirror the Bonsai CLI's in most cases.
+
+### Training
+
+`training` is an object.  The `simulator` field of that object
 points to a pre-configured simulation container inside the platform. The
 `command` field describes the command to run to start the simulator.
 
@@ -87,3 +113,4 @@ project file.
 [2]: https://quay.io/repository/bonsai/python
 [3]: https://quay.io/repository/bonsai/energyplus
 [4]: https://quay.io/repository/bonsai/gazebo
+[5]: https://en.wikipedia.org/wiki/Glob_(programming)
