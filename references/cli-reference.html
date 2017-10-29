@@ -621,17 +621,41 @@ you download or create a BRAIN with the CLI. The project file has a name like
 <code class="prettyprint">bonsai_brain.bproj</code> and contains a JSON object that ties together the Inkling
 files, simulator files, and simulator configuration needed to train a BRAIN.</p>
 
-<ul>
-<li><p><code class="prettyprint">files</code> is a list of files to be included in this BRAIN. Directories
+<h3 id="files">Files</h3>
+
+<p><code class="prettyprint">files</code> is a list of files to be included in this BRAIN. Directories
 may also be in the <code class="prettyprint">files</code> list. When a directory is specified, every file
 within that directory is included in the BRAIN. Currently, only one inkling
 file per BRAIN is supported. If <code class="prettyprint">files</code> specifies multiple Inkling files,
-only the first will be used and the remainder will be ingored.
-There must be at least one valid path in the <code class="prettyprint">files</code> list.</p></li>
-<li><p><code class="prettyprint">training</code> is an object.  The <code class="prettyprint">simulator</code> field of that object
+only the first will be used and the remainder will be ignored.</p>
+
+<p>There must be at least one valid path in the <code class="prettyprint">files</code> list.</p>
+
+<h4 id="globbing">Globbing</h4>
+
+<blockquote>
+<p>Examples of globbing</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"files"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"*.ink"</span><span class="p">,</span><span class="w">    </span><span class="err">#</span><span class="w"> </span><span class="err">All</span><span class="w"> </span><span class="err">inkling</span><span class="w"> </span><span class="err">files</span><span class="w"> </span><span class="err">in</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">current</span><span class="w"> </span><span class="err">directory</span><span class="w">
+        </span><span class="s2">"*/*.py"</span><span class="w">    </span><span class="err">#</span><span class="w"> </span><span class="err">All</span><span class="w"> </span><span class="err">python</span><span class="w"> </span><span class="err">source</span><span class="w"> </span><span class="err">files</span><span class="w"> </span><span class="err">from</span><span class="w"> </span><span class="err">every</span><span class="w"> </span><span class="err">subdirectory</span><span class="w"> </span><span class="err">one</span><span class="w"> </span><span class="err">level</span><span class="w"> </span><span class="err">below</span><span class="w"> </span><span class="err">cwd</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"training"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"python my_simulator.py"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"simulator"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bonsai.python"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>For users familiar with the Unix command line, file path expansion in the CLI will behave mostly as expected. There is no ~ expansion (in a Unix shell, this expands to the home directory), but <code class="prettyprint">*</code>, <code class="prettyprint">?</code>, and character ranges expressed with <code class="prettyprint">[ ]</code> will be correctly matched. Wikipedia has detailed information on <a href="https://en.wikipedia.org/wiki/Glob_(programming)">globbing syntax</a>.</p>
+
+<p>You can test these on a generic shell under OSX and try the pattern from your project directory using the ls command, whose globbing support should mirror the Bonsai CLI&rsquo;s in most cases.</p>
+
+<h3 id="training">Training</h3>
+
+<p><code class="prettyprint">training</code> is an object.  The <code class="prettyprint">simulator</code> field of that object
 points to a pre-configured simulation container inside the platform. The
-<code class="prettyprint">command</code> field describes the command to run to start the simulator.</p></li>
-</ul>
+<code class="prettyprint">command</code> field describes the command to run to start the simulator.</p>
 
 <p>Current list of supported simulators for Docker cloud-hosted training:</p>
 
