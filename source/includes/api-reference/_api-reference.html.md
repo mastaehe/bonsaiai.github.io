@@ -154,6 +154,7 @@ GET /v1/{userName}/{brainName}/ws'
     "metric": "episode_value",
     "value": 34.0,
     "episode": 83,
+    "iteration": 120546,
     "concept": "balance",
     "lesson": "balancing"
 }
@@ -194,7 +195,7 @@ There are 6 types of messages that are sent on this socket: `ADD_DATA_POINT`, `P
 #### ADD_DATA_POINT
 | Parameter | Description |
 | --- | --- |
-| metric | The data series for this data, will always be `episode_value` |
+| metric | The data series for this data. This will be `episode_value` for training data points and `test_pass_value` for test data points |
 | value | The reward value for an episode |
 | episode | Which episode the value corresponds to |
 | concept | The concept the value corresponds to |
