@@ -34,6 +34,27 @@ API calls must include an Authorization header. The value of this header is your
 
 # User and BRAIN Status
 
+### BRAIN Versions
+
+BRAIN versions numerically count up each time a BRAIN is trained. There is also
+a `latest` version that can be called if desired.
+
+### BRAIN Modes
+
+BRAIN versions have the following modes:
+
+* **ready_to_train:** After Inkling is uploaded and successfully compiled, the
+BRAIN version number is incremented. That particular version is in the
+ready_to_train state. ready_to_train versions give predictions the same as or
+worse than random.
+* **training:** After the train command is given, the BRAIN version is
+incremented and that version is in the training state. In this state the user
+cannot load new Inkling into the BRAIN or restart training. The user must
+cancel training to upload new Inkling.
+* **trained:** If training is canceled or completed the BRAIN version is in
+the trained state. Trained BRAIN versions can give predictions or receive more
+training. version is NOT incremented upon training completion.
+
 ## User Status
 
 Use GET to list all BRAINs owned by the user.
@@ -188,9 +209,12 @@ GET /v1/{userName}/{brainName}/ws'
 
 ### Response
 
-The websocket will send JSON messages for events in the BRAIN. Every message will have a `type` field which can be used to determine what the rest of the payload is.
+The websocket will send JSON messages for events in the BRAIN. Every message
+will have a `type` field which can be used to determine what the rest of the payload is.
 
-There are 6 types of messages that are sent on this socket: `ADD_DATA_POINT`, `PROPERTY_CHANGED`, `CONCEPTS_SET`, `CONCEPT_CHANGED`, `FILE_UPDATED`, `FILES_UPDATED`, and `TRAINING_INITIALIZED`.
+There are 6 types of messages that are sent on this socket: `ADD_DATA_POINT`,
+`PROPERTY_CHANGED`, `CONCEPTS_SET`, `CONCEPT_CHANGED`, `FILE_UPDATED`,
+`FILES_UPDATED`, and `TRAINING_INITIALIZED`.
 
 #### ADD_DATA_POINT
 | Parameter | Description |
@@ -230,6 +254,33 @@ This message has no extra data.
 #### TRAINING_INITIALIZED
 This message has no extra data.
 
+
+# BRAIN Metrics
+
+[RYAN: Small description about what these metrics are typically used for.]
+
+## Episode Reward
+
+[For each of these have a blurb about it.]
+
+> Request
+
+```text
+GET /v1/{userName}/{brainName}/{version}/metrics/episode_value
+```
+
+| Parameter | Description |
+| --- | --- |
+
+### Response
+
+[Blurb or table]
+
+## Test Pass Reward
+
+## Iterations
+
+
 # Project Files
 
 ## Retrieve File
@@ -240,7 +291,7 @@ code in the *.ink* file for a BRAIN.
 > Request
 
 ```text
-GET /v1/{userName}/[brainName]?file={fileName}
+GET /v1/{userName}/{brainName}?file={fileName}
 ```
 
 | Parameter | Description |
@@ -261,7 +312,7 @@ BRAIN. You cannot PUT new file contents while a BRAIN is training.
 > Request
 
 ```text
-PUT /v1/{userName}/[brainName]?file={fileName}
+PUT /v1/{userName}/{brainName}?file={fileName}
 ```
 
 | Parameter | Description |
@@ -377,7 +428,9 @@ GET /v1/{userName}/{brainName}/{brainVersion}/sims/1/logs/ws
 
 ### Response
 
-The websocket will send one message for each log message (starting with the first message logged in the simulator). This websocket will automatically close when all log messages have been sent or training is complete.
+The websocket will send one message for each log message (starting with the first
+message logged in the simulator). This websocket will automatically close when
+all log messages have been sent or training is complete.
 
 ## Simulator State
 
@@ -419,7 +472,11 @@ GET, /v1/{userName}/{brainName}/{brainVersion}/sims/1/state/ws'
 
 ### Response
 
-The websocket will send JSON messages for each state transition in the simulator. The payload will have `action`, `reward`, and `state` keys. The `reward` value will be the reward the simulator gives for this state transition. The `action` will be JSON with keys which correspond to the Inkling's action schema and the `state` will be JSON with keys corresponding to the Inkling's state schema.
+The websocket will send JSON messages for each state transition in the simulator.
+The payload will have `action`, `reward`, and `state` keys. The `reward` value
+will be the reward the simulator gives for this state transition. The `action`
+will be JSON with keys which correspond to the Inkling's action schema and the
+`state` will be JSON with keys corresponding to the Inkling's state schema.
 
 # Training
 
@@ -703,30 +760,6 @@ message PredictionData {
 ```
 
 ![Prediction Message Protocol][4]
-
-
-
-# BRAIN Versions and Modes
-
-## BRAIN Versions
-
-BRAIN versions numerically count up as BRAINs are trained.
-
-## BRAIN Modes
-
-BRAIN versions have the following modes:
-
-* **ready_to_train:** After Inkling is uploaded and successfully compiled, the
-BRAIN version number is incremented. That particular version is in the
-ready_to_train state. ready_to_train versions give predictions the same as or
-worse than random.
-* **training:** After the train command is given, the BRAIN version is
-incremented and that version is in the training state. In this state the user
-cannot load new Inkling into the BRAIN or restart training. The user must
-cancel training to upload new Inkling.
-* **trained:** If training is cancelled or completes the BRAIN version is in
-the trained state. Trained BRAIN versions can give predictions or receive more
-training. version is NOT incremented upon training completion.
 
 
 [1]: https://api.bons.ai
