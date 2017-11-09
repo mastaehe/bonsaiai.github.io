@@ -5,7 +5,7 @@ toc_footers:
   -  <%= partial "partials/footer-links" %>
 
 includes:
-- under-the-hood.html.md
+- ai-engine-guide/ai-engine-guide.html.md
 
 search: true
 ---

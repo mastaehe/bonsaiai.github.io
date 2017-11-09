@@ -13,7 +13,7 @@ There are many other parts of our system that are more common—systems for stor
 
 ## Versioning
 
-The Bonsai AI Engine keeps versions of BRAINs. Each training session generates a new version. This way you can compare the training or prediction of your latest version of a BRAIN with previous versions.
+The Bonsai AI Engine keeps versions of BRAINs. Each BRAIN can contain multiple versions. A BRAIN version is a snapshot of the brain at a particular time. Each training session generates a new version of the BRAIN, with a new snapshot of the user files pushed to the BRAIN. This way you can compare the training or prediction of your latest version of a BRAIN with previous versions. When training a BRAIN, you are actually training a specific version.
 
 # Architect
 
