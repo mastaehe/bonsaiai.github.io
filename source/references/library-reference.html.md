@@ -11,6 +11,9 @@ toc_footers:
 
 
 includes:
+  - library-reference/_introduction.html.md
+  - library-reference/_brain.html.md
+  - library-reference/_config.html.md
   - library-reference/_simulator.html.md
 
 
