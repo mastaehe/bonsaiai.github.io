@@ -257,11 +257,14 @@ This message has no extra data.
 
 # BRAIN Metrics
 
+The metrics endpoints will return data from BRAIN's training. They can be 
+useful for analyzing what happened during training.
 [RYAN: Small description about what these metrics are typically used for.]
 
 ## Episode Reward
 
-[For each of these have a blurb about it.]
+Episode reward contains data about each training episode.
+This represents what the AI is doing while it's learning.
 
 > Request
 
@@ -271,15 +274,78 @@ GET /v1/{userName}/{brainName}/{version}/metrics/episode_value
 
 | Parameter | Description |
 | --- | --- |
+| userName | Name of the user who has the BRAIN |
+| brainName | Name of the BRAIN |
+| version | Version of the BRAIN |
 
 ### Response
 
-[Blurb or table]
+The response will be an array of JSON of format:
 
-## Test Pass Reward
+| Parameter | Description |
+| --- | --- |
+| value | The episode's cumulative reward value |
+| episode | The episode for this value |
+| iteration | Total number of simulator iterations that have occurred |
+| time | Timestamp for when this value occurred |
+| concept| The concept this value corresponds to |
+| lesson | The lesson this value corresponds to |
+
+## Test Pass Value
+
+Test pass value contains data for test passes that occur during training.
+This represents the AI's best attempt at a given time.
+
+> Request
+
+```text
+GET /v1/{userName}/{brainName}/{version}/metrics/test_pass_value
+```
+
+| Parameter | Description |
+| --- | --- |
+| userName | Name of the user who has the BRAIN |
+| brainName | Name of the BRAIN |
+| version | Version of the BRAIN |
+
+### Response
+
+The response will be an array of JSON of format:
+
+| Parameter | Description |
+| --- | --- |
+| value | The episode's cumulative reward value |
+| episode | The test pass episode for this value |
+| iteration | Total number of simulator iterations that have occurred |
+| time | Timestamp for when this value occurred |
+| concept| The concept this value corresponds to |
+| lesson | The lesson this value corresponds to |
 
 ## Iterations
 
+Iterations contains data related to the number of simulator iterations that have occurred.
+This can be useful for long episodes when other metrics may not be getting data.
+
+> Request
+
+```text
+GET /v1/{userName}/{brainName}/{version}/metrics/iterations
+```
+
+| Parameter | Description |
+| --- | --- |
+| userName | Name of the user who has the BRAIN |
+| brainName | Name of the BRAIN |
+| version | Version of the BRAIN |
+
+### Response
+
+The response will be an array of JSON of format:
+
+| Parameter | Description |
+| --- | --- |
+| value | Total number of simulator iterations that have occurred |
+| time | Timestamp for when this value occurred |
 
 # Project Files
 
