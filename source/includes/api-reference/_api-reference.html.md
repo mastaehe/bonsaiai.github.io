@@ -324,8 +324,7 @@ GET /v1/{userName}/{brainName}/{version}/metrics/episode_value
 
 Test pass value contains data for test pass episodes that occur once every
 20 training episodes during training for a given version of a BRAIN.
-This represents the AI's highest reward value achieved at a regular interval
-of training.
+This value is representative of the AI’s performance at a regular interval of training.
 
 > Request
 
