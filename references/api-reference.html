@@ -382,6 +382,29 @@ programmers interact with the AI Engine.</p>
 
 <h1 id="user-and-brain-status">User and BRAIN Status</h1>
 
+<h3 id="brain-versions">BRAIN Versions</h3>
+
+<p>BRAIN versions numerically count up each time a BRAIN is trained. There is also
+a <code class="prettyprint">latest</code> version that can be called if desired.</p>
+
+<h3 id="brain-modes">BRAIN Modes</h3>
+
+<p>BRAIN versions have the following modes:</p>
+
+<ul>
+<li><strong>ready_to_train:</strong> After Inkling is uploaded and successfully compiled, the
+BRAIN version number is incremented. That particular version is in the
+ready_to_train state. ready_to_train versions give predictions the same as or
+worse than random.</li>
+<li><strong>training:</strong> After the train command is given, the BRAIN version is
+incremented and that version is in the training state. In this state the user
+cannot load new Inkling into the BRAIN or restart training. The user must
+cancel training to upload new Inkling.</li>
+<li><strong>trained:</strong> If training is canceled or completed the BRAIN version is in
+the trained state. Trained BRAIN versions can give predictions or receive more
+training. version is NOT incremented upon training completion.</li>
+</ul>
+
 <h2 id="user-status">User Status</h2>
 
 <p>Use GET to list all BRAINs owned by the user.</p>
@@ -564,6 +587,7 @@ every version of that BRAIN as well.</p>
     </span><span class="s2">"metric"</span><span class="p">:</span><span class="w"> </span><span class="s2">"episode_value"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">34.0</span><span class="p">,</span><span class="w">
     </span><span class="s2">"episode"</span><span class="p">:</span><span class="w"> </span><span class="mi">83</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"iteration"</span><span class="p">:</span><span class="w"> </span><span class="mi">120546</span><span class="p">,</span><span class="w">
     </span><span class="s2">"concept"</span><span class="p">:</span><span class="w"> </span><span class="s2">"balance"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"lesson"</span><span class="p">:</span><span class="w"> </span><span class="s2">"balancing"</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -596,9 +620,12 @@ every version of that BRAIN as well.</p>
 </span></code></pre>
 <h3 id="response">Response</h3>
 
-<p>The websocket will send JSON messages for events in the BRAIN. Every message will have a <code class="prettyprint">type</code> field which can be used to determine what the rest of the payload is.</p>
+<p>The websocket will send JSON messages for events in the BRAIN. Every message
+will have a <code class="prettyprint">type</code> field which can be used to determine what the rest of the payload is.</p>
 
-<p>There are 6 types of messages that are sent on this socket: <code class="prettyprint">ADD_DATA_POINT</code>, <code class="prettyprint">PROPERTY_CHANGED</code>, <code class="prettyprint">CONCEPTS_SET</code>, <code class="prettyprint">CONCEPT_CHANGED</code>, <code class="prettyprint">FILE_UPDATED</code>, <code class="prettyprint">FILES_UPDATED</code>, and <code class="prettyprint">TRAINING_INITIALIZED</code>.</p>
+<p>There are 6 types of messages that are sent on this socket: <code class="prettyprint">ADD_DATA_POINT</code>,
+<code class="prettyprint">PROPERTY_CHANGED</code>, <code class="prettyprint">CONCEPTS_SET</code>, <code class="prettyprint">CONCEPT_CHANGED</code>, <code class="prettyprint">FILE_UPDATED</code>,
+<code class="prettyprint">FILES_UPDATED</code>, and <code class="prettyprint">TRAINING_INITIALIZED</code>.</p>
 
 <h4 id="add_data_point">ADD_DATA_POINT</h4>
 
@@ -610,7 +637,7 @@ every version of that BRAIN as well.</p>
 </thead><tbody>
 <tr>
 <td>metric</td>
-<td>The data series for this data, will always be <code class="prettyprint">episode_value</code></td>
+<td>The data series for this data. This will be <code class="prettyprint">episode_value</code> for training data points and <code class="prettyprint">test_pass_value</code> for test data points</td>
 </tr>
 <tr>
 <td>value</td>
@@ -706,6 +733,272 @@ every version of that BRAIN as well.</p>
 
 <p>This message has no extra data.</p>
 
+<h1 id="brain-metrics">BRAIN Metrics</h1>
+
+<p>The metrics endpoints will return data from the specified version of a BRAIN&rsquo;s
+training. They can be useful for analyzing what happened during training.</p>
+
+<h2 id="episode-value">Episode Value</h2>
+
+<p>Episode value contains data about each training episode for a given version of a BRAIN.
+This represents what the AI has been rewarded and what it&rsquo;s currently learning
+through simulation.</p>
+
+<blockquote>
+<p>Request</p>
+</blockquote>
+<pre class="highlight plaintext"><code>GET /v1/{userName}/{brainName}/{version}/metrics/episode_value
+</code></pre>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>userName</td>
+<td>Name of the user who has the BRAIN</td>
+</tr>
+<tr>
+<td>brainName</td>
+<td>Name of the BRAIN</td>
+</tr>
+<tr>
+<td>version</td>
+<td>Version of the BRAIN</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Example JSON Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"episode"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"lesson"</span><span class="p">:</span><span class="w"> </span><span class="s2">"balancing"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"iteration"</span><span class="p">:</span><span class="w"> </span><span class="mi">1354</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"concept"</span><span class="p">:</span><span class="w"> </span><span class="s2">"balance"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-10T06:37:11.712068096Z"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"episode"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"lesson"</span><span class="p">:</span><span class="w"> </span><span class="s2">"balancing"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">43</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"iteration"</span><span class="p">:</span><span class="w"> </span><span class="mi">2784</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"concept"</span><span class="p">:</span><span class="w"> </span><span class="s2">"balance"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-10T06:37:11.739321856Z"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"episode"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"lesson"</span><span class="p">:</span><span class="w"> </span><span class="s2">"balancing"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"iteration"</span><span class="p">:</span><span class="w"> </span><span class="mi">4184</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"concept"</span><span class="p">:</span><span class="w"> </span><span class="s2">"balance"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-10T06:37:11.769031936Z"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<h3 id="response">Response</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>value</td>
+<td>The episode&rsquo;s cumulative reward value</td>
+</tr>
+<tr>
+<td>episode</td>
+<td>The episode for this value</td>
+</tr>
+<tr>
+<td>iteration</td>
+<td>Total number of simulator iterations that have occurred</td>
+</tr>
+<tr>
+<td>time</td>
+<td>Timestamp for when this value occurred</td>
+</tr>
+<tr>
+<td>concept</td>
+<td>The concept this value corresponds to</td>
+</tr>
+<tr>
+<td>lesson</td>
+<td>The lesson this value corresponds to</td>
+</tr>
+</tbody></table>
+
+<h2 id="test-pass-value">Test Pass Value</h2>
+
+<p>Test pass value contains data for test pass episodes that occur once every
+20 training episodes during training for a given version of a BRAIN.
+This value is representative of the AI’s performance at a regular interval of training.</p>
+
+<blockquote>
+<p>Request</p>
+</blockquote>
+<pre class="highlight plaintext"><code>GET /v1/{userName}/{brainName}/{version}/metrics/test_pass_value
+</code></pre>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>userName</td>
+<td>Name of the user who has the BRAIN</td>
+</tr>
+<tr>
+<td>brainName</td>
+<td>Name of the BRAIN</td>
+</tr>
+<tr>
+<td>version</td>
+<td>Version of the BRAIN</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Example JSON Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"episode"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"lesson"</span><span class="p">:</span><span class="w"> </span><span class="s2">"balancing"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"iteration"</span><span class="p">:</span><span class="w"> </span><span class="mi">5354</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"concept"</span><span class="p">:</span><span class="w"> </span><span class="s2">"balance"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-10T06:37:11.712068096Z"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"episode"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"lesson"</span><span class="p">:</span><span class="w"> </span><span class="s2">"balancing"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">43</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"iteration"</span><span class="p">:</span><span class="w"> </span><span class="mi">10784</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"concept"</span><span class="p">:</span><span class="w"> </span><span class="s2">"balance"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-10T06:37:11.739321856Z"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"episode"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"lesson"</span><span class="p">:</span><span class="w"> </span><span class="s2">"balancing"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"iteration"</span><span class="p">:</span><span class="w"> </span><span class="mi">16184</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"concept"</span><span class="p">:</span><span class="w"> </span><span class="s2">"balance"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-10T06:37:11.769031936Z"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<h3 id="response">Response</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>value</td>
+<td>The episode&rsquo;s cumulative reward value</td>
+</tr>
+<tr>
+<td>episode</td>
+<td>The test pass episode for this value</td>
+</tr>
+<tr>
+<td>iteration</td>
+<td>Total number of simulator iterations that have occurred</td>
+</tr>
+<tr>
+<td>time</td>
+<td>Timestamp for when this value occurred</td>
+</tr>
+<tr>
+<td>concept</td>
+<td>The concept this value corresponds to</td>
+</tr>
+<tr>
+<td>lesson</td>
+<td>The lesson this value corresponds to</td>
+</tr>
+</tbody></table>
+
+<h2 id="iterations">Iterations</h2>
+
+<p>Iterations contains data for the number of iterations that have occurred in a
+simulation and at what timestamp. This data gets logged about once every 100 iterations.
+This can be useful for long episodes when other metrics may not be getting data.</p>
+
+<blockquote>
+<p>Request</p>
+</blockquote>
+<pre class="highlight plaintext"><code>GET /v1/{userName}/{brainName}/{version}/metrics/iterations
+</code></pre>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>userName</td>
+<td>Name of the user who has the BRAIN</td>
+</tr>
+<tr>
+<td>brainName</td>
+<td>Name of the BRAIN</td>
+</tr>
+<tr>
+<td>version</td>
+<td>Version of the BRAIN</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Example JSON Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">134</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-08-22T19:40:47.631161088Z"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">267</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-08-22T19:40:48.393937152Z"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">374</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-08-22T19:40:49.018401024Z"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">503</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-08-22T19:40:49.508259072Z"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<h3 id="response">Response</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>value</td>
+<td>Total number of simulator iterations that have occurred</td>
+</tr>
+<tr>
+<td>time</td>
+<td>Timestamp for when this value occurred</td>
+</tr>
+</tbody></table>
+
 <h1 id="project-files">Project Files</h1>
 
 <h2 id="retrieve-file">Retrieve File</h2>
@@ -716,7 +1009,7 @@ code in the <em>.ink</em> file for a BRAIN.</p>
 <blockquote>
 <p>Request</p>
 </blockquote>
-<pre class="highlight plaintext"><code>GET /v1/{userName}/[brainName]?file={fileName}
+<pre class="highlight plaintext"><code>GET /v1/{userName}/{brainName}?file={fileName}
 </code></pre>
 <table><thead>
 <tr>
@@ -750,7 +1043,7 @@ BRAIN. You cannot PUT new file contents while a BRAIN is training.</p>
 <blockquote>
 <p>Request</p>
 </blockquote>
-<pre class="highlight plaintext"><code>PUT /v1/{userName}/[brainName]?file={fileName}
+<pre class="highlight plaintext"><code>PUT /v1/{userName}/{brainName}?file={fileName}
 </code></pre>
 <table><thead>
 <tr>
@@ -953,7 +1246,9 @@ BRAIN. You cannot PUT new file contents while a BRAIN is training.</p>
 
 <h3 id="response">Response</h3>
 
-<p>The websocket will send one message for each log message (starting with the first message logged in the simulator). This websocket will automatically close when all log messages have been sent or training is complete.</p>
+<p>The websocket will send one message for each log message (starting with the first
+message logged in the simulator). This websocket will automatically close when
+all log messages have been sent or training is complete.</p>
 
 <h2 id="simulator-state">Simulator State</h2>
 
@@ -1006,7 +1301,11 @@ BRAIN. You cannot PUT new file contents while a BRAIN is training.</p>
 </span></code></pre>
 <h3 id="response">Response</h3>
 
-<p>The websocket will send JSON messages for each state transition in the simulator. The payload will have <code class="prettyprint">action</code>, <code class="prettyprint">reward</code>, and <code class="prettyprint">state</code> keys. The <code class="prettyprint">reward</code> value will be the reward the simulator gives for this state transition. The <code class="prettyprint">action</code> will be JSON with keys which correspond to the Inkling&rsquo;s action schema and the <code class="prettyprint">state</code> will be JSON with keys corresponding to the Inkling&rsquo;s state schema.</p>
+<p>The websocket will send JSON messages for each state transition in the simulator.
+The payload will have <code class="prettyprint">action</code>, <code class="prettyprint">reward</code>, and <code class="prettyprint">state</code> keys. The <code class="prettyprint">reward</code> value
+will be the reward the simulator gives for this state transition. The <code class="prettyprint">action</code>
+will be JSON with keys which correspond to the Inkling&rsquo;s action schema and the
+<code class="prettyprint">state</code> will be JSON with keys corresponding to the Inkling&rsquo;s state schema.</p>
 
 <h1 id="training">Training</h1>
 
@@ -1357,30 +1656,6 @@ protocol.</p>
 <span class="p">}</span>
 </code></pre>
 <p><img src="../images/prediction.svg" alt="Prediction Message Protocol" /></p>
-
-<h1 id="brain-versions-and-modes">BRAIN Versions and Modes</h1>
-
-<h2 id="brain-versions">BRAIN Versions</h2>
-
-<p>BRAIN versions numerically count up as BRAINs are trained.</p>
-
-<h2 id="brain-modes">BRAIN Modes</h2>
-
-<p>BRAIN versions have the following modes:</p>
-
-<ul>
-<li><strong>ready_to_train:</strong> After Inkling is uploaded and successfully compiled, the
-BRAIN version number is incremented. That particular version is in the
-ready_to_train state. ready_to_train versions give predictions the same as or
-worse than random.</li>
-<li><strong>training:</strong> After the train command is given, the BRAIN version is
-incremented and that version is in the training state. In this state the user
-cannot load new Inkling into the BRAIN or restart training. The user must
-cancel training to upload new Inkling.</li>
-<li><strong>trained:</strong> If training is cancelled or completes the BRAIN version is in
-the trained state. Trained BRAIN versions can give predictions or receive more
-training. version is NOT incremented upon training completion.</li>
-</ul>
 
       </div>
       <div class="dark-box">
