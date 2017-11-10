@@ -322,9 +322,10 @@ GET /v1/{userName}/{brainName}/{version}/metrics/episode_value
 
 ## Test Pass Value
 
-Test pass value contains data for test passes that occur once every 20 episodes
-during training for a given version of a BRAIN.
-This represents the AI's highest reward value achieved at a given time.
+Test pass value contains data for test pass episodes that occur once every
+20 training episodes during training for a given version of a BRAIN.
+This represents the AI's highest reward value achieved at a regular interval
+of training.
 
 > Request
 
@@ -383,7 +384,7 @@ GET /v1/{userName}/{brainName}/{version}/metrics/test_pass_value
 ## Iterations
 
 Iterations contains data for the number of iterations that have occurred in a
-simulation at a given time period.
+simulation and at what timestamp. This data gets logged about once every 100 iterations.
 This can be useful for long episodes when other metrics may not be getting data.
 
 > Request
