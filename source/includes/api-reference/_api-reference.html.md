@@ -286,6 +286,7 @@ GET /v1/{userName}/{brainName}/{version}/metrics/episode_value
     "episode": 1,
     "lesson": "balancing",
     "value": 25,
+    "iteration": 1354,
     "concept": "balance",
     "time": "2017-11-10T06:37:11.712068096Z"
   },
@@ -293,6 +294,7 @@ GET /v1/{userName}/{brainName}/{version}/metrics/episode_value
     "episode": 2,
     "lesson": "balancing",
     "value": 43,
+    "iteration": 2784,
     "concept": "balance",
     "time": "2017-11-10T06:37:11.739321856Z"
   },
@@ -300,6 +302,7 @@ GET /v1/{userName}/{brainName}/{version}/metrics/episode_value
     "episode": 3,
     "lesson": "balancing",
     "value": 16,
+    "iteration": 4184,
     "concept": "balance",
     "time": "2017-11-10T06:37:11.769031936Z"
   }
@@ -338,7 +341,32 @@ GET /v1/{userName}/{brainName}/{version}/metrics/test_pass_value
 > Example JSON Response
 
 ```json
-   Example needed
+[
+  {
+    "episode": 1,
+    "lesson": "balancing",
+    "value": 25,
+    "iteration": 5354,
+    "concept": "balance",
+    "time": "2017-11-10T06:37:11.712068096Z"
+  },
+  {
+    "episode": 2,
+    "lesson": "balancing",
+    "value": 43,
+    "iteration": 10784,
+    "concept": "balance",
+    "time": "2017-11-10T06:37:11.739321856Z"
+  },
+  {
+    "episode": 3,
+    "lesson": "balancing",
+    "value": 16,
+    "iteration": 16184,
+    "concept": "balance",
+    "time": "2017-11-10T06:37:11.769031936Z"
+  }
+]
 ```
 
 ### Response
