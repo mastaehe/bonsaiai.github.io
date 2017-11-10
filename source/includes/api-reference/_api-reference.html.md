@@ -257,14 +257,14 @@ This message has no extra data.
 
 # BRAIN Metrics
 
-The metrics endpoints will return data from BRAIN's training. They can be 
-useful for analyzing what happened during training.
-[RYAN: Small description about what these metrics are typically used for.]
+The metrics endpoints will return data from the specified version of a BRAIN's
+training. They can be useful for analyzing what happened during training.
 
-## Episode Reward
+## Episode Value
 
-Episode reward contains data about each training episode.
-This represents what the AI is doing while it's learning.
+Episode value contains data about each training episode for a given version of a BRAIN.
+This represents what the AI has been rewarded and what it's currently learning
+through simulation.
 
 > Request
 
@@ -278,9 +278,35 @@ GET /v1/{userName}/{brainName}/{version}/metrics/episode_value
 | brainName | Name of the BRAIN |
 | version | Version of the BRAIN |
 
-### Response
+> Example JSON Response
 
-The response will be an array of JSON of format:
+```json
+[
+  {
+    "episode": 1,
+    "lesson": "balancing",
+    "value": 25,
+    "concept": "balance",
+    "time": "2017-11-10T06:37:11.712068096Z"
+  },
+  {
+    "episode": 2,
+    "lesson": "balancing",
+    "value": 43,
+    "concept": "balance",
+    "time": "2017-11-10T06:37:11.739321856Z"
+  },
+  {
+    "episode": 3,
+    "lesson": "balancing",
+    "value": 16,
+    "concept": "balance",
+    "time": "2017-11-10T06:37:11.769031936Z"
+  }
+]
+```
+
+### Response
 
 | Parameter | Description |
 | --- | --- |
@@ -293,8 +319,9 @@ The response will be an array of JSON of format:
 
 ## Test Pass Value
 
-Test pass value contains data for test passes that occur during training.
-This represents the AI's best attempt at a given time.
+Test pass value contains data for test passes that occur once every 20 episodes
+during training for a given version of a BRAIN.
+This represents the AI's highest reward value achieved at a given time.
 
 > Request
 
@@ -308,9 +335,13 @@ GET /v1/{userName}/{brainName}/{version}/metrics/test_pass_value
 | brainName | Name of the BRAIN |
 | version | Version of the BRAIN |
 
-### Response
+> Example JSON Response
 
-The response will be an array of JSON of format:
+```json
+   Example needed
+```
+
+### Response
 
 | Parameter | Description |
 | --- | --- |
@@ -323,7 +354,8 @@ The response will be an array of JSON of format:
 
 ## Iterations
 
-Iterations contains data related to the number of simulator iterations that have occurred.
+Iterations contains data for the number of iterations that have occurred in a
+simulation at a given time period.
 This can be useful for long episodes when other metrics may not be getting data.
 
 > Request
@@ -338,14 +370,36 @@ GET /v1/{userName}/{brainName}/{version}/metrics/iterations
 | brainName | Name of the BRAIN |
 | version | Version of the BRAIN |
 
-### Response
+> Example JSON Response
 
-The response will be an array of JSON of format:
+```json
+[
+  {
+    "value": 134,
+    "time": "2017-08-22T19:40:47.631161088Z"
+  },
+  {
+    "value": 267,
+    "time": "2017-08-22T19:40:48.393937152Z"
+  },
+  {
+    "value": 374,
+    "time": "2017-08-22T19:40:49.018401024Z"
+  },
+  {
+    "value": 503,
+    "time": "2017-08-22T19:40:49.508259072Z"
+  }
+]
+```
+
+### Response
 
 | Parameter | Description |
 | --- | --- |
 | value | Total number of simulator iterations that have occurred |
 | time | Timestamp for when this value occurred |
+
 
 # Project Files
 
