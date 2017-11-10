@@ -34,6 +34,27 @@ API calls must include an Authorization header. The value of this header is your
 
 # User and BRAIN Status
 
+### BRAIN Versions
+
+BRAIN versions numerically count up each time a BRAIN is trained. There is also
+a `latest` version that can be called if desired.
+
+### BRAIN Modes
+
+BRAIN versions have the following modes:
+
+* **ready_to_train:** After Inkling is uploaded and successfully compiled, the
+BRAIN version number is incremented. That particular version is in the
+ready_to_train state. ready_to_train versions give predictions the same as or
+worse than random.
+* **training:** After the train command is given, the BRAIN version is
+incremented and that version is in the training state. In this state the user
+cannot load new Inkling into the BRAIN or restart training. The user must
+cancel training to upload new Inkling.
+* **trained:** If training is canceled or completed the BRAIN version is in
+the trained state. Trained BRAIN versions can give predictions or receive more
+training. version is NOT incremented upon training completion.
+
 ## User Status
 
 Use GET to list all BRAINs owned by the user.
@@ -154,6 +175,7 @@ GET /v1/{userName}/{brainName}/ws'
     "metric": "episode_value",
     "value": 34.0,
     "episode": 83,
+    "iteration": 120546,
     "concept": "balance",
     "lesson": "balancing"
 }
@@ -187,14 +209,17 @@ GET /v1/{userName}/{brainName}/ws'
 
 ### Response
 
-The websocket will send JSON messages for events in the BRAIN. Every message will have a `type` field which can be used to determine what the rest of the payload is.
+The websocket will send JSON messages for events in the BRAIN. Every message
+will have a `type` field which can be used to determine what the rest of the payload is.
 
-There are 6 types of messages that are sent on this socket: `ADD_DATA_POINT`, `PROPERTY_CHANGED`, `CONCEPTS_SET`, `CONCEPT_CHANGED`, `FILE_UPDATED`, `FILES_UPDATED`, and `TRAINING_INITIALIZED`.
+There are 6 types of messages that are sent on this socket: `ADD_DATA_POINT`,
+`PROPERTY_CHANGED`, `CONCEPTS_SET`, `CONCEPT_CHANGED`, `FILE_UPDATED`,
+`FILES_UPDATED`, and `TRAINING_INITIALIZED`.
 
 #### ADD_DATA_POINT
 | Parameter | Description |
 | --- | --- |
-| metric | The data series for this data, will always be `episode_value` |
+| metric | The data series for this data. This will be `episode_value` for training data points and `test_pass_value` for test data points |
 | value | The reward value for an episode |
 | episode | Which episode the value corresponds to |
 | concept | The concept the value corresponds to |
@@ -229,6 +254,181 @@ This message has no extra data.
 #### TRAINING_INITIALIZED
 This message has no extra data.
 
+
+# BRAIN Metrics
+
+The metrics endpoints will return data from the specified version of a BRAIN's
+training. They can be useful for analyzing what happened during training.
+
+## Episode Value
+
+Episode value contains data about each training episode for a given version of a BRAIN.
+This represents what the AI has been rewarded and what it's currently learning
+through simulation.
+
+> Request
+
+```text
+GET /v1/{userName}/{brainName}/{version}/metrics/episode_value
+```
+
+| Parameter | Description |
+| --- | --- |
+| userName | Name of the user who has the BRAIN |
+| brainName | Name of the BRAIN |
+| version | Version of the BRAIN |
+
+> Example JSON Response
+
+```json
+[
+  {
+    "episode": 1,
+    "lesson": "balancing",
+    "value": 25,
+    "iteration": 1354,
+    "concept": "balance",
+    "time": "2017-11-10T06:37:11.712068096Z"
+  },
+  {
+    "episode": 2,
+    "lesson": "balancing",
+    "value": 43,
+    "iteration": 2784,
+    "concept": "balance",
+    "time": "2017-11-10T06:37:11.739321856Z"
+  },
+  {
+    "episode": 3,
+    "lesson": "balancing",
+    "value": 16,
+    "iteration": 4184,
+    "concept": "balance",
+    "time": "2017-11-10T06:37:11.769031936Z"
+  }
+]
+```
+
+### Response
+
+| Parameter | Description |
+| --- | --- |
+| value | The episode's cumulative reward value |
+| episode | The episode for this value |
+| iteration | Total number of simulator iterations that have occurred |
+| time | Timestamp for when this value occurred |
+| concept| The concept this value corresponds to |
+| lesson | The lesson this value corresponds to |
+
+## Test Pass Value
+
+Test pass value contains data for test pass episodes that occur once every
+20 training episodes during training for a given version of a BRAIN.
+This value is representative of the AI’s performance at a regular interval of training.
+
+> Request
+
+```text
+GET /v1/{userName}/{brainName}/{version}/metrics/test_pass_value
+```
+
+| Parameter | Description |
+| --- | --- |
+| userName | Name of the user who has the BRAIN |
+| brainName | Name of the BRAIN |
+| version | Version of the BRAIN |
+
+> Example JSON Response
+
+```json
+[
+  {
+    "episode": 1,
+    "lesson": "balancing",
+    "value": 25,
+    "iteration": 5354,
+    "concept": "balance",
+    "time": "2017-11-10T06:37:11.712068096Z"
+  },
+  {
+    "episode": 2,
+    "lesson": "balancing",
+    "value": 43,
+    "iteration": 10784,
+    "concept": "balance",
+    "time": "2017-11-10T06:37:11.739321856Z"
+  },
+  {
+    "episode": 3,
+    "lesson": "balancing",
+    "value": 16,
+    "iteration": 16184,
+    "concept": "balance",
+    "time": "2017-11-10T06:37:11.769031936Z"
+  }
+]
+```
+
+### Response
+
+| Parameter | Description |
+| --- | --- |
+| value | The episode's cumulative reward value |
+| episode | The test pass episode for this value |
+| iteration | Total number of simulator iterations that have occurred |
+| time | Timestamp for when this value occurred |
+| concept| The concept this value corresponds to |
+| lesson | The lesson this value corresponds to |
+
+## Iterations
+
+Iterations contains data for the number of iterations that have occurred in a
+simulation and at what timestamp. This data gets logged about once every 100 iterations.
+This can be useful for long episodes when other metrics may not be getting data.
+
+> Request
+
+```text
+GET /v1/{userName}/{brainName}/{version}/metrics/iterations
+```
+
+| Parameter | Description |
+| --- | --- |
+| userName | Name of the user who has the BRAIN |
+| brainName | Name of the BRAIN |
+| version | Version of the BRAIN |
+
+> Example JSON Response
+
+```json
+[
+  {
+    "value": 134,
+    "time": "2017-08-22T19:40:47.631161088Z"
+  },
+  {
+    "value": 267,
+    "time": "2017-08-22T19:40:48.393937152Z"
+  },
+  {
+    "value": 374,
+    "time": "2017-08-22T19:40:49.018401024Z"
+  },
+  {
+    "value": 503,
+    "time": "2017-08-22T19:40:49.508259072Z"
+  }
+]
+```
+
+### Response
+
+| Parameter | Description |
+| --- | --- |
+| value | Total number of simulator iterations that have occurred |
+| time | Timestamp for when this value occurred |
+
+
 # Project Files
 
 ## Retrieve File
@@ -239,7 +439,7 @@ code in the *.ink* file for a BRAIN.
 > Request
 
 ```text
-GET /v1/{userName}/[brainName]?file={fileName}
+GET /v1/{userName}/{brainName}?file={fileName}
 ```
 
 | Parameter | Description |
@@ -260,7 +460,7 @@ BRAIN. You cannot PUT new file contents while a BRAIN is training.
 > Request
 
 ```text
-PUT /v1/{userName}/[brainName]?file={fileName}
+PUT /v1/{userName}/{brainName}?file={fileName}
 ```
 
 | Parameter | Description |
@@ -376,7 +576,9 @@ GET /v1/{userName}/{brainName}/{brainVersion}/sims/1/logs/ws
 
 ### Response
 
-The websocket will send one message for each log message (starting with the first message logged in the simulator). This websocket will automatically close when all log messages have been sent or training is complete.
+The websocket will send one message for each log message (starting with the first
+message logged in the simulator). This websocket will automatically close when
+all log messages have been sent or training is complete.
 
 ## Simulator State
 
@@ -418,7 +620,11 @@ GET, /v1/{userName}/{brainName}/{brainVersion}/sims/1/state/ws'
 
 ### Response
 
-The websocket will send JSON messages for each state transition in the simulator. The payload will have `action`, `reward`, and `state` keys. The `reward` value will be the reward the simulator gives for this state transition. The `action` will be JSON with keys which correspond to the Inkling's action schema and the `state` will be JSON with keys corresponding to the Inkling's state schema.
+The websocket will send JSON messages for each state transition in the simulator.
+The payload will have `action`, `reward`, and `state` keys. The `reward` value
+will be the reward the simulator gives for this state transition. The `action`
+will be JSON with keys which correspond to the Inkling's action schema and the
+`state` will be JSON with keys corresponding to the Inkling's state schema.
 
 # Training
 
@@ -702,30 +908,6 @@ message PredictionData {
 ```
 
 ![Prediction Message Protocol][4]
-
-
-
-# BRAIN Versions and Modes
-
-## BRAIN Versions
-
-BRAIN versions numerically count up as BRAINs are trained.
-
-## BRAIN Modes
-
-BRAIN versions have the following modes:
-
-* **ready_to_train:** After Inkling is uploaded and successfully compiled, the
-BRAIN version number is incremented. That particular version is in the
-ready_to_train state. ready_to_train versions give predictions the same as or
-worse than random.
-* **training:** After the train command is given, the BRAIN version is
-incremented and that version is in the training state. In this state the user
-cannot load new Inkling into the BRAIN or restart training. The user must
-cancel training to upload new Inkling.
-* **trained:** If training is cancelled or completes the BRAIN version is in
-the trained state. Trained BRAIN versions can give predictions or receive more
-training. version is NOT incremented upon training completion.
 
 
 [1]: https://api.bons.ai
