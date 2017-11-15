@@ -71,7 +71,7 @@ Another way to troubleshoot your BRAIN is to check out the logs down below the c
 
 # When to Stop Training
 
-> ![Cartpole Position Velocity](../images/graph-cartpole-finished.png)
+> ![Cartpole Finished](../images/graph-cartpole-finished.png)
 
 So you’ve looked around at the different graphs and what the data has to offer, and now you might be wondering “Ok, so when do I hit the stop training button?” The answer to this question varies widely depending on the simulation. You have to know what a sufficient reward looks like for your problem you’re solving.
 
