@@ -1,0 +1,488 @@
+
+
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Understanding BRAIN Graphs - Bonsai</title>
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .gh {
+  color: #999999;
+}
+.highlight .sr {
+  color: #f6aa11;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #75715e;
+}
+.highlight .c1 {
+  color: #75715e;
+}
+.highlight .cs {
+  color: #75715e;
+}
+.highlight .c, .highlight .cd {
+  color: #75715e;
+}
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
+}
+.highlight .gd {
+  color: #49483e;
+}
+.highlight .gi {
+  color: #49483e;
+}
+.highlight .ge {
+  color: #49483e;
+}
+.highlight .kc {
+  color: #66d9ef;
+}
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
+}
+.highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s {
+  color: #e6db74;
+}
+.highlight .na {
+  color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+}
+.highlight .nn {
+  color: #ffffff;
+}
+.highlight .nl {
+  color: #ffffff;
+}
+.highlight .ni {
+  color: #ffffff;
+}
+.highlight .bp {
+  color: #ffffff;
+}
+.highlight .vg {
+  color: #ffffff;
+}
+.highlight .vi {
+  color: #ffffff;
+}
+.highlight .nv {
+  color: #ffffff;
+}
+.highlight .w {
+  color: #ffffff;
+}
+.highlight {
+  color: #ffffff;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
+}
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+    <link href="../stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="../stylesheets/print.css" rel="stylesheet" media="print" />
+	  <link href="../stylesheets/test.css" rel="stylesheet" media="screen" />
+    <link href="../favicon.ico" rel="icon" type="image/ico" />
+      <script src="../javascripts/all.js"></script>
+	
+	  <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WVB6MG2');</script>
+<!-- End Google Tag Manager -->
+  </head>
+
+  <body class="guides guides_web-graphs-guide" data-languages="[]">
+	  
+	  
+	  <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WVB6MG2"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) --> 
+
+  <div id="flex-container">
+
+	<nav id="primary-nav">
+
+
+
+	<div id="logo"> <a href="../"><img class="bonsai-logo" src="../images/bonsai-logo.svg"></a></div>
+
+	<label for="drop" class="toggle"><img class="menu-ham" src="../images/menu.svg"></label>
+	<input type="checkbox" id="drop" />
+
+	<ul class="menu">
+
+		<li class="header_menu_item "> <a href="getting-started.html">Quick Start</a></li>
+
+	
+		<li class="header_menu_item"> <!-- First Tier Drop Down --> <label for="drop-1" class="toggle">Guides +</label><a  href="#">Guides</a>			
+			<input type="checkbox" id="drop-1"/>
+			<ul id="guides">
+				<li class=""> <a href="ai-engine-guide.html">AI Engine Guide</a>  </li>
+				<li class=""> <a href="cli-guide.html">CLI Guide</a>  </li>
+				<li class=""> <a href="inkling-guide.html">Inkling Guide</a>  </li>
+			</ul> 
+		</li>
+
+		<li class="header_menu_item"> <!-- First Tier Drop Down --> <label for="drop-2" class="toggle">References +</label><a  href="#">References</a>			
+			<input type="checkbox" id="drop-2"/>
+			<ul id="references">
+				<li class=""> <a href="../references/api-reference.html">API</a>  </li>
+				<li class=""> <a href="../references/cli-reference.html">CLI</a>  </li>
+				<li class=""> <a href="../references/inkling-reference.html">Inkling</a>  </li>
+				<li class=""> <a href="../references/library-reference.html">Library</a>  </li>
+			</ul> 
+		</li>
+		
+		<li class="header_menu_item "> <a href="../examples.html">Examples</a></li>
+
+		<li>
+			<input type="search" id="docs-search" placeholder="Search Bonsai Docs">
+		</li>
+
+
+	</ul>
+
+</nav>
+
+
+
+
+
+	<div id="main-wrapper">
+
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="../images/navbar.png" alt="Navbar" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <div class="page-title">Understanding BRAIN Graphs</div>
+      <div id="toc">
+      </div>
+      
+			 
+<ul class="toc-footer">
+
+<li><a href='https://bons.ai'>Bonsai Home</a></li>
+<li><a href='https://beta.bons.ai'>BRAIN Dashboard</a></li>
+<li><a href='https://github.com/BonsaiAI/slate'>Contribute to the Docs</a></li>
+<li><a href='http://pages.bons.ai/apply.html'>Apply for Bonsai Platform Preview</a></li>
+<li><a href='https://bons.ai/contact-us#contact-page-form'>Contact Us</a></li>
+
+</ul>
+       
+        
+	   <div class="cc-bottom">
+	
+	<div class="toc-footer bottom cc-info">
+
+		<a href='https://creativecommons.org/licenses/by-sa/4.0/' class="cc-icon-width" >
+			<svg class="cc" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+			viewBox="0 0 70.7 13.4" style="enable-background:new 0 0 70.7 13.4;" xml:space="preserve">
+
+				<g>
+
+				<g>
+				<circle class="st0" cx="6.8" cy="6.7" r="6.1"/>
+				<path d="M6.7,0c1.9,0,3.5,0.7,4.8,2c0.6,0.6,1.1,1.4,1.4,2.2c0.3,0.8,0.5,1.7,0.5,2.6c0,0.9-0.2,1.8-0.5,2.6
+				c-0.3,0.8-0.8,1.5-1.4,2.1c-0.7,0.6-1.4,1.1-2.2,1.5c-0.8,0.3-1.7,0.5-2.6,0.5S5,13.3,4.2,12.9c-0.8-0.3-1.5-0.8-2.2-1.5
+				s-1.1-1.4-1.5-2.2S0,7.6,0,6.7C0,5.8,0.2,5,0.5,4.2S1.3,2.6,2,2C3.3,0.7,4.8,0,6.7,0z M6.7,1.2c-1.5,0-2.8,0.5-3.9,1.6
+				C2.3,3.4,1.9,4,1.6,4.6C1.4,5.3,1.2,6,1.2,6.7c0,0.7,0.1,1.4,0.4,2.1c0.3,0.7,0.7,1.3,1.2,1.8c0.5,0.5,1.1,0.9,1.8,1.2
+				c0.7,0.3,1.4,0.4,2.1,0.4c0.7,0,1.4-0.1,2.1-0.4c0.7-0.3,1.3-0.7,1.8-1.2c1-1,1.6-2.3,1.6-3.9c0-0.7-0.1-1.4-0.4-2.1
+				c-0.3-0.7-0.7-1.3-1.2-1.8C9.5,1.8,8.2,1.2,6.7,1.2z M6.6,5.6L5.7,6.1C5.6,5.9,5.5,5.7,5.4,5.6C5.3,5.6,5.1,5.5,5,5.5
+				c-0.6,0-0.9,0.4-0.9,1.2c0,0.4,0.1,0.6,0.2,0.9C4.5,7.8,4.7,7.9,5,7.9c0.4,0,0.7-0.2,0.8-0.6l0.8,0.4C6.5,8.1,6.2,8.3,5.9,8.5
+				c-0.3,0.2-0.7,0.3-1,0.3c-0.6,0-1.1-0.2-1.5-0.6C3.1,7.9,2.9,7.4,2.9,6.7c0-0.6,0.2-1.1,0.6-1.5c0.4-0.4,0.8-0.6,1.4-0.6
+				C5.7,4.6,6.3,5,6.6,5.6z M10.5,5.6L9.6,6.1C9.5,5.9,9.4,5.7,9.3,5.6C9.1,5.6,9,5.5,8.9,5.5C8.3,5.5,8,5.9,8,6.7
+				c0,0.4,0.1,0.6,0.2,0.9c0.2,0.2,0.4,0.3,0.7,0.3c0.4,0,0.7-0.2,0.8-0.6l0.8,0.4c-0.2,0.3-0.4,0.6-0.7,0.8c-0.3,0.2-0.7,0.3-1,0.3
+				c-0.6,0-1.1-0.2-1.5-0.6C7,7.9,6.8,7.4,6.8,6.7c0-0.6,0.2-1.1,0.6-1.5c0.4-0.4,0.8-0.6,1.4-0.6C9.6,4.6,10.2,5,10.5,5.6z"/>
+				</g>
+
+				</g>
+			</svg>
+		</a>
+		
+		<a href='https://creativecommons.org/licenses/by-sa/4.0/'>Content:
+		CC-BY-SA </a>
+		
+	</div>
+
+</div>
+
+    </div>
+	      
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        
+          <h1 id="introduction">Introduction</h1>
+
+<p>This guide will familiarize you with the two training graphs displayed on every BRAIN’s Details Page on The Bonsai Platform. These graphs can be used to monitor training, troubleshoot your BRAIN, and decide when your BRAIN has been sufficiently trained and is ready for predictions. </p>
+
+<blockquote>
+<p><img src="../images/cart-pole-balance.gif" alt="Cartpole Balance" /></p>
+</blockquote>
+
+<p>In this guide we&rsquo;ll be walking through the graphs for OpenAI Gym&rsquo;s <a href="http://docs.bons.ai/examples.html#openai-gym-cart-pole">Cartpole</a> environment to illustrate how to best use the information gathered in the Concepts and Simulator graphs. If you need instruction on how to create a demo on the Platform you can follow the <a href="http://docs.bons.ai/guides/getting-started.html">web guide</a>. You may also choose to run this demo locally by following the <a href="http://docs.bons.ai/guides/cli-guide.html">CLI guide</a>. OpenAI Gym describes Cartpole as:</p>
+
+<p><em>A pole is attached by an un-actuated joint to a cart, which moves along a frictionless track. The system is controlled by applying a force of +1 or -1 to the cart. The pendulum starts upright, and the goal is to prevent it from falling over. A reward of +1 is provided for every timestep that the pole remains upright. The episode ends when the pole is more than 15 degrees from vertical, or the cart moves more than 2.4 units from the center.</em></p>
+
+<p>A summary of common terms you’ll see mentioned on these graphs and in this guide is shown below.</p>
+
+<h4 id="summary-table-of-terms">Summary table of terms</h4>
+
+<table><thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Concept</td>
+<td>One or more concepts are used to define what you are going to teach the BRAIN. For more details see <a href="http://docs.bons.ai/references/inkling-reference.html#concepts">Concept Reference</a>.</td>
+</tr>
+<tr>
+<td>Simulator</td>
+<td>A simulator connects to the BRAIN and runs a simulation, which the AI Engine trains on. A simulation imitates a real-world situation in a virtual environment, which enables a user to rapidly test and predict scenarios.</td>
+</tr>
+<tr>
+<td>Iteration</td>
+<td>An iteration is one state → action → new-state transition in the environment. The loop starts when the simulator sends the AI Engine a state; next, the AI Engine replies with an action; then, the simulator uses this action to advance the environment (deployed or simulated) and compute a new state as well as a reward.</td>
+</tr>
+<tr>
+<td>Episode</td>
+<td>An episode is a series of iterations, starting in some initial state and ending  when the environment hits a termination condition and the environment resets for the next episode. Episodes can vary in length, with termination conditions typically defined based on succeeding at the task, failing at the task, getting too far from success, or running out of time.</td>
+</tr>
+<tr>
+<td>Reward</td>
+<td>Reward is the objective of training. During training, the AI Engine learns to maximize the cumulative reward given by the simulation’s reward function over the course of an episode.</td>
+</tr>
+</tbody></table>
+
+<p>For more information on writing reward functions and other terms in this guide please watch <a href="https://www.youtube.com/watch?v=0R3PnJEisqk&amp;list=PLAktfMEMCsOY9HUZKIuGI6yqefGBuszAV&amp;index=4">Writing Great Reward Functions</a>.</p>
+
+<h1 id="start-training">Start Training</h1>
+
+<blockquote>
+<p><img src="../images/graph-cartpole-start-training.png" alt="Cartpole Start Training" /></p>
+</blockquote>
+
+<p>Once you’ve created your Cartpole demo you should see a “Start Training” button as shown in the image. Clicking that button starts the automatic process of hooking up a web hosted version of the OpenAI Gym environment up to the BRAIN you’ve created, and starts the AI Engine training on this simulation. It should take less than a minute for this connection (depending on how long the first episode takes to log) and you’ll start to see data appearing on the Concepts tab graph!</p>
+
+<h1 id="concepts-graph">Concepts Graph</h1>
+
+<blockquote>
+<p><img src="../images/graph-cartpole-start.png" alt="Cartpole Concepts Graph" /></p>
+</blockquote>
+
+<p>On the concepts graph you will notice there is a display of which concept is currently training and its status and plotted are episode reward and average reward vs. training iterations. The current episode reward and the training time per concept for this version of the BRAIN are shown to the right.</p>
+
+<p>This graph shows your BRAIN’s performance during training. After every 20 training episodes, the system runs a test episode. A test episode is the same as running the simulation in prediction mode after training has stopped - it runs without exploration.The dots indicate individual rewards achieved by each of these test episodes. The smoothed reward is the average of the 10 previous such rewards. The x axis is the total number of training iterations before each test episode, which is the number of state transitions and rewards that the BRAIN has had to learn from.</p>
+
+<h1 id="simulation-graph">Simulation Graph</h1>
+
+<p>The simulation graph illustrates the states, actions, and rewards for a given simulation and allows users to graph them against each other to see correlations. This information can be helpful when debugging simulations and reward functions. On the simulation graph you will notice there is a status for the connectivity between the BRAIN and the simulator, two data series for you to choose to display, and the total training time of this version of the BRAIN.</p>
+
+<p>You may also pause the display of data being collected on the graph at any time. This can be useful when a simulation’s iterations happen very quickly. When you unpause the graph data will be shown in real-time.</p>
+
+<h2 id="data-series">Data Series</h2>
+
+<blockquote>
+<p><img src="../images/graph-cartpole-command-position.png" alt="Cartpole Position Command" /></p>
+</blockquote>
+
+<p>There are two separate drop down menus to display data series. Each data series will scale to its own axis on the simulation graph. For each of these values you can choose from any of the states, actions, or rewards you have defined in Inkling for the BRAIN being trained.</p>
+
+<p>It can be useful to watch how your BRAIN is performing by graphing correlating values against one another and making sure the data makes sense. In the case of Cartpole we can see that <code class="prettyprint">x_position</code> correlates with <code class="prettyprint">command</code> and when we see that a command of <code class="prettyprint">2</code> we see that the sinusoidal curve is closer to <code class="prettyprint">1</code> (the right edge) and when the command is 0 the curve is closer to <code class="prettyprint">-1</code> (the left edge). The AI is giving commands for the cart to move towards where the pole is falling in order to maintain balance.</p>
+
+<blockquote>
+<p><img src="../images/graph-cartpole-position-velocity.png" alt="Cartpole Position Velocity" /></p>
+</blockquote>
+
+<p>You can see in the second graph the relation between <code class="prettyprint">x_position</code> and <code class="prettyprint">x_velocity</code>. The cart is going to be balancing the pole and if a large velocity is needed, the position of the cart is probably farther away from the center position (0). Smaller velocities are generally correlating with the cart staying near the center position. Large velocities are typically seen right before the episode ends, as the cart gives a last try at balancing before the pole drops.</p>
+
+<aside class="notice">
+In this example the reward will always be 1 during an iteration as the BRAIN is rewarded `1` for every iteration it maintains before the episode is terminated. In other simulations reward can be useful to graph.
+</aside>
+
+<h1 id="troubleshooting-your-brain">Troubleshooting Your BRAIN</h1>
+
+<blockquote>
+<p><img src="../images/graph-cartpole-debug.png" alt="Cartpole Debug" /></p>
+</blockquote>
+
+<p>When your graph isn’t looking quite right, or if your reward isn’t building in the way you’d expect, the Simulator Graph can be a great way to troubleshoot what might be going on in your BRAIN. Graphing your reward against an action schema for example can tell you what is happening every iteration of your simulation.</p>
+
+<p>Another way to troubleshoot your BRAIN is to check out the logs down below the code editor window. This can be found below the graphs and is typically used for text output of what’s going on in the simulation. For example, with Cartpole, every single episode’s reward is output to the logs and shown in the code panel here. Since the graph on the Concepts tab only displays an average. For simulations with very long episode time lengths this can be a good way to make sure things are working correctly in the beginning, before the first test episode is shown on the graph.</p>
+
+<h1 id="when-to-stop-training">When to Stop Training</h1>
+
+<blockquote>
+<p><img src="../images/graph-cartpole-finished.png" alt="Cartpole Position Velocity" /></p>
+</blockquote>
+
+<p>So you’ve looked around at the different graphs and what the data has to offer, and now you might be wondering “Ok, so when do I hit the stop training button?” The answer to this question varies widely depending on the simulation. You have to know what a sufficient reward looks like for your problem you’re solving.</p>
+
+<p>In the case of Cartpole what we’re looking for is the length of time between test episodes, because this is indicative of how long the AI is able to balance the pole before crashing and terminating that episode. The AI gets pretty good at playing the game after just a few minutes, where it can often reach around 1000 reward. If keeping the pole balanced for longer than that is necessary, then you would continue training and refining the model until you are satisfied with the BRAIN’s performance at the given task.</p>
+
+<p>The time it will take to reach this level of training can vary due to many factors. Just because a BRAIN took 5 minutes to train Cartpole one time doesn’t mean it can’t take 15 minutes to reach the same reward another time. There is still a lot of variance in training due to exploration and bandwidth so the shape of the graph is the most reliable method of determining when to stop training.</p>
+
+<aside class="warning">
+If you see the graph getting much worse over a long period of time for Cartpole this is a known issue with the current algorithm used.
+</aside>
+
+<h2 id="automatic-termination">Automatic Termination</h2>
+
+<p>Your BRAIN will not train forever. If you don’t choose to stop training yourself, the AI Engine will determine a point in which it has considered to be done training, and then wait a significant time period after that in case the user continues to want the training data. For Cartpole this will be 4.5 million iterations. This will show a BRAIN status of “Complete” because that version of the BRAIN can no longer be trained.</p>
+
+<aside class="notice">
+Automatic termination will take a significant amount of time and it is recommended that the user stop training once sufficient episode reward has been achieved.
+</aside>
+
+      </div>
+      <div class="dark-box">
+      </div>
+    </div>
+
+    </div>
+
+  </div>
+  <!-- at the end of the BODY -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+  <script type="text/javascript"> docsearch({
+  apiKey: '49fa6f01d7ff94a85b9b7434b1c2b7cf',
+  indexName: 'bon-sai',
+  inputSelector: '#docs-search',
+  debug: false // Set debug to true if you want to inspect the dropdown
+  });
+  </script>
+  </body>
+</html>
