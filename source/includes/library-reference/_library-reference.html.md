@@ -177,6 +177,36 @@ simulator must be the same in Inkling as it is in this function call.
 `simulator_or_generator` is a reference to an instance of the simulator. This
 call blocks and drives the simulator loop until training stops.
 
+## Proxy
+
+To connect a simulator from behind a corporate proxy, command line
+tools like the bonsai sdk need to know where to send traffic.  For the
+bonsai sdk, this is done in two steps - change the event_loop to
+enable proxy support, and provide the proxy details.
+
+#### event_loop="websocket"
+
+```python
+simulator = FindCenterSimulator()
+bonsai.run_for_training_or_prediction("inverted_pendulum_simulator",
+                                      simulator,
+                                      event_loop="websocket")
+```
+
+Set the event loop as an argument to `run_for_training_or_prediction`.
+
+#### Environment variables
+
+```sh
+$ export ALL_PROXY=http://username:password@example:3456
+```
+
+Next specify the proxy details as environment variables.  Proxy
+details differ between companies, so ask your IT staff for the proxy
+URL and if any login information is also needed.
+
+`HTTPS_PROXY` and `HTTP_PROXY` are also supported.
+
 
 # Example
 
