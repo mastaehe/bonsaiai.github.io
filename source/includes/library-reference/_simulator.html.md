@@ -1,5 +1,7 @@
 # Simulator Class
 
+> ![Simulator state image][1]
+
 This class is used to interface with the server while training or running predictions against
 a **BRAIN**. It is an abstract base class, and the developer must create a subclass.
 
@@ -13,7 +15,7 @@ There are two main methods one must override, `episode_start` and `simulate`.
 Returns the brain being used for this simulation.
 
 ## string name()
-Returns the simulator name that was passed in when contructed
+Returns the simulator name that was passed in when constructed
 
 ## bool predict()
 Returns weather or not the simulation is setup to run in predict or training mode
@@ -153,3 +155,4 @@ simulation has finished or halted.
 The client should call this method in a `while` loop until it returns `false`.
 To run for prediction `brain()->config()->predict()` must return `true`.
 
+[1]: ../images/simulator_state.svg
