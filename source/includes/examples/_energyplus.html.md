@@ -85,6 +85,11 @@ This curriculum contains one lesson, called `my_first_lesson`. It configures the
 # Excerpt of simulator class from the energyplus_simulator.py file
 
 class EnergyPlusSimulator(Simulator):
+    """
+    Runs the Actuator model for training or prediction by launching it
+    against the Ptolemy server above. This uses the Bonsai Simulator
+    base class to interface with the BRAIN server.
+    """
     model = ePlus85Actuator()
     server = None
 
@@ -92,95 +97,23 @@ class EnergyPlusSimulator(Simulator):
     shade = 0.
     is_terminal = True
 
-    def start(self):
-        """This method is called when training is started."""
-        print("EnergyPlusSimulator: start")
-
-    def stop(self):
-        print("EnergyPlusSimulator: stop")
-
-        graph = self.model.grapher()
-        py.plot(graph, filename="graph.html")
-
-    def readFromPtolemyClient(self):
-        self.server.readFromClient()
-        if self.model.fromClient and len(self.model.fromClient) == 4:
-            self.clientState = {
-                # 'TOut': self.model.fromClient[0],
-                # 'TZone': self.model.fromClient[1],
-                'SolarIrradiation': int(self.model.fromClient[2])/100
-                # 'FractionShadingOn': self.model.fromClient[3]
-                }
-
-            # save the client input in our graph
-            for n in range(len(self.model.fromClient)):
-                value = self.model.fromClient[n]
-                # scale some of the values for readability
-                if n == 2:
-                    value /= 100.
-                self.model.data[n].append(value)
-
-        self.is_terminal = self.model.exitFlag != 0
-
-    def restartPtolemyServer(self):
-        # set some default values for get_state
-        self.is_terminal = True
-        # self.clientState = {'TOut': 0.,
-        #                     'TZone': 0.,
-        #                     'SolarIrradiation': 0.,
-        #                     'FractionShadingOn': 0. }
-        self.clientState = {'SolarIrradiation': 0}
-
-        # close the old connections if they're still open
-        if self.server:
-            self.server.close()
-
-        # start a new episode
-        print("EnergyPlusSimulator: starting PtolemyServer")
-        self.server = PtolemyServer(self.model)
-
-        try:
-            self.server.start()
-            self.server.waitForClient()
-            # get initial state
-            self.readFromPtolemyClient()
-
-        except OSError as msg:
-            print("EnergyPlusSimulator: error on restart:", msg)
-            self.server = None
-
-    def reset(self):
-        """Called by the AI Engine to reset simulator state in between training
-           and test passes.
+    def episode_start(self, parameters):
         """
-        print("EnergyPlusSimulator: reset")
-
-    def advance(self, actions):
-        print("EnergyPlusSimulator: advance ", actions)
-        """Advance the simulation forward one tick. actions contains a
-           dictionary of key values as defined by this simulator's action
-           schema in Inkling.
-        """
-        self.shade = actions['shade'] * 6.  # Int32[0..1]
-
-    def set_properties(self, **kwargs):
-        print("EnergyPlusSimulator: set_properties")
-        """This method is called before training is started
-           or on the frame after is_terminal=True to set
-           configuration properties in this simulation. See
-           the configure clause of the lesson statement in
-           this simulator's accompanying curriculums.
+        Callback called when an training episode starts. We use this
+        to reset the Ptolemy server and start a new simulation session.
+        Returns the initial state.
         """
         self.restartPtolemyServer()
+        return self.clientState
 
-    def get_state(self):
-        """Returns a named tuple of state and is_terminal. state is a
-           dictionary matching the state schema as defined in Inkling.
-           is_terminal is only true when the simulator is in a "game over"
-           state.
+    def simulate(self, action):
+        """
+        Callback called  when stepping the simulation. It sends actions to the
+        model and returns the state of the simulation to the BRAIN.
         """
 
-        print("EnergyPlusSimulator: get_state: terminal:", self.is_terminal)
+        # take the action
+        self.shade = action['shade'] * 6.
 
         if self.is_terminal:
             self.restartPtolemyServer()
@@ -196,15 +129,74 @@ class EnergyPlusSimulator(Simulator):
             # clear old data
             self.model.data = ([], [], [], [], [])
 
-        return SimState(state=self.clientState, is_terminal=self.is_terminal)
+        reward = self.reward_function()
+        return self.clientState, float(reward), self.is_terminal
+
+    def finished(self):
+        """
+        Called at the end of the simulation to output the graph.
+        """
+        graph = self.model.grapher()
+        py.plot(graph, filename="graph.html")
+
+    def readFromPtolemyClient(self):
+        """
+        Utility method used to do the read portion of the exchange
+        with the Ptolemy server and client.
+        """
+        self.server.readFromClient()
+        if self.model.fromClient and len(self.model.fromClient) == 4:
+            self.clientState = {
+                'SolarIrradiation': int(self.model.fromClient[2]/100)
+                }
+
+            # save the client input in our graph
+            for n in range(len(self.model.fromClient)):
+                value = self.model.fromClient[n]
+                # scale some of the values for readability
+                if n == 2:
+                    value /= 100.
+                self.model.data[n].append(value)
+
+        self.is_terminal = self.model.exitFlag != 0
+
+    def restartPtolemyServer(self):
+        """
+        Used to restart the server and setup the initial state.
+        """
+
+        # set some default values for get_state
+        self.is_terminal = True
+        self.clientState = {'SolarIrradiation': 0}
+
+        # close the old connections if they're still open
+        if self.server:
+            self.server.close()
+
+        # star a new episode
+        print("EnergyPlusSimulator: starting PtolemyServer")
+        self.server = PtolemyServer(self.model)
+
+        try:
+            self.server.start()
+            self.server.waitForClient()
+            # get initial state
+            self.readFromPtolemyClient()
+
+        except OSError as msg:
+            print("EnergyPlusSimulator: error on restart:", msg)
+            self.server = None
 
     def reward_function(self):
+        """
+        Calculates the reward for the current state of the simulation
+        """
         print("EnergyPlusSimulator: reward_function")
+
         # largest reward is best reward (maximize)
-        reward = 0.
+        reward = 0
         if self.model.fromClient and len(self.model.fromClient) == 4:
             # SolarIrradiation === Shades down === good
-            # TOut = self.model.fromClient[0]
             SolarIrradiation = self.model.fromClient[2] / 100.
 
             # sun is down
@@ -216,7 +208,7 @@ class EnergyPlusSimulator(Simulator):
 
             # sun is out
             else:
-                if self.shade > 0: 
+                if self.shade > 0:
                     reward = 1  # shades on
                 else:
                     reward = -1  # shades off
