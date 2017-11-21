@@ -603,6 +603,8 @@ every version of that BRAIN as well.</p>
     </span><span class="s2">"concepts"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
         </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"balance"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Not Started"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"algorithm"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DQN"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"is_estimator"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
     </span><span class="p">}],</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
@@ -685,7 +687,7 @@ will have a <code class="prettyprint">type</code> field which can be used to det
 </thead><tbody>
 <tr>
 <td>concepts</td>
-<td>An array of name and state JSON per concept in the BRAIN</td>
+<td>An array of JSON per concept in the BRAIN. The JSON will include the concept&rsquo;s state, the algorithm that the concept will be trained with and whether the concept is an estimator or classifier</td>
 </tr>
 </tbody></table>
 

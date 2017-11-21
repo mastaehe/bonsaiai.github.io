@@ -489,6 +489,30 @@ simulator must be the same in Inkling as it is in this function call.
 <code class="prettyprint">simulator_or_generator</code> is a reference to an instance of the simulator. This
 call blocks and drives the simulator loop until training stops.</p>
 
+<h2 id="proxy">Proxy</h2>
+
+<p>To connect a simulator from behind a corporate proxy, command line
+tools like the bonsai sdk need to know where to send traffic.  For the
+bonsai sdk, this is done in two steps - change the event_loop to
+enable proxy support, and provide the proxy details.</p>
+
+<h4 id="event_loop-websocket">event_loop=&ldquo;websocket&rdquo;</h4>
+<pre class="highlight python tab-python"><code><span class="n">simulator</span> <span class="o">=</span> <span class="n">FindCenterSimulator</span><span class="p">()</span>
+<span class="n">bonsai</span><span class="o">.</span><span class="n">run_for_training_or_prediction</span><span class="p">(</span><span class="s">"inverted_pendulum_simulator"</span><span class="p">,</span>
+                                      <span class="n">simulator</span><span class="p">,</span>
+                                      <span class="n">event_loop</span><span class="o">=</span><span class="s">"websocket"</span><span class="p">)</span>
+</code></pre>
+<p>Set the event loop as an argument to <code class="prettyprint">run_for_training_or_prediction</code>.</p>
+
+<h4 id="environment-variables">Environment variables</h4>
+<pre class="highlight sh tab-shell"><code><span class="gp">$ </span><span class="nb">export </span><span class="nv">ALL_PROXY</span><span class="o">=</span>http://username:password@example:3456
+</code></pre>
+<p>Next specify the proxy details as environment variables.  Proxy
+details differ between companies, so ask your IT staff for the proxy
+URL and if any login information is also needed.</p>
+
+<p><code class="prettyprint">HTTPS_PROXY</code> and <code class="prettyprint">HTTP_PROXY</code> are also supported.</p>
+
 <h1 id="example">Example</h1>
 
 <p>For a more complete example of the <code class="prettyprint">FindCenterSimulation</code>, see <a href="../examples.html#basic-simulator-find-the-center">examples</a>.</p>
