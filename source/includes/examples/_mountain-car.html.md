@@ -87,35 +87,37 @@ The lesson trains until the AI has maximized the objective named `score`.
 ## Simulator File
 
 ```python
-import gym
-
-import bonsai
+import sys
+import logging
+from bonsai_ai import Brain, Config
 from bonsai_gym_common import GymSimulator
 
-ENVIRONMENT = 'MountainCar-v0'
-RECORD_PATH = None
-SKIPPED_FRAME = 4
+log = logging.getLogger('gym_simulator')
+log.setLevel(logging.DEBUG)
 
-class MountainCarSimulator(GymSimulator):
 
-    def __init__(self, env, skip_frame, record_path):
-        GymSimulator.__init__(
-            self, env, skip_frame=skip_frame,
-            record_path=record_path)
+class MountainCar(GymSimulator):
+    environment_name = 'MountainCar-v0'
+    simulator_name = 'mountaincar_simulator'
 
-    def get_state(self):
-        parent_state = GymSimulator.get_state(self)
-        state_dict = {"x_position": parent_state.state[0],
-                      "x_velocity": parent_state.state[1]}
-        return bonsai.simulator.SimState(state_dict, parent_state.is_terminal)
+    def gym_to_state(self, observation):
+        state = {'x_position': observation[0],
+                 'x_velocity': observation[1]}
+        return state
 
-if __name__ == "__main__":
-    env = gym.make(ENVIRONMENT)
-    simulator = MountainCarSimulator(env, SKIPPED_FRAME, RECORD_PATH)
-    bonsai.run_for_training_or_prediction("mountaincar_simulator", simulator)
+    def action_to_gym(self, inkling_action):
+        return inkling_action['command']
+
+
+if __name__ == '__main__':
+    # create a brain, openai-gym environment, and simulator
+    config = Config(sys.argv)
+    brain = Brain(config)
+    sim = MountainCar(brain)
+    sim.run_gym()
 ```
 
-This is an OpenAI Gym example which uses the OpenAI environment as its simulator. For more information about the simulator used see the [Bonsai Gym Common GitHub repo][3] which is a python library for integrating a Bonsai BRAIN with Open AI Gym environments.
+This is an OpenAI Gym example which uses the OpenAI environment as its simulator. For more information about the simulator used see the [Bonsai Gym Common GitHub repo][3] which is a python library for integrating a Bonsai BRAIN with OpenAI Gym environments.
 
 [1]: https://github.com/BonsaiAI/gym-mountaincar-sample
 [2]: https://gym.openai.com/envs/MountainCar-v0

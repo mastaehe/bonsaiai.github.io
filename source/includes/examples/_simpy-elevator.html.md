@@ -129,12 +129,9 @@ class ElevatorSimulator(Simulator):
         self.reqs = reqs
         self.ep = ep
 
-        return Simulator.State(json.dumps(self._get_state()))
+        return self._get_state()
 
-    def simulate(self, json_action, objective=None):
-        action = json.loads(json_action)
-
-        # TODO - sounds like previous state should replace the internal state..
+    def simulate(self, action):
         command = action['command']
         env = self.env
         # print('[advance]', end='')
@@ -152,10 +149,12 @@ class ElevatorSimulator(Simulator):
         state = self._get_state()
         done = self._get_done()
         reward = None
-        if objective is not None:
+
+        # only calculate reward for training mode
+        if not self.predict:
             reward = self._elevator_objective()
 
-        return Simulator.State(json.dumps(self._get_state()), reward, done)
+        return self._get_state(), reward, done
 
     def _get_state(self):
         """ This function must be implemented for all simulators.
