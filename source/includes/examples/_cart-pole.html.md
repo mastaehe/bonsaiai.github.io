@@ -91,37 +91,44 @@ This curriculum contains one lesson, called `balancing`. It configures the simul
 ## Simulator File
 
 ```python
-import gym
+import sys
+import logging
+from bonsai_ai import Brain, Config
+from bonsai_gym_common import GymSimulator
 
-import bonsai
-from bonsai_gym_common import GymSimulator, logging_basic_config
-
-ENVIRONMENT = 'CartPole-v0'
-RECORD_PATH = None
-
-
-class CartPoleSimulator(GymSimulator):
-
-    def __init__(self, env, record_path):
-        super(CartPoleSimulator, self).__init__(env, record_path=record_path)
-
-    def get_state(self):
-        parent_state = GymSimulator.get_state(self)
-        state_dict = {"position": parent_state.state[0],
-                      "velocity": parent_state.state[1],
-                      "angle": parent_state.state[2],
-                      "rotation": parent_state.state[3]}
-        return bonsai.simulator.SimState(state_dict, parent_state.is_terminal)
+log = logging.getLogger('gym_simulator')
+log.setLevel(logging.DEBUG)
 
 
-if __name__ == "__main__":
-    logging_basic_config()
-    env = gym.make(ENVIRONMENT)
-    simulator = CartPoleSimulator(env, RECORD_PATH)
-    bonsai.run_for_training_or_prediction("cartpole_simulator", simulator)
+class CartPole(GymSimulator):
+    # Environment name, from openai-gym
+    environment_name = 'CartPole-v0'
+
+    # simulator name from Inkling
+    simulator_name = 'cartpole_simulator'
+
+    # convert openai gym observation to our state schema
+    def gym_to_state(self, observation):
+        state = {'position': observation[0],
+                 'velocity': observation[1],
+                 'angle':    observation[2],
+                 'rotation': observation[3]}
+        return state
+
+    # convert our action schema into openai gym action
+    def action_to_gym(self, action):
+        return action['command']
+
+
+if __name__ == '__main__':
+    # create a brain, openai-gym environment, and simulator
+    config = Config(sys.argv)
+    brain = Brain(config)
+    sim = CartPole(brain)
+    sim.run_gym()
 ```
 
-This is an OpenAI Gym example which uses the OpenAI environment as its simulator. For more information about the simulator used see the [Bonsai Gym Common GitHub repo][3] which is a python library for integrating a Bonsai BRAIN with Open AI Gym environments.
+This is an OpenAI Gym example which uses the OpenAI environment as its simulator. For more information about the simulator used see the [Bonsai Gym Common GitHub repo][3] which is a python library for integrating a Bonsai BRAIN with OpenAI Gym environments.
 
 [1]: https://github.com/BonsaiAI/gym-cartpole-sample
 [2]: https://gym.openai.com/envs/CartPole-v1
