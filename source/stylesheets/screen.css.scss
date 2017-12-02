@@ -926,7 +926,7 @@ nav ul li ul li a {
   width: 70px;
 }
 
-@media only screen and (max-width: 870px) {
+@media only screen and (max-width: 1000px) {
 	
 	
 	nav ul li ul li a {
@@ -1320,7 +1320,7 @@ nav li > a:only-child:after {content: '';}
 /* Media Queries
 --------------------------------------------- */
 
-@media all and (max-width : 870px) {
+@media all and (max-width : 1000px) {
 
 	.menu-ham {width:26px;padding-right: 20px;}
 #primary-nav  ul li ul li a {margin-right:0!important;background-color: hsl(52, 48%, 94%);}
@@ -1459,7 +1459,7 @@ nav li > a:only-child:after {content: '';}
 
 /*mobile slider*/
 
-@media screen and (max-width: 870px) {
+@media screen and (max-width: 1000px) {
 
 	.tocify-wrapper.open {
 	    top: 0 !important;
