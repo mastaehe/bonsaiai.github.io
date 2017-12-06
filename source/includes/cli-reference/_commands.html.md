@@ -19,6 +19,7 @@ Options:
 Commands:
   configure  Authenticate with the BRAIN Server.
   create     Create a BRAIN and set the default BRAIN.
+  delete     Delete a BRAIN.
   download   Downloads all the files related to a BRAIN.
   list       Lists BRAINs owned by current user.
   log        Display logs from remote training.
@@ -75,6 +76,21 @@ If you'd like to use one of our pre-populated projects, you may run `bonsai crea
 * `demos/cartpole`
 * `demos/mountain-car`
 * `templates/starter-project`
+
+## bonsai delete
+
+```
+$ bonsai delete --help
+Usage: bonsai delete [OPTIONS] BRAIN_NAME
+
+  Deletes a BRAIN. A deleted BRAIN cannot be recovered. The name of a
+  deleted BRAIN cannot be reused.
+
+Options:
+  -h, --help  Show this message and exit.
+```
+
+`bonsai delete` deletes a BRAIN and its associated data from the Bonsai platform. Once a BRAIN is deleted, its data cannot be recovered, and its name cannot be reused.
 
 ## bonsai download
 
