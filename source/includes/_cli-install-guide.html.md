@@ -20,6 +20,8 @@ This guide will walk you through any prerequisites you may need, and how to inst
 EMACS USERS: There is an inkling-mode for local development found on <a href="https://github.com/BonsaiAI/inkling-mode">Bonsai's GitHub</a>
 </aside>
 
+
+
 # Install Prerequisites
 
 Before you begin, you will need to have access to the Bonsai Platform preview. If you don't have access yet, request access at [bons.ai][2].
@@ -124,7 +126,6 @@ If you *do not* have Anaconda installed on your system, please go to the [Manual
 
 
 
-
 # Install the Bonsai CLI
 
 > Python 2 and Anaconda
@@ -150,7 +151,7 @@ From your command prompt, install the Bonsai Command Line Interface tool and con
 
 # Next Steps
 
-Now that you've installed the Bonsai CLI you can follow the local development guide [Running the Platform Locally][5] to get started with the Bonsai Platform.
+Now that you've installed the Bonsai CLI you can follow the local development guide [Run the Platform Locally][5] to get started with the Bonsai Platform.
 
 If you have already trained a BRAIN on the web and are looking to use the Bonsai CLI to get predictions from your BRAIN you can either follow the instructions on the web to connect your local environment to your BRAIN or see [Predict with Your BRAIN][16] for an example.
 

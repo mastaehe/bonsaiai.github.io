@@ -1,8 +1,18 @@
-# CLI Overview
+# Local Development Overview
 
-The Bonsai Command Line Interface (CLI) is a text-based tool that enables you to configure and control the Bonsai Artificial Intelligence Engine. The CLI is especially useful for automation and connection to other tools. Currently, there are some actions that can only be performed using the CLI, such as loading your Inkling file and connecting your simulator.
+```powershell
+###########################################################
+# Windows specific command prompt instructions shown here #
+###########################################################
+```
 
-This guide will walk you through how to setup your first project and get a simulator running, all from your local computer. If you haven’t yet, it will be helpful to read the [Quick Start Overview][1] to give context to the commands you’ll be running in this guide.
+```shell
+#########################################################
+# macOS specific command prompt instructions shown here #
+#########################################################
+```
+
+This guide uses the Bonsai Command Line Interface (CLI) to walk you through how to setup your first project and get a simulator running, all from your local computer. If you haven’t yet, it will be helpful to read the [Quick Start Overview][1] to give context to the commands you’ll be running in this guide. The CLI is especially useful for automation and connection to other tools. Currently, there are some actions that can only be performed using the CLI, such as loading your Inkling file and connecting your simulator.
 
 The reference document for all of the commands you will see in this guide can be found in the [CLI Reference][3].
 
@@ -152,7 +162,7 @@ python3 mountaincar_simulator.py --predict-brain=myMountainCarBrain --predict-ve
 After your BRAIN is finished training it can play the Mountain Car game. How well it does depends on how long you let it train! Using your BRAIN involves calling Python on your simulator file, but now in prediction mode with `--predict-version=latest` which will use the version of the latest training session that you just ran. You can use a different version of your BRAIN if you have trained it multiple times by replacing 'latest' with the version number.
 
 [1]: getting-started.html#overview
-[2]: local-dev-guide.html#install-prerequisites
+[2]: cli-install-guide.html#install-prerequisites
 [3]: ../references/cli-reference.html
 [4]: https://gym.openai.com/envs/MountainCar-v0
 [5]: https://beta.bons.ai
