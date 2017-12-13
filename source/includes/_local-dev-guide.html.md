@@ -72,7 +72,9 @@ Almost there! Time to tell the Bonsai AI Engine to prepare a new BRAIN version f
 
 Simulators which can be trained remotely include EnergyPlus, OpenAI Gym's, and simple simulators all found on our [Examples documentation][23]. If the simulator is not one that we support remotely, you'll need to run it locally.
 
-## Train Remotely
+## Train Remotely or Locally
+
+### Remotely
 
 ```
 bonsai train start --remote
@@ -82,7 +84,7 @@ Start training your BRAIN with [`bonsai train start --remote`][20].
 
 Remote training is the best way to train BRAINs that need to ran overnight or for multiple days at a time. There is no disconnection of the simulator to the server like there can be when training locally.
 
-## Train Locally
+### Locally
 
 ```
 bonsai train start

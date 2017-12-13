@@ -63,7 +63,7 @@ Please remember to reboot your computer after installing Python and Git to make 
 ### macOS
 
 * **Git**: Git is more than likely already installed on your computer if you have Xcode, but if not, run `git` from your command prompt and the system will prompt you to install.
-* **Python**: Download and install Python (3.6 or 2.7) from [python.org][3].
+* **Python**: Download and install Python (3.6 or 2.7) from [python.org][4].
 
 <aside class="notice">
 We highly recommend macOS users download Python directly so you can follow this guide on user-land Python rather than <a href="https://github.com/MacPython/wiki/wiki/Which-Python">system Python</a>.
