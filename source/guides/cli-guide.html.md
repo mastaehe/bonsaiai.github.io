@@ -1,16 +1,2 @@
----
-title: CLI Guide
-
-language_tabs:
-    - powershell: Windows
-    - shell: macOS
-
-toc_footers:
-  -  <%= partial "partials/footer-links" %>    
-
-includes:
-  - cli-guide/cli-overview.html.md
-  - cli-guide/install.html.md
-  
-search: true
----
+<meta http-equiv="refresh" content="0; url=/guides/local-dev-guide.html">
+<link rel="canonical" href="/guides/local-dev-guide.html" />
