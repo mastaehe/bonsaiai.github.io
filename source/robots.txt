@@ -1,0 +1,4 @@
+# robots.txt for http://docs.bons.ai/
+
+User-agent: *
+Disallow: /sdk2-beta/ # This is a beta of sdk2 we don't want in search results
