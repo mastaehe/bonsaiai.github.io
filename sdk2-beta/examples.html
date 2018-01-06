@@ -1,0 +1,995 @@
+
+
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>SDK2 Beta Examples - Bonsai</title>
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .gh {
+  color: #999999;
+}
+.highlight .sr {
+  color: #f6aa11;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #75715e;
+}
+.highlight .c1 {
+  color: #75715e;
+}
+.highlight .cs {
+  color: #75715e;
+}
+.highlight .c, .highlight .cd {
+  color: #75715e;
+}
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
+}
+.highlight .gd {
+  color: #49483e;
+}
+.highlight .gi {
+  color: #49483e;
+}
+.highlight .ge {
+  color: #49483e;
+}
+.highlight .kc {
+  color: #66d9ef;
+}
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
+}
+.highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s {
+  color: #e6db74;
+}
+.highlight .na {
+  color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+}
+.highlight .nn {
+  color: #ffffff;
+}
+.highlight .nl {
+  color: #ffffff;
+}
+.highlight .ni {
+  color: #ffffff;
+}
+.highlight .bp {
+  color: #ffffff;
+}
+.highlight .vg {
+  color: #ffffff;
+}
+.highlight .vi {
+  color: #ffffff;
+}
+.highlight .nv {
+  color: #ffffff;
+}
+.highlight .w {
+  color: #ffffff;
+}
+.highlight {
+  color: #ffffff;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
+}
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+    <link href="../stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="../stylesheets/print.css" rel="stylesheet" media="print" />
+	  <link href="../stylesheets/test.css" rel="stylesheet" media="screen" />
+    <link href="../favicon.ico" rel="icon" type="image/ico" />
+      <script src="../javascripts/all.js"></script>
+	
+	  <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WVB6MG2');</script>
+<!-- End Google Tag Manager -->
+  </head>
+
+  <body class="sdk2-beta sdk2-beta_examples" data-languages="[]">
+	  
+	  
+	  <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WVB6MG2"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) --> 
+
+  <div id="flex-container">
+
+	<nav id="primary-nav">
+
+
+
+	<div id="logo"> <a href="../"><img class="bonsai-logo" src="../images/bonsai-logo.svg"></a></div>
+
+	<label for="drop" class="toggle"><img class="menu-ham" src="../images/menu.svg"></label>
+	<input type="checkbox" id="drop" />
+
+	<ul class="menu">
+
+		<li class="header_menu_item "> <a href="../guides/getting-started.html">Quick Start</a></li>
+
+	
+		<li class="header_menu_item"> <!-- First Tier Drop Down --> <label for="drop-1" class="toggle">Guides +</label><a  href="#">Guides</a>			
+			<input type="checkbox" id="drop-1"/>
+			<ul id="guides">
+				<li class=""> <a href="../guides/ai-engine-guide.html">AI Engine Guide</a>  </li>
+				<li class=""> <a href="../guides/inkling-guide.html">Inkling Guide</a>  </li>
+				<li class=""> <a href="../guides/cli-install-guide.html">Install the CLI</a>  </li>
+				<li class=""> <a href="../guides/local-dev-guide.html">Run the Platform Locally</a>  </li>
+				<li class=""> <a href="../guides/web-graphs-guide.html">Understanding BRAIN Graphs</a>  </li>
+			</ul> 
+		</li>
+
+		<li class="header_menu_item"> <!-- First Tier Drop Down --> <label for="drop-2" class="toggle">References +</label><a  href="#">References</a>			
+			<input type="checkbox" id="drop-2"/>
+			<ul id="references">
+				<li class=""> <a href="../references/api-reference.html">API</a>  </li>
+				<li class=""> <a href="../references/cli-reference.html">CLI</a>  </li>
+				<li class=""> <a href="../references/inkling-reference.html">Inkling</a>  </li>
+				<li class=""> <a href="../references/library-reference.html">Library</a>  </li>
+			</ul> 
+		</li>
+		
+		<li class="header_menu_item "> <a href="../examples.html">Examples</a></li>
+
+		<li>
+			<input type="search" id="docs-search" placeholder="Search Bonsai Docs">
+		</li>
+
+
+	</ul>
+
+</nav>
+
+
+
+
+
+	<div id="main-wrapper">
+
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="../images/navbar.png" alt="Navbar" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <div class="page-title">SDK2 Beta Examples</div>
+      <div id="toc">
+      </div>
+      
+			 
+<ul class="toc-footer">
+
+<li><a href='https://bons.ai'>Bonsai Home</a></li>
+<li><a href='https://beta.bons.ai'>BRAIN Dashboard</a></li>
+<li><a href='https://github.com/BonsaiAI/slate'>Contribute to the Docs</a></li>
+<li><a href='http://pages.bons.ai/apply.html'>Apply for Bonsai Platform Preview</a></li>
+<li><a href='https://bons.ai/contact-us#contact-page-form'>Contact Us</a></li>
+
+</ul>
+       
+        
+	   <div class="cc-bottom">
+	
+	<div class="toc-footer bottom cc-info">
+
+		<a href='https://creativecommons.org/licenses/by-sa/4.0/' class="cc-icon-width" >
+			<svg class="cc" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+			viewBox="0 0 70.7 13.4" style="enable-background:new 0 0 70.7 13.4;" xml:space="preserve">
+
+				<g>
+
+				<g>
+				<circle class="st0" cx="6.8" cy="6.7" r="6.1"/>
+				<path d="M6.7,0c1.9,0,3.5,0.7,4.8,2c0.6,0.6,1.1,1.4,1.4,2.2c0.3,0.8,0.5,1.7,0.5,2.6c0,0.9-0.2,1.8-0.5,2.6
+				c-0.3,0.8-0.8,1.5-1.4,2.1c-0.7,0.6-1.4,1.1-2.2,1.5c-0.8,0.3-1.7,0.5-2.6,0.5S5,13.3,4.2,12.9c-0.8-0.3-1.5-0.8-2.2-1.5
+				s-1.1-1.4-1.5-2.2S0,7.6,0,6.7C0,5.8,0.2,5,0.5,4.2S1.3,2.6,2,2C3.3,0.7,4.8,0,6.7,0z M6.7,1.2c-1.5,0-2.8,0.5-3.9,1.6
+				C2.3,3.4,1.9,4,1.6,4.6C1.4,5.3,1.2,6,1.2,6.7c0,0.7,0.1,1.4,0.4,2.1c0.3,0.7,0.7,1.3,1.2,1.8c0.5,0.5,1.1,0.9,1.8,1.2
+				c0.7,0.3,1.4,0.4,2.1,0.4c0.7,0,1.4-0.1,2.1-0.4c0.7-0.3,1.3-0.7,1.8-1.2c1-1,1.6-2.3,1.6-3.9c0-0.7-0.1-1.4-0.4-2.1
+				c-0.3-0.7-0.7-1.3-1.2-1.8C9.5,1.8,8.2,1.2,6.7,1.2z M6.6,5.6L5.7,6.1C5.6,5.9,5.5,5.7,5.4,5.6C5.3,5.6,5.1,5.5,5,5.5
+				c-0.6,0-0.9,0.4-0.9,1.2c0,0.4,0.1,0.6,0.2,0.9C4.5,7.8,4.7,7.9,5,7.9c0.4,0,0.7-0.2,0.8-0.6l0.8,0.4C6.5,8.1,6.2,8.3,5.9,8.5
+				c-0.3,0.2-0.7,0.3-1,0.3c-0.6,0-1.1-0.2-1.5-0.6C3.1,7.9,2.9,7.4,2.9,6.7c0-0.6,0.2-1.1,0.6-1.5c0.4-0.4,0.8-0.6,1.4-0.6
+				C5.7,4.6,6.3,5,6.6,5.6z M10.5,5.6L9.6,6.1C9.5,5.9,9.4,5.7,9.3,5.6C9.1,5.6,9,5.5,8.9,5.5C8.3,5.5,8,5.9,8,6.7
+				c0,0.4,0.1,0.6,0.2,0.9c0.2,0.2,0.4,0.3,0.7,0.3c0.4,0,0.7-0.2,0.8-0.6l0.8,0.4c-0.2,0.3-0.4,0.6-0.7,0.8c-0.3,0.2-0.7,0.3-1,0.3
+				c-0.6,0-1.1-0.2-1.5-0.6C7,7.9,6.8,7.4,6.8,6.7c0-0.6,0.2-1.1,0.6-1.5c0.4-0.4,0.8-0.6,1.4-0.6C9.6,4.6,10.2,5,10.5,5.6z"/>
+				</g>
+
+				</g>
+			</svg>
+		</a>
+		
+		<a href='https://creativecommons.org/licenses/by-sa/4.0/'>Content:
+		CC-BY-SA </a>
+		
+	</div>
+
+</div>
+
+    </div>
+	      
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        
+          <h1 id="examples-overview">Examples Overview</h1>
+
+<aside class="warning">
+These are examples for a beta release of sdk2. If you have any issues please contact support or your sales representative.
+</aside>
+
+<p>This page contains working examples of Inkling code in conjunction with python simulator files. All of these examples and the libraries that accompany them can be found on <a href="https://github.com/BonsaiAI">BonsaiAI&rsquo;s GitHub page</a> and are also linked within each Example.</p>
+
+<p>All of the <strong>Python</strong>, <strong>OpenAI Gym</strong>, and <strong>EnergyPlus</strong> examples can be trained in the cloud with Bonsai managed simulators. A full list of supported Docker containers for remotely managed simulators can be found in the <a href="../references/cli-reference.html#bproj-file">Project File Reference</a>.</p>
+
+<p>If you have any suggestions of examples you&rsquo;d like to see us implement please <a href="https://bons.ai/contact-us#contact-page-form">contact the support team</a>.</p>
+
+<h3 id="custom-python-simulator-examples">Custom Python Simulator Examples</h3>
+
+<ul>
+<li><strong>SimPy Simulator</strong>: A basic example of how to use SimPy to simulate a scenario. This one is an elevator dropping people off on 3 floors.</li>
+</ul>
+
+<h3 id="openai-gym-examples">OpenAI Gym Examples</h3>
+
+<ul>
+<li><strong>Cart Pole</strong>: A simple control problem where a cart must make a simple move to keep a pole balanced on top.</li>
+<li><strong>Mountain Car</strong>: A simple control problem where a car must build up enough momentum to climb a hill.</li>
+</ul>
+
+<h3 id="real-world-examples">Real World Examples</h3>
+
+<ul>
+<li><strong>HVAC with EnergyPlus</strong>: An example of climate control machine teaching using EnergyPlus and BCVTB for simulation. </li>
+</ul>
+
+          <h1 id="simpy-elevator-simulation">SimPy Elevator Simulation</h1>
+
+<blockquote>
+<p><img src="../images/elevator_output.png" alt="ASCII Elevator Output" /></p>
+</blockquote>
+
+<p><a href="https://github.com/BonsaiAI/simpy-elevator-sample"><strong>Download the full source code on GitHub</strong></a> if you want to run this simulator locally.</p>
+
+<p>In this example, <a href="https://simpy.readthedocs.io/en/latest/index.html">SimPy</a>, a process-based discrete-event simulation framework based on standard Python, is used to simulate an elevator effectively transporting people to their desired floor. The simulated elevator gets rewarded by having people wait for the least amount of time. This example includes a simple elevator SimPy simulator, a Python simulation, and the simulation&rsquo;s Inkling file.</p>
+
+<p>&ldquo;Processes in SimPy are defined by Python generator functions and may, for example, be used to model active components like customers, vehicles or agents. SimPy also provides various types of shared resources to model limited capacity congestion points (like servers, checkout counters and tunnels).&rdquo; - SimPy docs</p>
+
+<p>This simulation is to provide actions (up, down, open doors) for an elevator, given floor requests from randomly arriving passengers. SimPy has a great framework for simulating time only when some state changes, which speeds up training for systems that would otherwise be mostly waiting.</p>
+
+<p>In the image to the right, the elevator logs output every 100 seconds, then shows the state of the world, and then a list of recent passengers. The world state is the floor, the number of people waiting, plus the elevator, and the number of people inside.</p>
+
+<p><code class="prettyprint">1: 0| 2: 1| 3: 0| [_1_]</code> shows zero people on the first floor, one person waiting on the second floor, and one person in the elevator on the third floor.</p>
+
+<p>For more ideas of how SimPy can simulate real world problems see the <a href="https://simpy.readthedocs.io/en/latest/examples/index.html#examples">SimPy Examples page</a>.</p>
+
+<h2 id="inkling-file">Inkling File</h2>
+
+<h6 id="schema">Schema</h6>
+<pre class="highlight inkling tab-inkling"><code><span class="c1"># Position is current location of elevator</span>
+<span class="c1"># State of each floor: 1 if the floor is requested, 0 if not</span>
+<span class="k">schema</span> <span class="nx">FloorState</span>
+    <span class="kr">Int8</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span> <span class="nx">Position</span><span class="p">,</span>
+    <span class="kr">Int8</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">}</span> <span class="nx">Floor1</span><span class="p">,</span>
+    <span class="kr">Int8</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">}</span> <span class="nx">Floor2</span><span class="p">,</span>
+    <span class="kr">Int8</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">}</span> <span class="nx">Floor3</span>
+<span class="k">end</span>
+</code></pre>
+<p>The <code class="prettyprint">FloorState</code> schema defines the simulation <code class="prettyprint">state</code> updated from the simulation&rsquo;s <code class="prettyprint">simulate</code> method.</p>
+<pre class="highlight inkling tab-inkling"><code><span class="c1"># command options: up, open, down</span>
+<span class="k">schema</span> <span class="nx">Action</span>
+    <span class="kr">Int8</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span> <span class="nx">command</span>
+<span class="k">end</span>
+</code></pre>
+<p>The <code class="prettyprint">Action</code> schema defines the possible actions the elevator can take. In this case the command given to the elevator is &lsquo;0&rsquo; is open, &lsquo;1&rsquo; is go up a floor, and &lsquo;2&rsquo; is go down a floor.</p>
+<pre class="highlight inkling tab-inkling"><code><span class="c1"># Possible option for configuration</span>
+<span class="k">schema</span> <span class="nx">ElevatorConfig</span>
+    <span class="kr">Int8</span> <span class="nx">episode_length</span>
+<span class="k">end</span>
+</code></pre>
+<p>The <code class="prettyprint">ElevatorConfig</code> schema outlines a possible configuration you could give to the elevator if you wanted to tailor its learning in the lessons outlined later. In this example is is not used.</p>
+
+<h6 id="concept">Concept</h6>
+<pre class="highlight inkling tab-inkling"><code><span class="c1"># Predicts an Action and follows input from the FloorState schema</span>
+<span class="k">concept</span> <span class="nx">elevator_plan</span> <span class="k">is</span> <span class="nx">classifier</span>
+    <span class="k">predicts</span> <span class="p">(</span><span class="nx">Action</span><span class="p">)</span>
+    <span class="k">follows</span> <span class="kr">input</span><span class="p">(</span><span class="nx">FloorState</span><span class="p">)</span>
+    <span class="k">feeds</span> <span class="kr">output</span>
+<span class="k">end</span>
+</code></pre>
+<p>This concept is named <code class="prettyprint">elevator_plan</code>, a classifier, which predicts an <code class="prettyprint">Action</code> given the current <code class="prettyprint">FloorState</code>. In this simple example, we are training the concept to make an action (go up a floor, go down a floor, or open the doors) based on the current state of the floor the elevator is on.</p>
+
+<h6 id="simulator">Simulator</h6>
+<pre class="highlight inkling tab-inkling"><code><span class="c1"># Connect to SimPy simulator for training</span>
+<span class="k">simulator</span> <span class="nx">elevator_simulator</span><span class="p">(</span><span class="nx">ElevatorConfig</span><span class="p">)</span>
+    <span class="k">action</span> <span class="p">(</span><span class="nx">Action</span><span class="p">)</span>
+    <span class="k">state</span> <span class="p">(</span><span class="nx">FloorState</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
+<p>The simulator clause declares that a simulator named <code class="prettyprint">elevator_simulator</code> will be connecting to the server for training. This <code class="prettyprint">elevator_simulator</code> expects an action defined in the <code class="prettyprint">Action</code> schema as input and replies with a state defined in the <code class="prettyprint">FloorState</code> schema as output.</p>
+
+<h6 id="curriculum">Curriculum</h6>
+<pre class="highlight inkling tab-inkling"><code><span class="c1"># This trains the concept using a single lesson</span>
+<span class="c1"># Maximize the elevator_objective defined in elevator_simulator.py</span>
+<span class="k">curriculum</span> <span class="nx">high_score_curriculum</span>
+    <span class="k">train</span> <span class="nx">elevator_plan</span>
+    <span class="k">with</span> <span class="k">simulator</span> <span class="nx">elevator_simulator</span>
+    <span class="k">objective</span> <span class="nx">elevator_objective</span>
+        <span class="k">lesson</span> <span class="nx">get_high_score</span>
+            <span class="k">configure</span>
+                <span class="k">constrain</span> <span class="nx">episode_length</span> <span class="k">with</span> <span class="kr">Int8</span><span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">}</span>
+            <span class="k">until</span>
+                <span class="k">maximize</span> <span class="nx">elevator_objective</span>
+<span class="k">end</span>
+</code></pre>
+<p>The curriculum <code class="prettyprint">high_score_curriculum</code> trains <code class="prettyprint">elevator_plan</code> using <code class="prettyprint">elevator_simulator</code>. The BRAIN that runs this Inkling code will try to maximize the value returned from <code class="prettyprint">elevator_objective</code> until you stop training. The reward function passed to <code class="prettyprint">elevator_objective</code> is a method in the simulator <code class="prettyprint">elevator_simulator.py</code> in which it returns the waiting time of the total sum of people as a negative number, in order to maximize it. The code for this can be seen at the end of the simulator excerpt below.</p>
+
+<p>This curriculum contains one simple lesson, called <code class="prettyprint">get_high_score</code>. It configures the simulation, but in this case the lesson is simply using a dummy variable to not provide the elevator with any starting condition to learn from. The training starts from random placement and actions.</p>
+
+<h2 id="simulator-excerpt">Simulator Excerpt</h2>
+<pre class="highlight python tab-python"><code><span class="c"># Excerpt of simulator class from the elevator_simulator.py file</span>
+
+<span class="k">class</span> <span class="nc">ElevatorSimulator</span><span class="p">(</span><span class="n">Simulator</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">episode_start</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'called episode_start'</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">env</span> <span class="o">=</span> <span class="n">env</span> <span class="o">=</span> <span class="n">simpy</span><span class="o">.</span><span class="n">Environment</span><span class="p">()</span>
+        <span class="n">floors</span> <span class="o">=</span> <span class="p">[</span><span class="n">simpy</span><span class="o">.</span><span class="n">Resource</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">BUILDING_SIZE</span><span class="p">)]</span>
+        <span class="n">store</span> <span class="o">=</span> <span class="n">simpy</span><span class="o">.</span><span class="n">Store</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="n">elevator</span><span class="o">.</span><span class="n">Lstate</span><span class="p">()</span>
+        <span class="n">person_score</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">reqs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">env</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">elevator</span><span class="o">.</span><span class="n">claim</span><span class="p">(</span><span class="n">floors</span><span class="p">,</span> <span class="n">reqs</span><span class="p">))</span>
+        <span class="n">env</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">elevator</span><span class="o">.</span><span class="n">person_generator</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">floors</span><span class="p">,</span> <span class="n">person_score</span><span class="p">))</span>
+        <span class="n">env</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">elevator</span><span class="o">.</span><span class="n">display_process</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">person_score</span><span class="p">,</span> <span class="n">state</span><span class="p">))</span>
+
+        <span class="c"># We use the single step version of elevator (elevator_one)</span>
+        <span class="c"># this allows the simulator to run until the elevator uses a command.</span>
+        <span class="n">ep</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">process</span><span class="p">(</span>
+            <span class="n">elevator</span><span class="o">.</span><span class="n">elevator_one</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">floors</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">store</span><span class="p">,</span> <span class="n">reqs</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">floors</span> <span class="o">=</span> <span class="n">floors</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">store</span> <span class="o">=</span> <span class="n">store</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="n">state</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">person_score</span> <span class="o">=</span> <span class="n">person_score</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reqs</span> <span class="o">=</span> <span class="n">reqs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ep</span> <span class="o">=</span> <span class="n">ep</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_state</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">simulate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">):</span>
+        <span class="n">command</span> <span class="o">=</span> <span class="n">action</span><span class="p">[</span><span class="s">'command'</span><span class="p">]</span>
+        <span class="n">env</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">env</span>
+        <span class="c"># print('[advance]', end='')</span>
+        <span class="c"># print('command: {}'.format(command))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">command</span> <span class="o">=</span> <span class="n">command</span>
+
+        <span class="c"># pass our command to a resource by way of this doit() method</span>
+        <span class="n">env</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">doit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">store</span><span class="p">,</span> <span class="n">command</span><span class="p">))</span>
+
+        <span class="n">env</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">until</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ep</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ep</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">elevator</span><span class="o">.</span><span class="n">elevator_one</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">floors</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">store</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">reqs</span><span class="p">))</span>
+        <span class="c"># print('stepped to {}'.format(env.now))</span>
+
+        <span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_state</span><span class="p">()</span>
+        <span class="n">done</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_done</span><span class="p">()</span>
+        <span class="n">reward</span> <span class="o">=</span> <span class="bp">None</span>
+
+        <span class="c"># only calculate reward for training mode</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">predict</span><span class="p">:</span>
+            <span class="n">reward</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_elevator_objective</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_state</span><span class="p">(),</span> <span class="n">reward</span><span class="p">,</span> <span class="n">done</span>
+
+    <span class="k">def</span> <span class="nf">_get_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">""" This function must be implemented for all simulators.
+        During training and prediction, this is used to construct the state
+        message that represents the current simulation state.
+        It is assumed that this function returns Simulator.State objects """</span>
+
+        <span class="c"># print('[get_state]', end='')</span>
+
+        <span class="c"># if a floor is requested, state=1</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="nb">min</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">queue</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">floors</span><span class="p">]</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="p">{</span><span class="s">'Floor{}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ix</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span> <span class="n">v</span> <span class="k">for</span> <span class="n">ix</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">values</span><span class="p">)}</span>
+        <span class="n">state</span><span class="p">[</span><span class="s">'Position'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">floor</span>
+        <span class="c"># print(state)</span>
+
+        <span class="k">return</span> <span class="n">state</span>
+
+    <span class="k">def</span> <span class="nf">_get_done</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">done</span> <span class="o">=</span> <span class="n">done</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">now</span> <span class="o">&gt;</span> <span class="n">SIM_TIME</span>
+        <span class="k">return</span> <span class="n">done</span>
+
+    <span class="k">def</span> <span class="nf">_elevator_objective</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c"># print('[objective]', end='')</span>
+        <span class="n">waiting</span> <span class="o">=</span> <span class="n">elevator</span><span class="o">.</span><span class="n">count_waiting</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">person_score</span><span class="p">)</span>
+        <span class="c"># print("returning score %d for %d people" % (active, len(scores)))</span>
+
+        <span class="c"># return as negative because the simulator maximizes this value.</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">waiting</span>
+</code></pre>
+<p>The full simulator file <em>elevator_simulator.py</em> and elevator simulation file <em>elevator.py</em> for this example is with the rest of the <a href="https://github.com/BonsaiAI/simpy-elevator-sample">simpy-elevator code</a> on GitHub.</p>
+
+<p>This is a Python simulator which uses the elevator.py custom Python simulation using SimPy. This <em>elevator_simulator.py</em> file repeatedly runs the elevator simulation for each episode of training to get details of where people start out, how many are on the elevator, and what floor they are going to, etc. Each episode the curriculum in Inkling trains the concept by sending a new <code class="prettyprint">Action</code> to the BRAIN based on the <code class="prettyprint">FloorState</code> of the simulator.</p>
+
+<p>The <code class="prettyprint">_elevator_objective</code> function returns a negative waiting value because this value is going to be maximized, and we want to actually minimize the collective group of people&rsquo;s wait time.</p>
+
+<p>For more information on the functions inside of this simulator class and how to implement them see the <a href="http://docs.bons.ai/references/library-reference.html">Library Reference</a>.</p>
+
+<p>Also note that if you would like to see how this simulator can be run without Bonsai - to demonstrate how the emulator behaves with a hard-coded algorithm - you can do so by running elevator.py directly.</p>
+
+          <h1 id="openai-gym-cart-pole">OpenAI Gym: Cart Pole</h1>
+
+<blockquote>
+<p><img src="../images/cart-pole-balance.gif" alt="Cart Pole Balance" /></p>
+</blockquote>
+
+<p><a href="https://github.com/BonsaiAI/gym-cartpole-sample"><strong>Download the full source code on GitHub</strong></a> if you want to run this simulator locally. If you want to run Cart Pole remotely on the Bonsai Platform as a managed simulator, create a new BRAIN selecting the Cart Pole demo on <a href="https://beta.bons.ai/new">beta.bons.ai</a>.</p>
+
+<p>In this example, we&rsquo;ll walk you through the various statements that are part of the Cart Pole Inkling file. Each statement is followed by an explanation of the statement.</p>
+
+<p>Cart Pole is a classic control problem. <a href="https://gym.openai.com/envs/CartPole-v1">OpenAI Gym</a> describes it as:</p>
+
+<p><em>A pole is attached by an un-actuated joint to a cart, which moves along a frictionless track. The system is controlled by applying a force of +1 or -1 to the cart. The pendulum starts upright, and the goal is to prevent it from falling over. A reward of +1 is provided for every timestep that the pole remains upright. The episode ends when the pole is more than 15 degrees from vertical, or the cart moves more than 2.4 units from the center.</em></p>
+
+<h2 id="inkling-file">Inkling File</h2>
+
+<h6 id="schema">Schema</h6>
+<pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">GameState</span>
+    <span class="kr">Float32</span> <span class="nx">position</span><span class="p">,</span>
+    <span class="kr">Float32</span> <span class="nx">velocity</span><span class="p">,</span>
+    <span class="kr">Float32</span> <span class="nx">angle</span><span class="p">,</span>
+    <span class="kr">Float32</span> <span class="nx">rotation</span>
+<span class="k">end</span>
+</code></pre>
+<p>The schema <code class="prettyprint">GameState</code> names four records — <code class="prettyprint">position</code>, <code class="prettyprint">velocity</code>, <code class="prettyprint">angle</code>, and <code class="prettyprint">rotation</code> — and assigns a type to them. This information is input from the simulation.</p>
+<pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">Action</span>
+    <span class="kr">Int8</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">}</span> <span class="nx">command</span>
+<span class="k">end</span>
+</code></pre>
+<p>The schema <code class="prettyprint">Action</code> names a record — <code class="prettyprint">action</code> —  and assigns it a constrained type.</p>
+<pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">CartPoleConfig</span>
+    <span class="kr">Int8</span> <span class="nx">episode_length</span><span class="p">,</span>
+    <span class="kr">UInt8</span> <span class="nx">deque_size</span>
+<span class="k">end</span>
+</code></pre>
+<p>The schema <code class="prettyprint">CartPoleConfig</code> names two records — <code class="prettyprint">episode_length</code> and
+ <code class="prettyprint">deque_size</code> — and assigns each of them a type.   <code class="prettyprint">episode_length</code> is a signed <code class="prettyprint">Int8</code> because -1 is used for &ldquo;run until pole drops&rdquo;.</p>
+
+<h6 id="concept">Concept</h6>
+<pre class="highlight inkling tab-inkling"><code><span class="k">concept</span> <span class="nx">balance</span> <span class="k">is</span> <span class="nx">classifier</span>
+    <span class="k">predicts</span> <span class="p">(</span><span class="nx">Action</span><span class="p">)</span>
+    <span class="k">follows</span> <span class="kr">input</span><span class="p">(</span><span class="nx">GameState</span><span class="p">)</span>
+    <span class="k">feeds</span> <span class="kr">output</span>
+<span class="k">end</span>
+</code></pre>
+<p>The concept is named <code class="prettyprint">balance</code>, and it takes input from the simulator. That input is the records in the schema <code class="prettyprint">GameState</code>. The balance concept outputs the move the AI should make in the simulator. This output is the record in the <code class="prettyprint">Action</code> schema.</p>
+
+<h6 id="simulator">Simulator</h6>
+<pre class="highlight inkling tab-inkling"><code><span class="k">simulator</span> <span class="nx">cartpole_simulator</span><span class="p">(</span><span class="nx">CartPoleConfig</span><span class="p">)</span> 
+    <span class="k">action</span> <span class="p">(</span><span class="nx">Action</span><span class="p">)</span>
+    <span class="k">state</span> <span class="p">(</span><span class="nx">GameState</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
+<p>The <code class="prettyprint">cartpole_simulator</code> gets information from two schemas. The first schema, <code class="prettyprint">CartPoleConfig</code>, specifies the schema for configuration of the simulation. The second schema contains the state of the simulator that is sent to the lesson.</p>
+
+<h6 id="curriculum">Curriculum</h6>
+<pre class="highlight inkling tab-inkling"><code><span class="k">curriculum</span> <span class="nx">balance_curriculum</span>
+    <span class="k">train</span> <span class="nx">balance</span>
+    <span class="k">with</span> <span class="k">simulator</span> <span class="nx">cartpole_simulator</span>
+    <span class="k">objective</span> <span class="nx">open_ai_gym_default_objective</span>
+
+        <span class="k">lesson</span> <span class="nx">balancing</span>
+            <span class="k">configure</span>
+                <span class="k">constrain</span> <span class="nx">episode_length</span> <span class="k">with</span> <span class="kr">Int8</span><span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">},</span>
+                <span class="k">constrain</span> <span class="nx">deque_size</span> <span class="k">with</span> <span class="kr">UInt8</span><span class="p">{</span><span class="mi">1</span><span class="p">}</span>
+            <span class="k">until</span>
+                <span class="k">maximize</span> <span class="nx">open_ai_gym_default_objective</span>
+<span class="k">end</span>
+</code></pre>
+<p>The curriculum&rsquo;s name is <code class="prettyprint">balance_curriculum</code>. It trains the <code class="prettyprint">balance</code> concept with the <code class="prettyprint">cartpole_simulator</code>. The objective for this curriculum is <code class="prettyprint">up_time</code>. The objective measures how long the pole stays upright.</p>
+
+<p>This curriculum contains one lesson, called <code class="prettyprint">balancing</code>. It configures the simulation, by setting two constraints for the state of the simulator. The lesson trains until the AI has maximized the objective.</p>
+
+<h2 id="simulator-file">Simulator File</h2>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">bonsai_ai</span> <span class="kn">import</span> <span class="n">Brain</span><span class="p">,</span> <span class="n">Config</span>
+<span class="kn">from</span> <span class="nn">bonsai_gym_common</span> <span class="kn">import</span> <span class="n">GymSimulator</span>
+
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s">'gym_simulator'</span><span class="p">)</span>
+<span class="n">log</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">CartPole</span><span class="p">(</span><span class="n">GymSimulator</span><span class="p">):</span>
+    <span class="c"># Environment name, from openai-gym</span>
+    <span class="n">environment_name</span> <span class="o">=</span> <span class="s">'CartPole-v0'</span>
+
+    <span class="c"># simulator name from Inkling</span>
+    <span class="n">simulator_name</span> <span class="o">=</span> <span class="s">'cartpole_simulator'</span>
+
+    <span class="c"># convert openai gym observation to our state schema</span>
+    <span class="k">def</span> <span class="nf">gym_to_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">observation</span><span class="p">):</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="p">{</span><span class="s">'position'</span><span class="p">:</span> <span class="n">observation</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                 <span class="s">'velocity'</span><span class="p">:</span> <span class="n">observation</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                 <span class="s">'angle'</span><span class="p">:</span>    <span class="n">observation</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                 <span class="s">'rotation'</span><span class="p">:</span> <span class="n">observation</span><span class="p">[</span><span class="mi">3</span><span class="p">]}</span>
+        <span class="k">return</span> <span class="n">state</span>
+
+    <span class="c"># convert our action schema into openai gym action</span>
+    <span class="k">def</span> <span class="nf">action_to_gym</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">action</span><span class="p">[</span><span class="s">'command'</span><span class="p">]</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="c"># create a brain, openai-gym environment, and simulator</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">Config</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
+    <span class="n">brain</span> <span class="o">=</span> <span class="n">Brain</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+    <span class="n">sim</span> <span class="o">=</span> <span class="n">CartPole</span><span class="p">(</span><span class="n">brain</span><span class="p">)</span>
+    <span class="n">sim</span><span class="o">.</span><span class="n">run_gym</span><span class="p">()</span>
+</code></pre>
+<p>This is an OpenAI Gym example which uses the OpenAI environment as its simulator. For more information about the simulator used see the <a href="https://github.com/BonsaiAI/bonsai-gym-common">Bonsai Gym Common GitHub repo</a> which is a python library for integrating a Bonsai BRAIN with OpenAI Gym environments.</p>
+
+          <h1 id="openai-gym-mountain-car">OpenAI Gym: Mountain Car</h1>
+
+<blockquote>
+<p><img src="../images/mountain-car-control.gif" alt="Mountain Car Control" /></p>
+</blockquote>
+
+<p><a href="https://github.com/BonsaiAI/gym-mountaincar-sample"><strong>Download the full source code on GitHub</strong></a> if you want to run this simulator locally. If you want to run Mountain Car remotely on the Bonsai Platform as a managed simulator, create a new BRAIN selecting the Mountain Car demo on <a href="https://beta.bons.ai/new">beta.bons.ai</a></p>
+
+<p>We&rsquo;ve used pieces of code from this example in several places, but here we&rsquo;ll walk you through all the various statements that are part of the Mountain Car Inkling file. Each statement is followed by an explanation of the statement.</p>
+
+<p>Mountain Car is a classic control problem. <a href="https://gym.openai.com/envs/MountainCar-v0">OpenAI Gym</a> describes it as:</p>
+
+<p><em>A car is on a one-dimensional track, positioned between two &ldquo;mountains&rdquo;. The goal is to drive up the mountain on the right; however, the car&rsquo;s engine is not strong enough to scale the mountain in a single pass. Therefore, the only way to succeed is to drive back and forth to build up momentum.</em></p>
+
+<h2 id="inkling-file">Inkling File</h2>
+
+<h6 id="schema">Schema</h6>
+<pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">GameState</span>
+    <span class="kr">Float32</span> <span class="nx">x_position</span><span class="p">,</span>
+    <span class="kr">Float32</span> <span class="nx">x_velocity</span>
+<span class="k">end</span>
+</code></pre>
+<p>The <code class="prettyprint">GameState</code> schema names two records — <code class="prettyprint">x_position</code> and <code class="prettyprint">y_position</code> — and assigns a type to them.</p>
+<pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">Action</span>
+    <span class="kr">Int8</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span> <span class="nx">command</span>
+<span class="k">end</span>
+</code></pre>
+<p>The <code class="prettyprint">Action</code> schema names a single record — <code class="prettyprint">action</code> — and assigns a constrained type to it.</p>
+<pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">MountainCarConfig</span>
+    <span class="kr">Int8</span> <span class="nx">episode_length</span><span class="p">,</span>
+    <span class="kr">UInt8</span> <span class="nx">deque_size</span>
+<span class="k">end</span>
+</code></pre>
+<p>The <code class="prettyprint">MountainCarConfig</code> schema names two records — <code class="prettyprint">episode_length</code> and <code class="prettyprint">deque_size</code> — and assigns types to them.</p>
+
+<h6 id="concept">Concept</h6>
+<pre class="highlight inkling tab-inkling"><code><span class="k">concept</span> <span class="nx">high_score</span> <span class="k">is</span> <span class="nx">classifier</span>
+    <span class="k">predicts</span> <span class="p">(</span><span class="nx">Action</span><span class="p">)</span>
+    <span class="k">follows</span> <span class="kr">input</span><span class="p">(</span><span class="nx">GameState</span><span class="p">)</span>
+    <span class="k">feeds</span> <span class="kr">output</span>
+<span class="k">end</span>
+</code></pre>
+<p>The concept is named <code class="prettyprint">high_score</code>, and it takes input from the simulator about the state of the game (<code class="prettyprint">GameState</code> schema). It outputs to the <code class="prettyprint">Action</code> schema. This is the AI&rsquo;s next move in the game.</p>
+
+<h6 id="simulator">Simulator</h6>
+<pre class="highlight inkling tab-inkling"><code><span class="k">simulator</span> <span class="nx">mountaincar_simulator</span><span class="p">(</span><span class="nx">MountainCarConfig</span><span class="p">)</span>
+    <span class="k">action</span> <span class="p">(</span><span class="nx">Action</span><span class="p">)</span>
+    <span class="k">state</span> <span class="p">(</span><span class="nx">GameState</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
+<p>The <code class="prettyprint">mountaincar_simulator</code> gets information from two schemas. The first schema, <code class="prettyprint">MountainCarConfig</code>, specifies the schema for configuration of the simulation. The second schema contains the state of the simulator that is sent to the lesson.</p>
+
+<h6 id="curriculum">Curriculum</h6>
+<pre class="highlight inkling tab-inkling"><code><span class="k">curriculum</span> <span class="nx">high_score_curriculum</span>
+    <span class="k">train</span> <span class="nx">high_score</span>
+    <span class="k">with</span> <span class="k">simulator</span> <span class="nx">mountaincar_simulator</span>
+    <span class="k">objective</span> <span class="nx">open_ai_gym_default_objective</span>
+
+        <span class="k">lesson</span> <span class="nx">get_high_score</span>
+            <span class="k">configure</span>
+                <span class="k">constrain</span> <span class="nx">episode_length</span> <span class="k">with</span> <span class="kr">Int8</span><span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">},</span>
+                <span class="k">constrain</span> <span class="nx">deque_size</span> <span class="k">with</span> <span class="kr">UInt8</span><span class="p">{</span><span class="mi">1</span><span class="p">}</span>
+            <span class="k">until</span>
+                <span class="k">maximize</span> <span class="nx">open_ai_gym_default_objective</span>
+<span class="k">end</span>
+</code></pre>
+<p>The curriculum is named <code class="prettyprint">high_score_curriculum</code>, and it trains the <code class="prettyprint">high_score</code> concept using the <code class="prettyprint">mountaincar_simulator</code>. This curriculum contains one lesson, called <code class="prettyprint">get_high_score</code>. It configures the simulation, by setting two constraints for the state of the simulator.</p>
+
+<p>The lesson trains until the AI has maximized the objective named <code class="prettyprint">score</code>.</p>
+
+<h2 id="simulator-file">Simulator File</h2>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">bonsai_ai</span> <span class="kn">import</span> <span class="n">Brain</span><span class="p">,</span> <span class="n">Config</span>
+<span class="kn">from</span> <span class="nn">bonsai_gym_common</span> <span class="kn">import</span> <span class="n">GymSimulator</span>
+
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s">'gym_simulator'</span><span class="p">)</span>
+<span class="n">log</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">MountainCar</span><span class="p">(</span><span class="n">GymSimulator</span><span class="p">):</span>
+    <span class="n">environment_name</span> <span class="o">=</span> <span class="s">'MountainCar-v0'</span>
+    <span class="n">simulator_name</span> <span class="o">=</span> <span class="s">'mountaincar_simulator'</span>
+
+    <span class="k">def</span> <span class="nf">gym_to_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">observation</span><span class="p">):</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="p">{</span><span class="s">'x_position'</span><span class="p">:</span> <span class="n">observation</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                 <span class="s">'x_velocity'</span><span class="p">:</span> <span class="n">observation</span><span class="p">[</span><span class="mi">1</span><span class="p">]}</span>
+        <span class="k">return</span> <span class="n">state</span>
+
+    <span class="k">def</span> <span class="nf">action_to_gym</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inkling_action</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">inkling_action</span><span class="p">[</span><span class="s">'command'</span><span class="p">]</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="c"># create a brain, openai-gym environment, and simulator</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">Config</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
+    <span class="n">brain</span> <span class="o">=</span> <span class="n">Brain</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+    <span class="n">sim</span> <span class="o">=</span> <span class="n">MountainCar</span><span class="p">(</span><span class="n">brain</span><span class="p">)</span>
+    <span class="n">sim</span><span class="o">.</span><span class="n">run_gym</span><span class="p">()</span>
+</code></pre>
+<p>This is an OpenAI Gym example which uses the OpenAI environment as its simulator. For more information about the simulator used see the <a href="https://github.com/BonsaiAI/bonsai-gym-common">Bonsai Gym Common GitHub repo</a> which is a python library for integrating a Bonsai BRAIN with OpenAI Gym environments.</p>
+
+          <h1 id="energyplus-hvac-optimization">EnergyPlus HVAC Optimization</h1>
+
+<blockquote>
+<p><img src="../images/energyplus-graph.png" alt="EnergyPlus Graph" /></p>
+</blockquote>
+
+<p><a href="https://github.com/BonsaiAI/energyplus-sample"><strong>Download the full source code on GitHub</strong></a> if you want to run this simulator locally. If you want to run EnergyPlus remotely on the Bonsai Platform as a managed simulator, create a new BRAIN selecting the EnergyPlus demo on <a href="https://beta.bons.ai/new">beta.bons.ai</a>.</p>
+
+<p>In this example, we&rsquo;ll walk you through the various statements that are part of a sample implementation of <a href="https://energyplus.net/">EnergyPlus</a> on the Bonsai Platform, including the simulator and the Inkling files. This is a real-world example of how to use the Bonsai Platform for HVAC control using BCVTB and EnergyPlus.</p>
+
+<p>While this BRAIN is training, the Bonsai AI Engine launches the EnergyPlus simulator in the background for every episode. The <em>energyplus_simulator.py</em> then drives the simulator forward a step at a time until it finishes the episode and then relaunches it for the next episode, driving the actions into it and sending state results back to the Bonsai AI Engine.</p>
+
+<h2 id="inkling-file">Inkling File</h2>
+
+<h6 id="schema">Schema</h6>
+<pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">SimState</span>
+    <span class="kr">Int32</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">}</span> <span class="nx">SolarIrradiation</span>
+<span class="k">end</span>
+</code></pre>
+<p>The <code class="prettyprint">SimState</code> schema defines the dictionary returned from the Python simulation&rsquo;s <code class="prettyprint">advance</code> method to the BRAIN.</p>
+<pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">SimAction</span>
+    <span class="kr">Int32</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">}</span> <span class="nx">shade</span>
+<span class="k">end</span>
+</code></pre>
+<p>The <code class="prettyprint">SimAction</code> schema defines the &lsquo;actions&rsquo;, a dictionary of control signals this AI can send to the climate control. For example: <code class="prettyprint">shade</code> == night, off, day.</p>
+<pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">SimConfig</span>
+    <span class="kr">Int32</span><span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">}</span> <span class="nx">unused</span>
+<span class="k">end</span>
+</code></pre>
+<p>The <code class="prettyprint">SimConfig</code> schema in this case is not used (but is still required to be defined in Inkling) but it would define the dictionary passed as a parameter to the <code class="prettyprint">set_properties</code> method of the Python simulator.</p>
+
+<h6 id="concept">Concept</h6>
+<pre class="highlight inkling tab-inkling"><code><span class="k">concept</span> <span class="nx">my_concept</span> <span class="k">is</span> <span class="nx">classifier</span>
+   <span class="k">predicts</span> <span class="p">(</span><span class="nx">SimAction</span><span class="p">)</span>
+   <span class="k">follows</span> <span class="kr">input</span><span class="p">(</span><span class="nx">SimState</span><span class="p">)</span>
+   <span class="k">feeds</span> <span class="kr">output</span>
+<span class="k">end</span>
+</code></pre>
+<p>This concept is named <code class="prettyprint">my_concept</code> which predicts a <code class="prettyprint">SimAction</code> given a <code class="prettyprint">SimState</code>. In this simple demo we just ask the Bonsai Platform to generate any model that can learn to control the server using these inputs and outputs.</p>
+
+<h6 id="simulator">Simulator</h6>
+<pre class="highlight inkling tab-inkling"><code><span class="k">simulator</span> <span class="nx">energyplus_simulator</span><span class="p">(</span><span class="nx">SimConfig</span><span class="p">)</span>
+    <span class="k">action</span> <span class="p">(</span><span class="nx">SimAction</span><span class="p">)</span>
+    <span class="k">state</span> <span class="p">(</span><span class="nx">SimState</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
+<p>The simulator clause declares that a simulator named <code class="prettyprint">energyplus_simulator</code> will be connecting to the server for training. This code snippet binds the previous schemas to this simulator. To define the training relationship between the simulator and the concept we must begin by defining the simulator. <code class="prettyprint">energyplus_simulator</code> expects an action defined in the <code class="prettyprint">SimAction</code> schema as input and replies with a state defined in the <code class="prettyprint">SimState</code> schema as output.</p>
+
+<h6 id="curriculum">Curriculum</h6>
+<pre class="highlight inkling tab-inkling"><code><span class="k">curriculum</span> <span class="nx">my_curriculum</span>
+    <span class="k">train</span> <span class="nx">my_concept</span>
+    <span class="k">with</span> <span class="k">simulator</span> <span class="nx">energyplus_simulator</span>
+    <span class="k">objective</span> <span class="nx">reward_function</span>
+        <span class="k">lesson</span> <span class="nx">my_first_lesson</span>
+            <span class="k">configure</span>
+                <span class="k">constrain</span> <span class="nx">unused</span> <span class="k">with</span> <span class="kr">Int32</span><span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">}</span>
+            <span class="k">until</span>
+                <span class="k">maximize</span> <span class="nx">reward_function</span>
+<span class="k">end</span>
+</code></pre>
+<p>The curriculum <code class="prettyprint">my_curriculum</code> trains <code class="prettyprint">my_concept</code> using <code class="prettyprint">energyplus_simulator</code>. The BRAIN that runs this Inkling code will try to maximize the value returned from <code class="prettyprint">reward_function</code> until you stop training. <code class="prettyprint">reward_function</code> is a method in the Python simulator.</p>
+
+<p>This curriculum contains one lesson, called <code class="prettyprint">my_first_lesson</code>. It configures the simulation, by setting a number of constraints for the state of the simulator.</p>
+
+<h2 id="simulator-excerpt">Simulator Excerpt</h2>
+<pre class="highlight python tab-python"><code><span class="c"># Excerpt of simulator class from the energyplus_simulator.py file</span>
+
+<span class="k">class</span> <span class="nc">EnergyPlusSimulator</span><span class="p">(</span><span class="n">Simulator</span><span class="p">):</span>
+    <span class="s">"""
+    Runs the Actuator model for training or prediction by launching it
+    against the Ptolemy server above. This uses the Bonsai Simulator
+    base class to interface with the BRAIN server.
+    """</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">ePlus85Actuator</span><span class="p">()</span>
+    <span class="n">server</span> <span class="o">=</span> <span class="bp">None</span>
+
+    <span class="n">clientState</span> <span class="o">=</span> <span class="p">{</span><span class="s">'SolarIrradiation'</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+    <span class="n">shade</span> <span class="o">=</span> <span class="mf">0.</span>
+    <span class="n">is_terminal</span> <span class="o">=</span> <span class="bp">True</span>
+
+    <span class="k">def</span> <span class="nf">episode_start</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
+        <span class="s">"""
+        Callback called when an training episode starts. We use this
+        to reset the Ptolemy server and start a new simulation session.
+        Returns the initial state.
+        """</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">restartPtolemyServer</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">clientState</span>
+
+    <span class="k">def</span> <span class="nf">simulate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">):</span>
+        <span class="s">"""
+        Callback called  when stepping the simulation. It sends actions to the
+        model and returns the state of the simulation to the BRAIN.
+        """</span>
+
+        <span class="c"># take the action</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">shade</span> <span class="o">=</span> <span class="n">action</span><span class="p">[</span><span class="s">'shade'</span><span class="p">]</span> <span class="o">*</span> <span class="mf">6.</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_terminal</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">restartPtolemyServer</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">writeToClient</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">shade</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">readFromPtolemyClient</span><span class="p">()</span>
+
+        <span class="c"># you like graphs? WE HAVE GRAPHS. SO MANY GRAPHS.</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_terminal</span><span class="p">:</span>
+            <span class="n">graph</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">grapher</span><span class="p">()</span>
+            <span class="n">write_graph</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+
+            <span class="c"># clear old data</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="p">([],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[])</span>
+
+        <span class="n">reward</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reward_function</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">clientState</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">reward</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_terminal</span>
+
+    <span class="k">def</span> <span class="nf">finished</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">"""
+        Called at the end of the simulation to output the graph.
+        """</span>
+        <span class="n">graph</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">grapher</span><span class="p">()</span>
+        <span class="n">py</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s">"graph.html"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">readFromPtolemyClient</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">"""
+        Utility method used to do the read portion of the exchange
+        with the Ptolemy server and client.
+        """</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">readFromClient</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">fromClient</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">fromClient</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">clientState</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s">'SolarIrradiation'</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">fromClient</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">/</span><span class="mi">100</span><span class="p">)</span>
+                <span class="p">}</span>
+
+            <span class="c"># save the client input in our graph</span>
+            <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">fromClient</span><span class="p">)):</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">fromClient</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+                <span class="c"># scale some of the values for readability</span>
+                <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                    <span class="n">value</span> <span class="o">/=</span> <span class="mf">100.</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_terminal</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">exitFlag</span> <span class="o">!=</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="nf">restartPtolemyServer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">"""
+        Used to restart the server and setup the initial state.
+        """</span>
+
+        <span class="c"># set some default values for get_state</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_terminal</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">clientState</span> <span class="o">=</span> <span class="p">{</span><span class="s">'SolarIrradiation'</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+
+        <span class="c"># close the old connections if they're still open</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+        <span class="c"># start a new episode</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"EnergyPlusSimulator: starting PtolemyServer"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">server</span> <span class="o">=</span> <span class="n">PtolemyServer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">)</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">waitForClient</span><span class="p">()</span>
+            <span class="c"># get initial state</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">readFromPtolemyClient</span><span class="p">()</span>
+
+        <span class="k">except</span> <span class="nb">OSError</span> <span class="k">as</span> <span class="n">msg</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">"EnergyPlusSimulator: error on restart:"</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">server</span> <span class="o">=</span> <span class="bp">None</span>
+
+    <span class="k">def</span> <span class="nf">reward_function</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">"""
+        Calculates the reward for the current state of the simulation
+        """</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"EnergyPlusSimulator: reward_function"</span><span class="p">)</span>
+
+        <span class="c"># largest reward is best reward (maximize)</span>
+        <span class="n">reward</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">fromClient</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">fromClient</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+            <span class="c"># SolarIrradiation === Shades down === good</span>
+            <span class="n">SolarIrradiation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">fromClient</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">/</span> <span class="mf">100.</span>
+
+            <span class="c"># sun is down</span>
+            <span class="k">if</span> <span class="n">SolarIrradiation</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">shade</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">reward</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>  <span class="c"># shades on</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">reward</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c"># shade off</span>
+
+            <span class="c"># sun is out</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">shade</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">reward</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c"># shades on</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">reward</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>  <span class="c"># shades off</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">reward</span><span class="p">)</span>
+
+        <span class="k">print</span><span class="p">(</span><span class="s">"EnergyPlusSimulator reward:"</span><span class="p">,</span> <span class="n">reward</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">reward</span>
+</code></pre>
+<p>The full simulator file <em>energyplus_simulator.py</em> for this example is with the rest of the <a href="https://github.com/BonsaiAI/energyplus-sample">energyplus-sample code</a> on GitHub.</p>
+
+<p>This is a Python simulator for integrating the EnergyPlus simulator into the Bonsai AI Engine. This <em>energyplus_simulator.py</em> file repeatedly runs the EnergyPlus simulator in the background with new actions sent from the Bonsai AI Engine by passing the state from EnergyPlus to the backend, and the action from the backend back to EnergyPlus.</p>
+
+<p>For more information on the functions inside of this simulator class and how to implement them see the <a href="http://docs.bons.ai/references/library-reference.html">Library Reference</a>.</p>
+
+      </div>
+      <div class="dark-box">
+      </div>
+    </div>
+
+    </div>
+
+  </div>
+  <!-- at the end of the BODY -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+  <script type="text/javascript"> docsearch({
+  apiKey: '49fa6f01d7ff94a85b9b7434b1c2b7cf',
+  indexName: 'bon-sai',
+  inputSelector: '#docs-search',
+  debug: false // Set debug to true if you want to inspect the dropdown
+  });
+  </script>
+  </body>
+</html>
