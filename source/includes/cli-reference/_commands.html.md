@@ -13,16 +13,18 @@ Usage: bonsai [OPTIONS] COMMAND [ARGS]...
 
 Options:
   --debug / --no-debug  Enable/disable verbose debugging output.
-  --version             Show the version and exit.
-  --help                Show this message and exit.
+  --version             Show the version and check if bonsai is up to date.
+  -h, --help            Show this message and exit.
 
 Commands:
   configure  Authenticate with the BRAIN Server.
   create     Create a BRAIN and set the default BRAIN.
   delete     Delete a BRAIN.
   download   Downloads all the files related to a BRAIN.
+  help       Show this message and exit.
   list       Lists BRAINs owned by current user.
   log        Display logs from remote training.
+  pull       Downloads project file(s) from a BRAIN.
   push       Uploads project file(s) to a BRAIN.
   sims       Retrieve information about simulators.
   switch     Change the active configuration section.
@@ -141,6 +143,22 @@ This command is meant for simulators running remotely on Bonsai's servers using 
 
 If `bonsai log --follow` is used, then display will update when new logs exist.  Use `Ctrl-c` to stop this command.
 
+## bonsai pull
+
+```
+$ bonsai pull --help
+Usage: bonsai pull [OPTIONS]
+
+  Downloads project file(s) from a BRAIN.
+
+Options:
+  --all         Option to pull all files from targeted BRAIN.
+  --brain TEXT  Override to target another BRAIN.
+  -h, --help    Show this message and exit.
+```
+
+`bonsai pull` will ask you one by one whether you would like to download the specified file. You can respond with [Y/n] to the prompt for each file in the BRAIN's project. If you would like to automatically download all of the files from the BRAIN then `bonsai pull -all` will update all files without asking you which ones to download.
+
 ## bonsai push
 
 ```
@@ -156,6 +174,22 @@ Options:
 ```
 
 `bonsai push` will upload the entire project file contents and all accompanying files to the Bonsai AI Engine and can be viewed on [beta.bons.ai](https://beta.bons.ai). You can override the BRAIN you want to push to or the project directory you want to push.
+
+## bonsai sims list
+
+```
+$ bonsai sims list --help
+Usage: bonsai sims list [OPTIONS]
+
+  List the simulators connected to the BRAIN server.
+
+Options:
+  --brain TEXT    Override to target another BRAIN.
+  --project TEXT  Override to target another project directory.
+  --help          Show this message and exit.
+```
+
+`bonsai sims list` shows you all of the simulators you have connected to the BRAIN server.
 
 ## bonsai train
 
@@ -174,7 +208,7 @@ Commands:
   stop    Stops training on the specified BRAIN.
 ```
 
-`bonsai train` has no funtionality itself. It will output the help to guide you to start, status, or stop training.
+`bonsai train` has no functionality itself. It will output the help to guide you to start, status, or stop training.
 
 ## bonsai train start
 
@@ -229,19 +263,3 @@ Options:
 ```
 
 `bonsai train status` is used to see the current training status of your BRAIN.
-
-## bonsai sims list
-
-```
-$ bonsai sims list --help
-Usage: bonsai sims list [OPTIONS]
-
-  List the simulators connected to the BRAIN server.
-
-Options:
-  --brain TEXT    Override to target another BRAIN.
-  --project TEXT  Override to target another project directory.
-  --help          Show this message and exit.
-```
-
-`bonsai sims list` shows you all of the simulators you have connected to the BRAIN server.
