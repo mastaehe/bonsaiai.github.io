@@ -1,5 +1,5 @@
 ---
-title: Inkling Guide
+title: Learn the Inkling Language
 
 toc_footers:
   -  <%= partial "partials/footer-links" %>
