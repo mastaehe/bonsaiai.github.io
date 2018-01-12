@@ -1,5 +1,5 @@
 ---
-title: AI Engine Guide
+title: Understand AI Engine Components
 
 toc_footers:
   -  <%= partial "partials/footer-links" %>
