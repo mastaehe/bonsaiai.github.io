@@ -1,5 +1,8 @@
 # Notebook Overview
 
+> Jupyter Notebook Graphing
+> ![Jupyter Notebook Graph](../images/jupyter-example-graph.png)
+
 This guide contains basic instructions for how to setup the [Jupyter Notebook App][1] and contains an example notebook for how to access Bonsai's API through the notebook environment. Instructions for how to setup and use the APIs are contained within the notebook itself.
 
 **Before you read this guide** you will need to have successfully trained a BRAIN using either the [Quick Start][2] web guide or have [Run the Platform Locally][3]. This Jupyter Notebook will access information about the BRAINs you have trained and their training data.
@@ -12,6 +15,9 @@ Jupyter Notebooks are often used in the data science community to access, analyz
 * visualize results with feature rich graphs
 
 ## What Are Jupyter Notebooks?
+
+> Example Jupyter Notebook Dashboard
+> ![Example Jupyter Notebook](../images/jupyter-example.png)
 
 Notebook documents (or “notebooks”) are documents produced by the [Jupyter Notebook App][1], which contain both computer code (e.g. python) and rich text elements (paragraph, equations, figures, links, etc...). Notebook documents are both human-readable documents containing the analysis description and the results (figures, tables, etc..) as well as executable documents which can be run to perform data analysis.
 
