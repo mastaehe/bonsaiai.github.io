@@ -44,6 +44,10 @@ The simulation graph illustrates the states, actions, and rewards for a given si
 
 You may also pause the display of data being collected on the graph at any time. This can be useful when a simulation’s iterations happen very quickly. When you unpause the graph data will be shown in real-time.
 
+<aside class="notice">
+This graph is only active during BRAIN training. Once training is stopped, it seizes to plot and deactivates.
+</aside> 
+
 ## Data Series
 
 > ![Cartpole Position Command](../images/graph-cartpole-command-position.png)
