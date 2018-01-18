@@ -225,7 +225,7 @@ Go to System -> Advanced system settings -> Environment Variables to set these i
 
 **macOS/Linux**
 
-Use `export` in macOS or Linux to set these variables into your PATH. You may wish to copy and
+Use `export` in macOS or Linux in a terminal window to set these variables into your PATH. You may wish to copy and
 paste this into your `.bash_profile` for future use.
 
 
