@@ -184,7 +184,7 @@ tools like the bonsai sdk need to know where to send traffic.  For the
 bonsai sdk, this is done in two steps - change the event_loop to
 enable proxy support, and provide the proxy details.
 
-#### event_loop="websocket"
+#### 1. Change `event_loop`
 
 ```python
 simulator = FindCenterSimulator()
@@ -193,19 +193,40 @@ bonsai.run_for_training_or_prediction("inverted_pendulum_simulator",
                                       event_loop="websocket")
 ```
 
-Set the event loop as an argument to `run_for_training_or_prediction`.
+Set `event_loop="websocket"` as an argument to `run_for_training_or_prediction` in your simulator.
 
-#### Environment variables
+#### 2. Set Environment Variables
+
+> Windows
+
+```powershell
+| Variable       | Value                                      |
+| -------------- | ------------------------------------------ |
+| ALL_PROXY      | http://username:password@URL:3456   |
+```
+
+> macOS/Linux
 
 ```sh
-$ export ALL_PROXY=http://username:password@example:3456
+$ export ALL_PROXY=http://username:password@URL:3456 
 ```
+
 
 Next specify the proxy details as environment variables.  Proxy
 details differ between companies, so ask your IT staff for the proxy
-URL and if any login information is also needed.
+URL, port number, and if any login information such as username/password is also needed.
 
-`HTTPS_PROXY` and `HTTP_PROXY` are also supported.
+The examples shown use `ALL_PROXY` but `HTTPS_PROXY` and `HTTP_PROXY` are also supported.
+
+**Windows**
+
+Go to System -> Advanced system settings -> Environment Variables to set these in Windows.
+
+
+**macOS/Linux**
+
+Use `export` in macOS or Linux in a terminal window to set these variables into your PATH. You may wish to copy and
+paste this into your `.bash_profile` for future use.
 
 
 # Example
