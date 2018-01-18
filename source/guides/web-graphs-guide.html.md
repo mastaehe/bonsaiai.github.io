@@ -1,5 +1,5 @@
 ---
-title: Understanding BRAIN Graphs
+title: Understand BRAIN Graphs
 
 toc_footers:
   -  <%= partial "partials/footer-links" %>
