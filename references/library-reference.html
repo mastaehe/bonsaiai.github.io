@@ -498,22 +498,42 @@ tools like the bonsai sdk need to know where to send traffic.  For the
 bonsai sdk, this is done in two steps - change the event_loop to
 enable proxy support, and provide the proxy details.</p>
 
-<h4 id="event_loop-websocket">event_loop=&ldquo;websocket&rdquo;</h4>
+<h4 id="1-change-event_loop">1. Change <code class="prettyprint">event_loop</code></h4>
 <pre class="highlight python tab-python"><code><span class="n">simulator</span> <span class="o">=</span> <span class="n">FindCenterSimulator</span><span class="p">()</span>
 <span class="n">bonsai</span><span class="o">.</span><span class="n">run_for_training_or_prediction</span><span class="p">(</span><span class="s">"inverted_pendulum_simulator"</span><span class="p">,</span>
                                       <span class="n">simulator</span><span class="p">,</span>
                                       <span class="n">event_loop</span><span class="o">=</span><span class="s">"websocket"</span><span class="p">)</span>
 </code></pre>
-<p>Set the event loop as an argument to <code class="prettyprint">run_for_training_or_prediction</code>.</p>
+<p>Set <code class="prettyprint">event_loop=&quot;websocket&quot;</code> as an argument to <code class="prettyprint">run_for_training_or_prediction</code> in your simulator.</p>
 
-<h4 id="environment-variables">Environment variables</h4>
-<pre class="highlight sh tab-shell"><code><span class="gp">$ </span><span class="nb">export </span><span class="nv">ALL_PROXY</span><span class="o">=</span>http://username:password@example:3456
+<h4 id="2-set-environment-variables">2. Set Environment Variables</h4>
+
+<blockquote>
+<p>Windows</p>
+</blockquote>
+<pre class="highlight powershell tab-powershell"><code>| Variable       | Value                                      |
+| -------------- | ------------------------------------------ |
+| ALL_PROXY      | http://username:password@URL:3456   |
+</code></pre>
+<blockquote>
+<p>macOS/Linux</p>
+</blockquote>
+<pre class="highlight sh tab-shell"><code><span class="gp">$ </span><span class="nb">export </span><span class="nv">ALL_PROXY</span><span class="o">=</span>http://username:password@URL:3456 
 </code></pre>
 <p>Next specify the proxy details as environment variables.  Proxy
 details differ between companies, so ask your IT staff for the proxy
-URL and if any login information is also needed.</p>
+URL, port number, and if any login information such as username/password is also needed.</p>
 
-<p><code class="prettyprint">HTTPS_PROXY</code> and <code class="prettyprint">HTTP_PROXY</code> are also supported.</p>
+<p>The examples shown use <code class="prettyprint">ALL_PROXY</code> but <code class="prettyprint">HTTPS_PROXY</code> and <code class="prettyprint">HTTP_PROXY</code> are also supported.</p>
+
+<p><strong>Windows</strong></p>
+
+<p>Go to System -&gt; Advanced system settings -&gt; Environment Variables to set these in Windows.</p>
+
+<p><strong>macOS/Linux</strong></p>
+
+<p>Use <code class="prettyprint">export</code> in macOS or Linux in a terminal window to set these variables into your PATH. You may wish to copy and
+paste this into your <code class="prettyprint">.bash_profile</code> for future use.</p>
 
 <h1 id="example">Example</h1>
 
