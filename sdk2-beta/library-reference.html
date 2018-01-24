@@ -379,30 +379,25 @@ loop is sometimes referred to as an &ldquo;iteration&rdquo;.</p>
 
           <h1 id="brain-class">Brain Class</h1>
 
-<p>Used to manage a BRAIN instance and talk with the server backend. Contains
-state information about the BRAIN and can be used to upload/download inkling
+<p>Manages a BRAIN instance, talks with the server backend, and contains
+information about the BRAIN state. In future versions will be used to upload and download Inkling
 to and from the BRAIN on the server.</p>
 
-<p>Requires a shared pointer to a <code class="prettyprint">bonsai::Config</code> and a BRAIN name.</p>
+<p>Requires a <code class="prettyprint">Config</code> and a BRAIN name.</p>
 
 <h2 id="brain-config-name">Brain(config, name)</h2>
 
-<p>Construct a BRAIN using an existing configuration and BRAIN name.</p>
+<p>Creates a local object for interacting with an existing BRAIN on the server.</p>
 
 <ul>
 <li><code class="prettyprint">config</code> Shared pointer to previously created <code class="prettyprint">bonsai::Config</code>.</li>
-<li><code class="prettyprint">name</code>   BRAIN name as specified on the server. If name is empty the
-        BRAIN name in <code class="prettyprint">config</code> will be used instead.</li>
+<li><code class="prettyprint">name</code>   BRAIN name as specified on the server. If name is empty, the
+        BRAIN name in <code class="prettyprint">config</code> is used instead.</li>
 </ul>
-
-<h2 id="setup">setup()</h2>
-
-<p>Checks the <code class="prettyprint">config()</code> and starts up a BRAIN for training if running in training mode.
-Stops a BRAIN running for training mode if requested for prediction and the version is the latest.</p>
 
 <h2 id="update">update()</h2>
 
-<p>Retrieves current state information about the BRAIN from the server</p>
+<p>Refreshes local state information with information from the current state of the BRAIN on the server</p>
 
 <h2 id="bool-ready">bool ready()</h2>
 
@@ -411,11 +406,11 @@ A BRAIN may not be ready if it has no uploaded inkling files or is configured in
 
 <h2 id="start">start()</h2>
 
-<p>Instructs the server to start training for this BRAIN.</p>
+<p>Instructs the server to start training this BRAIN.</p>
 
 <h2 id="stop">stop()</h2>
 
-<p>Instructs the server to stop training for this BRAIN.</p>
+<p>Instructs the server to stop training this BRAIN.</p>
 
 <h2 id="string-name">string name()</h2>
 
@@ -423,21 +418,29 @@ A BRAIN may not be ready if it has no uploaded inkling files or is configured in
 
 <h2 id="string-description">string description()</h2>
 
-<p>Returns the user created description for the BRAIN.</p>
+<p>Returns the user-provided description for the BRAIN.</p>
 
 <h2 id="int-version">int version()</h2>
 
-<p>Returns version number of the BRAIN</p>
+<p>Returns the version number of the BRAIN</p>
+
+<h2 id="int-latest_version">int latest_version()</h2>
+
+<p>Returns latest version number of the BRAIN</p>
 
 <h2 id="config-config">Config config()</h2>
 
-<p>Configuration used to talk to this BRAIN.</p>
+<p>Returns the configuration used to talk to this BRAIN.</p>
+
+<h2 id="operator-ostream-brain">operator&lt;&lt;(ostream, brain)</h2>
+
+<p>Prints out a representation of Brain that is useful for debugging.</p>
 
           <h1 id="config-class">Config Class</h1>
 
-<p>Used to manage bonsai configuration environments.
-Config files can be either specified in the users home directory
-or in a local directory. In addition, configuration parameters can be parsed from
+<p>Manages bonsai configuration environments.
+Config files can be specified in the user home directory
+or in a local directory. Configuration parameters can also be parsed from
 the command line.</p>
 
 <p>Example <code class="prettyprint">~/.bonsai</code> config file:</p>
@@ -450,21 +453,17 @@ the command line.</p>
 <span class="py">url</span> <span class="p">=</span> <span class="s">http://localhost:5000</span>
 <span class="py">username</span> <span class="p">=</span> <span class="s">admin</span>
 <span class="py">accesskey</span> <span class="p">=</span> <span class="s">00000000-1111-2222-3333-000000000001</span>
-
-<span class="nn">[alpha]</span>
-<span class="py">url</span> <span class="p">=</span> <span class="s">https://alpha-api.int.bons.ai</span>
-<span class="py">username</span> <span class="p">=</span> <span class="s">mikest</span>
 </code></pre>
 <p>The <code class="prettyprint">profile</code> key can be used to switch between different profiles in
-the same configuration file.</p>
+one configuration file.</p>
 
 <h2 id="config-profile">Config(profile)</h2>
 
 <p>Constructs a default configuration.
-- <code class="prettyprint">profile</code> Name of the default profile. Default value is an empty string.</p>
+<code class="prettyprint">profile</code> is the name of the default profile. Default value is an empty string.</p>
 
 <p>Configurations are stored in <code class="prettyprint">~/.bonsai</code> and <code class="prettyprint">./.bonsai</code> configuration files.
-The local configuration file will override settings in the users home directory configuration file.</p>
+The local configuration file overrides settings in the configuration file in the user home directory.</p>
 <pre class="highlight python tab-python"><code><span class="n">config</span> <span class="o">=</span> <span class="n">Config</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span> <span class="p">{</span>
@@ -498,7 +497,7 @@ In Python, <code class="prettyprint">argc</code> is not necessary.</p>
 <h2 id="accesskey">accesskey()</h2>
 
 <p>Server authentication token.
-Obtained from the bonsai server. you will need to set it in your config.</p>
+Obtained from the bonsai server. You need to set it in your config.</p>
 
 <h2 id="username">username()</h2>
 
@@ -523,7 +522,7 @@ Name of the BRAIN on the server.</p>
 <h2 id="predict">predict()</h2>
 
 <p>Simulator mode.
-The mode simulators will run in, true if running for prediction, false for training.</p>
+The mode in which simulators will run. True if running for prediction, false for training.</p>
 
 <h2 id="brain_version">brain_version()</h2>
 
@@ -532,10 +531,14 @@ The version of the brain to use when running for prediction. Set to 0 to use lat
 
 <h2 id="recording_file">recording_file()</h2>
 
-<p>Simulator log file path.
-Path to a file to use for simulator logging. If you are implementing a simulator this may
-be used to specify a log file in a simulator specific nature. Implementation is left as an
-exercise to the simulator.</p>
+<p>Simulator log file path. </p>
+
+<p>Path to a file for simulator logging. If you are implementing a simulator you can use this to specify a log file in a simulator-specific nature. 
+Implementation is left for the simulator to do as an exercise.</p>
+
+<h2 id="operator-ostream-config">operator&lt;&lt;(ostream, config)</h2>
+
+<p>Will print out a representation of Config that is useful for debugging.</p>
 
           <h1 id="simulator-class">Simulator Class</h1>
 
@@ -544,13 +547,13 @@ exercise to the simulator.</p>
 </blockquote>
 
 <p>This class is used to interface with the server while training or running predictions against
-a <strong>BRAIN</strong>. It is an abstract base class, and the developer must create a subclass.</p>
+a <strong>BRAIN</strong>. It is an abstract base class, and to use it a developer must create a subclass.</p>
 
-<p>The <code class="prettyprint">Simulator</code> class has a close relationship with the <strong>Inkling</strong> file associated with
-the <strong>BRAIN</strong>. The name used to construct the <code class="prettyprint">Simulator</code> must match the name of the simulator
+<p>The <code class="prettyprint">Simulator</code> class is closely related to the <strong>Inkling</strong> file that is associated with
+the <strong>BRAIN</strong>. The name used to construct <code class="prettyprint">Simulator</code> must match the name of the simulator
 in the <em>Inkling</em> file.</p>
 
-<p>There are two main methods one must override, <code class="prettyprint">episode_start</code> and <code class="prettyprint">simulate</code>.</p>
+<p>There are two main methods that you must override, <code class="prettyprint">episode_start</code> and <code class="prettyprint">simulate</code>. The diagram demonstrates how these are called during training.</p>
 
 <h2 id="brain-brain">Brain brain()</h2>
 
@@ -562,21 +565,21 @@ in the <em>Inkling</em> file.</p>
 
 <h2 id="bool-predict">bool predict()</h2>
 
-<p>Returns weather or not the simulation is setup to run in predict or training mode</p>
+<p>Returns a value indicating whether the simulation is set up to run in predict mode or training mode</p>
 
 <h2 id="string-objective_name">string objective_name()</h2>
 
-<p>Accessor method which returns the name of the current objective.
-Objective may be updated before <code class="prettyprint">episode_start</code> is called. When running
-for prediction and during start up, objective will return an empty string.</p>
+<p>Accessor method that returns the name of the current objective.
+The objective may be updated before <code class="prettyprint">episode_start</code> is called. When running
+for prediction and during start up, objective will return an empty std::string.</p>
 
 <h2 id="episode_start-parameters-initial_state">episode_start(parameters, initial_state)</h2>
 
 <h3 id="arguments">Arguments</h3>
 
 <ul>
-<li><code class="prettyprint">parameters</code>     InklingMessage of initialization parameters for an episode as defined in
-               inkling. <code class="prettyprint">parameters</code> Will be populated if a training session is running.</li>
+<li><code class="prettyprint">parameters</code>     InklingMessage of episode initialization parameters as defined in
+               inkling. <code class="prettyprint">parameters</code> will be populated if a training session is running.</li>
 <li><code class="prettyprint">initial_state</code>  Output InklingMessage. The subclasser should populate this message with the
                initial state of the simulation.</li>
 </ul>
@@ -617,6 +620,8 @@ updated to reflect the current objective for this episode.</p>
 
 <p>This call is where a simulation should be reset for the next round.</p>
 
+<p>The default implementation will throw an exception.</p>
+
 <h2 id="simulate-action-state-terminal">simulate(action, state, terminal)</h2>
 
 <h3 id="arguments">Arguments</h3>
@@ -656,24 +661,24 @@ updated to reflect the current objective for this episode.</p>
     <span class="n">state</span><span class="p">.</span><span class="n">set_float32</span><span class="p">(</span><span class="s">"angle"</span><span class="p">,</span>    <span class="n">angle</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre>
-<p>This callback is used to step the simulation forward by a single step. It passes in
+<p>This callback steps the simulation forward by a single step. It passes in
 the <code class="prettyprint">action</code> to be taken, and expects the resulting <code class="prettyprint">state</code>, <code class="prettyprint">reward</code> for the current
 <code class="prettyprint">objective</code>, and a <code class="prettyprint">terminal</code> flag used to signal the end of an episode. Note that an
 episode may be reset prematurely by the backend during training.</p>
 
-<p>For multi-lesson curriculum the <code class="prettyprint">objective_name</code> will change from episode to episode.
-The simulator should take care to insure that it is returning the correct reward for the
+<p>For a multi-lesson curriculum, the <code class="prettyprint">objective_name</code> will change from episode to episode.
+In this case ensure that the simulator is returning the correct reward for the
 different lessons.</p>
 
-<p>Returning <code class="prettyprint">true</code> for the <code class="prettyprint">terminal</code> flag will signal the start of a new episode.</p>
+<p>Returning <code class="prettyprint">true</code> for the <code class="prettyprint">terminal</code> flag signals the start of a new episode.</p>
+
+<p>The default implementation will throw an exception.</p>
 
 <h2 id="bool-standby-reason">bool standby(reason)</h2>
 
 <h3 id="arguments">Arguments</h3>
 
-<ul>
-<li><code class="prettyprint">reason</code>  A string describing the reason training has been delayed</li>
-</ul>
+<p><code class="prettyprint">reason</code>  A std::string describing the reason training has been delayed</p>
 
 <p>The default action is to wait one second and continue. If returns <code class="prettyprint">true</code>,
 the server status will be checked again and the loop will continue.</p>
@@ -687,11 +692,40 @@ the server status will be checked again and the loop will continue.</p>
     <span class="k">continue</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre>
-<p>Main loop call for driving the simulation. Will return <code class="prettyprint">false</code> when the
+<p>Main loop call for driving the simulation. Returns <code class="prettyprint">false</code> when the
 simulation has finished or halted.</p>
 
 <p>The client should call this method in a <code class="prettyprint">while</code> loop until it returns <code class="prettyprint">false</code>.
-To run for prediction <code class="prettyprint">brain()-&gt;config()-&gt;predict()</code> must return <code class="prettyprint">true</code>.</p>
+To run for prediction, <code class="prettyprint">brain()-&gt;config()-&gt;predict()</code> must return <code class="prettyprint">true</code>.</p>
+
+<h2 id="event-get_next_event">Event get_next_event()</h2>
+
+<p>Returns the next simulator event in the queue.</p>
+<pre class="highlight cpp tab-cpp"><code><span class="k">auto</span> <span class="n">event</span> <span class="o">=</span> <span class="n">get_next_event</span><span class="p">();</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">()</span> <span class="o">==</span> <span class="n">Type</span><span class="o">::</span><span class="n">Episode_Start</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">es_E</span> <span class="o">=</span> <span class="n">dynamic_pointer_cast</span><span class="o">&lt;</span><span class="n">EpisodeStartEvent</span><span class="o">&gt;</span><span class="p">(</span><span class="n">event</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">initial_properties</span> <span class="o">=</span> <span class="n">es</span><span class="o">-&gt;</span><span class="n">initial_properties</span><span class="p">;</span>
+    <span class="k">auto</span> <span class="n">initial_state</span> <span class="o">=</span> <span class="n">es</span><span class="o">-&gt;</span><span class="n">initial_state</span><span class="p">;</span>
+    <span class="c1">// process initial properties/state
+</span><span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">()</span> <span class="o">==</span> <span class="n">Type</span><span class="o">::</span><span class="n">Simulate</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">sim_E</span> <span class="o">=</span> <span class="n">dynamic_pointer_cast</span><span class="o">&lt;</span><span class="n">SimulatorEvent</span><span class="o">&gt;</span><span class="p">(</span><span class="n">event</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">prediction</span> <span class="o">=</span> <span class="n">sim_E</span><span class="o">-&gt;</span><span class="n">prediction</span><span class="p">;</span>
+    <span class="k">auto</span> <span class="n">state</span> <span class="o">=</span> <span class="n">sim_E</span><span class="o">-&gt;</span><span class="n">state</span><span class="p">;</span>
+    <span class="k">auto</span> <span class="n">reward</span> <span class="o">=</span> <span class="n">sim_E</span><span class="o">-&gt;</span><span class="n">reward</span><span class="p">;</span>
+    <span class="k">auto</span> <span class="n">terminal</span> <span class="o">=</span> <span class="n">sim_E</span><span class="o">-&gt;</span><span class="n">terminal</span><span class="p">;</span>
+    <span class="c1">// process simulator step 
+</span><span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">()</span> <span class="o">==</span> <span class="n">Type</span><span class="o">::</span><span class="n">Finished</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">close</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre>
+<h2 id="void-close">void close()</h2>
+
+<p>Closes the connection between <code class="prettyprint">Simulator</code> and the Bonsai BRAIN.</p>
+<pre class="highlight cpp tab-cpp"><code><span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">()</span> <span class="o">==</span> <span class="n">Type</span><span class="o">::</span><span class="n">Finished</span><span class="p">)</span> <span class="n">close</span><span class="p">();</span>
+</code></pre>
+<h2 id="operator-ostream-simulator">operator&lt;&lt;(ostream, simulator)</h2>
+
+<p>Prints out a representation of Simulator that is useful for debugging.</p>
 
       </div>
       <div class="dark-box">
