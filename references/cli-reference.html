@@ -401,16 +401,18 @@ Usage: bonsai [OPTIONS] COMMAND [ARGS]...
 
 Options:
   --debug / --no-debug  Enable/disable verbose debugging output.
-  --version             Show the version and exit.
-  --help                Show this message and exit.
+  --version             Show the version and check if bonsai is up to date.
+  -h, --help            Show this message and exit.
 
 Commands:
   configure  Authenticate with the BRAIN Server.
   create     Create a BRAIN and set the default BRAIN.
   delete     Delete a BRAIN.
   download   Downloads all the files related to a BRAIN.
+  help       Show this message and exit.
   list       Lists BRAINs owned by current user.
   log        Display logs from remote training.
+  pull       Downloads project file(s) from a BRAIN.
   push       Uploads project file(s) to a BRAIN.
   sims       Retrieve information about simulators.
   switch     Change the active configuration section.
@@ -426,7 +428,7 @@ Usage: bonsai configure [OPTIONS]
 
 Options:
   --key TEXT  Provide an access key.
-  --help      Show this message and exit.
+  -h, --help  Show this message and exit.
 </code></pre>
 <p><code class="prettyprint">bonsai configure</code> sets up authentication between you (as a user) and the server. This enables the server to verify that you are allowed to write Inkling code to a specific BRAIN.</p>
 
@@ -442,7 +444,7 @@ Options:
   --project TEXT       Override to target another project directory.
   --project-type TEXT  Specify to download and use demo/starter project files
                        (i.e. "demos/cartpole")
-  --help               Show this message and exit.
+  -h, --help           Show this message and exit.
 </code></pre>
 <p><code class="prettyprint">bonsai create</code> generates a new brain and names it BRAIN_NAME.  It also sets the assumed BRAIN name for later commands.</p>
 
@@ -481,7 +483,7 @@ Usage: bonsai.py download [OPTIONS] BRAIN_NAME
   Downloads all the files related to a BRAIN.
 
 Options:
-  --help  Show this message and exit.
+  -h, --help  Show this message and exit.
 </code></pre>
 <p><code class="prettyprint">bonsai download</code> creates local copies of your BRAIN project files. This will contain your Inkling code and may also contain simulator code. This command works like git clone - it copies files into a new directory, and will not try and overwrite files that already exist.</p>
 
@@ -492,7 +494,7 @@ Usage: bonsai list [OPTIONS]
   Lists BRAINs owned by current user or by the user under a given URL.
 
 Options:
-  --help  Show this message and exit.
+  -h, --help  Show this message and exit.
 </code></pre>
 <p><code class="prettyprint">bonsai list</code> shows you the BRAINs you currently own or by a user under a given URL. You must have your Bonsai account configured with <code class="prettyprint">bonsai configure</code> before you can see this list.</p>
 
@@ -506,13 +508,26 @@ Options:
   --brain TEXT    Override to target another BRAIN.
   --project TEXT  Override to target another project directory.
   --follow        Continually follow simulator's output.
-  --help          Show this message and exit.
+  -h, --help      Show this message and exit.
 </code></pre>
 <p>Displays <em>stderr</em> and <em>stdout</em> from the currently running simulator. This will display the last 1000 lines of the running simulator&rsquo;s output. You can override the BRAIN you want to log if multiple are running at the same time or the project.</p>
 
 <p>This command is meant for simulators running remotely on Bonsai&rsquo;s servers using <code class="prettyprint">bonsai train start --remote</code>. Simulators running locally will generally output this information at the command prompt.</p>
 
 <p>If <code class="prettyprint">bonsai log --follow</code> is used, then display will update when new logs exist.  Use <code class="prettyprint">Ctrl-c</code> to stop this command.</p>
+
+<h2 id="bonsai-pull">bonsai pull</h2>
+<pre class="highlight plaintext"><code>$ bonsai pull --help
+Usage: bonsai pull [OPTIONS]
+
+  Downloads project file(s) from a BRAIN.
+
+Options:
+  --all         Option to pull all files from targeted BRAIN.
+  --brain TEXT  Override to target another BRAIN.
+  -h, --help    Show this message and exit.
+</code></pre>
+<p><code class="prettyprint">bonsai pull</code> will ask you one by one whether you would like to download the specified file. You can respond with [Y/n] to the prompt for each file in the BRAIN&rsquo;s project. If you would like to automatically download all of the files from the BRAIN then <code class="prettyprint">bonsai pull -all</code> will update all files without asking you which ones to download.</p>
 
 <h2 id="bonsai-push">bonsai push</h2>
 <pre class="highlight plaintext"><code>$ bonsai push --help
@@ -523,9 +538,22 @@ Usage: bonsai push [OPTIONS]
 Options:
   --brain TEXT    Override to target another BRAIN.
   --project TEXT  Override to target another project directory.
-  --help          Show this message and exit.
+  -h, --help      Show this message and exit.
 </code></pre>
 <p><code class="prettyprint">bonsai push</code> will upload the entire project file contents and all accompanying files to the Bonsai AI Engine and can be viewed on <a href="https://beta.bons.ai">beta.bons.ai</a>. You can override the BRAIN you want to push to or the project directory you want to push.</p>
+
+<h2 id="bonsai-sims-list">bonsai sims list</h2>
+<pre class="highlight plaintext"><code>$ bonsai sims list --help
+Usage: bonsai sims list [OPTIONS]
+
+  List the simulators connected to the BRAIN server.
+
+Options:
+  --brain TEXT    Override to target another BRAIN.
+  --project TEXT  Override to target another project directory.
+  -h, --help      Show this message and exit.
+</code></pre>
+<p><code class="prettyprint">bonsai sims list</code> shows you all of the simulators you have connected to the BRAIN server.</p>
 
 <h2 id="bonsai-train">bonsai train</h2>
 <pre class="highlight plaintext"><code>$ bonsai train --help
@@ -534,14 +562,14 @@ Usage: bonsai train [OPTIONS] COMMAND [ARGS]...
   Start and stop training on a BRAIN, as well as get training status information.
 
 Options:
-  --help  Show this message and exit.
+  -h, --help  Show this message and exit.
 
 Commands:
   start   Trains the specified BRAIN.
   status  Gets training status on the specified BRAIN.
   stop    Stops training on the specified BRAIN.
 </code></pre>
-<p><code class="prettyprint">bonsai train</code> has no funtionality itself. It will output the help to guide you to start, status, or stop training.</p>
+<p><code class="prettyprint">bonsai train</code> has no functionality itself. It will output the help to guide you to start, status, or stop training.</p>
 
 <h2 id="bonsai-train-start">bonsai train start</h2>
 <pre class="highlight plaintext"><code>$ bonsai train start --help
@@ -553,7 +581,7 @@ Options:
   --brain TEXT    Override to target another BRAIN.
   --project TEXT  Override to target another project directory.
   --remote        Run a simulator remotely on Bonsai’s servers.
-  --help          Show this message and exit.
+  -h, --help      Show this message and exit.
 </code></pre>
 <p><code class="prettyprint">bonsai train start</code> turns on/enables training mode for the current BRAIN. The BRAIN trains whenever a simulator is connected.</p>
 
@@ -570,7 +598,7 @@ Usage: bonsai train stop [OPTIONS] BRAIN_NAME
 Options:
   --brain TEXT    Override to target another BRAIN.
   --project TEXT  Override to target another project directory.
-  --help          Show this message and exit.
+  -h, --help      Show this message and exit.
 </code></pre>
 <p><code class="prettyprint">bonsai train stop</code> turns off training mode for the current BRAIN.</p>
 
@@ -584,22 +612,9 @@ Options:
   --brain TEXT    Override to target another BRAIN.
   --json          Output status as json.
   --project TEXT  Override to target another project directory.
-  --help          Show this message and exit.
+  -h, --help      Show this message and exit.
 </code></pre>
 <p><code class="prettyprint">bonsai train status</code> is used to see the current training status of your BRAIN.</p>
-
-<h2 id="bonsai-sims-list">bonsai sims list</h2>
-<pre class="highlight plaintext"><code>$ bonsai sims list --help
-Usage: bonsai sims list [OPTIONS]
-
-  List the simulators connected to the BRAIN server.
-
-Options:
-  --brain TEXT    Override to target another BRAIN.
-  --project TEXT  Override to target another project directory.
-  --help          Show this message and exit.
-</code></pre>
-<p><code class="prettyprint">bonsai sims list</code> shows you all of the simulators you have connected to the BRAIN server.</p>
 
           <h1 id="projects-and-config-files">Projects and Config Files</h1>
 
