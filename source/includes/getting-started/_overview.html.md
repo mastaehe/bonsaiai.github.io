@@ -1,7 +1,5 @@
 # Overview
 
-[//]: # (If any commented statements become false, change prior text)
-
 Hello new Bonsai developer!
 
 There are some things you might want to know before you get started. In this section, we're going
@@ -13,8 +11,8 @@ however, **skip down to [Create Your BRAIN][1]** below. We'll guide you through 
 first BRAIN with the Cartpole template, how to get that BRAIN training, and then explain what
 to do with it!
 
-If you'd prefer not to use our web interface, head to our [CLI Guide][7] to follow a similar guide
-using tools on your local computer.
+If you'd prefer not to use our web interface, instead follow [Run the Platform Locally][11] for a similar guide
+to this one on your local computer.
 
 ## The Bonsai Platform
 
@@ -24,7 +22,7 @@ using tools on your local computer.
 
 * **Bonsai Command Line Interface (CLI):** is a command line tool that enables you to configure and
 control the Bonsai Artificial Intelligence (AI) Engine. This is an alternative to using the Web
-Interface and is not covered in this guide. See the [CLI Guide][7] if you prefer to run the platform locally.
+Interface and is not covered in this guide. See how to [Run the Platform Locally][7] if you prefer CLI development.
 * **Web Interface:** is the browser-based tool found at [beta.bons.ai][3] for creating and analyzing
 BRAINs stored in the Bonsai AI Engine. You can also visualize the BRAIN's training on this page.
 This is what we will use for this Quick Start guide because you can get up and running on the
@@ -37,8 +35,6 @@ world inside the virtual environment and receive actions which change that state
 Currently, during the Bonsai Platform preview, you can only use simulators as your training source. Generators
 and Data sources will be released at a future time.
 </aside> 
-
-[//]: # (Simulators are the only training source, beta.bons.ai is current website instead of brains.bons.ai)
 
 ### Teach
 
@@ -108,6 +104,6 @@ simulator, refer to our [Library Reference][4].
 [4]: ../references/library-reference.html
 [5]: #bonsai-brains
 [6]: ./ai-engine-guide.html
-[7]: ./cli-guide.html
+[7]: ./local-dev-guide.html
 [8]: ./inkling-guide.html
 [9]: ../references/api-reference.html

@@ -60,7 +60,7 @@ For users installing <b>Python 3.6</b>: Make sure to check the box on the first 
 Please remember to reboot your computer after installing Python and Git to make sure all install settings take effect.
 </aside>
 
-**Great!** Now that you have Git, Python, and pip installed, you can skip down to [Install the Bonsai CLI][2]. 
+**Great!** Now that you have Git, Python, and pip installed, you can skip down to [Install the Bonsai CLI][3]. 
 
 ### macOS
 
@@ -73,7 +73,7 @@ We highly recommend macOS users download Python directly so you can follow this 
 
 * **pip**: Python version 2.7.9 and greater come with pip (or pip3 for version 3+), but if for some reason you need to use a different version of Python please follow [these instructions][12].
 
-**Great!** Now that you have Git, Python, and pip installed, you can skip down to [Install the Bonsai CLI][2]. 
+**Great!** Now that you have Git, Python, and pip installed, you can skip down to [Install the Bonsai CLI][3]. 
 
 ## Install with Chocolatey or Homebrew
 

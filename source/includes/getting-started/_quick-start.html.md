@@ -11,7 +11,7 @@ Cartpole, a simple balance control problem. The walkthrough of the Inkling code 
 interface can be found in our [Examples][2] and the full source code for you to take a look at
 is on [Bonsai's GitHub][3].
 
-If you'd prefer not to use our web interface, head to our [CLI Guide][11] to follow a similar guide
+If you'd prefer not to use our web interface, instead follow [Run the Platform Locally][11] for a similar guide
 to this one on your local computer.
 
 ## BRAIN Dashboard
@@ -51,7 +51,7 @@ of each file if you click on them on the left.
 
 Your code will automatically compile (if it's Inkling) and save every few seconds while you are
 editing. You never need to edit code in the browser if you don't want to. Check out our
-[CLI Guide][11] to install the Bonsai CLI locally, download these files, and run the rest of this
+[CLI Install Guide][13] to install the Bonsai CLI locally, download these files, and run the rest of this
 guide locally if you want.
 
 
@@ -162,7 +162,7 @@ file, in predict mode, and `--predict-version=latest` will use the latest traini
 [8]: ../../images/quick-start-start-training.png
 [9]: ../../images/quick-start-code-editor.png
 [10]: ../../images/quick-start-trained-brain.png
-[11]: ./cli-guide.html
+[11]: ./local-dev-guide.html
 [12]: ../../images/cart-pole-balance.gif
-[13]: ./cli-guide.html#install-prerequisites
+[13]: ./cli-install-guide.html#install-prerequisites
 [14]: #what-are-brains
