@@ -505,11 +505,11 @@ h6:before {
     }
 
     tr:nth-child(odd)>td {
-      background-color: lighten($main-bg,4.2%);
+      background-color: darken($main-bg,4.2%);
     }
 
     tr:nth-child(even)>td {
-      background-color: lighten($main-bg,2.4%);
+      background-color: darken($main-bg,2.4%);
     }
   }
 
@@ -534,7 +534,7 @@ h6:before {
     background-color: rgba(0,0,0,0.05);
     padding: 3px;
     border-radius: 3px;
-    @extend %break-words;
+//    @extend %break-words;
     @extend %code-font;
   }
 
