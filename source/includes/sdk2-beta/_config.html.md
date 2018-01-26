@@ -37,7 +37,10 @@ int main(int argc, char** argv) {
 ```
 
 Constructs a default configuration.
-`profile` is the name of the default profile. Default value is an empty string.
+
+| Argument | Description |
+| --- | --- |
+|`profile` | Name of the default profile. Default value is an empty string. |
 
 Configurations are stored in `~/.bonsai` and `./.bonsai` configuration files.
 The local configuration file overrides settings in the configuration file in the user home directory.

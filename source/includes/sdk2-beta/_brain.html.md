@@ -44,3 +44,10 @@ Returns the configuration used to talk to this BRAIN.
 
 ## operator<<(ostream, brain)
 Prints out a representation of Brain that is useful for debugging.
+
+**Note:** Used in C++ only.
+
+| Argument | Description |
+| --- | --- |
+| `ostream` | std c++ stream operator. |
+| `config` | Object returned by previously created `Bonsai::Config`. |
