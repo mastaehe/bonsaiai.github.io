@@ -117,6 +117,6 @@ Will print out a representation of Config that is useful for debugging.
 
 | Argument | Description |
 | --- | --- |
-| `ostream` | std c++ stream operator. |
+| `ostream` | A std c++ stream operator. |
 | `config` | Object returned by previously created `Bonsai::Config`. |
 
