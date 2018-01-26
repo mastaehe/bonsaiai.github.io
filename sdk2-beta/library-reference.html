@@ -380,24 +380,34 @@ loop is sometimes referred to as an &ldquo;iteration&rdquo;.</p>
           <h1 id="brain-class">Brain Class</h1>
 
 <p>Manages a BRAIN instance, talks with the server backend, and contains
-information about the BRAIN state. In future versions will be used to upload and download Inkling
-to and from the BRAIN on the server.</p>
+information about the BRAIN state. In future versions will be used to upload
+and download Inkling to and from the BRAIN on the server.</p>
 
-<p>Requires a <code class="prettyprint">Config</code> and a BRAIN name.</p>
+<p>Requires a configuration and a BRAIN name.</p>
 
 <h2 id="brain-config-name">Brain(config, name)</h2>
 
 <p>Creates a local object for interacting with an existing BRAIN on the server.</p>
 
-<ul>
-<li><code class="prettyprint">config</code> Shared pointer to previously created <code class="prettyprint">bonsai::Config</code>.</li>
-<li><code class="prettyprint">name</code>   BRAIN name as specified on the server. If name is empty, the
-        BRAIN name in <code class="prettyprint">config</code> is used instead.</li>
-</ul>
+<table><thead>
+<tr>
+<th>Argument</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">config</code></td>
+<td>Object returned by previously created <code class="prettyprint">Bonsai::Config</code> (C++) or <code class="prettyprint">bonsai_ai.Config()</code> (Python).</td>
+</tr>
+<tr>
+<td><code class="prettyprint">name</code></td>
+<td>BRAIN name as specified on the server. If name is empty, the BRAIN name in <code class="prettyprint">config</code> is used instead.</td>
+</tr>
+</tbody></table>
 
 <h2 id="update">update()</h2>
 
-<p>Refreshes local state information with information from the current state of the BRAIN on the server</p>
+<p>Refreshes local state information with information from the current state of the BRAIN on the server.</p>
 
 <h2 id="bool-ready">bool ready()</h2>
 
@@ -422,11 +432,11 @@ A BRAIN may not be ready if it has no uploaded inkling files or is configured in
 
 <h2 id="int-version">int version()</h2>
 
-<p>Returns the version number of the BRAIN</p>
+<p>Returns the version number of the BRAIN.</p>
 
 <h2 id="int-latest_version">int latest_version()</h2>
 
-<p>Returns latest version number of the BRAIN</p>
+<p>Returns latest version number of the BRAIN.</p>
 
 <h2 id="config-config">Config config()</h2>
 
@@ -436,14 +446,29 @@ A BRAIN may not be ready if it has no uploaded inkling files or is configured in
 
 <p>Prints out a representation of Brain that is useful for debugging.</p>
 
+<p><strong>Note:</strong> Used in C++ only.</p>
+
+<table><thead>
+<tr>
+<th>Argument</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">ostream</code></td>
+<td>A std c++ stream operator.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">config</code></td>
+<td>Object returned by previously created <code class="prettyprint">Bonsai::Config</code>.</td>
+</tr>
+</tbody></table>
+
           <h1 id="config-class">Config Class</h1>
 
-<p>Manages bonsai configuration environments.
-Config files can be specified in the user home directory
-or in a local directory. Configuration parameters can also be parsed from
-the command line.</p>
-
-<p>Example <code class="prettyprint">~/.bonsai</code> config file:</p>
+<blockquote>
+<p>Example <code class="prettyprint">~/.bonsai</code> file</p>
+</blockquote>
 <pre class="highlight ini tab-ini"><code><span class="nn">[DEFAULT]</span>
 <span class="py">username</span> <span class="p">=</span> <span class="s">admin</span>
 <span class="py">accesskey</span> <span class="p">=</span> <span class="s">None</span>
@@ -454,16 +479,15 @@ the command line.</p>
 <span class="py">username</span> <span class="p">=</span> <span class="s">admin</span>
 <span class="py">accesskey</span> <span class="p">=</span> <span class="s">00000000-1111-2222-3333-000000000001</span>
 </code></pre>
+<p>Manages bonsai configuration environments.
+Config files can be specified in the user home directory, <code class="prettyprint">~/.bonsai</code>,
+or in a local directory. Configuration parameters can also be parsed from
+the command line.</p>
+
 <p>The <code class="prettyprint">profile</code> key can be used to switch between different profiles in
 one configuration file.</p>
 
 <h2 id="config-profile">Config(profile)</h2>
-
-<p>Constructs a default configuration.
-<code class="prettyprint">profile</code> is the name of the default profile. Default value is an empty string.</p>
-
-<p>Configurations are stored in <code class="prettyprint">~/.bonsai</code> and <code class="prettyprint">./.bonsai</code> configuration files.
-The local configuration file overrides settings in the configuration file in the user home directory.</p>
 <pre class="highlight python tab-python"><code><span class="n">config</span> <span class="o">=</span> <span class="n">Config</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span> <span class="p">{</span>
@@ -471,26 +495,55 @@ The local configuration file overrides settings in the configuration file in the
     <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">config</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre>
+<p>Constructs a default configuration.</p>
+
+<table><thead>
+<tr>
+<th>Argument</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">profile</code></td>
+<td>Name of the default profile. Default value is an empty string.</td>
+</tr>
+</tbody></table>
+
+<p>Configurations are stored in <code class="prettyprint">~/.bonsai</code> and <code class="prettyprint">./.bonsai</code> configuration files.
+The local configuration file overrides settings in the configuration file in the user home directory.</p>
+
 <h2 id="config-argc-argv-profile">Config(argc, argv, profile)</h2>
 
-<p>Constructs a config by looking in the configuration files and parsing the command line arguments.
-In Python, <code class="prettyprint">argc</code> is not necessary.</p>
+<blockquote>
+<p>Example arguments</p>
+</blockquote>
+<pre class="highlight plaintext"><code>--accesskey=00000000-1111-2222-3333-000000000001
+--username=admin
+--url=http://localhost:32802
+</code></pre>
+<p>Constructs a config by looking in the configuration files and parsing the command line arguments.</p>
 
-<p>Arguments:</p>
+<p><strong>Note:</strong> In Python, <code class="prettyprint">argc</code> is not necessary.</p>
 
-<ul>
-<li><code class="prettyprint">argc</code> &hellip;as passed to <code class="prettyprint">int main(int argc, char** argv)</code>.</li>
-<li><code class="prettyprint">argv</code> &hellip;same.</li>
-<li><code class="prettyprint">profile</code> Name of the default profile.</li>
-</ul>
-
-<p>Example command line arguments:</p>
-
-<ul>
-<li><code class="prettyprint">--accesskey=00000000-1111-2222-3333-000000000001</code></li>
-<li><code class="prettyprint">--username=admin</code></li>
-<li><code class="prettyprint">--url=http://localhost:32802</code></li>
-</ul>
+<table><thead>
+<tr>
+<th>Argument</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">argc</code></td>
+<td>Passed to <code class="prettyprint">int main(int argc, char** argv)</code>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">argv</code></td>
+<td>Passed to <code class="prettyprint">int main(int argc, char** argv)</code>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">profile</code></td>
+<td>Name of the default profile.</td>
+</tr>
+</tbody></table>
 
 <p>Unrecognized arguments will be ignored.</p>
 
@@ -540,6 +593,24 @@ Implementation is left for the simulator to do as an exercise.</p>
 
 <p>Will print out a representation of Config that is useful for debugging.</p>
 
+<p><strong>Note:</strong> Used in C++ only.</p>
+
+<table><thead>
+<tr>
+<th>Argument</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">ostream</code></td>
+<td>A std c++ stream operator.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">config</code></td>
+<td>Object returned by previously created <code class="prettyprint">Bonsai::Config</code>.</td>
+</tr>
+</tbody></table>
+
           <h1 id="simulator-class">Simulator Class</h1>
 
 <blockquote>
@@ -553,19 +624,20 @@ a <strong>BRAIN</strong>. It is an abstract base class, and to use it a develope
 the <strong>BRAIN</strong>. The name used to construct <code class="prettyprint">Simulator</code> must match the name of the simulator
 in the <em>Inkling</em> file.</p>
 
-<p>There are two main methods that you must override, <code class="prettyprint">episode_start</code> and <code class="prettyprint">simulate</code>. The diagram demonstrates how these are called during training.</p>
+<p>There are two main methods that you must override, <code class="prettyprint">episode_start</code> and <code class="prettyprint">simulate</code>. The diagram
+demonstrates how these are called during training.</p>
 
 <h2 id="brain-brain">Brain brain()</h2>
 
-<p>Returns the brain being used for this simulation.</p>
+<p>Returns the BRAIN being used for this simulation.</p>
 
 <h2 id="string-name">string name()</h2>
 
-<p>Returns the simulator name that was passed in when constructed</p>
+<p>Returns the simulator name that was passed in when constructed.</p>
 
 <h2 id="bool-predict">bool predict()</h2>
 
-<p>Returns a value indicating whether the simulation is set up to run in predict mode or training mode</p>
+<p>Returns a value indicating whether the simulation is set up to run in predict mode or training mode.</p>
 
 <h2 id="string-objective_name">string objective_name()</h2>
 
@@ -574,15 +646,6 @@ The objective may be updated before <code class="prettyprint">episode_start</cod
 for prediction and during start up, objective will return an empty std::string.</p>
 
 <h2 id="episode_start-parameters-initial_state">episode_start(parameters, initial_state)</h2>
-
-<h3 id="arguments">Arguments</h3>
-
-<ul>
-<li><code class="prettyprint">parameters</code>     InklingMessage of episode initialization parameters as defined in
-               inkling. <code class="prettyprint">parameters</code> will be populated if a training session is running.</li>
-<li><code class="prettyprint">initial_state</code>  Output InklingMessage. The subclasser should populate this message with the
-               initial state of the simulation.</li>
-</ul>
 
 <blockquote>
 <p>Example Inkling:</p>
@@ -614,6 +677,22 @@ for prediction and during start up, objective will return an empty std::string.<
     <span class="p">}</span>
     <span class="k">return</span> <span class="n">initial</span>
 </code></pre>
+<table><thead>
+<tr>
+<th>Argument</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">parameters</code></td>
+<td>InklingMessage of episode initialization parameters as defined in inkling. <code class="prettyprint">parameters</code> will be populated if a training session is running.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">initial_state</code></td>
+<td>Output InklingMessage. The subclasser should populate this message with the initial state of the simulation.</td>
+</tr>
+</tbody></table>
+
 <p>This callback passes in a set of initial parameters and expects an initial state in return
 for the simulator. Before this callback is called, the property <code class="prettyprint">objective_name</code> will be
 updated to reflect the current objective for this episode.</p>
@@ -622,16 +701,7 @@ updated to reflect the current objective for this episode.</p>
 
 <p>The default implementation will throw an exception.</p>
 
-<h2 id="simulate-action-state-terminal">simulate(action, state, terminal)</h2>
-
-<h3 id="arguments">Arguments</h3>
-
-<ul>
-<li><code class="prettyprint">action</code>   Input InklingMessage of action to be taken as defined in inkling.</li>
-<li><code class="prettyprint">state</code>    Output InklingMessage. Should be populated with the current simulator state.</li>
-<li><code class="prettyprint">reward</code>   Output reward value as calculated based upon the objective.</li>
-<li><code class="prettyprint">terminal</code> Output terminal state. Set to true if the simulator is in a terminal state.</li>
-</ul>
+<h2 id="simulate-action-state-reward-terminal">simulate(action, state, reward, terminal)</h2>
 
 <blockquote>
 <p>Example Inkling:</p>
@@ -661,6 +731,30 @@ updated to reflect the current objective for this episode.</p>
     <span class="n">state</span><span class="p">.</span><span class="n">set_float32</span><span class="p">(</span><span class="s">"angle"</span><span class="p">,</span>    <span class="n">angle</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre>
+<table><thead>
+<tr>
+<th>Argument</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">action</code></td>
+<td>Input InklingMessage of action to be taken as defined in inkling.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">state</code></td>
+<td>Output InklingMessage. Should be populated with the current simulator state.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">reward</code></td>
+<td>Output reward value as calculated based upon the objective.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">terminal</code></td>
+<td>Output terminal state. Set to true if the simulator is in a terminal state.</td>
+</tr>
+</tbody></table>
+
 <p>This callback steps the simulation forward by a single step. It passes in
 the <code class="prettyprint">action</code> to be taken, and expects the resulting <code class="prettyprint">state</code>, <code class="prettyprint">reward</code> for the current
 <code class="prettyprint">objective</code>, and a <code class="prettyprint">terminal</code> flag used to signal the end of an episode. Note that an
@@ -676,14 +770,22 @@ different lessons.</p>
 
 <h2 id="bool-standby-reason">bool standby(reason)</h2>
 
-<h3 id="arguments">Arguments</h3>
-
-<p><code class="prettyprint">reason</code>  A std::string describing the reason training has been delayed</p>
+<table><thead>
+<tr>
+<th>Argument</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">reason</code></td>
+<td>A std::string describing the reason training has been delayed.</td>
+</tr>
+</tbody></table>
 
 <p>The default action is to wait one second and continue. If returns <code class="prettyprint">true</code>,
 the server status will be checked again and the loop will continue.</p>
 
-<p>bool run()</p>
+<h2 id="bool-run">bool run()</h2>
 <pre class="highlight python tab-python"><code><span class="n">mySim</span> <span class="o">=</span> <span class="n">MySimulator</span><span class="p">(</span><span class="n">brain</span><span class="p">)</span>
 <span class="k">while</span> <span class="n">mySim</span><span class="o">.</span><span class="n">run</span><span class="p">():</span>
     <span class="k">continue</span>
@@ -699,8 +801,6 @@ simulation has finished or halted.</p>
 To run for prediction, <code class="prettyprint">brain()-&gt;config()-&gt;predict()</code> must return <code class="prettyprint">true</code>.</p>
 
 <h2 id="event-get_next_event">Event get_next_event()</h2>
-
-<p>Returns the next simulator event in the queue.</p>
 <pre class="highlight cpp tab-cpp"><code><span class="k">auto</span> <span class="n">event</span> <span class="o">=</span> <span class="n">get_next_event</span><span class="p">();</span>
 <span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">()</span> <span class="o">==</span> <span class="n">Type</span><span class="o">::</span><span class="n">Episode_Start</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">auto</span> <span class="n">es_E</span> <span class="o">=</span> <span class="n">dynamic_pointer_cast</span><span class="o">&lt;</span><span class="n">EpisodeStartEvent</span><span class="o">&gt;</span><span class="p">(</span><span class="n">event</span><span class="p">);</span>
@@ -718,14 +818,34 @@ To run for prediction, <code class="prettyprint">brain()-&gt;config()-&gt;predic
     <span class="n">close</span><span class="p">();</span>
 <span class="p">}</span>
 </code></pre>
-<h2 id="void-close">void close()</h2>
+<p>Returns the next simulator event in the queue.</p>
 
-<p>Closes the connection between <code class="prettyprint">Simulator</code> and the Bonsai BRAIN.</p>
+<h2 id="void-close">void close()</h2>
 <pre class="highlight cpp tab-cpp"><code><span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">()</span> <span class="o">==</span> <span class="n">Type</span><span class="o">::</span><span class="n">Finished</span><span class="p">)</span> <span class="n">close</span><span class="p">();</span>
 </code></pre>
+<p>Closes the connection between <code class="prettyprint">Simulator</code> and the Bonsai BRAIN.</p>
+
 <h2 id="operator-ostream-simulator">operator&lt;&lt;(ostream, simulator)</h2>
 
 <p>Prints out a representation of Simulator that is useful for debugging.</p>
+
+<p><strong>Note:</strong> Used in C++ only.</p>
+
+<table><thead>
+<tr>
+<th>Argument</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">ostream</code></td>
+<td>A std c++ stream operator.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">config</code></td>
+<td>Object returned by previously created <code class="prettyprint">Bonsai::Config</code>.</td>
+</tr>
+</tbody></table>
 
       </div>
       <div class="dark-box">
