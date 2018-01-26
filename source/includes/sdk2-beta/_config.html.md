@@ -113,3 +113,10 @@ Implementation is left for the simulator to do as an exercise.
 
 Will print out a representation of Config that is useful for debugging.
 
+**Note:** Used in C++ only.
+
+| Argument | Description |
+| --- | --- |
+| `ostream` | std c++ stream operator. |
+| `config` | Object returned by previously created `Bonsai::Config`. |
+

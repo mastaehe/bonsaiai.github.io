@@ -196,3 +196,10 @@ Closes the connection between `Simulator` and the Bonsai BRAIN.
 
 Prints out a representation of Simulator that is useful for debugging.
 
+**Note:** Used in C++ only.
+
+| Argument | Description |
+| --- | --- |
+| `ostream` | std c++ stream operator. |
+| `config` | Object returned by previously created `Bonsai::Config`. |
+
