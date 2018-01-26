@@ -1,11 +1,6 @@
 # Config Class
 
-Manages bonsai configuration environments.
-Config files can be specified in the user home directory
-or in a local directory. Configuration parameters can also be parsed from
-the command line.
-
-Example `~/.bonsai` config file:
+> Example `~/.bonsai` file
     
 ```ini
 [DEFAULT]
@@ -19,16 +14,15 @@ username = admin
 accesskey = 00000000-1111-2222-3333-000000000001
 ```
 
+Manages bonsai configuration environments.
+Config files can be specified in the user home directory, `~/.bonsai`,
+or in a local directory. Configuration parameters can also be parsed from
+the command line.
+
 The `profile` key can be used to switch between different profiles in
 one configuration file.
 
 ## Config(profile)
-
-Constructs a default configuration.
-`profile` is the name of the default profile. Default value is an empty string.
-
-Configurations are stored in `~/.bonsai` and `./.bonsai` configuration files.
-The local configuration file overrides settings in the configuration file in the user home directory.
     
 ```python
 config = Config(sys.argv)
@@ -42,22 +36,34 @@ int main(int argc, char** argv) {
 }
 ```
 
+Constructs a default configuration.
+
+| Argument | Description |
+| --- | --- |
+|`profile` | Name of the default profile. Default value is an empty string. |
+
+Configurations are stored in `~/.bonsai` and `./.bonsai` configuration files.
+The local configuration file overrides settings in the configuration file in the user home directory.
+
 ## Config(argc, argv, profile)
 
+>Example arguments
+
+```
+--accesskey=00000000-1111-2222-3333-000000000001
+--username=admin
+--url=http://localhost:32802
+```
+
 Constructs a config by looking in the configuration files and parsing the command line arguments.
-In Python, `argc` is not necessary.
 
-Arguments:
+**Note:** In Python, `argc` is not necessary.
 
-- `argc` ...as passed to `int main(int argc, char** argv)`.
-- `argv` ...same.
-- `profile` Name of the default profile.
-
-Example command line arguments:
-
-- `--accesskey=00000000-1111-2222-3333-000000000001`
-- `--username=admin`
-- `--url=http://localhost:32802`
+| Argument | Description |
+| --- | --- |
+| `argc` | Passed to `int main(int argc, char** argv)`.|
+| `argv` | Passed to `int main(int argc, char** argv)`.|
+| `profile` | Name of the default profile.|
 
 Unrecognized arguments will be ignored.
 
@@ -106,4 +112,11 @@ Implementation is left for the simulator to do as an exercise.
 ## operator<<(ostream, config)
 
 Will print out a representation of Config that is useful for debugging.
+
+**Note:** Used in C++ only.
+
+| Argument | Description |
+| --- | --- |
+| `ostream` | A std c++ stream operator. |
+| `config` | Object returned by previously created `Bonsai::Config`. |
 
