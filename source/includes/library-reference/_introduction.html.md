@@ -1,14 +1,5 @@
-# Python Library Overview
+# Library Overview
 
-The Python library wraps the API to simplify the process of building simulators
-in the Python programming language.  Compatible with Python 2.7+
+The Bonsai libraries known as `libbonsai` (C++) and `bonsai_ai` (Python) wrap the Bonsai API to simplify the process of building simulators in C++ and Python programming languages. The Python library is generated from the C++ library and you may see some C++ dominant language used in this reference. Please use the language tabs in the code panel to view this reference in either C++ or Python code examples. These libraries are compatible with Python 3+ on Windows 7/10, macOS, and Linux.
 
-When the AI Engine trains with the simulator it works in a loop. First, the
-simulator connects and registers itself with the AI Engine. Then, the simulator
-sends the AI Engine a state and the value of any objectives or rewards; next,
-the AI Engine replies with an action. The simulator then uses this action to
-advance the simulation and compute a new state. This "send state, receive
-action" process is repeated until training stops.  At any time the AI engine
-may stop, reconfigure, and reset the simulator.  After doing so it will either
-restart this training loop or stop training.  A training loop is sometimes
-referred to as an "iteration".
+When the AI Engine trains with the simulator it works in a loop. First, the simulator connects and registers itself with the AI Engine. Then, the simulator sends the AI Engine a state and the value of any objectives or rewards; next, the AI Engine replies with an action. The simulator then uses this action to advance the simulation and compute a new state. This “send state, receive action” process is repeated until training stops. At any time the AI engine may stop, reconfigure, and reset the simulator. After doing so it will either restart this training loop or stop training. A single state, action, next state, loop is sometimes referred to as an “iteration”.

@@ -1,37 +1,32 @@
 # Simulator Class
 
-> ![Simulator state image][1]
+>![Simulator state image](../images/simulator_state.svg)
 
 This class is used to interface with the server while training or running predictions against
-a **BRAIN**. It is an abstract base class, and the developer must create a subclass.
+a **BRAIN**. It is an abstract base class, and to use it a developer must create a subclass.
 
-The `Simulator` class has a close relationship with the **Inkling** file associated with
-the **BRAIN**. The name used to construct the `Simulator` must match the name of the simulator
+The `Simulator` class is closely related to the **Inkling** file that is associated with
+the **BRAIN**. The name used to construct `Simulator` must match the name of the simulator
 in the *Inkling* file.
 
-There are two main methods one must override, `episode_start` and `simulate`.
+There are two main methods that you must override, `episode_start` and `simulate`. The diagram
+demonstrates how these are called during training.
 
 ## Brain brain()
-Returns the brain being used for this simulation.
+Returns the BRAIN being used for this simulation.
 
 ## string name()
-Returns the simulator name that was passed in when constructed
+Returns the simulator name that was passed in when constructed.
 
 ## bool predict()
-Returns weather or not the simulation is setup to run in predict or training mode
+Returns a value indicating whether the simulation is set up to run in predict mode or training mode.
 
 ## string objective_name()
-Accessor method which returns the name of the current objective.
-Objective may be updated before `episode_start` is called. When running
-for prediction and during start up, objective will return an empty string.
+Accessor method that returns the name of the current objective.
+The objective may be updated before `episode_start` is called. When running
+for prediction and during start up, objective will return an empty std::string.
 
 ## episode_start(parameters, initial_state)
-
-### Arguments
-- `parameters`     InklingMessage of initialization parameters for an episode as defined in
-                   inkling. `parameters` Will be populated if a training session is running.
-- `initial_state`  Output InklingMessage. The subclasser should populate this message with the
-                   initial state of the simulation.
 
 > Example Inkling:
 
@@ -68,19 +63,20 @@ def episode_start(self, params):
     return initial
 ```
 
+| Argument        | Description |
+| ---             | ---         |
+| `parameters`    | InklingMessage of episode initialization parameters as defined in inkling. `parameters` will be populated if a training session is running. |
+| `initial_state` | Output InklingMessage. The subclasser should populate this message with the initial state of the simulation. |
+
 This callback passes in a set of initial parameters and expects an initial state in return
 for the simulator. Before this callback is called, the property `objective_name` will be
 updated to reflect the current objective for this episode.
 
 This call is where a simulation should be reset for the next round.
 
-## simulate(action, state, terminal)
+The default implementation will throw an exception.
 
-### Arguments
-- `action`   Input InklingMessage of action to be taken as defined in inkling.
-- `state`    Output InklingMessage. Should be populated with the current simulator state.
-- `reward`   Output reward value as calculated based upon the objective.
-- `terminal` Output terminal state. Set to true if the simulator is in a terminal state.
+## simulate(action, state, reward, terminal)
 
 > Example Inkling:
 
@@ -115,26 +111,36 @@ void Test::simulate(const InklingMessage& action,
 }
 ```
 
-This callback is used to step the simulation forward by a single step. It passes in
+| Argument   | Description |
+| ---        | ---         |
+| `action`   | Input InklingMessage of action to be taken as defined in inkling. |
+| `state`    | Output InklingMessage. Should be populated with the current simulator state. |
+| `reward`   | Output reward value as calculated based upon the objective. |
+| `terminal` | Output terminal state. Set to true if the simulator is in a terminal state. |
+
+This callback steps the simulation forward by a single step. It passes in
 the `action` to be taken, and expects the resulting `state`, `reward` for the current
 `objective`, and a `terminal` flag used to signal the end of an episode. Note that an
 episode may be reset prematurely by the backend during training.
 
-For multi-lesson curriculum the `objective_name` will change from episode to episode.
-The simulator should take care to insure that it is returning the correct reward for the
+For a multi-lesson curriculum, the `objective_name` will change from episode to episode.
+In this case ensure that the simulator is returning the correct reward for the
 different lessons.
 
-Returning `true` for the `terminal` flag will signal the start of a new episode.
+Returning `true` for the `terminal` flag signals the start of a new episode.
+
+The default implementation will throw an exception.
 
 ## bool standby(reason)
 
-### Arguments
-- `reason`  A string describing the reason training has been delayed
+| Argument | Description |
+| ---      | ---         |
+| `reason` | A std::string describing the reason training has been delayed. |
 
 The default action is to wait one second and continue. If returns `true`,
 the server status will be checked again and the loop will continue.
 
-bool run()
+## bool run()
 
 ```python
 mySim = MySimulator(brain)
@@ -149,10 +155,51 @@ while( mySim.run() ) {
 }
 ```
 
-Main loop call for driving the simulation. Will return `false` when the
+Main loop call for driving the simulation. Returns `false` when the
 simulation has finished or halted.
 
 The client should call this method in a `while` loop until it returns `false`.
-To run for prediction `brain()->config()->predict()` must return `true`.
+To run for prediction, `brain()->config()->predict()` must return `true`.
 
-[1]: ../images/simulator_state.svg
+## Event get_next_event()
+
+```cpp
+auto event = get_next_event();
+if (event->type() == Type::Episode_Start) {
+    auto es_E = dynamic_pointer_cast<EpisodeStartEvent>(event);
+    auto initial_properties = es->initial_properties;
+    auto initial_state = es->initial_state;
+    // process initial properties/state
+} else if (event->type() == Type::Simulate) {
+    auto sim_E = dynamic_pointer_cast<SimulatorEvent>(event);
+    auto prediction = sim_E->prediction;
+    auto state = sim_E->state;
+    auto reward = sim_E->reward;
+    auto terminal = sim_E->terminal;
+    // process simulator step 
+} else if (event->type() == Type::Finished) {
+    close();
+}
+```
+
+Returns the next simulator event in the queue.
+
+## void close()
+
+```cpp
+if (event->type() == Type::Finished) close();
+```
+
+Closes the connection between `Simulator` and the Bonsai BRAIN.
+
+## operator<<(ostream, simulator)
+
+Prints out a representation of Simulator that is useful for debugging.
+
+**Note:** Used in C++ only.
+
+| Argument  | Description |
+| ---       | ---         |
+| `ostream` | A std c++ stream operator. |
+| `config`  | Object returned by previously created `Bonsai::Config`. |
+
