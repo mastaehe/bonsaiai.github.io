@@ -1,6 +1,10 @@
 ---
 title: Examples
 
+language_tabs:
+    - python
+    - cpp
+
 toc_footers:
   -  <%= partial "partials/footer-links" %>
 
@@ -11,7 +15,6 @@ includes:
 - examples/cart-pole.html.md
 - examples/mountain-car.html.md
 - examples/energyplus.html.md
-- examples/turtlebot.html.md
 
 search: true
 ---
