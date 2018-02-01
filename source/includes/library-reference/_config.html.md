@@ -24,49 +24,49 @@ one configuration file.
 
 ## Config(profile)
 
-    ```python
-    config = Config(sys.argv)
-    print(config)
-    ```
+```python
+config = Config(sys.argv)
+print(config)
+```
 
-    ```cpp
-    int main(int argc, char** argv) {
-        auto config = Config(argc, argv);
-        std::cout << config << std::endl;
-    }
-    ```
+```cpp
+int main(int argc, char** argv) {
+    auto config = Config(argc, argv);
+    std::cout << config << std::endl;
+}
+```
 
-    Constructs a default configuration.
+Constructs a default configuration.
 
-    | Argument | Description |
-    | ---      | ---         |
-    |`profile` | Name of the default profile. Default value is an empty string. |
-    
-    Configurations are stored in `~/.bonsai` and `./.bonsai` configuration files.
-    The local configuration file overrides settings in the configuration file in the user home directory.
+| Argument | Description |
+| ---      | ---         |
+|`profile` | Name of the default profile. Default value is an empty string. |
 
-    ## Config(argc, argv, profile)
+Configurations are stored in `~/.bonsai` and `./.bonsai` configuration files.
+The local configuration file overrides settings in the configuration file in the user home directory.
 
-    > Example arguments
-    
-    ```
-    --help
-    --accesskey=00000000-1111-2222-3333-000000000001
-    --username=admin
-    --url=http://localhost:32802
-    ```
+## Config(argc, argv, profile)
 
-    Constructs a config by looking in the configuration files and parsing the command line arguments.
+> Example arguments
 
-    **Note:** In Python, `argc` is not necessary.
+```
+--help
+--accesskey=00000000-1111-2222-3333-000000000001
+--username=admin
+--url=http://localhost:32802
+```
 
-    | Argument  | Description |
-    | ---       | ---         |
-    | `argc`    | As passed to main(). (C++)|
-    | `argv`    | As passed to main(). (C++/Python)|
-    | `profile` | Name of the default profile.|
+Constructs a config by looking in the configuration files and parsing the command line arguments.
 
-    Unrecognized arguments will be ignored.
+**Note:** In Python, `argc` is not necessary.
+
+| Argument  | Description |
+| ---       | ---         |
+| `argc`    | As passed to main(). (C++)|
+| `argv`    | As passed to main(). (C++/Python)|
+| `profile` | Name of the default profile.|
+
+Unrecognized arguments will be ignored.
 
 ## accesskey()
 
