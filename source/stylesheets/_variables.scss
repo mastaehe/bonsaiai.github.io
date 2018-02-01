@@ -29,12 +29,12 @@ $code-bg: #292929 !default;
 $code-annotation-bg: #1c1c1c !default;
 $nav-subitem-bg: #262626 !default;
 $nav-subsubitem-bg: #131313 !default;
-$nav-active-bg: #2467af !default;
+$nav-active-bg: #288136 !default;
 $lang-select-border: #000 !default;
 $lang-select-bg: #222 !default;
 $lang-select-active-bg: $examples-bg !default; // feel free to change this to blue or something
 $lang-select-pressed-bg: #111 !default; // color of language tab bg when mouse is pressed
-$main-bg: #eaf2f6 !default;
+$main-bg: #fff !default;
 $aside-notice-bg: #8fbcd4 !default;
 $aside-warning-bg: #c97a7e !default;
 $aside-success-bg: #6ac174 !default;
@@ -62,7 +62,7 @@ $nav-v-padding: 10px !default; // padding used vertically around search boxes an
 $nav-indent: 1em !default; // extra padding for ToC subitems
 $code-annotation-padding: 13px !default; // padding inside code annotations
 $h1-margin-bottom: 21px !default; // padding under the largest header tags
-$tablet-width: 930px !default; // min width before reverting to tablet size
+$tablet-width: 1000px !default; // min width before reverting to tablet size
 $phone-width: $tablet-width - $nav-width !default; // min width before reverting to mobile size
 
 

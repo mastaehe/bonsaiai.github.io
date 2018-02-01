@@ -191,6 +191,8 @@ GET /v1/{userName}/{brainName}/ws'
     "concepts": [{
         "name": "balance",
         "state": "Not Started",
+        "algorithm": "DQN",
+        "is_estimator": true
     }],
 }
 
@@ -234,7 +236,7 @@ There are 6 types of messages that are sent on this socket: `ADD_DATA_POINT`,
 #### CONCEPTS_SET
 | Parameter | Description |
 | --- | --- |
-| concepts | An array of name and state JSON per concept in the BRAIN |
+| concepts | An array of JSON per concept in the BRAIN. The JSON will include the concept's state, the algorithm that the concept will be trained with and whether the concept is an estimator or classifier |
 
 #### CONCEPT_CHANGED
 | Parameter | Description |

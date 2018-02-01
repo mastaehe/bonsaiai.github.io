@@ -4,7 +4,7 @@ This guide will familiarize you with the two training graphs displayed on every 
 
 > ![Cartpole Balance](../images/cart-pole-balance.gif)
 
-In this guide we'll be walking through the graphs for OpenAI Gym's [Cartpole][3] environment to illustrate how to best use the information gathered in the Concepts and Simulator graphs. If you need instruction on how to create a demo on the Platform you can follow the [web guide][4]. You may also choose to run this demo locally by following the [CLI guide][5]. OpenAI Gym describes Cartpole as:
+In this guide we'll be walking through the graphs for OpenAI Gym's [Cartpole][3] environment to illustrate how to best use the information gathered in the Concepts and Simulator graphs. If you need instruction on how to create a demo on the Platform you can follow the [web guide][4]. You may also choose to [Run the Platform Locally][5]. OpenAI Gym describes Cartpole as:
 
 _A pole is attached by an un-actuated joint to a cart, which moves along a frictionless track. The system is controlled by applying a force of +1 or -1 to the cart. The pendulum starts upright, and the goal is to prevent it from falling over. A reward of +1 is provided for every timestep that the pole remains upright. The episode ends when the pole is more than 15 degrees from vertical, or the cart moves more than 2.4 units from the center._
 
@@ -43,6 +43,10 @@ This graph shows your BRAIN’s performance during training. After every 20 trai
 The simulation graph illustrates the states, actions, and rewards for a given simulation and allows users to graph them against each other to see correlations. This information can be helpful when debugging simulations and reward functions. On the simulation graph you will notice there is a status for the connectivity between the BRAIN and the simulator, two data series for you to choose to display, and the total training time of this version of the BRAIN.
 
 You may also pause the display of data being collected on the graph at any time. This can be useful when a simulation’s iterations happen very quickly. When you unpause the graph data will be shown in real-time.
+
+<aside class="notice">
+This graph is only active during BRAIN training. Once training is stopped, it seizes to plot and deactivates.
+</aside> 
 
 ## Data Series
 
@@ -96,4 +100,4 @@ Automatic termination will take a significant amount of time and it is recommend
 [2]: https://www.youtube.com/watch?v=0R3PnJEisqk&list=PLAktfMEMCsOY9HUZKIuGI6yqefGBuszAV&index=4
 [3]: http://docs.bons.ai/examples.html#openai-gym-cart-pole
 [4]: http://docs.bons.ai/guides/getting-started.html
-[5]: http://docs.bons.ai/guides/cli-guide.html
+[5]: http://docs.bons.ai/guides/local-dev-guide.html

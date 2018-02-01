@@ -1,11 +1,11 @@
 ---
-title: Understand BRAIN Graphs
+title: Use Bonsai's API with Jupyter
 
 toc_footers:
   -  <%= partial "partials/footer-links" %>
 
 includes:
-  - web-graphs-guide.html.md
+  - jupyter-api-guide.html.md
   
 search: true
 ---

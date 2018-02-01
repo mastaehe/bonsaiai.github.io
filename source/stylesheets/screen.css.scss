@@ -227,6 +227,10 @@ h6:before {
     box-shadow: 0px 1px 0px $nav-active-shadow;
     background-color: $nav-active-bg;
     color: $nav-active-text;
+
+    a:hover {
+      color: #fff;
+    }
   }
 
   // Headers are headers.
@@ -424,7 +428,7 @@ h6:before {
     margin-bottom: $h1-margin-bottom;
     margin-top: 2em;
     border-top: 1px solid #ddd;
-    background-image: linear-gradient(to bottom, #fff, #f9f9f9);
+    background-color: #edebe8;
   }
 
   h1:first-child, div:first-child + h1 {
@@ -501,11 +505,11 @@ h6:before {
     }
 
     tr:nth-child(odd)>td {
-      background-color: lighten($main-bg,4.2%);
+      background-color: darken($main-bg,4.2%);
     }
 
     tr:nth-child(even)>td {
-      background-color: lighten($main-bg,2.4%);
+      background-color: darken($main-bg,2.4%);
     }
   }
 
@@ -530,7 +534,7 @@ h6:before {
     background-color: rgba(0,0,0,0.05);
     padding: 3px;
     border-radius: 3px;
-    @extend %break-words;
+//    @extend %break-words;
     @extend %code-font;
   }
 
@@ -808,7 +812,8 @@ li.tocify-item {line-height:1.4em !important;}
 	#references li.selected a {color:#288136 !important}
 	
 	
-	li a:hover {color:#288136 !important; text-decoration:none !important;}
+	li a:hover {color:#288136; text-decoration:none !important;}
+  #primary-nav li a:hover {color:#288136}
 
 /*///////////////////////////////////////////////////////////////////////////////
 // TYPE
@@ -926,7 +931,7 @@ nav ul li ul li a {
   width: 70px;
 }
 
-@media only screen and (max-width: 870px) {
+@media only screen and (max-width: $tablet-width) {
 	
 	
 	nav ul li ul li a {
@@ -1018,7 +1023,7 @@ nav ul li ul li a {
   height: initial;
   }
 }
-@media screen and (min-width: 1000px) {
+@media screen and (min-width: $tablet-width) {
 	
 	 #primary-nav .selected a {border-bottom: solid 4px #3bb94f;padding-bottom: 12px;margin-top: 18px;}
 
@@ -1320,7 +1325,7 @@ nav li > a:only-child:after {content: '';}
 /* Media Queries
 --------------------------------------------- */
 
-@media all and (max-width : 870px) {
+@media all and (max-width : $tablet-width) {
 
 	.menu-ham {width:26px;padding-right: 20px;}
 #primary-nav  ul li ul li a {margin-right:0!important;background-color: hsl(52, 48%, 94%);}
@@ -1459,7 +1464,7 @@ nav li > a:only-child:after {content: '';}
 
 /*mobile slider*/
 
-@media screen and (max-width: 870px) {
+@media screen and (max-width: $tablet-width) {
 
 	.tocify-wrapper.open {
 	    top: 0 !important;
