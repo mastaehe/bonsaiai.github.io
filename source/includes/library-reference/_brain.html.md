@@ -9,46 +9,96 @@ Requires a configuration and a BRAIN name.
 ## Brain(config, name)
 Creates a local object for interacting with an existing BRAIN on the server.
 
+```cpp
+auto config = make_shared<bonsai::Config>(argc, argv);
+auto brain = make_shared<bonsai::Brain>(config);
+std::cout << brain << std::endl;
+```
+
+```python
+config = bonsai_ai.Config(sys.argv)
+brain = bonsai_ai.Brain(config)
+print(brain)
+```
+
 | Argument | Description |
 | ---      | ---         |
 | `config` | Object returned by previously created `Bonsai::Config` (C++) or `bonsai_ai.Config()` (Python). |
 | `name`   | BRAIN name as specified on the server. If name is empty, the BRAIN name in `config` is used instead. |
 
 ## update()
-Refreshes local state information with information from the current state of the BRAIN on the server.
+```cpp
+brain.update();
+```
 
-## bool ready()
-Returns true if the BRAIN is ready to run for training or prediction.
-A BRAIN may not be ready if it has no uploaded inkling files or is configured incorrectly.
-
-## start()
-Instructs the server to start training this BRAIN.
-
-## stop()
-Instructs the server to stop training this BRAIN.
+```python
+brain.update()
+```
+Refreshes description, status, and other information with the current state of the BRAIN on the server.
+Called by default when constructing a new Brain object.
 
 ## string name()
+```cpp
+std::cout << brain.name() << endl;
+```
+
+```python
+print(brain.name)
+```
+
 Returns the name of the BRAIN as specified when it was created.
 
 ## string description()
+```cpp
+std::cout << brain.description() << endl;
+```
+
+```python
+print(brain.description)
+```
+
 Returns the user-provided description for the BRAIN.
 
 ## int version()
-Returns the version number of the BRAIN.
+```cpp
+std::cout << brain.version() << endl;
+```
+
+```python
+print(brain.version)
+```
+
+Returns the current version number of the BRAIN.
 
 ## int latest_version()
+```cpp
+std::cout << brain.latest_version() << endl;
+```
+
+```python
+print(brain.latest_version)
+```
+
 Returns latest version number of the BRAIN.
 
 ## Config config()
-Returns the configuration used to talk to this BRAIN.
+```cpp
+std::cout << brain.config() << endl;
+```
+
+```python
+print(brain.config)
+```
+
+Returns the configuration used to locate this BRAIN.
 
 ## operator<<(ostream, brain)
 Prints out a representation of Brain that is useful for debugging.
 
-**Note:** Used in C++ only.
+**Note:** Used in C++ only. For python use `print(brain)`
 
 | Argument  | Description |
 | ---       | ---         |
 | `ostream` | A std c++ stream operator. |
-| `config`  | Object returned by previously created `Bonsai::Config`. |
+| `brain`   | A bonsai::Brain object to print out`. |
 
