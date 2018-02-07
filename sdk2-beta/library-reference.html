@@ -388,7 +388,13 @@ and download Inkling to and from the BRAIN on the server.</p>
 <h2 id="brain-config-name">Brain(config, name)</h2>
 
 <p>Creates a local object for interacting with an existing BRAIN on the server.</p>
-
+<pre class="highlight cpp tab-cpp"><code><span class="k">auto</span> <span class="n">config</span> <span class="o">=</span> <span class="n">make_shared</span><span class="o">&lt;</span><span class="n">bonsai</span><span class="o">::</span><span class="n">Config</span><span class="o">&gt;</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">);</span>
+<span class="k">auto</span> <span class="n">brain</span> <span class="o">=</span> <span class="n">make_shared</span><span class="o">&lt;</span><span class="n">bonsai</span><span class="o">::</span><span class="n">Brain</span><span class="o">&gt;</span><span class="p">(</span><span class="n">config</span><span class="p">);</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">brain</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="n">config</span> <span class="o">=</span> <span class="n">bonsai_ai</span><span class="o">.</span><span class="n">Config</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
+<span class="n">brain</span> <span class="o">=</span> <span class="n">bonsai_ai</span><span class="o">.</span><span class="n">Brain</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">brain</span><span class="p">)</span>
+</code></pre>
 <table><thead>
 <tr>
 <th>Argument</th>
@@ -406,47 +412,47 @@ and download Inkling to and from the BRAIN on the server.</p>
 </tbody></table>
 
 <h2 id="update">update()</h2>
-
-<p>Refreshes local state information with information from the current state of the BRAIN on the server.</p>
-
-<h2 id="bool-ready">bool ready()</h2>
-
-<p>Returns true if the BRAIN is ready to run for training or prediction.
-A BRAIN may not be ready if it has no uploaded inkling files or is configured incorrectly.</p>
-
-<h2 id="start">start()</h2>
-
-<p>Instructs the server to start training this BRAIN.</p>
-
-<h2 id="stop">stop()</h2>
-
-<p>Instructs the server to stop training this BRAIN.</p>
+<pre class="highlight cpp tab-cpp"><code><span class="n">brain</span><span class="p">.</span><span class="n">update</span><span class="p">();</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="n">brain</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+</code></pre>
+<p>Refreshes description, status, and other information with the current state of the BRAIN on the server.
+Called by default when constructing a new Brain object.</p>
 
 <h2 id="string-name">string name()</h2>
-
+<pre class="highlight cpp tab-cpp"><code><span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">brain</span><span class="p">.</span><span class="n">name</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="k">print</span><span class="p">(</span><span class="n">brain</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+</code></pre>
 <p>Returns the name of the BRAIN as specified when it was created.</p>
 
 <h2 id="string-description">string description()</h2>
-
+<pre class="highlight cpp tab-cpp"><code><span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">brain</span><span class="p">.</span><span class="n">description</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="k">print</span><span class="p">(</span><span class="n">brain</span><span class="o">.</span><span class="n">description</span><span class="p">)</span>
+</code></pre>
 <p>Returns the user-provided description for the BRAIN.</p>
 
 <h2 id="int-version">int version()</h2>
-
-<p>Returns the version number of the BRAIN.</p>
+<pre class="highlight cpp tab-cpp"><code><span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">brain</span><span class="p">.</span><span class="n">version</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="k">print</span><span class="p">(</span><span class="n">brain</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
+</code></pre>
+<p>Returns the current version number of the BRAIN.</p>
 
 <h2 id="int-latest_version">int latest_version()</h2>
-
+<pre class="highlight cpp tab-cpp"><code><span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">brain</span><span class="p">.</span><span class="n">latest_version</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="k">print</span><span class="p">(</span><span class="n">brain</span><span class="o">.</span><span class="n">latest_version</span><span class="p">)</span>
+</code></pre>
 <p>Returns latest version number of the BRAIN.</p>
 
 <h2 id="config-config">Config config()</h2>
-
-<p>Returns the configuration used to talk to this BRAIN.</p>
+<pre class="highlight cpp tab-cpp"><code><span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">brain</span><span class="p">.</span><span class="n">config</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="k">print</span><span class="p">(</span><span class="n">brain</span><span class="o">.</span><span class="n">config</span><span class="p">)</span>
+</code></pre>
+<p>Returns the configuration used to locate this BRAIN.</p>
 
 <h2 id="operator-ostream-brain">operator&lt;&lt;(ostream, brain)</h2>
 
 <p>Prints out a representation of Brain that is useful for debugging.</p>
 
-<p><strong>Note:</strong> Used in C++ only.</p>
+<p><strong>Note:</strong> Used in C++ only. For python use <code class="prettyprint">print(brain)</code></p>
 
 <table><thead>
 <tr>
@@ -459,8 +465,8 @@ A BRAIN may not be ready if it has no uploaded inkling files or is configured in
 <td>A std c++ stream operator.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">config</code></td>
-<td>Object returned by previously created <code class="prettyprint">Bonsai::Config</code>.</td>
+<td><code class="prettyprint">brain</code></td>
+<td>A bonsai::Brain object to print out`.</td>
 </tr>
 </tbody></table>
 
@@ -479,7 +485,7 @@ A BRAIN may not be ready if it has no uploaded inkling files or is configured in
 <span class="py">username</span> <span class="p">=</span> <span class="s">admin</span>
 <span class="py">accesskey</span> <span class="p">=</span> <span class="s">00000000-1111-2222-3333-000000000001</span>
 </code></pre>
-<p>Manages bonsai configuration environments.
+<p>Manages Bonsai configuration environments.
 Config files can be specified in the user home directory, <code class="prettyprint">~/.bonsai</code>,
 or in a local directory. Configuration parameters can also be parsed from
 the command line.</p>
@@ -488,10 +494,13 @@ the command line.</p>
 one configuration file.</p>
 
 <h2 id="config-profile">Config(profile)</h2>
-<pre class="highlight python tab-python"><code><span class="n">config</span> <span class="o">=</span> <span class="n">Config</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
-</code></pre><pre class="highlight cpp tab-cpp"><code><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">auto</span> <span class="n">config</span> <span class="o">=</span> <span class="n">Config</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">);</span>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">sys</span><span class="p">,</span> <span class="n">bonsai_ai</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">bonsai_ai</span><span class="o">.</span><span class="n">Config</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+</code></pre><pre class="highlight cpp tab-cpp"><code><span class="cp">#include &lt;bonsai.hpp&gt;
+</span><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">config</span> <span class="o">=</span> <span class="n">bonsai</span><span class="o">::</span><span class="n">Config</span><span class="p">();</span>
     <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">config</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre>
@@ -505,7 +514,7 @@ one configuration file.</p>
 </thead><tbody>
 <tr>
 <td><code class="prettyprint">profile</code></td>
-<td>Name of the default profile. Default value is an empty string.</td>
+<td>Optional <code class="prettyprint">.bonsai</code> profile name. Will use the DEFAULT profile if not specified.</td>
 </tr>
 </tbody></table>
 
@@ -513,15 +522,18 @@ one configuration file.</p>
 The local configuration file overrides settings in the configuration file in the user home directory.</p>
 
 <h2 id="config-argc-argv-profile">Config(argc, argv, profile)</h2>
-
-<blockquote>
-<p>Example arguments</p>
-</blockquote>
-<pre class="highlight plaintext"><code>--accesskey=00000000-1111-2222-3333-000000000001
---username=admin
---url=http://localhost:32802
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">sys</span><span class="p">,</span> <span class="n">bonsai_ai</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">bonsai_ai</span><span class="o">.</span><span class="n">Config</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+</code></pre><pre class="highlight cpp tab-cpp"><code><span class="cp">#include &lt;bonsai.hpp&gt;
+</span><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">config</span> <span class="o">=</span> <span class="n">bonsai</span><span class="o">::</span><span class="n">Config</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">);</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">config</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre>
-<p>Constructs a config by looking in the configuration files and parsing the command line arguments.</p>
+<p>Constructs a config by looking in the configuration files and parsing the command line arguments.
+To see the list of command line arguments, pass in the <code class="prettyprint">--help</code> flag.</p>
 
 <p><strong>Note:</strong> In Python, <code class="prettyprint">argc</code> is not necessary.</p>
 
@@ -533,67 +545,88 @@ The local configuration file overrides settings in the configuration file in the
 </thead><tbody>
 <tr>
 <td><code class="prettyprint">argc</code></td>
-<td>Passed to <code class="prettyprint">int main(int argc, char** argv)</code>.</td>
+<td>As passed to main(). (C++)</td>
 </tr>
 <tr>
 <td><code class="prettyprint">argv</code></td>
-<td>Passed to <code class="prettyprint">int main(int argc, char** argv)</code>.</td>
+<td>As passed to main(). (C++/Python)</td>
 </tr>
 <tr>
 <td><code class="prettyprint">profile</code></td>
-<td>Name of the default profile.</td>
+<td>Optional <code class="prettyprint">.bonsai</code> profile name. Will use the DEFAULT profile if not specified.</td>
 </tr>
 </tbody></table>
 
 <p>Unrecognized arguments will be ignored.</p>
 
 <h2 id="accesskey">accesskey()</h2>
-
+<pre class="highlight cpp tab-cpp"><code><span class="n">my_config</span><span class="p">.</span><span class="n">accesskey</span><span class="p">()</span> <span class="o">==</span> <span class="s">"00000000-1111-2222-3333-000000000001"</span><span class="p">;</span>
+<span class="n">my_config</span><span class="p">.</span><span class="n">set_accesskey</span><span class="p">(</span><span class="s">"00000000-1111-2222-3333-000000000001"</span><span class="p">);</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="n">my_config</span><span class="o">.</span><span class="n">accesskey</span> <span class="o">==</span> <span class="s">'00000000-1111-2222-3333-000000000001'</span>
+<span class="n">my_config</span><span class="o">.</span><span class="n">accesskey</span> <span class="o">=</span> <span class="s">'00000000-1111-2222-3333-000000000001'</span>
+</code></pre>
 <p>Server authentication token.
 Obtained from the bonsai server. You need to set it in your config.</p>
 
 <h2 id="username">username()</h2>
-
+<pre class="highlight cpp tab-cpp"><code><span class="n">my_config</span><span class="p">.</span><span class="n">username</span><span class="p">()</span> <span class="o">==</span> <span class="s">"alice"</span><span class="p">;</span>
+<span class="n">my_config</span><span class="p">.</span><span class="n">set_username</span><span class="p">(</span><span class="s">"alice"</span><span class="p">);</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="n">my_config</span><span class="o">.</span><span class="n">username</span> <span class="o">==</span> <span class="s">'alice'</span>
+<span class="n">my_config</span><span class="o">.</span><span class="n">username</span> <span class="o">=</span> <span class="s">'alice'</span>
+</code></pre>
 <p>Account user name.
 The account you signed up with.</p>
 
 <h2 id="url">url()</h2>
-
+<pre class="highlight cpp tab-cpp"><code><span class="n">my_config</span><span class="p">.</span><span class="n">url</span><span class="p">()</span> <span class="o">==</span> <span class="s">"https://api.bons.ai"</span><span class="p">;</span>
+<span class="n">my_config</span><span class="p">.</span><span class="n">set_url</span><span class="p">(</span><span class="s">"https://api.bons.ai"</span><span class="p">);</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="n">my_config</span><span class="o">.</span><span class="n">url</span> <span class="o">==</span> <span class="s">'https://api.bons.ai'</span>
+<span class="n">my_config</span><span class="o">.</span><span class="n">url</span> <span class="o">=</span> <span class="s">'https://api.bons.ai'</span>
+</code></pre>
 <p>Server URL.
 Address and port number of the bonsai server. Normally you should not need to change this.</p>
 
 <h2 id="proxy">proxy()</h2>
-
+<pre class="highlight cpp tab-cpp"><code><span class="n">my_config</span><span class="p">.</span><span class="n">proxy</span><span class="p">()</span> <span class="o">==</span> <span class="s">"myproxy:5000"</span><span class="p">;</span>
+<span class="n">my_config</span><span class="p">.</span><span class="n">set_proxy</span><span class="p">(</span><span class="s">"myproxy:5000"</span><span class="p">);</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="n">my_config</span><span class="o">.</span><span class="n">proxy</span> <span class="o">==</span> <span class="s">'myproxy:5000'</span>
+<span class="n">my_config</span><span class="o">.</span><span class="n">proxy</span> <span class="o">=</span> <span class="s">'myproxy:5000'</span>
+</code></pre>
 <p>Proxy Server.
 Address and port number of the proxy server to connect through.</p>
 
 <h2 id="brain">brain()</h2>
-
+<pre class="highlight cpp tab-cpp"><code><span class="n">my_config</span><span class="p">.</span><span class="n">brain</span><span class="p">()</span> <span class="o">==</span> <span class="s">"scarecrow"</span><span class="p">;</span>
+<span class="n">my_config</span><span class="p">.</span><span class="n">set_brain</span><span class="p">(</span><span class="s">"scarecrow"</span><span class="p">);</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="n">my_config</span><span class="o">.</span><span class="n">brain</span> <span class="o">==</span> <span class="s">'scarecrow'</span>
+<span class="n">my_config</span><span class="o">.</span><span class="n">brain</span> <span class="o">=</span> <span class="s">'scarecrow'</span>
+</code></pre>
 <p>BRAIN name.
 Name of the BRAIN on the server.</p>
 
 <h2 id="predict">predict()</h2>
-
+<pre class="highlight cpp tab-cpp"><code><span class="n">my_config</span><span class="p">.</span><span class="n">predict</span><span class="p">()</span> <span class="o">==</span> <span class="nb">true</span><span class="p">;</span>
+<span class="n">my_config</span><span class="p">.</span><span class="n">set_predict</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="n">my_config</span><span class="o">.</span><span class="n">predict</span> <span class="o">==</span> <span class="bp">True</span>
+<span class="n">my_config</span><span class="o">.</span><span class="n">brain</span> <span class="o">=</span> <span class="bp">True</span>
+</code></pre>
 <p>Simulator mode.
 The mode in which simulators will run. True if running for prediction, false for training.</p>
 
 <h2 id="brain_version">brain_version()</h2>
-
-<p>Brain version.
-The version of the brain to use when running for prediction. Set to 0 to use latest version</p>
-
-<h2 id="recording_file">recording_file()</h2>
-
-<p>Simulator log file path. </p>
-
-<p>Path to a file for simulator logging. If you are implementing a simulator you can use this to specify a log file in a simulator-specific nature. 
-Implementation is left for the simulator to do as an exercise.</p>
+<pre class="highlight cpp tab-cpp"><code><span class="n">my_config</span><span class="p">.</span><span class="n">brain_version</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span>
+<span class="n">my_config</span><span class="p">.</span><span class="n">set_brain_version</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="n">my_config</span><span class="o">.</span><span class="n">brain_version</span> <span class="o">==</span> <span class="mi">0</span>
+<span class="n">my_config</span><span class="o">.</span><span class="n">brain_version</span> <span class="o">=</span> <span class="mi">0</span>
+</code></pre>
+<p>BRAIN version.
+The version of the brain to use when running for prediction. Set to 0 to use latest version.</p>
 
 <h2 id="operator-ostream-config">operator&lt;&lt;(ostream, config)</h2>
 
 <p>Will print out a representation of Config that is useful for debugging.</p>
 
-<p><strong>Note:</strong> Used in C++ only.</p>
+<p><strong>Note:</strong> Used in C++ only. For python use <code class="prettyprint">print(config)</code></p>
 
 <table><thead>
 <tr>
@@ -607,7 +640,7 @@ Implementation is left for the simulator to do as an exercise.</p>
 </tr>
 <tr>
 <td><code class="prettyprint">config</code></td>
-<td>Object returned by previously created <code class="prettyprint">Bonsai::Config</code>.</td>
+<td>A bonsai::Config object to print.</td>
 </tr>
 </tbody></table>
 
@@ -627,21 +660,127 @@ in the <em>Inkling</em> file.</p>
 <p>There are two main methods that you must override, <code class="prettyprint">episode_start</code> and <code class="prettyprint">simulate</code>. The diagram
 demonstrates how these are called during training.</p>
 
-<h2 id="brain-brain">Brain brain()</h2>
+<h2 id="simulator-brain-name">Simulator(brain, name)</h2>
 
+<blockquote>
+<p>Example Inkling:</p>
+</blockquote>
+<pre class="highlight inkling tab-inkling"><code><span class="k">simulator</span> <span class="nx">my_simulator</span><span class="p">(</span><span class="nx">Config</span><span class="p">)</span>
+    <span class="k">action</span> <span class="p">(</span><span class="nx">Action</span><span class="p">)</span>
+    <span class="k">state</span> <span class="p">(</span><span class="nx">State</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
+<blockquote>
+<p>Example code:</p>
+</blockquote>
+<pre class="highlight cpp tab-cpp"><code><span class="k">class</span> <span class="nc">MySimulator</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Simulator</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+    <span class="k">explicit</span> <span class="n">BasicSimulator</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Brain</span><span class="o">&gt;</span> <span class="n">brain</span><span class="p">,</span> <span class="n">string</span> <span class="n">name</span> <span class="p">)</span>
+        <span class="o">:</span> <span class="n">Simulator</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">brain</span><span class="p">),</span> <span class="n">move</span><span class="p">(</span><span class="n">name</span><span class="p">))</span> <span class="p">{</span>
+            <span class="c1">// your simulator init code goes here.
+</span>        <span class="p">}</span>
+
+    <span class="kt">void</span> <span class="n">episode_start</span><span class="p">(</span><span class="k">const</span> <span class="n">bonsai</span><span class="o">::</span><span class="n">InklingMessage</span><span class="o">&amp;</span> <span class="n">params</span><span class="p">,</span>
+        <span class="n">bonsai</span><span class="o">::</span><span class="n">InklingMessage</span><span class="o">&amp;</span> <span class="n">initial_state</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
+            <span class="c1">// your simulation episode reset/init code.
+</span>        <span class="p">}</span>
+
+    <span class="kt">void</span> <span class="n">simulate</span><span class="p">(</span><span class="k">const</span> <span class="n">bonsai</span><span class="o">::</span><span class="n">InklingMessage</span><span class="o">&amp;</span> <span class="n">action</span><span class="p">,</span>
+        <span class="n">bonsai</span><span class="o">::</span><span class="n">InklingMessage</span><span class="o">&amp;</span> <span class="n">state</span><span class="p">,</span>
+        <span class="kt">float</span><span class="o">&amp;</span> <span class="n">reward</span><span class="p">,</span>
+        <span class="kt">bool</span><span class="o">&amp;</span> <span class="n">terminal</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
+            <span class="c1">// your simulation stepping code.
+</span>        <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="p">...</span>
+
+<span class="k">auto</span> <span class="n">config</span> <span class="o">=</span> <span class="n">make_shared</span><span class="o">&lt;</span><span class="n">bonsai</span><span class="o">::</span><span class="n">Config</span><span class="o">&gt;</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">);</span>
+<span class="k">auto</span> <span class="n">brain</span> <span class="o">=</span> <span class="n">make_shared</span><span class="o">&lt;</span><span class="n">bonsai</span><span class="o">::</span><span class="n">Brain</span><span class="o">&gt;</span><span class="p">(</span><span class="n">config</span><span class="p">);</span>
+<span class="n">MySimulator</span> <span class="n">sim</span><span class="p">(</span><span class="n">brain</span><span class="p">,</span> <span class="s">"my_simulator"</span><span class="p">);</span>
+
+<span class="p">...</span>
+
+</code></pre><pre class="highlight python tab-python"><code><span class="k">class</span> <span class="nc">MySimulator</span><span class="p">(</span><span class="n">bonsai_ai</span><span class="o">.</span><span class="n">Simulator</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">brain</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">brain</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+        <span class="c"># your sim init code goes here.</span>
+
+    <span class="k">def</span> <span class="nf">episode_start</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="c"># your reset/init code goes here.</span>
+        <span class="k">return</span> <span class="n">my_state</span>
+
+    <span class="k">def</span> <span class="nf">simulate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">):</span>
+        <span class="c"># your simulation stepping code goes here.</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">my_state</span><span class="p">,</span> <span class="n">my_reward</span><span class="p">,</span> <span class="n">is_terminal</span><span class="p">)</span>
+
+<span class="o">...</span>
+
+<span class="n">config</span> <span class="o">=</span> <span class="n">bonsai_ai</span><span class="o">.</span><span class="n">Config</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
+<span class="n">brain</span> <span class="o">=</span> <span class="n">bonsai_ai</span><span class="o">.</span><span class="n">Brain</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+<span class="n">sim</span> <span class="o">=</span> <span class="n">MySimulator</span><span class="p">(</span><span class="n">brain</span><span class="p">,</span> <span class="s">"my_simulator"</span><span class="p">)</span>
+
+<span class="o">...</span>
+</code></pre>
+<p>Serves as a base class for running simulations. You should create a subclass
+of Simulator and implement the <code class="prettyprint">episode_start</code> and <code class="prettyprint">simulate</code> callbacks.</p>
+
+<table><thead>
+<tr>
+<th>Argument</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">brain</code></td>
+<td>A Brain object for the BRAIN you wish to train against.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">name</code></td>
+<td>The name of simulator as specified in the Inkling for the BRAIN.</td>
+</tr>
+</tbody></table>
+
+<h2 id="brain-brain">Brain brain()</h2>
+<pre class="highlight cpp tab-cpp"><code><span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">sim</span><span class="p">.</span><span class="n">brain</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="k">print</span><span class="p">(</span><span class="n">sim</span><span class="o">.</span><span class="n">brain</span><span class="p">)</span>
+</code></pre>
 <p>Returns the BRAIN being used for this simulation.</p>
 
 <h2 id="string-name">string name()</h2>
-
+<pre class="highlight cpp tab-cpp"><code><span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Starting "</span> <span class="o">&lt;&lt;</span> <span class="n">sim</span><span class="p">.</span><span class="n">name</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="k">print</span><span class="p">(</span><span class="s">"Starting "</span><span class="p">,</span> <span class="n">sim</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+</code></pre>
 <p>Returns the simulator name that was passed in when constructed.</p>
 
 <h2 id="bool-predict">bool predict()</h2>
+<pre class="highlight cpp tab-cpp"><code><span class="kt">void</span> <span class="n">MySimulator</span><span class="o">::</span><span class="n">simulate</span><span class="p">(</span><span class="k">const</span> <span class="n">bonsai</span><span class="o">::</span><span class="n">InklingMessage</span><span class="o">&amp;</span> <span class="n">action</span><span class="p">,</span>
+                    <span class="n">bonsai</span><span class="o">::</span><span class="n">InklingMessage</span><span class="o">&amp;</span> <span class="n">state</span><span class="p">,</span> <span class="kt">float</span><span class="o">&amp;</span> <span class="n">reward</span><span class="p">,</span> <span class="kt">bool</span><span class="o">&amp;</span> <span class="n">terminal</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">predict</span><span class="p">()</span> <span class="o">==</span> <span class="nb">false</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// calculate reward...
+</span>    <span class="p">}</span>
 
+    <span class="p">...</span>
+<span class="p">}</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="k">def</span> <span class="nf">simulate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">):</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">predict</span> <span class="ow">is</span> <span class="bp">False</span><span class="p">:</span>
+        <span class="c"># calculate reward...</span>
+
+    <span class="o">...</span>
+</code></pre>
 <p>Returns a value indicating whether the simulation is set up to run in predict mode or training mode.</p>
 
 <h2 id="string-objective_name">string objective_name()</h2>
-
-<p>Accessor method that returns the name of the current objective.
+<pre class="highlight cpp tab-cpp"><code><span class="kt">void</span> <span class="n">MySimulator</span><span class="o">::</span><span class="n">episode_start</span><span class="p">(</span><span class="k">const</span> <span class="n">bonsai</span><span class="o">::</span><span class="n">InklingMessage</span><span class="o">&amp;</span> <span class="n">params</span><span class="p">,</span>
+                                <span class="n">bonsai</span><span class="o">::</span><span class="n">InklingMessage</span><span class="o">&amp;</span> <span class="n">initial_state</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">objective_name</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="k">def</span> <span class="nf">episode_start</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">objective_name</span><span class="p">)</span>
+    <span class="o">...</span>
+</code></pre>
+<p>Property accessor that returns the name of the current objective from Inkling.
 The objective may be updated before <code class="prettyprint">episode_start</code> is called. When running
 for prediction and during start up, objective will return an empty std::string.</p>
 
@@ -662,15 +801,23 @@ for prediction and during start up, objective will return an empty std::string.<
 <blockquote>
 <p>Example code:</p>
 </blockquote>
-<pre class="highlight cpp tab-cpp"><code><span class="kt">void</span> <span class="n">MySimulator</span><span class="o">::</span><span class="n">episode_start</span><span class="p">(</span><span class="k">const</span> <span class="n">InklingMessage</span><span class="o">&amp;</span> <span class="n">params</span><span class="p">,</span> <span class="n">InklingMessage</span><span class="o">&amp;</span> <span class="n">initial_state</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">objective_name</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-    <span class="n">angle</span> <span class="o">=</span> <span class="n">params</span><span class="p">.</span><span class="n">get_float32</span><span class="p">(</span><span class="s">"start_angle"</span><span class="p">);</span>
+<pre class="highlight cpp tab-cpp"><code><span class="kt">void</span> <span class="n">MySimulator</span><span class="o">::</span><span class="n">episode_start</span><span class="p">(</span><span class="k">const</span> <span class="n">bonsai</span><span class="o">::</span><span class="n">InklingMessage</span><span class="o">&amp;</span> <span class="n">params</span><span class="p">,</span>
+                                <span class="n">bonsai</span><span class="o">::</span><span class="n">InklingMessage</span><span class="o">&amp;</span> <span class="n">initial_state</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// training params are only passed in during training
+</span>    <span class="k">if</span> <span class="p">(</span><span class="n">predict</span><span class="p">()</span> <span class="o">==</span> <span class="nb">false</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">objective_name</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+        <span class="n">angle</span> <span class="o">=</span> <span class="n">params</span><span class="p">.</span><span class="n">get_float32</span><span class="p">(</span><span class="s">"start_angle"</span><span class="p">);</span>
+    <span class="p">}</span>
+
     <span class="n">initial_state</span><span class="p">.</span><span class="n">set_float32</span><span class="p">(</span><span class="s">"velocity"</span><span class="p">,</span> <span class="n">velocity</span><span class="p">);</span>
     <span class="n">initial_state</span><span class="p">.</span><span class="n">set_float32</span><span class="p">(</span><span class="s">"angle"</span><span class="p">,</span>    <span class="n">angle</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre><pre class="highlight python tab-python"><code><span class="k">def</span> <span class="nf">episode_start</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">objective_name</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">angle</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">start_angle</span>
+    <span class="c"># training params are only passed in during training</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">predict</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">objective_name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">angle</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">start_angle</span>
+
     <span class="n">initial</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s">"angle"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">angle</span><span class="p">,</span>
         <span class="s">"velocity"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">velocity</span><span class="p">,</span>
@@ -713,23 +860,32 @@ updated to reflect the current objective for this episode.</p>
 <blockquote>
 <p>Example code:</p>
 </blockquote>
-<pre class="highlight python tab-python"><code><span class="k">def</span> <span class="nf">simulate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">):</span>
+<pre class="highlight cpp tab-cpp"><code><span class="kt">void</span> <span class="n">MySimulator</span><span class="o">::</span><span class="n">simulate</span><span class="p">(</span><span class="k">const</span> <span class="n">bonsai</span><span class="o">::</span><span class="n">InklingMessage</span><span class="o">&amp;</span> <span class="n">action</span><span class="p">,</span>
+                           <span class="n">bonsai</span><span class="o">::</span><span class="n">InklingMessage</span><span class="o">&amp;</span> <span class="n">state</span><span class="p">,</span> <span class="kt">float</span><span class="o">&amp;</span> <span class="n">reward</span><span class="p">,</span> <span class="kt">bool</span><span class="o">&amp;</span> <span class="n">terminal</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">velocity</span> <span class="o">=</span> <span class="n">velocity</span> <span class="o">-</span> <span class="n">action</span><span class="p">.</span><span class="n">get_int8</span><span class="p">(</span><span class="s">"delta"</span><span class="p">);</span>
+    <span class="n">terminal</span> <span class="o">=</span> <span class="p">(</span><span class="n">velocity</span> <span class="o">&lt;=</span> <span class="mf">0.0</span><span class="p">);</span>
+
+    <span class="c1">// reward is only needed during training.
+</span>    <span class="k">if</span> <span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">predict</span><span class="p">()</span> <span class="o">==</span> <span class="nb">false</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">reward</span> <span class="o">=</span> <span class="n">reward_for_objective</span><span class="p">(</span><span class="n">objective_name</span><span class="p">());</span>
+    <span class="p">}</span>
+
+    <span class="n">state</span><span class="p">.</span><span class="n">set_float32</span><span class="p">(</span><span class="s">"velocity"</span><span class="p">,</span> <span class="n">velocity</span><span class="p">);</span>
+    <span class="n">state</span><span class="p">.</span><span class="n">set_float32</span><span class="p">(</span><span class="s">"angle"</span><span class="p">,</span>    <span class="n">angle</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="k">def</span> <span class="nf">simulate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">):</span>
     <span class="n">velocity</span> <span class="o">=</span> <span class="n">velocity</span> <span class="o">-</span> <span class="n">action</span><span class="o">.</span><span class="n">delta</span><span class="p">;</span>
     <span class="n">terminal</span> <span class="o">=</span> <span class="p">(</span><span class="n">velocity</span> <span class="o">&lt;=</span> <span class="mf">0.0</span><span class="p">)</span>
-    <span class="n">reward</span> <span class="o">=</span> <span class="n">reward_for_objective</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">objective_name</span><span class="p">)</span>
+
+    <span class="c"># reward is only needed during training</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">predict</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+        <span class="n">reward</span> <span class="o">=</span> <span class="n">reward_for_objective</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">objective_name</span><span class="p">)</span>
+
     <span class="n">state</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s">"velocity"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">velocity</span><span class="p">,</span>
         <span class="s">"angle"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">angle</span><span class="p">,</span>
     <span class="p">}</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">terminal</span><span class="p">)</span>
-</code></pre><pre class="highlight cpp tab-cpp"><code><span class="kt">void</span> <span class="n">Test</span><span class="o">::</span><span class="n">simulate</span><span class="p">(</span><span class="k">const</span> <span class="n">InklingMessage</span><span class="o">&amp;</span> <span class="n">action</span><span class="p">,</span>
-    <span class="n">InklingMessage</span><span class="o">&amp;</span> <span class="n">state</span><span class="p">,</span> <span class="kt">float</span><span class="o">&amp;</span> <span class="n">reward</span><span class="p">,</span> <span class="kt">bool</span><span class="o">&amp;</span> <span class="n">terminal</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">velocity</span> <span class="o">=</span> <span class="n">velocity</span> <span class="o">-</span> <span class="n">action</span><span class="p">.</span><span class="n">get_int8</span><span class="p">(</span><span class="s">"delta"</span><span class="p">);</span>
-    <span class="n">terminal</span> <span class="o">=</span> <span class="p">(</span><span class="n">velocity</span> <span class="o">&lt;=</span> <span class="mf">0.0</span><span class="p">);</span>
-    <span class="n">reward</span> <span class="o">=</span> <span class="n">reward_for_objective</span><span class="p">(</span><span class="n">objective_name</span><span class="p">());</span>
-    <span class="n">state</span><span class="p">.</span><span class="n">set_float32</span><span class="p">(</span><span class="s">"velocity"</span><span class="p">,</span> <span class="n">velocity</span><span class="p">);</span>
-    <span class="n">state</span><span class="p">.</span><span class="n">set_float32</span><span class="p">(</span><span class="s">"angle"</span><span class="p">,</span>    <span class="n">angle</span><span class="p">);</span>
-<span class="p">}</span>
 </code></pre>
 <table><thead>
 <tr>
@@ -768,31 +924,25 @@ different lessons.</p>
 
 <p>The default implementation will throw an exception.</p>
 
-<h2 id="bool-standby-reason">bool standby(reason)</h2>
-
-<table><thead>
-<tr>
-<th>Argument</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code class="prettyprint">reason</code></td>
-<td>A std::string describing the reason training has been delayed.</td>
-</tr>
-</tbody></table>
-
-<p>The default action is to wait one second and continue. If returns <code class="prettyprint">true</code>,
-the server status will be checked again and the loop will continue.</p>
-
 <h2 id="bool-run">bool run()</h2>
-<pre class="highlight python tab-python"><code><span class="n">mySim</span> <span class="o">=</span> <span class="n">MySimulator</span><span class="p">(</span><span class="n">brain</span><span class="p">)</span>
-<span class="k">while</span> <span class="n">mySim</span><span class="o">.</span><span class="n">run</span><span class="p">():</span>
-    <span class="k">continue</span>
-</code></pre><pre class="highlight cpp tab-cpp"><code><span class="n">MySimulator</span> <span class="n">mySim</span><span class="p">(</span><span class="n">brain</span><span class="p">);</span>
-<span class="k">while</span><span class="p">(</span> <span class="n">mySim</span><span class="p">.</span><span class="n">run</span><span class="p">()</span> <span class="p">)</span> <span class="p">{</span>
-    <span class="k">continue</span><span class="p">;</span>
+<pre class="highlight cpp tab-cpp"><code><span class="n">MySimulator</span> <span class="n">sim</span><span class="p">(</span><span class="n">brain</span><span class="p">);</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="n">sim</span><span class="p">.</span><span class="n">predict</span><span class="p">())</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Predicting against "</span> <span class="o">&lt;&lt;</span> <span class="n">brain</span><span class="p">.</span><span class="n">name</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">" version "</span> <span class="o">&lt;&lt;</span> <span class="n">brain</span><span class="p">.</span><span class="n">version</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="k">else</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Training "</span> <span class="o">&lt;&lt;</span> <span class="n">brain</span><span class="p">.</span><span class="n">name</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+
+<span class="k">while</span><span class="p">(</span> <span class="n">sim</span><span class="p">.</span><span class="n">run</span><span class="p">()</span> <span class="p">)</span> <span class="p">{</span>
 <span class="p">}</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="n">sim</span> <span class="o">=</span> <span class="n">MySimulator</span><span class="p">(</span><span class="n">brain</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">sim</span><span class="o">.</span><span class="n">predict</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Predicting against "</span><span class="p">,</span> <span class="n">brain</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s">" version "</span><span class="p">,</span> <span class="n">brain</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Training "</span><span class="p">,</span> <span class="n">brain</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+<span class="k">while</span> <span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">():</span>
+    <span class="k">continue</span>
 </code></pre>
 <p>Main loop call for driving the simulation. Returns <code class="prettyprint">false</code> when the
 simulation has finished or halted.</p>
@@ -800,36 +950,11 @@ simulation has finished or halted.</p>
 <p>The client should call this method in a <code class="prettyprint">while</code> loop until it returns <code class="prettyprint">false</code>.
 To run for prediction, <code class="prettyprint">brain()-&gt;config()-&gt;predict()</code> must return <code class="prettyprint">true</code>.</p>
 
-<h2 id="event-get_next_event">Event get_next_event()</h2>
-<pre class="highlight cpp tab-cpp"><code><span class="k">auto</span> <span class="n">event</span> <span class="o">=</span> <span class="n">get_next_event</span><span class="p">();</span>
-<span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">()</span> <span class="o">==</span> <span class="n">Type</span><span class="o">::</span><span class="n">Episode_Start</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">auto</span> <span class="n">es_E</span> <span class="o">=</span> <span class="n">dynamic_pointer_cast</span><span class="o">&lt;</span><span class="n">EpisodeStartEvent</span><span class="o">&gt;</span><span class="p">(</span><span class="n">event</span><span class="p">);</span>
-    <span class="k">auto</span> <span class="n">initial_properties</span> <span class="o">=</span> <span class="n">es</span><span class="o">-&gt;</span><span class="n">initial_properties</span><span class="p">;</span>
-    <span class="k">auto</span> <span class="n">initial_state</span> <span class="o">=</span> <span class="n">es</span><span class="o">-&gt;</span><span class="n">initial_state</span><span class="p">;</span>
-    <span class="c1">// process initial properties/state
-</span><span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">()</span> <span class="o">==</span> <span class="n">Type</span><span class="o">::</span><span class="n">Simulate</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">auto</span> <span class="n">sim_E</span> <span class="o">=</span> <span class="n">dynamic_pointer_cast</span><span class="o">&lt;</span><span class="n">SimulatorEvent</span><span class="o">&gt;</span><span class="p">(</span><span class="n">event</span><span class="p">);</span>
-    <span class="k">auto</span> <span class="n">prediction</span> <span class="o">=</span> <span class="n">sim_E</span><span class="o">-&gt;</span><span class="n">prediction</span><span class="p">;</span>
-    <span class="k">auto</span> <span class="n">state</span> <span class="o">=</span> <span class="n">sim_E</span><span class="o">-&gt;</span><span class="n">state</span><span class="p">;</span>
-    <span class="k">auto</span> <span class="n">reward</span> <span class="o">=</span> <span class="n">sim_E</span><span class="o">-&gt;</span><span class="n">reward</span><span class="p">;</span>
-    <span class="k">auto</span> <span class="n">terminal</span> <span class="o">=</span> <span class="n">sim_E</span><span class="o">-&gt;</span><span class="n">terminal</span><span class="p">;</span>
-    <span class="c1">// process simulator step 
-</span><span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">()</span> <span class="o">==</span> <span class="n">Type</span><span class="o">::</span><span class="n">Finished</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">close</span><span class="p">();</span>
-<span class="p">}</span>
-</code></pre>
-<p>Returns the next simulator event in the queue.</p>
-
-<h2 id="void-close">void close()</h2>
-<pre class="highlight cpp tab-cpp"><code><span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">()</span> <span class="o">==</span> <span class="n">Type</span><span class="o">::</span><span class="n">Finished</span><span class="p">)</span> <span class="n">close</span><span class="p">();</span>
-</code></pre>
-<p>Closes the connection between <code class="prettyprint">Simulator</code> and the Bonsai BRAIN.</p>
-
 <h2 id="operator-ostream-simulator">operator&lt;&lt;(ostream, simulator)</h2>
 
 <p>Prints out a representation of Simulator that is useful for debugging.</p>
 
-<p><strong>Note:</strong> Used in C++ only.</p>
+<p><strong>Note:</strong> Used in C++ only. For python, use <code class="prettyprint">print(simulator)</code></p>
 
 <table><thead>
 <tr>
@@ -842,8 +967,8 @@ To run for prediction, <code class="prettyprint">brain()-&gt;config()-&gt;predic
 <td>A std c++ stream operator.</td>
 </tr>
 <tr>
-<td><code class="prettyprint">config</code></td>
-<td>Object returned by previously created <code class="prettyprint">Bonsai::Config</code>.</td>
+<td><code class="prettyprint">simulator</code></td>
+<td>A bonsai::Simulator to print out.</td>
 </tr>
 </tbody></table>
 
