@@ -1,39 +1,59 @@
 # Install bonsai-ai for Python
 
-## Install with pip
+Here is the sequence of commands for installing bonsai-ai and related components. (NOTE: `bonsai-gym`
+depends on `bonsai-ai` and so installing gym by itself will bring in ai too.)
 
-Blurb about using a virtual env of your choice
+Do **ONE** of the following:
+
+* [Install with pip][1]
+* [Install with Anaconda][4]
+
+## Install with pip
 
 > Python 3+ Install
 
 ```shell
+# Optional to install within a virtual environment
 python3 -m venv sdk2
 source sdk2/bin/activate
+
 pip3 install bonsai-ai bonsai-gym bonsai-cli
 ```
 
 > Python 2.7 Install
 
 ```shell
+# Optional to install within a virtual environment
 virtualenv sdk2
 source sdk2/bin/activate
+
 pip install bonsai-ai bonsai-gym bonsai-cli
 ```
 
+It it highly recommended that you use the Python SDK with a virtual environment of your choice.
+In the code panel we show [virtualenv][3] being used but you can replace this with one of your choice or
+leave it out and pip install directly into your system if you wish.
+
 ## Install with Anaconda
-
-If you *do not* have Anaconda installed on your system, please follow to the [Install with pip][15] instructions and skip this section.
-
-`conda` is a tool for installing and managing Python and R dependencies. Anaconda includes Python and pip, so all you need to do is install Git if you haven't already. For more information, refer to the [Anaconda website][10].
 
 > Anaconda Install
 
 ```shell
+# Optional to install within a virtual environment
 conda create -n sdk2 pip
 source activate sdk2
+
 pip install bonsai-ai bonsai-gym bonsai-cli
 ```
 
-Here is the sequence of commands for installing bonsai-ai and related components. (NOTE: `bonsai-gym` depends on `bonsai-ai` and so installing gym will bring in ai too.)
+If you *do not* have Anaconda installed on your system, please follow to the [Install with pip][1]
+instructions and skip this section.
+
+`conda` is a tool for installing and managing Python and R dependencies, as well as virtual python
+environments. For more information, refer to the [Anaconda website][2].
 
 
+[1]: #install-with-pip
+[2]: https://www.anaconda.com/download/
+[3]: https://packaging.python.org/guides/installing-using-pip-and-virtualenv/
+[4]: #install-with-anaconda
