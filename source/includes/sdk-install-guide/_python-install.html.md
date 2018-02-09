@@ -8,6 +8,8 @@ Do **ONE** of the following:
 * [Install with pip][1]
 * [Install with Anaconda][4]
 
+See the [Python Library Reference][5] for full details on usage of this library.
+
 ## Install with pip
 
 > Python 3+ Install
@@ -57,3 +59,4 @@ environments. For more information, refer to the [Anaconda website][2].
 [2]: https://www.anaconda.com/download/
 [3]: https://packaging.python.org/guides/installing-using-pip-and-virtualenv/
 [4]: #install-with-anaconda
+[5]: ../references/library-reference.html?python
