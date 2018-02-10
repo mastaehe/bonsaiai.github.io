@@ -2,8 +2,8 @@
 title: Library Reference
 
 language_tabs:
-  - cpp
   - python
+  - cpp
 
 toc_footers:
   -  <%= partial "partials/footer-links" %>
@@ -11,10 +11,10 @@ toc_footers:
 
 
 includes:
-  - library-reference/_introduction.html.md
-  - library-reference/_brain.html.md
-  - library-reference/_config.html.md
-  - library-reference/_simulator.html.md
+  - library-reference/introduction.html.md
+  - library-reference/brain.html.md
+  - library-reference/config.html.md
+  - library-reference/simulator.html.md
 
 
 search: true
