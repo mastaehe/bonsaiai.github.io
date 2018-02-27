@@ -236,8 +236,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 		<li class="header_menu_item "> <a href="guides/getting-started.html">Quick Start</a></li>
 
-	
-		<li class="header_menu_item"> <!-- First Tier Drop Down --> <label for="drop-1" class="toggle">Guides +</label><a  href="#">Guides</a>			
+
+		<li class="header_menu_item"> <!-- First Tier Drop Down --> <label for="drop-1" class="toggle">Guides +</label><a  href="#">Guides</a>
 			<input type="checkbox" id="drop-1"/>
 			<ul id="guides">
 				<li class=""> <a href="guides/cli-install-guide.html">Install the CLI</a>  </li>
@@ -246,20 +246,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 				<li class=""> <a href="guides/ai-engine-guide.html">Understand AI Engine Components</a>  </li>
 				<li class=""> <a href="guides/web-graphs-guide.html">Understand BRAIN Graphs</a>  </li>
 				<li class=""> <a href="guides/jupyter-api-guide.html">Use Bonsai's API with Jupyter</a>  </li>
+				<li class=""> <a href="guides/simulation-guide.html">Simulation Guide</a>  </li>
 
-			</ul> 
+			</ul>
 		</li>
 
-		<li class="header_menu_item"> <!-- First Tier Drop Down --> <label for="drop-2" class="toggle">References +</label><a  href="#">References</a>			
+		<li class="header_menu_item"> <!-- First Tier Drop Down --> <label for="drop-2" class="toggle">References +</label><a  href="#">References</a>
 			<input type="checkbox" id="drop-2"/>
 			<ul id="references">
 				<li class=""> <a href="references/api-reference.html">API</a>  </li>
 				<li class=""> <a href="references/cli-reference.html">CLI</a>  </li>
 				<li class=""> <a href="references/inkling-reference.html">Inkling</a>  </li>
 				<li class=""> <a href="references/library-reference.html">Library</a>  </li>
-			</ul> 
+			</ul>
 		</li>
-		
+
 		<li class="header_menu_item selected"> <a href="examples.html">Examples</a></li>
 
 		<li>
@@ -270,9 +271,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	</ul>
 
 </nav>
-
-
-
 
 
 	<div id="main-wrapper">
@@ -955,164 +953,247 @@ def debug(*args):
 
 <p>For more information on the functions inside of this simulator class and how to implement them see the <a href="http://docs.bons.ai/references/library-reference.html">Library Reference</a>.</p>
 
-          <h1 id="gazebo-turtlebot">Gazebo: Turtlebot</h1>
+          <h1 id="simulink-examples">Simulink Examples</h1>
 
-<blockquote>
-<p><img src="images/bonsai-turtlebot-demo.png" alt="Turtlebot Demo Image" /></p>
-</blockquote>
+<p><strong>Simulink</strong>, developed by The MathWorks, is a graphical programming environment for modeling, simulating and analyzing multi-domain dynamical systems.</p>
 
-<p><a href="https://github.com/BonsaiAI/gazebo-turtlebot-sample"><strong>Download the full source code on GitHub</strong></a> if you want to run this simulator
-locally. If you want to run Gazebo Turtlebot remotely on the Bonsai Platform as
-a managed simulator (highly recommended), create a new BRAIN selecting the
-Gazebo Turtlebot demo on <a href="https://beta.bons.ai/new">beta.bons.ai</a>.</p>
+<p>Bonsai is using <strong>Simulink</strong> as a training environment for a Bonsai BRAIN. We’re supporting a wide range of use cases that can be described as control or machine tuning problems. Please review our simulator and sim model requirements guide at INSERT URL.</p>
 
-<p>In this example, we&rsquo;ll walk you through the various Inkling components and
-simulation scripts that are part of a sample implementation of training
-<a href="http://www.turtlebot.com/">Turtlebot</a> to navigate the Willow Garage office on the Bonsai Platform.
-Turtlebot is a low-cost mobile base for basic robotics and AI-driven robotics
-R&amp;D. This is a real-world example of how to use the Bonsai Platform for robotics
-using <a href="http://gazebosim.org/tutorials?tut=ros_overview">Gazebo and ROS</a> (Robotic Operating System).</p>
+<h2 id="prerequisites">Prerequisites</h2>
 
-<p>This example also includes scripts for integrating Gazebo and ROS into the
-Bonsai Platform which can be found below in the <a href="#simulator-files">Simulator Files</a> section.
-In this case, ROS is relaying information between the simulator Gazebo and the
-Bonsai Platform. Turtlebot is being simulated inside of Gazebo, and ROS is
-communicating the action and state of the simulation back to the Bonsai servers for training.</p>
+<p>Installation covered within the specific example.</p>
 
-<p>A graphical display is not part of the Docker container (when training remotely),
- but a Gazebo client may additionally connect to the Gazebo server (that <em>is</em>
- part of the container) to visualize the simulation environment.</p>
+<ul>
+<li>Python3</li>
+<li>Bonsai CLI and SDK</li>
+<li>Asynchronous HTTP Client/Server</li>
+<li>MATLAB Engine API for Python</li>
+<li>MATLAB &amp; Simulink (R2017b)</li>
+</ul>
 
-<h2 id="inkling-file">Inkling File</h2>
+<p><a href="https://github.com/BonsaiAI/bonsai-simulink"><strong>Download the full source code on GitHub</strong></a> or clone into your project directory.</p>
+<pre class="highlight shell tab-shell"><code>git clone https://github.com/BonsaiAI/bonsai-simulink
+</code></pre>
+<h2 id="simulink-cartpole">Simulink Cartpole</h2>
+
+<p>This is a step-by-step guide for using <strong>Bonsai&rsquo;s Universal Coordinator</strong> in Python to connect the Bonsai Platform to a Simulink model.</p>
+
+<p>You have to have Matlab and Simulink installed. Trial versions can be downloaded from <a href="http://www.themathworks.com">TheMathworks</a></p>
+
+<h4 id="cli-guide">CLI guide</h4>
+
+<p>We&rsquo;re using the Bonsai Command Line Interface (CLI) for this example. Refer to the <a href="http://docs.bons.ai/guides/cli-install-guide.html"><strong>Bonsai CLI guide</strong></a> for more details.</p>
+
+<h4 id="install-pre-requisites">Install Pre-Requisites</h4>
+<pre class="highlight plaintext"><code>pip install aiohttp
+pip install bonsai-cli bonsai-ai bonsai-gym
+</code></pre>
+<p>Install Asynchronous HTTP Client/Server and the Bonsai CLI and Bonsai libraries needed to run our examples.</p>
+
+<h4 id="install-matlab-dependencies">Install Matlab Dependencies:</h4>
+<pre class="highlight plaintext"><code>cd &lt;matlabroot&gt;/extern/engines/python
+python setup.py install
+</code></pre>
+<p>Install the Matlab API for Python from the root directory of your Matlab installation.</p>
+
+<p><strong>Matlab Simscape Multibody Add-On</strong> is required for this example.</p>
+
+<p>Go to your Add-On Explorer in Matlab and add Simscape and Simscape Multibody.</p>
+
+<h4 id="running-and-training">Running and Training</h4>
+<pre class="highlight plaintext"><code>bonsai create simulink-cartpole
+bonsai push
+bonsai train start
+
+
+
+../../coordinator/coordinator --brain=simulink-cartpole
+</code></pre>
+<p>Run the following in the simulink-househeat directory:</p>
+
+<p>The <code class="prettyprint">bonsai push</code> command will upload all needed files to the Bonsai backend. This includes an <a href="http://docs.bons.ai/references/inkling-reference.html"><strong>Inkling</strong></a> file which describes state, actions and a learning curriculum that the the Bonsai AI is using for training.</p>
+
+<h6 id="inkling">Inkling</h6>
+
+<p>Inkling is a declarative, strongly typed programming language specifically designed for artificial intelligence (AI). It abstracts away the vast world of dynamic AI algorithms that require expertise in machine learning and enables more developers to program AI.
+Please review our <a href="http://docs.bons.ai/guides/inkling-guide.html#overview"><strong>Inkling Guide</strong></a></p>
 
 <h6 id="schema">Schema</h6>
-<pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">State</span>
-    <span class="kr">Float32</span> <span class="nx">heading_x</span><span class="p">,</span>
-    <span class="kr">Float32</span> <span class="nx">heading_y</span><span class="p">,</span>
-    <span class="kr">Float32</span> <span class="nx">heading_yaw</span><span class="p">,</span>
-    <span class="kr">Float32</span> <span class="nx">yaw</span><span class="p">,</span>
+<pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">CartpoleState</span>
+    <span class="kr">Float32</span> <span class="nx">theta</span><span class="p">,</span>
+    <span class="kr">Float32</span> <span class="nx">dtheta</span><span class="p">,</span>
     <span class="kr">Float32</span> <span class="nx">x</span><span class="p">,</span>
-    <span class="kr">Float32</span> <span class="nx">y</span>
+    <span class="kr">Float32</span> <span class="nx">dx</span>
 <span class="k">end</span>
 </code></pre>
-<p>The <code class="prettyprint">State</code> schema provides the BRAIN with the current x, y coordinates of the
-turtlebot, as well as its orientation. We also supply a heading vector to the
-relative orientation of the goal with respect to the Turtlebot. This provides an
-invariant representation across goal positions.</p>
-<pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">Command</span>
-    <span class="kr">Float32</span> <span class="nx">lin_vel</span><span class="p">,</span>
-    <span class="kr">Float32</span> <span class="nx">ang_vel</span>
+<p>The <code class="prettyprint">CartpoleState</code> schema names four records — <code class="prettyprint">theta</code>, <code class="prettyprint">dtheta</code>,<code class="prettyprint">x,</code> and <code class="prettyprint">dx</code> — and assigns a type to them.</p>
+<pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">CartpoleAction</span>
+    <span class="kr">Float32</span> <span class="p">{</span><span class="o">-</span><span class="mf">10.0</span><span class="p">:</span><span class="mf">10.0</span><span class="p">}</span> <span class="nx">f</span>
 <span class="k">end</span>
 </code></pre>
-<p>The <code class="prettyprint">Command</code> schema defines <code class="prettyprint">lin_vel</code> as the linear velocity and <code class="prettyprint">ang_vel</code> as
-the angular velocity of Turtlebot in the simulation. These are the two actions
-that can be taken to move Turtlebot. Our BRAIN will output the desired linear
-and angular velocities in m/s and rad/s, respectively. A PID controller will
-make a best effort to achieve these targets within the time limit of the iteration.</p>
-<pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">TurtlebotConfig</span>
-    <span class="kr">Int8</span> <span class="nx">unused</span>
+<p>The <code class="prettyprint">CartpoleAction</code> schema names a single record — <code class="prettyprint">action</code> — and assigns a constrained type to it.</p>
+<pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">CartpoleConfig</span>
+    <span class="kr">Int8</span> <span class="nx">dummy</span>
 <span class="k">end</span>
 </code></pre>
-<p>The <code class="prettyprint">TurtlebotConfig</code> schema in this case is not used (but is still required to
-be defined in Inkling).</p>
+<p>The <code class="prettyprint">CartpoleConfig</code> is set to <code class="prettyprint">dummy</code> as we&rsquo;re not using config in this model.</p>
 
 <h6 id="concept">Concept</h6>
-<pre class="highlight inkling tab-inkling"><code><span class="k">concept</span> <span class="nx">go_to_point</span> <span class="k">is</span> <span class="nx">estimator</span>
-    <span class="k">predicts</span> <span class="p">(</span><span class="nx">Command</span><span class="p">)</span>
-    <span class="k">follows</span> <span class="kr">input</span><span class="p">(</span><span class="nx">State</span><span class="p">)</span>
-    <span class="k">feeds</span> <span class="kr">output</span>
+<pre class="highlight inkling tab-inkling"><code><span class="k">concept</span> <span class="nx">balance</span> <span class="k">is</span> <span class="nx">estimator</span>
+   <span class="k">predicts</span> <span class="p">(</span><span class="nx">CartpoleAction</span><span class="p">)</span>
+   <span class="k">follows</span> <span class="kr">input</span><span class="p">(</span><span class="nx">CartpoleState</span><span class="p">)</span>
+   <span class="k">feeds</span> <span class="kr">output</span>
 <span class="k">end</span>
 </code></pre>
-<p>This concept is named <code class="prettyprint">go_to_point</code>, which predicts a <code class="prettyprint">Command</code> given a <code class="prettyprint">State</code>
-of the simulation. This concept of <code class="prettyprint">go_to_point</code> is based on the x, y position
-set as the goal.</p>
+<p>The concept is named <code class="prettyprint">balance</code>, and it takes input from the simulator about the state of the model (<code class="prettyprint">Cartpolestate</code> schema). It outputs to the <code class="prettyprint">CartpoleAction</code> schema. This is the AI&rsquo;s next control signal to the cartpole.</p>
 
 <h6 id="simulator">Simulator</h6>
-<pre class="highlight inkling tab-inkling"><code><span class="k">simulator</span> <span class="nx">turtlebot_office_simulator</span><span class="p">(</span><span class="nx">TurtlebotConfig</span><span class="p">)</span>
-    <span class="k">action</span> <span class="p">(</span><span class="nx">Command</span><span class="p">)</span>
-    <span class="k">state</span> <span class="p">(</span><span class="nx">State</span><span class="p">)</span>
+<pre class="highlight inkling tab-inkling"><code><span class="k">simulator</span> <span class="nx">simulink_sim</span><span class="p">(</span><span class="nx">CartpoleConfig</span><span class="p">)</span>
+    <span class="k">action</span> <span class="p">(</span><span class="nx">CartpoleAction</span><span class="p">)</span>
+    <span class="k">state</span> <span class="p">(</span><span class="nx">CartpoleState</span><span class="p">)</span>
 <span class="k">end</span>
 </code></pre>
-<p>The simulator clause declares that a simulator named <code class="prettyprint">turtlebot_office_simulator</code>
-will be connecting to the server for training. This code snippet binds the
-previous schemas to this simulator. To define the training relationship between
-the simulator and the concept we must begin by defining the simulator.
-<code class="prettyprint">turtlebot_office_simulator</code> expects an action defined in the <code class="prettyprint">Command</code> schema
-as input and replies with a state defined in the <code class="prettyprint">State</code> schema as output.</p>
+<p>The <code class="prettyprint">simulink_sim</code> gets information from two schemas. The first schema, <code class="prettyprint">action</code>, specifies the schema for actions within the simulation. The second schema contains the <code class="prettyprint">state</code> of the simulator that is sent to the lesson.</p>
 
 <h6 id="curriculum">Curriculum</h6>
-<pre class="highlight inkling tab-inkling"><code><span class="k">curriculum</span> <span class="nx">go_to_point_curriculum</span>
-    <span class="k">train</span> <span class="nx">go_to_point</span>
-    <span class="k">with</span> <span class="k">simulator</span> <span class="nx">turtlebot_office_simulator</span>
-    <span class="k">objective</span> <span class="nx">get_reward</span>
-        <span class="k">lesson</span> <span class="nx">get_to_point</span>
+<pre class="highlight inkling tab-inkling"><code><span class="k">curriculum</span> <span class="nx">my_curriculum</span>
+    <span class="k">train</span> <span class="nx">balance</span>
+    <span class="k">with</span> <span class="k">simulator</span> <span class="nx">simulink_sim</span>
+    <span class="k">objective</span> <span class="nx">cartpole_balance</span>
+        <span class="k">lesson</span> <span class="nx">my_first_lesson</span>
             <span class="k">configure</span>
-                <span class="k">constrain</span> <span class="nx">unused</span> <span class="k">with</span> <span class="kr">Int8</span><span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">}</span>
+                <span class="k">constrain</span> <span class="nx">dummy</span> <span class="k">with</span> <span class="kr">Int8</span><span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">}</span>
             <span class="k">until</span>
-                <span class="k">maximize</span> <span class="nx">get_reward</span>
+                <span class="k">maximize</span> <span class="nx">cartpole_balance</span>
 <span class="k">end</span>
 </code></pre>
-<p>The curriculum <code class="prettyprint">go_to_point_curriculum</code> trains <code class="prettyprint">go_to_point</code> using
-<code class="prettyprint">turtlebot_office_simulator</code>. The BRAIN that runs this Inkling code will try to
-maximize the value returned from <code class="prettyprint">get_reward</code> until you stop training.
-<code class="prettyprint">get_reward</code> is a method in the Python simulator.</p>
+<p>The curriculum is named <code class="prettyprint">my_curriculum</code>, and it trains the <code class="prettyprint">balance</code> concept using the <code class="prettyprint">simulink_sim</code>. This curriculum contains one lesson, called <code class="prettyprint">my_first_lesson</code>. It configures the simulation, by setting a constraint for the state of the simulator.</p>
 
-<p>This curriculum contains one lesson, called <code class="prettyprint">get_to_point</code>. If used, it would
-configure the simulation by setting a number of constraints for the state of
-the simulator. In this simple example however, there are no constraints.</p>
+<p>The lesson trains until the AI has maximized the objective named <code class="prettyprint">cartpole_balance</code>.</p>
 
-<h2 id="simulator-files">Simulator Files</h2>
+<h6 id="predicting-with-a-brain">Predicting with a BRAIN</h6>
+<pre class="highlight plaintext"><code>bonsai train stop
+</code></pre>
+<p>When you are seeing rewards reaching 1000 you can stop training. You may need to Ctrl+C to stop in the terminal.</p>
+<pre class="highlight plaintext"><code>../../coordinator/coordinator --predict
+</code></pre>
+<p>Now you can predict using the trained BRAIN.</p>
 
-<p>The three full Python files for this example are with the rest of the
-<a href="https://github.com/BonsaiAI/gazebo-turtlebot-sample">gazebo-turtlebot-sample code</a> on GitHub.</p>
+<h2 id="simulink-househeat">Simulink Househeat</h2>
 
-<h3 id="bonsai_ros-py">bonsai_ros.py</h3>
+<p>This is a step-by-step guide for using Bonsai&rsquo;s Universal Coordinator in Python to connect the Bonsai Platform to a Simulink model.</p>
 
-<blockquote>
-<p>Source code too long to display, please click Github link.</p>
-</blockquote>
+<p>You have to have Matlab and Simulink installed. Trial versions can be downloaded from <a href="http://www.themathworks.com">TheMathworks</a></p>
 
-<p>This Python file mainly contains a class that acts as a basic interface between
-ROS and Bonsai&rsquo;s protocols. It can bring up and down the ROS stack and parse a
-variety of basic messages.</p>
+<p>This example shows how to use Simulink to create the thermal model of a house. This system models the outdoor environment, the thermal characteristics of the house, and the house heating system. Objective for the Bonsai AI is to reach the desired temperature.</p>
 
-<p>The purpose of this file is to manage the interactions between the BRAIN server
-interface and many ROS topics that are available to subscribe or publish to.</p>
+<h4 id="cli-guide">CLI Guide</h4>
 
-<p>See the <a href="https://github.com/BonsaiAI/gazebo-turtlebot-sample/blob/master/scripts/bonsai_ros.py"><strong>bonsai_ros.py file</strong></a> on GitHub.</p>
+<p>We&rsquo;re using the Bonsai Command Line Interface (CLI) for this example. Refer to the <a href="http://docs.bons.ai/guides/cli-install-guide.html"><strong>Bonsai CLI guide</strong></a> for more details.</p>
 
-<h3 id="bonsai_gazebo-py">bonsai_gazebo.py</h3>
+<h4 id="pre-requisites-to-run-the-example">Pre-requisites to run the Example</h4>
+<pre class="highlight plaintext"><code>pip install aiohttp
+pip install bonsai-cli bonsai-ai bonsai-gym
+</code></pre>
+<p>Install Asynchronous HTTP Client/Server and the Bonsai CLI and Bonsai libraries needed to run our examples.</p>
 
-<blockquote>
-<p>Source code too long to display, please click Github link.</p>
-</blockquote>
+<h4 id="install-matlab-engine">Install Matlab Engine:</h4>
+<pre class="highlight plaintext"><code>cd &lt;matlabroot&gt;/extern/engines/python
+python setup.py install
+</code></pre>
+<p>Install the Matlab API for Python from the root directory of your Matlab installation.</p>
 
-<p>This Python file extends the BonsaiROS interface with methods for controlling
-Gazebo simulations in accordance with the Bonsai simulator protocol.</p>
+<h4 id="running-and-training">Running and Training</h4>
+<pre class="highlight plaintext"><code>bonsai create simulink-househeat
+bonsai push
+bonsai train start
 
-<p>The purpose of this file is to extend <code class="prettyprint">bonsai_ros.py</code> to also handle interacting
-with the Gazebo specific services and topics made available when using a Gazebo
-simulation with ROS.</p>
+../../coordinator/coordinator --brain=simulink-househeat
+</code></pre>
+<p>Run the following in the simulink-househeat directory:</p>
 
-<p>See the <a href="https://github.com/BonsaiAI/gazebo-turtlebot-sample/blob/master/scripts/bonsai_gazebo.py"><strong>bonsai_gazebo.py file</strong></a> on GitHub.</p>
+<p>The <code class="prettyprint">bonsai push</code> command will upload all needed files to the Bonsai backend. This includes an <a href="http://docs.bons.ai/references/inkling-reference.html"><strong>Inkling</strong></a> file which describes state, actions and a learning curriculum that the the Bonsai AI is using for training.</p>
 
-<h3 id="turtlebot_office_simulator-py">turtlebot_office_simulator.py</h3>
+<h6 id="inkling">Inkling</h6>
 
-<blockquote>
-<p>Source code too long to display, please click Github link.</p>
-</blockquote>
+<p>Inkling is a declarative, strongly typed programming language specifically designed for artificial intelligence (AI). It abstracts away the vast world of dynamic AI algorithms that require expertise in machine learning and enables more developers to program AI.
+Please review our <a href="http://docs.bons.ai/guides/inkling-guide.html#overview"><strong>Inkling Guide</strong></a></p>
 
-<p>This is a Python file for integrating the Gazebo simulator through ROS into
-the Bonsai AI Engine. This contains the main Bonsai-specific simulator functionality,
-which is the main interface that communicates with the Bonsai AI engine
-to drive AI training and prediction.</p>
+<h6 id="schema">Schema</h6>
+<pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">HouseheatState</span>
+    <span class="kr">Float32</span> <span class="nx">set_temp</span><span class="p">,</span>
+    <span class="kr">Float32</span> <span class="nx">room_temp</span><span class="p">,</span>
+    <span class="kr">Float32</span> <span class="nx">room_temp_change</span><span class="p">,</span>
+    <span class="kr">Float32</span> <span class="nx">heat_cost</span><span class="p">,</span>
+    <span class="kr">Float32</span> <span class="nx">outside_temp</span><span class="p">,</span>
+    <span class="kr">Float32</span> <span class="nx">outside_temp_change</span>
+<span class="k">end</span>
+</code></pre>
+<p>The <code class="prettyprint">HouseheatState</code> schema names six records — <code class="prettyprint">set_temp</code>.<code class="prettyprint">room_temp</code>,<code class="prettyprint">room_temp_change</code>,<code class="prettyprint">heat_cost</code>,<code class="prettyprint">outside_temp</code>, and <code class="prettyprint">outside_temp_change</code> — and assigns a type to them.</p>
+<pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">HouseheatAction</span>
+    <span class="kr">Float32</span><span class="p">{</span> <span class="mf">0.0</span><span class="p">:</span><span class="mi">1</span><span class="p">:</span><span class="mf">1.0</span> <span class="p">}</span> <span class="nx">heater_on</span>
+<span class="k">end</span>
+</code></pre>
+<p>The <code class="prettyprint">HouseheatAction</code> schema names a single record — <code class="prettyprint">heater_on</code> — and assigns a constrained type to it.</p>
+<pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">HouseheatConfig</span>
+    <span class="kr">Float32</span> <span class="nx">outside_phase</span>
+<span class="k">end</span>
+</code></pre>
+<p>The <code class="prettyprint">HouseheatConfig</code> schema names one record — <code class="prettyprint">outside_phase</code> - and assigns a type to it.</p>
 
-<p>This file repeatedly runs each &ldquo;episode&rdquo; and the <code class="prettyprint">State</code>
-of the simulation in Gazebo gets passed through ROS to the Bonsai AI Engine
-which then proceeds with the next <code class="prettyprint">Command</code> for Turtlebot and passes that back
-through ROS to Gazebo. </p>
+<h6 id="concept">Concept</h6>
+<pre class="highlight inkling tab-inkling"><code><span class="k">concept</span> <span class="nx">thermostat</span> <span class="k">is</span> <span class="nx">classifier</span>
+   <span class="k">predicts</span> <span class="p">(</span><span class="nx">HouseheatAction</span><span class="p">)</span>
+   <span class="k">follows</span> <span class="kr">input</span><span class="p">(</span><span class="nx">HouseheatState</span><span class="p">)</span>
+   <span class="k">feeds</span> <span class="kr">output</span>
+<span class="k">end</span>
+</code></pre>
+<p>The concept is named <code class="prettyprint">thermostat</code>, and it takes input from the simulation model about the state of the temperature in the house (<code class="prettyprint">HouseheatState</code> schema). It outputs to the <code class="prettyprint">HouseheatAction</code> schema. This is the AI&rsquo;s next move in the game.</p>
 
-<p>See the <a href="https://github.com/BonsaiAI/gazebo-turtlebot-sample/blob/master/scripts/turtlebot_office_simulator.py"><strong>turtlebot_office_simulator.py file</strong></a> on GitHub.</p>
+<h6 id="simulator">Simulator</h6>
+<pre class="highlight inkling tab-inkling"><code><span class="k">simulator</span> <span class="nx">simulink_sim</span><span class="p">(</span><span class="nx">HouseheatConfig</span><span class="p">)</span>
+    <span class="k">action</span> <span class="p">(</span><span class="nx">HouseheatAction</span><span class="p">)</span>
+    <span class="k">state</span> <span class="p">(</span><span class="nx">HouseheatState</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
+<p>The <code class="prettyprint">simulink_sim</code> gets information from two schemas. The first schema, <code class="prettyprint">action</code>, specifies the schema for actions within the simulation. The second schema, <code class="prettyprint">state</code> contains the state of the simulation that is sent to the lesson.</p>
+
+<h6 id="curriculum">Curriculum</h6>
+<pre class="highlight inkling tab-inkling"><code><span class="k">curriculum</span> <span class="nx">my_curriculum</span>
+    <span class="k">train</span> <span class="nx">thermostat</span>
+    <span class="k">with</span> <span class="k">simulator</span> <span class="nx">simulink_sim</span>
+    <span class="k">objective</span> <span class="nx">match_set_temp</span>
+        <span class="k">lesson</span> <span class="nx">my_first_lesson</span>
+            <span class="k">configure</span>
+            <span class="k">constrain</span> <span class="nx">outside_phase</span> <span class="k">with</span> <span class="kr">Float32</span><span class="p">{</span><span class="mf">0.0</span><span class="p">:</span><span class="mf">48.0</span><span class="p">}</span>
+            <span class="k">until</span>
+                <span class="k">maximize</span> <span class="nx">match_set_temp</span>
+<span class="k">end</span>
+</code></pre>
+<p>The curriculum is named <code class="prettyprint">my_curriculum</code>, and it trains the <code class="prettyprint">thermostat</code> concept using the <code class="prettyprint">simulink_sim</code>. This curriculum contains one lesson, called <code class="prettyprint">my_first_lesson</code>. It configures the simulation, by setting constraints for the state of the simulator.</p>
+
+<p>The lesson trains until the AI has maximized the objective named <code class="prettyprint">match_set_temp</code>.</p>
+
+<h6 id="predicting-with-a-brain">Predicting with a BRAIN</h6>
+<pre class="highlight plaintext"><code>bonsai train stop
+</code></pre>
+<p>When you are seeing rewards reaching &gt;100 you can stop training. You may need to Ctrl+C to stop in the terminal.</p>
+<pre class="highlight plaintext"><code>../../coordinator/coordinator --predict
+</code></pre>
+<p>Now you can predict using the trained BRAIN.</p>
+
+<h2 id="using-simulink-coder-for-parallel-simulations">Using Simulink Coder for Parallel Simulations</h2>
+
+<p>Simulink Coder provides a mechanism to compile many Simulink models as a fast running C executable file for your operating system. There are three main benefits to training Bonsai BRAINs with these executables.
+First is that Simulink Coder executables return simulations results much faster than raw Simulink files. When training a BRAIN using Deep Reinforcement Learning, this difference in speed can add up. For example, if you train a BRAIN for 1M iterations with a Simulink Coder executable that runs in 0.5s per iteration instead of 1.5s per iteration, your total training time will decrease by 277 hours!
+Second, Simulink Coder executables are much easier to connect to the Bonsai platform in parallel because they require a lot less memory and CPU than instances of interactive Simulink models. Continuing the example above, if you run 100 copies your new coder executable in parallel training you&rsquo;ve now reduced the training time by an additional 250 hours.
+Finally, Simulink Coder executable models can be easily shared with people and teams and used to train Bonsai BRAINS without a Matlab or Simulink license.</p>
+
+<p>Visit The Mathworks for more information on <a href="https://www.mathworks.com/products/simulink-coder.html"><strong>Matlab and Simulink Coder</strong></a></p>
+
+<h2 id="how-to-connect-your-own-model">How to connect your own model</h2>
+
+<p>Please review the HOWTO file for additional information on how to connect your own Simulink model to the Bonsai AI platform.</p>
 
       </div>
       <div class="dark-box">
