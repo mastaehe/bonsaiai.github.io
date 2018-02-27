@@ -2,7 +2,7 @@
 
 **Simulink**, developed by The MathWorks, is a graphical programming environment for modeling, simulating and analyzing multi-domain dynamical systems.
 
-Bonsai is using **Simulink** as a training environment for a Bonsai BRAIN. We’re supporting a wide range of use cases that can be described as control or machine tuning problems. Please review our simulator and sim model requirements guide at INSERT URL.
+Bonsai is using **Simulink** as a training environment for a Bonsai BRAIN. We’re supporting a wide range of use cases that can be described as control or machine tuning problems. Please review our simulator and [**sim model requirements guide**](http://docs.bons.ai/guides/simulation-guide.html).
 
 ## Prerequisites
 
