@@ -153,7 +153,7 @@ file, in predict mode, and `--predict-version=latest` will use the latest traini
 
 
 [1]: http://pages.bons.ai/apply.html
-[2]: ../examples.html#openai-gym-cart-pole
+[2]: ../examples.html#openai-gym-cartpole
 [3]: https://github.com/BonsaiAI/gym-cartpole-sample
 [4]: https://gym.openai.com/envs/CartPole-v1
 [5]: ../../images/no_brains_image.png

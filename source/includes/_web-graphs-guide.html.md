@@ -98,6 +98,6 @@ Automatic termination will take a significant amount of time and it is recommend
 
 [1]: http://docs.bons.ai/references/inkling-reference.html#concepts
 [2]: https://www.youtube.com/watch?v=0R3PnJEisqk&list=PLAktfMEMCsOY9HUZKIuGI6yqefGBuszAV&index=4
-[3]: http://docs.bons.ai/examples.html#openai-gym-cart-pole
+[3]: http://docs.bons.ai/examples.html#openai-gym-cartpole
 [4]: http://docs.bons.ai/guides/getting-started.html
 [5]: http://docs.bons.ai/guides/local-dev-guide.html
