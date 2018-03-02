@@ -171,3 +171,4 @@ If you have already trained a BRAIN on the web and are looking to use the Bonsai
 [14]: https://chocolatey.org/
 [15]: #manual-install
 [16]: local-dev-guide.html#predict-with-your-brain
+[17]: ../references/cli-reference.html#bonsai-configure

@@ -15,6 +15,7 @@ includes:
 - examples/cart-pole.html.md
 - examples/mountain-car.html.md
 - examples/energyplus.html.md
+- examples/simulink.html.md
 
 search: true
 ---

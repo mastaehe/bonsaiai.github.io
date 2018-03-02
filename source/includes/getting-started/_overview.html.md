@@ -11,7 +11,7 @@ however, **skip down to [Create Your BRAIN][1]** below. We'll guide you through 
 first BRAIN with the Cartpole template, how to get that BRAIN training, and then explain what
 to do with it!
 
-If you'd prefer not to use our web interface, instead follow [Run the Platform Locally][11] for a similar guide
+If you'd prefer not to use our web interface, instead follow [Run the Platform Locally][7] for a similar guide
 to this one on your local computer.
 
 ## The Bonsai Platform
