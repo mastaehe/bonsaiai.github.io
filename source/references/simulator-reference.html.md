@@ -1,11 +1,11 @@
 ---
-title: Use a Simulator to Train
+title: Simulator Reference
 
 toc_footers:
   -  <%= partial "partials/footer-links" %>
 
 includes:
-  - simulator-guide.html.md
+  - simulator-reference.html.md
   
 search: true
 ---

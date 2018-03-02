@@ -1,12 +1,12 @@
-# Simulator Training
+# Simulator Overview
 
 > ![Simulator Diagram](../images/brain-sim-marketing.png)
 
-This guide is intended to give you information and best practices you’ll need to train a BRAIN on The Bonsai Platform with simulators. It covers best practices such as running simulations in parallel, general guidelines like how to use corporate proxies with the CLI, and other tips pertaining to simulators and simulations.
+This reference gives you the information you’ll need to train a BRAIN on The Bonsai Platform with simulators. It covers best practices such as running simulations in parallel, general guidelines like how to configure web proxies with the CLI, and what simulators are currently supported.
 
-Currently, The Bonsai Platform uses simulators for applied deep reinforcement learning (DRL). For more background on applied DRL with simulations read our blog post on [simulations as a training environment][6].
+Currently, The Bonsai Platform depends on simulators as a source of training data for applied deep reinforcement learning (DRL). For more background on applied DRL with simulations read our blog post on [simulations as a training environment][6].
 
-We have client libraries for Python & C++, two common languages used in systems modeling. We also have coordinators to connect up to OpenAI Gym Environments, Simulink models and EnergyPlus models. To learn more about connecting your simulator, refer to our [Library Reference][4].
+The Bonsai Platform includes client libraries for Python & C++, two common languages used in systems modeling. We also have samples showing how to connect to OpenAI Gym Environments, Simulink models, and EnergyPlus models. To learn more about connecting your simulator, refer to our [Library Reference][4].
 
 ## What is a simulator?
 
@@ -18,7 +18,7 @@ To be effective, a BRAIN needs to be trained using DRL against a simulated model
 
 ## Currently Integrated Simulators
 
-The Bonsai Platform currently supports an API and two client libraries written in our Python or C++ libraries, or through connectors in these languages. Currently available connectors:
+The Bonsai Platform currently supports an API and two client libraries written in Python or C++. The platform also includes connectors built ontop of these libraries. Currently available connectors:
 
 * OpenAI Gym Environments (bonsai-gym)
 * Simulink Universal Coordinator
@@ -60,7 +60,9 @@ optional arguments:
                         Enables time delta logging. Alias for --log=perf.all
 ```
 
-During development, you will need to iterate quickly on your simulation, reward function, and lesson plans. You may also need to connect a debugger, or do additional logging to help you get your simulation ready to train. The Bonsai SDK provides a set of capabilities to help the developer iterate quickly on their simulation while running on a local machine.
+Currently, all connectors use a Python program to bootstrap the simulation and connect it to the Bonsai AI Engine. To run any simulation, you call a Python program which is shown in the code panel.
+
+During development, you will need to iterate quickly on your simulation, reward function, and lesson plans. You may also need to connect a debugger, or do additional logging to help you get your simulation ready to train.
 
 During the course of normal operation, one should only need to specify the prediction/training mode on the command line. The rest of the options will be read from configuration files.
 
@@ -107,7 +109,7 @@ Current list of supported libraries for cloud-hosted training:
 * EnergyPlus Simulator: [`bonsai.energyplus`][3]
 * Legacy `bonsai-python` library: [`bonsai.python`][2]
 
-In order to set your BRAIN to use one of these cloud-hosted simulators, you’ll need to modify your BRAIN’s [project (`.bproj`) file][8] if you aren’t already using one of the Bonsai demo projects.
+In order to set your BRAIN to use one of these cloud-hosted simulators, you’ll either need to start with a starter project and modify your BRAIN’s [project (`.bproj`) file][8] or use one of the Bonsai demo projects.
 
 # Running Simulations in Parallel
 
@@ -115,16 +117,16 @@ In order to set your BRAIN to use one of these cloud-hosted simulators, you’ll
 
 Training can take a long time. Depending on the complexity of the problem and the way your lesson plans are written, training can take several hours to several days. Fortunately, training can happen in parallel. Each new simulator you connect to a running training session will increase the episode per second training rate which will help the BRAIN find better solutions faster. How much you can increase training depends on the speed of your simulation: if your simulation takes 1s per iteration, it will be beneficial to run dozens in parallel.
 
-Running simulations in parallel is currently only supported when running your simulator locally via the Bonsai CLI. Simply connect multiple instances of your simulation to the same BRAIN to take advantage of this feature. Eventually, the system will no longer handle any more messages per second and you will see a plateau of improvement in training.
+Running simulations in parallel is currently only supported either when running your simulator locally via the Bonsai CLI, or in your own private cloud on AWS or Azure. Simply connect multiple instances of your simulation to the same BRAIN to take advantage of this feature. Eventually, the system will no longer handle any more messages per second and you will see a plateau of improvement in training.
 
 
 [1]: https://quay.io/repository/bonsai/gym
 [2]: https://quay.io/repository/bonsai/python
 [3]: https://quay.io/repository/bonsai/energyplus
-[4]: ../references/library-reference.html
+[4]: ./library-reference.html
 [5]: #running-simulators-in-parallel
 [6]: https://bons.ai/blog/simulators-deep-reinforcement-learning
 [7]: ../examples.html
-[8]: ../references/cli-reference.html#bproj-file
-[9]: ../references/library-reference.html#proxy
+[8]: ./cli-reference.html#bproj-file
+[9]: ./library-reference.html#proxy
 [10]: https://quay.io/repository/bonsai/bonsai-ai
