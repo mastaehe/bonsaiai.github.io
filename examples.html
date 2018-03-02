@@ -213,7 +213,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- End Google Tag Manager -->
   </head>
 
-  <body class="examples" data-languages="[]">
+  <body class="examples" data-languages="[&quot;python&quot;,&quot;cpp&quot;]">
 	  
 	  
 	  <!-- Google Tag Manager (noscript) -->
@@ -241,24 +241,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			<input type="checkbox" id="drop-1"/>
 			<ul id="guides">
 				<li class=""> <a href="guides/cli-install-guide.html">Install the CLI</a>  </li>
+				<li class=""> <a href="guides/sdk-install-guide.html">Install the SDK</a>  </li>
+				<li class=""> <a href="guides/simulation-guide.html">Learn About Simulation Requirements</a>  </li>
 				<li class=""> <a href="guides/inkling-guide.html">Learn the Inkling Language</a>  </li>
 				<li class=""> <a href="guides/local-dev-guide.html">Run the Platform Locally</a>  </li>
 				<li class=""> <a href="guides/ai-engine-guide.html">Understand AI Engine Components</a>  </li>
 				<li class=""> <a href="guides/web-graphs-guide.html">Understand BRAIN Graphs</a>  </li>
 				<li class=""> <a href="guides/jupyter-api-guide.html">Use Bonsai's API with Jupyter</a>  </li>
-				<li class=""> <a href="guides/simulation-guide.html">Simulation Guide</a>  </li>
-
 			</ul>
 		</li>
 
 		<li class="header_menu_item"> <!-- First Tier Drop Down --> <label for="drop-2" class="toggle">References +</label><a  href="#">References</a>
 			<input type="checkbox" id="drop-2"/>
 			<ul id="references">
-				<li class=""> <a href="references/api-reference.html">API</a>  </li>
-				<li class=""> <a href="references/cli-reference.html">CLI</a>  </li>
-				<li class=""> <a href="references/inkling-reference.html">Inkling</a>  </li>
-				<li class=""> <a href="references/library-reference.html">Library</a>  </li>
-			</ul>
+				<li class=""> <a href="references/api-reference.html">API Reference</a>  </li>
+				<li class=""> <a href="references/cli-reference.html">CLI Reference</a>  </li>
+				<li class=""> <a href="references/inkling-reference.html">Inkling Reference</a>  </li>
+				<li class=""> <a href="references/library-reference.html">Library Reference</a>  </li>
+				<li class=""> <a href="references/simulator-reference.html">Simulator Reference</a>
+			</ul> 
 		</li>
 
 		<li class="header_menu_item selected"> <a href="examples.html">Examples</a></li>
@@ -283,6 +284,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </a>
     <div class="tocify-wrapper">
 
+        <div class="lang-selector">
+              <a href="#" data-language-name="python">python</a>
+              <a href="#" data-language-name="cpp">cpp</a>
+        </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
         </div>
@@ -349,14 +354,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <p>This page contains working examples of Inkling code in conjunction with python simulator files. All of these examples and the libraries that accompany them can be found on <a href="https://github.com/BonsaiAI">BonsaiAI&rsquo;s GitHub page</a> and are also linked within each Example.</p>
 
-<p>All of the <strong>OpenAI Gym</strong>, <strong>EnergyPlus</strong> and <strong>Gazebo</strong> examples can be trained in the cloud with Bonsai managed simulators. A full list of supported Docker containers for remotely managed simulators can be found in the <a href="references/cli-reference.html#bproj-file">Project File Reference</a>.</p>
+<p>All of the <strong>Python</strong> <strong>OpenAI Gym</strong>, and <strong>EnergyPlus</strong> examples can be trained in the cloud with Bonsai managed simulators. A full list of supported Docker containers for remotely managed simulators can be found in the <a href="references/cli-reference.html#bproj-file">Project File Reference</a>.</p>
 
 <p>If you have any suggestions of examples you&rsquo;d like to see us implement please <a href="https://bons.ai/contact-us#contact-page-form">contact the support team</a>.</p>
 
-<h3 id="basic-walkthrough-examples">Basic Walkthrough Examples</h3>
+<h3 id="custom-simulator-examples">Custom Simulator Examples</h3>
 
 <ul>
-<li><strong>Basic Simulator</strong>: A project called <em>Find the Center</em> which walks you through how to create a simple Inkling file that connects to a basic python simulator.</li>
+<li><strong>Basic Python/C++ Simulation</strong>: A project called <em>Find the Center</em> which walks you through how to create a simple Inkling file that connects to a basic Python or C++ simulator.</li>
+<li><strong>SimPy Elevator Simulation</strong>: A basic example of how to use SimPy to simulate a scenario. This one is an elevator dropping people off on 3 floors.</li>
 </ul>
 
 <h3 id="openai-gym-examples">OpenAI Gym Examples</h3>
@@ -370,10 +376,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <ul>
 <li><strong>HVAC with EnergyPlus</strong>: An example of climate control machine teaching using EnergyPlus and BCVTB for simulation. </li>
-<li><strong>Gazebo Simulated Turtlebot</strong>: A robotics example of a Turtlebot robot navigating an environment in Gazebo.</li>
 </ul>
 
-          <h1 id="basic-simulator-find-the-center">Basic Simulator (Find the Center)</h1>
+          <h1 id="basic-python-c-simulation">Basic Python/C++ Simulation</h1>
 
 <blockquote>
 <p><img src="images/find-the-center.png" alt="Find the Center Diagram" /></p>
@@ -381,7 +386,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <p><a href="https://github.com/BonsaiAI/find-the-center"><strong>Download the full source code on GitHub</strong></a> if you want to run this simulator locally.</p>
 
-<p>In this example, we&rsquo;ll walk you through the various statements that are part of the <em>Find the Center</em> game, including the python simulator file and the Inkling file. This is a very basic example of Inkling and how to connect to a custom python simulator.</p>
+<p>In this example, we&rsquo;ll walk you through the various statements that are part of the <em>Find the Center</em> game, including options for either a Python or C++ simulator file and the Inkling file. This is a very basic example of Inkling and how to connect to a custom simulator and shows the differences between using <code class="prettyprint">libbonsai</code> (C++) and the <code class="prettyprint">bonsai-ai</code> (Python) libraries.</p>
 
 <p><em>Find the Center</em> is a simple game where the AI seeks the average value between two numbers. In this game, the AI begins at a random value of 0, 1, or 2. The AI then can move to a lower number by outputting -1, a higher number by outputting +1, or staying on the same number by outputting 0. The goal of <em>Find the Center</em> is to remain in the center of 0 and 2 (the number 1).</p>
 
@@ -439,111 +444,359 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <p>This curriculum contains one lesson, called <code class="prettyprint">seek_center</code>. It configures the simulation, by setting a number of constraints for the state of the simulator. The lesson trains until the AI has maximized the objective <code class="prettyprint">time_at_goal</code>.</p>
 
 <h2 id="simulator-file">Simulator File</h2>
-<pre class="highlight python tab-python"><code><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
-<span class="kn">import</span> <span class="nn">bonsai</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">from</span> <span class="nn">bonsai.simulator</span> <span class="kn">import</span> <span class="n">SimState</span>
+<pre class="highlight python tab-python"><code><span class="s">""" This Basic simulator is for learning the simulator interface.
+It can be used in this case to find the center between two numbers.
+"""</span>
+<span class="kn">import</span> <span class="nn">bonsai_ai</span>
 <span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>
 
-<span class="s">""" If you would like to debug your code add this back in.
-def debug(*args):
-    print(*args, file=sys.stderr)
-"""</span>
 
-
-<span class="k">class</span> <span class="nc">BasicSimulator</span><span class="p">(</span><span class="n">bonsai</span><span class="o">.</span><span class="n">Simulator</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">BasicSimulator</span><span class="p">(</span><span class="n">bonsai_ai</span><span class="o">.</span><span class="n">Simulator</span><span class="p">):</span>
     <span class="s">""" A basic simulator class that takes in a move from the inkling file,
     and returns the state as a result of that move.
     """</span>
-
     <span class="nb">min</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="nb">max</span> <span class="o">=</span> <span class="mi">2</span>
     <span class="n">goal</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">started</span> <span class="o">=</span> <span class="bp">False</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">BasicSimulator</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+    <span class="k">def</span> <span class="nf">episode_start</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="s">""" called at the start of every episode. should
+        reset the simulation and return the initial state
+        """</span>
+
+        <span class="c"># reset internal initial state</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">goal_count</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="nb">min</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="nb">max</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">old_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="nb">min</span>
 
-    <span class="k">def</span> <span class="nf">get_terminal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="s">""" Restarts the simulation if the AI moved out of bounds.
+        <span class="c"># print out a message for our first episode</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">started</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">started</span> <span class="o">=</span> <span class="bp">True</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">'started.'</span><span class="p">)</span>
+
+        <span class="c"># return initial external state</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s">"value"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">simulate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">):</span>
+        <span class="s">""" run a single step of the simulation.
+        if the simulation has reached a terminal state, mark it as such.
         """</span>
-        <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="nb">min</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="nb">max</span><span class="p">):</span>
-            <span class="c"># (self.value == self.goal and self.old_value == self.goal)):</span>
 
-            <span class="c"># debug("terminal")</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
-            <span class="k">return</span> <span class="bp">True</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">False</span>
-
-    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="s">""" Start the episode by initializing value to a random number
-        between the min and max.
-        """</span>
-        <span class="c"># debug("start")</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">goal_count</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">old_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="nb">min</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="nb">min</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="nb">max</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="s">""" Stop is called after a training session is complete.
-        This simple game requires no cleanup after training.
-        """</span>
-        <span class="c"># debug("stop")</span>
-        <span class="k">pass</span>
-
-    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="s">""" Reset is called to reset simulator state before the next training session.
-        """</span>
-        <span class="c"># debug("reset")</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">goal_count</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">old_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="nb">min</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="nb">min</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="nb">max</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">advance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">actions</span><span class="p">):</span>
-        <span class="s">""" Function to make a move based on output from the BRAIN as
-        defined in the Inkling file.
-        """</span>
-        <span class="c"># debug("advance", actions["delta"])</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">+=</span> <span class="n">actions</span><span class="p">[</span><span class="s">"delta"</span><span class="p">]</span>
+        <span class="c"># perform the action</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">+=</span> <span class="n">action</span><span class="p">[</span><span class="s">"delta"</span><span class="p">]</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">goal</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">goal_count</span> <span class="o">+=</span> <span class="mi">1</span>
 
-    <span class="k">def</span> <span class="nf">get_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="s">""" Gets the state of the simulator, whether it be a valid value or
-        terminal ("game over") state.
-        """</span>
-        <span class="c"># debug("get_state")</span>
-        <span class="c"># debug("state", self.value)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">old_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span>
-        <span class="k">return</span> <span class="n">SimState</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="p">{</span><span class="s">"value"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">},</span>
-                        <span class="n">is_terminal</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_terminal</span><span class="p">())</span>
+        <span class="c"># is this episode finished?</span>
+        <span class="n">terminal</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="nb">min</span> <span class="ow">or</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="nb">max</span> <span class="ow">or</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">goal_count</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="p">{</span><span class="s">"value"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">}</span>
+        <span class="n">reward</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">goal_count</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">terminal</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">time_at_goal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="s">""" Function to return how long the simulation has maintained the goal.
-        """</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">goal_count</span>
 
 <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">bonsai_ai</span><span class="o">.</span><span class="n">Config</span><span class="p">()</span>
+    <span class="n">brain</span> <span class="o">=</span> <span class="n">bonsai_ai</span><span class="o">.</span><span class="n">Brain</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+    <span class="n">sim</span> <span class="o">=</span> <span class="n">BasicSimulator</span><span class="p">(</span><span class="n">brain</span><span class="p">,</span> <span class="s">"find_the_center_sim"</span><span class="p">)</span>
 
-    <span class="n">sim</span> <span class="o">=</span> <span class="n">BasicSimulator</span><span class="p">()</span>
-    <span class="n">bonsai</span><span class="o">.</span><span class="n">run_for_training_or_prediction</span><span class="p">(</span><span class="s">"find_the_center_sim"</span><span class="p">,</span> <span class="n">sim</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'starting...'</span><span class="p">)</span>
+    <span class="k">while</span> <span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">():</span>
+        <span class="k">continue</span>
+
+</code></pre><pre class="highlight cpp tab-cpp"><code><span class="c1">// Copyright (C) 2017 Bonsai, Inc.
+</span>
+<span class="cp">#include &lt;iostream&gt;
+#include &lt;memory&gt;
+#include &lt;string&gt;
+#include &lt;random&gt;
+</span>
+<span class="cp">#include "bonsai/bonsai.hpp"
+</span>
+<span class="c1">// std
+</span><span class="k">using</span> <span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">;</span>
+
+<span class="k">using</span> <span class="n">std</span><span class="o">::</span><span class="n">random_device</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">std</span><span class="o">::</span><span class="n">mt19937</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">std</span><span class="o">::</span><span class="n">uniform_int_distribution</span><span class="p">;</span>
+
+<span class="c1">// bonsai
+</span><span class="k">using</span> <span class="n">bonsai</span><span class="o">::</span><span class="n">Brain</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">bonsai</span><span class="o">::</span><span class="n">Config</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">bonsai</span><span class="o">::</span><span class="n">InklingMessage</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">bonsai</span><span class="o">::</span><span class="n">Simulator</span><span class="p">;</span>
+
+<span class="c1">// random number generator
+</span><span class="n">random_device</span> <span class="n">rd</span><span class="p">;</span>
+<span class="n">mt19937</span> <span class="n">rng</span><span class="p">(</span><span class="n">rd</span><span class="p">());</span>
+
+<span class="c1">// basic simulator
+</span><span class="k">class</span> <span class="nc">BasicSimulator</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Simulator</span> <span class="p">{</span>
+    <span class="k">constexpr</span> <span class="k">static</span> <span class="kt">int8_t</span> <span class="n">_min</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">_max</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">_goal</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="kt">int8_t</span> <span class="n">_goal_count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">int8_t</span> <span class="n">_value</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">uniform_int_distribution</span><span class="o">&lt;</span><span class="kt">int8_t</span><span class="o">&gt;</span> <span class="n">_uni</span><span class="p">{</span><span class="n">_min</span><span class="p">,</span> <span class="n">_max</span><span class="p">};</span>
+ <span class="k">public</span><span class="o">:</span>
+    <span class="k">explicit</span> <span class="n">BasicSimulator</span><span class="p">(</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Brain</span><span class="o">&gt;</span> <span class="n">brain</span><span class="p">,</span> <span class="n">string</span> <span class="n">name</span> <span class="p">)</span>
+        <span class="o">:</span> <span class="n">Simulator</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">brain</span><span class="p">),</span> <span class="n">move</span><span class="p">(</span><span class="n">name</span><span class="p">))</span> <span class="p">{}</span>
+
+    <span class="kt">void</span> <span class="n">episode_start</span><span class="p">(</span><span class="k">const</span> <span class="n">InklingMessage</span><span class="o">&amp;</span> <span class="n">params</span><span class="p">,</span>
+        <span class="n">InklingMessage</span><span class="o">&amp;</span> <span class="n">initial_state</span><span class="p">)</span> <span class="k">override</span><span class="p">;</span>
+    <span class="kt">void</span> <span class="n">simulate</span><span class="p">(</span><span class="k">const</span> <span class="n">InklingMessage</span><span class="o">&amp;</span> <span class="n">action</span><span class="p">,</span>
+        <span class="n">InklingMessage</span><span class="o">&amp;</span> <span class="n">state</span><span class="p">,</span>
+        <span class="kt">float</span><span class="o">&amp;</span> <span class="n">reward</span><span class="p">,</span>
+        <span class="kt">bool</span><span class="o">&amp;</span> <span class="n">terminal</span><span class="p">)</span> <span class="k">override</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="kt">void</span> <span class="n">BasicSimulator</span><span class="o">::</span><span class="n">episode_start</span><span class="p">(</span>
+    <span class="k">const</span> <span class="n">InklingMessage</span><span class="o">&amp;</span> <span class="n">params</span><span class="p">,</span>
+    <span class="n">InklingMessage</span><span class="o">&amp;</span> <span class="n">initial_state</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="c1">// reset
+</span>    <span class="n">_goal_count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">_value</span> <span class="o">=</span> <span class="n">_uni</span><span class="p">(</span><span class="n">rng</span><span class="p">);</span>
+
+    <span class="c1">// set intial state
+</span>    <span class="n">initial_state</span><span class="p">.</span><span class="n">set_int8</span><span class="p">(</span><span class="s">"value"</span><span class="p">,</span> <span class="n">_value</span><span class="p">);</span>
+
+    <span class="c1">// print a message for our first episode
+</span>    <span class="k">static</span> <span class="kt">bool</span> <span class="n">started</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">started</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">started</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"started."</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">BasicSimulator</span><span class="o">::</span><span class="n">simulate</span><span class="p">(</span>
+    <span class="k">const</span> <span class="n">InklingMessage</span><span class="o">&amp;</span> <span class="n">action</span><span class="p">,</span>
+    <span class="n">InklingMessage</span><span class="o">&amp;</span> <span class="n">state</span><span class="p">,</span>
+    <span class="kt">float</span><span class="o">&amp;</span> <span class="n">reward</span><span class="p">,</span>
+    <span class="kt">bool</span><span class="o">&amp;</span> <span class="n">terminal</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="c1">// perform the action
+</span>    <span class="n">_value</span> <span class="o">+=</span> <span class="n">action</span><span class="p">.</span><span class="n">get_int8</span><span class="p">(</span><span class="s">"delta"</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">_value</span> <span class="o">==</span> <span class="n">_goal</span><span class="p">)</span>
+        <span class="n">_goal_count</span><span class="o">++</span><span class="p">;</span>
+
+    <span class="c1">// output
+</span>    <span class="n">state</span><span class="p">.</span><span class="n">set_int8</span><span class="p">(</span><span class="s">"value"</span><span class="p">,</span> <span class="n">_value</span><span class="p">);</span>
+    <span class="n">terminal</span> <span class="o">=</span> <span class="n">_value</span> <span class="o">&lt;</span> <span class="n">_min</span> <span class="o">||</span> <span class="n">_value</span> <span class="o">&gt;</span> <span class="n">_max</span> <span class="o">||</span> <span class="n">_goal_count</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">;</span>
+    <span class="n">reward</span> <span class="o">=</span> <span class="n">_goal_count</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+<span class="kt">int</span> <span class="n">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">config</span> <span class="o">=</span> <span class="n">make_shared</span><span class="o">&lt;</span><span class="n">Config</span><span class="o">&gt;</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">brain</span> <span class="o">=</span> <span class="n">make_shared</span><span class="o">&lt;</span><span class="n">Brain</span><span class="o">&gt;</span><span class="p">(</span><span class="n">config</span><span class="p">);</span>
+
+    <span class="n">BasicSimulator</span> <span class="n">sim</span><span class="p">(</span><span class="n">brain</span><span class="p">,</span> <span class="s">"find_the_center_sim"</span><span class="p">);</span>
+
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"starting..."</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span> <span class="n">sim</span><span class="p">.</span><span class="n">run</span><span class="p">()</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="k">continue</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre>
-<p>This is a basic python simulator for learning the simulator library. In this case it is used to find the center between two numbers, 0 and 2. The goal, as outlined in the Inkling file, is to reach 1. The moves that the simulator is able to make are sent from the Inkling file to the simulator and the state of the simulator is sent back to Inkling.</p>
+<p>This is a basic simulator for learning the simulator library. In this case it is used to find the center between two numbers, 0 and 2. The goal, as outlined in the Inkling file, is to reach 1. The moves that the simulator is able to make are sent from the Inkling file to the simulator and the state of the simulator is sent back to Inkling.</p>
 
-          <h1 id="openai-gym-cart-pole">OpenAI Gym: Cart Pole</h1>
+<p>The <a href="https://github.com/BonsaiAI/find-the-center/blob/master/README.md">README file</a> contained in the project has instructions for running this simulator in either Python or C++.</p>
+
+          <h1 id="simpy-elevator-simulation">SimPy Elevator Simulation</h1>
 
 <blockquote>
-<p><img src="images/cart-pole-balance.gif" alt="Cart Pole Balance" /></p>
+<p><img src="images/elevator_output.png" alt="ASCII Elevator Output" /></p>
 </blockquote>
 
-<p><a href="https://github.com/BonsaiAI/gym-cartpole-sample"><strong>Download the full source code on GitHub</strong></a> if you want to run this simulator locally. If you want to run Cart Pole remotely on the Bonsai Platform as a managed simulator, create a new BRAIN selecting the Cart Pole demo on <a href="https://beta.bons.ai/new">beta.bons.ai</a>.</p>
+<p><a href="https://github.com/BonsaiAI/simpy-elevator-sample"><strong>Download the full source code on GitHub</strong></a> if you want to run this simulator locally.</p>
 
-<p>In this example, we&rsquo;ll walk you through the various statements that are part of the Cart Pole Inkling file. Each statement is followed by an explanation of the statement.</p>
+<p>In this example, <a href="https://simpy.readthedocs.io/en/latest/index.html">SimPy</a>, a process-based discrete-event simulation framework based on standard Python, is used to simulate an elevator effectively transporting people to their desired floor. The simulated elevator gets rewarded by having people wait for the least amount of time. This example includes a simple elevator SimPy simulator, a Python simulation, and the simulation&rsquo;s Inkling file.</p>
 
-<p>Cart Pole is a classic control problem. <a href="https://gym.openai.com/envs/CartPole-v1">OpenAI Gym</a> describes it as:</p>
+<p>&ldquo;Processes in SimPy are defined by Python generator functions and may, for example, be used to model active components like customers, vehicles or agents. SimPy also provides various types of shared resources to model limited capacity congestion points (like servers, checkout counters and tunnels).&rdquo; - SimPy docs</p>
+
+<p>This simulation is to provide actions (up, down, open doors) for an elevator, given floor requests from randomly arriving passengers. SimPy has a great framework for simulating time only when some state changes, which speeds up training for systems that would otherwise be mostly waiting.</p>
+
+<p>In the image to the right, the elevator logs output every 100 seconds, then shows the state of the world, and then a list of recent passengers. The world state is the floor, the number of people waiting, plus the elevator, and the number of people inside.</p>
+
+<p><code class="prettyprint">1: 0| 2: 1| 3: 0| [_1_]</code> shows zero people on the first floor, one person waiting on the second floor, and one person in the elevator on the third floor.</p>
+
+<p>For more ideas of how SimPy can simulate real world problems see the <a href="https://simpy.readthedocs.io/en/latest/examples/index.html#examples">SimPy Examples page</a>.</p>
+
+<h2 id="inkling-file">Inkling File</h2>
+
+<h6 id="schema">Schema</h6>
+<pre class="highlight inkling tab-inkling"><code><span class="c1"># Position is current location of elevator</span>
+<span class="c1"># State of each floor: 1 if the floor is requested, 0 if not</span>
+<span class="k">schema</span> <span class="nx">FloorState</span>
+    <span class="kr">Int8</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span> <span class="nx">Position</span><span class="p">,</span>
+    <span class="kr">Int8</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">}</span> <span class="nx">Floor1</span><span class="p">,</span>
+    <span class="kr">Int8</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">}</span> <span class="nx">Floor2</span><span class="p">,</span>
+    <span class="kr">Int8</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">}</span> <span class="nx">Floor3</span>
+<span class="k">end</span>
+</code></pre>
+<p>The <code class="prettyprint">FloorState</code> schema defines the dictionary returned from the Python simulation&rsquo;s <code class="prettyprint">advance</code> method to the BRAIN.</p>
+<pre class="highlight inkling tab-inkling"><code><span class="c1"># command options: up, open, down</span>
+<span class="k">schema</span> <span class="nx">Action</span>
+    <span class="kr">Int8</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span> <span class="nx">command</span>
+<span class="k">end</span>
+</code></pre>
+<p>The <code class="prettyprint">Action</code> schema defines the possible actions the elevator can take. In this case the command given to the elevator is &lsquo;0&rsquo; is open, &lsquo;1&rsquo; is go up a floor, and &lsquo;2&rsquo; is go down a floor.</p>
+<pre class="highlight inkling tab-inkling"><code><span class="c1"># Possible option for configuration</span>
+<span class="k">schema</span> <span class="nx">ElevatorConfig</span>
+    <span class="kr">Int8</span> <span class="nx">episode_length</span>
+<span class="k">end</span>
+</code></pre>
+<p>The <code class="prettyprint">ElevatorConfig</code> schema outlines some possible configurations you could give to the elevator if you wanted to tailor its learning in the lessons outlined later.</p>
+
+<h6 id="concept">Concept</h6>
+<pre class="highlight inkling tab-inkling"><code><span class="c1"># Predicts an Action and follows input from the FloorState schema</span>
+<span class="k">concept</span> <span class="nx">elevator_plan</span> <span class="k">is</span> <span class="nx">classifier</span>
+    <span class="k">predicts</span> <span class="p">(</span><span class="nx">Action</span><span class="p">)</span>
+    <span class="k">follows</span> <span class="kr">input</span><span class="p">(</span><span class="nx">FloorState</span><span class="p">)</span>
+    <span class="k">feeds</span> <span class="kr">output</span>
+<span class="k">end</span>
+</code></pre>
+<p>This concept is named <code class="prettyprint">elevator_plan</code>, a classifier, which predicts an <code class="prettyprint">Action</code> given the current <code class="prettyprint">FloorState</code>. In this simple example, we are training the concept to make an action (go up a floor, go down a floor, or open the doors) based on the current state of the floor the elevator is on.</p>
+
+<h6 id="simulator">Simulator</h6>
+<pre class="highlight inkling tab-inkling"><code><span class="c1"># Connect to SimPy simulator for training</span>
+<span class="k">simulator</span> <span class="nx">elevator_simulator</span><span class="p">(</span><span class="nx">ElevatorConfig</span><span class="p">)</span>
+    <span class="k">action</span> <span class="p">(</span><span class="nx">Action</span><span class="p">)</span>
+    <span class="k">state</span> <span class="p">(</span><span class="nx">FloorState</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
+<p>The simulator clause declares that a simulator named <code class="prettyprint">elevator_simulator</code> will be connecting to the server for training. This <code class="prettyprint">elevator_simulator</code> expects an action defined in the <code class="prettyprint">Action</code> schema as input and replies with a state defined in the <code class="prettyprint">FloorState</code> schema as output.</p>
+
+<h6 id="curriculum">Curriculum</h6>
+<pre class="highlight inkling tab-inkling"><code><span class="c1"># This trains the concept using a single lesson</span>
+<span class="c1"># Maximize the elevator_objective defined in elevator_simulator.py</span>
+<span class="k">curriculum</span> <span class="nx">high_score_curriculum</span>
+    <span class="k">train</span> <span class="nx">elevator_plan</span>
+    <span class="k">with</span> <span class="k">simulator</span> <span class="nx">elevator_simulator</span>
+    <span class="k">objective</span> <span class="nx">elevator_objective</span>
+        <span class="k">lesson</span> <span class="nx">get_high_score</span>
+            <span class="k">configure</span>
+                <span class="k">constrain</span> <span class="nx">episode_length</span> <span class="k">with</span> <span class="kr">Int8</span><span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">}</span>
+            <span class="k">until</span>
+                <span class="k">maximize</span> <span class="nx">elevator_objective</span>
+<span class="k">end</span>
+</code></pre>
+<p>The curriculum <code class="prettyprint">high_score_curriculum</code> trains <code class="prettyprint">elevator_plan</code> using <code class="prettyprint">elevator_simulator</code>. The BRAIN that runs this Inkling code will try to maximize the value returned from <code class="prettyprint">elevator_objective</code> until you stop training. The reward function passed to <code class="prettyprint">elevator_objective</code> is a method in the simulator <code class="prettyprint">elevator_simulator.py</code> in which it returns the waiting time of the total sum of people as a negative number, in order to maximize it. The code for this can be seen at the end of the simulator excerpt below.</p>
+
+<p>This curriculum contains one simple lesson, called <code class="prettyprint">get_high_score</code>. It configures the simulation, but in this case the lesson is simply using a dummy variable to not provide the elevator with any starting conditions to learn from. The training starts from random placement and actions.</p>
+
+<h2 id="simulator-excerpt">Simulator Excerpt</h2>
+<pre class="highlight python tab-python"><code><span class="c"># Excerpt of simulator class from the elevator_simulator.py file</span>
+
+<span class="k">class</span> <span class="nc">ElevatorSimulator</span><span class="p">(</span><span class="n">Simulator</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">episode_start</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'called episode_start'</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">env</span> <span class="o">=</span> <span class="n">env</span> <span class="o">=</span> <span class="n">simpy</span><span class="o">.</span><span class="n">Environment</span><span class="p">()</span>
+        <span class="n">floors</span> <span class="o">=</span> <span class="p">[</span><span class="n">simpy</span><span class="o">.</span><span class="n">Resource</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">BUILDING_SIZE</span><span class="p">)]</span>
+        <span class="n">store</span> <span class="o">=</span> <span class="n">simpy</span><span class="o">.</span><span class="n">Store</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="n">elevator</span><span class="o">.</span><span class="n">Lstate</span><span class="p">()</span>
+        <span class="n">person_score</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">reqs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">env</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">elevator</span><span class="o">.</span><span class="n">claim</span><span class="p">(</span><span class="n">floors</span><span class="p">,</span> <span class="n">reqs</span><span class="p">))</span>
+        <span class="n">env</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">elevator</span><span class="o">.</span><span class="n">person_generator</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">floors</span><span class="p">,</span> <span class="n">person_score</span><span class="p">))</span>
+        <span class="n">env</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">elevator</span><span class="o">.</span><span class="n">display_process</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">person_score</span><span class="p">,</span> <span class="n">state</span><span class="p">))</span>
+
+        <span class="c"># We use the single step version of elevator (elevator_one)</span>
+        <span class="c"># this allows the simulator to run until the elevator uses a command.</span>
+        <span class="n">ep</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">process</span><span class="p">(</span>
+            <span class="n">elevator</span><span class="o">.</span><span class="n">elevator_one</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">floors</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">store</span><span class="p">,</span> <span class="n">reqs</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">floors</span> <span class="o">=</span> <span class="n">floors</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">store</span> <span class="o">=</span> <span class="n">store</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="n">state</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">person_score</span> <span class="o">=</span> <span class="n">person_score</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reqs</span> <span class="o">=</span> <span class="n">reqs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ep</span> <span class="o">=</span> <span class="n">ep</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_state</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">simulate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">):</span>
+        <span class="n">command</span> <span class="o">=</span> <span class="n">action</span><span class="p">[</span><span class="s">'command'</span><span class="p">]</span>
+        <span class="n">env</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">env</span>
+        <span class="c"># print('[advance]', end='')</span>
+        <span class="c"># print('command: {}'.format(command))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">command</span> <span class="o">=</span> <span class="n">command</span>
+
+        <span class="c"># pass our command to a resource by way of this doit() method</span>
+        <span class="n">env</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">doit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">store</span><span class="p">,</span> <span class="n">command</span><span class="p">))</span>
+
+        <span class="n">env</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">until</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ep</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ep</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">elevator</span><span class="o">.</span><span class="n">elevator_one</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">floors</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">store</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">reqs</span><span class="p">))</span>
+        <span class="c"># print('stepped to {}'.format(env.now))</span>
+
+        <span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_state</span><span class="p">()</span>
+        <span class="n">done</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_done</span><span class="p">()</span>
+        <span class="n">reward</span> <span class="o">=</span> <span class="bp">None</span>
+
+        <span class="c"># only calculate reward for training mode</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">predict</span><span class="p">:</span>
+            <span class="n">reward</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_elevator_objective</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_state</span><span class="p">(),</span> <span class="n">reward</span><span class="p">,</span> <span class="n">done</span>
+
+    <span class="k">def</span> <span class="nf">_get_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">""" This function must be implemented for all simulators.
+        During training and prediction, this is used to construct the state
+        message that represents the current simulation state.
+        It is assumed that this function returns Simulator.State objects """</span>
+
+        <span class="c"># print('[get_state]', end='')</span>
+
+        <span class="c"># if a floor is requested, state=1</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="nb">min</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">queue</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">floors</span><span class="p">]</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="p">{</span><span class="s">'Floor{}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ix</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span> <span class="n">v</span> <span class="k">for</span> <span class="n">ix</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">values</span><span class="p">)}</span>
+        <span class="n">state</span><span class="p">[</span><span class="s">'Position'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">floor</span>
+        <span class="c"># print(state)</span>
+
+        <span class="k">return</span> <span class="n">state</span>
+
+    <span class="k">def</span> <span class="nf">_get_done</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">done</span> <span class="o">=</span> <span class="n">done</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">now</span> <span class="o">&gt;</span> <span class="n">SIM_TIME</span>
+        <span class="k">return</span> <span class="n">done</span>
+
+    <span class="k">def</span> <span class="nf">_elevator_objective</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c"># print('[objective]', end='')</span>
+        <span class="n">waiting</span> <span class="o">=</span> <span class="n">elevator</span><span class="o">.</span><span class="n">count_waiting</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">person_score</span><span class="p">)</span>
+        <span class="c"># print("returning score %d for %d people" % (active, len(scores)))</span>
+
+        <span class="c"># return as negative because the simulator maximizes this value.</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">waiting</span>
+</code></pre>
+<p>The full simulator file <em>elevator_simulator.py</em> and elevator simulation file <em>elevator.py</em> for this example is with the rest of the <a href="https://github.com/BonsaiAI/simpy-elevator-sample">simpy-elevator code</a> on GitHub.</p>
+
+<p>This is a Python simulator which uses the elevator.py custom Python simulation using SimPy. This <em>elevator_simulator.py</em> file repeatedly runs the elevator simulation for each episode of training to get details of where people start out, how many are on the elevator, and what floor they are going to, etc. Each episode the curriculum in Inkling trains the concept by sending a new <code class="prettyprint">Action</code> to the BRAIN based on the <code class="prettyprint">FloorState</code> of the simulator.</p>
+
+<p>The <code class="prettyprint">_elevator_objective</code> function returns a negative waiting value because this value is going to be maximized, and we want to actually minimize the collective group of people&rsquo;s wait time.</p>
+
+<p>For more information on the functions inside of this simulator class and how to implement them see the <a href="http://docs.bons.ai/references/library-reference.html">Library Reference</a>.</p>
+
+<p>Also note that if you would like to see how this simulator can be run without Bonsai - to demonstrate how the emulator behaves with a hard-coded algorithm - you can do so by running elevator.py simply with Python itself.</p>
+
+          <h1 id="openai-gym-cartpole">OpenAI Gym: Cartpole</h1>
+
+<blockquote>
+<p><img src="images/cart-pole-balance.gif" alt="Cartpole Balance" /></p>
+</blockquote>
+
+<p><a href="https://github.com/BonsaiAI/gym-cartpole-sample"><strong>Download the full source code on GitHub</strong></a> if you want to run this simulator locally. If you want to run Cartpole remotely on the Bonsai Platform as a managed simulator, create a new BRAIN selecting the Cartpole demo on <a href="https://beta.bons.ai/new">beta.bons.ai</a>.</p>
+
+<p>In this example, we&rsquo;ll walk you through the various statements that are part of the Cartpole Inkling file. Each statement is followed by an explanation of the statement.</p>
+
+<p>Cartpole is a classic control problem. <a href="https://gym.openai.com/envs/CartPole-v1">OpenAI Gym</a> describes it as:</p>
 
 <p><em>A pole is attached by an un-actuated joint to a cart, which moves along a frictionless track. The system is controlled by applying a force of +1 or -1 to the cart. The pendulum starts upright, and the goal is to prevent it from falling over. A reward of +1 is provided for every timestep that the pole remains upright. The episode ends when the pole is more than 15 degrees from vertical, or the cart moves more than 2.4 units from the center.</em></p>
 
@@ -607,36 +860,59 @@ def debug(*args):
 <p>This curriculum contains one lesson, called <code class="prettyprint">balancing</code>. It configures the simulation, by setting two constraints for the state of the simulator. The lesson trains until the AI has maximized the objective.</p>
 
 <h2 id="simulator-file">Simulator File</h2>
-<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">gym</span>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">bonsai_ai</span> <span class="kn">import</span> <span class="n">Brain</span><span class="p">,</span> <span class="n">Config</span>
+<span class="kn">from</span> <span class="nn">bonsai_gym</span> <span class="kn">import</span> <span class="n">GymSimulator</span>
 
-<span class="kn">import</span> <span class="nn">bonsai</span>
-<span class="kn">from</span> <span class="nn">bonsai_gym_common</span> <span class="kn">import</span> <span class="n">GymSimulator</span><span class="p">,</span> <span class="n">logging_basic_config</span>
-
-<span class="n">ENVIRONMENT</span> <span class="o">=</span> <span class="s">'CartPole-v0'</span>
-<span class="n">RECORD_PATH</span> <span class="o">=</span> <span class="bp">None</span>
-
-
-<span class="k">class</span> <span class="nc">CartPoleSimulator</span><span class="p">(</span><span class="n">GymSimulator</span><span class="p">):</span>
-
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">env</span><span class="p">,</span> <span class="n">record_path</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">CartPoleSimulator</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">record_path</span><span class="o">=</span><span class="n">record_path</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">get_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">parent_state</span> <span class="o">=</span> <span class="n">GymSimulator</span><span class="o">.</span><span class="n">get_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="n">state_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s">"position"</span><span class="p">:</span> <span class="n">parent_state</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-                      <span class="s">"velocity"</span><span class="p">:</span> <span class="n">parent_state</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
-                      <span class="s">"angle"</span><span class="p">:</span> <span class="n">parent_state</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
-                      <span class="s">"rotation"</span><span class="p">:</span> <span class="n">parent_state</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="mi">3</span><span class="p">]}</span>
-        <span class="k">return</span> <span class="n">bonsai</span><span class="o">.</span><span class="n">simulator</span><span class="o">.</span><span class="n">SimState</span><span class="p">(</span><span class="n">state_dict</span><span class="p">,</span> <span class="n">parent_state</span><span class="o">.</span><span class="n">is_terminal</span><span class="p">)</span>
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s">'gym_simulator'</span><span class="p">)</span>
+<span class="n">log</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
 
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
-    <span class="n">logging_basic_config</span><span class="p">()</span>
-    <span class="n">env</span> <span class="o">=</span> <span class="n">gym</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">ENVIRONMENT</span><span class="p">)</span>
-    <span class="n">simulator</span> <span class="o">=</span> <span class="n">CartPoleSimulator</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">RECORD_PATH</span><span class="p">)</span>
-    <span class="n">bonsai</span><span class="o">.</span><span class="n">run_for_training_or_prediction</span><span class="p">(</span><span class="s">"cartpole_simulator"</span><span class="p">,</span> <span class="n">simulator</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">CartPole</span><span class="p">(</span><span class="n">GymSimulator</span><span class="p">):</span>
+    <span class="c"># Environment name, from openai-gym</span>
+    <span class="n">environment_name</span> <span class="o">=</span> <span class="s">'CartPole-v0'</span>
+
+    <span class="c"># simulator name from Inkling</span>
+    <span class="c"># Example Inkling:</span>
+    <span class="c">#   curriculum balance_curriculum</span>
+    <span class="c">#       train balance</span>
+    <span class="c">#       with simulator cartpole_simulator</span>
+    <span class="c">#       ....</span>
+    <span class="n">simulator_name</span> <span class="o">=</span> <span class="s">'cartpole_simulator'</span>
+
+    <span class="c"># convert openai gym observation to our state schema</span>
+    <span class="c"># Example Inkling:</span>
+    <span class="c">#   schema GameState</span>
+    <span class="c">#       Float32 position,</span>
+    <span class="c">#       Float32 velocity,</span>
+    <span class="c">#       Float32 angle,</span>
+    <span class="c">#       Float32 rotation</span>
+    <span class="c">#   end</span>
+    <span class="k">def</span> <span class="nf">gym_to_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">observation</span><span class="p">):</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="p">{</span><span class="s">'position'</span><span class="p">:</span> <span class="n">observation</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                 <span class="s">'velocity'</span><span class="p">:</span> <span class="n">observation</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                 <span class="s">'angle'</span><span class="p">:</span>    <span class="n">observation</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                 <span class="s">'rotation'</span><span class="p">:</span> <span class="n">observation</span><span class="p">[</span><span class="mi">3</span><span class="p">]}</span>
+        <span class="k">return</span> <span class="n">state</span>
+
+    <span class="c"># convert our action schema into openai gym action</span>
+    <span class="c"># Example Inkling:</span>
+    <span class="c">#   schema Action</span>
+    <span class="c">#       Int8{0, 1} command</span>
+    <span class="c">#   end</span>
+    <span class="k">def</span> <span class="nf">action_to_gym</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">action</span><span class="p">[</span><span class="s">'command'</span><span class="p">]</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="c"># create a brain, openai-gym environment, and simulator</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">Config</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
+    <span class="n">brain</span> <span class="o">=</span> <span class="n">Brain</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+    <span class="n">sim</span> <span class="o">=</span> <span class="n">CartPole</span><span class="p">(</span><span class="n">brain</span><span class="p">)</span>
+    <span class="n">sim</span><span class="o">.</span><span class="n">run_gym</span><span class="p">()</span>
 </code></pre>
-<p>This is an OpenAI Gym example which uses the OpenAI environment as its simulator. For more information about the simulator used see the <a href="https://github.com/BonsaiAI/bonsai-gym-common">Bonsai Gym Common GitHub repo</a> which is a python library for integrating a Bonsai BRAIN with Open AI Gym environments.</p>
+<p>This is an OpenAI Gym example which uses the OpenAI environment as its simulator. For more information about the simulator used see the <a href="https://github.com/BonsaiAI/bonsai-gym-common">Bonsai Gym Common GitHub repo</a> which is a python library for integrating a Bonsai BRAIN with OpenAI Gym environments.</p>
 
           <h1 id="openai-gym-mountain-car">OpenAI Gym: Mountain Car</h1>
 
@@ -648,7 +924,7 @@ def debug(*args):
 
 <p>We&rsquo;ve used pieces of code from this example in several places, but here we&rsquo;ll walk you through all the various statements that are part of the Mountain Car Inkling file. Each statement is followed by an explanation of the statement.</p>
 
-<p>Mountain Car is a classic control problem. <a href="https://gym.openai.com/envs/MountainCar-v0">OpenAI Gym</a> describes it as:</p>
+<p>Mountain Car is a classic control problem. <a href="https://gym.openai.com/envs/MountainCarContinuous-v0/">OpenAI Gym</a> describes it as:</p>
 
 <p><em>A car is on a one-dimensional track, positioned between two &ldquo;mountains&rdquo;. The goal is to drive up the mountain on the right; however, the car&rsquo;s engine is not strong enough to scale the mountain in a single pass. Therefore, the only way to succeed is to drive back and forth to build up momentum.</em></p>
 
@@ -662,16 +938,15 @@ def debug(*args):
 </code></pre>
 <p>The <code class="prettyprint">GameState</code> schema names two records — <code class="prettyprint">x_position</code> and <code class="prettyprint">y_position</code> — and assigns a type to them.</p>
 <pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">Action</span>
-    <span class="kr">Int8</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span> <span class="nx">command</span>
+    <span class="kr">Float32</span><span class="p">{</span><span class="o">-</span><span class="mf">1.0</span><span class="p">:</span><span class="mf">1.0</span><span class="p">}</span> <span class="nx">command</span>
 <span class="k">end</span>
 </code></pre>
-<p>The <code class="prettyprint">Action</code> schema names a single record — <code class="prettyprint">action</code> — and assigns a constrained type to it.</p>
+<p>The <code class="prettyprint">Action</code> schema names a single record — <code class="prettyprint">command</code> — and assigns a constrained type to it.</p>
 <pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">MountainCarConfig</span>
-    <span class="kr">Int8</span> <span class="nx">episode_length</span><span class="p">,</span>
     <span class="kr">UInt8</span> <span class="nx">deque_size</span>
 <span class="k">end</span>
 </code></pre>
-<p>The <code class="prettyprint">MountainCarConfig</code> schema names two records — <code class="prettyprint">episode_length</code> and <code class="prettyprint">deque_size</code> — and assigns types to them.</p>
+<p>The <code class="prettyprint">MountainCarConfig</code> schema names a single record - <code class="prettyprint">deque_size</code> - and assigns an unconstrained type to it.</p>
 
 <h6 id="concept">Concept</h6>
 <pre class="highlight inkling tab-inkling"><code><span class="k">concept</span> <span class="nx">high_score</span> <span class="k">is</span> <span class="nx">classifier</span>
@@ -683,22 +958,21 @@ def debug(*args):
 <p>The concept is named <code class="prettyprint">high_score</code>, and it takes input from the simulator about the state of the game (<code class="prettyprint">GameState</code> schema). It outputs to the <code class="prettyprint">Action</code> schema. This is the AI&rsquo;s next move in the game.</p>
 
 <h6 id="simulator">Simulator</h6>
-<pre class="highlight inkling tab-inkling"><code><span class="k">simulator</span> <span class="nx">mountaincar_simulator</span><span class="p">(</span><span class="nx">MountainCarConfig</span><span class="p">)</span>
-    <span class="k">action</span> <span class="p">(</span><span class="nx">Action</span><span class="p">)</span>
-    <span class="k">state</span> <span class="p">(</span><span class="nx">GameState</span><span class="p">)</span>
+<pre class="highlight inkling tab-inkling"><code><span class="k">simulator</span> <span class="nx">mountaincar_continuous_simulator</span><span class="p">(</span><span class="nx">MountainCarConfig</span><span class="p">)</span>
+   <span class="k">action</span>  <span class="p">(</span><span class="nx">Action</span><span class="p">)</span>
+   <span class="k">state</span>  <span class="p">(</span><span class="nx">GameState</span><span class="p">)</span>
 <span class="k">end</span>
 </code></pre>
-<p>The <code class="prettyprint">mountaincar_simulator</code> gets information from two schemas. The first schema, <code class="prettyprint">MountainCarConfig</code>, specifies the schema for configuration of the simulation. The second schema contains the state of the simulator that is sent to the lesson.</p>
+<p>The <code class="prettyprint">mountaincar_continuous_simulator</code> gets information from two schemas. The first schema, <code class="prettyprint">MountainCarConfig</code>, specifies the schema for configuration of the simulation. The second schema contains the state of the simulator that is sent to the lesson.</p>
 
 <h6 id="curriculum">Curriculum</h6>
 <pre class="highlight inkling tab-inkling"><code><span class="k">curriculum</span> <span class="nx">high_score_curriculum</span>
     <span class="k">train</span> <span class="nx">high_score</span>
-    <span class="k">with</span> <span class="k">simulator</span> <span class="nx">mountaincar_simulator</span>
+    <span class="k">with</span> <span class="k">simulator</span> <span class="nx">mountaincar_continuous_simulator</span>
     <span class="k">objective</span> <span class="nx">open_ai_gym_default_objective</span>
 
         <span class="k">lesson</span> <span class="nx">get_high_score</span>
             <span class="k">configure</span>
-                <span class="k">constrain</span> <span class="nx">episode_length</span> <span class="k">with</span> <span class="kr">Int8</span><span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">},</span>
                 <span class="k">constrain</span> <span class="nx">deque_size</span> <span class="k">with</span> <span class="kr">UInt8</span><span class="p">{</span><span class="mi">1</span><span class="p">}</span>
             <span class="k">until</span>
                 <span class="k">maximize</span> <span class="nx">open_ai_gym_default_objective</span>
@@ -709,34 +983,40 @@ def debug(*args):
 <p>The lesson trains until the AI has maximized the objective named <code class="prettyprint">score</code>.</p>
 
 <h2 id="simulator-file">Simulator File</h2>
-<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">gym</span>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">bonsai_ai</span> <span class="kn">import</span> <span class="n">Brain</span><span class="p">,</span> <span class="n">Config</span>
+<span class="kn">from</span> <span class="nn">bonsai_gym</span> <span class="kn">import</span> <span class="n">GymSimulator</span>
 
-<span class="kn">import</span> <span class="nn">bonsai</span>
-<span class="kn">from</span> <span class="nn">bonsai_gym_common</span> <span class="kn">import</span> <span class="n">GymSimulator</span>
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s">'gym_simulator'</span><span class="p">)</span>
+<span class="n">log</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
 
-<span class="n">ENVIRONMENT</span> <span class="o">=</span> <span class="s">'MountainCar-v0'</span>
-<span class="n">RECORD_PATH</span> <span class="o">=</span> <span class="bp">None</span>
-<span class="n">SKIPPED_FRAME</span> <span class="o">=</span> <span class="mi">4</span>
 
-<span class="k">class</span> <span class="nc">MountainCarSimulator</span><span class="p">(</span><span class="n">GymSimulator</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">MountainCarContinuous</span><span class="p">(</span><span class="n">GymSimulator</span><span class="p">):</span>
+    <span class="n">environment_name</span> <span class="o">=</span> <span class="s">'MountainCarContinuous-v0'</span>
+    <span class="n">simulator_name</span> <span class="o">=</span> <span class="s">'mountaincar_continuous_simulator'</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">env</span><span class="p">,</span> <span class="n">skip_frame</span><span class="p">,</span> <span class="n">record_path</span><span class="p">):</span>
-        <span class="n">GymSimulator</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span> <span class="n">env</span><span class="p">,</span> <span class="n">skip_frame</span><span class="o">=</span><span class="n">skip_frame</span><span class="p">,</span>
-            <span class="n">record_path</span><span class="o">=</span><span class="n">record_path</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">gym_to_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">observation</span><span class="p">):</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="p">{</span><span class="s">'x_position'</span><span class="p">:</span> <span class="n">observation</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                 <span class="s">'x_velocity'</span><span class="p">:</span> <span class="n">observation</span><span class="p">[</span><span class="mi">1</span><span class="p">]}</span>
+        <span class="k">return</span> <span class="n">state</span>
 
-    <span class="k">def</span> <span class="nf">get_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">parent_state</span> <span class="o">=</span> <span class="n">GymSimulator</span><span class="o">.</span><span class="n">get_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="n">state_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s">"x_position"</span><span class="p">:</span> <span class="n">parent_state</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-                      <span class="s">"x_velocity"</span><span class="p">:</span> <span class="n">parent_state</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="mi">1</span><span class="p">]}</span>
-        <span class="k">return</span> <span class="n">bonsai</span><span class="o">.</span><span class="n">simulator</span><span class="o">.</span><span class="n">SimState</span><span class="p">(</span><span class="n">state_dict</span><span class="p">,</span> <span class="n">parent_state</span><span class="o">.</span><span class="n">is_terminal</span><span class="p">)</span>
+    <span class="c"># As an Estimator, continuous mountaincar returns the command</span>
+    <span class="c"># as a numpy array.</span>
+    <span class="k">def</span> <span class="nf">action_to_gym</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">actions</span><span class="p">):</span>
+        <span class="c"># return actions['command']</span>
+        <span class="k">return</span> <span class="n">numpy</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="n">actions</span><span class="p">[</span><span class="s">'command'</span><span class="p">]])</span>
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
-    <span class="n">env</span> <span class="o">=</span> <span class="n">gym</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">ENVIRONMENT</span><span class="p">)</span>
-    <span class="n">simulator</span> <span class="o">=</span> <span class="n">MountainCarSimulator</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">SKIPPED_FRAME</span><span class="p">,</span> <span class="n">RECORD_PATH</span><span class="p">)</span>
-    <span class="n">bonsai</span><span class="o">.</span><span class="n">run_for_training_or_prediction</span><span class="p">(</span><span class="s">"mountaincar_simulator"</span><span class="p">,</span> <span class="n">simulator</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="c"># create a brain, openai-gym environment, and simulator</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">Config</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
+    <span class="n">brain</span> <span class="o">=</span> <span class="n">Brain</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+    <span class="n">sim</span> <span class="o">=</span> <span class="n">MountainCarContinuous</span><span class="p">(</span><span class="n">brain</span><span class="p">)</span>
+    <span class="n">sim</span><span class="o">.</span><span class="n">run_gym</span><span class="p">()</span>
 </code></pre>
-<p>This is an OpenAI Gym example which uses the OpenAI environment as its simulator. For more information about the simulator used see the <a href="https://github.com/BonsaiAI/bonsai-gym-common">Bonsai Gym Common GitHub repo</a> which is a python library for integrating a Bonsai BRAIN with Open AI Gym environments.</p>
+<p>This is an OpenAI Gym example which uses the OpenAI environment as its simulator. For more information about the simulator used see the <a href="https://github.com/BonsaiAI/bonsai-gym-common">Bonsai Gym Common GitHub repo</a> which is a python library for integrating a Bonsai BRAIN with OpenAI Gym environments.</p>
 
           <h1 id="energyplus-hvac-optimization">EnergyPlus HVAC Optimization</h1>
 
@@ -806,6 +1086,11 @@ def debug(*args):
 <pre class="highlight python tab-python"><code><span class="c"># Excerpt of simulator class from the energyplus_simulator.py file</span>
 
 <span class="k">class</span> <span class="nc">EnergyPlusSimulator</span><span class="p">(</span><span class="n">Simulator</span><span class="p">):</span>
+    <span class="s">"""
+    Runs the Actuator model for training or prediction by launching it
+    against the Ptolemy server above. This uses the Bonsai Simulator
+    base class to interface with the BRAIN server.
+    """</span>
     <span class="n">model</span> <span class="o">=</span> <span class="n">ePlus85Actuator</span><span class="p">()</span>
     <span class="n">server</span> <span class="o">=</span> <span class="bp">None</span>
 
@@ -813,95 +1098,23 @@ def debug(*args):
     <span class="n">shade</span> <span class="o">=</span> <span class="mf">0.</span>
     <span class="n">is_terminal</span> <span class="o">=</span> <span class="bp">True</span>
 
-    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="s">"""This method is called when training is started."""</span>
-        <span class="k">print</span><span class="p">(</span><span class="s">"EnergyPlusSimulator: start"</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">print</span><span class="p">(</span><span class="s">"EnergyPlusSimulator: stop"</span><span class="p">)</span>
-
-        <span class="n">graph</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">grapher</span><span class="p">()</span>
-        <span class="n">py</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s">"graph.html"</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">readFromPtolemyClient</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">readFromClient</span><span class="p">()</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">fromClient</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">fromClient</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">clientState</span> <span class="o">=</span> <span class="p">{</span>
-                <span class="c"># 'TOut': self.model.fromClient[0],</span>
-                <span class="c"># 'TZone': self.model.fromClient[1],</span>
-                <span class="s">'SolarIrradiation'</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">fromClient</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span><span class="o">/</span><span class="mi">100</span>
-                <span class="c"># 'FractionShadingOn': self.model.fromClient[3]</span>
-                <span class="p">}</span>
-
-            <span class="c"># save the client input in our graph</span>
-            <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">fromClient</span><span class="p">)):</span>
-                <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">fromClient</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
-                <span class="c"># scale some of the values for readability</span>
-                <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-                    <span class="n">value</span> <span class="o">/=</span> <span class="mf">100.</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">is_terminal</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">exitFlag</span> <span class="o">!=</span> <span class="mi">0</span>
-
-    <span class="k">def</span> <span class="nf">restartPtolemyServer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="c"># set some default values for get_state</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">is_terminal</span> <span class="o">=</span> <span class="bp">True</span>
-        <span class="c"># self.clientState = {'TOut': 0.,</span>
-        <span class="c">#                     'TZone': 0.,</span>
-        <span class="c">#                     'SolarIrradiation': 0.,</span>
-        <span class="c">#                     'FractionShadingOn': 0. }</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">clientState</span> <span class="o">=</span> <span class="p">{</span><span class="s">'SolarIrradiation'</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
-
-        <span class="c"># close the old connections if they're still open</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-
-        <span class="c"># start a new episode</span>
-        <span class="k">print</span><span class="p">(</span><span class="s">"EnergyPlusSimulator: starting PtolemyServer"</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">server</span> <span class="o">=</span> <span class="n">PtolemyServer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">)</span>
-
-        <span class="k">try</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">waitForClient</span><span class="p">()</span>
-            <span class="c"># get initial state</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">readFromPtolemyClient</span><span class="p">()</span>
-
-        <span class="k">except</span> <span class="nb">OSError</span> <span class="k">as</span> <span class="n">msg</span><span class="p">:</span>
-            <span class="k">print</span><span class="p">(</span><span class="s">"EnergyPlusSimulator: error on restart:"</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">server</span> <span class="o">=</span> <span class="bp">None</span>
-
-    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="s">"""Called by the AI Engine to reset simulator state in between training
-           and test passes.
-        """</span>
-        <span class="k">print</span><span class="p">(</span><span class="s">"EnergyPlusSimulator: reset"</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">advance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">actions</span><span class="p">):</span>
-        <span class="k">print</span><span class="p">(</span><span class="s">"EnergyPlusSimulator: advance "</span><span class="p">,</span> <span class="n">actions</span><span class="p">)</span>
-        <span class="s">"""Advance the simulation forward one tick. actions contains a
-           dictionary of key values as defined by this simulator's action
-           schema in Inkling.
-        """</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">shade</span> <span class="o">=</span> <span class="n">actions</span><span class="p">[</span><span class="s">'shade'</span><span class="p">]</span> <span class="o">*</span> <span class="mf">6.</span>  <span class="c"># Int32[0..1]</span>
-
-    <span class="k">def</span> <span class="nf">set_properties</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="k">print</span><span class="p">(</span><span class="s">"EnergyPlusSimulator: set_properties"</span><span class="p">)</span>
-        <span class="s">"""This method is called before training is started
-           or on the frame after is_terminal=True to set
-           configuration properties in this simulation. See
-           the configure clause of the lesson statement in
-           this simulator's accompanying curriculums.
+    <span class="k">def</span> <span class="nf">episode_start</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
+        <span class="s">"""
+        Callback called when an training episode starts. We use this
+        to reset the Ptolemy server and start a new simulation session.
+        Returns the initial state.
         """</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">restartPtolemyServer</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">clientState</span>
 
-    <span class="k">def</span> <span class="nf">get_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="s">"""Returns a named tuple of state and is_terminal. state is a
-           dictionary matching the state schema as defined in Inkling.
-           is_terminal is only true when the simulator is in a "game over"
-           state.
+    <span class="k">def</span> <span class="nf">simulate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">):</span>
+        <span class="s">"""
+        Callback called  when stepping the simulation. It sends actions to the
+        model and returns the state of the simulation to the BRAIN.
         """</span>
 
-        <span class="k">print</span><span class="p">(</span><span class="s">"EnergyPlusSimulator: get_state: terminal:"</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_terminal</span><span class="p">)</span>
+        <span class="c"># take the action</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">shade</span> <span class="o">=</span> <span class="n">action</span><span class="p">[</span><span class="s">'shade'</span><span class="p">]</span> <span class="o">*</span> <span class="mf">6.</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_terminal</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">restartPtolemyServer</span><span class="p">()</span>
@@ -917,15 +1130,74 @@ def debug(*args):
             <span class="c"># clear old data</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="p">([],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[])</span>
 
-        <span class="k">return</span> <span class="n">SimState</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">clientState</span><span class="p">,</span> <span class="n">is_terminal</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">is_terminal</span><span class="p">)</span>
+        <span class="n">reward</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reward_function</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">clientState</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">reward</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_terminal</span>
+
+    <span class="k">def</span> <span class="nf">finished</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">"""
+        Called at the end of the simulation to output the graph.
+        """</span>
+        <span class="n">graph</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">grapher</span><span class="p">()</span>
+        <span class="n">py</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s">"graph.html"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">readFromPtolemyClient</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">"""
+        Utility method used to do the read portion of the exchange
+        with the Ptolemy server and client.
+        """</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">readFromClient</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">fromClient</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">fromClient</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">clientState</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s">'SolarIrradiation'</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">fromClient</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">/</span><span class="mi">100</span><span class="p">)</span>
+                <span class="p">}</span>
+
+            <span class="c"># save the client input in our graph</span>
+            <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">fromClient</span><span class="p">)):</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">fromClient</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+                <span class="c"># scale some of the values for readability</span>
+                <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                    <span class="n">value</span> <span class="o">/=</span> <span class="mf">100.</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_terminal</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">exitFlag</span> <span class="o">!=</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="nf">restartPtolemyServer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">"""
+        Used to restart the server and setup the initial state.
+        """</span>
+
+        <span class="c"># set some default values for get_state</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_terminal</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">clientState</span> <span class="o">=</span> <span class="p">{</span><span class="s">'SolarIrradiation'</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+
+        <span class="c"># close the old connections if they're still open</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+        <span class="c"># star a new episode</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"EnergyPlusSimulator: starting PtolemyServer"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">server</span> <span class="o">=</span> <span class="n">PtolemyServer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">)</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">waitForClient</span><span class="p">()</span>
+            <span class="c"># get initial state</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">readFromPtolemyClient</span><span class="p">()</span>
+
+        <span class="k">except</span> <span class="nb">OSError</span> <span class="k">as</span> <span class="n">msg</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">"EnergyPlusSimulator: error on restart:"</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">server</span> <span class="o">=</span> <span class="bp">None</span>
 
     <span class="k">def</span> <span class="nf">reward_function</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">"""
+        Calculates the reward for the current state of the simulation
+        """</span>
         <span class="k">print</span><span class="p">(</span><span class="s">"EnergyPlusSimulator: reward_function"</span><span class="p">)</span>
+
         <span class="c"># largest reward is best reward (maximize)</span>
-        <span class="n">reward</span> <span class="o">=</span> <span class="mf">0.</span>
+        <span class="n">reward</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">fromClient</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">fromClient</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
             <span class="c"># SolarIrradiation === Shades down === good</span>
-            <span class="c"># TOut = self.model.fromClient[0]</span>
             <span class="n">SolarIrradiation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">fromClient</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">/</span> <span class="mf">100.</span>
 
             <span class="c"># sun is down</span>
@@ -937,7 +1209,7 @@ def debug(*args):
 
             <span class="c"># sun is out</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">shade</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> 
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">shade</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
                     <span class="n">reward</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c"># shades on</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">reward</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>  <span class="c"># shades off</span>
@@ -1197,6 +1469,10 @@ Finally, Simulink Coder executable models can be easily shared with people and t
 
       </div>
       <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="python">python</a>
+                <a href="#" data-language-name="cpp">cpp</a>
+          </div>
       </div>
     </div>
 

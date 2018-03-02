@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Simulation Guide - Bonsai</title>
+    <title>Learn about Simulation Requirements - Bonsai</title>
     <style>
       .highlight table td { padding: 5px; }
 .highlight table pre { margin: 0; }
@@ -241,24 +241,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			<input type="checkbox" id="drop-1"/>
 			<ul id="guides">
 				<li class=""> <a href="cli-install-guide.html">Install the CLI</a>  </li>
+				<li class=""> <a href="sdk-install-guide.html">Install the SDK</a>  </li>
+				<li class="selected"> <a href="simulation-guide.html">Learn About Simulation Requirements</a>  </li>
 				<li class=""> <a href="inkling-guide.html">Learn the Inkling Language</a>  </li>
 				<li class=""> <a href="local-dev-guide.html">Run the Platform Locally</a>  </li>
 				<li class=""> <a href="ai-engine-guide.html">Understand AI Engine Components</a>  </li>
 				<li class=""> <a href="web-graphs-guide.html">Understand BRAIN Graphs</a>  </li>
 				<li class=""> <a href="jupyter-api-guide.html">Use Bonsai's API with Jupyter</a>  </li>
-				<li class="selected"> <a href="simulation-guide.html">Simulation Guide</a>  </li>
-
 			</ul>
 		</li>
 
 		<li class="header_menu_item"> <!-- First Tier Drop Down --> <label for="drop-2" class="toggle">References +</label><a  href="#">References</a>
 			<input type="checkbox" id="drop-2"/>
 			<ul id="references">
-				<li class=""> <a href="../references/api-reference.html">API</a>  </li>
-				<li class=""> <a href="../references/cli-reference.html">CLI</a>  </li>
-				<li class=""> <a href="../references/inkling-reference.html">Inkling</a>  </li>
-				<li class=""> <a href="../references/library-reference.html">Library</a>  </li>
-			</ul>
+				<li class=""> <a href="../references/api-reference.html">API Reference</a>  </li>
+				<li class=""> <a href="../references/cli-reference.html">CLI Reference</a>  </li>
+				<li class=""> <a href="../references/inkling-reference.html">Inkling Reference</a>  </li>
+				<li class=""> <a href="../references/library-reference.html">Library Reference</a>  </li>
+				<li class=""> <a href="../references/simulator-reference.html">Simulator Reference</a>
+			</ul> 
 		</li>
 
 		<li class="header_menu_item "> <a href="../examples.html">Examples</a></li>
@@ -287,7 +288,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <input type="text" class="search" id="input-search" placeholder="Search">
         </div>
         <ul class="search-results"></ul>
-      <div class="page-title">Simulation Guide</div>
+      <div class="page-title">Learn about Simulation Requirements</div>
       <div id="toc">
       </div>
       
@@ -345,7 +346,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="dark-box"></div>
       <div class="content">
         
-          <h1 id="overview">Overview</h1>
+          <h1 id="simulation-overview">Simulation Overview</h1>
 
 <p><a href="http://docs.bons.ai/guides/ai-engine-guide.html#major-components-overview"><strong>The Bonsai platform</strong></a> uses simulations to train a BRAIN. This guide describes requirements and recommendations for simulators that are well suited to use with Reinforcement Learning. Some of these are related to the simulation model itself while others are directed at the simulator platform that runs the models. Typically, model related requirements are focused on whether Deep Reinforcement Learning is applicable or not, while simulator platform requirements determine if and how the Bonsai backend can connect and control the simulation environment through the Bonsai SDK.</p>
 
