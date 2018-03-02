@@ -1,7 +1,7 @@
 # Projects and Config Files
 
 The Bonsai command-line interface works with three files.  A `.bonsai` file in
-your user directory, a project file in the directory containing the Inkling 
+your user directory, a `.bproj` project file in the directory containing the Inkling 
 files and simulator configuration for a BRAIN, and a `.brains` file that links
 a project file to a BRAIN in the same directory as the project file.
 
@@ -18,9 +18,9 @@ host = api.bons.ai
 usessl = True
 ```
 
-The `.bonsai` file is located in your user directory. It stores your username and an access token for access to the
-Bonsai servers. The `bonsai configure` CLI command will update this file and create it if it does not exist.
-
+The `.bonsai` file is located in your user directory. It stores your username and an access token
+for access to theBonsai servers. The `bonsai configure` CLI command will update this file and create
+it if it does not exist.
 
 ## .bproj file
 
@@ -32,7 +32,7 @@ Bonsai servers. The `bonsai configure` CLI command will update this file and cre
     ],
     "training": {
         "command": "python my_simulator.py",
-        "simulator": "bonsai.python"
+        "simulator": "bonsai.ai"
     }
 }
 ```
@@ -64,14 +64,18 @@ There must be at least one valid path in the `files` list.
     ],
     "training": {
         "command": "python my_simulator.py",
-        "simulator": "bonsai.python"
+        "simulator": "bonsai.ai"
     }
 }
 ```
 
-For users familiar with the Unix command line, file path expansion in the CLI will behave mostly as expected. There is no ~ expansion (in a Unix shell, this expands to the home directory), but `*`, `?`, and character ranges expressed with `[ ]` will be correctly matched. Wikipedia has detailed information on [globbing syntax][5].
+For users familiar with the Unix command line, file path expansion in the CLI will behave mostly as
+expected. There is no ~ expansion (in a Unix shell, this expands to the home directory), but `*`,
+`?`, and character ranges expressed with `[ ]` will be correctly matched. Wikipedia has detailed
+information on [globbing syntax][5].
 
-You can test these on a generic shell under OSX and try the pattern from your project directory using the ls command, whose globbing support should mirror the Bonsai CLI's in most cases.
+You can test these on a generic shell under OSX and try the pattern from your project directory
+using the ls command, whose globbing support should mirror the Bonsai CLI's in most cases.
 
 ### Training
 
@@ -81,10 +85,11 @@ points to a pre-configured simulation container inside the platform. The
 
 Current list of supported simulators for Docker cloud-hosted training:
 
- * [`openai.gym`][1]
- * [`bonsai.python`][2]
- * [`bonsai.energyplus`][3]
- * [`bonsai.gazebo`][4]
+* OpenAI Gym environment: [`openai.gym`][1]
+* Bonsai Python `bonsai-ai` library: [`bonsai.ai`][4]
+* EnergyPlus Simulator: [`bonsai.energyplus`][3]
+* Legacy `bonsai-python` library: [`bonsai.python`][2]
+
 
 ## .brains file
 
@@ -103,14 +108,13 @@ project to many BRAINs.  The file is located in the same directory as a
 project file.
 
 
- * `name` is a name of one of this user's BRAINs.
-
- * `default` marks a named BRAIN as the default BRAIN to use with command
+* `name` is a name of one of this user's BRAINs.
+* `default` marks a named BRAIN as the default BRAIN to use with command
    operations.
 
 
 [1]: https://quay.io/repository/bonsai/gym
 [2]: https://quay.io/repository/bonsai/python
 [3]: https://quay.io/repository/bonsai/energyplus
-[4]: https://quay.io/repository/bonsai/gazebo
+[4]: https://quay.io/repository/bonsai/bonsai-ai
 [5]: https://en.wikipedia.org/wiki/Glob_(programming)

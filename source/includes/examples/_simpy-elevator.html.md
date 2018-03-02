@@ -31,7 +31,7 @@ schema FloorState
 end
 ```
 
-The `FloorState` schema defines the simulation `state` updated from the simulation's `simulate` method.
+The `FloorState` schema defines the dictionary returned from the Python simulation's `advance` method to the BRAIN.
 
 ```inkling
 # command options: up, open, down
@@ -49,7 +49,7 @@ schema ElevatorConfig
 end
 ```
 
-The `ElevatorConfig` schema outlines a possible configuration you could give to the elevator if you wanted to tailor its learning in the lessons outlined later. In this example is is not used.
+The `ElevatorConfig` schema outlines some possible configurations you could give to the elevator if you wanted to tailor its learning in the lessons outlined later.
 
 ###### Concept
 
@@ -95,7 +95,7 @@ end
 
 The curriculum `high_score_curriculum` trains `elevator_plan` using `elevator_simulator`. The BRAIN that runs this Inkling code will try to maximize the value returned from `elevator_objective` until you stop training. The reward function passed to `elevator_objective` is a method in the simulator `elevator_simulator.py` in which it returns the waiting time of the total sum of people as a negative number, in order to maximize it. The code for this can be seen at the end of the simulator excerpt below.
 
-This curriculum contains one simple lesson, called `get_high_score`. It configures the simulation, but in this case the lesson is simply using a dummy variable to not provide the elevator with any starting condition to learn from. The training starts from random placement and actions.
+This curriculum contains one simple lesson, called `get_high_score`. It configures the simulation, but in this case the lesson is simply using a dummy variable to not provide the elevator with any starting conditions to learn from. The training starts from random placement and actions.
 
 
 ## Simulator Excerpt
@@ -193,7 +193,7 @@ The `_elevator_objective` function returns a negative waiting value because this
 
 For more information on the functions inside of this simulator class and how to implement them see the [Library Reference][3].
 
-Also note that if you would like to see how this simulator can be run without Bonsai - to demonstrate how the emulator behaves with a hard-coded algorithm - you can do so by running elevator.py directly.
+Also note that if you would like to see how this simulator can be run without Bonsai - to demonstrate how the emulator behaves with a hard-coded algorithm - you can do so by running elevator.py simply with Python itself.
 
 [1]: https://github.com/BonsaiAI/simpy-elevator-sample
 [2]: https://simpy.readthedocs.io/en/latest/index.html

@@ -1,11 +1,11 @@
 ---
-title: Learn about Simulation Requirements
+title: Simulator Reference
 
 toc_footers:
   -  <%= partial "partials/footer-links" %>
 
 includes:
-  - simulation-guide.html.md
-
+  - simulator-reference.html.md
+  
 search: true
 ---

@@ -1,4 +1,4 @@
-# Overview
+# Simulation Overview
 
 [**The Bonsai platform**](http://docs.bons.ai/guides/ai-engine-guide.html#major-components-overview) uses simulations to train a BRAIN. This guide describes requirements and recommendations for simulators that are well suited to use with Reinforcement Learning. Some of these are related to the simulation model itself while others are directed at the simulator platform that runs the models. Typically, model related requirements are focused on whether Deep Reinforcement Learning is applicable or not, while simulator platform requirements determine if and how the Bonsai backend can connect and control the simulation environment through the Bonsai SDK.
 
@@ -8,6 +8,7 @@ Most fundamentally, the simulation model should simulate the environment of inte
 The environment state should be well-defined and accessible at each step of the simulation.
 
 ## States
+
 Examples of states for different settings:
 
 * **HVAC:** current temperature, humidity inside and outside the building, desired temperature.

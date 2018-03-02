@@ -1,12 +1,12 @@
-# OpenAI Gym: Cart Pole
+# OpenAI Gym: Cartpole
 
-> ![Cart Pole Balance](../images/cart-pole-balance.gif)
+> ![Cartpole Balance](../images/cart-pole-balance.gif)
 
-[**Download the full source code on GitHub**][1] if you want to run this simulator locally. If you want to run Cart Pole remotely on the Bonsai Platform as a managed simulator, create a new BRAIN selecting the Cart Pole demo on [beta.bons.ai][4].
+[**Download the full source code on GitHub**][1] if you want to run this simulator locally. If you want to run Cartpole remotely on the Bonsai Platform as a managed simulator, create a new BRAIN selecting the Cartpole demo on [beta.bons.ai][4].
 
-In this example, we'll walk you through the various statements that are part of the Cart Pole Inkling file. Each statement is followed by an explanation of the statement.
+In this example, we'll walk you through the various statements that are part of the Cartpole Inkling file. Each statement is followed by an explanation of the statement.
 
-Cart Pole is a classic control problem. [OpenAI Gym][2] describes it as:
+Cartpole is a classic control problem. [OpenAI Gym][2] describes it as:
 
 _A pole is attached by an un-actuated joint to a cart, which moves along a frictionless track. The system is controlled by applying a force of +1 or -1 to the cart. The pendulum starts upright, and the goal is to prevent it from falling over. A reward of +1 is provided for every timestep that the pole remains upright. The episode ends when the pole is more than 15 degrees from vertical, or the cart moves more than 2.4 units from the center._
 
@@ -94,7 +94,7 @@ This curriculum contains one lesson, called `balancing`. It configures the simul
 import sys
 import logging
 from bonsai_ai import Brain, Config
-from bonsai_gym_common import GymSimulator
+from bonsai_gym import GymSimulator
 
 log = logging.getLogger('gym_simulator')
 log.setLevel(logging.DEBUG)
@@ -105,9 +105,21 @@ class CartPole(GymSimulator):
     environment_name = 'CartPole-v0'
 
     # simulator name from Inkling
+    # Example Inkling:
+    #   curriculum balance_curriculum
+    #       train balance
+    #       with simulator cartpole_simulator
+    #       ....
     simulator_name = 'cartpole_simulator'
 
     # convert openai gym observation to our state schema
+    # Example Inkling:
+    #   schema GameState
+    #       Float32 position,
+    #       Float32 velocity,
+    #       Float32 angle,
+    #       Float32 rotation
+    #   end
     def gym_to_state(self, observation):
         state = {'position': observation[0],
                  'velocity': observation[1],
@@ -116,6 +128,10 @@ class CartPole(GymSimulator):
         return state
 
     # convert our action schema into openai gym action
+    # Example Inkling:
+    #   schema Action
+    #       Int8{0, 1} command
+    #   end
     def action_to_gym(self, action):
         return action['command']
 
