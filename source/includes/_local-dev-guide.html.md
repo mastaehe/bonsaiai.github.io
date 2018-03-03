@@ -124,9 +124,9 @@ We use headless here to indicate we don't need to see a graphical display from t
 
 ## View your BRAIN training status
 
-View your BRAIN's training status as it trains on the simulator by going to the BRAIN's Dashboard page on [beta.bons.ai][5]. Training Mountain Car takes about an hour to get sufficient training to beat the game most of the time. If you want flawless victories each time the simulator can take up to 2 hours before you'll see the graph level out.
+> ![Mountaincar Training][16]
 
-![Fully Trained BRAIN][16]
+View your BRAIN's training status as it trains on the simulator by going to the BRAIN's Dashboard page on [beta.bons.ai][5]. Training Mountain Car takes about an hour to get sufficient training to beat the game most of the time. If you want flawless victories each time the simulator can take up to 2 hours before you'll see the graph level out.
 
 There is no automatic ending to training, you can train forever, but there will be diminishing returns after a couple of hours. You can play around with training for 15 mins, 30 mins, 1 hour, etc and use your BRAIN to see how well it plays each time! It takes about 700 episodes to train the BRAIN correctly. Our ideal target is an average reward of -195 or higher over 100 consecutive episodes.
 
@@ -138,10 +138,7 @@ There is no automatic ending to training, you can train forever, but there will 
 bonsai train stop
 ```
 
-Once we've gotten to this level of performance (or sooner if you prefer), CTRL-C to disconnect the simulator (if you are running it locally), then [`bonsai train stop`][21] will end the training, and proceed to prediction.
-
-
-
+Once the BRAIN has gotten to this level of performance (or sooner if you prefer), CTRL-C to disconnect the simulator (if you are running it locally), then [`bonsai train stop`][21] will end the training, and proceed to prediction.
 
 # Predict with Your BRAIN
 
@@ -166,7 +163,7 @@ After your BRAIN is finished training it can play the Mountain Car game. How wel
 [3]: ../references/cli-reference.html
 [4]: https://gym.openai.com/envs/MountainCar-v0
 [5]: https://beta.bons.ai
-[16]: ../images/fully_trained_brain.png
+[16]: ../images/graph-mountaincar-training.png
 [17]: ../references/cli-reference.html#bonsai-configure
 [18]: ../references/cli-reference.html#bonsai-create
 [19]: ../references/cli-reference.html#bonsai-push

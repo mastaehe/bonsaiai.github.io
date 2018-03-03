@@ -2,7 +2,7 @@
 
 Now that you've completed this guide, you can:
 
-**Check out our [Inkling Guide][1].**
+**Check out our [Learn the Inkling Language][1] Guide.**
 
 It contains all of the concepts and components of our unique programming language. You'll learn:
 
@@ -12,11 +12,11 @@ It contains all of the concepts and components of our unique programming languag
 
 And we have these other resources that will enable you to maximize your AI development experience:
 
-* [CLI Reference][2]
-* [API Reference][3]
-* [Bonsai Blog][4]
+* [Understand BRAIN Graphs][2] Guide
+* VIDEO: [Writing Great Reward Functions][3]
+* [Bonsai's Blog][4]
 
 [1]: ./inkling-guide.html
-[2]: ./../references/cli-reference.html
-[3]: ./../references/api-reference.html
+[2]: ./web-graphs-guide.html
+[3]: https://www.youtube.com/watch?v=0R3PnJEisqk&list=PLAktfMEMCsOY9HUZKIuGI6yqefGBuszAV&index=4
 [4]: https://bons.ai/blog

@@ -68,15 +68,20 @@ Cartpole simulator, simply click the **Start Training** button below the graph.
 What this is going to do is spin up a container for the [AI Engine][14], connect up to the
 `cartpole_simulator.py` file, and start the BRAIN training. All with one button!
 
-Training Cartpole for ~2,000 episodes is ideal, and might take between 15-30 minutes depending on
-how well your BRAIN is performing. You can see in the images that it only took about a minute for
-the first ~1,000 episodes but the second half took 14 minutes. Your graphs will vary because the
-training takes random actions, so don't worry if they don't look like these.
+Training Cartpole for about 15 minutes will give you reasonable performance for this task of
+balancing a pole on a cart. The longer you train the BRAIN in this case, the longer the cart will
+be able to balance the pole before it falls over. You can experiment with training for longer but
+you should be able to see the reward start to flatten out after 10 minutes or so as shown in the
+picture. Your graphs will vary because the training takes random actions, so don't worry if yours
+don't look like these.
 
 The server will automatically end training once the BRAIN reaches past a certain accuracy, but you
 will most likely want to stop training before it gets there because there will be diminishing returns
-for training past about 2,000 episodes. You can play around with training for
+for training after about 30 minutes. You can play around with training for
 15 mins, 30 mins, or even 1 hour and use your BRAIN to see how well it plays each time!
+
+Click the "Resume Training" button if you wish to continue training on the same version, or start
+over with a fresh version of the BRAIN by clicking "Start Over".
 
 
 
@@ -158,10 +163,10 @@ file, in predict mode, and `--predict-version=latest` will use the latest traini
 [4]: https://gym.openai.com/envs/CartPole-v1
 [5]: ../../images/no_brains_image.png
 [6]: ../../images/quick-start-create-brain.png
-[7]: ../../images/quick-start-no-training.png
-[8]: ../../images/quick-start-start-training.png
-[9]: ../../images/quick-start-code-editor.png
-[10]: ../../images/quick-start-trained-brain.png
+[7]: ../../images/empty-graph.png
+[8]: ../../images/cartpole-start-training.png
+[9]: ../../images/quick-start-editor.png
+[10]: ../../images/cartpole-end-training.png
 [11]: ./local-dev-guide.html
 [12]: ../../images/cart-pole-balance.gif
 [13]: ./cli-install-guide.html#install-prerequisites

@@ -93,7 +93,7 @@ complex control problems that can be modeled in a simulator.
 Training means teaching a BRAIN to reach a specific outcome in the simulator. The training involves
 using a specific set of concepts, a curriculum, and lessons, which are described in the Inkling file.
 
-Today, we only support simulators written in python. To learn more about connecting your own
+Today, we only support simulators written in Python or C++. To learn more about connecting your own
 simulator, refer to our [Library Reference][4].
 
 
