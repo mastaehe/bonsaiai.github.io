@@ -449,7 +449,7 @@ complex control problems that can be modeled in a simulator.</p>
 <p>Training means teaching a BRAIN to reach a specific outcome in the simulator. The training involves
 using a specific set of concepts, a curriculum, and lessons, which are described in the Inkling file.</p>
 
-<p>Today, we only support simulators written in python. To learn more about connecting your own
+<p>Today, we only support simulators written in Python or C++. To learn more about connecting your own
 simulator, refer to our <a href="../references/library-reference.html">Library Reference</a>.</p>
 
           <h1 id="create-your-brain">Create Your BRAIN</h1>
@@ -492,7 +492,7 @@ this time, you will also be asked to give your BRAIN a name and a description.</
 
 <blockquote>
 <p>BRAIN Graph
-<img src="../images/quick-start-no-training.png" alt="Untrained BRAIN graph" /></p>
+<img src="../images/empty-graph.png" alt="Untrained BRAIN graph" /></p>
 </blockquote>
 
 <h3 id="brain-training-graph">BRAIN Training Graph</h3>
@@ -503,7 +503,7 @@ code you&rsquo;ll see that Cartpole only has one).</p>
 
 <blockquote>
 <p>Code Editor Window
-<img src="../images/quick-start-code-editor.png" alt="Code Editor Window" /></p>
+<img src="../images/quick-start-editor.png" alt="Code Editor Window" /></p>
 </blockquote>
 
 <h3 id="code-editor-window">Code Editor Window</h3>
@@ -519,9 +519,9 @@ guide locally if you want.</p>
 <h1 id="train-your-brain">Train Your BRAIN</h1>
 
 <blockquote>
-<p><img src="../images/quick-start-start-training.png" alt="Start Training BRAIN" /></p>
+<p><img src="../images/cartpole-start-training.png" alt="Start Training BRAIN" /></p>
 
-<p><img src="../images/quick-start-trained-brain.png" alt="Trained BRAIN" /></p>
+<p><img src="../images/cartpole-end-training.png" alt="Trained BRAIN" /></p>
 </blockquote>
 
 <p>When you&rsquo;re done checking out the code editor and ready to start training this BRAIN on the
@@ -530,15 +530,20 @@ Cartpole simulator, simply click the <strong>Start Training</strong> button belo
 <p>What this is going to do is spin up a container for the <a href="#what-are-brains">AI Engine</a>, connect up to the
 <code class="prettyprint">cartpole_simulator.py</code> file, and start the BRAIN training. All with one button!</p>
 
-<p>Training Cartpole for ~2,000 episodes is ideal, and might take between 15-30 minutes depending on
-how well your BRAIN is performing. You can see in the images that it only took about a minute for
-the first ~1,000 episodes but the second half took 14 minutes. Your graphs will vary because the
-training takes random actions, so don&rsquo;t worry if they don&rsquo;t look like these.</p>
+<p>Training Cartpole for about 15 minutes will give you reasonable performance for this task of
+balancing a pole on a cart. The longer you train the BRAIN in this case, the longer the cart will
+be able to balance the pole before it falls over. You can experiment with training for longer but
+you should be able to see the reward start to flatten out after 10 minutes or so as shown in the
+picture. Your graphs will vary because the training takes random actions, so don&rsquo;t worry if yours
+don&rsquo;t look like these.</p>
 
 <p>The server will automatically end training once the BRAIN reaches past a certain accuracy, but you
 will most likely want to stop training before it gets there because there will be diminishing returns
-for training past about 2,000 episodes. You can play around with training for
+for training after about 30 minutes. You can play around with training for
 15 mins, 30 mins, or even 1 hour and use your BRAIN to see how well it plays each time!</p>
+
+<p>Click the &ldquo;Resume Training&rdquo; button if you wish to continue training on the same version, or start
+over with a fresh version of the BRAIN by clicking &ldquo;Start Over&rdquo;.</p>
 
 <h1 id="use-your-brain">Use Your BRAIN</h1>
 
@@ -612,7 +617,7 @@ file, in predict mode, and <code class="prettyprint">--predict-version=latest</c
 
 <p>Now that you&rsquo;ve completed this guide, you can:</p>
 
-<p><strong>Check out our <a href="inkling-guide.html">Inkling Guide</a>.</strong></p>
+<p><strong>Check out our <a href="inkling-guide.html">Learn the Inkling Language</a> Guide.</strong></p>
 
 <p>It contains all of the concepts and components of our unique programming language. You&rsquo;ll learn:</p>
 
@@ -625,9 +630,9 @@ file, in predict mode, and <code class="prettyprint">--predict-version=latest</c
 <p>And we have these other resources that will enable you to maximize your AI development experience:</p>
 
 <ul>
-<li><a href="../references/cli-reference.html">CLI Reference</a></li>
-<li><a href="../references/api-reference.html">API Reference</a></li>
-<li><a href="https://bons.ai/blog">Bonsai Blog</a></li>
+<li><a href="web-graphs-guide.html">Understand BRAIN Graphs</a> Guide</li>
+<li>VIDEO: <a href="https://www.youtube.com/watch?v=0R3PnJEisqk&amp;list=PLAktfMEMCsOY9HUZKIuGI6yqefGBuszAV&amp;index=4">Writing Great Reward Functions</a></li>
+<li><a href="https://bons.ai/blog">Bonsai&rsquo;s Blog</a></li>
 </ul>
 
       </div>

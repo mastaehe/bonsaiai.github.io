@@ -443,16 +443,18 @@ We use headless here to indicate we don&rsquo;t need to see a graphical display 
 
 <h2 id="view-your-brain-training-status">View your BRAIN training status</h2>
 
-<p>View your BRAIN&rsquo;s training status as it trains on the simulator by going to the BRAIN&rsquo;s Dashboard page on <a href="https://beta.bons.ai">beta.bons.ai</a>. Training Mountain Car takes about an hour to get sufficient training to beat the game most of the time. If you want flawless victories each time the simulator can take up to 2 hours before you&rsquo;ll see the graph level out.</p>
+<blockquote>
+<p><img src="../images/graph-mountaincar-training.png" alt="Mountaincar Training" /></p>
+</blockquote>
 
-<p><img src="../images/fully_trained_brain.png" alt="Fully Trained BRAIN" /></p>
+<p>View your BRAIN&rsquo;s training status as it trains on the simulator by going to the BRAIN&rsquo;s Dashboard page on <a href="https://beta.bons.ai">beta.bons.ai</a>. Training Mountain Car takes about an hour to get sufficient training to beat the game most of the time. If you want flawless victories each time the simulator can take up to 2 hours before you&rsquo;ll see the graph level out.</p>
 
 <p>There is no automatic ending to training, you can train forever, but there will be diminishing returns after a couple of hours. You can play around with training for 15 mins, 30 mins, 1 hour, etc and use your BRAIN to see how well it plays each time! It takes about 700 episodes to train the BRAIN correctly. Our ideal target is an average reward of -195 or higher over 100 consecutive episodes.</p>
 
 <h2 id="stop-training">Stop Training</h2>
 <pre class="highlight plaintext"><code>bonsai train stop
 </code></pre>
-<p>Once we&rsquo;ve gotten to this level of performance (or sooner if you prefer), CTRL-C to disconnect the simulator (if you are running it locally), then <a href="../references/cli-reference.html#bonsai-train-stop"><code class="prettyprint">bonsai train stop</code></a> will end the training, and proceed to prediction.</p>
+<p>Once the BRAIN has gotten to this level of performance (or sooner if you prefer), CTRL-C to disconnect the simulator (if you are running it locally), then <a href="../references/cli-reference.html#bonsai-train-stop"><code class="prettyprint">bonsai train stop</code></a> will end the training, and proceed to prediction.</p>
 
 <h1 id="predict-with-your-brain">Predict with Your BRAIN</h1>
 
