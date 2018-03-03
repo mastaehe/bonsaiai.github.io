@@ -4,7 +4,7 @@ This guide will familiarize you with the two training graphs displayed on every 
 
 > ![Cartpole Balance](../images/cart-pole-balance.gif)
 
-In this guide we'll be walking through the graphs for OpenAI Gym's [Cartpole][3] environment to illustrate how to best use the information gathered in the Concepts and Simulator graphs. If you need instruction on how to create a demo on the Platform you can follow the [web guide][4]. You may also choose to [Run the Platform Locally][5]. OpenAI Gym describes Cartpole as:
+In this guide we'll be walking through the graphs for OpenAI Gym's [Cartpole][3] environment to illustrate how to best use the information gathered in the Performance and Simulator graphs. If you need instruction on how to create a demo on the Platform you can follow the [web guide][4]. You may also choose to [Run the Platform Locally][5]. OpenAI Gym describes Cartpole as:
 
 _A pole is attached by an un-actuated joint to a cart, which moves along a frictionless track. The system is controlled by applying a force of +1 or -1 to the cart. The pendulum starts upright, and the goal is to prevent it from falling over. A reward of +1 is provided for every timestep that the pole remains upright. The episode ends when the pole is more than 15 degrees from vertical, or the cart moves more than 2.4 units from the center._
 
@@ -24,18 +24,18 @@ For more information on writing reward functions and other terms in this guide p
 
 # Start Training
 
-> ![Cartpole Start Training](../images/graph-cartpole-start-training.png)
+> ![Cartpole Start Training](../images/empty-graph.png)
 
-Once you’ve created your Cartpole demo you should see a “Start Training” button as shown in the image. Clicking that button starts the automatic process of hooking up a web hosted version of the OpenAI Gym environment up to the BRAIN you’ve created, and starts the AI Engine training on this simulation. It should take less than a minute for this connection (depending on how long the first episode takes to log) and you’ll start to see data appearing on the Concepts tab graph!
+Once you’ve created your Cartpole demo you should see a “Start Training” button as shown in the image. Clicking that button starts the automatic process of hooking up a web hosted version of the OpenAI Gym environment up to the BRAIN you’ve created, and starts the AI Engine training on this simulation. It should take less than a minute for this connection (depending on how long the first episode takes to log) and you’ll start to see data appearing on the Performance tab graph!
 
 
-# Concepts Graph
+# Performance Graph
 
-> ![Cartpole Concepts Graph](../images/graph-cartpole-start.png)
+> ![Cartpole Performance Graph](../images/cartpole-start-training.png)
 
-On the concepts graph you will notice there is a display of which concept is currently training and its status and plotted are episode reward and average reward vs. training iterations. The current episode reward and the training time per concept for this version of the BRAIN are shown to the right.
+On the performance graph at the top there is a display of which concept is currently training, its status, and [what algorithm][6] it's being trained on. Plotted are episode reward and average reward vs. training episodes. There is a drop down menu on the right so that you can choose to also view the graph as episode reward vs. training iterations The current episode reward and the training time per concept for this version of the BRAIN are shown to the right.
 
-This graph shows your BRAIN’s performance during training. After every 20 training episodes, the system runs a test episode. A test episode is the same as running the simulation in prediction mode after training has stopped - it runs without exploration.The dots indicate individual rewards achieved by each of these test episodes. The smoothed reward is the average of the 10 previous such rewards. The x axis is the total number of training iterations before each test episode, which is the number of state transitions and rewards that the BRAIN has had to learn from.
+This graph shows your BRAIN’s performance during training. After every 20 training episodes, the system runs a test episode. A test episode is the same as running the simulation in prediction mode after training has stopped - it runs without exploration. The dots indicate individual rewards achieved by each of these test episodes. The smoothed reward is the average of the 10 previous such rewards. The x axis can be displayed as either the total number of training iterations before each test episode, which is the number of state transitions and rewards that the BRAIN has had to learn from, or the episode count (including training and test episodes).
 
 
 # Simulation Graph
@@ -70,12 +70,12 @@ In this example the reward will always be 1 during an iteration as the BRAIN is 
 
 When your graph isn’t looking quite right, or if your reward isn’t building in the way you’d expect, the Simulator Graph can be a great way to troubleshoot what might be going on in your BRAIN. Graphing your reward against an action schema for example can tell you what is happening every iteration of your simulation.
 
-Another way to troubleshoot your BRAIN is to check out the logs down below the code editor window. This can be found below the graphs and is typically used for text output of what’s going on in the simulation. For example, with Cartpole, every single episode’s reward is output to the logs and shown in the code panel here. Since the graph on the Concepts tab only displays an average. For simulations with very long episode time lengths this can be a good way to make sure things are working correctly in the beginning, before the first test episode is shown on the graph.
+Another way to troubleshoot your BRAIN is to check out the logs down below the code editor window. This can be found below the graphs and is typically used for text output of what’s going on in the simulation. For example, with Cartpole, every single episode’s reward is output to the logs and shown in the code panel here. Since the graph on the Performance tab only displays an average. For simulations with very long episode time lengths this can be a good way to make sure things are working correctly in the beginning, before the first test episode is shown on the graph.
 
 
 # When to Stop Training
 
-> ![Cartpole Finished](../images/graph-cartpole-finished.png)
+> ![Cartpole Finished](../images/cartpole-end-training.png)
 
 So you’ve looked around at the different graphs and what the data has to offer, and now you might be wondering “Ok, so when do I hit the stop training button?” The answer to this question varies widely depending on the simulation. You have to know what a sufficient reward looks like for your problem you’re solving.
 
@@ -101,3 +101,4 @@ Automatic termination will take a significant amount of time and it is recommend
 [3]: http://docs.bons.ai/examples.html#openai-gym-cartpole
 [4]: http://docs.bons.ai/guides/getting-started.html
 [5]: http://docs.bons.ai/guides/local-dev-guide.html
+[6]: ./ai-engine-guide.html#currently-supported-models
