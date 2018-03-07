@@ -18,9 +18,9 @@ host = api.bons.ai
 usessl = True
 ```
 
-The `.bonsai` file is located in your user directory. It stores your username and an access token
-for access to theBonsai servers. The `bonsai configure` CLI command will update this file and create
-it if it does not exist.
+Your user directory contains the `.bonsai` file. This file stores your username and an
+access token for access to the Bonsai servers. The `bonsai configure` CLI command
+will update this file and create it if it does not exist.
 
 ## .bproj file
 
@@ -44,10 +44,10 @@ files, simulator files, and simulator configuration needed to train a BRAIN.
 
 ### Files
 
-`files` is a list of files to be included in this BRAIN. Directories
-may also be in the `files` list. When a directory is specified, every file
-within that directory is included in the BRAIN. Currently, only one inkling
-file per BRAIN is supported. If `files` specifies multiple Inkling files,
+`files` is a list of files included in this BRAIN. Directories
+may also be in the `files` list. Specifying a directory will include every
+file within that directory in the BRAIN. Only one inkling
+file per BRAIN is currently supported. If `files` specifies multiple Inkling files,
 only the first will be used and the remainder will be ignored.
 
 There must be at least one valid path in the `files` list.
@@ -69,7 +69,7 @@ There must be at least one valid path in the `files` list.
 }
 ```
 
-For users familiar with the Unix command line, file path expansion in the CLI will behave mostly as
+For users familiar with the Unix command line, file path expansion in the CLI will behave as
 expected. There is no ~ expansion (in a Unix shell, this expands to the home directory), but `*`,
 `?`, and character ranges expressed with `[ ]` will be correctly matched. Wikipedia has detailed
 information on [globbing syntax][5].
@@ -104,7 +104,7 @@ Current list of supported simulators for Docker cloud-hosted training:
 ```
 
 The `.brains` file links a project to a BRAIN on the server. You can link one
-project to many BRAINs.  The file is located in the same directory as a
+project to multiple BRAINs.  The file is located in the same directory as a
 project file.
 
 
