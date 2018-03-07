@@ -2,12 +2,12 @@
 
 This project is the public home for the source code for the Bonsai Platform documentation. You can find our documentation at http://docs.bons.ai/.
 
-Our hope is that open-sourcing our documentation on GitHub helps our docs stay a living, breathing, constantly evolving project that users feel empowered to contribute to. If any documentation is unclear/missing we invite you to submit an issue or a pull request. But if you’d just rather give us feedback directly, [send us an email](mailto:support@bons.ai).
+Our hope is that open-sourcing our documentation on GitHub helps our docs stay a living, breathing, constantly evolving project that users feel empowered to contribute to. If any documentation is unclear/missing we invite you to submit an issue or a pull request. But if you’d rather give us feedback directly, [send us an email](mailto:support@bons.ai).
 
 ## Frequently Asked Questions
 --------------------------
 
-**What is this source code stuff? Where can I see the actual documentation?**
+**What is this source code? Where can I see the actual live documentation?**
 
 You'll want to go to http://docs.bons.ai/ for the compiled version. This project shows the source code we used to generate it so that you can submit issues or pull requests to it.
 
@@ -26,9 +26,9 @@ Check out [Slate](lord.github.io/slate).
 
 You're going to need:
 
- - **Linux or OS X** — Windows may work, but is unsupported.
+ - **Linux or OS X** — Windows users may still use Docker or Vagrant.
  - **Ruby, version 2.3.1 or newer**
- - **Bundler** — If Ruby is already installed, but the `bundle` command doesn't work, just run `gem install bundler` in a terminal.
+ - **Bundler** — If Ruby is already installed, but the `bundle` command doesn't work, run `gem install bundler` in a terminal.
 
 ### Getting Set Up
 

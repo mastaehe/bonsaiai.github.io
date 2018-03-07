@@ -1,0 +1,27 @@
+{
+  "name": "docs.bons.ai",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Includes packages for testing and linting",
+  "scripts": {
+    "check-links": "echo \"Running Broken Link Checker on entire site\n\"; blc http://localhost:4567 -ro && echo \"No broken links!\" || echo \"There are some broken links :(\"",
+    "write-good": "echo \" Testing specified file for good grammar\n\"; write-good --no-illusion"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BonsaiAI/bonsaiai.github.io.git"
+  },
+  "author": "Katherine Tole <katherine@bons.ai>",
+  "license": "LICENSE",
+  "bugs": {
+    "url": "https://github.com/BonsaiAI/bonsaiai.github.io/issues"
+  },
+  "homepage": "http://docs.bons.ai",
+  "devDependencies": {
+    "broken-link-checker": "^0.7.7",
+    "write-good": "^0.11.3"
+  },
+  "engines": {
+    "node": "<=8.9.4"
+  }
+}
