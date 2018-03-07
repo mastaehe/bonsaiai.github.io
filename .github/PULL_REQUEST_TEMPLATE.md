@@ -1,6 +1,6 @@
 !!!!! STOP AND READ !!!!!
 
-If the dropdown above says "base fork: lord/master", click "base fork" to change it to the bonsaiai.github.io on the dev branch, *NOT master branch*.
+If the dropdown above says "base fork: lord/master", click "base fork" to change it to the bonsaiai.github.io on the `dev` branch, *NOT `master` branch*.
 
 PR Review Checklist:
 - [ ] Test search functionality on desktop
@@ -9,4 +9,5 @@ PR Review Checklist:
 - [ ] Test mobile header navigation
 - [ ] Test desktop header navigation
 - [ ] Test desktop homepage navigation
-- [ ] Run blc http://localhost:4567/ -ro (runs broken-link-checker on whatever port you're using)
+- [ ] Run `npm run check-links` with 0 broken links
+- [ ] Run `npm run write-good <files being edited>` to "lint" the docs

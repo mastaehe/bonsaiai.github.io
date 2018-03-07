@@ -1,0 +1,31 @@
+{
+  "name": "slate",
+  "version": "1.0.0",
+  "description": "Packages for testing",
+  "main": "index.html",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "check-links": "blc http://localhost:4567 -ro",
+    "write-good" : "write-good --no-illusion"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BonsaiAI/bonsaiai.github.io.git"
+  },
+  "author": "Katherine Tole",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BonsaiAI/bonsaiai.github.io/issues"
+  },
+  "homepage": "https://github.com/BonsaiAI/bonsaiai.github.io#readme",
+  "dependencies": {
+    "broken-link-checker": "^0.7.7",
+    "npm": "^5.7.1",
+    "write-good": "^0.11.3"
+  },
+  "engines": {
+    "node" : "<=8.9.4"
+  }
+}
