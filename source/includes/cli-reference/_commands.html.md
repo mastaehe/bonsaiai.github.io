@@ -1,8 +1,5 @@
 # Commands
 
-[//]: # (How do we want to standardize shell output vs. input? Either could go right/left pane.)
-[//]: # (The help text and the description text are currently super redundant.)
-
 > Help Text
 
 ```
@@ -46,9 +43,9 @@ Options:
   -h, --help  Show this message and exit.
 ```
 
-`bonsai configure` sets up authentication between you (as a user) and the server. This enables the server to verify that you are allowed to write Inkling code to a specific BRAIN.
+`bonsai configure` sets up authentication between you (as a user) and the server. This enables the server to verify your access to write Inkling code to a specific BRAIN.
 
-You can find your access key at [https://beta.bons.ai/accounts/key](https://beta.bons.ai/accounts/key).
+You can find your access key at [https://beta.bons.ai/accounts/settings/key][2].
 
 ## bonsai create
 
@@ -61,7 +58,7 @@ Usage: bonsai create [OPTIONS] BRAIN_NAME
 Options:
   --project TEXT       Override to target another project directory.
   --project-type TEXT  Specify to download and use demo/starter project files
-                       (i.e. "demos/cartpole")
+                       (e.g. "demos/cartpole").
   -h, --help           Show this message and exit.
 ```
 
@@ -98,7 +95,7 @@ Options:
 
 ```
 $ bonsai download --help
-Usage: bonsai.py download [OPTIONS] BRAIN_NAME
+Usage: bonsai download [OPTIONS] BRAIN_NAME
 
   Downloads all the files related to a BRAIN.
 
@@ -114,13 +111,13 @@ Options:
 $ bonsai list --help
 Usage: bonsai list [OPTIONS]
 
-  Lists BRAINs owned by current user or by the user under a given URL.
+  Lists BRAINs owned by current user.
 
 Options:
   -h, --help  Show this message and exit.
 ```
 
-`bonsai list` shows you the BRAINs you currently own or by a user under a given URL. You must have your Bonsai account configured with `bonsai configure` before you can see this list.
+`bonsai list` shows you the BRAINs on your account. You must have your Bonsai account configured with `bonsai configure` before you can see this list.
 
 ## bonsai log
 
@@ -137,11 +134,11 @@ Options:
   -h, --help      Show this message and exit.
 ```
 
-Displays *stderr* and *stdout* from the currently running simulator. This will display the last 1000 lines of the running simulator's output. You can override the BRAIN you want to log if multiple are running at the same time or the project.
+Displays *stderr* and *stdout* from the current running simulator. This will display the last 1000 lines of the running simulator's output. You can override the BRAIN you want to log if multiple are running at the same time or the project.
 
 This command is meant for simulators running remotely on Bonsai's servers using `bonsai train start --remote`. Simulators running locally will generally output this information at the command prompt.
 
-If `bonsai log --follow` is used, then display will update when new logs exist.  Use `Ctrl-c` to stop this command.
+If using `bonsai log --follow` then display will update when new logs exist.  Use `Ctrl-c` to stop this command.
 
 ## bonsai pull
 
@@ -157,7 +154,7 @@ Options:
   -h, --help    Show this message and exit.
 ```
 
-`bonsai pull` will ask you one by one whether you would like to download the specified file. You can respond with [Y/n] to the prompt for each file in the BRAIN's project. If you would like to automatically download all of the files from the BRAIN then `bonsai pull -all` will update all files without asking you which ones to download.
+`bonsai pull` asks you one by one whether you would like to download the specified file. You can respond with [Y/n] to the prompt for each file in the BRAIN's project. If you would like to automatically download all files from the BRAIN then `bonsai pull -all` will update all files without asking you which ones to download.
 
 ## bonsai push
 
@@ -169,11 +166,11 @@ Usage: bonsai push [OPTIONS]
 
 Options:
   --brain TEXT    Override to target another BRAIN.
-  --project TEXT  Override to target another project directory.
+  --project TEXT  Override to target another project directory
   -h, --help      Show this message and exit.
 ```
 
-`bonsai push` will upload the entire project file contents and all accompanying files to the Bonsai AI Engine and can be viewed on [beta.bons.ai](https://beta.bons.ai). You can override the BRAIN you want to push to or the project directory you want to push.
+`bonsai push` uploads the entire project file contents and all accompanying files to the Bonsai AI Engine and can be viewed on [beta.bons.ai][2]. You can override the BRAIN you want to push to or the project directory you want to push.
 
 ## bonsai sims list
 
@@ -189,7 +186,24 @@ Options:
   -h, --help      Show this message and exit.
 ```
 
-`bonsai sims list` shows you all of the simulators you have connected to the BRAIN server.
+`bonsai sims list` shows you all the simulators you have connected to the BRAIN server.
+
+## bonsai switch
+
+```
+$ bonsai switch --help
+Usage: bonsai switch [OPTIONS] PROFILE
+
+  Change the active configuration section.
+
+  For new profiles you must provide a url with the --url option.
+
+Options:
+  --url TEXT  Set the brain api url.
+  -h, --help  Show this message and exit.
+```
+
+`bonsai switch` changes your current profile to a different configuration as specified in your `.bonsai` file. If you wish to create a new profile you can do so with the `--url` option which creates a configuration you can use again in the future.
 
 ## bonsai train
 
@@ -197,12 +211,14 @@ Options:
 $ bonsai train --help
 Usage: bonsai train [OPTIONS] COMMAND [ARGS]...
 
-  Start and stop training on a BRAIN, as well as get training status information.
+  Start and stop training on a BRAIN, as well as get training status
+  information.
 
 Options:
   -h, --help  Show this message and exit.
 
 Commands:
+  resume  Resume training on the specified BRAIN.
   start   Trains the specified BRAIN.
   status  Gets training status on the specified BRAIN.
   stop    Stops training on the specified BRAIN.
@@ -227,25 +243,26 @@ Options:
 
 `bonsai train start` turns on/enables training mode for the current BRAIN. The BRAIN trains whenever a simulator is connected.
 
-When training locally, if the simulator is disconnected, the BRAIN remains in training mode, and it will train again where it left off when the simulator is reconnected up to an hour after being disconnected.
+When training locally, if the simulator disconnects, the BRAIN remains in training mode, and it will train again where it left off when the simulator reconnects (up to an hour after being disconnected).
 
-If `bonsai train start --remote` is used, then the simulator will run remotely on Bonsai's servers for supported simulators.
+If `bonsai train start --remote` is used, then the simulator will run remotely on Bonsai's servers for [supported simulators][3].
 
-## bonsai train stop
+## bonsai train resume
 
 ```
-$ bonsai train stop --help
-Usage: bonsai train stop [OPTIONS] BRAIN_NAME
+$ bonsai train resume --help
+Usage: bonsai train resume [OPTIONS]
 
-  Stops training on the specified BRAIN.
+  Resume training on the specified BRAIN.
 
 Options:
-  --brain TEXT    Override to target another BRAIN.
+  --brain TEXT    Override to target another BRAIN
   --project TEXT  Override to target another project directory.
+  --remote        Resume simulator remotely on Bonsai's servers.
   -h, --help      Show this message and exit.
 ```
 
-`bonsai train stop` turns off training mode for the current BRAIN.
+`bonsai train resume` resumes training on an existing trained version of a BRAIN. You can stop and resume a BRAIN as needed.
 
 ## bonsai train status
 
@@ -262,4 +279,24 @@ Options:
   -h, --help      Show this message and exit.
 ```
 
-`bonsai train status` is used to see the current training status of your BRAIN.
+`bonsai train status` gets the current training status of your BRAIN.
+
+## bonsai train stop
+
+```
+$ bonsai train stop --help
+Usage: bonsai train stop [OPTIONS] BRAIN_NAME
+
+  Stops training on the specified BRAIN.
+
+Options:
+  --brain TEXT    Override to target another BRAIN.
+  --project TEXT  Override to target another project directory.
+  -h, --help      Show this message and exit.
+```
+
+`bonsai train stop` stops (or pauses) training on the current BRAIN. You can resume training with `bonsai train resume`.
+
+[1]: https://beta.bons.ai/accounts/settings/key
+[2]: https://beta.bons.ai
+[3]: ./simulator-reference.html#cloud-hosted-simulators
