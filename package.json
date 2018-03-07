@@ -1,31 +1,27 @@
 {
-  "name": "Bonsai Slate Documentation",
+  "name": "docs.bons.ai",
   "version": "1.0.0",
   "private": true,
   "description": "Includes packages for testing and linting",
-  "directories": {
-    "lib": "lib"
-  },
   "scripts": {
-    "check-links": "blc http://localhost:4567 -ro",
-    "write-good" : "write-good --no-illusion"
+    "check-links": "echo \"Running Broken Link Checker on entire site\n\"; blc http://localhost:4567 -ro && echo \"No broken links!\" || echo \"There are some broken links :(\"",
+    "write-good": "echo \" Testing specified file for good grammar\n\"; write-good --no-illusion"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/BonsaiAI/bonsaiai.github.io.git"
   },
-  "author": "Katherine Tole",
+  "author": "Katherine Tole <katherine@bons.ai>",
   "license": "LICENSE",
   "bugs": {
     "url": "https://github.com/BonsaiAI/bonsaiai.github.io/issues"
   },
   "homepage": "http://docs.bons.ai",
-  "dependencies": {
+  "devDependencies": {
     "broken-link-checker": "^0.7.7",
-    "npm": "^5.7.1",
     "write-good": "^0.11.3"
   },
   "engines": {
-    "node" : "<=8.9.4"
+    "node": "<=8.9.4"
   }
 }
