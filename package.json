@@ -1,8 +1,8 @@
 {
-  "name": "slate",
+  "name": "Bonsai Slate Documentation",
   "version": "1.0.0",
-  "description": "Packages for testing",
-  "main": "index.html",
+  "private": true,
+  "description": "Includes packages for testing and linting",
   "directories": {
     "lib": "lib"
   },
@@ -15,11 +15,11 @@
     "url": "git+https://github.com/BonsaiAI/bonsaiai.github.io.git"
   },
   "author": "Katherine Tole",
-  "license": "MIT",
+  "license": "LICENSE",
   "bugs": {
     "url": "https://github.com/BonsaiAI/bonsaiai.github.io/issues"
   },
-  "homepage": "https://github.com/BonsaiAI/bonsaiai.github.io#readme",
+  "homepage": "http://docs.bons.ai",
   "dependencies": {
     "broken-link-checker": "^0.7.7",
     "npm": "^5.7.1",
