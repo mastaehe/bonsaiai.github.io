@@ -157,10 +157,7 @@ class ElevatorSimulator(Simulator):
         return self._get_state(), reward, done
 
     def _get_state(self):
-        """ This function must be implemented for all simulators.
-        During training and prediction, this is used to construct the state
-        message that represents the current simulation state.
-        It is assumed that this function returns Simulator.State objects """
+        """ return the current state of the simulation """
 
         # print('[get_state]', end='')
 
