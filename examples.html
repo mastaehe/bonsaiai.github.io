@@ -749,10 +749,7 @@ It can be used in this case to find the center between two numbers.
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_state</span><span class="p">(),</span> <span class="n">reward</span><span class="p">,</span> <span class="n">done</span>
 
     <span class="k">def</span> <span class="nf">_get_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="s">""" This function must be implemented for all simulators.
-        During training and prediction, this is used to construct the state
-        message that represents the current simulation state.
-        It is assumed that this function returns Simulator.State objects """</span>
+        <span class="s">""" return the current state of the simulation """</span>
 
         <span class="c"># print('[get_state]', end='')</span>
 
