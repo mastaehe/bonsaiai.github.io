@@ -51,8 +51,6 @@ body{font-size:16px;}
 #browse ul li:last-of-type {margin-bottom:0px;border-bottom: none;}
 
 #main-wrapper {-ms-flex: 1 0 auto;flex: 1 1 auto;display: -ms-flexbox;display: flex;-ms-flex-direction: column;flex-direction: column;position: relative;/* need this to position inner content overflow-y: auto;*/}
-#main-wrapper {background-color: #eaf2f6;}
-.index #main-wrapper{background-color: hsla(51, 198%, 97%, 1);}
 
 @media (max-width: 690px) {
 	
@@ -103,7 +101,7 @@ li.tocify-item {line-height:1.4em !important;}
 ////////////////////////////////////////////////////////////////////////////////*/
 
 
-	#primary-nav a  {font-size: 101%;margin-right: 35px !important;text-decoration:none;color: #564e1e;}
+	#primary-nav a  {font-size: 101%;margin-right: 30px !important;text-decoration:none;color: #564e1e;}
 	#primary-nav a:hover{text-decoration:underline;}
 	#primary-nav a:last-of-type {margin-right:0;}
 	 .bonsai-logo{height: 22px;}
@@ -119,7 +117,7 @@ li.tocify-item {line-height:1.4em !important;}
 // TYPE
 ////////////////////////////////////////////////////////////////////////////////*/
 
-.p2{font-size: 135%;font-weight: 400;}
+.p2{font-size: 180%;font-weight: 400;}
 .welcome{font-size: 309%;text-align:center;background-color: transparent;background: none;margin: 0;/* margin-top: 90px; */margin-bottom: 10px;font-weight: 300;letter-spacing: .02em;}
 #browse ul li a:hover {color:#3bb94f;}	
 .content h3{
