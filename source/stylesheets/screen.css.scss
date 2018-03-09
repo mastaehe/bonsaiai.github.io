@@ -788,7 +788,7 @@ body{font-size:16px;}
 #main-wrapper {-ms-flex: 1 0 auto;flex: 1 1 auto;display: -ms-flexbox;display: flex;-ms-flex-direction: column;flex-direction: column;position: relative;/* need this to position inner content overflow-y: auto;*/}
 #main-wrapper {background-color: #eaf2f6;}
 .index #main-wrapper{background-color: hsla(51, 198%, 97%, 1);}
-@media (max-width: 690px) {
+@media (max-width: $phone-width) {
   #browse, #browse-divs {-ms-flex-direction:column;flex-direction:column;-ms-flex-align: stretch;align-items: stretch;}
   #browse div {margin:20px;width: inherit;/* height: 50px !important; */min-height: inherit;}
   	#___gcse_1 {width: 90vw !important;}
@@ -826,8 +826,6 @@ li.tocify-item {line-height:1.4em !important;}
 	 .bonsai-logo{height: 22px;}
 	/* #primary-nav .selected {    border-bottom: solid 4px #3bb94f; padding-bottom: 22px; margin-top: 22px;}*/
 	li.selected + a {color:#288136 !important}
-	#references li.selected a {color:#288136 !important}
-	
 	
 	li a:hover {color:#288136; text-decoration:none !important;}
   #primary-nav li a:hover {color:#288136}
@@ -904,6 +902,11 @@ nav ul li {
   float: left;
   position: relative;
 }
+
+nav ul li ul {
+  box-shadow: 3px 5px 7px rgba(80,80,80,0.5);
+}
+
 nav ul li a,
 nav ul li a:visited {
   display: block;
@@ -927,7 +930,7 @@ nav ul li ul li {
   padding: 0 !important;
 }
 nav ul li ul li a {
-  padding: 25px;
+  padding: 15px;
   line-height: 20px;
 }
 
@@ -1042,9 +1045,8 @@ nav ul li ul li a {
 }
 @media screen and (min-width: $tablet-width) {
 	
-	 #primary-nav .selected a {border-bottom: solid 4px #3bb94f;padding-bottom: 12px;margin-top: 18px;}
+	 #primary-nav .selected.header_menu_item > a {border-bottom: solid 4px #3bb94f;padding-bottom: 12px;margin-top: 18px;}
 
-	 #references a {padding-top:0; margin-top:0!important;}
 	
 	
   .nav-list {
@@ -1550,7 +1552,7 @@ nav li > a:only-child:after {content: '';}
 .algolia-autocomplete {
   width: 90%;
   // On a max-width of 768px
-  @media (max-width: 768px) {
+  @media (max-width: $phone-width) {
     .ds-dropdown-menu {
       max-width: calc(100vw - 32px) !important;
       min-width: calc(100vw - 32px) !important;      
@@ -1571,7 +1573,7 @@ nav li > a:only-child:after {content: '';}
 }
 
 /* For bigger screens, when displaying results in two columns */
-@media (min-width: 768px) {
+@media (min-width: $phone-width) {
   /* Bottom border of each suggestion */
   .algolia-docsearch-suggestion {
     border-bottom-color: #3bb94f;
@@ -1637,13 +1639,14 @@ nav li > a:only-child:after {content: '';}
   }
 }
 
-@media (max-width: 690px) {
+@media (max-width: $tablet-width) {
   .icon-list {
     .flex-desktop-center-rows {
       img { margin: 0 auto;
       }
       a {
         padding: 30px 0;
+        font-size: 80%;
       }
     }
   }
@@ -1694,7 +1697,7 @@ nav li > a:only-child:after {content: '';}
   }
 }
 
-@media (max-width: 690px) {
+@media (max-width: $phone-width) {
   .thumbnail-list {
     ul {
     flex-direction: column;
