@@ -43,25 +43,16 @@ body{font-size:16px;}
 #search {padding-top: 25px;padding-bottom: 120px;}
 #search span {background-color:#fafafa;padding: 13px;border: solid 2px hsla(0,6%,92%,1);/* min-width: 300px; */min-width: 57vw;display: inline-block;margin: 0 auto;border-radius: 4px;color: #928d8d;}
 
-#browse {display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;-ms-flex-align:stretch;align-items: center;-ms-flex: 1 0 auto;flex: 1 0 auto;padding-bottom:30px;/* padding: 0 30px; */background: hsla(30,11%,92%,1);padding-top: 30px;border-top: solid 1px #ccc;-ms-flex-pack: center;justify-content: center;/* min-height: 30vh; *//* max-width: 1500px; *//* margin: 0 auto; */border-bottom: solid 1px #ccc;}
-
-#browse div {-ms-flex-positive:1;flex-grow:1;background-color:#fafafa;margin-right:20px;border-radius:3px;padding: 20px 40px;padding-top: 15px;border: solid 1px #ccc;width: 100%;/* min-height: 300px; */}
-
 .light-background {background-color:#fafafa;}
-
-#browse div:first-of-type {margin-left:20px;}
 
 #browse ul  {padding:0;list-style: none;margin: 0;margin-top: 36px;color: #5b6267;}
 #browse ul a {text-decoration:none;color: #5b6267;}
 #browse ul li {margin-bottom:10px;border-bottom: solid 1px hsl(46, 6%, 92%);padding-bottom: 13px;}
 #browse ul li:last-of-type {margin-bottom:0px;border-bottom: none;}
-#browse-divs {max-width: 1430px;display: -ms-flexbox;display: flex;-ms-flex: 1 0 auto;flex: 1 0 auto;}
 
 #main-wrapper {-ms-flex: 1 0 auto;flex: 1 1 auto;display: -ms-flexbox;display: flex;-ms-flex-direction: column;flex-direction: column;position: relative;/* need this to position inner content overflow-y: auto;*/}
-#main-wrapper {background-color: #eaf2f6;}
-.index #main-wrapper{background-color: hsla(51, 198%, 97%, 1);}
 
-@media (max-width: 690px) {
+@media (max-width: 770px) {
 	
   #browse, #browse-divs {-ms-flex-direction:column;flex-direction:column;-ms-flex-align: stretch;align-items: stretch;}
   #browse div {margin:20px;width: inherit;/* height: 50px !important; */min-height: inherit;}
@@ -106,27 +97,10 @@ li.tocify-item {line-height:1.4em !important;}
 .home-cc-icon {display:-ms-flexbox;display:flex; -ms-flex-pack:center; justify-content:center;}
 
 /*///////////////////////////////////////////////////////////////////////////////
-// PRIMARY NAV
-////////////////////////////////////////////////////////////////////////////////*/
-
-
-	#primary-nav a  {font-size: 101%;margin-right: 35px !important;text-decoration:none;color: #564e1e;}
-	#primary-nav a:hover{text-decoration:underline;}
-	#primary-nav a:last-of-type {margin-right:0;}
-	 .bonsai-logo{height: 22px;}
-	/* #primary-nav .selected {    border-bottom: solid 4px #3bb94f; padding-bottom: 22px; margin-top: 22px;}*/
-	li.selected + a {color:#288136 !important}
-	#references li.selected a {color:#288136 !important}
-	#guides li.selected a {color:#288136 !important}
-	
-	li a:hover, .toggle:hover {color:#288136; text-decoration:none !important;}
-	.toggle {color:#564e1e;}
-
-/*///////////////////////////////////////////////////////////////////////////////
 // TYPE
 ////////////////////////////////////////////////////////////////////////////////*/
 
-.p2{font-size: 135%;font-weight: 400;}
+.p2{font-size: 180%;font-weight: 400;}
 .welcome{font-size: 309%;text-align:center;background-color: transparent;background: none;margin: 0;/* margin-top: 90px; */margin-bottom: 10px;font-weight: 300;letter-spacing: .02em;}
 #browse ul li a:hover {color:#3bb94f;}	
 .content h3{
@@ -137,11 +111,6 @@ li.tocify-item {line-height:1.4em !important;}
 }
 
 .sub-text-1 {font-size: 132%;margin-top: 5px !important;letter-spacing: .03em;color: #3B453B;font-weight: 400;text-align: center;}
-
-
-
-
-
 
 	
 /*///////////////////////////////////////////////////////////////////////////////
@@ -215,10 +184,6 @@ nav ul li a:visited:not(:only-child):after {
 nav ul li ul li {
   min-width: 190px;
   padding: 0 !important;
-}
-nav ul li ul li a {
-  padding: 25px;
-  line-height: 20px;
 }
 
 .nav-dropdown {
@@ -332,12 +297,7 @@ nav ul li ul li a {
   }
 }
 @media screen and (min-width: 1000px) {
-	
-	 #primary-nav .selected a {border-bottom: solid 4px #3bb94f;padding-bottom: 12px;margin-top: 18px;}
-
-	 #references a {padding-top:0; margin-top:0!important;}
-	#guides a {padding-top:0; margin-top:0!important;}
-	
+		
   .nav-list {
     /* display: block !important; */
     display: -ms-flexbox;
@@ -605,7 +565,7 @@ nav ul li:hover > ul {
 	display:inherit;
 }
 	
-/* Fisrt Tier Dropdown */
+/* First Tier Dropdown */
 nav ul ul li {
 	width: 176px;
 	float:none;
@@ -623,10 +583,6 @@ nav ul ul ul li {
 	/* has to be the same number as the "width" of "nav ul ul li" */ 
 	left:170px; 
 }
-
-
-#references a {border:none!important;}
-#guides a {border:none!important;}
 	
 /* Change ' +' in order to change the Dropdown symbol */
 nav li > a:after {content:  ' +';}
