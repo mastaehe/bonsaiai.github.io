@@ -6,6 +6,12 @@ Bonsai is using **Simulink** as a training environment for a Bonsai BRAIN. We’
 
 ## Prerequisites
 
+> You can also clone the repo on GitHub
+
+```shell
+git clone https://github.com/BonsaiAI/bonsai-simulink
+```
+
 Installation covered within the specific example.
 
 - Python3
@@ -15,12 +21,6 @@ Installation covered within the specific example.
 - MATLAB & Simulink (R2017b)
 
 [**Download the full source code**](https://github.com/BonsaiAI/bonsai-simulink/archive/master.zip)
-
-> You can also clone the repo on GitHub
-
-```shell
-git clone https://github.com/BonsaiAI/bonsai-simulink
-```
 
 ## Simulink Cartpole
 
