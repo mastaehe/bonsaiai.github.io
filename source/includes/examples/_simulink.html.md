@@ -2,7 +2,7 @@
 
 **Simulink**, developed by The MathWorks, is a graphical programming environment for modeling, simulating and analyzing multi-domain dynamical systems.
 
-Bonsai is using **Simulink** as a training environment for a Bonsai BRAIN. We’re supporting a wide range of use cases that can be described as control or machine tuning problems. Please review our simulator and [**sim model requirements guide**](http://docs.bons.ai/guides/simulation-guide.html).
+Bonsai is using **Simulink** as a training environment for a Bonsai BRAIN. We’re supporting a wide range of classical control or machine tuning use cases. Please review our simulator and [**simulation model requirements guide**](http://docs.bons.ai/guides/simulation-guide.html).
 
 ## Prerequisites
 
@@ -14,7 +14,9 @@ Installation covered within the specific example.
 - MATLAB Engine API for Python
 - MATLAB & Simulink (R2017b)
 
-[**Download the full source code on GitHub**](https://github.com/BonsaiAI/bonsai-simulink) or clone into your project directory.
+[**Download the full source code**](https://github.com/BonsaiAI/bonsai-simulink/archive/master.zip)
+
+> You can also clone the repo on GitHub
 
 ```shell
 git clone https://github.com/BonsaiAI/bonsai-simulink
@@ -24,7 +26,7 @@ git clone https://github.com/BonsaiAI/bonsai-simulink
 
 This is a step-by-step guide for using **Bonsai's Universal Coordinator** in Python to connect the Bonsai Platform to a Simulink model.
 
-You have to have Matlab and Simulink installed. Trial versions can be downloaded from [TheMathworks](http://www.themathworks.com)
+You have to have Matlab and Simulink installed. You can download the trial version from [TheMathworks](http://www.themathworks.com)
 
 #### CLI guide
 
@@ -46,7 +48,7 @@ python setup.py install
 ```
 Install the Matlab API for Python from the root directory of your Matlab installation.
 
-**Matlab Simscape Multibody Add-On** is required for this example.
+This example requires the installation of **Matlab Simscape Multibody Add-On**.
 
 Go to your Add-On Explorer in Matlab and add Simscape and Simscape Multibody.
 
@@ -69,7 +71,7 @@ The `bonsai push` command will upload all needed files to the Bonsai backend. Th
 
 ###### Inkling    
 
-Inkling is a declarative, strongly typed programming language specifically designed for artificial intelligence (AI). It abstracts away the vast world of dynamic AI algorithms that require expertise in machine learning and enables more developers to program AI.
+Inkling is a declarative, strongly typed programming language specifically designed for artificial intelligence (AI). It abstracts away the world of dynamic AI algorithms that require expertise in machine learning and enables more developers to program AI.
 Please review our [**Inkling Guide**](http://docs.bons.ai/guides/inkling-guide.html#overview)
 
 ###### Schema
@@ -98,7 +100,7 @@ schema CartpoleConfig
 end
 ```
 
-The `CartpoleConfig` is set to `dummy` as we're not using config in this model.
+The `CartpoleConfig` uses `dummy` because we're not using config in this model.
 
 ###### Concept
 
@@ -109,7 +111,7 @@ concept balance is estimator
    feeds output
 end
 ```
-The concept is named `balance`, and it takes input from the simulator about the state of the model (`Cartpolestate` schema). It outputs to the `CartpoleAction` schema. This is the AI's next control signal to the cartpole.
+The concept, `balance`, takes input from the simulator about the state of the model (`Cartpolestate` schema). It outputs to the `CartpoleAction` schema. This is the AI's next control signal to the cartpole.
 
 ###### Simulator
 
@@ -120,7 +122,7 @@ simulator simulink_sim(CartpoleConfig)
 end
 ```
 
-The `simulink_sim` gets information from two schemas. The first schema, `action`, specifies the schema for actions within the simulation. The second schema contains the `state` of the simulator that is sent to the lesson.
+The `simulink_sim` gets information from two schemas. The first schema, `action`, specifies the schema for actions within the simulation. The second schema contains the `state` of the simulator sent to the lesson.
 
 ###### Curriculum
 
@@ -137,7 +139,7 @@ curriculum my_curriculum
 end
 ```
 
-The curriculum is named `my_curriculum`, and it trains the `balance` concept using the `simulink_sim`. This curriculum contains one lesson, called `my_first_lesson`. It configures the simulation, by setting a constraint for the state of the simulator.
+The curriculum, `my_curriculum`, trains the `balance` concept using the `simulink_sim`. This curriculum contains one lesson, called `my_first_lesson`. It configures the simulation, by setting a constraint for the state of the simulator.
 
 The lesson trains until the AI has maximized the objective named `cartpole_balance`.
 
@@ -146,12 +148,14 @@ The lesson trains until the AI has maximized the objective named `cartpole_balan
 ```
 bonsai train stop
 ```
+
 When you are seeing rewards reaching 1000 you can stop training. You may need to Ctrl+C to stop in the terminal.
 
 
 ```
 ../../coordinator/coordinator --predict
 ```
+
 Now you can predict using the trained BRAIN.
 
 
@@ -159,7 +163,7 @@ Now you can predict using the trained BRAIN.
 
 This is a step-by-step guide for using Bonsai's Universal Coordinator in Python to connect the Bonsai Platform to a Simulink model.
 
-You have to have Matlab and Simulink installed. Trial versions can be downloaded from [TheMathworks](http://www.themathworks.com)
+You have to have Matlab and Simulink installed. You can download a trial version from [TheMathworks](http://www.themathworks.com)
 
 This example shows how to use Simulink to create the thermal model of a house. This system models the outdoor environment, the thermal characteristics of the house, and the house heating system. Objective for the Bonsai AI is to reach the desired temperature.
 
@@ -200,7 +204,7 @@ The `bonsai push` command will upload all needed files to the Bonsai backend. Th
 
 ###### Inkling
 
-Inkling is a declarative, strongly typed programming language specifically designed for artificial intelligence (AI). It abstracts away the vast world of dynamic AI algorithms that require expertise in machine learning and enables more developers to program AI.
+Inkling is a declarative, strongly typed programming language specifically designed for artificial intelligence (AI). It abstracts away the world of dynamic AI algorithms that require expertise in machine learning and enables more developers to program AI.
 Please review our [**Inkling Guide**](http://docs.bons.ai/guides/inkling-guide.html#overview)
 
 ###### Schema
@@ -243,7 +247,7 @@ concept thermostat is classifier
    feeds output
 end
 ```
-The concept is named `thermostat`, and it takes input from the simulation model about the state of the temperature in the house (`HouseheatState` schema). It outputs to the `HouseheatAction` schema. This is the AI's next move in the game.
+The concept, `thermostat`, takes input from the simulation model about the state of the temperature in the house (`HouseheatState` schema). It outputs to the `HouseheatAction` schema. This is the AI's next move in the game.
 
 ###### Simulator
 
@@ -254,7 +258,7 @@ simulator simulink_sim(HouseheatConfig)
 end
 ```
 
-The `simulink_sim` gets information from two schemas. The first schema, `action`, specifies the schema for actions within the simulation. The second schema, `state` contains the state of the simulation that is sent to the lesson.
+The `simulink_sim` gets information from two schemas. The first schema, `action`, specifies the schema for actions within the simulation. The second schema, `state` contains the state of the simulation sent to the lesson.
 
 ###### Curriculum
 
@@ -271,7 +275,7 @@ curriculum my_curriculum
 end
 ```
 
-The curriculum is named `my_curriculum`, and it trains the `thermostat` concept using the `simulink_sim`. This curriculum contains one lesson, called `my_first_lesson`. It configures the simulation, by setting constraints for the state of the simulator.
+The curriculum, `my_curriculum`, trains the `thermostat` concept using the `simulink_sim`. This curriculum contains one lesson, called `my_first_lesson`. It configures the simulation, by setting constraints for the state of the simulator.
 
 The lesson trains until the AI has maximized the objective named `match_set_temp`.
 
@@ -291,13 +295,16 @@ Now you can predict using the trained BRAIN.
 
 ## Using Simulink Coder for Parallel Simulations
 
-Simulink Coder provides a mechanism to compile many Simulink models as a fast running C executable file for your operating system. There are three main benefits to training Bonsai BRAINs with these executables.
-First is that Simulink Coder executables return simulations results much faster than raw Simulink files. When training a BRAIN using Deep Reinforcement Learning, this difference in speed can add up. For example, if you train a BRAIN for 1M iterations with a Simulink Coder executable that runs in 0.5s per iteration instead of 1.5s per iteration, your total training time will decrease by 277 hours!
-Second, Simulink Coder executables are much easier to connect to the Bonsai platform in parallel because they require a lot less memory and CPU than instances of interactive Simulink models. Continuing the example above, if you run 100 copies your new coder executable in parallel training you've now reduced the training time by an additional 250 hours.
-Finally, Simulink Coder executable models can be easily shared with people and teams and used to train Bonsai BRAINS without a Matlab or Simulink license.
+Simulink Coder provides a mechanism to compile Simulink models as a fast running C executable file for your operating system. Three main benefits to training Bonsai BRAINs with these executables are as follows.
+
+First, is that Simulink Coder executables return simulations results much faster than raw Simulink files. When training a BRAIN using Deep Reinforcement Learning, this difference in speed can add up. For example, if you train a BRAIN for 1M iterations with a Simulink Coder executable that runs in 0.5s per iteration instead of 1.5s per iteration, your total training time will decrease by 277 hours!
+
+Second, Simulink Coder executables are much easier to connect to the Bonsai platform in parallel because they require a lot less memory and CPU than instances of interactive Simulink models. Continuing the example above, if you run 100 copies your new coder executable in parallel training you've now reduced the training time by about 250 hours.
+
+Lastly, Simulink Coder executable models allow you to share with people and teams using Simulink to train Bonsai BRAINS without a Matlab or Simulink license.
 
 Visit The Mathworks for more information on [**Matlab and Simulink Coder**](https://www.mathworks.com/products/simulink-coder.html)
 
 ## How to connect your own model
 
-Please review the HOWTO file for additional information on how to connect your own Simulink model to the Bonsai AI platform.
+Please review the `HOWTO.md` file in the downloaded folder for more information on how to connect your own Simulink model to the Bonsai AI platform.
