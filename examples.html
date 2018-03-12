@@ -1231,7 +1231,7 @@ It can be used in this case to find the center between two numbers.
 
 <p><strong>Simulink</strong>, developed by The MathWorks, is a graphical programming environment for modeling, simulating and analyzing multi-domain dynamical systems.</p>
 
-<p>Bonsai is using <strong>Simulink</strong> as a training environment for a Bonsai BRAIN. We’re supporting a wide range of use cases that can be described as control or machine tuning problems. Please review our simulator and <a href="http://docs.bons.ai/guides/simulation-guide.html"><strong>sim model requirements guide</strong></a>.</p>
+<p>Bonsai is using <strong>Simulink</strong> as a training environment for a Bonsai BRAIN. We’re supporting a wide range of classical control or machine tuning use cases. Please review our simulator and <a href="http://docs.bons.ai/guides/simulation-guide.html"><strong>simulation model requirements guide</strong></a>.</p>
 
 <h2 id="prerequisites">Prerequisites</h2>
 
@@ -1245,14 +1245,18 @@ It can be used in this case to find the center between two numbers.
 <li>MATLAB &amp; Simulink (R2017b)</li>
 </ul>
 
-<p><a href="https://github.com/BonsaiAI/bonsai-simulink"><strong>Download the full source code on GitHub</strong></a> or clone into your project directory.</p>
+<p><a href="https://github.com/BonsaiAI/bonsai-simulink/archive/master.zip"><strong>Download the full source code</strong></a></p>
+
+<blockquote>
+<p>You can also clone the repo on GitHub</p>
+</blockquote>
 <pre class="highlight shell tab-shell"><code>git clone https://github.com/BonsaiAI/bonsai-simulink
 </code></pre>
 <h2 id="simulink-cartpole">Simulink Cartpole</h2>
 
 <p>This is a step-by-step guide for using <strong>Bonsai&rsquo;s Universal Coordinator</strong> in Python to connect the Bonsai Platform to a Simulink model.</p>
 
-<p>You have to have Matlab and Simulink installed. Trial versions can be downloaded from <a href="http://www.themathworks.com">TheMathworks</a></p>
+<p>You have to have Matlab and Simulink installed. You can download the trial version from <a href="http://www.themathworks.com">TheMathworks</a></p>
 
 <h4 id="cli-guide">CLI guide</h4>
 
@@ -1270,7 +1274,7 @@ python setup.py install
 </code></pre>
 <p>Install the Matlab API for Python from the root directory of your Matlab installation.</p>
 
-<p><strong>Matlab Simscape Multibody Add-On</strong> is required for this example.</p>
+<p>This example requires the installation of <strong>Matlab Simscape Multibody Add-On</strong>.</p>
 
 <p>Go to your Add-On Explorer in Matlab and add Simscape and Simscape Multibody.</p>
 
@@ -1289,7 +1293,7 @@ bonsai train start
 
 <h6 id="inkling">Inkling</h6>
 
-<p>Inkling is a declarative, strongly typed programming language specifically designed for artificial intelligence (AI). It abstracts away the vast world of dynamic AI algorithms that require expertise in machine learning and enables more developers to program AI.
+<p>Inkling is a declarative, strongly typed programming language specifically designed for artificial intelligence (AI). It abstracts away the world of dynamic AI algorithms that require expertise in machine learning and enables more developers to program AI.
 Please review our <a href="http://docs.bons.ai/guides/inkling-guide.html#overview"><strong>Inkling Guide</strong></a></p>
 
 <h6 id="schema">Schema</h6>
@@ -1310,7 +1314,7 @@ Please review our <a href="http://docs.bons.ai/guides/inkling-guide.html#overvie
     <span class="kr">Int8</span> <span class="nx">dummy</span>
 <span class="k">end</span>
 </code></pre>
-<p>The <code class="prettyprint">CartpoleConfig</code> is set to <code class="prettyprint">dummy</code> as we&rsquo;re not using config in this model.</p>
+<p>The <code class="prettyprint">CartpoleConfig</code> uses <code class="prettyprint">dummy</code> because we&rsquo;re not using config in this model.</p>
 
 <h6 id="concept">Concept</h6>
 <pre class="highlight inkling tab-inkling"><code><span class="k">concept</span> <span class="nx">balance</span> <span class="k">is</span> <span class="nx">estimator</span>
@@ -1319,7 +1323,7 @@ Please review our <a href="http://docs.bons.ai/guides/inkling-guide.html#overvie
    <span class="k">feeds</span> <span class="kr">output</span>
 <span class="k">end</span>
 </code></pre>
-<p>The concept is named <code class="prettyprint">balance</code>, and it takes input from the simulator about the state of the model (<code class="prettyprint">Cartpolestate</code> schema). It outputs to the <code class="prettyprint">CartpoleAction</code> schema. This is the AI&rsquo;s next control signal to the cartpole.</p>
+<p>The concept, <code class="prettyprint">balance</code>, takes input from the simulator about the state of the model (<code class="prettyprint">Cartpolestate</code> schema). It outputs to the <code class="prettyprint">CartpoleAction</code> schema. This is the AI&rsquo;s next control signal to the cartpole.</p>
 
 <h6 id="simulator">Simulator</h6>
 <pre class="highlight inkling tab-inkling"><code><span class="k">simulator</span> <span class="nx">simulink_sim</span><span class="p">(</span><span class="nx">CartpoleConfig</span><span class="p">)</span>
@@ -1327,7 +1331,7 @@ Please review our <a href="http://docs.bons.ai/guides/inkling-guide.html#overvie
     <span class="k">state</span> <span class="p">(</span><span class="nx">CartpoleState</span><span class="p">)</span>
 <span class="k">end</span>
 </code></pre>
-<p>The <code class="prettyprint">simulink_sim</code> gets information from two schemas. The first schema, <code class="prettyprint">action</code>, specifies the schema for actions within the simulation. The second schema contains the <code class="prettyprint">state</code> of the simulator that is sent to the lesson.</p>
+<p>The <code class="prettyprint">simulink_sim</code> gets information from two schemas. The first schema, <code class="prettyprint">action</code>, specifies the schema for actions within the simulation. The second schema contains the <code class="prettyprint">state</code> of the simulator sent to the lesson.</p>
 
 <h6 id="curriculum">Curriculum</h6>
 <pre class="highlight inkling tab-inkling"><code><span class="k">curriculum</span> <span class="nx">my_curriculum</span>
@@ -1341,7 +1345,7 @@ Please review our <a href="http://docs.bons.ai/guides/inkling-guide.html#overvie
                 <span class="k">maximize</span> <span class="nx">cartpole_balance</span>
 <span class="k">end</span>
 </code></pre>
-<p>The curriculum is named <code class="prettyprint">my_curriculum</code>, and it trains the <code class="prettyprint">balance</code> concept using the <code class="prettyprint">simulink_sim</code>. This curriculum contains one lesson, called <code class="prettyprint">my_first_lesson</code>. It configures the simulation, by setting a constraint for the state of the simulator.</p>
+<p>The curriculum, <code class="prettyprint">my_curriculum</code>, trains the <code class="prettyprint">balance</code> concept using the <code class="prettyprint">simulink_sim</code>. This curriculum contains one lesson, called <code class="prettyprint">my_first_lesson</code>. It configures the simulation, by setting a constraint for the state of the simulator.</p>
 
 <p>The lesson trains until the AI has maximized the objective named <code class="prettyprint">cartpole_balance</code>.</p>
 
@@ -1357,7 +1361,7 @@ Please review our <a href="http://docs.bons.ai/guides/inkling-guide.html#overvie
 
 <p>This is a step-by-step guide for using Bonsai&rsquo;s Universal Coordinator in Python to connect the Bonsai Platform to a Simulink model.</p>
 
-<p>You have to have Matlab and Simulink installed. Trial versions can be downloaded from <a href="http://www.themathworks.com">TheMathworks</a></p>
+<p>You have to have Matlab and Simulink installed. You can download a trial version from <a href="http://www.themathworks.com">TheMathworks</a></p>
 
 <p>This example shows how to use Simulink to create the thermal model of a house. This system models the outdoor environment, the thermal characteristics of the house, and the house heating system. Objective for the Bonsai AI is to reach the desired temperature.</p>
 
@@ -1390,7 +1394,7 @@ bonsai train start
 
 <h6 id="inkling">Inkling</h6>
 
-<p>Inkling is a declarative, strongly typed programming language specifically designed for artificial intelligence (AI). It abstracts away the vast world of dynamic AI algorithms that require expertise in machine learning and enables more developers to program AI.
+<p>Inkling is a declarative, strongly typed programming language specifically designed for artificial intelligence (AI). It abstracts away the world of dynamic AI algorithms that require expertise in machine learning and enables more developers to program AI.
 Please review our <a href="http://docs.bons.ai/guides/inkling-guide.html#overview"><strong>Inkling Guide</strong></a></p>
 
 <h6 id="schema">Schema</h6>
@@ -1422,7 +1426,7 @@ Please review our <a href="http://docs.bons.ai/guides/inkling-guide.html#overvie
    <span class="k">feeds</span> <span class="kr">output</span>
 <span class="k">end</span>
 </code></pre>
-<p>The concept is named <code class="prettyprint">thermostat</code>, and it takes input from the simulation model about the state of the temperature in the house (<code class="prettyprint">HouseheatState</code> schema). It outputs to the <code class="prettyprint">HouseheatAction</code> schema. This is the AI&rsquo;s next move in the game.</p>
+<p>The concept, <code class="prettyprint">thermostat</code>, takes input from the simulation model about the state of the temperature in the house (<code class="prettyprint">HouseheatState</code> schema). It outputs to the <code class="prettyprint">HouseheatAction</code> schema. This is the AI&rsquo;s next move in the game.</p>
 
 <h6 id="simulator">Simulator</h6>
 <pre class="highlight inkling tab-inkling"><code><span class="k">simulator</span> <span class="nx">simulink_sim</span><span class="p">(</span><span class="nx">HouseheatConfig</span><span class="p">)</span>
@@ -1430,7 +1434,7 @@ Please review our <a href="http://docs.bons.ai/guides/inkling-guide.html#overvie
     <span class="k">state</span> <span class="p">(</span><span class="nx">HouseheatState</span><span class="p">)</span>
 <span class="k">end</span>
 </code></pre>
-<p>The <code class="prettyprint">simulink_sim</code> gets information from two schemas. The first schema, <code class="prettyprint">action</code>, specifies the schema for actions within the simulation. The second schema, <code class="prettyprint">state</code> contains the state of the simulation that is sent to the lesson.</p>
+<p>The <code class="prettyprint">simulink_sim</code> gets information from two schemas. The first schema, <code class="prettyprint">action</code>, specifies the schema for actions within the simulation. The second schema, <code class="prettyprint">state</code> contains the state of the simulation sent to the lesson.</p>
 
 <h6 id="curriculum">Curriculum</h6>
 <pre class="highlight inkling tab-inkling"><code><span class="k">curriculum</span> <span class="nx">my_curriculum</span>
@@ -1444,7 +1448,7 @@ Please review our <a href="http://docs.bons.ai/guides/inkling-guide.html#overvie
                 <span class="k">maximize</span> <span class="nx">match_set_temp</span>
 <span class="k">end</span>
 </code></pre>
-<p>The curriculum is named <code class="prettyprint">my_curriculum</code>, and it trains the <code class="prettyprint">thermostat</code> concept using the <code class="prettyprint">simulink_sim</code>. This curriculum contains one lesson, called <code class="prettyprint">my_first_lesson</code>. It configures the simulation, by setting constraints for the state of the simulator.</p>
+<p>The curriculum, <code class="prettyprint">my_curriculum</code>, trains the <code class="prettyprint">thermostat</code> concept using the <code class="prettyprint">simulink_sim</code>. This curriculum contains one lesson, called <code class="prettyprint">my_first_lesson</code>. It configures the simulation, by setting constraints for the state of the simulator.</p>
 
 <p>The lesson trains until the AI has maximized the objective named <code class="prettyprint">match_set_temp</code>.</p>
 
@@ -1458,16 +1462,19 @@ Please review our <a href="http://docs.bons.ai/guides/inkling-guide.html#overvie
 
 <h2 id="using-simulink-coder-for-parallel-simulations">Using Simulink Coder for Parallel Simulations</h2>
 
-<p>Simulink Coder provides a mechanism to compile many Simulink models as a fast running C executable file for your operating system. There are three main benefits to training Bonsai BRAINs with these executables.
-First is that Simulink Coder executables return simulations results much faster than raw Simulink files. When training a BRAIN using Deep Reinforcement Learning, this difference in speed can add up. For example, if you train a BRAIN for 1M iterations with a Simulink Coder executable that runs in 0.5s per iteration instead of 1.5s per iteration, your total training time will decrease by 277 hours!
-Second, Simulink Coder executables are much easier to connect to the Bonsai platform in parallel because they require a lot less memory and CPU than instances of interactive Simulink models. Continuing the example above, if you run 100 copies your new coder executable in parallel training you&rsquo;ve now reduced the training time by an additional 250 hours.
-Finally, Simulink Coder executable models can be easily shared with people and teams and used to train Bonsai BRAINS without a Matlab or Simulink license.</p>
+<p>Simulink Coder provides a mechanism to compile Simulink models as a fast running C executable file for your operating system. Three main benefits to training Bonsai BRAINs with these executables are as follows.</p>
+
+<p>First, is that Simulink Coder executables return simulations results much faster than raw Simulink files. When training a BRAIN using Deep Reinforcement Learning, this difference in speed can add up. For example, if you train a BRAIN for 1M iterations with a Simulink Coder executable that runs in 0.5s per iteration instead of 1.5s per iteration, your total training time will decrease by 277 hours!</p>
+
+<p>Second, Simulink Coder executables are much easier to connect to the Bonsai platform in parallel because they require a lot less memory and CPU than instances of interactive Simulink models. Continuing the example above, if you run 100 copies your new coder executable in parallel training you&rsquo;ve now reduced the training time by about 250 hours.</p>
+
+<p>Lastly, Simulink Coder executable models allow you to share with people and teams using Simulink to train Bonsai BRAINS without a Matlab or Simulink license.</p>
 
 <p>Visit The Mathworks for more information on <a href="https://www.mathworks.com/products/simulink-coder.html"><strong>Matlab and Simulink Coder</strong></a></p>
 
 <h2 id="how-to-connect-your-own-model">How to connect your own model</h2>
 
-<p>Please review the HOWTO file for additional information on how to connect your own Simulink model to the Bonsai AI platform.</p>
+<p>Please review the <code class="prettyprint">HOWTO.md</code> file in the downloaded folder for more information on how to connect your own Simulink model to the Bonsai AI platform.</p>
 
       </div>
       <div class="dark-box">
