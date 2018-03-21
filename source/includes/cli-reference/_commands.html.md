@@ -40,6 +40,7 @@ Usage: bonsai configure [OPTIONS]
 
 Options:
   --key TEXT  Provide an access key.
+  --show      Prints active profile information.
   -h, --help  Show this message and exit.
 ```
 
@@ -59,6 +60,7 @@ Options:
   --project TEXT       Override to target another project directory.
   --project-type TEXT  Specify to download and use demo/starter project files
                        (e.g. "demos/cartpole").
+  --json               Output json.              
   -h, --help           Show this message and exit.
 ```
 
@@ -114,6 +116,7 @@ Usage: bonsai list [OPTIONS]
   Lists BRAINs owned by current user.
 
 Options:
+  --json      Output json.
   -h, --help  Show this message and exit.
 ```
 
@@ -167,6 +170,7 @@ Usage: bonsai push [OPTIONS]
 Options:
   --brain TEXT    Override to target another BRAIN.
   --project TEXT  Override to target another project directory
+  --json          Output json.
   -h, --help      Show this message and exit.
 ```
 
@@ -183,6 +187,7 @@ Usage: bonsai sims list [OPTIONS]
 Options:
   --brain TEXT    Override to target another BRAIN.
   --project TEXT  Override to target another project directory.
+  --json          Output json.
   -h, --help      Show this message and exit.
 ```
 
@@ -200,10 +205,13 @@ Usage: bonsai switch [OPTIONS] PROFILE
 
 Options:
   --url TEXT  Set the brain api url.
+  --show      Prints active profile information.
   -h, --help  Show this message and exit.
+  
+Available Profiles:
 ```
 
-`bonsai switch` changes your current profile to a different configuration as specified in your `.bonsai` file. If you wish to create a new profile you can do so with the `--url` option which creates a configuration you can use again in the future.
+`bonsai switch` changes your current profile to a different configuration as specified in your `.bonsai` file. If you wish to create a new profile you can do so with the `--url` option which creates a configuration you can use again in the future. `bonsai switch` or `bonsai switch -h/--help` will print available profiles.
 
 ## bonsai train
 
@@ -238,6 +246,7 @@ Options:
   --brain TEXT    Override to target another BRAIN.
   --project TEXT  Override to target another project directory.
   --remote        Run a simulator remotely on Bonsai’s servers.
+  --json          Output json.
   -h, --help      Show this message and exit.
 ```
 
@@ -259,6 +268,7 @@ Options:
   --brain TEXT    Override to target another BRAIN
   --project TEXT  Override to target another project directory.
   --remote        Resume simulator remotely on Bonsai's servers.
+  --json          Output json.
   -h, --help      Show this message and exit.
 ```
 
@@ -292,6 +302,7 @@ Usage: bonsai train stop [OPTIONS] BRAIN_NAME
 Options:
   --brain TEXT    Override to target another BRAIN.
   --project TEXT  Override to target another project directory.
+  --json          Output json.
   -h, --help      Show this message and exit.
 ```
 
