@@ -352,10 +352,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="content">
         
           <h1 id="overview">Overview</h1>
-<pre class="highlight plaintext"><code>############################################
-# Inkling Code Snippets will be shown here #
-############################################
-</code></pre>
+
+<blockquote>
+<p><img src="../images/data-flow-simple.png" alt="Brain and Simulator" /></p>
+</blockquote>
+
 <p>Welcome to Inkling, Bonsai AI&rsquo;s special purpose programming language for training AI.</p>
 
 <p>Inkling is a declarative, strongly typed programming language specifically designed for artificial intelligence (AI). It abstracts away the vast world of dynamic AI algorithms that require expertise in machine learning and enables more developers to program AI. An Inkling file contains the concepts &ndash; what you want to teach the AI &ndash; and the curriculum, &ndash; how you want to teach the concepts &ndash; necessary to train your BRAIN. Before you read through this section about the Inkling language, you should familiarize yourself with the various components of the Bonsai Artificial Intelligence Engine, which you can read about in our <a href="getting-started.html#the-bonsai-platform">Getting Started Guide</a>.</p>
@@ -364,41 +365,39 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 EMACS USERS: There is an inkling-mode for local development found on <a href="https://github.com/BonsaiAI/inkling-mode">Bonsai&rsquo;s GitHub</a>
 </aside>
 
-<p>If you&rsquo;re interesting in finding out more about what&rsquo;s going on under the hood of the AI engine, check out the <a href="ai-engine-guide.html">AI Engine Guide</a>.</p>
+<p>If you&rsquo;re interesting in finding out more about what&rsquo;s going on under the hood of the Bonsai AI Engine, check out <a href="ai-engine-guide.html">Understand AI Engine Components</a>.</p>
 
-          <h2 id="inkling-a-new-language">Inkling: A New Language</h2>
+<h2 id="inkling-a-new-language">Inkling: A New Language</h2>
 
 <h3 id="what-kind-of-language-is-inkling">What kind of language is Inkling?</h3>
 
-<p>Inkling is a special purpose language for writing AI programs. The language has a blend of declarative and functional styles; it&rsquo;s modeled after ideas in SQL and python. We like to describe Inkling as the world&rsquo;s first pedagogical programming language.  </p>
+<p>Inkling is a special purpose language for writing AI programs. The language has a blend of declarative and functional styles; it&rsquo;s modeled after ideas in SQL and python. We like to describe Inkling as the world&rsquo;s first machine teaching language.  </p>
 
-<h3 id="what-is-pedagogical-programming">What is Pedagogical Programming?</h3>
+<h3 id="what-is-machine-teaching">What is Machine Teaching?</h3>
 
-<h6 id="pedagogical-programming">Pedagogical Programming</h6>
-
-<p>Pedagogical programming is a new programming paradigm. It expresses the solution to a problem in terms of how you teach the computer to find the solution as opposed to how to calculate the solution. Pedagogical programming focuses on:</p>
+<p>Machine teaching is a new programming paradigm. It expresses the solution to a problem in terms of how you teach the computer to find the solution as opposed to how to calculate the solution. Machine teaching focuses on:</p>
 
 <ul>
 <li><strong>What do you want the computer to know?</strong>
-Pedagogical programming captures the concepts and their relationship to each other and forms a directed graph of the concepts.</li>
+Machine teaching captures the concepts and their relationship to each other and forms a directed graph of the concepts.</li>
 </ul>
 
 <p>Imagine learning to play baseball; there are a lot of concepts involved. It goes beyond just the rules of the game, and includes things like batting stance, bat grip, eye hand coordination, etc.</p>
 
 <ul>
 <li><strong>How do you go about teaching those things?</strong>
-Pedagogical programming focuses on how the problem can be taught, not how it can be calculated.</li>
+Machine teaching focuses on how the problem can be taught, not how it can be calculated.</li>
 </ul>
 
 <p>Imagine teaching a child to play baseball. You can&rsquo;t just explain the whole game to them and expect them to understand how to play. You&rsquo;d break down learning into pieces, and create a series of lessons that would help them learn how to play baseball.</p>
 
 <p>Let&rsquo;s say, to start, you wanted to teach them the concept of hand-eye coordination. There would be a sequence of lessons to do this. You might start with a whiffle ball on a tee, progress to a tee that pops the ball up, move to underhand pitches, and then overhand pitches. You could continue to build upon your hand eye coordination concept with things like curved pitches, different styles of catching, and other exercises. It&rsquo;s all teaching one concept - hand-eye coordination - using <strong>progressive lessons</strong> to do so.</p>
 
-<h6 id="inkling-is-a-special-purpose-language">Inkling is a Special Purpose Language</h6>
+<h3 id="inkling-is-a-special-purpose-language">Inkling is a Special Purpose Language</h3>
 
 <p>Inkling is a special purpose language, meaning that it is a language for writing programs for a particular domain. This is as opposed to a general purpose language, which would allow you to write anything you could imagine. C++, Python, Ruby, and Java are all examples of general purpose programming languages.</p>
 
-<h6 id="inkling-is-a-functional-language">Inkling is a Functional language</h6>
+<h3 id="inkling-is-a-functional-language">Inkling is a Functional language</h3>
 
 <p>In a functional programming language, a function defines a scope and can only modify what is in that scope. In Inkling, every concept takes data as input and sends data as output. Each concept is self contained, and there is no shared information between concepts unless you explicitly declare it. This means that no information is kept as state unless you specifically declare it. This makes Inkling a <a href="https://en.wikipedia.org/wiki/Functional_programming">functional programming</a> language.</p>
 
@@ -410,7 +409,7 @@ Pedagogical programming focuses on how the problem can be taught, not how it can
 <li>R, matlab, Java and prolog are not functional programming languages.</li>
 </ul>
 
-<h6 id="white-space-insensitive">White Space Insensitive</h6>
+<h3 id="white-space-insensitive">White Space Insensitive</h3>
 
 <p>Inkling is white space insensitive. Internally, we prefer to use four spaces to indent lines. This is a stylistic choice. In this document, any mention of an &ldquo;indentation&rdquo; or a line &ldquo;being indented&rdquo; refers to using four spaces at the start of a line.</p>
 
