@@ -6,7 +6,6 @@ toc_footers:
 
 includes:
 - inkling-guide/overview.html.md
-- inkling-guide/inkling-a-new-language.html.md
 - inkling-guide/mental-models.html.md
 - inkling-guide/concepts.html.md
 - inkling-guide/schemas.html.md
