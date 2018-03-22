@@ -432,6 +432,7 @@ Usage: bonsai configure [OPTIONS]
 
 Options:
   --key TEXT  Provide an access key.
+  --show      Prints active profile information.
   -h, --help  Show this message and exit.
 </code></pre>
 <p><code class="prettyprint">bonsai configure</code> sets up authentication between you (as a user) and the server. This enables the server to verify your access to write Inkling code to a specific BRAIN.</p>
@@ -448,6 +449,7 @@ Options:
   --project TEXT       Override to target another project directory.
   --project-type TEXT  Specify to download and use demo/starter project files
                        (e.g. "demos/cartpole").
+  --json               Output json.              
   -h, --help           Show this message and exit.
 </code></pre>
 <p><code class="prettyprint">bonsai create</code> generates a new brain and names it BRAIN_NAME.  It also sets the assumed BRAIN name for later commands.</p>
@@ -498,6 +500,7 @@ Usage: bonsai list [OPTIONS]
   Lists BRAINs owned by current user.
 
 Options:
+  --json      Output json.
   -h, --help  Show this message and exit.
 </code></pre>
 <p><code class="prettyprint">bonsai list</code> shows you the BRAINs on your account. You must have your Bonsai account configured with <code class="prettyprint">bonsai configure</code> before you can see this list.</p>
@@ -542,6 +545,7 @@ Usage: bonsai push [OPTIONS]
 Options:
   --brain TEXT    Override to target another BRAIN.
   --project TEXT  Override to target another project directory
+  --json          Output json.
   -h, --help      Show this message and exit.
 </code></pre>
 <p><code class="prettyprint">bonsai push</code> uploads the entire project file contents and all accompanying files to the Bonsai AI Engine and can be viewed on <a href="https://beta.bons.ai">beta.bons.ai</a>. You can override the BRAIN you want to push to or the project directory you want to push.</p>
@@ -555,6 +559,7 @@ Usage: bonsai sims list [OPTIONS]
 Options:
   --brain TEXT    Override to target another BRAIN.
   --project TEXT  Override to target another project directory.
+  --json          Output json.
   -h, --help      Show this message and exit.
 </code></pre>
 <p><code class="prettyprint">bonsai sims list</code> shows you all the simulators you have connected to the BRAIN server.</p>
@@ -569,9 +574,12 @@ Usage: bonsai switch [OPTIONS] PROFILE
 
 Options:
   --url TEXT  Set the brain api url.
+  --show      Prints active profile information.
   -h, --help  Show this message and exit.
+
+Available Profiles:
 </code></pre>
-<p><code class="prettyprint">bonsai switch</code> changes your current profile to a different configuration as specified in your <code class="prettyprint">.bonsai</code> file. If you wish to create a new profile you can do so with the <code class="prettyprint">--url</code> option which creates a configuration you can use again in the future.</p>
+<p><code class="prettyprint">bonsai switch</code> changes your current profile to a different configuration as specified in your <code class="prettyprint">.bonsai</code> file. If you wish to create a new profile you can do so with the <code class="prettyprint">--url</code> option which creates a configuration you can use again in the future. <code class="prettyprint">bonsai switch</code> or <code class="prettyprint">bonsai switch -h/--help</code> will print available profiles.</p>
 
 <h2 id="bonsai-train">bonsai train</h2>
 <pre class="highlight plaintext"><code>$ bonsai train --help
@@ -601,6 +609,7 @@ Options:
   --brain TEXT    Override to target another BRAIN.
   --project TEXT  Override to target another project directory.
   --remote        Run a simulator remotely on Bonsai’s servers.
+  --json          Output json.
   -h, --help      Show this message and exit.
 </code></pre>
 <p><code class="prettyprint">bonsai train start</code> turns on/enables training mode for the current BRAIN. The BRAIN trains whenever a simulator is connected.</p>
@@ -619,6 +628,7 @@ Options:
   --brain TEXT    Override to target another BRAIN
   --project TEXT  Override to target another project directory.
   --remote        Resume simulator remotely on Bonsai's servers.
+  --json          Output json.
   -h, --help      Show this message and exit.
 </code></pre>
 <p><code class="prettyprint">bonsai train resume</code> resumes training on an existing trained version of a BRAIN. You can stop and resume a BRAIN as needed.</p>
@@ -646,6 +656,7 @@ Usage: bonsai train stop [OPTIONS] BRAIN_NAME
 Options:
   --brain TEXT    Override to target another BRAIN.
   --project TEXT  Override to target another project directory.
+  --json          Output json.
   -h, --help      Show this message and exit.
 </code></pre>
 <p><code class="prettyprint">bonsai train stop</code> stops (or pauses) training on the current BRAIN. You can resume training with <code class="prettyprint">bonsai train resume</code>.</p>
