@@ -3,10 +3,10 @@
 Hello new Bonsai developer!
 
 There are some things you might want to know before you get started. In this section, we're going
-to walk you through the components and fundamental ideas of the Bonsai
-Platform. Read through the Quick Start guide to learn how to get set up with Bonsai’s platform and what you can do with it.
+to walk you through the components and fundamental ideas of The Bonsai
+Platform. Read through the Quick Start guide to learn how to get set up with The Bonsai Platform and what you can do with it.
 
-If you're the type of developer who wants to dive right in and see the Bonsai Platform working,
+If you're the type of developer who wants to dive right in and see The Bonsai Platform working,
 however, **skip down to [Create Your BRAIN][1]** below. We'll guide you through setting up your
 first BRAIN with the Cartpole template, how to get that BRAIN training, and then explain what
 to do with it!
@@ -21,10 +21,10 @@ to this one on your local computer.
 ### Build
 
 * **Bonsai Command Line Interface (CLI):** is a command line tool that enables you to configure and
-control the Bonsai Artificial Intelligence (AI) Engine. This is an alternative to using the Web
+control The Bonsai Artificial Intelligence (AI) Engine. This is an alternative to using the Web
 Interface and is not covered in this guide. See how to [Run the Platform Locally][7] if you prefer CLI development.
 * **Web Interface:** is the browser-based tool found at [beta.bons.ai][3] for creating and analyzing
-BRAINs stored in the Bonsai AI Engine. You can also visualize the BRAIN's training on this page.
+BRAINs stored in The Bonsai AI Engine. You can also visualize the BRAIN's training on this page.
 This is what we will use for this Quick Start guide because you can get up and running on the
 Bonsai Platform in just a few clicks!
 * **Simulators:** are often a complex interactive virtual environment. For this project, you'll
@@ -32,7 +32,7 @@ be using a simple simulator from OpenAI. Simulators usually have state, which is
 world inside the virtual environment and receive actions which change that state.
 
 <aside class="notice">
-Currently, during the Bonsai Platform preview, you can only use simulators as your training source. Generators
+Currently, during The Bonsai Platform preview, you can only use simulators as your training source. Generators
 and Data sources will be released at a future time.
 </aside> 
 
@@ -73,24 +73,24 @@ etc., train all of them in parallel, and pick the best result.
 For example, if the BRAIN Server picked Deep Q-Learning, which is a machine learning algorithm,
 then the system also picks the appropriate topology, hyper-parameters, and initial weight values.
 
-The Bonsai AI Engine also determines when to train each concept, how much (or little) to train each
-concept based on its relevance, and, ultimately, produces a trained BRAIN. Furthermore, it does
-something we call **meta-learning**. Meta-learning means that the system keeps a kind of memory or
-record about each program it's seen, the data it used for training, and the generated AIs that it's
-made. It also records how fast those AIs trained and how accurate they became. The BRAIN server is
-continuously learning and improving over that dataset.
-
 Read more about how the Bonsai AI Engine works in our [AI Engine Guide][6].
 
 ## What is a simulator?
 
-A simulator imitates a real-world situation in a virtual environment, which enables a user to model
-and test situations that would often, otherwise be very complicated to set up and test. Your
-simulator could be a game, such as Cartpole, or an emulation of a real-world process, such as a
-self-driving car. Training with simulators is especially useful for optimization, or for use with
-complex control problems that can be modeled in a simulator.
+> ![Brain and Simulator][10]
 
-Training means teaching a BRAIN to reach a specific outcome in the simulator. The training involves
+A simulator is software that simulates an imperative model of a process, transitioning from state
+to state as actions are applied. Robotics, industrial automation, supply chain logistics, and
+structural engineering are all domains which use simulators to model the behavior of complex systems.
+
+Deep Reinforcement Learning (DRL) can work with simulated models to train a BRAIN to perform tasks within
+the modeled system. Tasks can be as simple as "stand this pole upright" or as complex as "learn to walk." 
+
+To be effective, a BRAIN needs to be trained using DRL against a simulated model. The Bonsai SDK
+allows the DRL system to control your simulator during the training process. Any simulator which has
+an initial state, and can be incremented through time, can be connected to the Bonsai training system.
+
+Training means teaching a BRAIN to reach a specific outcome in the simulation. The training involves
 using a specific set of concepts, a curriculum, and lessons, which are described in the Inkling file.
 
 Today, we only support simulators written in Python or C++. To learn more about connecting your own
@@ -107,3 +107,4 @@ simulator, refer to our [Library Reference][4].
 [7]: ./local-dev-guide.html
 [8]: ./inkling-guide.html
 [9]: ../references/api-reference.html
+[10]: ../../images/data-flow-simple.png
