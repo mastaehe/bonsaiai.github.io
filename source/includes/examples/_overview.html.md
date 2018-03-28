@@ -11,11 +11,15 @@ If you have any suggestions of examples you'd like to see us implement please [c
 * **SimPy Elevator Simulation**: A basic example of how to use SimPy to simulate a scenario. This one is an elevator dropping people off on 3 floors.
 
 ### OpenAI Gym Examples
-* **Cart Pole**: A simple control problem where a cart must make a simple move to keep a pole balanced on top.
+* **Cartpole**: A simple control problem where a cart must make a simple move to keep a pole balanced on top.
 * **Mountain Car**: A simple control problem where a car must build up enough momentum to climb a hill.
 
 ### Real World Examples
 * **HVAC with EnergyPlus**: An example of climate control machine teaching using EnergyPlus and BCVTB for simulation. 
+
+### Simulink Examples
+* **Simulink Cartpole**: The compiled Simulink version of a pole balancing on a cart.
+* **Simulink Househeat**: The compiled Simulink version of an HVAC system taking into account the outdoor environment, the thermal characteristics of the house, and the house heating system.
 
 [1]: https://github.com/BonsaiAI
 [2]: https://bons.ai/contact-us#contact-page-form
