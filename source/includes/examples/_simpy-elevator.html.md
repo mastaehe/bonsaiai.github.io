@@ -192,7 +192,7 @@ For more information on the functions inside of this simulator class and how to 
 
 Also note that if you would like to see how this simulator can be run without Bonsai - to demonstrate how the emulator behaves with a hard-coded algorithm - you can do so by running elevator.py simply with Python itself.
 
-[1]: https://github.com/BonsaiAI/simpy-elevator-sample
+[1]: https://github.com/BonsaiAI/bonsai-sdk/tree/master/samples/elevator-sim
 [2]: https://simpy.readthedocs.io/en/latest/index.html
 [3]: http://docs.bons.ai/references/library-reference.html
 [4]: https://simpy.readthedocs.io/en/latest/examples/index.html#examples

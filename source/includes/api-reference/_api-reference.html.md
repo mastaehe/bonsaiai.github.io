@@ -16,7 +16,7 @@ The Bonsai BRAIN API has two feature areas:
 * Managing BRAINS
 * Connecting simulators for training and use.
 
-The root for all Bonsai Platform API requests is [https://api.bons.ai][1].
+The root for all Bonsai Platform API requests is *https://api.bons.ai*.
 
 
 

@@ -145,21 +145,21 @@ You'll also want to run the `requirements.txt` file which contains all of the pa
 > Use Your BRAIN
 
 ```shell
-python cartpole_simulator.py --predict-brain=myCartpole --predict-version=latest
+python cartpole_simulator.py --predict=latest
 
 # If you're running python3 on macOS:
-python3 cartpole_simulator.py --predict-brain=myCartpole --predict-version=latest
+python3 cartpole_simulator.py --predict=latest
 ```
 
 It's finally time to run the simulator using predictions from your BRAIN! How well it does depends
 on how long you let it train. Using your BRAIN involves calling Python on the project's simulator
-file, in predict mode, and `--predict-version=latest` will use the latest training session that you just ran.
+file, in predict mode, and `--predict=latest` will use the latest training session that you just ran. You can also specify a number like `--predict=1` if you want to predict from a different version of your brain if you have trained it multiple times.
 
 
 
 [1]: http://pages.bons.ai/apply.html
 [2]: ../examples.html#openai-gym-cartpole
-[3]: https://github.com/BonsaiAI/gym-cartpole-sample
+[3]: https://github.com/BonsaiAI/bonsai-sdk/tree/master/samples/openai-gym/gym-cartpole-sample
 [4]: https://gym.openai.com/envs/CartPole-v1
 [5]: ../../images/no_brains_image.png
 [6]: ../../images/quick-start-create-brain.png

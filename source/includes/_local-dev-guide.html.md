@@ -29,19 +29,19 @@ If you haven't already, please follow the [Install the CLI][2] guide. This guide
 ## Clone a Sample Project
 
 ```
-git clone https://github.com/BonsaiAI/gym-mountaincar-sample
+git clone https://github.com/BonsaiAI/bonsai-sdk
 ```
 
-Clone a sample simulation project with `git clone`. For this guide we'll be walking you through [OpenAI Gym's Mountain Car][4] environment, one of the supported Bonsai simulators.
+Clone the Bonsai Python SDK with `git clone`. This will provide you with all of the samples, including [OpenAI Gym's Mountain Car][4] environment, which we will be using for this guide.
 
-If you wish to experiment with your own project at this stage you can. Your project will need an Inkling (.ink) file and a simulator file. Many other projects can be found on the [BonsaiAI GitHub page][22].
+If you wish to experiment with your own project at this stage you can. Your project will need an Inkling (.ink) file and a simulator file. Many other projects can be found in the samples folder of the SDK you have just cloned.
 
 ## Install Project Requirements
 
 > Python 2 and Anaconda
 
 ```
-cd gym-mountaincar-sample
+d bonsai-sdk/samples/openai-gym/gym-mountaincar-samplec
 pip install -r requirements.txt
 ```
 > Python 3
@@ -50,11 +50,11 @@ pip install -r requirements.txt
 # same as above
 ```
 ```shell
-cd gym-mountaincar-sample
+d bonsai-sdk/samples/openai-gym/gym-mountaincar-sample
 pip3 install -r requirements.txt
 ```
 
-Enter into the Mountain Car folder and then install the Mountain Car requirements from OpenAI Gym with pip.
+Enter into the Mountain Car folder in the samples folder of the SDK and then install the Mountain Car requirements from OpenAI Gym with `pip`.
 
 
 
@@ -80,7 +80,7 @@ Use [`bonsai push`][19] to upload the cloned Mountain Car project and its associ
 
 Almost there! Time to tell the Bonsai AI Engine to prepare a new BRAIN version for training. There are currently two options for training a BRAIN, one is to run a simulator remotely using Bonsai's servers, and the other is to run a simulator locally with your own computer.
 
-Simulators which can be trained remotely include EnergyPlus, OpenAI Gym's, and simple simulators all found on our [Examples documentation][23]. If the simulator is not one that we support remotely, you'll need to run it locally.
+Simulators which can be trained remotely include EnergyPlus, OpenAI Gym's, and Python simulators all found on our [Examples documentation][23]. If the simulator is not one that we support remotely, you'll need to run it locally.
 
 ## Train Remotely or Locally
 
@@ -92,7 +92,7 @@ bonsai train start --remote
 
 Start training your BRAIN with [`bonsai train start --remote`][20].
 
-Remote training is the best way to train BRAINs that need to ran overnight or for multiple days at a time. There is no disconnection of the simulator to the server like there can be when training locally.
+Remote training is the best way to train BRAINs that need to run overnight or for multiple days at a time. There is no disconnection of the simulator to the server like there can be when training locally.
 
 ### Locally
 
@@ -103,7 +103,7 @@ bonsai train start
 > Python 2
 
 ```
-python mountaincar_simulator.py --train-brain=myMountainCarBrain --headless
+python mountaincar_simulator.py --brain=myMountainCarBrain --headless
 ```
 > Python 3
 
@@ -111,7 +111,7 @@ python mountaincar_simulator.py --train-brain=myMountainCarBrain --headless
 # same as above
 ```
 ```shell
-python3 mountaincar_simulator.py --train-brain=myMountainCarBrain --headless
+python3 mountaincar_simulator.py --brain=myMountainCarBrain --headless
 ```
 
 Start training your BRAIN with [`bonsai train start`][20].
@@ -145,7 +145,7 @@ Once the BRAIN has gotten to this level of performance (or sooner if you prefer)
 > Python 2
 
 ```
-python mountaincar_simulator.py --predict-brain=myMountainCarBrain --predict-version=latest
+python mountaincar_simulator.py --predict=latest
 ```
 > Python 3
 
@@ -153,10 +153,10 @@ python mountaincar_simulator.py --predict-brain=myMountainCarBrain --predict-ver
 # same as above
 ```
 ```shell
-python3 mountaincar_simulator.py --predict-brain=myMountainCarBrain --predict-version=latest
+python3 mountaincar_simulator.py --predict=latest
 ```
 
-After your BRAIN is finished training it can play the Mountain Car game. How well it does depends on how long you let it train! Using your BRAIN involves calling Python on your simulator file, but now in prediction mode with `--predict-version=latest` which will use the version of the latest training session that you just ran. You can use a different version of your BRAIN if you have trained it multiple times by replacing 'latest' with the version number.
+After your BRAIN is finished training it can play the Mountain Car game. How well it does depends on how long you let it train! Using your BRAIN involves calling Python on your simulator file, but now in prediction mode with `--predict=latest` which will use the version of the latest training session that you just ran. You can also specify a number like `--predict=1` if you want to predict from a different version of your brain if you have trained it multiple times.
 
 [1]: getting-started.html#overview
 [2]: cli-install-guide.html#install-prerequisites
