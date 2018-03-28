@@ -373,7 +373,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <h3 id="openai-gym-examples">OpenAI Gym Examples</h3>
 
 <ul>
-<li><strong>Cart Pole</strong>: A simple control problem where a cart must make a simple move to keep a pole balanced on top.</li>
+<li><strong>Cartpole</strong>: A simple control problem where a cart must make a simple move to keep a pole balanced on top.</li>
 <li><strong>Mountain Car</strong>: A simple control problem where a car must build up enough momentum to climb a hill.</li>
 </ul>
 
@@ -381,6 +381,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <ul>
 <li><strong>HVAC with EnergyPlus</strong>: An example of climate control machine teaching using EnergyPlus and BCVTB for simulation. </li>
+</ul>
+
+<h3 id="simulink-examples">Simulink Examples</h3>
+
+<ul>
+<li><strong>Simulink Cartpole</strong>: The compiled Simulink version of a pole balancing on a cart.</li>
+<li><strong>Simulink Househeat</strong>: The compiled Simulink version of an HVAC system taking into account the outdoor environment, the thermal characteristics of the house, and the house heating system.</li>
 </ul>
 
           <h1 id="basic-python-c-simulation">Basic Python/C++ Simulation</h1>
@@ -620,7 +627,7 @@ It can be used in this case to find the center between two numbers.
 <p><img src="images/elevator_output.png" alt="ASCII Elevator Output" /></p>
 </blockquote>
 
-<p><a href="https://github.com/BonsaiAI/simpy-elevator-sample"><strong>Download the full source code on GitHub</strong></a> if you want to run this simulator locally.</p>
+<p><a href="https://github.com/BonsaiAI/bonsai-sdk/tree/master/samples/elevator-sim"><strong>Download the full source code on GitHub</strong></a> if you want to run this simulator locally.</p>
 
 <p>In this example, <a href="https://simpy.readthedocs.io/en/latest/index.html">SimPy</a>, a process-based discrete-event simulation framework based on standard Python, is used to simulate an elevator effectively transporting people to their desired floor. The simulated elevator gets rewarded by having people wait for the least amount of time. This example includes a simple elevator SimPy simulator, a Python simulation, and the simulation&rsquo;s Inkling file.</p>
 
@@ -778,7 +785,7 @@ It can be used in this case to find the center between two numbers.
         <span class="c"># return as negative because the simulator maximizes this value.</span>
         <span class="k">return</span> <span class="o">-</span><span class="n">waiting</span>
 </code></pre>
-<p>The full simulator file <em>elevator_simulator.py</em> and elevator simulation file <em>elevator.py</em> for this example is with the rest of the <a href="https://github.com/BonsaiAI/simpy-elevator-sample">simpy-elevator code</a> on GitHub.</p>
+<p>The full simulator file <em>elevator_simulator.py</em> and elevator simulation file <em>elevator.py</em> for this example is with the rest of the <a href="https://github.com/BonsaiAI/bonsai-sdk/tree/master/samples/elevator-sim">simpy-elevator code</a> on GitHub.</p>
 
 <p>This is a Python simulator which uses the elevator.py custom Python simulation using SimPy. This <em>elevator_simulator.py</em> file repeatedly runs the elevator simulation for each episode of training to get details of where people start out, how many are on the elevator, and what floor they are going to, etc. Each episode the curriculum in Inkling trains the concept by sending a new <code class="prettyprint">Action</code> to the BRAIN based on the <code class="prettyprint">FloorState</code> of the simulator.</p>
 

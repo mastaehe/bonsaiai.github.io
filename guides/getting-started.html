@@ -472,7 +472,7 @@ request access at <a href="http://pages.bons.ai/apply.html">bons.ai</a>.</p>
 <p>In this guide, we’ll walk you through creating a BRAIN to train the <a href="https://gym.openai.com/envs/CartPole-v1">OpenAI Gym</a> environment for
 Cartpole, a simple balance control problem. The walkthrough of the Inkling code and simulator
 interface can be found in our <a href="../examples.html#openai-gym-cartpole">Examples</a> and the full source code for you to take a look at
-is on <a href="https://github.com/BonsaiAI/gym-cartpole-sample">Bonsai&rsquo;s GitHub</a>.</p>
+is on <a href="https://github.com/BonsaiAI/bonsai-sdk/tree/master/samples/openai-gym/gym-cartpole-sample">Bonsai&rsquo;s GitHub</a>.</p>
 
 <p>If you&rsquo;d prefer not to use our web interface, instead follow <a href="local-dev-guide.html">Run the Platform Locally</a> for a similar guide
 to this one on your local computer.</p>
@@ -611,14 +611,14 @@ server created when you made your BRAIN. You can download these project files lo
 <blockquote>
 <p>Use Your BRAIN</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>python cartpole_simulator.py --predict-brain<span class="o">=</span>myCartpole --predict-version<span class="o">=</span>latest
+<pre class="highlight shell tab-shell"><code>python cartpole_simulator.py --predict<span class="o">=</span>latest
 
 <span class="c"># If you're running python3 on macOS:</span>
-python3 cartpole_simulator.py --predict-brain<span class="o">=</span>myCartpole --predict-version<span class="o">=</span>latest
+python3 cartpole_simulator.py --predict<span class="o">=</span>latest
 </code></pre>
 <p>It&rsquo;s finally time to run the simulator using predictions from your BRAIN! How well it does depends
 on how long you let it train. Using your BRAIN involves calling Python on the project&rsquo;s simulator
-file, in predict mode, and <code class="prettyprint">--predict-version=latest</code> will use the latest training session that you just ran.</p>
+file, in predict mode, and <code class="prettyprint">--predict=latest</code> will use the latest training session that you just ran. You can also specify a number like <code class="prettyprint">--predict=1</code> if you want to predict from a different version of your brain if you have trained it multiple times.</p>
 
           <h1 id="next-steps">Next Steps</h1>
 
