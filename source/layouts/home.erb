@@ -23,7 +23,7 @@
 	<%= javascript_include_tag  "all_nosearch" %>
 	<% end %>
 	<%= partial "partials/google-gtm" %>
-
+	<%= partial "partials/mixpanel" %>
 </head>
 
 <body class="<%= page_classes %>" data-languages="<%=h language_tabs.map{ |lang| lang.is_a?(Hash) ? lang.keys.first : lang }.to_json %>">
@@ -104,7 +104,7 @@
 								<li> <a href="/references/cli-reference.html">CLI Reference</a> </li>
 								<li> <a href="/references/inkling-reference.html">Inkling Reference</a> </li>
 								<li> <a href="/references/library-reference.html">Library Reference</a> </li>
-								<li> <a href="/references/simulator-reference.html">Simulator Reference</a> </li>						
+								<li> <a href="/references/simulator-reference.html">Simulator Reference</a> </li>
 							</ul>
 						</div>
 					</div>

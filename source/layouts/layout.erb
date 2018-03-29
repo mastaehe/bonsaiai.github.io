@@ -22,13 +22,14 @@
     <% else %>
       <%= javascript_include_tag  "all_nosearch" %>
     <% end %>
-	
-	  <%= partial "partials/google-gtm" %>
+
+    <%= partial "partials/google-gtm" %>
+    <%= partial "partials/mixpanel" %>
   </head>
 
   <body class="<%= page_classes %>" data-languages="<%=h language_tabs.map{ |lang| lang.is_a?(Hash) ? lang.keys.first : lang }.to_json %>">
-	  
-	  
+
+
 	  <%= partial "partials/hide-gtm" %>
 
   <div id="flex-container">
@@ -66,14 +67,14 @@
       <div id="toc">
       </div>
       <% if current_page.data.toc_footers %>
-      
+
 			 <%= partial "partials/footer-links" %>
-       
-        
+
+
       <% end %>
 	   <%= partial "partials/cc-license" %>
     </div>
-	      
+
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
