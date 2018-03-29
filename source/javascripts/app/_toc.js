@@ -47,10 +47,12 @@
 
   $(function() {
     makeToc();
-    animate();
     setupLanguages($('body').data('languages'));
-    $('.content').imagesLoaded( function() {
-      global.toc.calculateHeights();
-    });
+    if (global.toc) {
+      animate();
+      $('.content').imagesLoaded( function() {
+        global.toc.calculateHeights();
+      });
+    }
   });
 })(window);
