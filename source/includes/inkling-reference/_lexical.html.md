@@ -35,12 +35,12 @@ send | simulator | state | stream
 String | test | train | true
 UInt16 | UInt32 | UInt64 | UInt8
 unit | until | using | validate
-where | with | yield
+Vector | where | with | yield
 
 <aside class="notice">
 Most of these keywords are used by the currently supported Inkling version.
 A few are not used in the currently supported Inkling version and are
-reserved for future development such as Byte, Matrix, minimize, and String.
+reserved for future development such as Byte, Matrix, minimize, and Vector.
 </aside>
 
 ## Identifiers

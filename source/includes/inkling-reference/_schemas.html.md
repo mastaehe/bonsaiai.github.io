@@ -51,22 +51,16 @@ scalarDcln      :=  primitiveType   rangeExpression? <name>
                                            
 structureDcln   :=  structure_type   structure_init <name> 
                                 
-structure_type  :=  Luminance | Matrix | Vector
+structure_type  :=  Luminance
 
 structure_init  :=  '(' 
-                        luminance_init | matrix_init | vector_init
+                        luminance_init
                     ')'
 
 luminance_init  :=  integerLiteral  ',' integerLiteral 
-
-matrix_init     :=  '(' primitiveType [ ',' primitivetype ]* ')' 
-                        ',' integerLiteral [ ',' integerLiteral]* 
-
-vector_init     :=  primitiveType   rangeExpression? ','  integerLiteral 
 ```
 
-In the Schema Declaration Syntax, you will see references to Inkling primitive types and structured types
-(Luminance, Matrix). These are discussed in in the [Structured Types][2] section. 
+In the Schema Declaration Syntax, you will see references to Inkling primitive types and structured types. These are discussed in in the [Structured Types][2] section. 
 
 
 <aside class="warning">
@@ -79,14 +73,6 @@ Schema fields must be separated from each other by commas. Schema declarations
 are terminated by the `end` keyword.
 
 Field types can be any of the [Inkling primitive types][4] and [Inkling structured types][2]. 
-
-In matrix initialization, a parenthesized list of types is followed by a list of dimensions. The number of types and the number of dimensions must match.
-
-Matrix size must be an integral constant.  
-
-<aside class="warning">
-Matrix and Vector are not yet implemented.
-</aside>
 
 A schema field that has a primitive type can also have a type constraint that
 constrains the set of potential values for that field. Examples and syntax of
@@ -169,7 +155,7 @@ primitiveType ::=
 The Inkling set of primitive types includes numeric, string, and boolean types.
 
 <aside class="warning">
-String is not yet implemented.
+Only constrained Strings are currently implemented.
 </aside>
 
 In the code panel you will see the set of primitive types which are used in schema declarations. 
@@ -186,14 +172,12 @@ Integer types beginning with 'U' are unsigned.
 
 ```inkling--syntax
 structure_type ::=                      # syntax
-  Luminance 
-  | Matrix
+  Luminance
 ```
 
 ```inkling--code
 schema BallLocationSchema               # example
-  Luminance(84, 336) pixels,    
-  Matrix(UInt32, 1, 2) location 
+  Luminance(84, 336) pixels
 end
 ```
 
@@ -201,11 +185,6 @@ Structured types in Inkling are intended to support common
 Machine Learning types. The only Machine Learning type currently supported is
 `Luminance`. This support will be expanded to `Matrix` and `Vector`, among
 others in the future.
-
-<aside class="warning">
-Matrix and Vector are not yet implemented.
-</aside>
-
 
 ###### Constrained Types and Range Expressions
 
@@ -340,8 +319,8 @@ and the primitive type `Bool`.
 ### Usage
 
 ```inkling--code
-    UInt8  {7, 7, 7, 7}             # is valid.
-    UInt8  {7, -7, 7, 7}            # is invalid (negative integer in unsigned range).
+    UInt8  {7, 7, 7, 7}             # is valid
+    UInt8  {7, -7, 7, 7}            # is invalid (negative integer in unsigned range)
 ```
 
 Value list range expressions support allowing arbitrary lists of values to constitute the
@@ -379,13 +358,13 @@ end
  
 concept ball_location 
   is estimator
-  predicts (Matrix(UInt32, 1, 2) location)
+  predicts (UInt32 x, UInt32 y)
   follows 
     input(Luminance(84, 336) pixels) # <--- (2) MATCH
 end
  
 concept ball_X_location is estimator
-  predicts (Uint32 X_location)
+  predicts (UInt32 X_location)
   follows 
     input(Luminance(84, 330) pixels) # <--- (3) NO MATCH
 end
@@ -441,7 +420,7 @@ curriculum ball_location_curriculum
         select frame
         send frame
       until
-        minimize ball_location_distance
+        maximize ball_location_distance
 end
 ```
 
