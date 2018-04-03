@@ -211,7 +211,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-WVB6MG2');</script>
 <!-- End Google Tag Manager -->
-    <!-- start Mixpanel -->
+      <!-- start Mixpanel -->
 <script type="text/javascript">(function(e,a){if(!a.__SV){var b=window;try{var c,l,i,j=b.location,g=j.hash;c=function(a,b){return(l=a.match(RegExp(b+"=([^&]*)")))?l[1]:null};g&&c(g,"state")&&(i=JSON.parse(decodeURIComponent(c(g,"state"))),"mpeditor"===i.action&&(b.sessionStorage.setItem("_mpcehash",g),history.replaceState(i.desiredHash||"",e.title,j.pathname+j.search)))}catch(m){}var k,h;window.mixpanel=a;a._i=[];a.init=function(b,c,f){function e(b,a){var c=a.split(".");2==c.length&&(b=b[c[0]],a=c[1]);b[a]=function(){b.push([a].concat(Array.prototype.slice.call(arguments,
 0)))}}var d=a;"undefined"!==typeof f?d=a[f]=[]:f="mixpanel";d.people=d.people||[];d.toString=function(b){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);b||(a+=" (stub)");return a};d.people.toString=function(){return d.toString(1)+".people (stub)"};k="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config reset people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
 for(h=0;h<k.length;h++)e(d,k[h]);a._i.push([b,c,f])};a.__SV=1.2;b=e.createElement("script");b.type="text/javascript";b.async=!0;b.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";c=e.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c)}})(document,window.mixpanel||[]);
@@ -540,17 +540,17 @@ for use by Inkling and cannot be used as names in your program. </p>
 <td>validate</td>
 </tr>
 <tr>
+<td>Vector</td>
 <td>where</td>
 <td>with</td>
 <td>yield</td>
-<td></td>
 </tr>
 </tbody></table>
 
 <aside class="notice">
 Most of these keywords are used by the currently supported Inkling version.
 A few are not used in the currently supported Inkling version and are
-reserved for future development such as Byte, Matrix, minimize, and String.
+reserved for future development such as Byte, Matrix, minimize, and Vector.
 </aside>
 
 <h2 id="identifiers">Identifiers</h2>
@@ -1064,7 +1064,7 @@ Lessons allow the machine to learn the concept in stages rather than all at once
         <span class="k">select</span> <span class="nx">frame</span>
         <span class="k">send</span> <span class="nx">frame</span>
       <span class="k">until</span>
-        <span class="k">minimize</span> <span class="nx">ball_location_distance</span>
+        <span class="k">maximize</span> <span class="nx">ball_location_distance</span>
 
     <span class="k">lesson</span> <span class="nx">vary_breakout</span> <span class="k">follows</span> <span class="nx">constant_breakout</span>
       <span class="k">configure</span>          <span class="c1"># configure to type constraints</span>
@@ -1080,7 +1080,7 @@ Lessons allow the machine to learn the concept in stages rather than all at once
       <span class="k">select</span> <span class="nx">frame</span>
       <span class="k">send</span> <span class="nx">frame</span>
     <span class="k">until</span>
-      <span class="k">minimize</span> <span class="nx">ball_location_distance</span>
+      <span class="k">maximize</span> <span class="nx">ball_location_distance</span>
 <span class="k">end</span>
 </code></pre>
 <p>In this example we show lessons that break into stages the task of playing
@@ -1319,18 +1319,13 @@ Currently, there may be issues with termination of lessons in series. If you int
 </aside>
 <pre class="highlight inkling tab-inkling--syntax"><code><span class="nx">untilClause</span> <span class="p">::</span><span class="o">=</span>
 <span class="k">until</span>
-      <span class="p">[</span> <span class="k">minimize</span> <span class="o">|</span> <span class="k">maximize</span> <span class="p">]</span> <span class="o">&lt;</span><span class="nx">objectiveFunctionName</span><span class="o">&gt;</span>
+      <span class="k">maximize</span> <span class="o">&lt;</span><span class="nx">objectiveFunctionName</span><span class="o">&gt;</span>
     <span class="o">|</span>
       <span class="o">&lt;</span><span class="nx">objectiveFunctionName</span><span class="o">&gt;</span> <span class="nx">relOp</span> <span class="nx">constantExpression</span>
 
 <span class="nx">relOp</span> <span class="p">::</span><span class="o">=</span>
   <span class="p">'</span><span class="o">==</span><span class="p">'</span> <span class="o">|</span> <span class="p">'</span><span class="o">&lt;</span><span class="p">'</span> <span class="o">|</span> <span class="p">'</span><span class="o">&gt;</span><span class="p">'</span> <span class="o">|</span> <span class="p">'</span><span class="o">&lt;=</span><span class="p">'</span> <span class="o">|</span> <span class="p">'</span><span class="o">&gt;=</span><span class="p">'</span>
 </code></pre>
-<aside class="notice">
-Future support of the `until` clause will include `minimize` and constant
-expressions. Current support is limited to `maximize`.
-</aside>
-
 <h3 id="usage">Usage</h3>
 
 <p>The <code class="prettyprint">until</code> clause is required.</p>
@@ -1394,21 +1389,15 @@ example <code class="prettyprint">concept</code> and <code class="prettyprint">c
 
 <span class="nx">structureDcln</span>   <span class="p">:</span><span class="o">=</span>  <span class="nx">structure_type</span>   <span class="nx">structure_init</span> <span class="o">&lt;</span><span class="nx">name</span><span class="o">&gt;</span> 
 
-<span class="nx">structure_type</span>  <span class="p">:</span><span class="o">=</span>  <span class="kr">Luminance</span> <span class="o">|</span> <span class="kr">Matrix</span> <span class="o">|</span> <span class="nx">Vector</span>
+<span class="nx">structure_type</span>  <span class="p">:</span><span class="o">=</span>  <span class="kr">Luminance</span>
 
 <span class="nx">structure_init</span>  <span class="p">:</span><span class="o">=</span>  <span class="p">'('</span> 
-                        <span class="nx">luminance_init</span> <span class="o">|</span> <span class="nx">matrix_init</span> <span class="o">|</span> <span class="nx">vector_init</span>
+                        <span class="nx">luminance_init</span>
                     <span class="p">')'</span>
 
 <span class="nx">luminance_init</span>  <span class="p">:</span><span class="o">=</span>  <span class="nx">integerLiteral</span>  <span class="p">','</span> <span class="nx">integerLiteral</span> 
-
-<span class="nx">matrix_init</span>     <span class="p">:</span><span class="o">=</span>  <span class="p">'('</span> <span class="nx">primitiveType</span> <span class="p">[</span> <span class="p">','</span> <span class="nx">primitivetype</span> <span class="p">]</span><span class="o">*</span> <span class="p">')'</span> 
-                        <span class="p">','</span> <span class="nx">integerLiteral</span> <span class="p">[</span> <span class="p">','</span> <span class="nx">integerLiteral</span><span class="p">]</span><span class="o">*</span> 
-
-<span class="nx">vector_init</span>     <span class="p">:</span><span class="o">=</span>  <span class="nx">primitiveType</span>   <span class="nx">rangeExpression</span><span class="p">?</span> <span class="p">','</span>  <span class="nx">integerLiteral</span> 
 </code></pre>
-<p>In the Schema Declaration Syntax, you will see references to Inkling primitive types and structured types
-(Luminance, Matrix). These are discussed in in the <a href="#structured-types">Structured Types</a> section. </p>
+<p>In the Schema Declaration Syntax, you will see references to Inkling primitive types and structured types. These are discussed in in the <a href="#structured-types">Structured Types</a> section. </p>
 
 <aside class="warning">
 Due to limitations with Inkling’s communication with Tensorflow you can’t end your schema variables with an underscore and number such as `variable_1`, `variable_22`, etc.
@@ -1420,14 +1409,6 @@ Due to limitations with Inkling’s communication with Tensorflow you can’t en
 are terminated by the <code class="prettyprint">end</code> keyword.</p>
 
 <p>Field types can be any of the <a href="#primitive-types">Inkling primitive types</a> and <a href="#structured-types">Inkling structured types</a>. </p>
-
-<p>In matrix initialization, a parenthesized list of types is followed by a list of dimensions. The number of types and the number of dimensions must match.</p>
-
-<p>Matrix size must be an integral constant.  </p>
-
-<aside class="warning">
-Matrix and Vector are not yet implemented.
-</aside>
 
 <p>A schema field that has a primitive type can also have a type constraint that
 constrains the set of potential values for that field. Examples and syntax of
@@ -1496,7 +1477,7 @@ field definitions), if allowed in context.</p>
 <p>The Inkling set of primitive types includes numeric, string, and boolean types.</p>
 
 <aside class="warning">
-String is not yet implemented.
+Only constrained Strings are currently implemented.
 </aside>
 
 <p>In the code panel you will see the set of primitive types which are used in schema declarations. </p>
@@ -1513,21 +1494,15 @@ String is not yet implemented.
 <p>Structured Types List</p>
 </blockquote>
 <pre class="highlight inkling tab-inkling--syntax"><code><span class="nx">structure_type</span> <span class="p">::</span><span class="o">=</span>                      <span class="c1"># syntax</span>
-  <span class="kr">Luminance</span> 
-  <span class="o">|</span> <span class="kr">Matrix</span>
+  <span class="kr">Luminance</span>
 </code></pre><pre class="highlight inkling tab-inkling--code"><code><span class="k">schema</span> <span class="nx">BallLocationSchema</span>               <span class="c1"># example</span>
-  <span class="kr">Luminance</span><span class="p">(</span><span class="mi">84</span><span class="p">,</span> <span class="mi">336</span><span class="p">)</span> <span class="nx">pixels</span><span class="p">,</span>    
-  <span class="kr">Matrix</span><span class="p">(</span><span class="kr">UInt32</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="nx">location</span> 
+  <span class="kr">Luminance</span><span class="p">(</span><span class="mi">84</span><span class="p">,</span> <span class="mi">336</span><span class="p">)</span> <span class="nx">pixels</span>
 <span class="k">end</span>
 </code></pre>
 <p>Structured types in Inkling are intended to support common
 Machine Learning types. The only Machine Learning type currently supported is
 <code class="prettyprint">Luminance</code>. This support will be expanded to <code class="prettyprint">Matrix</code> and <code class="prettyprint">Vector</code>, among
 others in the future.</p>
-
-<aside class="warning">
-Matrix and Vector are not yet implemented.
-</aside>
 
 <h6 id="constrained-types-and-range-expressions">Constrained Types and Range Expressions</h6>
 <pre class="highlight inkling tab-inkling--code"><code>  <span class="k">schema</span> <span class="nx">my_schema</span>
@@ -1653,8 +1628,8 @@ expression can be defined for numeric types
 and the primitive type <code class="prettyprint">Bool</code>.</p>
 
 <h3 id="usage">Usage</h3>
-<pre class="highlight inkling tab-inkling--code"><code>    <span class="kr">UInt8</span>  <span class="p">{</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">}</span>             <span class="c1"># is valid.</span>
-    <span class="kr">UInt8</span>  <span class="p">{</span><span class="mi">7</span><span class="p">,</span> <span class="o">-</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">}</span>            <span class="c1"># is invalid (negative integer in unsigned range).</span>
+<pre class="highlight inkling tab-inkling--code"><code>    <span class="kr">UInt8</span>  <span class="p">{</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">}</span>             <span class="c1"># is valid</span>
+    <span class="kr">UInt8</span>  <span class="p">{</span><span class="mi">7</span><span class="p">,</span> <span class="o">-</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">}</span>            <span class="c1"># is invalid (negative integer in unsigned range)</span>
 </code></pre>
 <p>Value list range expressions support allowing arbitrary lists of values to constitute the
 range expression set, rather than start and end points. </p>
@@ -1689,13 +1664,13 @@ of the specified type (if there is such an attribute). </p>
 <span class="err"> </span>
 <span class="k">concept</span> <span class="nx">ball_location</span> 
   <span class="k">is</span> <span class="nx">estimator</span>
-  <span class="k">predicts</span> <span class="p">(</span><span class="kr">Matrix</span><span class="p">(</span><span class="kr">UInt32</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="nx">location</span><span class="p">)</span>
+  <span class="k">predicts</span> <span class="p">(</span><span class="kr">UInt32</span> <span class="nx">x</span><span class="p">,</span> <span class="kr">UInt32</span> <span class="nx">y</span><span class="p">)</span>
   <span class="k">follows</span> 
     <span class="kr">input</span><span class="p">(</span><span class="kr">Luminance</span><span class="p">(</span><span class="mi">84</span><span class="p">,</span> <span class="mi">336</span><span class="p">)</span> <span class="nx">pixels</span><span class="p">)</span> <span class="c1"># &lt;--- (2) MATCH</span>
 <span class="k">end</span>
 <span class="err"> </span>
 <span class="k">concept</span> <span class="nx">ball_X_location</span> <span class="k">is</span> <span class="nx">estimator</span>
-  <span class="k">predicts</span> <span class="p">(</span><span class="nx">Uint32</span> <span class="nx">X_location</span><span class="p">)</span>
+  <span class="k">predicts</span> <span class="p">(</span><span class="kr">UInt32</span> <span class="nx">X_location</span><span class="p">)</span>
   <span class="k">follows</span> 
     <span class="kr">input</span><span class="p">(</span><span class="kr">Luminance</span><span class="p">(</span><span class="mi">84</span><span class="p">,</span> <span class="mi">330</span><span class="p">)</span> <span class="nx">pixels</span><span class="p">)</span> <span class="c1"># &lt;--- (3) NO MATCH</span>
 <span class="k">end</span>
@@ -1752,7 +1727,7 @@ The rule being checked is that all uses of <code class="prettyprint">input</code
         <span class="k">select</span> <span class="nx">frame</span>
         <span class="k">send</span> <span class="nx">frame</span>
       <span class="k">until</span>
-        <span class="k">minimize</span> <span class="nx">ball_location_distance</span>
+        <span class="k">maximize</span> <span class="nx">ball_location_distance</span>
 <span class="k">end</span>
 </code></pre>
 <p>Constraints can be specified in the lesson configure clause. 
@@ -1825,7 +1800,7 @@ configure constraints for the field <code class="prettyprint">paddle_width</code
 simulator used in a curriculum must be declared in a <code class="prettyprint">simulator</code> statement.  </p>
 
 <p>The <code class="prettyprint">simulator</code> statement describes the interface to a simulator. Simulators are
-generally implemented in python or C++. The Inkling program does not contain
+implemented in Python or C++. The Inkling program does not contain
 code for the simulator itself. Instead the Inkling program defines how the
 simulator is used to train Inkling concepts.</p>
 
@@ -1833,8 +1808,8 @@ simulator is used to train Inkling concepts.</p>
 <p>Simulator Clause Syntax</p>
 </blockquote>
 <pre class="highlight inkling tab-inkling--syntax"><code><span class="k">simulator</span> <span class="o">&lt;</span><span class="nx">simulatorName</span><span class="o">&gt;</span><span class="p">'('</span><span class="o">&lt;</span><span class="nx">configurationSchema</span><span class="o">&gt;</span><span class="p">')'</span> 
-  <span class="k">state</span> <span class="p">'('</span><span class="o">&lt;</span><span class="nx">stateSchema</span><span class="o">&gt;</span><span class="p">')'</span>     <span class="c1"># simulator state</span>
-  <span class="nx">control</span> <span class="p">'('</span><span class="o">&lt;</span><span class="nx">controlSchema</span><span class="o">&gt;</span><span class="p">')'</span> <span class="c1"># training concept predicts schema</span>
+  <span class="k">state</span> <span class="p">'('</span><span class="o">&lt;</span><span class="nx">stateSchema</span><span class="o">&gt;</span><span class="p">')'</span>     <span class="c1"># simulation's current state</span>
+  <span class="k">action</span> <span class="p">'('</span><span class="o">&lt;</span><span class="nx">actionSchema</span><span class="o">&gt;</span><span class="p">')'</span>   <span class="c1"># BRAIN's next action</span>
 <span class="k">end</span>
 </code></pre>
 <p>A <code class="prettyprint">simulator</code> statement associates a set of schemas with the simulator. </p>
