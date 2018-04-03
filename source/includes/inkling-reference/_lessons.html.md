@@ -81,7 +81,7 @@ curriculum ball_location_curriculum
         select frame
         send frame
       until
-        minimize ball_location_distance
+        maximize ball_location_distance
 
     lesson vary_breakout follows constant_breakout
       configure          # configure to type constraints
@@ -97,7 +97,7 @@ curriculum ball_location_curriculum
       select frame
       send frame
     until
-      minimize ball_location_distance
+      maximize ball_location_distance
 end
 ```
 
@@ -349,7 +349,7 @@ Currently, there may be issues with termination of lessons in series. If you int
 ```inkling--syntax
 untilClause ::=
 until
-      [ minimize | maximize ] <objectiveFunctionName>
+      maximize <objectiveFunctionName>
     |
       <objectiveFunctionName> relOp constantExpression
 
@@ -357,10 +357,6 @@ relOp ::=
   '==' | '<' | '>' | '<=' | '>='
 ```
 
-<aside class="notice">
-Future support of the `until` clause will include `minimize` and constant
-expressions. Current support is limited to `maximize`.
-</aside>
 
 ### Usage
 

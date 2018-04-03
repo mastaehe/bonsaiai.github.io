@@ -11,7 +11,7 @@ Curriculum statements reference an associated simulator in the [with clause][3].
 simulator used in a curriculum must be declared in a `simulator` statement.  
 
 The `simulator` statement describes the interface to a simulator. Simulators are
-generally implemented in python or C++. The Inkling program does not contain
+implemented in Python or C++. The Inkling program does not contain
 code for the simulator itself. Instead the Inkling program defines how the
 simulator is used to train Inkling concepts.
 
@@ -19,8 +19,8 @@ simulator is used to train Inkling concepts.
 
 ```inkling--syntax
 simulator <simulatorName>'('<configurationSchema>')' 
-  state '('<stateSchema>')'     # simulator state
-  control '('<controlSchema>')' # training concept predicts schema
+  state '('<stateSchema>')'     # simulation's current state
+  action '('<actionSchema>')'   # BRAIN's next action
 end
 ```
 
