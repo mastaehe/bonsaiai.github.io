@@ -1,5 +1,5 @@
 
-#Helpers 
+#Helpers
 helpers do
   def is_page_selected(page)
     current_page.url == page ? "selected" : ''
@@ -47,6 +47,7 @@ configure :build do
   # out the following two lines has been known to help
   activate :minify_css
   activate :minify_javascript
+  set :app_config, 'production'
   # activate :relative_assets
   # activate :asset_hash
   # activate :gzip
@@ -60,6 +61,6 @@ set :port, 4567
 # Navigation gem
 
 #activate :navigation
-# 
+#
 # SASS
  sass_options = { :debug_info => true }
