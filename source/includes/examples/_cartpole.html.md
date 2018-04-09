@@ -146,7 +146,7 @@ if __name__ == '__main__':
 
 This is an OpenAI Gym example which uses the OpenAI environment as its simulator. For more information about the simulator used see the [Bonsai Gym Common GitHub repo][3] which is a python library for integrating a Bonsai BRAIN with OpenAI Gym environments.
 
-[1]: https://github.com/BonsaiAI/gym-cartpole-sample
+[1]: https://github.com/BonsaiAI/bonsai-sdk/tree/master/samples/openai-gym/gym-cartpole-sample
 [2]: https://gym.openai.com/envs/CartPole-v1
-[3]: https://github.com/BonsaiAI/bonsai-gym-common
+[3]: https://github.com/BonsaiAI/bonsai-sdk/tree/master/bonsai-gym
 [4]: https://beta.bons.ai/new

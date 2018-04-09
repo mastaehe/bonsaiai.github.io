@@ -225,7 +225,7 @@ This is a Python simulator for integrating the EnergyPlus simulator into the Bon
 
 For more information on the functions inside of this simulator class and how to implement them see the [Library Reference][3].
 
-[1]: https://github.com/BonsaiAI/energyplus-sample
+[1]: https://github.com/BonsaiAI/bonsai-sdk/tree/master/samples/energyplus-sample
 [2]: https://energyplus.net/
 [3]: http://docs.bons.ai/references/library-reference.html
 [4]: https://beta.bons.ai/new
