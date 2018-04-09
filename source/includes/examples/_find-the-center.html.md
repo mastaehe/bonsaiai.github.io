@@ -252,5 +252,5 @@ This is a basic simulator for learning the simulator library. In this case it is
 
 The [README file][2] contained in the project has instructions for running this simulator in either Python or C++.
 
-[1]: https://github.com/BonsaiAI/find-the-center
-[2]: https://github.com/BonsaiAI/find-the-center/blob/master/README.md
+[1]: https://github.com/BonsaiAI/bonsai-sdk/blob/master/samples/find-the-center-py
+[2]: https://github.com/BonsaiAI/bonsai-sdk/blob/master/samples/find-the-center-py/README.md
