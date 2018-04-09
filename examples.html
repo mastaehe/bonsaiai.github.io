@@ -420,7 +420,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <p><img src="images/find-the-center.png" alt="Find the Center Diagram" /></p>
 </blockquote>
 
-<p><a href="https://github.com/BonsaiAI/find-the-center"><strong>Download the full source code on GitHub</strong></a> if you want to run this simulator locally.</p>
+<p><a href="https://github.com/BonsaiAI/bonsai-sdk/blob/master/samples/find-the-center-py"><strong>Download the full source code on GitHub</strong></a> if you want to run this simulator locally.</p>
 
 <p>In this example, we&rsquo;ll walk you through the various statements that are part of the <em>Find the Center</em> game, including options for either a Python or C++ simulator file and the Inkling file. This is a very basic example of Inkling and how to connect to a custom simulator and shows the differences between using <code class="prettyprint">libbonsai</code> (C++) and the <code class="prettyprint">bonsai-ai</code> (Python) libraries.</p>
 
@@ -643,7 +643,7 @@ It can be used in this case to find the center between two numbers.
 </code></pre>
 <p>This is a basic simulator for learning the simulator library. In this case it is used to find the center between two numbers, 0 and 2. The goal, as outlined in the Inkling file, is to reach 1. The moves that the simulator is able to make are sent from the Inkling file to the simulator and the state of the simulator is sent back to Inkling.</p>
 
-<p>The <a href="https://github.com/BonsaiAI/find-the-center/blob/master/README.md">README file</a> contained in the project has instructions for running this simulator in either Python or C++.</p>
+<p>The <a href="https://github.com/BonsaiAI/bonsai-sdk/blob/master/samples/find-the-center-py/README.md">README file</a> contained in the project has instructions for running this simulator in either Python or C++.</p>
 
           <h1 id="simpy-elevator-simulation">SimPy Elevator Simulation</h1>
 
@@ -825,7 +825,7 @@ It can be used in this case to find the center between two numbers.
 <p><img src="images/cart-pole-balance.gif" alt="Cartpole Balance" /></p>
 </blockquote>
 
-<p><a href="https://github.com/BonsaiAI/gym-cartpole-sample"><strong>Download the full source code on GitHub</strong></a> if you want to run this simulator locally. If you want to run Cartpole remotely on the Bonsai Platform as a managed simulator, create a new BRAIN selecting the Cartpole demo on <a href="https://beta.bons.ai/new">beta.bons.ai</a>.</p>
+<p><a href="https://github.com/BonsaiAI/bonsai-sdk/tree/master/samples/openai-gym/gym-cartpole-sample"><strong>Download the full source code on GitHub</strong></a> if you want to run this simulator locally. If you want to run Cartpole remotely on the Bonsai Platform as a managed simulator, create a new BRAIN selecting the Cartpole demo on <a href="https://beta.bons.ai/new">beta.bons.ai</a>.</p>
 
 <p>In this example, we&rsquo;ll walk you through the various statements that are part of the Cartpole Inkling file. Each statement is followed by an explanation of the statement.</p>
 
@@ -945,7 +945,7 @@ It can be used in this case to find the center between two numbers.
     <span class="n">sim</span> <span class="o">=</span> <span class="n">CartPole</span><span class="p">(</span><span class="n">brain</span><span class="p">)</span>
     <span class="n">sim</span><span class="o">.</span><span class="n">run_gym</span><span class="p">()</span>
 </code></pre>
-<p>This is an OpenAI Gym example which uses the OpenAI environment as its simulator. For more information about the simulator used see the <a href="https://github.com/BonsaiAI/bonsai-gym-common">Bonsai Gym Common GitHub repo</a> which is a python library for integrating a Bonsai BRAIN with OpenAI Gym environments.</p>
+<p>This is an OpenAI Gym example which uses the OpenAI environment as its simulator. For more information about the simulator used see the <a href="https://github.com/BonsaiAI/bonsai-sdk/tree/master/bonsai-gym">Bonsai Gym Common GitHub repo</a> which is a python library for integrating a Bonsai BRAIN with OpenAI Gym environments.</p>
 
           <h1 id="openai-gym-mountain-car">OpenAI Gym: Mountain Car</h1>
 
@@ -953,7 +953,7 @@ It can be used in this case to find the center between two numbers.
 <p><img src="images/mountain-car-control.gif" alt="Mountain Car Control" /></p>
 </blockquote>
 
-<p><a href="https://github.com/BonsaiAI/gym-mountaincar-sample"><strong>Download the full source code on GitHub</strong></a> if you want to run this simulator locally. If you want to run Mountain Car remotely on the Bonsai Platform as a managed simulator, create a new BRAIN selecting the Mountain Car demo on <a href="https://beta.bons.ai/new">beta.bons.ai</a></p>
+<p><a href="https://github.com/BonsaiAI/bonsai-sdk/tree/master/samples/openai-gym/gym-mountaincar-sample"><strong>Download the full source code on GitHub</strong></a> if you want to run this simulator locally. If you want to run Mountain Car remotely on the Bonsai Platform as a managed simulator, create a new BRAIN selecting the Mountain Car demo on <a href="https://beta.bons.ai/new">beta.bons.ai</a></p>
 
 <p>We&rsquo;ve used pieces of code from this example in several places, but here we&rsquo;ll walk you through all the various statements that are part of the Mountain Car Inkling file. Each statement is followed by an explanation of the statement.</p>
 
@@ -1049,7 +1049,7 @@ It can be used in this case to find the center between two numbers.
     <span class="n">sim</span> <span class="o">=</span> <span class="n">MountainCarContinuous</span><span class="p">(</span><span class="n">brain</span><span class="p">)</span>
     <span class="n">sim</span><span class="o">.</span><span class="n">run_gym</span><span class="p">()</span>
 </code></pre>
-<p>This is an OpenAI Gym example which uses the OpenAI environment as its simulator. For more information about the simulator used see the <a href="https://github.com/BonsaiAI/bonsai-gym-common">Bonsai Gym Common GitHub repo</a> which is a python library for integrating a Bonsai BRAIN with OpenAI Gym environments.</p>
+<p>This is an OpenAI Gym example which uses the OpenAI environment as its simulator. For more information about the simulator used see the <a href="https://github.com/BonsaiAI/bonsai-sdk/tree/master/bonsai-gym">Bonsai Gym Common GitHub repo</a> which is a python library for integrating a Bonsai BRAIN with OpenAI Gym environments.</p>
 
           <h1 id="energyplus-hvac-optimization">EnergyPlus HVAC Optimization</h1>
 
@@ -1057,7 +1057,7 @@ It can be used in this case to find the center between two numbers.
 <p><img src="images/energyplus-graph.png" alt="EnergyPlus Graph" /></p>
 </blockquote>
 
-<p><a href="https://github.com/BonsaiAI/energyplus-sample"><strong>Download the full source code on GitHub</strong></a> if you want to run this simulator locally. If you want to run EnergyPlus remotely on the Bonsai Platform as a managed simulator, create a new BRAIN selecting the EnergyPlus demo on <a href="https://beta.bons.ai/new">beta.bons.ai</a>.</p>
+<p><a href="https://github.com/BonsaiAI/bonsai-sdk/tree/master/samples/energyplus-sample"><strong>Download the full source code on GitHub</strong></a> if you want to run this simulator locally. If you want to run EnergyPlus remotely on the Bonsai Platform as a managed simulator, create a new BRAIN selecting the EnergyPlus demo on <a href="https://beta.bons.ai/new">beta.bons.ai</a>.</p>
 
 <p>In this example, we&rsquo;ll walk you through the various statements that are part of a sample implementation of <a href="https://energyplus.net/">EnergyPlus</a> on the Bonsai Platform, including the simulator and the Inkling files. This is a real-world example of how to use the Bonsai Platform for HVAC control using BCVTB and EnergyPlus.</p>
 
@@ -1252,7 +1252,7 @@ It can be used in this case to find the center between two numbers.
         <span class="k">print</span><span class="p">(</span><span class="s">"EnergyPlusSimulator reward:"</span><span class="p">,</span> <span class="n">reward</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">reward</span>
 </code></pre>
-<p>The full simulator file <em>energyplus_simulator.py</em> for this example is with the rest of the <a href="https://github.com/BonsaiAI/energyplus-sample">energyplus-sample code</a> on GitHub.</p>
+<p>The full simulator file <em>energyplus_simulator.py</em> for this example is with the rest of the <a href="https://github.com/BonsaiAI/bonsai-sdk/tree/master/samples/energyplus-sample">energyplus-sample code</a> on GitHub.</p>
 
 <p>This is a Python simulator for integrating the EnergyPlus simulator into the Bonsai AI Engine. This <em>energyplus_simulator.py</em> file repeatedly runs the EnergyPlus simulator in the background with new actions sent from the Bonsai AI Engine by passing the state from EnergyPlus to the backend, and the action from the backend back to EnergyPlus.</p>
 
