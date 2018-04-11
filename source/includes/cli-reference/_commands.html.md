@@ -11,6 +11,8 @@ Usage: bonsai [OPTIONS] COMMAND [ARGS]...
 Options:
   --debug / --no-debug  Enable/disable verbose debugging output.
   --version             Show the version and check if bonsai is up to date.
+  --sysinfo             Show system information.
+  --timeout INTEGER     Set timeout for CLI API requests.
   -h, --help            Show this message and exit.
 
 Commands:
@@ -29,6 +31,16 @@ Commands:
 ```
 
 Use `bonsai COMMAND --help` to get information about a specific command. You can use `bonsai --help` to view a list of options for COMMAND.
+
+### How to use timeout
+
+`bonsai --timeout [INTEGER] [COMMAND]`
+
+Example:
+`bonsai --timeout 10 list`
+
+**Note:** Order matters because it is a top level command. The following would not work: 
+`bonsai list --timeout 10`
 
 ## bonsai configure
 
