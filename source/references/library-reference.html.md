@@ -15,6 +15,7 @@ includes:
   - library-reference/brain.html.md
   - library-reference/config.html.md
   - library-reference/simulator.html.md
+  - library-reference/predictor.html.md
 
 
 search: true
