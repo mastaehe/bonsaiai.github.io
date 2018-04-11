@@ -1042,6 +1042,71 @@ out statistical information, or perform post episode cleanup.</p>
 </tr>
 </tbody></table>
 
+          <h1 id="predictor-class">Predictor Class</h1>
+
+<blockquote>
+<p>Example Inkling:</p>
+</blockquote>
+<pre class="highlight inkling tab-inkling"><code>    <span class="k">simulator</span> <span class="nx">my_simulator</span><span class="p">(</span><span class="nx">Config</span><span class="p">)</span>
+        <span class="k">action</span> <span class="p">(</span><span class="nx">Action</span><span class="p">)</span>
+        <span class="k">state</span> <span class="p">(</span><span class="nx">State</span><span class="p">)</span>
+    <span class="k">end</span>
+</code></pre>
+<blockquote>
+<p>Example code:</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="c"># As a context manager:</span>
+<span class="n">config</span> <span class="o">=</span> <span class="n">bonsai_ai</span><span class="o">.</span><span class="n">Config</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
+<span class="n">brain</span> <span class="o">=</span> <span class="n">bonsai_ai</span><span class="o">.</span><span class="n">Brain</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+<span class="n">predictor</span> <span class="o">=</span> <span class="n">Predictor</span><span class="p">(</span><span class="n">brain</span><span class="p">,</span> <span class="s">"my_simulator"</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">predictor</span><span class="p">:</span>
+    <span class="n">action</span> <span class="o">=</span> <span class="n">predictor</span><span class="o">.</span><span class="n">get_action</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+
+<span class="c"># Without context manager:</span>
+<span class="n">config</span> <span class="o">=</span> <span class="n">bonsai_ai</span><span class="o">.</span><span class="n">Config</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
+<span class="n">brain</span> <span class="o">=</span> <span class="n">bonsai_ai</span><span class="o">.</span><span class="n">Brain</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+<span class="n">predictor</span> <span class="o">=</span> <span class="n">Predictor</span><span class="p">(</span><span class="n">brain</span><span class="p">,</span> <span class="s">"my_simulator"</span><span class="p">)</span>
+
+<span class="n">action</span> <span class="o">=</span> <span class="n">predictor</span><span class="o">.</span><span class="n">get_action</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+<span class="n">predictor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre><pre class="highlight cpp tab-cpp"><code><span class="cp"># Not yet implemented
+</span></code></pre>
+<p>This class is used to interface with the server to obtain predictions for a specific BRAIN and
+is a subclass of Simulator. This class is currently unavailable in <code class="prettyprint">libbonsai</code> so only Python
+implementations are shown.</p>
+
+<p>The <code class="prettyprint">Predictor</code> class is closely related to the Inkling file that is associated with the BRAIN.
+The name used to construct <code class="prettyprint">Predictor</code> must match the name of the simulator in the Inkling file.</p>
+
+<table><thead>
+<tr>
+<th>Argument</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">brain</code></td>
+<td>The name of the BRAIN to connect to.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">name</code></td>
+<td>The name of this simulator. Must match simulator in Inkling.</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+predict(), simulate(), and episode_start() are available methods in this class but should not be overwritten.
+</aside>
+
+<h2 id="get_action-self-state">get_action(self, state)</h2>
+
+<p>Receives the Inkling action when sent a state.</p>
+
+<h2 id="close-self">close(self)</h2>
+
+<p>Closes a websocket connection. This is recommended when <code class="prettyprint">predictor()</code> is used outside of the context manager.</p>
+
       </div>
       <div class="dark-box">
           <div class="lang-selector">
