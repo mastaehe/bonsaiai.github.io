@@ -668,7 +668,48 @@ the <strong>BRAIN</strong>. The name used to construct <code class="prettyprint"
 in the <em>Inkling</em> file.</p>
 
 <p>There are two main methods that you must override, <code class="prettyprint">episode_start</code> and <code class="prettyprint">simulate</code>. The diagram
-demonstrates how these are called during training.</p>
+demonstrates how these are called during training. Optionally, one may also override
+<code class="prettyprint">episode_finish</code>, which is called at the end of an episode.</p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">brain</code></td>
+<td>The simulators Brain object.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">name</code></td>
+<td>The simulators name.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">objective_name</code></td>
+<td>The name of the current objective for an episode.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">episode_reward</code></td>
+<td>Cumulative reward for this episode so far.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">episode_count</code></td>
+<td>Number of completed episodes since sim launch.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">episode_rate</code></td>
+<td>Episodes per second.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">iteration_count</code></td>
+<td>Number of iterations for the current episode.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">iteration_rate</code></td>
+<td>Iterations per second.</td>
+</tr>
+</tbody></table>
 
 <h2 id="simulator-brain-name">Simulator(brain, name)</h2>
 
@@ -685,7 +726,7 @@ demonstrates how these are called during training.</p>
 </blockquote>
 <pre class="highlight cpp tab-cpp"><code><span class="k">class</span> <span class="nc">MySimulator</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Simulator</span> <span class="p">{</span>
  <span class="k">public</span><span class="o">:</span>
-    <span class="k">explicit</span> <span class="n">BasicSimulator</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Brain</span><span class="o">&gt;</span> <span class="n">brain</span><span class="p">,</span> <span class="n">string</span> <span class="n">name</span> <span class="p">)</span>
+    <span class="k">explicit</span> <span class="n">BasicSimulator</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Brain</span><span class="o">&gt;</span> <span class="n">brain</span><span class="p">,</span> <span class="n">string</span> <span class="n">name</span><span class="p">)</span>
         <span class="o">:</span> <span class="n">Simulator</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">brain</span><span class="p">),</span> <span class="n">move</span><span class="p">(</span><span class="n">name</span><span class="p">))</span> <span class="p">{</span>
             <span class="c1">// your simulator init code goes here.
 </span>        <span class="p">}</span>
@@ -700,6 +741,10 @@ demonstrates how these are called during training.</p>
         <span class="kt">float</span><span class="o">&amp;</span> <span class="n">reward</span><span class="p">,</span>
         <span class="kt">bool</span><span class="o">&amp;</span> <span class="n">terminal</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
             <span class="c1">// your simulation stepping code.
+</span>        <span class="p">}</span>
+
+    <span class="kt">void</span> <span class="n">episode_finish</span><span class="p">()</span> <span class="k">override</span> <span class="p">{</span>
+            <span class="c1">// your post-episode code.
 </span>        <span class="p">}</span>
 <span class="p">};</span>
 
@@ -723,6 +768,10 @@ demonstrates how these are called during training.</p>
     <span class="k">def</span> <span class="nf">simulate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">):</span>
         <span class="c"># your simulation stepping code goes here.</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">my_state</span><span class="p">,</span> <span class="n">my_reward</span><span class="p">,</span> <span class="n">is_terminal</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">episode_finish</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c"># your post episode code goes here.</span>
+        <span class="k">pass</span>
 
 <span class="o">...</span>
 
@@ -959,6 +1008,17 @@ simulation has finished or halted.</p>
 
 <p>The client should call this method in a <code class="prettyprint">while</code> loop until it returns <code class="prettyprint">false</code>.
 To run for prediction, <code class="prettyprint">brain()-&gt;config()-&gt;predict()</code> must return <code class="prettyprint">true</code>.</p>
+
+<h2 id="episode_finish">episode_finish()</h2>
+<pre class="highlight cpp tab-cpp"><code><span class="kt">void</span> <span class="n">MySimulator</span><span class="o">::</span><span class="n">episode_finish</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="err">'</span><span class="n">Episode</span><span class="o">:</span> <span class="err">'</span> <span class="o">&lt;&lt;</span> <span class="n">episode_count</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="err">'</span> <span class="n">reward</span><span class="o">:</span><span class="err">'</span> <span class="o">&lt;&lt;</span> <span class="n">episode_reward</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="k">def</span> <span class="nf">episode_finish</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'Episode:'</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">episode_count</span><span class="p">,</span>
+          <span class="s">'reward:'</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">episode_reward</span><span class="p">)</span>
+</code></pre>
+<p>This callback is called at the end of each episode. You can use it to log
+out statistical information, or perform post episode cleanup.</p>
 
 <h2 id="operator-ostream-simulator">operator&lt;&lt;(ostream, simulator)</h2>
 
