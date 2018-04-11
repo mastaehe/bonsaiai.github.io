@@ -28,6 +28,20 @@ The Bonsai Platform currently supports an API and two client libraries written i
 
 A list of examples using these can be found on the [Examples][7] page.
 
+# Integrating a Simulator with Inkling
+
+> ![Simulator Diagram](../images/inkling_simulator_comparison.png)
+
+This table describes the colors and connections between the various parts of the Inkling file and Simulator file that must be the same or connected. The source code for this example, [Find the Center][11], is available if you wish to copy/paste this example.
+
+| Color               | Description  |
+| -                   | -  |
+| Purple (dark/light) | The action schema and the name of its value must be consistent between Inkling and the simulator. |
+| Blue (dark/light)   | The state schema and the name of its value must be consistent between Inkling and the simulator. |
+| Orange (dark/light) | The simulator's configuration and value are required in Inkling but unused in the simulator file in this example. |
+| Red                 | The name of the concept must match in the curriculum. |
+| Green               | The name of the simulator must match in the curriculum and be passed into Simulator class in the simulator file. |
+
 # Running a Simulator from the CLI
 
 > Simulator config help text
@@ -130,3 +144,4 @@ Running simulations in parallel is currently only supported either when running 
 [8]: ./cli-reference.html#bproj-file
 [9]: ./library-reference.html#proxy
 [10]: https://quay.io/repository/bonsai/bonsai-ai
+[11]: ./examples.html#inkling-file
