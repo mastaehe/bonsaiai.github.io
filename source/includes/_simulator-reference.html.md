@@ -144,4 +144,4 @@ Running simulations in parallel is currently only supported either when running 
 [8]: ./cli-reference.html#bproj-file
 [9]: ./library-reference.html#proxy
 [10]: https://quay.io/repository/bonsai/bonsai-ai
-[11]: ./examples.html#inkling-file
+[11]: ../../examples.html#inkling-file
