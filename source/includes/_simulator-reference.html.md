@@ -36,11 +36,12 @@ This table describes the colors and connections between the various parts of the
 
 | Color               | Description  |
 | -                   | -  |
-| Purple (dark/light) | The action schema and the name of its value must be consistent between Inkling and the simulator. |
-| Blue (dark/light)   | The state schema and the name of its value must be consistent between Inkling and the simulator. |
-| Orange (dark/light) | The simulator's configuration and value are required in Inkling but unused in the simulator file in this example. |
-| Red                 | The name of the concept must match in the curriculum. |
-| Green               | The name of the simulator must match in the curriculum and be passed into Simulator class in the simulator file. |
+| Purple (dark/light) | The Inkling state schema field names and types must match the state dictionaries returned from `episode_start` and `simulate` in the simulator. |
+| Blue (dark/light)   | The Inkling action schema field names will match the keys in the action dictionary passed to `simulate` in the simulator, and the values will have the types specified in Inkling, and will obey the specified constraints (`{-1, 0, 1}` in the example). |
+| Orange (dark/light) | The simulator's configuration will be passed as `parameters` to the `episode_start`, and will take values from the `constrain` clause in Inkling. |
+| Red                 | The name of the concept must match the `train` clause in the curriculum for that concept. |
+| Green               | The simulator name must match between the `simulator` clause and the `with simulator` clause in the curriculum. The simulator must pass the same name to the constructor of the `Simulator` class, so the AI engine knows which simulator is connected. |
+|Turquoise            | The name of the optimization objective or reward function appears twice in the Inkling, and is available as `self.objective_name` in the simulator. |
 
 # Running a Simulator from the CLI
 
