@@ -1843,7 +1843,7 @@ The simulator then changes state in response to that action. The BRAIN then
 receives this new updated frame of state from the simulator and selects a new
 next action, so on and so on, until the BRAIN learns how to best operate the simulation.</p>
 
-<p>Our <a href="library-reference.html">Library Reference</a> describes the classes and methods used to connect an existing simulator or create a new simulator in Python. <a href="../examples.html#basic-simulator-find-the-center">Find the Center</a> is an example of a basic simulator implementation.</p>
+<p>Our <a href="library-reference.html">Library Reference</a> describes the classes and methods used to connect an existing simulator or create a new simulator in Python. <a href="../examples.html#basic-python-c-simulation">Find the Center</a> is an example of a basic simulator implementation.</p>
 
 <h3 id="example">Example</h3>
 <pre class="highlight inkling tab-inkling--code"><code>
@@ -1901,6 +1901,50 @@ The curriculum <code class="prettyprint">with</code> clause specifies <code clas
 <code class="prettyprint">score</code>. The <code class="prettyprint">objective</code> function (which is sometimes called 
 the reward function in the literature) is implemented in the simulator. 
 (Eventually implementing objective functions in Inkling will be supported.)</p>
+
+<h1 id="integrating-a-simulator-with-inkling">Integrating a Simulator with Inkling</h1>
+
+<blockquote>
+<p><img src="../images/inkling_simulator_comparison.png" alt="Simulator Diagram" /></p>
+</blockquote>
+
+<p>This table describes the colors and connections between the various parts of the Inkling file and Simulator file that must be the same or connected. The source code for this example, <a href="../examples.html#inkling-file">Find the Center</a>, is available if you wish to copy/paste this example.</p>
+
+<table><thead>
+<tr>
+<th>Color</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Purple (dark/light)</td>
+<td>The Inkling state schema field names and types must match the state dictionaries returned from <code class="prettyprint">episode_start</code> and <code class="prettyprint">simulate</code> in the simulator.</td>
+</tr>
+<tr>
+<td>Blue (dark/light)</td>
+<td>The Inkling action schema field names will match the keys in the action dictionary passed to <code class="prettyprint">simulate</code> in the simulator, and the values will have the types specified in Inkling, and will obey the specified constraints (<code class="prettyprint">{-1, 0, 1}</code> in the example).</td>
+</tr>
+<tr>
+<td>Orange (dark/light)</td>
+<td>The simulator&rsquo;s configuration passes as <code class="prettyprint">parameters</code> to the <code class="prettyprint">episode_start</code>, and will take values from the <code class="prettyprint">constrain</code> clause in Inkling.</td>
+</tr>
+<tr>
+<td>Red</td>
+<td>The name of the concept must match the <code class="prettyprint">train</code> clause in the curriculum for that concept.</td>
+</tr>
+<tr>
+<td>Green</td>
+<td>The simulator name must match between the <code class="prettyprint">simulator</code> clause and the <code class="prettyprint">with simulator</code> clause in the curriculum. The simulator must pass the same name to the constructor of the <code class="prettyprint">Simulator</code> class, so the AI engine knows which simulator is connected.</td>
+</tr>
+<tr>
+<td>Turquoise</td>
+<td>The name of the optimization objective or reward function appears twice in the Inkling, and is available as <code class="prettyprint">self.objective_name</code> in the simulator.</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+Note that config in __main__ is the brain configuration and remains the same throughout, whereas goal_config (highlighted in orange) is used at the beginning of every episode and must be named the same as it is in Inkling. These configs are unrelated.
+</aside>
 
       </div>
       <div class="dark-box">
