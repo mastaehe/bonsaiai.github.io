@@ -14,11 +14,11 @@ A simulator is an imperative model of a process, transitioning from state to sta
 
 Deep Reinforcement Learning can work with simulated models to train a BRAIN to perform tasks within the modeled system. Tasks can be as simple as "stand this pole upright" or as complex as "learn to walk." 
 
-To be effective, a BRAIN needs to be trained using DRL against a simulated model. The Bonsai SDK allows the DRL system to control your simulator during the training process. Any simulator which has an initial state, and can be incremented through time, can be connected to the Bonsai training system.
+To be effective, training a BRAIN needs to be done using DRL against a simulated model. The Bonsai SDK allows the DRL system to control your simulator during the training process. Any simulator which has an initial state, and increments through time, can connect to the Bonsai training system.
 
 ## Currently Integrated Simulators
 
-The Bonsai Platform currently supports an API and two client libraries written in Python or C++. The platform also includes connectors built ontop of these libraries. Currently available connectors:
+The Bonsai Platform supports an API and two client libraries written in Python or C++. The platform also includes connectors built on top of these libraries. Currently available connectors:
 
 * OpenAI Gym Environments (bonsai-gym)
 * Simulink Universal Coordinator
@@ -26,7 +26,26 @@ The Bonsai Platform currently supports an API and two client libraries written i
     - Interactive
 * EnergyPlus (via BCVTB)
 
-A list of examples using these can be found on the [Examples][7] page.
+A list of examples using these are on the [Examples][7] page.
+
+# Integrating a Simulator with Inkling
+
+> ![Simulator Diagram](../images/inkling_simulator_comparison.png)
+
+This table describes the colors and connections between the various parts of the Inkling file and Simulator file that must be the same or connected. The source code for this example, [Find the Center][11], is available if you wish to copy/paste this example.
+
+| Color               | Description  |
+| -                   | -  |
+| Purple (dark/light) | The Inkling state schema field names and types must match the state dictionaries returned from `episode_start` and `simulate` in the simulator. |
+| Blue (dark/light)   | The Inkling action schema field names will match the keys in the action dictionary passed to `simulate` in the simulator, and the values will have the types specified in Inkling, and will obey the specified constraints (`{-1, 0, 1}` in the example). |
+| Orange (dark/light) | The simulator's configuration passes as `parameters` to the `episode_start`, and will take values from the `constrain` clause in Inkling. |
+| Red                 | The name of the concept must match the `train` clause in the curriculum for that concept. |
+| Green               | The simulator name must match between the `simulator` clause and the `with simulator` clause in the curriculum. The simulator must pass the same name to the constructor of the `Simulator` class, so the AI engine knows which simulator is connected. |
+|Turquoise            | The name of the optimization objective or reward function appears twice in the Inkling, and is available as `self.objective_name` in the simulator. |
+
+<aside class="notice">
+Note that config in __main__ is the brain configuration and remains the same throughout, whereas goal_config (highlighted in orange) is used at the beginning of every episode and must be named the same as it is in Inkling. These configs are unrelated.
+</aside>
 
 # Running a Simulator from the CLI
 
@@ -60,9 +79,9 @@ optional arguments:
                         Enables time delta logging. Alias for --log=perf.all
 ```
 
-Currently, all connectors use a Python program to bootstrap the simulation and connect it to the Bonsai AI Engine. To run any simulation, you call a Python program which is shown in the code panel.
+Currently, all connectors use a Python program to bootstrap the simulation and connect it to the Bonsai AI Engine. To run any simulation, you call a Python program (shown in the code panel).
 
-During development, you will need to iterate quickly on your simulation, reward function, and lesson plans. You may also need to connect a debugger, or do additional logging to help you get your simulation ready to train.
+During development, you will need to iterate efficiently on your simulation, reward function, and lesson plans. You may also need to connect a debugger, or do additional logging to help you get your simulation ready to train.
 
 During the course of normal operation, one should only need to specify the prediction/training mode on the command line. The rest of the options will be read from configuration files.
 
@@ -130,3 +149,4 @@ Running simulations in parallel is currently only supported either when running 
 [8]: ./cli-reference.html#bproj-file
 [9]: ./library-reference.html#proxy
 [10]: https://quay.io/repository/bonsai/bonsai-ai
+[11]: ../../examples.html#inkling-file
