@@ -43,6 +43,10 @@ This table describes the colors and connections between the various parts of the
 | Green               | The simulator name must match between the `simulator` clause and the `with simulator` clause in the curriculum. The simulator must pass the same name to the constructor of the `Simulator` class, so the AI engine knows which simulator is connected. |
 |Turquoise            | The name of the optimization objective or reward function appears twice in the Inkling, and is available as `self.objective_name` in the simulator. |
 
+<aside class="notice">
+Note that config in __main__ is the brain configuration and remains the same throughout, whereas goal_config (highlighted in orange) is used at the beginning of every episode and must be named the same as it is in Inkling. These configs are unrelated.
+</aside>
+
 # Running a Simulator from the CLI
 
 > Simulator config help text
