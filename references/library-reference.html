@@ -393,7 +393,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 information about the BRAIN state. In future versions will be used to upload
 and download Inkling to and from the BRAIN on the server.</p>
 
-<p>Requires a configuration and a BRAIN name.</p>
+<p>Requires a configuration and a BRAIN name. The BRAIN name can be set in
+several places, and there is an order of what takes precedence over the other as follows:</p>
+
+<p>Brain() &gt;&gt; &ndash;brain &gt;&gt; .brains &gt;&gt; .bonsai[profile] &gt;&gt; .bonsai[DEFAULT] &gt;&gt; env[BONSAI_TRAIN_BRAIN]</p>
+
+<p>such that &ldquo;&gt;&gt;&rdquo; indicates a decreasing order of precedence. Note that failure to set
+BRAIN name in at least one of these places will result in a friendly error.</p>
 
 <h2 id="brain-config-name">Brain(config, name)</h2>
 
