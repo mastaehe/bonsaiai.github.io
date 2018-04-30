@@ -1,7 +1,7 @@
 # Install bonsai-ai for Python
 
 Here is the sequence of commands for installing bonsai-ai and related components. (NOTE: `bonsai-gym`
-depends on `bonsai-ai` and so installing gym by itself will bring in ai too.)
+depends on `bonsai-ai` and so installing gym by itself will bring in `bonsai-ai` too.)
 
 Do **ONE** of the following:
 
@@ -14,6 +14,15 @@ See the [Python Library Reference][5] for full details on usage of this library.
 
 > Python 3+ Install
 
+```powershell
+# Optional to install within a virtual environment
+python -m venv sdk2
+cd sdk2/Scripts
+activate
+
+pip install bonsai-ai bonsai-gym bonsai-cli
+```
+
 ```shell
 # Optional to install within a virtual environment
 python3 -m venv sdk2
@@ -23,6 +32,15 @@ pip3 install bonsai-ai bonsai-gym bonsai-cli
 ```
 
 > Python 2.7 Install
+
+```powershell
+# Optional to install within a virtual environment
+virtualenv sdk2
+cd sdk2/Scripts
+activate
+
+pip install bonsai-ai bonsai-gym bonsai-cli
+```
 
 ```shell
 # Optional to install within a virtual environment
@@ -39,6 +57,14 @@ leave it out and pip install directly into your system if you wish.
 ## Install with Anaconda
 
 > Anaconda Install
+
+```powershell
+# Optional to install within a virtual environment
+conda create -n sdk2 pip
+source activate sdk2
+
+pip install bonsai-ai bonsai-gym bonsai-cli
+```
 
 ```shell
 # Optional to install within a virtual environment

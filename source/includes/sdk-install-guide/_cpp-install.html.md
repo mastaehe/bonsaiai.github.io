@@ -4,7 +4,11 @@
 The C++ library is still in beta and currently only available on macOS.
 </aside>
 
+```powershell
+# Currently unavailable on Windows
 ```
+
+```shell
 $ brew install BonsaiAI/homebrew-bonsai/bonsai
 ```
 
