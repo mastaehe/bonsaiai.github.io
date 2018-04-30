@@ -237,7 +237,7 @@ mixpanel.init("91fbf7b68fb2356f91916026f221ddd5", {
 
   </head>
 
-  <body class="guides guides_sdk-install-guide" data-languages="[]">
+  <body class="guides guides_sdk-install-guide" data-languages="[&quot;powershell&quot;,&quot;shell&quot;]">
 
 
 	  <!-- Google Tag Manager (noscript) -->
@@ -313,6 +313,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </a>
     <div class="tocify-wrapper">
 
+        <div class="lang-selector">
+              <a href="#" data-language-name="powershell">Windows</a>
+              <a href="#" data-language-name="shell">macOS</a>
+        </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
         </div>
@@ -376,7 +380,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="content">
         
           <h1 id="sdk-overview">SDK Overview</h1>
-
+<pre class="highlight powershell tab-powershell"><code><span class="c1">###########################################################</span>
+<span class="c1"># Windows specific command prompt instructions shown here #</span>
+<span class="c1">###########################################################</span>
+</code></pre><pre class="highlight shell tab-shell"><code><span class="c">#########################################################</span>
+<span class="c"># macOS specific command prompt instructions shown here #</span>
+<span class="c">#########################################################</span>
+</code></pre>
 <p>The Bonsai SDK is made up of a command line interface for interacting with and controlling BRAINs, a library for connecting simulations to a brain for training or predictions, and examples of simulators connecting to BRAINs. Bonsai libraries known as <code class="prettyprint">libbonsai</code> (C++) and <code class="prettyprint">bonsai-ai</code> (Python) wrap the Bonsai API to simplify the process of building simulators in C++ and Python programming languages. <code class="prettyprint">bonsai-ai</code> is compatible with Python 2.7+ on Windows 7/10, macOS, and Linux.</p>
 
 <p>It is strongly suggested that you first follow our guide to <a href="cli-install-guide.html">Install the CLI</a> so you can be sure to have any Python prerequisites already installed.</p>
@@ -388,7 +398,7 @@ The C++ library is still in beta and currently only available on macOS.
           <h1 id="install-bonsai-ai-for-python">Install bonsai-ai for Python</h1>
 
 <p>Here is the sequence of commands for installing bonsai-ai and related components. (NOTE: <code class="prettyprint">bonsai-gym</code>
-depends on <code class="prettyprint">bonsai-ai</code> and so installing gym by itself will bring in ai too.)</p>
+depends on <code class="prettyprint">bonsai-ai</code> and so installing gym by itself will bring in <code class="prettyprint">bonsai-ai</code> too.)</p>
 
 <p>Do <strong>ONE</strong> of the following:</p>
 
@@ -404,7 +414,13 @@ depends on <code class="prettyprint">bonsai-ai</code> and so installing gym by i
 <blockquote>
 <p>Python 3+ Install</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code><span class="c"># Optional to install within a virtual environment</span>
+<pre class="highlight powershell tab-powershell"><code><span class="c1"># Optional to install within a virtual environment</span>
+python -m venv sdk2
+<span class="nb">cd </span>sdk2/Scripts
+activate
+
+pip install bonsai-ai bonsai-gym bonsai-cli
+</code></pre><pre class="highlight shell tab-shell"><code><span class="c"># Optional to install within a virtual environment</span>
 python3 -m venv sdk2
 <span class="nb">source </span>sdk2/bin/activate
 
@@ -413,7 +429,13 @@ pip3 install bonsai-ai bonsai-gym bonsai-cli
 <blockquote>
 <p>Python 2.7 Install</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code><span class="c"># Optional to install within a virtual environment</span>
+<pre class="highlight powershell tab-powershell"><code><span class="c1"># Optional to install within a virtual environment</span>
+virtualenv sdk2
+<span class="nb">cd </span>sdk2/Scripts
+activate
+
+pip install bonsai-ai bonsai-gym bonsai-cli
+</code></pre><pre class="highlight shell tab-shell"><code><span class="c"># Optional to install within a virtual environment</span>
 virtualenv sdk2
 <span class="nb">source </span>sdk2/bin/activate
 
@@ -428,7 +450,12 @@ leave it out and pip install directly into your system if you wish.</p>
 <blockquote>
 <p>Anaconda Install</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code><span class="c"># Optional to install within a virtual environment</span>
+<pre class="highlight powershell tab-powershell"><code><span class="c1"># Optional to install within a virtual environment</span>
+conda create -n sdk2 pip
+<span class="nb">source </span>activate sdk2
+
+pip install bonsai-ai bonsai-gym bonsai-cli
+</code></pre><pre class="highlight shell tab-shell"><code><span class="c"># Optional to install within a virtual environment</span>
 conda create -n sdk2 pip
 <span class="nb">source </span>activate sdk2
 
@@ -445,7 +472,8 @@ environments. For more information, refer to the <a href="https://www.anaconda.c
 <aside class="warning">
 The C++ library is still in beta and currently only available on macOS.
 </aside>
-<pre class="highlight plaintext"><code>$ brew install BonsaiAI/homebrew-bonsai/bonsai
+<pre class="highlight powershell tab-powershell"><code><span class="c1"># Currently unavailable on Windows</span>
+</code></pre><pre class="highlight shell tab-shell"><code><span class="gp">$ </span>brew install BonsaiAI/homebrew-bonsai/bonsai
 </code></pre>
 <p>The C++ library <code class="prettyprint">libbonsai</code> can currently be installed via Homebrew. The formula is hosted on BonsaiAI&rsquo;s GitHub, therefore the full link to the formula must be specified when using <code class="prettyprint">brew</code> while it is in beta.</p>
 
@@ -464,6 +492,10 @@ The C++ library is still in beta and currently only available on macOS.
 
       </div>
       <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="powershell">Windows</a>
+                <a href="#" data-language-name="shell">macOS</a>
+          </div>
       </div>
     </div>
 
