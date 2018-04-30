@@ -158,11 +158,34 @@ python3 mountaincar_simulator.py --predict=latest
 
 After your BRAIN is finished training it can play the Mountain Car game. How well it does depends on how long you let it train! Using your BRAIN involves calling Python on your simulator file, but now in prediction mode with `--predict=latest` which will use the version of the latest training session that you just ran. You can also specify a number like `--predict=1` if you want to predict from a different version of your brain if you have trained it multiple times.
 
+# Next Steps
+
+Now that you've completed this guide, you can:
+
+**Check out our [Learn the Inkling Language][6] Guide.**
+
+It contains all of the concepts and components of our unique programming language. You'll learn:
+
+* How to assess a simulation and write an Inkling file to teach a BRAIN.
+* The core concepts behind the Inkling language.
+* The components of the Inkling language.
+
+And we have these other resources that will enable you to maximize your AI development experience:
+
+* [Understand BRAIN Graphs][7] Guide
+* VIDEO: [Writing Great Reward Functions][8]
+* [Bonsai's Blog][9]
+
+
 [1]: getting-started.html#overview
 [2]: cli-install-guide.html#install-prerequisites
 [3]: ../references/cli-reference.html
 [4]: https://gym.openai.com/envs/MountainCar-v0
 [5]: https://beta.bons.ai
+[6]: ./inkling-guide.html
+[7]: ./web-graphs-guide.html
+[8]: https://www.youtube.com/watch?v=0R3PnJEisqk&list=PLAktfMEMCsOY9HUZKIuGI6yqefGBuszAV&index=4
+[9]: https://bons.ai/blog
 [16]: ../images/graph-mountaincar-training.png
 [17]: ../references/cli-reference.html#bonsai-configure
 [18]: ../references/cli-reference.html#bonsai-create
