@@ -2,15 +2,13 @@
 
 Now that you’ve reviewed this guide, you can:
 
-Check out our [**Writing Inkling Files Tutorial**][Link TBD].
+* Read the [Simulator Reference][1] for details on how to use the SDK
+* Review our [Simulation Guide][2] before you get started integrating or building your simulation
+* Visit the [Library Reference][3] for SDK library details
+* Download [Bonsai Platform Examples][4] to test out an example on your computer
 
-And we have these other resources that will enable you to maximize your AI development experience:
 
-* VIDEO: [Advanced Platform Techniques][https://www.youtube.com/watch?v=E_JtPzT5-dg&index=3&list=PLAktfMEMCsOY9HUZKIuGI6yqefGBuszAV]
-* VIDEO: [Writing Great Reward Functions][https://www.youtube.com/watch?v=0R3PnJEisqk&list=PLAktfMEMCsOY9HUZKIuGI6yqefGBuszAV&index=4]
-* TUTORIAL: [Use Bonsai’s API with Jupyter][http://docs.bons.ai/guides/jupyter-api-guide.html]
-
-[1]: ./inkling-guide.html
-[2]: ./web-graphs-guide.html
-[3]: https://www.youtube.com/watch?v=0R3PnJEisqk&list=PLAktfMEMCsOY9HUZKIuGI6yqefGBuszAV&index=4
-[4]: https://bons.ai/blog
+[1]: ../references/simulator-reference.html
+[2]: ./simulation-guide.html
+[3]: ../references/library-reference.html
+[4]: ../examples.html

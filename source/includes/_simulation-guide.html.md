@@ -54,3 +54,19 @@ Training reinforcement learning algorithms can require simulating millions of ac
 * Some simulators (e.g. Simulink) allow compiling models to a C program that runs much faster than the original. When possible, we encourage this.
 * It is ideal if the simulation can be easily run many times on the same machine, and on many machines in parallel.
 Simulators that allow many models to be run without requiring separate licenses for each make it easier to parallelize.
+
+# Next Steps
+
+Now that you’ve reviewed this guide, you can:
+
+* Download the [Bonsai SDK][1] to build or integrate your simulator
+* Read the [Simulator Reference][2] for details on how to use the SDK
+* [Learn the Inkling Language][3]
+* Download [Bonsai Platform Examples][4] to test out an example on your computer
+
+
+[1]: ./sdk-install-guide.html
+[2]: ../references/simulator-reference.html
+[3]: ./inkling-guide.html
+[4]: ../examples.html
+

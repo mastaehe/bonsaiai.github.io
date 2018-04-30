@@ -10,6 +10,7 @@ includes:
 - inkling-guide/concepts.html.md
 - inkling-guide/schemas.html.md
 - inkling-guide/curriculum-and-lessons.html.md
+- inkling-guide/next-steps.html.md
 
 search: true
 ---
