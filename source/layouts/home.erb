@@ -47,11 +47,11 @@
 					<p class="sub-text-1">Bonsai enables developers to build, teach, and use intelligence models.</p>
 
 					<div class="flex-desktop-center-rows margin-top-1 max-width-x row-override">
-					<a class="green-button" href="/guides/getting-started.html">Quick Start</a>
+					<%= link_to 'Quick Start', '/guides/getting-started.html', :class => 'green-button' %>
 					</div>
 
 					<br><br>
-					<p class="sub-text-1"><a href="/examples.html#simulink-examples" style="color:#3bb94f">Simulink Examples</a> are available for MathWorks users.</p>
+					<p class="sub-text-1"><%= link_to 'Simulink Examples', '/examples.html#simulink-examples', :style => 'color:#3bb94f' %> are available for MathWorks users.</p>
 
 				</div>
 
@@ -68,10 +68,10 @@
 							<p class="p2">Tutorials</p>
 
 							<ul>
-								<li> <a href="/guides/cli-install-guide.html">Install the CLI</a></li>
-								<li> <a href="/guides/sdk-install-guide.html">Install the SDK</a></li>
-								<li> <a href="/guides/local-dev-guide.html">Run the Platform Locally</a></li>
-								<li> <a href="/guides/jupyter-api-guide.html">Use Bonsai's API with Jupyter</a> </li>
+								<li><%= link_to 'Install the CLI', '/guides/cli-install-guide.html' %></li>
+								<li><%= link_to 'Install the SDK', '/guides/sdk-install-guide.html' %></li>
+								<li><%= link_to 'Run the Platform Locally', '/guides/local-dev-guide.html' %></li>
+								<li><%= link_to "Use Bonsai's API with Jupyter", '/guides/jupyter-api-guide.html' %></li>
 							</ul>
 
 						</div>
@@ -85,10 +85,10 @@
 							<p class="p2">Guides</p>
 
 							<ul>
-								<li> <a href="/guides/inkling-guide.html">Learn the Inkling Language</a> </li>
-								<li> <a href="/guides/simulation-guide.html">Learn About Simulation Requirements</a> </li>
-								<li> <a href="/guides/ai-engine-guide.html">Understand AI Engine Components</a> </li>
-								<li> <a href="/guides/web-graphs-guide.html">Understand BRAIN Graphs</a> </li>
+								<li><%= link_to 'Learn the Inkling Language', "/guides/inkling-guide.html" %></li>
+								<li><%= link_to 'Learn About Simulation Requirements', "/guides/simulation-guide.html" %></li>
+								<li><%= link_to 'Understand AI Engine Components', "/guides/ai-engine-guide.html" %> </li>
+								<li><%= link_to 'Understand BRAIN Graphs', "/guides/web-graphs-guide.html" %></li>
 							</ul>
 
 						</div>
@@ -102,11 +102,11 @@
 							<p class="p2">References</p>
 
 							<ul>
-								<li> <a href="/references/api-reference.html">API Reference</a> </li>
-								<li> <a href="/references/cli-reference.html">CLI Reference</a> </li>
-								<li> <a href="/references/inkling-reference.html">Inkling Reference</a> </li>
-								<li> <a href="/references/library-reference.html">Library Reference</a> </li>
-								<li> <a href="/references/simulator-reference.html">Simulator Reference</a> </li>
+								<li><%= link_to 'API Reference', "/references/api-reference.html" %> </li>
+								<li><%= link_to 'CLI Reference', "/references/cli-reference.html" %> </li>
+								<li><%= link_to 'Inkling Reference', "/references/inkling-reference.html" %> </li>
+								<li><%= link_to 'Library Reference', "/references/library-reference.html" %> </li>
+								<li><%= link_to 'Simulator Reference', "/references/simulator-reference.html" %></li>
 							</ul>
 						</div>
 					</div>
@@ -119,10 +119,10 @@
 					<p class="p2">Simulation Examples</p>
 
 					<div class="flex-desktop-center-rows sub-text-1">
-					<a href="/examples.html#basic-python-c-simulation"><img src="/images/icon-code.svg">Basic Python Examples</a>
-					<a href="/examples.html#openai-gym-cartpole"><img src="/images/icon-wrench.svg">OpenAI Gym Examples</a>
-					<a href="/examples.html#energyplus-hvac-optimization"><img src="/images/icon-dial.svg">Industrial HVAC Example</a>
-					<a href="/examples.html#simulink-examples"><img src="/images/icon-data.svg">MathWorks Simulink Examples</a>
+					<%= link_to '<img src="/images/icon-code.svg">Basic Python Examples', "/examples.html#basic-python-c-simulation" %>
+					<%= link_to '<img src="/images/icon-wrench.svg">OpenAI Gym Examples', "/examples.html#openai-gym-cartpole" %>
+					<%= link_to '<img src="/images/icon-dial.svg">Industrial HVAC Example', "/examples.html#energyplus-hvac-optimization" %>
+					<%= link_to '<img src="/images/icon-data.svg">MathWorks Simulink Examples', "/examples.html#simulink-examples" %>
 					</div>
 				</div>
 
