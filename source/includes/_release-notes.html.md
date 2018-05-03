@@ -1,16 +1,21 @@
 # Product Release Notes
 
-These release notes combine releases for the web (BRAIN Dashboard), the backend services (Bonsai AI Engine), and Bonsai's API. All releases are tagged by date for the web, backend, and API. Releases are based on version for the SDKs and CLI which are available on GitHub.
+These release notes combine releases for the web (BRAIN Dashboard), the backend services (Bonsai AI Engine), and Bonsai's API. All releases are tagged by date for the web, backend, and API. SDK and CLI are released separately and have different version numbers. They are available on GitHub.
 
 Release Notes for CLI: [https://github.com/BonsaiAI/bonsai-cli/blob/master/CHANGELOG.md]()
 
-Release Notes for Python SDK (bonsai-ai): [https://github.com/BonsaiAI/bonsai-sdk/blob/master/bonsai-ai/CHANGELOG.md]()
+Release Notes for Python SDK (bonsai-ai, bonsai-cli, and bonsai-gym libraries): [https://github.com/BonsaiAI/bonsai-sdk/blob/master/bonsai-ai/CHANGELOG.md]()
+
+### 2018.03.07
+
+Various bug fixes, including:
+
+* Fixes for resume training
 
 ### 2018.02.23
 
 Various bug fixes, including:
 
-* Fix for concept threshold termination tags not terminating as expected
 * Removed limitation for Inkling variables ending in underscore followed by a number
 * Fixed backend race conditions causing dropped simulators
 
@@ -19,7 +24,6 @@ Various bug fixes, including:
 Notable features:
 
 * You can now Resume Training a BRAIN or Restart Training instead
-* Tags for reward and iteration based termination of concepts
 
 Various bug fixes, including:
 
