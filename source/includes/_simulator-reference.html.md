@@ -101,7 +101,35 @@ my_config.proxy == 'myproxy:5000'
 $ python <simulator_file>.py --proxy=localhost:3128
 ```
 
-To connect a simulator from behind a corporate proxy, command line tools like the Bonsai SDK need to know where to send traffic. For the Bonsai SDK, this is done by providing the proxy server address and port to the simulator config when running a simulator. There are multiple ways that you can do this such as through the CLI or in the simulator code itself.
+To connect a simulator from behind a corporate proxy, tools like the Bonsai SDK need to know where to send traffic. This is done by providing the proxy server address and port to the simulator config when running a simulator. There are multiple ways that you can do this such as through the CLI or in the simulator code itself.
+
+### Environment Variables
+
+> Windows Environment Variables
+
+```powershell
+| Variable       | Value                                      |
+| -------------- | ------------------------------------------ |
+| ALL_PROXY      | http://username:password@URL:3456          |
+```
+
+> macOS/Linux Environment Variables
+
+```sh
+$ export ALL_PROXY=http://username:password@URL:3456 
+```
+
+If the previous usage for the SDK does not work for the CLI as well you may need to specify the proxy details as environment variables.  Proxy details differ between companies, so ask your IT staff for the proxy URL, port number, and if any login information such as username/password is also needed.
+
+The examples shown use `ALL_PROXY` but `HTTPS_PROXY` and `HTTP_PROXY` are also supported.
+
+**Windows**
+
+Go to System -> Advanced system settings -> Environment Variables to set these in Windows.
+
+**macOS/Linux**
+
+Use `export` in macOS or Linux in a terminal window to set these variables into your PATH. You may wish to copy and paste this into your `.bash_profile` for future use.
 
 ## Prediction
 
