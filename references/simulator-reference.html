@@ -507,7 +507,37 @@ optional arguments:
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="gp">$ </span>python &lt;simulator_file&gt;.py --proxy<span class="o">=</span>localhost:3128
 </code></pre>
-<p>To connect a simulator from behind a corporate proxy, command line tools like the Bonsai SDK need to know where to send traffic. For the Bonsai SDK, this is done by providing the proxy server address and port to the simulator config when running a simulator. There are multiple ways that you can do this such as through the CLI or in the simulator code itself.</p>
+<p>To connect a simulator from behind a corporate proxy, tools like the Bonsai SDK need to know where to send traffic. This is done by providing the proxy server address and port to the simulator config when running a simulator. There are multiple ways that you can do this such as through the CLI or in the simulator code itself.</p>
+
+<h3 id="environment-variables">Environment Variables</h3>
+
+<blockquote>
+<p>Set Windows Environment Variable</p>
+</blockquote>
+<pre class="highlight plaintext"><code># HTTPS_PROXY and HTTP_PROXY are also supported
+
+| Variable       | Value                                      |
+| -------------- | ------------------------------------------ |
+| ALL_PROXY      | http://username:password@URL:3456          |
+</code></pre>
+<blockquote>
+<p>Set macOS/Linux Environment Variable</p>
+</blockquote>
+<pre class="highlight sh tab-shell"><code><span class="c"># HTTPS_PROXY and HTTP_PROXY are also supported</span>
+
+<span class="gp">$ </span><span class="nb">export </span><span class="nv">ALL_PROXY</span><span class="o">=</span>http://username:password@URL:3456 
+</code></pre>
+<p>If the previous usage for the SDK does not work for the CLI as well you may need to specify the proxy details as environment variables.  Proxy details differ between companies, so ask your IT staff for the proxy URL, port number, and if any login information such as username/password is also needed.</p>
+
+<p>The examples shown use <code class="prettyprint">ALL_PROXY</code> but <code class="prettyprint">HTTPS_PROXY</code> and <code class="prettyprint">HTTP_PROXY</code> are also supported.</p>
+
+<p><strong>Windows</strong></p>
+
+<p>Go to System -&gt; Advanced system settings -&gt; Environment Variables to set these in Windows.</p>
+
+<p><strong>macOS/Linux</strong></p>
+
+<p>Use <code class="prettyprint">export</code> in macOS or Linux in a terminal window to set these variables into your PATH. You may wish to copy and paste this into your <code class="prettyprint">.bash_profile</code> for future use.</p>
 
 <h2 id="prediction">Prediction</h2>
 <pre class="highlight python tab-python"><code><span class="c"># Default version is latest</span>
