@@ -18,7 +18,7 @@ See the [Python Library Reference][5] for full details on usage of this library.
 # Optional to install within a virtual environment
 python -m venv sdk2
 cd sdk2/Scripts
-activate
+.\activate
 
 pip install bonsai-ai bonsai-gym bonsai-cli
 ```
@@ -37,7 +37,7 @@ pip3 install bonsai-ai bonsai-gym bonsai-cli
 # Optional to install within a virtual environment
 virtualenv sdk2
 cd sdk2/Scripts
-activate
+.\activate
 
 pip install bonsai-ai bonsai-gym bonsai-cli
 ```
