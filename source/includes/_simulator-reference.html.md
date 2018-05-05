@@ -105,17 +105,21 @@ To connect a simulator from behind a corporate proxy, tools like the Bonsai SDK 
 
 ### Environment Variables
 
-> Windows Environment Variables
+> Set Windows Environment Variable
 
-```powershell
+```text
+# HTTPS_PROXY and HTTP_PROXY are also supported
+
 | Variable       | Value                                      |
 | -------------- | ------------------------------------------ |
 | ALL_PROXY      | http://username:password@URL:3456          |
 ```
 
-> macOS/Linux Environment Variables
+> Set macOS/Linux Environment Variable
 
 ```sh
+# HTTPS_PROXY and HTTP_PROXY are also supported
+
 $ export ALL_PROXY=http://username:password@URL:3456 
 ```
 
