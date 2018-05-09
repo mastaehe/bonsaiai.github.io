@@ -1114,6 +1114,174 @@ predict(), simulate(), and episode_start() are available methods in this class b
 
 <p>Closes a websocket connection. This is recommended when <code class="prettyprint">predictor()</code> is used outside of the context manager.</p>
 
+          <h1 id="logging">Logging</h1>
+
+<h2 id="logger-class-python">Logger Class (Python)</h2>
+
+<p>In python, the <code class="prettyprint">Logger</code> class serves as an entry point for runtime logging to <code class="prettyprint">stderr</code>. All instances of <code class="prettyprint">Logger</code> 
+share the same internal state, so enabling a particular log domain for a <code class="prettyprint">Logger</code> in any scope
+enables that log domain for all <code class="prettyprint">Logger</code> instances in the current process.</p>
+
+<h3 id="logger">Logger()</h3>
+
+<blockquote>
+<p>Example code: </p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="kn">from</span> <span class="nn">bonsai_ai.logger</span> <span class="kn">import</span> <span class="n">Logger</span>
+
+<span class="n">log</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">()</span>
+
+<span class="k">class</span> <span class="nc">MySim</span><span class="p">(</span><span class="n">bonsai_ai</span><span class="o">.</span><span class="n">Simulator</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">simulate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">):</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">mydomain</span><span class="p">(</span><span class="s">"My Log Info"</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+    <span class="o">...</span>
+    <span class="n">log</span><span class="o">.</span><span class="n">set_enabled</span><span class="p">(</span><span class="s">"mydomain"</span><span class="p">)</span>
+    <span class="o">...</span>
+
+</code></pre>
+<p>Return an instance of <code class="prettyprint">Logger</code> that reflects the shared state of all active Loggers.</p>
+
+<h3 id="set_enabled-key">set_enabled(key)</h3>
+
+<blockquote>
+<p>Example code:</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="n">log</span> <span class="o">=</span> <span class="n">bonsai_ai</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">Logger</span><span class="p">()</span>
+<span class="n">log</span><span class="o">.</span><span class="n">set_enabled</span><span class="p">(</span><span class="s">"foobar"</span><span class="p">)</span>
+<span class="n">log</span><span class="o">.</span><span class="n">foobar</span><span class="p">(</span><span class="s">"baz"</span><span class="p">)</span> <span class="c"># logs "baz" to stderr (along with timestamp and domain info)</span>
+<span class="n">log</span><span class="o">.</span><span class="n">barfoo</span><span class="p">(</span><span class="s">"zab"</span><span class="p">)</span> <span class="c"># no log, no error</span>
+</code></pre>
+<p>Enables the given log domain for all active Loggers.</p>
+
+<table><thead>
+<tr>
+<th>Argument</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">key</code></td>
+<td>A string describing which log domain to enable.</td>
+</tr>
+</tbody></table>
+
+<h3 id="set_enable_all-enable_all">set_enable_all(enable_all)</h3>
+
+<blockquote>
+<p>Example code:</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="n">log</span> <span class="o">=</span> <span class="n">bonsai_ai</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">Logger</span><span class="p">()</span>
+<span class="n">log</span><span class="o">.</span><span class="n">set_enable_all</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">log</span><span class="o">.</span><span class="n">foobar</span><span class="p">(</span><span class="s">"baz"</span><span class="p">)</span> <span class="c"># logs "baz" to stderr (along with timestamp and domain info)</span>
+<span class="n">log</span><span class="o">.</span><span class="n">barfoo</span><span class="p">(</span><span class="s">"zab"</span><span class="p">)</span> <span class="c"># logs "zab" to stderr (along with timestamp and domain info)</span>
+</code></pre>
+<p>When set, the <code class="prettyprint">Logger</code> prints any message, regardless of whether the particular domain
+was explicitly enabled. Corresponds to the <code class="prettyprint">--verbose</code> command line flag.</p>
+
+<table><thead>
+<tr>
+<th>Argument</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">enable_all</code></td>
+<td>A bool describing whether verbose logging is enabled.</td>
+</tr>
+</tbody></table>
+
+<h2 id="logging-class-c">logging Class (C++)</h2>
+
+<p>In C++, runtime logging is accomplished using the <code class="prettyprint">BONSAI_LOG</code> macro, which  <code class="prettyprint">BONSAI_LOG</code> may be invoked
+freely on log domains of your choosing, but the accompanying messages will only be printed if
+a given domain has been enabled either through command line flags (see <code class="prettyprint">bonsai::Config</code>) or
+through <code class="prettyprint">bonsai::logging::set_enabled</code>.</p>
+
+<p>Consumers of <code class="prettyprint">bonsai::logging</code> may enable a custom handler for <code class="prettyprint">BONSAI_LOG</code> via
+<code class="prettyprint">logging::set_handler</code>. By default, logs print to <code class="prettyprint">stderr</code>.</p>
+
+<p>Additionally, use <code class="prettyprint">logging::set_use_colors</code> to enable/disable ASCII colors in log output.</p>
+
+<blockquote>
+<p>Example code:</p>
+</blockquote>
+<pre class="highlight cpp tab-cpp"><code><span class="k">using</span> <span class="n">bonsai</span><span class="o">::</span><span class="n">logging</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">MySimulator</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Simulator</span> <span class="p">{</span>
+<span class="p">...</span>
+    <span class="kt">void</span> <span class="n">simulate</span><span class="p">(</span><span class="k">const</span> <span class="n">bonsai</span><span class="o">::</span><span class="n">InklingMessage</span><span class="o">&amp;</span> <span class="n">action</span><span class="p">,</span>
+                   <span class="n">bonsai</span><span class="o">::</span><span class="n">InklingMessage</span><span class="o">&amp;</span> <span class="n">state</span><span class="p">,</span>
+                   <span class="kt">float</span><span class="o">&amp;</span> <span class="n">reward</span><span class="p">,</span> <span class="kt">bool</span><span class="o">&amp;</span> <span class="n">terminal</span><span class="p">)</span> <span class="p">{</span>
+        <span class="p">...</span>
+        <span class="n">BONSAI_LOG</span><span class="p">(</span><span class="n">foobar</span><span class="p">,</span> <span class="s">"things ("</span> <span class="o">&lt;&lt;</span> <span class="n">reward</span> <span class="o">&lt;&lt;</span> <span class="s">") stuff"</span><span class="p">);</span> <span class="c1">// logged
+</span>        <span class="n">BONSAI_LOG</span><span class="p">(</span><span class="n">barfoo</span><span class="p">,</span> <span class="s">"things ("</span> <span class="o">&lt;&lt;</span> <span class="n">reward</span> <span class="o">&lt;&lt;</span> <span class="s">") stuff"</span><span class="p">);</span> <span class="c1">// not logged
+</span>        <span class="p">...</span>
+    <span class="p">}</span>
+<span class="p">...</span>
+<span class="p">};</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="p">...</span>
+    <span class="n">logging</span><span class="o">::</span><span class="n">log</span><span class="p">().</span><span class="n">set_enabled</span><span class="p">(</span><span class="nb">true</span><span class="p">)</span>
+    <span class="n">logging</span><span class="o">::</span><span class="n">log</span><span class="p">().</span><span class="n">set_enabled</span><span class="p">(</span><span class="s">"foobar"</span><span class="p">)</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+</code></pre>
+<h3 id="bonsai_log-domain-message">BONSAI_LOG(domain, message)</h3>
+
+<p><code class="prettyprint">BONSAI_LOG</code> is a preprocessor macro defined in <code class="prettyprint">logging.hpp</code>. It encapsulates various calls into
+the <code class="prettyprint">logging</code> singleton and performs the necessary domain checks and I/O procedures without the
+overhead of an additional function call.</p>
+
+<blockquote>
+<p>Example code:</p>
+</blockquote>
+<pre class="highlight cpp tab-cpp"><code><span class="kt">void</span> <span class="n">MySimulator</span><span class="o">::</span><span class="n">simulate</span><span class="p">()</span> <span class="p">{</span>
+    <span class="p">...</span>
+    <span class="n">BONSAI_LOG</span><span class="p">(</span><span class="n">foobar</span><span class="p">,</span> <span class="s">"my hovercraft has "</span> <span class="o">&lt;&lt;</span> <span class="n">val</span> <span class="o">&lt;&lt;</span> <span class="s">"eels"</span><span class="p">);</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+</code></pre>
+<p>The log domain should not include quotes. It will be quoted into a string literal at preprocessor time.</p>
+
+<p>Similarly, the message will be interpolated into an expression of the form <code class="prettyprint">std::cerr &lt;&lt; X &lt;&lt; std::endl;</code>. As such, <code class="prettyprint">message</code> can be any expression which produces syntactically correct C++  when substituted for X in an expression of that form.</p>
+
+<h3 id="enabled">enabled()</h3>
+
+<p>Global switch to enable/disable logging.</p>
+<pre class="highlight cpp tab-cpp"><code><span class="n">bonsai</span><span class="o">::</span><span class="n">logging</span><span class="o">::</span><span class="n">log</span><span class="p">().</span><span class="n">enabled</span><span class="p">()</span> <span class="o">==</span> <span class="nb">false</span><span class="p">;</span>
+<span class="n">bonsai</span><span class="o">::</span><span class="n">logging</span><span class="o">::</span><span class="n">log</span><span class="p">().</span><span class="n">set_enabled</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+</code></pre>
+<p>Individual switches to enable/disable specific domains.</p>
+<pre class="highlight cpp tab-cpp"><code><span class="n">bonsai</span><span class="o">::</span><span class="n">logging</span><span class="o">::</span><span class="n">log</span><span class="p">().</span><span class="n">enabled</span><span class="p">(</span><span class="s">"foobar"</span><span class="p">)</span> <span class="o">==</span> <span class="nb">false</span><span class="p">;</span>
+<span class="n">bonsai</span><span class="o">::</span><span class="n">logging</span><span class="o">::</span><span class="n">log</span><span class="p">().</span><span class="n">set_enabled</span><span class="p">(</span><span class="s">"foobar"</span><span class="p">);</span>
+</code></pre>
+<h3 id="enabled_all">enabled_all()</h3>
+
+<p>Switch to enable/disable verbose logging.</p>
+<pre class="highlight cpp tab-cpp"><code><span class="n">bonsai</span><span class="o">::</span><span class="n">logging</span><span class="o">::</span><span class="n">log</span><span class="p">().</span><span class="n">enabled_all</span><span class="p">()</span> <span class="o">==</span> <span class="nb">true</span><span class="p">;</span>
+<span class="n">bonsai</span><span class="o">::</span><span class="n">logging</span><span class="o">::</span><span class="n">log</span><span class="p">().</span><span class="n">set_enable_all</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+</code></pre>
+<h3 id="use_colors">use_colors</h3>
+
+<p>Switch to enable/disable ASCII colors in log output. Enabled by default.</p>
+<pre class="highlight cpp tab-cpp"><code><span class="n">bonsai</span><span class="o">::</span><span class="n">logging</span><span class="o">::</span><span class="n">log</span><span class="p">().</span><span class="n">use_colors</span><span class="p">()</span> <span class="o">==</span> <span class="nb">true</span><span class="p">;</span>
+<span class="n">bonsai</span><span class="o">::</span><span class="n">logging</span><span class="o">::</span><span class="n">log</span><span class="p">().</span><span class="n">set_use_colors</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+</code></pre>
+<h3 id="set_handler-functionvoid-stringstream">set_handler(function&lt;void(stringstream&amp;)&gt;)</h3>
+
+<p>Set a custom handler for <code class="prettyprint">BONSAI_LOG</code>. Instead of streaming directly to 
+<code class="prettyprint">std::cerr</code>, each log line will be passed to this custom handler in the form of a <code class="prettyprint">std::stringstream</code>.</p>
+
+<blockquote>
+<p>Example code:</p>
+</blockquote>
+<pre class="highlight cpp tab-cpp"><code><span class="n">bonsai</span><span class="o">::</span><span class="n">logging</span><span class="o">::</span><span class="n">log</span><span class="p">().</span><span class="n">set_handler</span><span class="p">([](</span><span class="n">std</span><span class="o">::</span><span class="n">stringstream</span><span class="o">&amp;</span> <span class="n">ss</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%s"</span><span class="p">,</span> <span class="n">ss</span><span class="p">.</span><span class="n">str</span><span class="p">().</span><span class="n">c_str</span><span class="p">());</span>
+<span class="p">});</span>
+</code></pre>
       </div>
       <div class="dark-box">
           <div class="lang-selector">

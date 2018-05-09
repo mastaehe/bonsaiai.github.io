@@ -431,6 +431,8 @@ Usage: bonsai [OPTIONS] COMMAND [ARGS]...
 Options:
   --debug / --no-debug  Enable/disable verbose debugging output.
   --version             Show the version and check if bonsai is up to date.
+  --sysinfo             Show system information.
+  --timeout INTEGER     Set timeout for CLI API requests.
   -h, --help            Show this message and exit.
 
 Commands:
@@ -448,6 +450,16 @@ Commands:
   train      Start and stop training on a BRAIN.
 </code></pre>
 <p>Use <code class="prettyprint">bonsai COMMAND --help</code> to get information about a specific command. You can use <code class="prettyprint">bonsai --help</code> to view a list of options for COMMAND.</p>
+
+<h3 id="how-to-use-timeout">How to use timeout</h3>
+
+<p><code class="prettyprint">bonsai --timeout [INTEGER] [COMMAND]</code></p>
+
+<p>Example:
+<code class="prettyprint">bonsai --timeout 10 list</code></p>
+
+<p><strong>Note:</strong> Order matters because it is a top level command. The following would not work: 
+<code class="prettyprint">bonsai list --timeout 10</code></p>
 
 <h2 id="bonsai-configure">bonsai configure</h2>
 <pre class="highlight plaintext"><code>$ bonsai configure --help
