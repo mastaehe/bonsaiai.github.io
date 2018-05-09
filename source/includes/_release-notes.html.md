@@ -1,3 +1,13 @@
+# Supported Versions
+
+This is a list of Bonsai's current versions of products that it supports. All dates in YEAR.MONTH.DAY format.
+
+| Software   | Version | Last Updated |
+| -          | -       | -            |
+| bonsai-cli | 0.8.23  | 2018.05.07   |
+| bonsai-ai  | 2.0.6   | 2018.05.07   |
+| bonsai-gym | 2.0.4   | 2018.05.07   |
+
 # Product Release Notes
 
 These release notes combine releases for the web (BRAIN Dashboard), the backend services (Bonsai AI Engine), and Bonsai's API. All releases are tagged by date for the web, backend, and API. SDK and CLI are released separately and have different version numbers. They are available on GitHub.
