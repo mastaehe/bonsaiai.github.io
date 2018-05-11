@@ -1,16 +1,16 @@
-# Supported Versions
+# Latest Versions
 
-This is a list of Bonsai's current versions of products that it supports. All dates in YEAR.MONTH.DAY format.
+This is a list of Bonsai's currently supported versions of its software packages. All dates in YEAR.MONTH.DAY format.
 
-| Software   | Version | Last Updated |
-| -          | -       | -            |
-| bonsai-cli | 0.8.23  | 2018.05.07   |
-| bonsai-ai  | 2.0.6   | 2018.05.07   |
-| bonsai-gym | 2.0.4   | 2018.05.07   |
+| Software               | Package Name | Versions | Last Updated |
+| -                      | -            | -        | -            |
+| Command Line Interface | bonsai-cli   | 0.8.23   | 2018.05.07   |
+| Python Library         | bonsai-ai    | 2.0.6    | 2018.05.07   |
+| Gym Common             | bonsai-gym   | 2.0.4    | 2018.05.07   |
 
 # Product Release Notes
 
-These release notes combine releases for the web (BRAIN Dashboard), the backend services (Bonsai AI Engine), and Bonsai's API. All releases are tagged by date for the web, backend, and API. SDK and CLI are released separately and have different version numbers. They are available on GitHub.
+These release notes combine releases for the web (BRAIN Dashboard), the backend services (Bonsai AI Engine), the Inkling language, and Bonsai's API. All releases are tagged by date for the web, backend, Inkling, and API. SDK and CLI are released separately and have different version numbers. They are available on GitHub.
 
 Release Notes for CLI: [https://github.com/BonsaiAI/bonsai-cli/blob/master/CHANGELOG.md]()
 
