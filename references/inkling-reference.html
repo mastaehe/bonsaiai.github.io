@@ -644,6 +644,454 @@ paired grouping operators like <code class="prettyprint">{</code> and <code clas
 <li>An Inkling comment begins after the character <strong>#</strong> and extends to the end of the line.</li>
 </ul>
 
+          <h1 id="schemas">Schemas</h1>
+
+<p>This is the reference for the keyword <code class="prettyprint">schema</code>. Also covered are the
+definitions and uses of <a href="#types">Inkling types</a>, including <a href="#constrained-types-and-range-expressions">type constraints</a>.  These are used in schema declarations.</p>
+
+<h2 id="schema-declarations">Schema Declarations</h2>
+<pre class="highlight inkling tab-inkling--code"><code>   <span class="k">schema</span> <span class="nx">bar</span>       <span class="c1"># schema declaration</span>
+      <span class="kr">Bool</span> <span class="nx">field1</span><span class="p">,</span>
+      <span class="kr">Int8</span> <span class="nx">field2</span>
+   <span class="k">end</span>
+</code></pre>
+<p>Schemas are declared with the <code class="prettyprint">schema</code> statement.</p>
+
+<p>In Inkling a <code class="prettyprint">schema</code> describes a named record and its contained fields. Each field in a schema has a name and a type. A field may also have a type constraint that constrains the values that the datum described by this field will take.</p>
+<pre class="highlight inkling tab-inkling--code"><code>   <span class="k">concept</span> <span class="nx">foo</span>
+      <span class="k">is</span> <span class="nx">classifier</span>
+      <span class="k">predicts</span> <span class="p">(</span><span class="nx">bar</span><span class="p">)</span> <span class="c1"># schema reference</span>
+   <span class="k">end</span>
+</code></pre>
+<p>Statements (such as the <code class="prettyprint">concept</code> statement) can reference schemas by name.</p>
+<pre class="highlight inkling tab-inkling--code"><code>   <span class="k">concept</span> <span class="nx">foo</span>
+      <span class="k">is</span> <span class="nx">classifier</span>
+      <span class="k">predicts</span> <span class="p">(</span><span class="kr">Bool</span> <span class="nx">field1</span><span class="p">,</span> <span class="kr">Int8</span> <span class="nx">field2</span><span class="p">)</span> <span class="c1"># anonymous schema</span>
+   <span class="k">end</span>
+</code></pre>
+<p>Schemas can also be <a href="#anonymous-schema">anonymous</a>. In that case, instead of a schema name, a list of named fields is present.</p>
+
+<p>Schemas describe the structure of data in Inkling streams, such as the
+predefined <code class="prettyprint">input</code> and <code class="prettyprint">output</code> streams. In addition, many Inkling statements (for
+example <code class="prettyprint">concept</code> and <code class="prettyprint">curriculum</code>) use schema references to describe the data that flows in and out of the construct.</p>
+
+<blockquote>
+<p>Schema Declaration Syntax</p>
+</blockquote>
+<pre class="highlight inkling tab-inkling--syntax"><code><span class="nx">schemaStmt</span> <span class="p">:</span><span class="o">=</span> 
+<span class="k">schema</span> <span class="o">&lt;</span><span class="nx">name</span><span class="o">&gt;</span>                      
+     <span class="nx">fieldDclnList</span> 
+<span class="k">end</span>
+
+<span class="nx">fieldDclnList</span>   <span class="p">:</span><span class="o">=</span>  <span class="nx">fieldDcln</span> <span class="p">[','</span> <span class="nx">fieldDcln</span>  <span class="p">]</span><span class="o">*</span>  
+
+<span class="nx">fieldDcln</span>       <span class="p">:</span><span class="o">=</span>  <span class="nx">scalarDcln</span>   <span class="o">|</span> <span class="nx">structureDcln</span> 
+
+<span class="nx">scalarDcln</span>      <span class="p">:</span><span class="o">=</span>  <span class="nx">primitiveType</span>   <span class="nx">rangeExpression</span><span class="p">?</span> <span class="o">&lt;</span><span class="nx">name</span><span class="o">&gt;</span>
+
+<span class="nx">structureDcln</span>   <span class="p">:</span><span class="o">=</span>  <span class="nx">structure_type</span>   <span class="nx">structure_init</span> <span class="o">&lt;</span><span class="nx">name</span><span class="o">&gt;</span> 
+
+<span class="nx">structure_type</span>  <span class="p">:</span><span class="o">=</span>  <span class="kr">Luminance</span>
+
+<span class="nx">structure_init</span>  <span class="p">:</span><span class="o">=</span>  <span class="p">'('</span> 
+                        <span class="nx">luminance_init</span>
+                    <span class="p">')'</span>
+
+<span class="nx">luminance_init</span>  <span class="p">:</span><span class="o">=</span>  <span class="nx">integerLiteral</span>  <span class="p">','</span> <span class="nx">integerLiteral</span> 
+</code></pre>
+<p>In the Schema Declaration Syntax, you will see references to Inkling primitive types and structured types. These are discussed in in the <a href="#structured-types">Structured Types</a> section. </p>
+
+<aside class="warning">
+Due to limitations with Inkling’s communication with Tensorflow you can’t end your schema variables with an underscore and number such as `variable_1`, `variable_22`, etc.
+</aside>
+
+<h3 id="usage">Usage</h3>
+
+<p>Schema fields must be separated from each other by commas. Schema declarations
+are terminated by the <code class="prettyprint">end</code> keyword.</p>
+
+<p>Field types can be any of the <a href="#primitive-types">Inkling primitive types</a> and <a href="#structured-types">Inkling structured types</a>. </p>
+
+<p>A schema field that has a primitive type can also have a type constraint that
+constrains the set of potential values for that field. Examples and syntax of
+type constraints are included in the <a href="#constrained-types-and-range-expressions">Constrained Types</a> section.</p>
+
+<h3 id="discussion">Discussion</h3>
+
+<p>Schemas tell the BRAIN system how to translate large matrices (tensors) to usable
+values.</p>
+
+<p>Note the inkling compiler does not do this translation, that is a runtime
+transformation.  However the inkling compiler performs static checks
+to verify that the schemas are valid in the context in which they are used. </p>
+<pre class="highlight inkling tab-inkling--code"><code>  <span class="k">schema</span> <span class="nx">MNIST_schema</span>
+    <span class="kr">Luminance</span><span class="p">(</span><span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">)</span> <span class="nx">image</span> <span class="c1"># structured type</span>
+  <span class="k">end</span>
+
+  <span class="k">schema</span> <span class="nx">my_schema</span>
+    <span class="kr">Int32</span> <span class="nx">x</span><span class="p">,</span>                <span class="c1"># primitive type</span>
+    <span class="kr">Int32</span><span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="p">}</span> <span class="nx">z</span>            <span class="c1"># primitive type with type constraint</span>
+  <span class="k">end</span>
+</code></pre>
+<p>The code panel contains a few example schemas. 
+The last field <code class="prettyprint">z</code> in <code class="prettyprint">my_schema</code> has constrained type <code class="prettyprint">Int32{1:5}</code>. For more information on this feature see <a href="#constrained-types-and-range-expressions">Constrained Types</a>.</p>
+
+<h2 id="schema-references">Schema References</h2>
+<pre class="highlight inkling tab-inkling--code"><code>   <span class="k">concept</span> <span class="nx">MyConcept</span>
+      <span class="k">is</span> <span class="nx">classifier</span>
+      <span class="k">predicts</span> <span class="p">(</span><span class="nx">MySchema</span><span class="p">)</span>       <span class="c1"># a schema reference</span>
+   <span class="k">end</span>
+</code></pre>
+<p>Inkling statements can reference schemas by name. </p>
+
+<h6 id="anonymous-schema">Anonymous Schema</h6>
+<pre class="highlight inkling tab-inkling--code"><code>   <span class="k">concept</span> <span class="nx">MyConcept</span>
+      <span class="k">is</span> <span class="nx">classifier</span>
+      <span class="k">predicts</span> <span class="p">(</span><span class="kr">UInt8</span> <span class="nx">MyField</span><span class="p">)</span>  <span class="c1"># a anonymous schema </span>
+   <span class="k">end</span>
+</code></pre>
+<p>Anywhere a schema name can
+be referenced, a list of fields can appear. This is an <strong>anonymous schema</strong>. 
+Anonymous schema can also be empty (that is, they can contain no
+field definitions), if allowed in context.</p>
+
+<blockquote>
+<p>Schema Reference Syntax</p>
+</blockquote>
+<pre class="highlight inkling tab-inkling--syntax"><code><span class="nx">schemaRef</span> <span class="p">:</span><span class="o">=</span>                 
+     <span class="p">'('</span>   <span class="p">')'</span>                  <span class="c1"># empty anonymous schema</span>
+ <span class="o">|</span>   <span class="p">'('</span> <span class="o">&lt;</span><span class="nx">name</span><span class="o">&gt;</span> <span class="p">')'</span>             <span class="c1"># named schema</span>
+ <span class="o">|</span>   <span class="p">'('</span>  <span class="o">&lt;</span><span class="nx">fieldDclnList</span><span class="o">&gt;</span> <span class="p">')</span>    <span class="c1"># non-empty anonymous schema</span>
+</code></pre>
+<h2 id="types">Types</h2>
+
+<p>Inkling supports both primitive types and structured types.</p>
+
+<h6 id="primitive-types">Primitive Types</h6>
+
+<blockquote>
+<p>Primitive Types List</p>
+</blockquote>
+<pre class="highlight inkling tab-inkling--syntax"><code><span class="nx">primitiveType</span> <span class="p">::</span><span class="o">=</span>
+  <span class="kr">Double</span> <span class="o">|</span> <span class="kr">Float64</span> <span class="o">|</span> <span class="kr">Float32</span> <span class="o">|</span> <span class="kr">Int8</span> <span class="o">|</span> <span class="kr">Int16</span> <span class="o">|</span> <span class="kr">Int32</span> <span class="o">|</span>
+  <span class="kr">Int64</span> <span class="o">|</span> <span class="kr">UInt8</span> <span class="o">|</span> <span class="kr">UInt16</span> <span class="o">|</span> <span class="kr">UInt32</span>  <span class="o">|</span> <span class="kr">UInt64</span> <span class="o">|</span> <span class="kr">Bool</span> <span class="o">|</span> <span class="kr">String</span>
+</code></pre>
+<p>The Inkling set of primitive types includes numeric, string, and boolean types.</p>
+
+<aside class="warning">
+Only constrained Strings are currently implemented.
+</aside>
+
+<p>In the code panel you will see the set of primitive types which are used in schema declarations. </p>
+
+<p>The integer suffix indicates the size in bits of the type. </p>
+
+<p>Integer types beginning with &lsquo;U&rsquo; are unsigned. </p>
+
+<p><code class="prettyprint">Double</code> and <code class="prettyprint">Float64</code> are synonyms.</p>
+
+<h6 id="structured-types">Structured Types</h6>
+
+<blockquote>
+<p>Structured Types List</p>
+</blockquote>
+<pre class="highlight inkling tab-inkling--syntax"><code><span class="nx">structure_type</span> <span class="p">::</span><span class="o">=</span>                      <span class="c1"># syntax</span>
+  <span class="kr">Luminance</span>
+</code></pre><pre class="highlight inkling tab-inkling--code"><code><span class="k">schema</span> <span class="nx">BallLocationSchema</span>               <span class="c1"># example</span>
+  <span class="kr">Luminance</span><span class="p">(</span><span class="mi">84</span><span class="p">,</span> <span class="mi">336</span><span class="p">)</span> <span class="nx">pixels</span>
+<span class="k">end</span>
+</code></pre>
+<p>Structured types in Inkling are intended to support common
+Machine Learning types. The only Machine Learning type currently supported is
+<code class="prettyprint">Luminance</code>. This support will be expanded to <code class="prettyprint">Matrix</code> and <code class="prettyprint">Vector</code>, among
+others in the future.</p>
+
+<h6 id="constrained-types-and-range-expressions">Constrained Types and Range Expressions</h6>
+<pre class="highlight inkling tab-inkling--code"><code>  <span class="k">schema</span> <span class="nx">my_schema</span>
+    <span class="kr">Int32</span><span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="p">}</span> <span class="nx">z</span>            <span class="c1"># primitive type with type constraint</span>
+  <span class="k">end</span>
+</code></pre>
+<p>A constrained type is a type which is associated with a constraint.
+The type plus constraint is effectively a set definition. 
+A field declared with a
+constrained type can only take values that are a member of the set defined by
+the constraint. In the example in the code panel, the field <code class="prettyprint">z</code> can only take on
+values between <code class="prettyprint">1</code> and <code class="prettyprint">5</code>. </p>
+
+<p>Constrained types are supported in schemas and in lesson clauses. Types are
+constrained by means of <strong>range expressions</strong>.
+A range expression on a type has the effect of constraining the values of the type to values defined by the range expression. </p>
+
+<ul>
+<li>In a schema the range expression constrains the values in the field. </li>
+<li>In lessons the range expression constrains the values of the placeholder being configured.</li>
+</ul>
+<pre class="highlight inkling tab-inkling--code"><code><span class="k">schema</span> <span class="nx">MyOutput</span> 
+   <span class="kr">UInt8</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">}</span>    <span class="nx">label</span><span class="p">,</span>       <span class="c1"># a list of UInt8 values</span>
+   <span class="kr">Int64</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">:</span><span class="mi">100</span><span class="p">}</span>      <span class="nx">x</span><span class="p">,</span>           <span class="c1"># start:step:stop, step= 5, 0..100</span>
+   <span class="kr">Int64</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="mi">100</span><span class="p">}</span>        <span class="nx">y</span><span class="p">,</span>           <span class="c1"># start:stop, step= 1, 0..100</span>
+   <span class="kr">Int64</span> <span class="p">{</span><span class="mi">0</span><span class="p">..</span><span class="mi">100</span><span class="p">:</span><span class="mi">25</span><span class="p">}</span>    <span class="nx">z</span><span class="p">,</span>           <span class="c1"># start:stop, numsteps=25, step= 4, 0..100</span>
+   <span class="kr">Float32</span> <span class="p">{</span><span class="mi">0</span><span class="p">..</span><span class="mi">2</span><span class="p">:</span><span class="mi">5</span><span class="p">}</span>     <span class="nx">a</span>            <span class="c1"># gives (0, .5., 1.0, 1.5, 2.0)</span>
+<span class="k">end</span>
+</code></pre>
+<p>The syntax for a constrained type is the same for schema fields and placeholder expressions.</p>
+
+<p>In the code panel are some examples of type constraints as they could appear in a schema definition. Curly braces delineate the range expression.</p>
+
+<p>Inkling supports <strong>numeric range expressions</strong> and <strong>value list range
+expressions</strong>. </p>
+
+<h6 id="numeric-range-expressions">Numeric Range Expressions</h6>
+
+<blockquote>
+<p>Numeric Range Expression Syntax</p>
+</blockquote>
+<pre class="highlight inkling tab-inkling--syntax"><code> <span class="kr">Double</span> <span class="o">|</span> <span class="kr">Float64</span> <span class="o">|</span> <span class="kr">Float32</span> <span class="o">|</span> <span class="kr">Int8</span> <span class="o">|</span> <span class="kr">Int16</span> <span class="o">|</span> <span class="kr">Int32</span> <span class="o">|</span> <span class="kr">Int64</span> <span class="o">|</span> <span class="kr">UInt8</span> <span class="o">|</span> <span class="kr">UInt16</span> <span class="o">|</span> <span class="kr">UInt32</span> <span class="o">|</span> <span class="kr">UInt64</span>
+  <span class="p">'{'</span> 
+      <span class="nx">start</span> <span class="p">':'</span> <span class="p">[</span> <span class="nx">step</span><span class="p">':']?</span> <span class="nx">stop</span>       <span class="c1"># 'colon range'</span>
+      <span class="o">|</span>  
+      <span class="nx">start</span> <span class="p">'.'</span> <span class="p">'.'</span> <span class="nx">stop</span> <span class="p">':'</span> <span class="nx">numSteps</span>  <span class="c1"># 'dot range'</span>
+  <span class="p">'}'</span> 
+</code></pre>
+<p>For numeric range expressions there are two types: </p>
+
+<ul>
+<li><strong>colon range</strong> </li>
+<li><strong>dot range</strong> </li>
+</ul>
+
+<p>A <strong>dot range</strong> must specify numSteps. numSteps must be a positive integer constant. Today, <strong>dot range</strong> expressions cannot be used in <code class="prettyprint">predicts</code> schemas with <code class="prettyprint">is estimator</code> concepts. </p>
+
+<p>A <strong>colon range</strong> can specifies an optional <strong>step size</strong>. If step size is omitted, the range includes all values of the given type between <strong>start</strong> and <strong>end</strong>. For example, in <strong>colon range</strong> expressions with integer types, if an explicit step is not specified, the default step size is 1.</p>
+
+<p>Step size is required for FloatXX fields in the output schemas for <code class="prettyprint">is classifier</code> concepts. </p>
+
+<p>Note that today, all fields in schemas used in the predicts clause of <code class="prettyprint">is estimator</code> concepts must have type FloatXX with no explicit step.</p>
+
+<h3 id="usage">Usage</h3>
+
+<p>For some ranges, it is clearer to specify the number of steps in the
+range then the step size. For example <code class="prettyprint">Int32{-11003..743299:100}</code> makes it clear 
+that a large range has 100 elements. Using step size for such a range would not
+clearly communicate that information. </p>
+
+<p>In other contexts, the step size is of interest, and we use the colon range. For
+example, in the range <code class="prettyprint">Int32{0:2:10}</code>, we have divided the range into elements (0,2,4,6,8,10).
+The step size of two communicates information about the distribution of values
+in the range. </p>
+<pre class="highlight inkling tab-inkling--code"><code><span class="kr">Int64</span>  <span class="p">{</span> <span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">:</span><span class="mi">1</span> <span class="p">}</span>     <span class="c1"># is invalid. The step size is larger than the range.</span>
+<span class="kr">Int64</span>  <span class="p">{</span> <span class="mi">0</span><span class="p">..</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span> <span class="p">}</span>    <span class="c1"># is invalid. Values generated are floating point not integer. </span>
+<span class="kr">Float32</span><span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">..</span><span class="mi">1</span><span class="p">:</span><span class="mi">10</span> <span class="p">}</span>   <span class="c1"># is valid. Negative bounds allowed.</span>
+<span class="kr">Int8</span>   <span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">4</span><span class="p">:</span><span class="o">-</span><span class="mi">100</span><span class="p">}</span>   <span class="c1"># is valid. stop &lt; start is valid if and only if step is negative. </span>
+<span class="kr">UInt32</span> <span class="p">{</span><span class="o">-</span><span class="mi">10</span><span class="p">:</span><span class="mi">10</span><span class="p">}</span>      <span class="c1"># is invalid. Unsigned integer range contains signed values.</span>
+</code></pre>
+<p>The code panel contains some examples of valid and invalid ranges. </p>
+
+<p>For <strong>colon range</strong>, step can be a floating point number. </p>
+
+<p>For <strong>dot range</strong>, number of steps (numSteps) must be a positive integer.</p>
+
+<p>For <strong>colon range</strong>, the step size can be negative only if stop is less than start.</p>
+
+<p>For both <strong>colon range</strong> and <strong>dot range</strong>:</p>
+
+<ul>
+<li><p>The <strong>start point</strong> is inclusive (it is included in the values of the range) and fixed. </p></li>
+<li><p>The <strong>start point</strong> is exact (to the maximum extent possible if the range expression type is floating point). </p></li>
+<li><p>The <strong>end point</strong> must be reachable from the range start by applying the step. (The range must be bounded.) </p></li>
+<li><p>The <strong>end point</strong> may or may not be included in the values of the range. If you
+land on it exactly it is in the range. If you don&rsquo;t land on it exactly it is not
+in the range. For example <code class="prettyprint">Int8 {0:3:10}</code> gives you (0, 3, 6, 9). The end point
+<code class="prettyprint">10</code> is not included. The specification of <code class="prettyprint">10</code> as the stop point is not an error (because it is a limit, not an endpoint). </p></li>
+</ul>
+
+<p>You can think of the <strong>end point</strong> as a limit. It is included only if, after
+applying the (step or numSteps) expression, you land on it exactly. 
+Otherwise the highest value landed on which is less than the end point is the final value in the range. </p>
+
+<h6 id="value-list-range-expressions">Value List Range Expressions</h6>
+
+<p> </p>
+
+<blockquote>
+<p>Value List Range Expression Syntax</p>
+</blockquote>
+<pre class="highlight inkling tab-inkling--syntax"><code><span class="nx">primitiveType</span> 
+    <span class="p">'{'</span> 
+        <span class="p">[</span> <span class="nx">integerLiteral</span> <span class="p">[</span> <span class="p">','</span> <span class="nx">integerLiteral</span> <span class="p">]</span><span class="o">*</span> <span class="p">]</span>
+     <span class="o">|</span>  <span class="p">[</span> <span class="nx">floatLiteral</span> <span class="p">[</span> <span class="p">','</span> <span class="nx">floatLiteral</span> <span class="p">]</span><span class="o">*</span> <span class="p">]</span>
+     <span class="o">|</span>  <span class="p">[</span> <span class="nx">booleanLiteral</span> <span class="p">[</span> <span class="p">','</span> <span class="nx">booleanLiteral</span> <span class="p">]?</span> <span class="p">]</span>
+    <span class="p">'}'</span> 
+</code></pre>
+<p>Inkling supports range expressions for value lists. </p>
+
+<p>A value list range
+expression can be defined for numeric types
+and the primitive type <code class="prettyprint">Bool</code>.</p>
+
+<h3 id="usage">Usage</h3>
+<pre class="highlight inkling tab-inkling--code"><code>    <span class="kr">UInt8</span>  <span class="p">{</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">}</span>             <span class="c1"># is valid</span>
+    <span class="kr">UInt8</span>  <span class="p">{</span><span class="mi">7</span><span class="p">,</span> <span class="o">-</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">}</span>            <span class="c1"># is invalid (negative integer in unsigned range)</span>
+</code></pre>
+<p>Value list range expressions support allowing arbitrary lists of values to constitute the
+range expression set, rather than start and end points. </p>
+
+<p>A value list range expression must have all its elements be valid values for the
+specified type. </p>
+
+<p>A value list range expression must conform to the signed or unsigned attribute
+of the specified type (if there is such an attribute). </p>
+
+<h6 id="schema-matching">Schema Matching</h6>
+
+<p>Inkling uses schemas to understand and interpret the data format of streams.  The Inkling compiler performs schema match checking and will report errors if schemas which are expected to match do not. </p>
+<pre class="highlight inkling tab-inkling--code"><code><span class="k">schema</span> <span class="nx">GameState</span>
+  <span class="kr">Luminance</span><span class="p">(</span><span class="mi">84</span><span class="p">,</span> <span class="mi">336</span><span class="p">)</span> <span class="nx">pixels</span>
+<span class="k">end</span>
+<span class="err"> </span>
+<span class="k">concept</span> <span class="nx">keep_paddle_under_ball</span> 
+  <span class="k">is</span> <span class="nx">classifier</span>
+  <span class="k">predicts</span> <span class="p">(</span><span class="nx">PlayerMove</span><span class="p">)</span>
+  <span class="k">follows</span> <span class="nx">ball_location</span><span class="p">,</span> 
+          <span class="kr">input</span><span class="p">(</span><span class="nx">GameState</span><span class="p">)</span>           <span class="c1"># &lt;--- (1) MATCH </span>
+<span class="k">end</span>
+<span class="err"> </span>
+<span class="k">concept</span> <span class="nx">high_score</span> 
+  <span class="k">is</span> <span class="nx">classifier</span>
+  <span class="k">predicts</span> <span class="p">(</span><span class="nx">PlayerMove</span><span class="p">)</span>
+  <span class="k">follows</span> <span class="nx">keep_paddle_under_ball</span><span class="p">,</span> 
+          <span class="kr">input</span><span class="p">(</span><span class="nx">GameState</span><span class="p">)</span>           <span class="c1"># &lt;--- (1) MATCH </span>
+  <span class="k">feeds</span> <span class="kr">output</span>
+<span class="k">end</span>
+<span class="err"> </span>
+<span class="k">concept</span> <span class="nx">ball_location</span> 
+  <span class="k">is</span> <span class="nx">estimator</span>
+  <span class="k">predicts</span> <span class="p">(</span><span class="kr">UInt32</span> <span class="nx">x</span><span class="p">,</span> <span class="kr">UInt32</span> <span class="nx">y</span><span class="p">)</span>
+  <span class="k">follows</span> 
+    <span class="kr">input</span><span class="p">(</span><span class="kr">Luminance</span><span class="p">(</span><span class="mi">84</span><span class="p">,</span> <span class="mi">336</span><span class="p">)</span> <span class="nx">pixels</span><span class="p">)</span> <span class="c1"># &lt;--- (2) MATCH</span>
+<span class="k">end</span>
+<span class="err"> </span>
+<span class="k">concept</span> <span class="nx">ball_X_location</span> <span class="k">is</span> <span class="nx">estimator</span>
+  <span class="k">predicts</span> <span class="p">(</span><span class="kr">UInt32</span> <span class="nx">X_location</span><span class="p">)</span>
+  <span class="k">follows</span> 
+    <span class="kr">input</span><span class="p">(</span><span class="kr">Luminance</span><span class="p">(</span><span class="mi">84</span><span class="p">,</span> <span class="mi">330</span><span class="p">)</span> <span class="nx">pixels</span><span class="p">)</span> <span class="c1"># &lt;--- (3) NO MATCH</span>
+<span class="k">end</span>
+</code></pre>
+<p>Matching for schemas is both structural and name based. Field names matter.
+Types matter.</p>
+
+<ul>
+<li>Two references by name to the same schema match because a schema matches itself. </li>
+<li>Two references to different schema names match if both schemas define the same list of field types in the same order with the same names. For structured types whose declaration includes size, the sizes must be equal.</li>
+<li>Two anonymous schemas match if both define the same field types in the same order with the same names. </li>
+<li>A schema referenced by name matches an anonymous schema if both define the same field types in the same order with the same names. </li>
+</ul>
+
+<p>The associated example shows successful schema matching and failed schema matching. 
+The rule being checked is that all uses of <code class="prettyprint">input</code> use the same schema. </p>
+
+<ul>
+<li>(1) shows a valid schema match by name (for <code class="prettyprint">input</code>). </li>
+<li>(2) shows a valid match by field type, field name, and size (for <code class="prettyprint">input</code>). </li>
+<li>(3) shows a failed match (size is not equal, for <code class="prettyprint">input</code>). </li>
+</ul>
+
+<p>Every Inkling program has the predefined stream <code class="prettyprint">input</code> available to it. Since there is a single stream associated with the keyword <code class="prettyprint">input</code>, there can be only one definition of the data format of that stream. Once defined, the data format of a stream cannot change dynamically.  If that schema changes inkling compiler will flag that change as an error. Thus any reference to the <code class="prettyprint">input</code> stream must have a schema that matches all other schemas used with the <code class="prettyprint">input</code> stream. </p>
+
+<h6 id="constraint-compatibility-in-the-lesson-configure-clause">Constraint Compatibility in the Lesson Configure Clause</h6>
+<pre class="highlight inkling tab-inkling--code"><code><span class="k">simulator</span> <span class="nx">breakout_simulator</span><span class="p">(</span><span class="nx">BreakoutConfig</span><span class="p">)</span>
+   <span class="k">state</span> <span class="p">(</span><span class="nx">GameState</span><span class="p">)</span>
+   <span class="k">action</span><span class="p">(</span><span class="nx">PlayerMove</span><span class="p">)</span>
+<span class="nx">End</span>
+<span class="err"> </span>
+<span class="k">schema</span> <span class="nx">BreakoutConfig</span>
+  <span class="kr">UInt32</span> <span class="nx">level</span><span class="p">,</span>
+  <span class="kr">UInt8</span><span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">}</span> <span class="nx">paddle_width</span><span class="p">,</span>
+  <span class="kr">Float32</span> <span class="nx">bricks_percent</span>
+<span class="k">end</span>
+<span class="err"> </span>
+<span class="k">curriculum</span> <span class="nx">ball_location_curriculum</span>
+  <span class="k">train</span> <span class="nx">ball_location</span>
+  <span class="k">with</span> <span class="k">simulator</span> <span class="nx">breakout_simulator</span>
+  <span class="k">objective</span> <span class="nx">ball_location_distance</span>
+
+    <span class="k">lesson</span> <span class="nx">more_bricks</span> <span class="k">follows</span> <span class="nx">no_bricks</span>
+      <span class="k">configure</span>
+        <span class="k">constrain</span> <span class="nx">bricks_percent</span> <span class="k">with</span> <span class="kr">Float32</span><span class="p">{</span><span class="mf">0.1</span><span class="p">:</span><span class="mf">0.01</span><span class="p">:</span><span class="mf">1.0</span><span class="p">},</span>
+        <span class="k">constrain</span> <span class="nx">level</span> <span class="k">with</span> <span class="kr">UInt32</span><span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">},</span>
+        <span class="k">constrain</span> <span class="nx">paddle_width</span> <span class="k">with</span> <span class="kr">UInt8</span><span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">}</span>
+      <span class="k">train</span>
+        <span class="k">from</span> <span class="nx">frame</span> <span class="k">in</span> <span class="nx">breakout_simulator</span>
+        <span class="k">select</span> <span class="nx">frame</span>
+        <span class="k">send</span> <span class="nx">frame</span>
+      <span class="k">test</span>
+        <span class="k">from</span> <span class="nx">frame</span> <span class="k">in</span> <span class="nx">breakout_simulator</span>
+        <span class="k">select</span> <span class="nx">frame</span>
+        <span class="k">send</span> <span class="nx">frame</span>
+      <span class="k">until</span>
+        <span class="k">maximize</span> <span class="nx">ball_location_distance</span>
+<span class="k">end</span>
+</code></pre>
+<p>Constraints can be specified in the lesson configure clause. 
+These constraints must be compatible with the configuration schema of the
+associated simulator. 
+The code panel contains some Inkling code from the breakout program to show an example. </p>
+
+<p>The constraints in a lesson configure clause are constraints on the fields of
+the configuration schema of the simulator.
+Here, the lesson configure constraints are constraining the fields of schema <code class="prettyprint">BreakoutConfig</code>.</p>
+
+<p>Given simulator <code class="prettyprint">breakout_simulator</code>, the constraints in the lesson configure section must have these characteristics to be compatible with schema <code class="prettyprint">BreakoutConfig</code>:</p>
+
+<ol>
+<li>They must specify exactly the same type and field name as the schema declaration. A constraint cannot use an Int8 where a UInt32 was originally specified.</li>
+<li>For the range expression, the range in the configure must specify exactly the same range or a subrange as the schema declaration.</li>
+<li>Step size or numSteps should not be specified in the configuration schema of
+the simulator. They can be specified in the lesson configure clause.
+Specifically, in the <code class="prettyprint">BreakoutConfig</code> schema above, <code class="prettyprint">UInt8{1:4} paddle_width</code> is valid but <code class="prettyprint">UInt8{1:2:4} paddle_width</code> would not be valid.</li>
+</ol>
+
+<p>Here is the constraint for <code class="prettyprint">level</code> that is specified in the lesson <code class="prettyprint">more_bricks</code> configure clause:</p>
+
+<p><code class="prettyprint">constrain level with UInt32{1:100}</code></p>
+
+<p>Here is the constraint for <code class="prettyprint">level</code> in the simulator configuration schema <code class="prettyprint">BreakoutConfig</code>:</p>
+
+<p><code class="prettyprint">UInt32 level</code></p>
+
+<blockquote>
+<p>Examples of valid constraints:</p>
+</blockquote>
+<pre class="highlight inkling tab-inkling--code"><code><span class="k">constrain</span> <span class="nx">paddle_width</span> <span class="k">with</span> <span class="kr">UInt8</span><span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">}</span>    <span class="c1"># ok: a subset of constraint set</span>
+
+<span class="k">constrain</span> <span class="nx">paddle_width</span> <span class="k">with</span> <span class="kr">UInt8</span><span class="p">{</span><span class="mi">2</span><span class="p">}</span>      <span class="c1"># ok: value in constraint set</span>
+</code></pre>
+<blockquote>
+<p>Examples of invalid constraints</p>
+</blockquote>
+<pre class="highlight inkling tab-inkling--code"><code><span class="k">constrain</span> <span class="nx">paddle_width</span> <span class="k">with</span> <span class="kr">UInt8</span><span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="p">}</span>    <span class="c1"># not a subset of constraint set</span>
+
+<span class="k">constrain</span> <span class="nx">paddle_width</span> <span class="k">with</span> <span class="kr">UInt8</span><span class="p">{</span><span class="mi">7</span><span class="p">}</span>      <span class="c1"># value not in constraint set</span>
+</code></pre>
+<p>The lesson configure clause constraint is compatible with the simulator
+configuration constraint because the latter declared
+no range at all and any range expression is a subrange of all the values
+available to a type. </p>
+
+<p>The field <code class="prettyprint">paddle_width</code> in the simulator configuration schema <code class="prettyprint">BreakoutConfig</code>
+does specify a range expression: </p>
+
+<p><code class="prettyprint">UInt8{1:4} paddle_width</code></p>
+
+<p>The corresponding range expression in the lesson configure clause is identical:</p>
+
+<p><code class="prettyprint">constrain paddle_width with UInt8{1:4}</code></p>
+
+<p>These are compatible.</p>
+
+<p>In the examples in the code panel, we show more examples of valid and invalid lesson
+configure constraints for the field <code class="prettyprint">paddle_width</code>.</p>
+
           <h1 id="concepts">Concepts</h1>
 
 <p>The <code class="prettyprint">concept</code> keyword declares an abstract concept that is to be learned by the system. It could be a feature (such as a curvy line in an image) or a goal (such as high score in a game).  Ultimately, a concept takes the form of a transformation of data, but no information need be provided about how to perform the calculation. By declaring a concept, you are instructing the BRAIN server that this is a node in the basic recurrent artificial intelligence network that must be learned. Consequently, concept nodes must have corresponding curricula to teach them.</p>
@@ -1343,454 +1791,6 @@ the code panel.</p>
 <p>These both specify that training should continue until the return value of the
 objective function is maximized. </p>
 
-          <h1 id="schemas">Schemas</h1>
-
-<p>This is the reference for the keyword <code class="prettyprint">schema</code>. Also covered are the
-definitions and uses of <a href="#types">Inkling types</a>, including <a href="#constrained-types-and-range-expressions">type constraints</a>.  These are used in schema declarations.</p>
-
-<h2 id="schema-declarations">Schema Declarations</h2>
-<pre class="highlight inkling tab-inkling--code"><code>   <span class="k">schema</span> <span class="nx">bar</span>       <span class="c1"># schema declaration</span>
-      <span class="kr">Bool</span> <span class="nx">field1</span><span class="p">,</span>
-      <span class="kr">Int8</span> <span class="nx">field2</span>
-   <span class="k">end</span>
-</code></pre>
-<p>Schemas are declared with the <code class="prettyprint">schema</code> statement.</p>
-
-<p>In Inkling a <code class="prettyprint">schema</code> describes a named record and its contained fields. Each field in a schema has a name and a type. A field may also have a type constraint that constrains the values that the datum described by this field will take.</p>
-<pre class="highlight inkling tab-inkling--code"><code>   <span class="k">concept</span> <span class="nx">foo</span>
-      <span class="k">is</span> <span class="nx">classifier</span>
-      <span class="k">predicts</span> <span class="p">(</span><span class="nx">bar</span><span class="p">)</span> <span class="c1"># schema reference</span>
-   <span class="k">end</span>
-</code></pre>
-<p>Statements (such as the <code class="prettyprint">concept</code> statement) can reference schemas by name.</p>
-<pre class="highlight inkling tab-inkling--code"><code>   <span class="k">concept</span> <span class="nx">foo</span>
-      <span class="k">is</span> <span class="nx">classifier</span>
-      <span class="k">predicts</span> <span class="p">(</span><span class="kr">Bool</span> <span class="nx">field1</span><span class="p">,</span> <span class="kr">Int8</span> <span class="nx">field2</span><span class="p">)</span> <span class="c1"># anonymous schema</span>
-   <span class="k">end</span>
-</code></pre>
-<p>Schemas can also be <a href="#anonymous-schema">anonymous</a>. In that case, instead of a schema name, a list of named fields is present.</p>
-
-<p>Schemas describe the structure of data in Inkling streams, such as the
-predefined <code class="prettyprint">input</code> and <code class="prettyprint">output</code> streams. In addition, many Inkling statements (for
-example <code class="prettyprint">concept</code> and <code class="prettyprint">curriculum</code>) use schema references to describe the data that flows in and out of the construct.</p>
-
-<blockquote>
-<p>Schema Declaration Syntax</p>
-</blockquote>
-<pre class="highlight inkling tab-inkling--syntax"><code><span class="nx">schemaStmt</span> <span class="p">:</span><span class="o">=</span> 
-<span class="k">schema</span> <span class="o">&lt;</span><span class="nx">name</span><span class="o">&gt;</span>                      
-     <span class="nx">fieldDclnList</span> 
-<span class="k">end</span>
-
-<span class="nx">fieldDclnList</span>   <span class="p">:</span><span class="o">=</span>  <span class="nx">fieldDcln</span> <span class="p">[','</span> <span class="nx">fieldDcln</span>  <span class="p">]</span><span class="o">*</span>  
-
-<span class="nx">fieldDcln</span>       <span class="p">:</span><span class="o">=</span>  <span class="nx">scalarDcln</span>   <span class="o">|</span> <span class="nx">structureDcln</span> 
-
-<span class="nx">scalarDcln</span>      <span class="p">:</span><span class="o">=</span>  <span class="nx">primitiveType</span>   <span class="nx">rangeExpression</span><span class="p">?</span> <span class="o">&lt;</span><span class="nx">name</span><span class="o">&gt;</span>
-
-<span class="nx">structureDcln</span>   <span class="p">:</span><span class="o">=</span>  <span class="nx">structure_type</span>   <span class="nx">structure_init</span> <span class="o">&lt;</span><span class="nx">name</span><span class="o">&gt;</span> 
-
-<span class="nx">structure_type</span>  <span class="p">:</span><span class="o">=</span>  <span class="kr">Luminance</span>
-
-<span class="nx">structure_init</span>  <span class="p">:</span><span class="o">=</span>  <span class="p">'('</span> 
-                        <span class="nx">luminance_init</span>
-                    <span class="p">')'</span>
-
-<span class="nx">luminance_init</span>  <span class="p">:</span><span class="o">=</span>  <span class="nx">integerLiteral</span>  <span class="p">','</span> <span class="nx">integerLiteral</span> 
-</code></pre>
-<p>In the Schema Declaration Syntax, you will see references to Inkling primitive types and structured types. These are discussed in in the <a href="#structured-types">Structured Types</a> section. </p>
-
-<aside class="warning">
-Due to limitations with Inkling’s communication with Tensorflow you can’t end your schema variables with an underscore and number such as `variable_1`, `variable_22`, etc.
-</aside>
-
-<h3 id="usage">Usage</h3>
-
-<p>Schema fields must be separated from each other by commas. Schema declarations
-are terminated by the <code class="prettyprint">end</code> keyword.</p>
-
-<p>Field types can be any of the <a href="#primitive-types">Inkling primitive types</a> and <a href="#structured-types">Inkling structured types</a>. </p>
-
-<p>A schema field that has a primitive type can also have a type constraint that
-constrains the set of potential values for that field. Examples and syntax of
-type constraints are included in the <a href="#constrained-types-and-range-expressions">Constrained Types</a> section.</p>
-
-<h3 id="discussion">Discussion</h3>
-
-<p>Schemas tell the BRAIN system how to translate large matrices (tensors) to usable
-values.</p>
-
-<p>Note the inkling compiler does not do this translation, that is a runtime
-transformation.  However the inkling compiler performs static checks
-to verify that the schemas are valid in the context in which they are used. </p>
-<pre class="highlight inkling tab-inkling--code"><code>  <span class="k">schema</span> <span class="nx">MNIST_schema</span>
-    <span class="kr">Luminance</span><span class="p">(</span><span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">)</span> <span class="nx">image</span> <span class="c1"># structured type</span>
-  <span class="k">end</span>
-
-  <span class="k">schema</span> <span class="nx">my_schema</span>
-    <span class="kr">Int32</span> <span class="nx">x</span><span class="p">,</span>                <span class="c1"># primitive type</span>
-    <span class="kr">Int32</span><span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="p">}</span> <span class="nx">z</span>            <span class="c1"># primitive type with type constraint</span>
-  <span class="k">end</span>
-</code></pre>
-<p>The code panel contains a few example schemas. 
-The last field <code class="prettyprint">z</code> in <code class="prettyprint">my_schema</code> has constrained type <code class="prettyprint">Int32{1:5}</code>. For more information on this feature see <a href="#constrained-types-and-range-expressions">Constrained Types</a>.</p>
-
-<h2 id="schema-references">Schema References</h2>
-<pre class="highlight inkling tab-inkling--code"><code>   <span class="k">concept</span> <span class="nx">MyConcept</span>
-      <span class="k">is</span> <span class="nx">classifier</span>
-      <span class="k">predicts</span> <span class="p">(</span><span class="nx">MySchema</span><span class="p">)</span>       <span class="c1"># a schema reference</span>
-   <span class="k">end</span>
-</code></pre>
-<p>Inkling statements can reference schemas by name. </p>
-
-<h6 id="anonymous-schema">Anonymous Schema</h6>
-<pre class="highlight inkling tab-inkling--code"><code>   <span class="k">concept</span> <span class="nx">MyConcept</span>
-      <span class="k">is</span> <span class="nx">classifier</span>
-      <span class="k">predicts</span> <span class="p">(</span><span class="kr">UInt8</span> <span class="nx">MyField</span><span class="p">)</span>  <span class="c1"># a anonymous schema </span>
-   <span class="k">end</span>
-</code></pre>
-<p>Anywhere a schema name can
-be referenced, a list of fields can appear. This is an <strong>anonymous schema</strong>. 
-Anonymous schema can also be empty (that is, they can contain no
-field definitions), if allowed in context.</p>
-
-<blockquote>
-<p>Schema Reference Syntax</p>
-</blockquote>
-<pre class="highlight inkling tab-inkling--syntax"><code><span class="nx">schemaRef</span> <span class="p">:</span><span class="o">=</span>                 
-     <span class="p">'('</span>   <span class="p">')'</span>                  <span class="c1"># empty anonymous schema</span>
- <span class="o">|</span>   <span class="p">'('</span> <span class="o">&lt;</span><span class="nx">name</span><span class="o">&gt;</span> <span class="p">')'</span>             <span class="c1"># named schema</span>
- <span class="o">|</span>   <span class="p">'('</span>  <span class="o">&lt;</span><span class="nx">fieldDclnList</span><span class="o">&gt;</span> <span class="p">')</span>    <span class="c1"># non-empty anonymous schema</span>
-</code></pre>
-<h2 id="types">Types</h2>
-
-<p>Inkling supports both primitive types and structured types.</p>
-
-<h6 id="primitive-types">Primitive Types</h6>
-
-<blockquote>
-<p>Primitive Types List</p>
-</blockquote>
-<pre class="highlight inkling tab-inkling--syntax"><code><span class="nx">primitiveType</span> <span class="p">::</span><span class="o">=</span>
-  <span class="kr">Double</span> <span class="o">|</span> <span class="kr">Float64</span> <span class="o">|</span> <span class="kr">Float32</span> <span class="o">|</span> <span class="kr">Int8</span> <span class="o">|</span> <span class="kr">Int16</span> <span class="o">|</span> <span class="kr">Int32</span> <span class="o">|</span>
-  <span class="kr">Int64</span> <span class="o">|</span> <span class="kr">UInt8</span> <span class="o">|</span> <span class="kr">UInt16</span> <span class="o">|</span> <span class="kr">UInt32</span>  <span class="o">|</span> <span class="kr">UInt64</span> <span class="o">|</span> <span class="kr">Bool</span> <span class="o">|</span> <span class="kr">String</span>
-</code></pre>
-<p>The Inkling set of primitive types includes numeric, string, and boolean types.</p>
-
-<aside class="warning">
-Only constrained Strings are currently implemented.
-</aside>
-
-<p>In the code panel you will see the set of primitive types which are used in schema declarations. </p>
-
-<p>The integer suffix indicates the size in bits of the type. </p>
-
-<p>Integer types beginning with &lsquo;U&rsquo; are unsigned. </p>
-
-<p><code class="prettyprint">Double</code> and <code class="prettyprint">Float64</code> are synonyms.</p>
-
-<h6 id="structured-types">Structured Types</h6>
-
-<blockquote>
-<p>Structured Types List</p>
-</blockquote>
-<pre class="highlight inkling tab-inkling--syntax"><code><span class="nx">structure_type</span> <span class="p">::</span><span class="o">=</span>                      <span class="c1"># syntax</span>
-  <span class="kr">Luminance</span>
-</code></pre><pre class="highlight inkling tab-inkling--code"><code><span class="k">schema</span> <span class="nx">BallLocationSchema</span>               <span class="c1"># example</span>
-  <span class="kr">Luminance</span><span class="p">(</span><span class="mi">84</span><span class="p">,</span> <span class="mi">336</span><span class="p">)</span> <span class="nx">pixels</span>
-<span class="k">end</span>
-</code></pre>
-<p>Structured types in Inkling are intended to support common
-Machine Learning types. The only Machine Learning type currently supported is
-<code class="prettyprint">Luminance</code>. This support will be expanded to <code class="prettyprint">Matrix</code> and <code class="prettyprint">Vector</code>, among
-others in the future.</p>
-
-<h6 id="constrained-types-and-range-expressions">Constrained Types and Range Expressions</h6>
-<pre class="highlight inkling tab-inkling--code"><code>  <span class="k">schema</span> <span class="nx">my_schema</span>
-    <span class="kr">Int32</span><span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="p">}</span> <span class="nx">z</span>            <span class="c1"># primitive type with type constraint</span>
-  <span class="k">end</span>
-</code></pre>
-<p>A constrained type is a type which is associated with a constraint.
-The type plus constraint is effectively a set definition. 
-A field declared with a
-constrained type can only take values that are a member of the set defined by
-the constraint. In the example in the code panel, the field <code class="prettyprint">z</code> can only take on
-values between <code class="prettyprint">1</code> and <code class="prettyprint">5</code>. </p>
-
-<p>Constrained types are supported in schemas and in lesson clauses. Types are
-constrained by means of <strong>range expressions</strong>.
-A range expression on a type has the effect of constraining the values of the type to values defined by the range expression. </p>
-
-<ul>
-<li>In a schema the range expression constrains the values in the field. </li>
-<li>In lessons the range expression constrains the values of the placeholder being configured.</li>
-</ul>
-<pre class="highlight inkling tab-inkling--code"><code><span class="k">schema</span> <span class="nx">MyOutput</span> 
-   <span class="kr">UInt8</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">}</span>    <span class="nx">label</span><span class="p">,</span>       <span class="c1"># a list of UInt8 values</span>
-   <span class="kr">Int64</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">:</span><span class="mi">100</span><span class="p">}</span>      <span class="nx">x</span><span class="p">,</span>           <span class="c1"># start:step:stop, step= 5, 0..100</span>
-   <span class="kr">Int64</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="mi">100</span><span class="p">}</span>        <span class="nx">y</span><span class="p">,</span>           <span class="c1"># start:stop, step= 1, 0..100</span>
-   <span class="kr">Int64</span> <span class="p">{</span><span class="mi">0</span><span class="p">..</span><span class="mi">100</span><span class="p">:</span><span class="mi">25</span><span class="p">}</span>    <span class="nx">z</span><span class="p">,</span>           <span class="c1"># start:stop, numsteps=25, step= 4, 0..100</span>
-   <span class="kr">Float32</span> <span class="p">{</span><span class="mi">0</span><span class="p">..</span><span class="mi">2</span><span class="p">:</span><span class="mi">5</span><span class="p">}</span>     <span class="nx">a</span>            <span class="c1"># gives (0, .5., 1.0, 1.5, 2.0)</span>
-<span class="k">end</span>
-</code></pre>
-<p>The syntax for a constrained type is the same for schema fields and placeholder expressions.</p>
-
-<p>In the code panel are some examples of type constraints as they could appear in a schema definition. Curly braces delineate the range expression.</p>
-
-<p>Inkling supports <strong>numeric range expressions</strong> and <strong>value list range
-expressions</strong>. </p>
-
-<h6 id="numeric-range-expressions">Numeric Range Expressions</h6>
-
-<blockquote>
-<p>Numeric Range Expression Syntax</p>
-</blockquote>
-<pre class="highlight inkling tab-inkling--syntax"><code> <span class="kr">Double</span> <span class="o">|</span> <span class="kr">Float64</span> <span class="o">|</span> <span class="kr">Float32</span> <span class="o">|</span> <span class="kr">Int8</span> <span class="o">|</span> <span class="kr">Int16</span> <span class="o">|</span> <span class="kr">Int32</span> <span class="o">|</span> <span class="kr">Int64</span> <span class="o">|</span> <span class="kr">UInt8</span> <span class="o">|</span> <span class="kr">UInt16</span> <span class="o">|</span> <span class="kr">UInt32</span> <span class="o">|</span> <span class="kr">UInt64</span>
-  <span class="p">'{'</span> 
-      <span class="nx">start</span> <span class="p">':'</span> <span class="p">[</span> <span class="nx">step</span><span class="p">':']?</span> <span class="nx">stop</span>       <span class="c1"># 'colon range'</span>
-      <span class="o">|</span>  
-      <span class="nx">start</span> <span class="p">'.'</span> <span class="p">'.'</span> <span class="nx">stop</span> <span class="p">':'</span> <span class="nx">numSteps</span>  <span class="c1"># 'dot range'</span>
-  <span class="p">'}'</span> 
-</code></pre>
-<p>For numeric range expressions there are two types: </p>
-
-<ul>
-<li><strong>colon range</strong> </li>
-<li><strong>dot range</strong> </li>
-</ul>
-
-<p>A <strong>dot range</strong> must specify numSteps. numSteps must be a positive integer constant. Today, <strong>dot range</strong> expressions cannot be used in <code class="prettyprint">predicts</code> schemas with <code class="prettyprint">is estimator</code> concepts. </p>
-
-<p>A <strong>colon range</strong> can specifies an optional <strong>step size</strong>. If step size is omitted, the range includes all values of the given type between <strong>start</strong> and <strong>end</strong>. For example, in <strong>colon range</strong> expressions with integer types, if an explicit step is not specified, the default step size is 1.</p>
-
-<p>Step size is required for FloatXX fields in the output schemas for <code class="prettyprint">is classifier</code> concepts. </p>
-
-<p>Note that today, all fields in schemas used in the predicts clause of <code class="prettyprint">is estimator</code> concepts must have type FloatXX with no explicit step.</p>
-
-<h3 id="usage">Usage</h3>
-
-<p>For some ranges, it is clearer to specify the number of steps in the
-range then the step size. For example <code class="prettyprint">Int32{-11003..743299:100}</code> makes it clear 
-that a large range has 100 elements. Using step size for such a range would not
-clearly communicate that information. </p>
-
-<p>In other contexts, the step size is of interest, and we use the colon range. For
-example, in the range <code class="prettyprint">Int32{0:2:10}</code>, we have divided the range into elements (0,2,4,6,8,10).
-The step size of two communicates information about the distribution of values
-in the range. </p>
-<pre class="highlight inkling tab-inkling--code"><code><span class="kr">Int64</span>  <span class="p">{</span> <span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">:</span><span class="mi">1</span> <span class="p">}</span>     <span class="c1"># is invalid. The step size is larger than the range.</span>
-<span class="kr">Int64</span>  <span class="p">{</span> <span class="mi">0</span><span class="p">..</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span> <span class="p">}</span>    <span class="c1"># is invalid. Values generated are floating point not integer. </span>
-<span class="kr">Float32</span><span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">..</span><span class="mi">1</span><span class="p">:</span><span class="mi">10</span> <span class="p">}</span>   <span class="c1"># is valid. Negative bounds allowed.</span>
-<span class="kr">Int8</span>   <span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">4</span><span class="p">:</span><span class="o">-</span><span class="mi">100</span><span class="p">}</span>   <span class="c1"># is valid. stop &lt; start is valid if and only if step is negative. </span>
-<span class="kr">UInt32</span> <span class="p">{</span><span class="o">-</span><span class="mi">10</span><span class="p">:</span><span class="mi">10</span><span class="p">}</span>      <span class="c1"># is invalid. Unsigned integer range contains signed values.</span>
-</code></pre>
-<p>The code panel contains some examples of valid and invalid ranges. </p>
-
-<p>For <strong>colon range</strong>, step can be a floating point number. </p>
-
-<p>For <strong>dot range</strong>, number of steps (numSteps) must be a positive integer.</p>
-
-<p>For <strong>colon range</strong>, the step size can be negative only if stop is less than start.</p>
-
-<p>For both <strong>colon range</strong> and <strong>dot range</strong>:</p>
-
-<ul>
-<li><p>The <strong>start point</strong> is inclusive (it is included in the values of the range) and fixed. </p></li>
-<li><p>The <strong>start point</strong> is exact (to the maximum extent possible if the range expression type is floating point). </p></li>
-<li><p>The <strong>end point</strong> must be reachable from the range start by applying the step. (The range must be bounded.) </p></li>
-<li><p>The <strong>end point</strong> may or may not be included in the values of the range. If you
-land on it exactly it is in the range. If you don&rsquo;t land on it exactly it is not
-in the range. For example <code class="prettyprint">Int8 {0:3:10}</code> gives you (0, 3, 6, 9). The end point
-<code class="prettyprint">10</code> is not included. The specification of <code class="prettyprint">10</code> as the stop point is not an error (because it is a limit, not an endpoint). </p></li>
-</ul>
-
-<p>You can think of the <strong>end point</strong> as a limit. It is included only if, after
-applying the (step or numSteps) expression, you land on it exactly. 
-Otherwise the highest value landed on which is less than the end point is the final value in the range. </p>
-
-<h6 id="value-list-range-expressions">Value List Range Expressions</h6>
-
-<p> </p>
-
-<blockquote>
-<p>Value List Range Expression Syntax</p>
-</blockquote>
-<pre class="highlight inkling tab-inkling--syntax"><code><span class="nx">primitiveType</span> 
-    <span class="p">'{'</span> 
-        <span class="p">[</span> <span class="nx">integerLiteral</span> <span class="p">[</span> <span class="p">','</span> <span class="nx">integerLiteral</span> <span class="p">]</span><span class="o">*</span> <span class="p">]</span>
-     <span class="o">|</span>  <span class="p">[</span> <span class="nx">floatLiteral</span> <span class="p">[</span> <span class="p">','</span> <span class="nx">floatLiteral</span> <span class="p">]</span><span class="o">*</span> <span class="p">]</span>
-     <span class="o">|</span>  <span class="p">[</span> <span class="nx">booleanLiteral</span> <span class="p">[</span> <span class="p">','</span> <span class="nx">booleanLiteral</span> <span class="p">]?</span> <span class="p">]</span>
-    <span class="p">'}'</span> 
-</code></pre>
-<p>Inkling supports range expressions for value lists. </p>
-
-<p>A value list range
-expression can be defined for numeric types
-and the primitive type <code class="prettyprint">Bool</code>.</p>
-
-<h3 id="usage">Usage</h3>
-<pre class="highlight inkling tab-inkling--code"><code>    <span class="kr">UInt8</span>  <span class="p">{</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">}</span>             <span class="c1"># is valid</span>
-    <span class="kr">UInt8</span>  <span class="p">{</span><span class="mi">7</span><span class="p">,</span> <span class="o">-</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">}</span>            <span class="c1"># is invalid (negative integer in unsigned range)</span>
-</code></pre>
-<p>Value list range expressions support allowing arbitrary lists of values to constitute the
-range expression set, rather than start and end points. </p>
-
-<p>A value list range expression must have all its elements be valid values for the
-specified type. </p>
-
-<p>A value list range expression must conform to the signed or unsigned attribute
-of the specified type (if there is such an attribute). </p>
-
-<h6 id="schema-matching">Schema Matching</h6>
-
-<p>Inkling uses schemas to understand and interpret the data format of streams.  The Inkling compiler performs schema match checking and will report errors if schemas which are expected to match do not. </p>
-<pre class="highlight inkling tab-inkling--code"><code><span class="k">schema</span> <span class="nx">GameState</span>
-  <span class="kr">Luminance</span><span class="p">(</span><span class="mi">84</span><span class="p">,</span> <span class="mi">336</span><span class="p">)</span> <span class="nx">pixels</span>
-<span class="k">end</span>
-<span class="err"> </span>
-<span class="k">concept</span> <span class="nx">keep_paddle_under_ball</span> 
-  <span class="k">is</span> <span class="nx">classifier</span>
-  <span class="k">predicts</span> <span class="p">(</span><span class="nx">PlayerMove</span><span class="p">)</span>
-  <span class="k">follows</span> <span class="nx">ball_location</span><span class="p">,</span> 
-          <span class="kr">input</span><span class="p">(</span><span class="nx">GameState</span><span class="p">)</span>           <span class="c1"># &lt;--- (1) MATCH </span>
-<span class="k">end</span>
-<span class="err"> </span>
-<span class="k">concept</span> <span class="nx">high_score</span> 
-  <span class="k">is</span> <span class="nx">classifier</span>
-  <span class="k">predicts</span> <span class="p">(</span><span class="nx">PlayerMove</span><span class="p">)</span>
-  <span class="k">follows</span> <span class="nx">keep_paddle_under_ball</span><span class="p">,</span> 
-          <span class="kr">input</span><span class="p">(</span><span class="nx">GameState</span><span class="p">)</span>           <span class="c1"># &lt;--- (1) MATCH </span>
-  <span class="k">feeds</span> <span class="kr">output</span>
-<span class="k">end</span>
-<span class="err"> </span>
-<span class="k">concept</span> <span class="nx">ball_location</span> 
-  <span class="k">is</span> <span class="nx">estimator</span>
-  <span class="k">predicts</span> <span class="p">(</span><span class="kr">UInt32</span> <span class="nx">x</span><span class="p">,</span> <span class="kr">UInt32</span> <span class="nx">y</span><span class="p">)</span>
-  <span class="k">follows</span> 
-    <span class="kr">input</span><span class="p">(</span><span class="kr">Luminance</span><span class="p">(</span><span class="mi">84</span><span class="p">,</span> <span class="mi">336</span><span class="p">)</span> <span class="nx">pixels</span><span class="p">)</span> <span class="c1"># &lt;--- (2) MATCH</span>
-<span class="k">end</span>
-<span class="err"> </span>
-<span class="k">concept</span> <span class="nx">ball_X_location</span> <span class="k">is</span> <span class="nx">estimator</span>
-  <span class="k">predicts</span> <span class="p">(</span><span class="kr">UInt32</span> <span class="nx">X_location</span><span class="p">)</span>
-  <span class="k">follows</span> 
-    <span class="kr">input</span><span class="p">(</span><span class="kr">Luminance</span><span class="p">(</span><span class="mi">84</span><span class="p">,</span> <span class="mi">330</span><span class="p">)</span> <span class="nx">pixels</span><span class="p">)</span> <span class="c1"># &lt;--- (3) NO MATCH</span>
-<span class="k">end</span>
-</code></pre>
-<p>Matching for schemas is both structural and name based. Field names matter.
-Types matter.</p>
-
-<ul>
-<li>Two references by name to the same schema match because a schema matches itself. </li>
-<li>Two references to different schema names match if both schemas define the same list of field types in the same order with the same names. For structured types whose declaration includes size, the sizes must be equal.</li>
-<li>Two anonymous schemas match if both define the same field types in the same order with the same names. </li>
-<li>A schema referenced by name matches an anonymous schema if both define the same field types in the same order with the same names. </li>
-</ul>
-
-<p>The associated example shows successful schema matching and failed schema matching. 
-The rule being checked is that all uses of <code class="prettyprint">input</code> use the same schema. </p>
-
-<ul>
-<li>(1) shows a valid schema match by name (for <code class="prettyprint">input</code>). </li>
-<li>(2) shows a valid match by field type, field name, and size (for <code class="prettyprint">input</code>). </li>
-<li>(3) shows a failed match (size is not equal, for <code class="prettyprint">input</code>). </li>
-</ul>
-
-<p>Every Inkling program has the predefined stream <code class="prettyprint">input</code> available to it. Since there is a single stream associated with the keyword <code class="prettyprint">input</code>, there can be only one definition of the data format of that stream. Once defined, the data format of a stream cannot change dynamically.  If that schema changes inkling compiler will flag that change as an error. Thus any reference to the <code class="prettyprint">input</code> stream must have a schema that matches all other schemas used with the <code class="prettyprint">input</code> stream. </p>
-
-<h6 id="constraint-compatibility-in-the-lesson-configure-clause">Constraint Compatibility in the Lesson Configure Clause</h6>
-<pre class="highlight inkling tab-inkling--code"><code><span class="k">simulator</span> <span class="nx">breakout_simulator</span><span class="p">(</span><span class="nx">BreakoutConfig</span><span class="p">)</span>
-   <span class="k">state</span> <span class="p">(</span><span class="nx">GameState</span><span class="p">)</span>
-   <span class="k">action</span><span class="p">(</span><span class="nx">PlayerMove</span><span class="p">)</span>
-<span class="nx">End</span>
-<span class="err"> </span>
-<span class="k">schema</span> <span class="nx">BreakoutConfig</span>
-  <span class="kr">UInt32</span> <span class="nx">level</span><span class="p">,</span>
-  <span class="kr">UInt8</span><span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">}</span> <span class="nx">paddle_width</span><span class="p">,</span>
-  <span class="kr">Float32</span> <span class="nx">bricks_percent</span>
-<span class="k">end</span>
-<span class="err"> </span>
-<span class="k">curriculum</span> <span class="nx">ball_location_curriculum</span>
-  <span class="k">train</span> <span class="nx">ball_location</span>
-  <span class="k">with</span> <span class="k">simulator</span> <span class="nx">breakout_simulator</span>
-  <span class="k">objective</span> <span class="nx">ball_location_distance</span>
-
-    <span class="k">lesson</span> <span class="nx">more_bricks</span> <span class="k">follows</span> <span class="nx">no_bricks</span>
-      <span class="k">configure</span>
-        <span class="k">constrain</span> <span class="nx">bricks_percent</span> <span class="k">with</span> <span class="kr">Float32</span><span class="p">{</span><span class="mf">0.1</span><span class="p">:</span><span class="mf">0.01</span><span class="p">:</span><span class="mf">1.0</span><span class="p">},</span>
-        <span class="k">constrain</span> <span class="nx">level</span> <span class="k">with</span> <span class="kr">UInt32</span><span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">},</span>
-        <span class="k">constrain</span> <span class="nx">paddle_width</span> <span class="k">with</span> <span class="kr">UInt8</span><span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">}</span>
-      <span class="k">train</span>
-        <span class="k">from</span> <span class="nx">frame</span> <span class="k">in</span> <span class="nx">breakout_simulator</span>
-        <span class="k">select</span> <span class="nx">frame</span>
-        <span class="k">send</span> <span class="nx">frame</span>
-      <span class="k">test</span>
-        <span class="k">from</span> <span class="nx">frame</span> <span class="k">in</span> <span class="nx">breakout_simulator</span>
-        <span class="k">select</span> <span class="nx">frame</span>
-        <span class="k">send</span> <span class="nx">frame</span>
-      <span class="k">until</span>
-        <span class="k">maximize</span> <span class="nx">ball_location_distance</span>
-<span class="k">end</span>
-</code></pre>
-<p>Constraints can be specified in the lesson configure clause. 
-These constraints must be compatible with the configuration schema of the
-associated simulator. 
-The code panel contains some Inkling code from the breakout program to show an example. </p>
-
-<p>The constraints in a lesson configure clause are constraints on the fields of
-the configuration schema of the simulator.
-Here, the lesson configure constraints are constraining the fields of schema <code class="prettyprint">BreakoutConfig</code>.</p>
-
-<p>Given simulator <code class="prettyprint">breakout_simulator</code>, the constraints in the lesson configure section must have these characteristics to be compatible with schema <code class="prettyprint">BreakoutConfig</code>:</p>
-
-<ol>
-<li>They must specify exactly the same type and field name as the schema declaration. A constraint cannot use an Int8 where a UInt32 was originally specified.</li>
-<li>For the range expression, the range in the configure must specify exactly the same range or a subrange as the schema declaration.</li>
-<li>Step size or numSteps should not be specified in the configuration schema of
-the simulator. They can be specified in the lesson configure clause.
-Specifically, in the <code class="prettyprint">BreakoutConfig</code> schema above, <code class="prettyprint">UInt8{1:4} paddle_width</code> is valid but <code class="prettyprint">UInt8{1:2:4} paddle_width</code> would not be valid.</li>
-</ol>
-
-<p>Here is the constraint for <code class="prettyprint">level</code> that is specified in the lesson <code class="prettyprint">more_bricks</code> configure clause:</p>
-
-<p><code class="prettyprint">constrain level with UInt32{1:100}</code></p>
-
-<p>Here is the constraint for <code class="prettyprint">level</code> in the simulator configuration schema <code class="prettyprint">BreakoutConfig</code>:</p>
-
-<p><code class="prettyprint">UInt32 level</code></p>
-
-<blockquote>
-<p>Examples of valid constraints:</p>
-</blockquote>
-<pre class="highlight inkling tab-inkling--code"><code><span class="k">constrain</span> <span class="nx">paddle_width</span> <span class="k">with</span> <span class="kr">UInt8</span><span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">}</span>    <span class="c1"># ok: a subset of constraint set</span>
-
-<span class="k">constrain</span> <span class="nx">paddle_width</span> <span class="k">with</span> <span class="kr">UInt8</span><span class="p">{</span><span class="mi">2</span><span class="p">}</span>      <span class="c1"># ok: value in constraint set</span>
-</code></pre>
-<blockquote>
-<p>Examples of invalid constraints</p>
-</blockquote>
-<pre class="highlight inkling tab-inkling--code"><code><span class="k">constrain</span> <span class="nx">paddle_width</span> <span class="k">with</span> <span class="kr">UInt8</span><span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="p">}</span>    <span class="c1"># not a subset of constraint set</span>
-
-<span class="k">constrain</span> <span class="nx">paddle_width</span> <span class="k">with</span> <span class="kr">UInt8</span><span class="p">{</span><span class="mi">7</span><span class="p">}</span>      <span class="c1"># value not in constraint set</span>
-</code></pre>
-<p>The lesson configure clause constraint is compatible with the simulator
-configuration constraint because the latter declared
-no range at all and any range expression is a subrange of all the values
-available to a type. </p>
-
-<p>The field <code class="prettyprint">paddle_width</code> in the simulator configuration schema <code class="prettyprint">BreakoutConfig</code>
-does specify a range expression: </p>
-
-<p><code class="prettyprint">UInt8{1:4} paddle_width</code></p>
-
-<p>The corresponding range expression in the lesson configure clause is identical:</p>
-
-<p><code class="prettyprint">constrain paddle_width with UInt8{1:4}</code></p>
-
-<p>These are compatible.</p>
-
-<p>In the examples in the code panel, we show more examples of valid and invalid lesson
-configure constraints for the field <code class="prettyprint">paddle_width</code>.</p>
-
           <h1 id="simulators">Simulators</h1>
 <pre class="highlight inkling tab-inkling--code"><code><span class="k">simulator</span> <span class="nx">MySimulator</span><span class="p">(</span><span class="nx">MySchemaConfig</span><span class="p">)</span>
   <span class="k">state</span> <span class="p">(</span><span class="nx">MyStateSchema</span><span class="p">)</span>
@@ -1946,6 +1946,274 @@ the reward function in the literature) is implemented in the simulator.
 <aside class="notice">
 Note that config in __main__ is the brain configuration and remains the same throughout, whereas goal_config (highlighted in orange) is used at the beginning of every episode and must be named the same as it is in Inkling. These configs are unrelated.
 </aside>
+
+          <h1 id="advanced-algorithms">Advanced: Algorithms</h1>
+
+<blockquote>
+<p>Syntax (in the global scope)</p>
+</blockquote>
+<pre class="highlight inkling tab-inkling--syntax"><code><span class="nx">algorithm</span> <span class="o">&lt;</span><span class="nx">localAlgorithmId</span><span class="o">&gt;</span>
+   <span class="k">is</span> <span class="o">&lt;</span><span class="nx">globalAlgorithmId</span><span class="o">&gt;</span>
+   <span class="p">[</span>
+     <span class="o">&lt;</span><span class="nx">parameterName</span><span class="o">&gt;</span> <span class="o">=&gt;</span> <span class="o">&lt;</span><span class="nx">literal</span><span class="o">&gt;</span>
+     <span class="p">[</span> <span class="err">‘</span><span class="p">,</span><span class="err">’</span> <span class="o">&lt;</span><span class="nx">parameterName</span><span class="o">&gt;</span> <span class="o">=&gt;</span> <span class="o">&lt;</span><span class="nx">literal</span><span class="o">&gt;</span> <span class="p">]</span><span class="o">*</span>
+   <span class="p">]?</span>
+<span class="k">end</span>
+</code></pre>
+<blockquote>
+<p>Example (in the global scope)</p>
+</blockquote>
+<pre class="highlight plaintext"><code>schema GameState
+   Float32 position,
+   Float32 velocity,
+   Float32 angle,
+   Float32 rotation
+end
+
+schema Action
+   Float32 command
+end
+
+schema CartPoleConfig
+   Int8 episode_length,
+   UInt8 deque_size
+end
+
+simulator the_simulator(CartPoleConfig)
+   action (Action)
+   state (GameState)
+end
+
+
+algorithm My_TRPO_Settings
+   is TRPO
+   learning_rate =&gt; 5,
+   network_size =&gt; 48
+end
+
+concept balance is estimator
+   predicts (Action)
+   follows input(GameState)
+   feeds output
+
+end
+
+curriculum balance_curriculum
+   train balance
+   using algorithm My_TRPO_Settings
+      # optional to override parameter with same type
+      learning_rate =&gt; 0.5
+   end
+
+   with simulator the_simulator
+   objective open_ai_gym_default_objective
+
+       lesson balancing
+           configure
+               constrain episode_length with Int8{-1},
+               constrain deque_size with UInt8{1}
+           until
+               maximize open_ai_gym_default_objective
+end
+</code></pre>
+<blockquote>
+<p>Syntax (in the curriculum)</p>
+</blockquote>
+<pre class="highlight plaintext"><code>using algorithm &lt;algorithmIdentifier&gt;
+   [
+     &lt;parameterName&gt; =&gt; &lt;literal&gt;
+     [ ‘,’ &lt;parameterName&gt; =&gt; &lt;literal&gt; ]*
+   end
+]?
+</code></pre>
+<blockquote>
+<p>Example (in the curriculum)</p>
+</blockquote>
+<pre class="highlight plaintext"><code>schema GameState
+   Float32 position,
+   Float32 velocity,
+   Float32 angle,
+   Float32 rotation
+end
+
+schema Action
+   Float32 command
+end
+
+schema CartPoleConfig
+   Int8 episode_length,
+   UInt8 deque_size
+end
+
+simulator the_simulator(CartPoleConfig)
+   action (Action)
+   state (GameState)
+end
+
+concept balance is estimator
+   predicts (Action)
+   follows input(GameState)
+   feeds output
+
+end
+
+curriculum balance_curriculum
+   train balance
+   using algorithm TRPO
+      learning_rate =&gt; 5
+      network_size =&gt; 48
+   end
+
+   with simulator the_simulator
+   objective open_ai_gym_default_objective
+
+       lesson balancing
+           configure
+               constrain episode_length with Int8{-1},
+               constrain deque_size with UInt8{1}
+           until
+               maximize open_ai_gym_default_objective
+end
+</code></pre>
+<p>The algorithm clause is for advanced users who want to experiment with changing machine learning algorithms and their tuning parameters. Inkling supports an algorithm definition clause in global scope for use in multiple curriculums as well as an algorithm use clause inside the curriculum statement which applies only to that curriculum. If the user wants, they can define named algorithm settings they can re-use in multiple curriculums (when using multiple concepts). It is also possible to override a global parameter inside of a curriculum if needed.</p>
+
+<h3 id="valid-algorithm-identifiers">Valid Algorithm Identifiers</h3>
+
+<ul>
+<li><code class="prettyprint">DQN</code> (Deep Q Learning) - classification only</li>
+<li><code class="prettyprint">DDPG</code> (Deep Deterministic Policy Gradients) - estimation only</li>
+<li><code class="prettyprint">DiscreteDDPG</code> (Deep Deterministic Policy Gradients with Discrete Actions) - classification only</li>
+<li><code class="prettyprint">QTable</code> (Q Learning with Q Table) - classification only</li>
+<li><code class="prettyprint">TRPO</code> (Trust Region Policy Optimization) - estimation only</li>
+</ul>
+
+<h3 id="shared-parameter-details">Shared Parameter Details</h3>
+
+<p>The following parameters all apply to DQN, DDPG, Discrete DDPG, and TRPO. Additional parameter options are shown in subsequent tables below.</p>
+
+<table><thead>
+<tr>
+<th>Parameter (Example use)</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>hidden_layer_size_descriptor =&gt; [int, int, int, …] <br><br> (<code class="prettyprint">hidden_layer_size_descriptor =&gt; [400, 300]</code></td>
+<td>The sizes of each hidden layer. One integer size per hidden layer.</td>
+</tr>
+<tr>
+<td>hidden_layer_activation_descriptor =&gt; [string, string, string, …] <br><br> (<code class="prettyprint">hidden_layer_activation_descriptor =&gt; [“relu”, “tanh”]</code>)</td>
+<td>An array of activation functions (corresponding to the hidden layer size descriptor): string is the activation function type. Strings supported: “linear”, “tanh”, “relu”, “logistic”, “softmax”, “elu”. (Using this should be combined with <code class="prettyprint">hidden_layer_size_descriptor</code>, in the given example “relu” is the activation function for the first layer, and “tanh” for the second one.)</td>
+</tr>
+<tr>
+<td>conv_layer_descriptor =&gt; “x_sizexy_size:x_stride:y_stride:filters; …” <br><br> (<code class="prettyprint">conv_layer_descriptor =&gt; “8x8:4:4:32; 3x3:1:1:16”</code>)</td>
+<td>A semicolon delimited string of a convolutional network configuration (filters is number of filters).</td>
+</tr>
+<tr>
+<td>conv_compression_size_descriptor =&gt; [int, int, int, &hellip;] <br><br> (<code class="prettyprint">conv_compression_size_descriptor =&gt; [20, 10]</code>)</td>
+<td>An array of convolutional compressed size: int is the hidden layer size. If specified, will add one or more fully connected layers after the convolutional layers to compress the representation before incorporating other features.</td>
+</tr>
+<tr>
+<td>conv_compression_activation_descriptor =&gt; [string, string, string, …] <br><br> (<code class="prettyprint">conv_compression_activation_descriptor =&gt; [“softmax”, “tanh”]</code>)</td>
+<td>An array of activation functions for convolutional network compression: string is the activation function type. Strings supported: “linear”, “tanh”, “relu”, “logistic”, “softmax”, “elu”. (Using this should be combined with <code class="prettyprint">conv_compression_size_descriptor</code>, in the given example  “softmax” is the activation function for the first layer, and “tanh” for the second one.)</td>
+</tr>
+<tr>
+<td>conv_limit_dim =&gt; string <br> (<code class="prettyprint">conv_limit_dim =&gt; “x”</code>)</td>
+<td>A string that represents which dimension of the input shape to be used as the convolutional filter sizes. Strings supported: “max”, “min”, “x”, “y”, “0”, “1”. By default, it’s <code class="prettyprint">None</code>, which uses the original input shapes as the filter sizes. “max” uses the maximum number of x and y inputs as the filter sizes. “min” uses the minimum number of x and y inputs as the filter sizes. “x” or “0” uses the x dimension input shape as the filter sizes. “y” or “1” uses the y dimension input shape as the filter sizes. (The example uses the input x dimension shape as the convolutional filter sizes.)</td>
+</tr>
+</tbody></table>
+
+<h3 id="dqn-specific-parameters">DQN-Specific Parameters</h3>
+
+<p>In addition to the first (shared) table of parameters, DQN also has four additional parameters available.</p>
+
+<table><thead>
+<tr>
+<th>Parameter (Example use)</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>exploration_decay =&gt; float <br> (<code class="prettyprint">exploration_decay =&gt; 0.00001</code>)</td>
+<td>The exploration decay in DQN.</td>
+</tr>
+<tr>
+<td>samples_per_train =&gt; int <br> (<code class="prettyprint">samples_per_train =&gt; 10</code>)</td>
+<td>The ratio of number of data sampling and training.</td>
+</tr>
+<tr>
+<td>q_learning_rate =&gt; float <br> (<code class="prettyprint">q_learning_rate =&gt; 0.0001</code>)</td>
+<td>The learning rate for training the Q network.</td>
+</tr>
+<tr>
+<td>gamma =&gt; float <br> (<code class="prettyprint">gamma =&gt; 0.99</code>)</td>
+<td>The discount rate for the Bellman Equation.</td>
+</tr>
+</tbody></table>
+
+<h3 id="ddpg-specific-and-discreteddpg-parameters">DDPG-Specific (and DiscreteDDPG) Parameters</h3>
+
+<p>In addition to the first (shared) table of parameters, DDPP (and DiscreteDDPG) also has three additional parameters available.</p>
+
+<table><thead>
+<tr>
+<th>Parameter (Example use)</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>mu_learning_rate =&gt; float <br> (<code class="prettyprint">mu_learning_rate =&gt; 0.0001</code>)</td>
+<td>The learning rate for training the Mu network.</td>
+</tr>
+<tr>
+<td>q_learning_rate =&gt; float <br> (<code class="prettyprint">q_learning_rate =&gt; 0.0001</code>)</td>
+<td>The learning rate for training the Q network.</td>
+</tr>
+<tr>
+<td>gamma =&gt; float <br> (<code class="prettyprint">gamma =&gt; 0.99</code>)</td>
+<td>The discount rate for the Bellman Equation.</td>
+</tr>
+</tbody></table>
+
+<h3 id="trpo-specific-parameters">TRPO-Specific Parameters</h3>
+
+<p>In addition to the first (shared) table of parameters, TRPO also has one additional parameter available.</p>
+
+<table><thead>
+<tr>
+<th>Parameter (Example use)</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>samples_per_train =&gt; int <br> (<code class="prettyprint">samples_per_train =&gt; 10</code>)</td>
+<td>The ratio of number of data sampling and training. The default is 10K samples per training.</td>
+</tr>
+</tbody></table>
+
+<h3 id="qtable-parameters">QTable Parameters</h3>
+
+<p>These are the only three parameters available for Q-Tables. They do not share any of the parameters from the first (shared) table.</p>
+
+<table><thead>
+<tr>
+<th>Parameter (Example use)</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>exploration_decay =&gt; float <br> (<code class="prettyprint">exploration_decay =&gt; 0.00001</code>)</td>
+<td>The exploration decay in QTable.</td>
+</tr>
+<tr>
+<td>q_learning_rate =&gt; float <br> (<code class="prettyprint">q_learning_rate =&gt; 0.0001</code>)</td>
+<td>The learning rate for training the Q Table.</td>
+</tr>
+<tr>
+<td>gamma =&gt; float <br> (<code class="prettyprint">gamma =&gt; 0.99</code>)</td>
+<td>The discount rate for the Bellman Equation.</td>
+</tr>
+</tbody></table>
 
       </div>
       <div class="dark-box">
