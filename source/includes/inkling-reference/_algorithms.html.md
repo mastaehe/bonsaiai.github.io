@@ -131,7 +131,7 @@ curriculum balance_curriculum
 end
 ```
 
-The algorithm clause is for advanced users who want to experiment changing machine learning algorithms and their tuning parameters. The clause is always specified within a curriculum. If the user wants, they can define named algorithm settings they can re-use in multiple curriculums (when using multiple concepts). It is also possible to override a global parameter inside of a curriculum if needed.
+The algorithm clause is for advanced users who want to experiment with changing machine learning algorithms and their tuning parameters. Inkling supports an algorithm definition clause in global scope for use in multiple curriculums as well as an algorithm use clause inside the curriculum statement which applies only to that curriculum. If the user wants, they can define named algorithm settings they can re-use in multiple curriculums (when using multiple concepts). It is also possible to override a global parameter inside of a curriculum if needed.
 
 ### Valid Algorithm Identifiers
 
