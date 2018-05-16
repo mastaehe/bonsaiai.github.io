@@ -1020,14 +1020,6 @@ The rule being checked is that all uses of <code class="prettyprint">input</code
         <span class="k">constrain</span> <span class="nx">bricks_percent</span> <span class="k">with</span> <span class="kr">Float32</span><span class="p">{</span><span class="mf">0.1</span><span class="p">:</span><span class="mf">0.01</span><span class="p">:</span><span class="mf">1.0</span><span class="p">},</span>
         <span class="k">constrain</span> <span class="nx">level</span> <span class="k">with</span> <span class="kr">UInt32</span><span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">},</span>
         <span class="k">constrain</span> <span class="nx">paddle_width</span> <span class="k">with</span> <span class="kr">UInt8</span><span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">}</span>
-      <span class="k">train</span>
-        <span class="k">from</span> <span class="nx">frame</span> <span class="k">in</span> <span class="nx">breakout_simulator</span>
-        <span class="k">select</span> <span class="nx">frame</span>
-        <span class="k">send</span> <span class="nx">frame</span>
-      <span class="k">test</span>
-        <span class="k">from</span> <span class="nx">frame</span> <span class="k">in</span> <span class="nx">breakout_simulator</span>
-        <span class="k">select</span> <span class="nx">frame</span>
-        <span class="k">send</span> <span class="nx">frame</span>
       <span class="k">until</span>
         <span class="k">maximize</span> <span class="nx">ball_location_distance</span>
 <span class="k">end</span>
@@ -1450,21 +1442,17 @@ Future support is expected for training with generators and with data, and those
   <span class="k">lesson</span> <span class="o">&lt;</span><span class="nx">lessonName</span><span class="o">&gt;</span>
     <span class="nx">followsClause</span><span class="p">?</span>
     <span class="nx">configureClause</span>
-    <span class="nx">trainClause</span><span class="p">?</span>
-    <span class="nx">testClause</span><span class="p">?</span>
     <span class="nx">untilClause</span>
 </code></pre>
 <p>The <code class="prettyprint">lesson</code> declares an individual lesson for the concept being trained by the curriculum.  Lessons are contained within curriculum statements. A curriculum can contain multiple lessons.</p>
 
 <p>Lessons provide control over the training of the mental model. They allow 
 the training of the concept to be broken down into phases where each phase is implemented by a lesson.
-Lessons allow the machine to learn the concept in stages rather than all at once. </p>
+Lessons allow the BRAIN to learn the concept in stages rather than all at once. </p>
 
 <h3 id="usage">Usage</h3>
 
-<p>The <code class="prettyprint">configure</code> and the <code class="prettyprint">until</code> clauses are required. </p>
-
-<p>The <code class="prettyprint">train</code> and <code class="prettyprint">test</code> clauses are optional.</p>
+<p>The <code class="prettyprint">configure</code> and the <code class="prettyprint">until</code> clauses are required.</p>
 
 <p>Lessons can be ordered, using the <code class="prettyprint">follows</code> clause. Note that this ordering is a suggestion to the instructor, not a hard and fast rule.  If there is no <code class="prettyprint">follows</code> clause and the lessons are executed in parallel, training will be slower.</p>
 
@@ -1504,14 +1492,6 @@ Lessons allow the machine to learn the concept in stages rather than all at once
         <span class="k">constrain</span> <span class="nx">bricks_percent</span> <span class="k">with</span> <span class="kr">Float32</span><span class="p">{</span><span class="mf">0.5</span><span class="p">},</span>
         <span class="k">constrain</span> <span class="nx">level</span> <span class="k">with</span> <span class="kr">Int32</span><span class="p">{</span><span class="mi">1</span><span class="p">},</span>    <span class="c1"># e.g. level = 1</span>
         <span class="k">constrain</span> <span class="nx">paddle_width</span> <span class="k">with</span> <span class="kr">Int8</span><span class="p">{</span><span class="mi">4</span><span class="p">}</span>
-      <span class="k">train</span>
-        <span class="k">from</span> <span class="nx">frame</span> <span class="k">in</span> <span class="nx">breakout_simulator</span>
-        <span class="k">select</span> <span class="nx">frame</span>
-        <span class="k">send</span> <span class="nx">frame</span>
-      <span class="k">test</span>
-        <span class="k">from</span> <span class="nx">frame</span> <span class="k">in</span> <span class="nx">breakout_simulator</span>
-        <span class="k">select</span> <span class="nx">frame</span>
-        <span class="k">send</span> <span class="nx">frame</span>
       <span class="k">until</span>
         <span class="k">maximize</span> <span class="nx">ball_location_distance</span>
 
@@ -1520,14 +1500,6 @@ Lessons allow the machine to learn the concept in stages rather than all at once
       <span class="k">constrain</span> <span class="nx">bricks_percent</span> <span class="k">with</span> <span class="kr">Float32</span><span class="p">{</span><span class="mf">0.1</span><span class="p">:</span><span class="mf">0.01</span><span class="p">:</span><span class="mf">1.0</span><span class="p">},</span>
       <span class="k">constrain</span> <span class="nx">level</span> <span class="k">with</span> <span class="kr">Int32</span><span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">},</span> <span class="c1"># e.g. level varies from 1..100</span>
       <span class="k">constrain</span> <span class="nx">paddle_width</span> <span class="k">with</span> <span class="kr">Int8</span><span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">}</span>
-    <span class="k">train</span>
-      <span class="k">from</span> <span class="nx">frame</span> <span class="k">in</span> <span class="nx">breakout_simulator</span>
-      <span class="k">select</span> <span class="nx">frame</span>
-      <span class="k">send</span> <span class="nx">frame</span>
-    <span class="k">test</span>
-      <span class="k">from</span> <span class="nx">frame</span> <span class="k">in</span> <span class="nx">breakout_simulator</span>
-      <span class="k">select</span> <span class="nx">frame</span>
-      <span class="k">send</span> <span class="nx">frame</span>
     <span class="k">until</span>
       <span class="k">maximize</span> <span class="nx">ball_location_distance</span>
 <span class="k">end</span>
@@ -1555,15 +1527,11 @@ type constraint they are called <em>placeholders</em>.  This means that the name
 
 <h2 id="lesson-subclauses">Lesson Subclauses</h2>
 
-<p>In this section we discuss the <code class="prettyprint">follows</code> clause, the <code class="prettyprint">configure</code> clause, the
-<code class="prettyprint">test</code> and <code class="prettyprint">train</code> clause, and the <code class="prettyprint">until</code> clause.</p>
+<p>In this section we discuss the <code class="prettyprint">follows</code> clause, the <code class="prettyprint">configure</code> clause, and the <code class="prettyprint">until</code> clause.</p>
 
 <ul>
 <li><p>Lessons can be ordered, using the <code class="prettyprint">follows</code> clause. This will specify the order of lessons in training and can be more efficient.</p></li>
 <li><p>Lessons are configured, using the <code class="prettyprint">configure</code> clause. This configures data for the lesson. </p></li>
-<li><p>The <code class="prettyprint">test</code> and <code class="prettyprint">train</code> clauses describe testing and training, and are optional. 
-Note that whereas the <code class="prettyprint">test</code> clause is optional for any particular lesson, if
-the last lesson has no <code class="prettyprint">test</code> clause it is an error.</p></li>
 <li><p>The <code class="prettyprint">until</code> clause describes success for the objective function. </p></li>
 </ul>
 
@@ -1669,91 +1637,6 @@ expression on the placeholder would be valid.</p>
 value list form of the range expression. You can add values to the list as long as they are of the same type, so the following is also valid:</p>
 
 <p><code class="prettyprint">constrain bricks_percent with Float32 {1.0, 1.5}</code></p>
-
-<h6 id="train-and-test-clause">Train and Test Clause</h6>
-
-<blockquote>
-<p>Train and Test Clause Syntax</p>
-</blockquote>
-<pre class="highlight inkling tab-inkling--syntax"><code><span class="nx">trainClause</span> <span class="p">::</span><span class="o">=</span>
-<span class="k">train</span>
-  <span class="k">from</span> <span class="o">&lt;</span><span class="nx">item_name</span><span class="o">&gt;</span> <span class="k">in</span> <span class="o">&lt;</span><span class="nx">simulator_name</span><span class="o">&gt;</span>
-  <span class="k">select</span> <span class="o">&lt;</span><span class="nx">item_name</span><span class="o">&gt;</span>
-  <span class="k">send</span> <span class="o">&lt;</span><span class="nx">item_name</span><span class="o">&gt;</span>
-
-<span class="nx">testClause</span> <span class="p">::</span><span class="o">=</span>
-<span class="k">test</span>
-  <span class="k">from</span> <span class="o">&lt;</span><span class="nx">item_name</span><span class="o">&gt;</span> <span class="k">in</span> <span class="o">&lt;</span><span class="nx">simulator_name</span><span class="o">&gt;</span>
-  <span class="k">select</span> <span class="o">&lt;</span><span class="nx">item_name</span><span class="o">&gt;</span>
-  <span class="k">send</span> <span class="o">&lt;</span><span class="nx">item_name</span><span class="o">&gt;</span>
-</code></pre>
-<p>The <code class="prettyprint">test</code> and <code class="prettyprint">train</code> clauses describe testing and training.</p>
-
-<p>The <code class="prettyprint">from</code> subclause in the test/train syntax is used to name, describe, and select the
-training data that is sent by the simulator to the lesson.</p>
-
-<p>The <code class="prettyprint">test</code> clause and the <code class="prettyprint">train</code> clause have identical syntax except for
-their keyword (<code class="prettyprint">train</code> or <code class="prettyprint">test</code>).  </p>
-
-<h3 id="usage">Usage</h3>
-
-<p>The <code class="prettyprint">test</code> and <code class="prettyprint">train</code> clauses are optional. </p>
-
-<p>If neither the <code class="prettyprint">test</code> or <code class="prettyprint">train</code> lesson clauses are present, defaults for both
-clauses are generated. The default in both cases is:</p>
-
-<p><code class="prettyprint">from item in &lt;simulator_name&gt; select item send item</code></p>
-
-<p>(Here <code class="prettyprint">&lt;simulator_name&gt;</code> refers to the name of the simulator being used by the
-lesson.)</p>
-
-<p>If one of the <code class="prettyprint">train</code> and <code class="prettyprint">test</code> clauses is present, no defaults are generated.</p>
-
-<p>If the <code class="prettyprint">train</code> clause is not present, the return schema of the simulator must exactly match the input schema to the network.</p>
-
-<p>The <code class="prettyprint">test</code> clause is not required for any particular lesson. But if the final lesson does not have a <code class="prettyprint">test</code> clause that is an error.</p>
-
-<h3 id="example">Example</h3>
-
-<p>In this example we show <code class="prettyprint">train</code> and <code class="prettyprint">test</code> clauses. </p>
-<pre class="highlight inkling tab-inkling--code"><code><span class="k">curriculum</span> <span class="nx">high_score_curriculum</span>
-  <span class="k">train</span> <span class="nx">high_score</span>
-  <span class="k">with</span> <span class="k">simulator</span> <span class="nx">breakout_simulator</span>
-  <span class="k">objective</span> <span class="nx">score</span>
-    <span class="k">lesson</span> <span class="nx">score_lesson</span>
-      <span class="k">configure</span>
-        <span class="k">constrain</span> <span class="nx">bricks_percent</span> <span class="k">with</span> <span class="kr">Float32</span><span class="p">{</span><span class="mf">1.0</span><span class="p">},</span>
-        <span class="k">constrain</span> <span class="nx">level</span> <span class="k">with</span> <span class="kr">Int32</span><span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">},</span>
-        <span class="k">constrain</span> <span class="nx">paddle_width</span> <span class="k">with</span> <span class="kr">Int8</span><span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">}</span>
-      <span class="k">train</span>
-        <span class="k">from</span> <span class="nx">frame</span> <span class="k">in</span> <span class="nx">breakout_simulator</span>
-        <span class="k">select</span> <span class="nx">frame</span>
-        <span class="k">send</span> <span class="nx">frame</span>
-      <span class="k">test</span>
-        <span class="k">from</span> <span class="nx">frame</span> <span class="k">in</span> <span class="nx">breakout_simulator</span>
-        <span class="k">select</span> <span class="nx">frame</span>
-        <span class="k">send</span> <span class="nx">frame</span>
-      <span class="k">until</span>
-        <span class="k">maximize</span> <span class="nx">score</span>
-<span class="k">end</span>
-
-</code></pre>
-<p>What is sent (via <code class="prettyprint">send</code>) to the neural network as a result of the <code class="prettyprint">train</code> must have the same schema as the system&rsquo;s input schema. In this case that is <code class="prettyprint">GameState</code>.  Note that <code class="prettyprint">GameState</code> is declared as the output schema of the simulator.</p>
-
-<p>The data that comes out of the lesson will always flow into the input keyword.
-The system is calculating a subgraph between the input and the concept being
-trained and that portion of the mental model is involved in the training.</p>
-
-<p>The curriculum represents a collection of lessons which collectively train a subgraph of the mental model. The lesson represents a phase in training a subgraph of the mental model. The lessons represent the phases of training.</p>
-
-<p>All subgraphs begin with input and end with the concept under training and contain all nodes in between.</p>
-
-<p>For training with a simulator, the trained statement equals the simulator output.</p>
-
-<p>The trained statement can be understood as the input data to the trained network (or mental model).</p>
-
-<p>The <code class="prettyprint">train</code> clause is optional. If it is not present a default is generated that
-will send the simulator output (conforming to the simulator output schema) to the neural network. </p>
 
 <h6 id="until-clause">Until Clause</h6>
 
@@ -1882,14 +1765,6 @@ next action, so on and so on, until the BRAIN learns how to best operate the sim
         <span class="k">constrain</span> <span class="nx">bricks_percent</span> <span class="k">with</span> <span class="kr">Float32</span><span class="p">{</span><span class="mf">1.0</span><span class="p">},</span>
         <span class="k">constrain</span> <span class="nx">level</span> <span class="k">with</span> <span class="kr">UInt32</span><span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">},</span>
         <span class="k">constrain</span> <span class="nx">paddle_width</span> <span class="k">with</span> <span class="kr">UInt8</span><span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">}</span>
-      <span class="k">train</span>
-        <span class="k">from</span> <span class="nx">frame</span> <span class="k">in</span> <span class="nx">breakout_simulator</span>
-        <span class="k">select</span> <span class="nx">frame</span>
-        <span class="k">send</span> <span class="nx">frame</span>
-      <span class="k">test</span>
-        <span class="k">from</span> <span class="nx">frame</span> <span class="k">in</span> <span class="nx">breakout_simulator</span>
-        <span class="k">select</span> <span class="nx">frame</span>
-        <span class="k">send</span> <span class="nx">frame</span>
       <span class="k">until</span>
         <span class="k">maximize</span> <span class="nx">score</span>
 <span class="k">end</span>
