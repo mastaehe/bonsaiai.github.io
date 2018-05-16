@@ -411,14 +411,6 @@ curriculum ball_location_curriculum
         constrain bricks_percent with Float32{0.1:0.01:1.0},
         constrain level with UInt32{1:100},
         constrain paddle_width with UInt8{1:4}
-      train
-        from frame in breakout_simulator
-        select frame
-        send frame
-      test
-        from frame in breakout_simulator
-        select frame
-        send frame
       until
         maximize ball_location_distance
 end
