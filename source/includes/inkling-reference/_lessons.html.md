@@ -15,8 +15,6 @@ lessonStatement ::=
   lesson <lessonName>
     followsClause?
     configureClause
-    trainClause?
-    testClause?
     untilClause
 ```
 
@@ -24,13 +22,11 @@ The `lesson` declares an individual lesson for the concept being trained by the 
 
 Lessons provide control over the training of the mental model. They allow 
 the training of the concept to be broken down into phases where each phase is implemented by a lesson.
-Lessons allow the machine to learn the concept in stages rather than all at once. 
+Lessons allow the BRAIN to learn the concept in stages rather than all at once. 
 
 ### Usage
 
-The `configure` and the `until` clauses are required. 
-
-The `train` and `test` clauses are optional.
+The `configure` and the `until` clauses are required.
 
 Lessons can be ordered, using the `follows` clause. Note that this ordering is a suggestion to the instructor, not a hard and fast rule.  If there is no `follows` clause and the lessons are executed in parallel, training will be slower.
 
@@ -72,14 +68,6 @@ curriculum ball_location_curriculum
         constrain bricks_percent with Float32{0.5},
         constrain level with Int32{1},    # e.g. level = 1
         constrain paddle_width with Int8{4}
-      train
-        from frame in breakout_simulator
-        select frame
-        send frame
-      test
-        from frame in breakout_simulator
-        select frame
-        send frame
       until
         maximize ball_location_distance
 
@@ -88,14 +76,6 @@ curriculum ball_location_curriculum
       constrain bricks_percent with Float32{0.1:0.01:1.0},
       constrain level with Int32{1:100}, # e.g. level varies from 1..100
       constrain paddle_width with Int8{1:4}
-    train
-      from frame in breakout_simulator
-      select frame
-      send frame
-    test
-      from frame in breakout_simulator
-      select frame
-      send frame
     until
       maximize ball_location_distance
 end
@@ -123,16 +103,11 @@ Schema declarations can also use type constraints. They are discussed in depth
 
 ## Lesson Subclauses
 
-In this section we discuss the `follows` clause, the `configure` clause, the
-`test` and `train` clause, and the `until` clause.
+In this section we discuss the `follows` clause, the `configure` clause, and the `until` clause.
 
 * Lessons can be ordered, using the `follows` clause. This will specify the order of lessons in training and can be more efficient.
 
 * Lessons are configured, using the `configure` clause. This configures data for the lesson. 
-
-* The `test` and `train` clauses describe testing and training, and are optional. 
-Note that whereas the `test` clause is optional for any particular lesson, if
-the last lesson has no `test` clause it is an error.
 
 * The `until` clause describes success for the objective function. 
 
@@ -246,95 +221,6 @@ We can also configure `bricks_percent` to take a constant value:
 value list form of the range expression. You can add values to the list as long as they are of the same type, so the following is also valid:
 
 `constrain bricks_percent with Float32 {1.0, 1.5}`
-
-###### Train and Test Clause
-
-> Train and Test Clause Syntax
-
-```inkling--syntax
-trainClause ::=
-train
-  from <item_name> in <simulator_name>
-  select <item_name>
-  send <item_name>
-
-testClause ::=
-test
-  from <item_name> in <simulator_name>
-  select <item_name>
-  send <item_name>
-```
-
-The `test` and `train` clauses describe testing and training.
-
-The `from` subclause in the test/train syntax is used to name, describe, and select the
-training data that is sent by the simulator to the lesson.
-
-The `test` clause and the `train` clause have identical syntax except for
-their keyword (`train` or `test`).  
-
-### Usage
-
-The `test` and `train` clauses are optional. 
-
-If neither the `test` or `train` lesson clauses are present, defaults for both
-clauses are generated. The default in both cases is:
-
-`from item in <simulator_name> select item send item`
-
-(Here `<simulator_name>` refers to the name of the simulator being used by the
-lesson.)
-
-If one of the `train` and `test` clauses is present, no defaults are generated.
-
-If the `train` clause is not present, the return schema of the simulator must exactly match the input schema to the network.
-
-The `test` clause is not required for any particular lesson. But if the final lesson does not have a `test` clause that is an error.
-
-### Example
-
-In this example we show `train` and `test` clauses. 
- 
-```inkling--code
-curriculum high_score_curriculum
-  train high_score
-  with simulator breakout_simulator
-  objective score
-    lesson score_lesson
-      configure
-        constrain bricks_percent with Float32{1.0},
-        constrain level with Int32{1:100},
-        constrain paddle_width with Int8{1:4}
-      train
-        from frame in breakout_simulator
-        select frame
-        send frame
-      test
-        from frame in breakout_simulator
-        select frame
-        send frame
-      until
-        maximize score
-end
-
-```
-
-What is sent (via `send`) to the neural network as a result of the `train` must have the same schema as the system's input schema. In this case that is `GameState`.  Note that `GameState` is declared as the output schema of the simulator.
-
-The data that comes out of the lesson will always flow into the input keyword.
-The system is calculating a subgraph between the input and the concept being
-trained and that portion of the mental model is involved in the training.
-
-The curriculum represents a collection of lessons which collectively train a subgraph of the mental model. The lesson represents a phase in training a subgraph of the mental model. The lessons represent the phases of training.
-
-All subgraphs begin with input and end with the concept under training and contain all nodes in between.
-
-For training with a simulator, the trained statement equals the simulator output.
-
-The trained statement can be understood as the input data to the trained network (or mental model).
-
-The `train` clause is optional. If it is not present a default is generated that
-will send the simulator output (conforming to the simulator output schema) to the neural network. 
 
 ###### Until Clause
 
