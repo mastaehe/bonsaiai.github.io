@@ -219,6 +219,8 @@ Before we dive into the STAR components of this system, let’s first look at th
 
 After you've glanced at the Inkling code you can take a quick look at the Python code. This guide will walk through segments of it and the full code (with more code comments) can be referenced under [Simulink Househeat][1] on GitHub if you want the full context. Specifically, the code snippets describing machine teaching can be found in `simulink_househeat.ink` for Inkling and `bonsai_model.py` for Python.
 
+Note that if you want to run this Simulink househeat example yourself you'll need to have MATLAB and Simulink installed on your computer. The guide for this is in our [Simulink Examples][4] section.
+
 
 # Transforming State Spaces
 
@@ -364,6 +366,8 @@ The reward function of a model simply does just that. You are rewarding the syst
 
 As mentioned in the first part of this guide, the house in this example is being heated by an AI to keep as close as possible to a set point temperature. When constructing a reward function, you will need to keep in mind this objective. Currently in the platform the reward function is constructed in the simulation model, not in Inkling.
 
+This example uses both a time limit and a negative [terminal condition][2]. The episode will end if there has been more than 120 iterations (steps) or the reward has gone negative. 
+
 ## Sparse vs. Shaped Rewards
 
 > Sparse Reward Function
@@ -383,19 +387,14 @@ In the Sparse Reward Function shown, if there is a temperature difference of les
 
 ```python
 tdiff = math.fabs(self.state['set_temp'] - self.state['room_temp'])
-nonlinear_diff = pow(tdiff, 0.4)
-scaled_diff = nonlinear_diff / 1.32
-self.reward = 1.0 - scaled_diff
-
-self.terminal = self.nsteps >= _STEPLIMIT or self.reward < 0.0
-
-if self.nsteps > 0:
-    self.total_reward += self.reward
+        nonlinear_diff = pow(tdiff, 0.4)
+        scaled_diff = nonlinear_diff / 1.32
+        self.reward = 1.0 - scaled_diff
 ```
 
 Shaping a reward function is an important part of reducing training time. By providing information throughout the simulation (before the objective is reached) the BRAIN can learn the types of behaviors we want to see in the simulation. For example, if you know that being closer to a set temperature is better than being farther away you can use that information to provide a smooth continuous gradient that says ‘for any given state, if that state is closer to the objective, then it should give more reward than a state that's further away from the objective. 
 
-In this example, we have created an exponential function to shape the reward function. This function will reward close to 1 when the difference in temperature is close to 0 and has a curve to encourage the BRAIN to get closer to 0 when it’s farther away. This example uses both a time limit and a negative [terminal condition][2]. The episode will end if there has been more than 120 iterations (steps) or the reward has gone negative. 
+In this example, we have created an exponential function to shape the reward function. This function will reward close to 1 when the difference in temperature is close to 0 and has a curve to encourage the BRAIN to get closer to 0 when it’s farther away.
 
 Problems that amenable to shaping are problems where it’s easy to say for any given state whether it’s better or worse. In the game Go for example, it’s very hard to determine whether one move is better or worse than any other given move, and makes it very hard to solve with Reinforcement Learning.
 
@@ -577,3 +576,4 @@ Logs that document states and actions for iterations and episodes help identify 
 [1]: https://github.com/BonsaiAI/bonsai-simulink/tree/master/examples/simulink-househeat
 [2]: #speeding-up-training
 [3]: https://www.youtube.com/watch?v=0R3PnJEisqk&index=4&list=PLAktfMEMCsOY9HUZKIuGI6yqefGBuszAV]
+[4]: ../examples.html#simulink-examples
