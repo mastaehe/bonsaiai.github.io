@@ -1,0 +1,1102 @@
+
+
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Programming Machine Teaching - Bonsai</title>
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .gh {
+  color: #999999;
+}
+.highlight .sr {
+  color: #f6aa11;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #75715e;
+}
+.highlight .c1 {
+  color: #75715e;
+}
+.highlight .cs {
+  color: #75715e;
+}
+.highlight .c, .highlight .cd {
+  color: #75715e;
+}
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
+}
+.highlight .gd {
+  color: #49483e;
+}
+.highlight .gi {
+  color: #49483e;
+}
+.highlight .ge {
+  color: #49483e;
+}
+.highlight .kc {
+  color: #66d9ef;
+}
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
+}
+.highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s {
+  color: #e6db74;
+}
+.highlight .na {
+  color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+}
+.highlight .nn {
+  color: #ffffff;
+}
+.highlight .nl {
+  color: #ffffff;
+}
+.highlight .ni {
+  color: #ffffff;
+}
+.highlight .bp {
+  color: #ffffff;
+}
+.highlight .vg {
+  color: #ffffff;
+}
+.highlight .vi {
+  color: #ffffff;
+}
+.highlight .nv {
+  color: #ffffff;
+}
+.highlight .w {
+  color: #ffffff;
+}
+.highlight {
+  color: #ffffff;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
+}
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+    <link href="../stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="../stylesheets/print.css" rel="stylesheet" media="print" />
+	  <link href="../stylesheets/test.css" rel="stylesheet" media="screen" />
+    <link href="../favicon.ico" rel="icon" type="image/ico" />
+      <script src="../javascripts/all.js"></script>
+
+    <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WVB6MG2');</script>
+<!-- End Google Tag Manager -->
+      <!-- start Mixpanel -->
+<script type="text/javascript">(function(e,a){if(!a.__SV){var b=window;try{var c,l,i,j=b.location,g=j.hash;c=function(a,b){return(l=a.match(RegExp(b+"=([^&]*)")))?l[1]:null};g&&c(g,"state")&&(i=JSON.parse(decodeURIComponent(c(g,"state"))),"mpeditor"===i.action&&(b.sessionStorage.setItem("_mpcehash",g),history.replaceState(i.desiredHash||"",e.title,j.pathname+j.search)))}catch(m){}var k,h;window.mixpanel=a;a._i=[];a.init=function(b,c,f){function e(b,a){var c=a.split(".");2==c.length&&(b=b[c[0]],a=c[1]);b[a]=function(){b.push([a].concat(Array.prototype.slice.call(arguments,
+0)))}}var d=a;"undefined"!==typeof f?d=a[f]=[]:f="mixpanel";d.people=d.people||[];d.toString=function(b){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);b||(a+=" (stub)");return a};d.people.toString=function(){return d.toString(1)+".people (stub)"};k="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config reset people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+for(h=0;h<k.length;h++)e(d,k[h]);a._i.push([b,c,f])};a.__SV=1.2;b=e.createElement("script");b.type="text/javascript";b.async=!0;b.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";c=e.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c)}})(document,window.mixpanel||[]);
+mixpanel.init("91fbf7b68fb2356f91916026f221ddd5", {
+    loaded: function(mixpanel) {
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+
+        distinct_id = getParameterByName('refUserId');
+        if (distinct_id) {
+          mixpanel.identify(distinct_id);
+        }
+    }
+});</script>
+<!-- end Mixpanel -->
+
+  </head>
+
+  <body class="guides guides_machine-teaching" data-languages="[]">
+
+
+	  <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WVB6MG2"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) --> 
+
+  <div id="flex-container">
+
+	<nav id="primary-nav">
+
+
+
+	<div id="logo"> <a href="../"><img class="bonsai-logo" src="../images/bonsai-logo.svg"></a></div>
+
+	<label for="drop" class="toggle"><img class="menu-ham" src="../images/menu.svg"></label>
+	<input type="checkbox" id="drop" />
+
+	<ul class="menu">
+
+		<li class="header_menu_item "> <a href="getting-started.html">Quick Start</a></li>
+
+		<li class="header_menu_item"> <!-- First Tier Drop Down --> <label for="drop-1" class="toggle">Tutorials +</label><a  href="#">Tutorials</a>
+			<input type="checkbox" id="drop-1"/>
+			<ul id="tutorials">
+				<li class=""> <a href="cli-install-guide.html">Install the CLI</a>  </li>
+				<li class=""> <a href="sdk-install-guide.html">Install the SDK</a>  </li>
+				<li class=""> <a href="local-dev-guide.html">Run the Platform Locally</a>  </li>
+				<li class=""> <a href="jupyter-api-guide.html">Use Bonsai's API with Jupyter</a>  </li>
+			</ul>
+		</li>
+
+		<li class="header_menu_item"> <!-- First Tier Drop Down --> <label for="drop-2" class="toggle">Guides +</label><a  href="#">Guides</a>
+			<input type="checkbox" id="drop-2"/>
+			<ul id="guides">
+				<li class=""> <a href="simulation-guide.html">Learn About Simulation Requirements</a>  </li>
+				<li class=""> <a href="inkling-guide.html">Learn the Inkling Language</a>  </li>
+				<li class=""> <a href="ai-engine-guide.html">Understand AI Engine Components</a>  </li>
+				<li class=""> <a href="web-graphs-guide.html">Understand BRAIN Graphs</a>  </li>
+			</ul>
+		</li>
+
+		<li class="header_menu_item"> <!-- First Tier Drop Down --> <label for="drop-3" class="toggle">References +</label><a  href="#">References</a>
+			<input type="checkbox" id="drop-3"/>
+			<ul id="references">
+				<li class=""> <a href="../references/api-reference.html">API Reference</a>  </li>
+				<li class=""> <a href="../references/cli-reference.html">CLI Reference</a>  </li>
+				<li class=""> <a href="../references/inkling-reference.html">Inkling Reference</a>  </li>
+				<li class=""> <a href="../references/library-reference.html">Library Reference</a>  </li>
+				<li class=""> <a href="../references/simulator-reference.html">Simulator Reference</a>
+			</ul> 
+		</li>
+
+		<li class="header_menu_item "> <a href="../examples.html">Examples</a></li>
+
+		<li>
+			<input type="search" id="docs-search" placeholder="Search Bonsai Docs">
+		</li>
+
+
+	</ul>
+
+</nav>
+
+
+	<div id="main-wrapper">
+
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="../images/navbar.png" alt="Navbar" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <div class="page-title">Programming Machine Teaching</div>
+      <div id="toc">
+      </div>
+
+			 
+<ul class="toc-footer">
+
+<li><a href='https://bons.ai'>Bonsai Home</a></li>
+<li><a href='https://beta.bons.ai'>BRAIN Dashboard</a></li>
+<li><a href='https://github.com/BonsaiAI/slate'>Contribute to the Docs</a></li>
+<li><a href='http://pages.bons.ai/apply.html'>Apply for Bonsai Platform Preview</a></li>
+<li><a href="/releases.html">Product Release Notes</a></li>
+<li><a href='https://bons.ai/contact-us#contact-page-form'>Contact Us</a></li>
+
+</ul>
+
+
+	   <div class="cc-bottom">
+	
+	<div class="toc-footer bottom cc-info">
+
+		<a href='https://creativecommons.org/licenses/by-sa/4.0/' class="cc-icon-width" >
+			<svg class="cc" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+			viewBox="0 0 70.7 13.4" style="enable-background:new 0 0 70.7 13.4;" xml:space="preserve">
+
+				<g>
+
+				<g>
+				<circle class="st0" cx="6.8" cy="6.7" r="6.1"/>
+				<path d="M6.7,0c1.9,0,3.5,0.7,4.8,2c0.6,0.6,1.1,1.4,1.4,2.2c0.3,0.8,0.5,1.7,0.5,2.6c0,0.9-0.2,1.8-0.5,2.6
+				c-0.3,0.8-0.8,1.5-1.4,2.1c-0.7,0.6-1.4,1.1-2.2,1.5c-0.8,0.3-1.7,0.5-2.6,0.5S5,13.3,4.2,12.9c-0.8-0.3-1.5-0.8-2.2-1.5
+				s-1.1-1.4-1.5-2.2S0,7.6,0,6.7C0,5.8,0.2,5,0.5,4.2S1.3,2.6,2,2C3.3,0.7,4.8,0,6.7,0z M6.7,1.2c-1.5,0-2.8,0.5-3.9,1.6
+				C2.3,3.4,1.9,4,1.6,4.6C1.4,5.3,1.2,6,1.2,6.7c0,0.7,0.1,1.4,0.4,2.1c0.3,0.7,0.7,1.3,1.2,1.8c0.5,0.5,1.1,0.9,1.8,1.2
+				c0.7,0.3,1.4,0.4,2.1,0.4c0.7,0,1.4-0.1,2.1-0.4c0.7-0.3,1.3-0.7,1.8-1.2c1-1,1.6-2.3,1.6-3.9c0-0.7-0.1-1.4-0.4-2.1
+				c-0.3-0.7-0.7-1.3-1.2-1.8C9.5,1.8,8.2,1.2,6.7,1.2z M6.6,5.6L5.7,6.1C5.6,5.9,5.5,5.7,5.4,5.6C5.3,5.6,5.1,5.5,5,5.5
+				c-0.6,0-0.9,0.4-0.9,1.2c0,0.4,0.1,0.6,0.2,0.9C4.5,7.8,4.7,7.9,5,7.9c0.4,0,0.7-0.2,0.8-0.6l0.8,0.4C6.5,8.1,6.2,8.3,5.9,8.5
+				c-0.3,0.2-0.7,0.3-1,0.3c-0.6,0-1.1-0.2-1.5-0.6C3.1,7.9,2.9,7.4,2.9,6.7c0-0.6,0.2-1.1,0.6-1.5c0.4-0.4,0.8-0.6,1.4-0.6
+				C5.7,4.6,6.3,5,6.6,5.6z M10.5,5.6L9.6,6.1C9.5,5.9,9.4,5.7,9.3,5.6C9.1,5.6,9,5.5,8.9,5.5C8.3,5.5,8,5.9,8,6.7
+				c0,0.4,0.1,0.6,0.2,0.9c0.2,0.2,0.4,0.3,0.7,0.3c0.4,0,0.7-0.2,0.8-0.6l0.8,0.4c-0.2,0.3-0.4,0.6-0.7,0.8c-0.3,0.2-0.7,0.3-1,0.3
+				c-0.6,0-1.1-0.2-1.5-0.6C7,7.9,6.8,7.4,6.8,6.7c0-0.6,0.2-1.1,0.6-1.5c0.4-0.4,0.8-0.6,1.4-0.6C9.6,4.6,10.2,5,10.5,5.6z"/>
+				</g>
+
+				</g>
+			</svg>
+		</a>
+		
+		<a href='https://creativecommons.org/licenses/by-sa/4.0/'>Content:
+		CC-BY-SA </a>
+		
+	</div>
+
+</div>
+
+    </div>
+
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        
+          <h1 id="machine-teaching-overview">Machine Teaching Overview</h1>
+
+<p>Machine teaching comprises programming a BRAIN to learn to control or optimize a complex system by outlining details of the system and providing strategies for how the BRAIN should learn. </p>
+
+<p>In this guide you will learn about the different components of programming machine teaching, where they currently reside in the platform, and how to transform them from one to the other. This guide will also cover constructing reward functions, terminal conditions, logging your output, and different types of simulator patterns you may be programming for.  First, let’s start with our approach for machine teaching: </p>
+
+<ol>
+<li><strong>Describe the problem.</strong>  The first step in machine teaching is to clearly describe the system that you will train the BRAIN to control or optimize.</li>
+<li><strong>Identify the learning objectives.</strong>  Learning objectives are the sub-skills that you want the BRAIN to learn in order to master control of the system.  The process of identifying learning objectives helps organize the machine teaching process before diving into the details. </li>
+<li><strong>Outline your teaching methods and lesson plan.</strong>  After you have identified your learning objectives, decide how you want to teach each objective.  For example, some learning objectives might be taught with Deep Reinforcement Learning, some learning objectives might be fulfilled using existing control algorithms or other machine learning approaches, other learning objectives might be described using rules or heuristics. </li>
+</ol>
+
+<h2 id="components-of-machine-teaching">Components of Machine Teaching</h2>
+
+<blockquote>
+<p><img src="../images/machine-teaching-flow.png" alt="Machine Teaching Flow" /></p>
+</blockquote>
+
+<p>Some of the programming for machine teaching resides in Inkling, a new machine teaching language, and the rest resides in Python.  The STAR (State, Terminal, Action, Reward) components in Python are part of the connection between the Simulator and the Bonsai Platform that focuses on machine teaching as opposed to simulator mechanics.  For example, you may use a Python script to connect your simulation model to the Platform using the Bonsai SDK.  Some of the functions in your Python script handle communication with your simulation model.  Other functions are dedicated to machine teaching.  </p>
+
+<h3 id="terminology">Terminology</h3>
+
+<p>The following table describes the key aspects of programming Machine Teaching on the Bonsai platform and where each aspect is programmed. </p>
+
+<table><thead>
+<tr>
+<th></th>
+<th>Inkling</th>
+<th>Python</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>S</strong>tate</td>
+<td>State definition describes variables that represent the state of the system at each time step.</td>
+<td>State transformations modify the state given by the simulation model for more efficient deep reinforcement learning.</td>
+</tr>
+<tr>
+<td><strong>T</strong>erminal Condition</td>
+<td></td>
+<td>Terminal conditions specify when to end an episode.</td>
+</tr>
+<tr>
+<td><strong>A</strong>ction</td>
+<td>Action definition describes which actions the BRAIN is learning to control in the system.</td>
+<td>Action transformations modify the action space.</td>
+</tr>
+<tr>
+<td><strong>R</strong>eward Function</td>
+<td></td>
+<td>Reward functions allocate reward to the BRAIN based on how well it optimized the system toward the objective.</td>
+</tr>
+<tr>
+<td>Concepts</td>
+<td>Concepts are sub-skills that the BRAIN will learn that help it control or optimize the system.</td>
+<td></td>
+</tr>
+<tr>
+<td>Lessons</td>
+<td>Lessons guide the BRAIN through phased training sequences.</td>
+<td></td>
+</tr>
+<tr>
+<td>Lesson Configurations</td>
+<td></td>
+<td>Lesson configurations pass data about initial conditions from the lesson plan to the simulator.</td>
+</tr>
+<tr>
+<td>Logging</td>
+<td></td>
+<td>Logging documents training results at each time step (iteration) and training pass (episode) in the terminal and log files.</td>
+</tr>
+</tbody></table>
+
+          <h1 id="househeat-example">Househeat Example</h1>
+
+<blockquote>
+<p>Inkling code for Househeat</p>
+</blockquote>
+<pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">HouseheatState</span>
+    <span class="kr">Float32</span> <span class="nx">heat_cost</span><span class="p">,</span>
+    <span class="kr">Float32</span> <span class="nx">temperature_difference</span><span class="p">,</span>
+    <span class="kr">Float32</span> <span class="nx">temperature_difference_t1</span><span class="p">,</span>
+    <span class="kr">Float32</span> <span class="nx">temperature_difference_t2</span><span class="p">,</span>
+    <span class="kr">Float32</span> <span class="nx">temperature_difference_t3</span><span class="p">,</span>
+    <span class="kr">Float32</span> <span class="nx">temperature_difference_t4</span><span class="p">,</span>
+    <span class="kr">Float32</span> <span class="nx">temperature_difference_t5</span><span class="p">,</span>
+    <span class="kr">Float32</span> <span class="nx">outside_temp_change</span>
+<span class="k">end</span>
+
+<span class="k">schema</span> <span class="nx">HouseheatAction</span>
+    <span class="kr">Float32</span><span class="p">{</span> <span class="mf">0.0</span><span class="p">:</span><span class="mi">1</span><span class="p">:</span><span class="mf">1.0</span> <span class="p">}</span> <span class="nx">heater_on</span>
+<span class="k">end</span>
+
+<span class="k">schema</span> <span class="nx">HouseheatConfig</span>
+    <span class="kr">Float32</span> <span class="nx">outside_phase</span>
+<span class="k">end</span>
+
+<span class="k">concept</span> <span class="nx">thermostat</span> <span class="k">is</span> <span class="nx">classifier</span>
+   <span class="k">predicts</span> <span class="p">(</span><span class="nx">HouseheatAction</span><span class="p">)</span>
+   <span class="k">follows</span> <span class="kr">input</span><span class="p">(</span><span class="nx">HouseheatState</span><span class="p">)</span>
+   <span class="k">feeds</span> <span class="kr">output</span>
+<span class="k">end</span>
+
+<span class="k">simulator</span> <span class="nx">simulink_sim</span><span class="p">(</span><span class="nx">HouseheatConfig</span><span class="p">)</span>
+    <span class="k">action</span> <span class="p">(</span><span class="nx">HouseheatAction</span><span class="p">)</span>
+    <span class="k">state</span> <span class="p">(</span><span class="nx">HouseheatState</span><span class="p">)</span>
+<span class="k">end</span>
+
+<span class="k">curriculum</span> <span class="nx">my_curriculum</span>
+    <span class="k">train</span> <span class="nx">thermostat</span>
+    <span class="k">with</span> <span class="k">simulator</span> <span class="nx">simulink_sim</span>
+    <span class="k">objective</span> <span class="nx">match_set_temp</span>
+
+        <span class="k">lesson</span> <span class="nx">my_first_lesson</span>
+            <span class="k">configure</span>
+            <span class="k">constrain</span> <span class="nx">outside_phase</span> <span class="k">with</span> <span class="kr">Float32</span><span class="p">{</span><span class="mf">0.0</span><span class="p">:</span><span class="mf">12.0</span><span class="p">}</span>
+            <span class="k">until</span>
+                <span class="k">maximize</span> <span class="nx">match_set_temp</span>
+
+        <span class="k">lesson</span> <span class="nx">my_second_lesson</span>
+            <span class="k">configure</span>
+            <span class="k">constrain</span> <span class="nx">outside_phase</span> <span class="k">with</span> <span class="kr">Float32</span><span class="p">{</span><span class="mf">0.0</span><span class="p">:</span><span class="mf">24.0</span><span class="p">}</span>
+            <span class="k">until</span>
+                <span class="k">maximize</span> <span class="nx">match_set_temp</span>
+
+
+        <span class="k">lesson</span> <span class="nx">my_third_lesson</span>
+            <span class="k">configure</span>
+            <span class="k">constrain</span> <span class="nx">outside_phase</span> <span class="k">with</span> <span class="kr">Float32</span><span class="p">{</span><span class="mf">0.0</span><span class="p">:</span><span class="mf">48.0</span><span class="p">}</span>
+            <span class="k">until</span>
+                <span class="k">maximize</span> <span class="nx">match_set_temp</span>
+
+<span class="k">end</span>
+</code></pre>
+<blockquote>
+<p>Python code for Househeat</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="c">#!/usr/bin/env python3</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+
+<span class="n">_STEPLIMIT</span> <span class="o">=</span> <span class="mi">480</span>
+
+<span class="k">class</span> <span class="nc">Model</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">eng</span><span class="p">):</span>
+        <span class="s">"""
+        Load the specified simulink model.
+        """</span>
+        <span class="n">eng</span><span class="o">.</span><span class="nb">eval</span><span class="p">(</span><span class="s">"load_system('simulink_househeat')"</span><span class="p">,</span> <span class="n">nargout</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">executable_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">"""
+        Returns the name of the executable (Simulink Coder Only).
+        """</span>
+        <span class="k">return</span> <span class="s">"./simulink_househeat"</span>
+
+    <span class="k">def</span> <span class="nf">episode_init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">"""
+        This method is called at the beginning of each episode.
+        """</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nsteps</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">action</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logged_state</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reward</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">terminal</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">total_reward</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="n">empty_observation</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">temperature_difference_history</span> <span class="o">=</span> <span class="n">deque</span><span class="p">(</span><span class="n">empty_observation</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">episode_step</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">"""
+        This method is called at the beginning of each iteration.
+        """</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nsteps</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">convert_config</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">conf</span><span class="p">):</span>
+        <span class="s">"""
+        Convert the dictionary of config from the brain into an ordered
+        list of config for the simulation.
+        """</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">conf</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">conf</span><span class="p">[</span><span class="s">'outside_phase'</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="k">return</span> <span class="p">[</span> <span class="n">conf</span><span class="p">[</span><span class="s">'outside_phase'</span><span class="p">],</span> <span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">convert_input</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">simulator_state</span><span class="p">):</span>
+        <span class="s">"""
+        Called with a list of inputs from the model,
+        returns (state, reward, terminal).
+        """</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logged_state</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s">'heat_cost'</span><span class="p">:</span>           <span class="n">simulator_state</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+            <span class="s">'set_temp'</span><span class="p">:</span>            <span class="n">simulator_state</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+            <span class="s">'room_temp'</span><span class="p">:</span>           <span class="n">simulator_state</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+            <span class="s">'room_temp_change'</span><span class="p">:</span>    <span class="n">simulator_state</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+            <span class="s">'outside_temp'</span><span class="p">:</span>        <span class="n">simulator_state</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span>
+            <span class="s">'outside_temp_change'</span><span class="p">:</span> <span class="n">simulator_state</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span>
+        <span class="p">}</span>
+
+        <span class="n">tdiff</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">fabs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logged_state</span><span class="p">[</span><span class="s">'set_temp'</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">logged_state</span><span class="p">[</span><span class="s">'room_temp'</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">temperature_difference_history</span><span class="o">.</span><span class="n">appendleft</span><span class="p">(</span><span class="n">tdiff</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">temperature_difference_history</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s">'heat_cost'</span><span class="p">:</span>                 <span class="n">simulator_state</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+            <span class="s">'temperature_difference'</span><span class="p">:</span>    <span class="n">tdiff</span><span class="p">,</span>
+            <span class="s">'temperature_difference_t1'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">temperature_difference_history</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+            <span class="s">'temperature_difference_t2'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">temperature_difference_history</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+            <span class="s">'temperature_difference_t3'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">temperature_difference_history</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+            <span class="s">'temperature_difference_t4'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">temperature_difference_history</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+            <span class="s">'temperature_difference_t5'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">temperature_difference_history</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span>
+            <span class="s">'outside_temp_change'</span><span class="p">:</span>       <span class="n">simulator_state</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span>
+        <span class="p">}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">tstamp</span> <span class="o">=</span> <span class="n">simulator_state</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span>
+
+        <span class="n">tdiff</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">fabs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s">'set_temp'</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s">'room_temp'</span><span class="p">])</span>
+        <span class="n">nonlinear_diff</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">tdiff</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">)</span>
+        <span class="n">scaled_diff</span> <span class="o">=</span> <span class="n">nonlinear_diff</span> <span class="o">/</span> <span class="mf">1.32</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reward</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">scaled_diff</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">terminal</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nsteps</span> <span class="o">&gt;=</span> <span class="n">_STEPLIMIT</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">reward</span> <span class="o">&lt;</span> <span class="mf">0.0</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">nsteps</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">total_reward</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reward</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">reward</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">terminal</span>
+
+    <span class="k">def</span> <span class="nf">convert_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">brain_action</span><span class="p">):</span>
+        <span class="s">"""
+        Called with a dictionary of actions from the brain, returns an
+        ordered list of outputs for the simulation model.
+        """</span>
+        <span class="n">outlist</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="n">brain_action</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">clamped_action</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">brain_action</span><span class="p">[</span><span class="s">'heater_on'</span><span class="p">]))</span> <span class="c"># clamp to [-1,1] </span>
+            <span class="n">scaled_action</span> <span class="o">=</span> <span class="p">(</span><span class="n">clamped_action</span> <span class="o">+</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span> <span class="c"># scale to [0,1]</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">action</span> <span class="o">=</span> <span class="n">brain_action</span>
+            <span class="n">outlist</span> <span class="o">=</span> <span class="p">[</span> <span class="n">brain_action</span><span class="p">[</span><span class="s">'heater_on'</span><span class="p">],</span> <span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">outlist</span>
+
+    <span class="k">def</span> <span class="nf">format_start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">"""
+        Emit a formatted header and initial state line at the beginning
+        of each episode.
+        """</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">" itr  time h =&gt;    cost  set   troom   droom tout dout = t    rwd"</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">"                </span><span class="si">%7.1</span><span class="s">f </span><span class="si">%4.1</span><span class="s">f </span><span class="si">%7.1</span><span class="s">f </span><span class="si">%7.1</span><span class="s">f </span><span class="si">%4.1</span><span class="s">f </span><span class="si">%4.1</span><span class="s">f"</span> <span class="o">%</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logged_state</span><span class="p">[</span><span class="s">'heat_cost'</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logged_state</span><span class="p">[</span><span class="s">'set_temp'</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logged_state</span><span class="p">[</span><span class="s">'room_temp'</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logged_state</span><span class="p">[</span><span class="s">'room_temp_change'</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logged_state</span><span class="p">[</span><span class="s">'outside_temp'</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logged_state</span><span class="p">[</span><span class="s">'outside_temp_change'</span><span class="p">],</span>
+        <span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">format_step</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">"""
+        Emit a formatted line for each iteration.
+        """</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">terminal</span><span class="p">:</span>
+            <span class="n">totrwdstr</span> <span class="o">=</span> <span class="s">" </span><span class="si">%6.3</span><span class="s">f"</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">total_reward</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">totrwdstr</span> <span class="o">=</span> <span class="s">""</span>
+
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">" </span><span class="si">%3</span><span class="s">d </span><span class="si">%5.3</span><span class="s">f </span><span class="si">%1.0</span><span class="s">f =&gt; </span><span class="si">%7.1</span><span class="s">f </span><span class="si">%4.1</span><span class="s">f </span><span class="si">%7.1</span><span class="s">f </span><span class="si">%7.1</span><span class="s">f </span><span class="si">%4.1</span><span class="s">f </span><span class="si">%4.1</span><span class="s">f = </span><span class="si">%</span><span class="s">i </span><span class="si">%6.3</span><span class="s">f</span><span class="si">%</span><span class="s">s"</span> <span class="o">%</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">nsteps</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tstamp</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">action</span><span class="p">[</span><span class="s">'heater_on'</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logged_state</span><span class="p">[</span><span class="s">'heat_cost'</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logged_state</span><span class="p">[</span><span class="s">'set_temp'</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logged_state</span><span class="p">[</span><span class="s">'room_temp'</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logged_state</span><span class="p">[</span><span class="s">'room_temp_change'</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logged_state</span><span class="p">[</span><span class="s">'outside_temp'</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logged_state</span><span class="p">[</span><span class="s">'outside_temp_change'</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">terminal</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">reward</span><span class="p">,</span>
+            <span class="n">totrwdstr</span><span class="p">,</span>
+        <span class="p">))</span>
+</code></pre>
+<p><img src="../images/househeat.png" alt="Househeat image" /></p>
+
+<p>The rest of this guide will walk through example code and best practices of training a BRAIN to keep the internal temperature of a house as close as possible to a set point temperature. This system models the outdoor environment, the thermal characteristics of the house, and the house heating system. This is simulating the real-world example of a HVAC system in a home.</p>
+
+<p>Before we dive into the STAR components of this system, let’s first look at the Inkling concepts and schemas that describe the problem at hand. These state and action schemas combine with the reward to comprise the feedback loop that the BRAIN will use to learn. We will use the transformations outlined below to reformat the simulator inputs and outputs to match the Inkling schemas that we present to the BRAIN.</p>
+
+<p>After you&rsquo;ve glanced at the Inkling code you can take a quick look at the Python code. This guide will walk through segments of it and the full code (with more code comments) can be referenced under <a href="https://github.com/BonsaiAI/bonsai-simulink/tree/master/examples/simulink-househeat">Simulink Househeat</a> on GitHub if you want the full context. Specifically, the code snippets describing machine teaching can be found in <code class="prettyprint">simulink_househeat.ink</code> for Inkling and <code class="prettyprint">bonsai_model.py</code> for Python.</p>
+
+<p>Note that if you want to run this Simulink househeat example yourself you&rsquo;ll need to have MATLAB and Simulink installed on your computer. The guide for this is in our <a href="../examples.html#simulink-examples">Simulink Examples</a> section.</p>
+
+<h1 id="transforming-state-spaces">Transforming State Spaces</h1>
+
+<p>When preparing to train a BRAIN on the Bonsai Platform, you might realize that you want to modify the state signals from the simulation model before passing it to the BRAIN. For example, you might not need all of the simulation model outputs for your BRAIN training.  As another example, you might want to perform calculations on the state variables from the model to create your state space for BRAIN training. Let’s discuss three common state transformations for machine teaching. </p>
+
+<h2 id="creating-a-state-history-buffer-using-deques">Creating a State History Buffer Using Deques</h2>
+
+<blockquote>
+<p>Initialize</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="n">empty_observation</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">]</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">temperature_difference_history</span> <span class="o">=</span> <span class="n">deque</span><span class="p">(</span><span class="n">empty_observation</span><span class="p">)</span>
+</code></pre>
+<blockquote>
+<p>Transform</p>
+</blockquote>
+<pre class="highlight python tab-python"><code>        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s">'heat_cost'</span><span class="p">:</span>                 <span class="n">simulator_state</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+            <span class="s">'temperature_difference'</span><span class="p">:</span>    <span class="n">tdiff</span><span class="p">,</span>
+            <span class="s">'temperature_difference_t1'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">temperature_difference_history</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+            <span class="s">'temperature_difference_t2'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">temperature_difference_history</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+            <span class="s">'temperature_difference_t3'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">temperature_difference_history</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+            <span class="s">'temperature_difference_t4'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">temperature_difference_history</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+            <span class="s">'temperature_difference_t5'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">temperature_difference_history</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span>
+            <span class="s">'outside_temp_change'</span><span class="p">:</span>       <span class="n">simulator_state</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span>
+        <span class="p">}</span>
+</code></pre>
+<blockquote>
+<p>Update</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="bp">self</span><span class="o">.</span><span class="n">temperature_difference_history</span><span class="o">.</span><span class="n">appendleft</span><span class="p">(</span><span class="n">tdiff</span><span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">temperature_difference_history</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+</code></pre>
+<p>We can give the BRAIN a “memory” of previous states that resulted from its actions by creating a history buffer of several previous values of important state variables.  This may result in more efficient training and more effective resulting policies, particularly for systems that need to be continuously controlled over time.   For example, if you are training a BRAIN to assist with vehicle control and your simple model includes only position of the vehicle, you may want to include a history buffer of position in your training state.  This helps the BRAIN learn the dynamics of velocity and acceleration of the vehicle.</p>
+
+<p>The way you would do this is to:</p>
+
+<ol>
+<li>Initialize the a deque with average values for the state variables at the beginning of each episode.</li>
+<li>Then, transform the simulation outputs into a state dictionary for the BRAIN.</li>
+<li>Last, update the deque with new state values returned from the simulator.</li>
+</ol>
+
+<h2 id="converting-and-combining-state-variables">Converting and Combining State Variables</h2>
+
+<p>Sometimes the signals from your simulation model are not exactly what you want to pass to the BRAIN for training.  Here is our example of househeat (with code) and another example of a hybrid vehicle system so you can start to think about how to apply these concepts elsewhere of how to convert and combine state variables:</p>
+
+<blockquote>
+<p>HVAC example Python</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="n">tdiff</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">fabs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logged_state</span><span class="p">[</span><span class="s">'set_temp'</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">logged_state</span><span class="p">[</span><span class="s">'room_temp'</span><span class="p">])</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">temperature_difference_history</span><span class="o">.</span><span class="n">appendleft</span><span class="p">(</span><span class="n">tdiff</span><span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">temperature_difference_history</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+</code></pre>
+<ul>
+<li><p>HVAC:  In our example where we train a BRAIN to control a heating system, we receive the thermostat set temperature and the room temperature at each time step from the simulation model. In this case, we use the absolute value of the current room temperature minus the thermostat set temperature instead of both the set temperature and the room temperature in the state.  After calculating the temperature difference, we add it to a history buffer of the temperature difference at the five most recent previous time steps. </p></li>
+<li><p>Hybrid Vehicle System:  As another example, if you are training a BRAIN to decide when to store energy and when to discharge energy from the battery in a hybrid vehicle system, the simulation model may provide the vehicle power requirement and the engine available power at each time step.  In order to decide when to discharge the battery, the BRAIN needs to know whether the engine needs a boost or not.  In this case, we return &lsquo;true&rsquo; to the BRAIN if the power required exceeds the available power from the engine. </p></li>
+</ul>
+
+<h2 id="normalizing-state-variables">Normalizing State Variables</h2>
+
+<p>Another common state transformation is to normalize all state variables into a similar range.   This helps the learning algorithm modify the neural network weights more efficiently as it learns.  For example, you  might want to perform a state transformation to convert Celsius degrees to Fahrenheit degrees.  As another example, you might want to convert simulator time to unix time.</p>
+
+<h1 id="transforming-action-spaces">Transforming Action Spaces</h1>
+
+<p>Action spaces comprise the complete list of actions that you are training the BRAIN to control.   Discrete action spaces contain a defined list of possible actions.   For example, the transmission in a car is a discrete action space.  At any given time, the gear shift specifies one of several gear ratio settings to the transmission.   Continuous action spaces contain an infinite number of possible actions within a range.  For example, a slider control for indoor lighting works in a continuous action space.</p>
+
+<h2 id="clamping-and-scaling-continuous-action-spaces">Clamping and Scaling Continuous Action Spaces</h2>
+
+<blockquote>
+<p>Example Python for clamping and scaling</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="k">def</span> <span class="nf">convert_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">brain_action</span><span class="p">):</span>
+        <span class="s">"""
+        Called with a dictionary of actions from the brain, returns an
+        ordered list of outputs for the simulation model.
+        """</span>
+        <span class="n">outlist</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="n">brain_action</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+
+            <span class="c"># If you need to clamp the action, for example because the TRPO algorithm does not clamp automatically.</span>
+            <span class="n">clamped_action</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">brain_action</span><span class="p">[</span><span class="s">'heater_on'</span><span class="p">]))</span> <span class="c"># clamp to [-1,1] </span>
+
+            <span class="c"># If you need to scale the action, for example to to [0,1]</span>
+            <span class="n">scaled_action</span> <span class="o">=</span> <span class="p">(</span><span class="n">clamped_action</span> <span class="o">+</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span> <span class="c"># scale to [0,1]</span>
+
+            <span class="n">outlist</span> <span class="o">=</span> <span class="p">[</span> <span class="n">brain_action</span><span class="p">[</span><span class="s">'heater_on'</span><span class="p">],</span> <span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">outlist</span>
+
+</code></pre>
+<p>At times, you might want to use a Deep Reinforcement Learning (DRL) algorithm to train a BRAIN on an action space that is discrete.  For example, you might choose the Trust Region Policy Optimization (TRPO) algorithm to train this smart thermostat BRAIN because TRPO tends to train well for large time-dependent state spaces.  </p>
+
+<p>TRPO produces continuous actions (any number from -1 to 1), but in this case the system controls are discrete actions (0 for heater off, 1 for heater on).  You need to convert each action from the BRAIN to a control action for the heater.  The Python function below clamps and scales BRAIN actions that were generated by a DRL algorithm like TRPO.</p>
+
+<h2 id="simplifying-the-action-spaces-of-real-world-systems">Simplifying the action spaces of real world systems</h2>
+
+<p>Let’s deviate from our HVAC example to illustrate another application of transforming action spaces.  In the same way that you might want to omit some model output variables from the BRAIN training state, you might want to omit or consolidate some control actions from the BRAIN training action space.  For example, if you are training a BRAIN to control a Baxter Robot to lift a table you might want to transform the action space.  The Baxter robot has six joints: two elbows, two wrists, two shoulders.  But when lifting a table both arms operate in unison, so we consolidate the action space to three commands instead of six, one for each set of joints. </p>
+
+<h2 id="overriding-brain-actions">Overriding BRAIN Actions</h2>
+
+<p>In some situations, you will want to override the actions that are coming from the BRAIN.  You can do this in the STAR.py file.  For example, you might want to run the simulator against a fixed policy to provide a benchmark for the learning algorithm.  For the smart thermostat, this might mean running overriding the BRAIN actions and running the simulator as simple relay (turn the heater on if the room temperature is five degrees below the set temperature, turn the heater off if the room temperature is five degrees above the set temperature), logging the results and recording the rewards for comparison against the BRAIN. </p>
+
+<h1 id="constructing-reward-functions">Constructing Reward Functions</h1>
+
+<blockquote>
+<p>Househeat reward function Python code</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="c"># To compute the reward function value we start by taking the</span>
+<span class="c"># difference between the set point temperature and the actual</span>
+<span class="c"># room temperature.</span>
+<span class="n">tdiff</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">fabs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s">'set_temp'</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s">'room_temp'</span><span class="p">])</span>
+
+<span class="c"># Raise the difference to the 0.4 power.  The non-linear</span>
+<span class="c"># function enhances the reward distribution near the desired</span>
+<span class="c"># temperature range.  Please refer to the Bonsai training</span>
+<span class="c"># video on reward functions for more details.</span>
+<span class="n">nonlinear_diff</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">tdiff</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">)</span>
+
+<span class="c"># Scale the nonlinear difference so differences in the range</span>
+<span class="c"># +/- 2 degrees (C) map between 0 and 1.0.</span>
+<span class="c"># 2 degree ^ 0.4 = 1.32</span>
+<span class="n">scaled_diff</span> <span class="o">=</span> <span class="n">nonlinear_diff</span> <span class="o">/</span> <span class="mf">1.32</span>
+
+<span class="c"># Since we need a positive going reward function, subtract the</span>
+<span class="c"># scaled difference from 1.0.  This reward value will be 1.0</span>
+<span class="c"># when we are precisely matching the set point and will fall</span>
+<span class="c"># to less than 0.0 when we exceed 2 degrees (C) from the set</span>
+<span class="c"># point.</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">reward</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">scaled_diff</span>
+
+<span class="bp">self</span><span class="o">.</span><span class="n">terminal</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nsteps</span> <span class="o">&gt;=</span> <span class="n">_STEPLIMIT</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">reward</span> <span class="o">&lt;</span> <span class="mf">0.0</span>
+
+<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">nsteps</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">total_reward</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reward</span>
+</code></pre>
+<p>The reward function of a model simply does just that. You are rewarding the system either negatively or positively for its actions. The AI will learn to do exactly what it’s rewarded for, nothing more and nothing less. So you need to be careful to give enough information the system to result in the desired behavior.</p>
+
+<p>As mentioned in the first part of this guide, the house in this example is being heated by an AI to keep as close as possible to a set point temperature. When constructing a reward function, you will need to keep in mind this objective. Currently in the platform the reward function is constructed in the simulation model, not in Inkling.</p>
+
+<p>This example uses both a time limit and a negative <a href="#speeding-up-training">terminal condition</a>. The episode will end if there has been more than 120 iterations (steps) or the reward has gone negative. </p>
+
+<h2 id="sparse-vs-shaped-rewards">Sparse vs. Shaped Rewards</h2>
+
+<blockquote>
+<p>Sparse Reward Function</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="k">if</span> <span class="n">tdiff</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">:</span>
+     <span class="bp">self</span><span class="o">.</span><span class="n">reward</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="k">elif</span> <span class="n">tdiff</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">:</span>
+     <span class="bp">self</span><span class="o">.</span><span class="n">reward</span> <span class="o">=</span> <span class="mi">0</span>
+</code></pre>
+<p>The simplest reward function is called a sparse reward. In a sparse reward, the BRAIN receives a reward once it accomplishes its objective, and it receives 0 reward otherwise. This type of reward is very easy to conceptualize and write, but is very inefficient when it comes to training time because of the lack of continuous information provided to the BRAIN.</p>
+
+<p>In the Sparse Reward Function shown, if there is a temperature difference of less than 5 degrees from the set point temperature, the reward would be 1, and otherwise the temperature is not close enough to the desired set point and a reward of 0 is given.</p>
+
+<blockquote>
+<p>Shaped Reward Function</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="n">tdiff</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">fabs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s">'set_temp'</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s">'room_temp'</span><span class="p">])</span>
+        <span class="n">nonlinear_diff</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">tdiff</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">)</span>
+        <span class="n">scaled_diff</span> <span class="o">=</span> <span class="n">nonlinear_diff</span> <span class="o">/</span> <span class="mf">1.32</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reward</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">scaled_diff</span>
+</code></pre>
+<p>Shaping a reward function is an important part of reducing training time. By providing information throughout the simulation (before the objective is reached) the BRAIN can learn the types of behaviors we want to see in the simulation. For example, if you know that being closer to a set temperature is better than being farther away you can use that information to provide a smooth continuous gradient that says ‘for any given state, if that state is closer to the objective, then it should give more reward than a state that&rsquo;s further away from the objective. </p>
+
+<p>In this example, we have created an exponential function to shape the reward function. This function will reward close to 1 when the difference in temperature is close to 0 and has a curve to encourage the BRAIN to get closer to 0 when it’s farther away.</p>
+
+<p>Problems that amenable to shaping are problems where it’s easy to say for any given state whether it’s better or worse. In the game Go for example, it’s very hard to determine whether one move is better or worse than any other given move, and makes it very hard to solve with Reinforcement Learning.</p>
+
+<p>For detailed information and examples on shaping reward functions you can watch our training video on <a href="https://www.youtube.com/watch?v=0R3PnJEisqk&amp;index=4&amp;list=PLAktfMEMCsOY9HUZKIuGI6yqefGBuszAV]">Writing Great Reward Functions</a>.</p>
+
+<h2 id="terminating-episodes-during-brain-training">Terminating Episodes During BRAIN Training</h2>
+
+<p>One of the most important considerations in designing your simulation and setting up your reward function is deciding on your terminal conditions. These are conditions in which your simulation will reset back to the initial conditions and a new episode will begin. Terminal conditions help bound exploration and they avoid wasting time (if the BRAIN gets stuck or gets into a degenerate condition). If the temperature in a house is hot enough to boil the occupants, you probably don’t need the BRAIN to do much exploring in that state space.</p>
+
+<p>There are three types of <strong>terminal conditions</strong>:</p>
+
+<ul>
+<li>Time limits</li>
+<li>Positive terminals</li>
+<li>Negative terminals</li>
+</ul>
+
+<h3 id="speeding-up-training">Speeding up Training</h3>
+
+<p><strong>Time Limits</strong></p>
+
+<p>While shaping a great reward function helps the BRAIN train faster, having smart terminal conditions speeds up the time in between episodes which helps you iterate faster on your model. Time limits for example are often useful for preventing that stuck condition if the BRAIN is executing on a model that is never going to succeed. It’s better to just end the episode and bring it back to initial conditions so it can train again in a useful state space.</p>
+
+<p><strong>Positive Terminals</strong></p>
+
+<p>Positive terminals are your success conditions. In these cases, the task has been finished, and you want to restart the simulation so the BRAIN gets another chance to practice from the beginning.</p>
+
+<p>It is important to pair positive rewards with positive terminals to avoid a BRAIN from accumulating reward until it hits a time limit, instead of completing the objective. Making sure that any positive terminal you have rewards more in a single step than the AI could expect to receive were it to continue the episode as long as possible will prevent this.</p>
+
+<p><strong>Negative Terminals</strong></p>
+
+<p>Going back to the example of simulating temperature in a house, you would want to provide the simulation a negative terminal if the temperature in the house reached a level too high for the occupants to survive. Once the BRAIN has reached a state from which it cannot succeed or has wandered outside the bounds of the environment we want it to restart and try again.</p>
+
+<h1 id="constructing-lessons-for-brain-training">Constructing Lessons for BRAIN Training</h1>
+
+<p>Each Inkling file contains a lesson plan that will be used to train the BRAIN.  You can create a phased training plan for your BRAIN by configuring your simulation model at the beginning of each episode.  </p>
+
+<h2 id="initializing-episodes">Initializing Episodes</h2>
+
+<blockquote>
+<p>Inkling for episode configuration</p>
+</blockquote>
+<pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">HouseheatConfig</span>
+    <span class="kr">Float32</span> <span class="nx">outside_phase</span>
+<span class="k">end</span>
+
+<span class="k">curriculum</span> <span class="nx">my_curriculum</span>
+    <span class="k">train</span> <span class="nx">thermostat</span>
+    <span class="k">with</span> <span class="k">simulator</span> <span class="nx">simulink_sim</span>
+    <span class="k">objective</span> <span class="nx">match_set_temp</span>
+
+        <span class="k">lesson</span> <span class="nx">my_first_lesson</span>
+            <span class="k">configure</span>
+            <span class="k">constrain</span> <span class="nx">outside_phase</span> <span class="k">with</span> <span class="kr">Float32</span><span class="p">{</span><span class="mf">0.0</span><span class="p">:</span><span class="mf">12.0</span><span class="p">}</span>
+            <span class="k">until</span>
+                <span class="k">maximize</span> <span class="nx">match_set_temp</span> 
+<span class="k">end</span>
+</code></pre>
+<p>The episode_start call passes in configuration parameters that are specified in Inkling.  In the example shown, a randomized phase of the sinusoidal temperature variations is passed into an HVAC simulation from the Inkling lesson.  You can think of this as the outside temperature at different times of the day. </p>
+
+<p>At the beginning of each episode, the phase is passed into the STAR.py file and you can use it for things like reward calculations. </p>
+
+<blockquote>
+<p>Python for episode start</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="k">def</span> <span class="nf">episode_start</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
+      <span class="s">""" called at the start of every episode. should
+    reset the simulation and return the initial state
+    """</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">initial_temperature</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s">'outside_phase'</span><span class="p">]</span>
+</code></pre>
+<h2 id="generalizing-training">Generalizing Training</h2>
+
+<p>We can also train more robust policies and better transition from simulation to live equipment using simulator configurations.   Randomizing initial conditions can force the BRAIN to learn the underlying dynamics of systems instead of overfitting to one particular scenario.  This technique can also help to better adapt to live equipment which often experiences much more variation than the simulation model that the BRAIN was trained on.</p>
+
+<blockquote>
+<p>Temperature variation in Inkling lesson</p>
+</blockquote>
+<pre class="highlight inkling tab-inkling"><code><span class="k">lesson</span> <span class="nx">my_first_lesson</span>
+    <span class="k">configure</span>
+    <span class="k">constrain</span> <span class="nx">outside_phase</span> <span class="k">with</span> <span class="kr">Float32</span><span class="p">{</span><span class="mf">0.0</span><span class="p">:</span><span class="mf">12.0</span><span class="p">}</span>
+    <span class="k">until</span>
+        <span class="k">maximize</span> <span class="nx">match_set_temp</span>
+</code></pre>
+<p>For example, if you are training a BRAIN to control an HVAC system to control a chiller valve there may be error in the valve calibration.   When the BRAIN specifies a the valve to be opened to allow 40% of maximum water flow, the valve actually opens to 42% maximum water flow.  One way to mitigate this common miscalibration would be to set a noise variable in Inkling configuration parameter.  At the beginning of each episode, this variable will be set to a random value within a range of possible miscalibration.  This mimics the effect of valves that are miscalibrated and forces the BRAIN to learn to effectively control the HVAC system through a wide variety of miscalibrated valves.</p>
+
+<p>In our code sample, the outside phase, which represents the temperature variation at different times of day is randomly varied.</p>
+
+<h2 id="constructing-lessons">Constructing Lessons</h2>
+
+<blockquote>
+<p>Inkling curriculum</p>
+</blockquote>
+<pre class="highlight inkling tab-inkling"><code><span class="k">curriculum</span> <span class="nx">my_curriculum</span>
+    <span class="k">train</span> <span class="nx">thermostat</span>
+    <span class="k">with</span> <span class="k">simulator</span> <span class="nx">simulink_sim</span>
+    <span class="k">objective</span> <span class="nx">match_set_temp</span>
+
+        <span class="k">lesson</span> <span class="nx">my_first_lesson</span>
+            <span class="k">configure</span>
+            <span class="k">constrain</span> <span class="nx">outside_phase</span> <span class="k">with</span> <span class="kr">Float32</span><span class="p">{</span><span class="mf">0.0</span><span class="p">:</span><span class="mf">12.0</span><span class="p">}</span>
+            <span class="k">until</span>
+                <span class="k">maximize</span> <span class="nx">match_set_temp</span>
+
+        <span class="k">lesson</span> <span class="nx">my_second_lesson</span>
+            <span class="k">configure</span>
+            <span class="k">constrain</span> <span class="nx">outside_phase</span> <span class="k">with</span> <span class="kr">Float32</span><span class="p">{</span><span class="mf">0.0</span><span class="p">:</span><span class="mf">24.0</span><span class="p">}</span>
+            <span class="k">until</span>
+                <span class="k">maximize</span> <span class="nx">match_set_temp</span>
+
+
+        <span class="k">lesson</span> <span class="nx">my_third_lesson</span>
+            <span class="k">configure</span>
+            <span class="k">constrain</span> <span class="nx">outside_phase</span> <span class="k">with</span> <span class="kr">Float32</span><span class="p">{</span><span class="mf">0.0</span><span class="p">:</span><span class="mf">48.0</span><span class="p">}</span>
+            <span class="k">until</span>
+                <span class="k">maximize</span> <span class="nx">match_set_temp</span>
+
+<span class="k">end</span>
+</code></pre>
+<p>In this example we want to train a BRAIN to control a residential HVAC system.  We want the BRAIN to successfully respond to a wide variety of initial room temperatures.  We create an Inkling <code class="prettyprint">configure</code> variable for initial temperature, but we don’t want to vary the initial room temperature randomly because the range of initial temperatures is very wide.  This may take the learning algorithm a long time to explore the solution space. </p>
+
+<p>Instead, we use a phased training approach called lessons. In the early episodes, the first lesson, we <code class="prettyprint">constrain</code> the initial temperature to a narrow range. After the BRAIN learns to control the system well in the first range of initial temperatures, we increase the range of possible initial temperatures in the second lesson. Then we repeat the process for subsequent lessons. </p>
+
+<h1 id="logging-brain-training-progress">Logging BRAIN Training Progress</h1>
+
+<blockquote>
+<p>Python Logging</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="k">def</span> <span class="nf">format_start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">"""
+        Emit a formatted header and initial state line at the beginning
+        of each episode.
+        """</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">" itr  time h =&gt;    cost  set   troom   droom tout dout = t    rwd"</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">"                </span><span class="si">%7.1</span><span class="s">f </span><span class="si">%4.1</span><span class="s">f </span><span class="si">%7.1</span><span class="s">f </span><span class="si">%7.1</span><span class="s">f </span><span class="si">%4.1</span><span class="s">f </span><span class="si">%4.1</span><span class="s">f"</span> <span class="o">%</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logged_state</span><span class="p">[</span><span class="s">'heat_cost'</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logged_state</span><span class="p">[</span><span class="s">'set_temp'</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logged_state</span><span class="p">[</span><span class="s">'room_temp'</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logged_state</span><span class="p">[</span><span class="s">'room_temp_change'</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logged_state</span><span class="p">[</span><span class="s">'outside_temp'</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logged_state</span><span class="p">[</span><span class="s">'outside_temp_change'</span><span class="p">],</span>
+        <span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">format_step</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">"""
+        Emit a formatted line for each iteration.
+        """</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">terminal</span><span class="p">:</span>
+            <span class="n">totrwdstr</span> <span class="o">=</span> <span class="s">" </span><span class="si">%6.3</span><span class="s">f"</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">total_reward</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">totrwdstr</span> <span class="o">=</span> <span class="s">""</span>
+
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">" </span><span class="si">%3</span><span class="s">d </span><span class="si">%5.3</span><span class="s">f </span><span class="si">%1.0</span><span class="s">f =&gt; </span><span class="si">%7.1</span><span class="s">f </span><span class="si">%4.1</span><span class="s">f </span><span class="si">%7.1</span><span class="s">f </span><span class="si">%7.1</span><span class="s">f </span><span class="si">%4.1</span><span class="s">f </span><span class="si">%4.1</span><span class="s">f = </span><span class="si">%</span><span class="s">i </span><span class="si">%6.3</span><span class="s">f</span><span class="si">%</span><span class="s">s"</span> <span class="o">%</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">nsteps</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tstamp</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">action</span><span class="p">[</span><span class="s">'heater_on'</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logged_state</span><span class="p">[</span><span class="s">'heat_cost'</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logged_state</span><span class="p">[</span><span class="s">'set_temp'</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logged_state</span><span class="p">[</span><span class="s">'room_temp'</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logged_state</span><span class="p">[</span><span class="s">'room_temp_change'</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logged_state</span><span class="p">[</span><span class="s">'outside_temp'</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logged_state</span><span class="p">[</span><span class="s">'outside_temp_change'</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">terminal</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">reward</span><span class="p">,</span>
+            <span class="n">totrwdstr</span><span class="p">,</span>
+        <span class="p">))</span>
+</code></pre>
+<p>Training a BRAIN to control or optimize a complex system is an iterative process. It proves helpful to log each action that the BRAIN takes and each system state that results from the action. Each of these action state pairs is called an iteration. A series of iterations that comprises a training scenario is called an episode. For example, if you are training a BRAIN to control an autonomous vehicle to stay within a driving lane at a manufacturing plant, each steering correction and the resulting position of the vehicle is an iteration.  One trip around the plant might be an episode.</p>
+
+<p>Logs that document states and actions for iterations and episodes help identify errors in the simulator output and help assess how the training is progressing. Logs can be written to files or to the command line terminal. The example shown is a Python function in a STAR.py file that writes each iteration to the terminal and to a log file. </p>
+
+          <h1 id="different-types-of-simulator-patterns">Different Types of Simulator Patterns</h1>
+
+<p>The are many different kinds of simulators, but roughly speaking, they can be integrated into the Bonsai platform in the following ways:</p>
+
+<h3 id="stand-alone-application">Stand-alone Application</h3>
+
+<p><em>Example: <a href="./examples.html#basic-python-c-simulation">Find the Center</a></em></p>
+
+<p>A Standalone application contains a model, simulator, simulator connector and other support code necessary to train a BRAIN against the model. It’s great when you’re first learning, or writing your own simulator and model from scratch.</p>
+
+<ul>
+<li>A good model for learning.</li>
+<li>Has everything in one place.</li>
+</ul>
+
+<p>Subclass from <code class="prettyprint">Simulator</code>, and put the simulation model reset code in <code class="prettyprint">episode_start()</code>. Step the simulation model in <code class="prettyprint">simulate()</code>. Wrap up simulation episode in <code class="prettyprint">episode_finish()</code>.</p>
+
+<h3 id="stand-alone-application-w-simulation-framework">Stand-alone Application w/ Simulation Framework</h3>
+
+<p><em>Example: <a href="./examples.html#openai-gym-cartpole">Cartpole + OpenAI Gym</a></em></p>
+
+<p>If your simulator &amp; model are coming from another framework and you instantiate them as a class, this pattern is good for integrating a framework with the platform.</p>
+
+<ul>
+<li>You have a existing simulation framework which runs a model.</li>
+<li>Separates the AI teaching from simulation code.</li>
+</ul>
+
+<p>Subclass from <code class="prettyprint">Simulator</code>, instantiate the simulation model in <code class="prettyprint">episode_start()</code>, step the simulation and translate to/from inkling into simulation frameworks parameter formats in <code class="prettyprint">simulate()</code>. Clean up and destroy simulation model in <code class="prettyprint">episode_finish()</code>.</p>
+
+<h3 id="plug-in">Plug-in</h3>
+
+<p><em>Example: <a href="./examples.html#simulink-examples">Simulink</a></em></p>
+
+<p>If your simulation environment is a standalone application that can load plugins and those plugins can link C++ or Python code, you may be able to integrate as a Simulator Plugin.</p>
+
+<ul>
+<li>Write a simulator platform plugin</li>
+<li>Use <code class="prettyprint">Simulator::get_next_event()</code> and take appropriate action.</li>
+</ul>
+
+<h3 id="bridge">Bridge</h3>
+
+<p><em>Example: Unity, <a href="./examples.html#energyplus-hvac-optimization">EnergyPlus</a></em></p>
+
+<p>Use a bridge model when your Simulation environment is already in a self contained application and you’re unable to instantiate a <code class="prettyprint">Simulator</code> class within it. The application will have to have some sort of mechanism for communicate state outward at each step of the simulation model. It also useful when you have a Plug-in environment that doesn’t integrate smoothly with the <code class="prettyprint">Simulator</code> class.</p>
+
+<ul>
+<li>Dependant on getting messages into/out of the simulator environment</li>
+<li>The separate bridge application will act as a mini server to translate simulation environment messages into bonsai messages.</li>
+</ul>
+
+          <h1 id="next-steps">Next Steps</h1>
+
+<p>Now that you&rsquo;ve completed this guide, you can:</p>
+
+<p><strong>Check out our <a href="inkling-guide.html">Learn the Inkling Language</a> Guide.</strong></p>
+
+<p>It contains all of the concepts and components of our unique programming language. You&rsquo;ll learn:</p>
+
+<ul>
+<li>How to assess a simulation and write an Inkling file to teach a BRAIN.</li>
+<li>The core concepts behind the Inkling language.</li>
+<li>The components of the Inkling language.</li>
+</ul>
+
+<p>And we have these other resources that will enable you to maximize your AI development experience:</p>
+
+<ul>
+<li>VIDEO: <a href="https://www.youtube.com/watch?v=E_JtPzT5-dg&amp;index=3&amp;list=PLAktfMEMCsOY9HUZKIuGI6yqefGBuszAV">Advanced Platform Techniques</a></li>
+<li>VIDEO: <a href="https://www.youtube.com/watch?v=0R3PnJEisqk&amp;list=PLAktfMEMCsOY9HUZKIuGI6yqefGBuszAV&amp;index=4">Writing Great Reward Functions</a></li>
+<li>TUTORIAL: <a href="jupyter-api-guide.html">Use Bonsai’s API with Jupyter</a></li>
+</ul>
+
+      </div>
+      <div class="dark-box">
+      </div>
+    </div>
+
+    </div>
+
+  </div>
+  <!-- at the end of the BODY -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+  <script type="text/javascript"> docsearch({
+  apiKey: '49fa6f01d7ff94a85b9b7434b1c2b7cf',
+  indexName: 'bon-sai',
+  inputSelector: '#docs-search',
+  debug: false // Set debug to true if you want to inspect the dropdown
+  });
+  </script>
+  </body>
+</html>
