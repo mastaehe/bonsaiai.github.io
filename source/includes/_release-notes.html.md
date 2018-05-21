@@ -5,8 +5,9 @@ This is a list of Bonsai's currently supported versions of its software packages
 | Software               | Package Name | Versions | Last Updated |
 | -                      | -            | -        | -            |
 | Command Line Interface | bonsai-cli   | 0.8.23   | 2018.05.07   |
-| Python Library         | bonsai-ai    | 2.0.6    | 2018.05.07   |
-| Gym Common             | bonsai-gym   | 2.0.4    | 2018.05.07   |
+| Gym Common             | bonsai-gym   | 2.0.5    | 2018.05.21   |
+| Python Library         | bonsai-ai    | 2.0.7    | 2018.05.21   |
+| C++ Library            | libbonsai    | 2.0.1    | 2018.05.21   |
 
 # Product Release Notes
 
@@ -15,6 +16,33 @@ These release notes combine releases for the web (BRAIN Dashboard), the backend 
 Release Notes for CLI: [https://github.com/BonsaiAI/bonsai-cli/blob/master/CHANGELOG.md]()
 
 Release Notes for Python SDK (bonsai-ai, bonsai-cli, and bonsai-gym libraries): [https://github.com/BonsaiAI/bonsai-sdk/blob/master/bonsai-ai/CHANGELOG.md]()
+
+Release Notes for C++ SDK (libbonsai): [https://github.com/BonsaiAI/libbonsai/blob/master/libbonsai/CHANGELOG.md]()
+
+### 2018.05.01
+
+Notable features:
+
+* You can now specify an algorithm and its parameters for the AI Engine to use
+* Support for Unity as a simulator
+* Added statistics to simulators and the option for the SDK to log them for easy analysis
+* Simulink demo added to the Create BRAIN web page
+* bonsai-simulink is now supported on Windows 10
+* EnergyPlus demo has been upgraded to use SDK2
+* Constants are supported in Inkling
+
+Various bug fixes, including:
+
+* Bonsai CLI commends no longer wait forever
+* Training graph no longer disappears sometimes
+* Fixed access key link in bonsai configure command
+* Simulator tab no longer resets every time you click away
+* Fix for SDK2 port of Taxi simulator
+
+Other notes:
+
+* Limited BRAINs actively training to 2
+* Increase of supported parallel simulators from 256 to 1024
 
 ### 2018.03.07
 
