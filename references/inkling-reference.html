@@ -1825,73 +1825,6 @@ Note that config in __main__ is the brain configuration and remains the same thr
           <h1 id="advanced-algorithms">Advanced: Algorithms</h1>
 
 <blockquote>
-<p>Syntax (in the global scope)</p>
-</blockquote>
-<pre class="highlight inkling tab-inkling--syntax"><code><span class="nx">algorithm</span> <span class="o">&lt;</span><span class="nx">localAlgorithmId</span><span class="o">&gt;</span>
-   <span class="k">is</span> <span class="o">&lt;</span><span class="nx">globalAlgorithmId</span><span class="o">&gt;</span>
-   <span class="p">[</span>
-     <span class="o">&lt;</span><span class="nx">parameterName</span><span class="o">&gt;</span> <span class="o">=&gt;</span> <span class="o">&lt;</span><span class="nx">literal</span><span class="o">&gt;</span>
-     <span class="p">[</span> <span class="err">‘</span><span class="p">,</span><span class="err">’</span> <span class="o">&lt;</span><span class="nx">parameterName</span><span class="o">&gt;</span> <span class="o">=&gt;</span> <span class="o">&lt;</span><span class="nx">literal</span><span class="o">&gt;</span> <span class="p">]</span><span class="o">*</span>
-   <span class="p">]?</span>
-<span class="k">end</span>
-</code></pre>
-<blockquote>
-<p>Example (in the global scope)</p>
-</blockquote>
-<pre class="highlight plaintext"><code>schema GameState
-   Float32 position,
-   Float32 velocity,
-   Float32 angle,
-   Float32 rotation
-end
-
-schema Action
-   Float32 command
-end
-
-schema CartPoleConfig
-   Int8 episode_length,
-   UInt8 deque_size
-end
-
-simulator the_simulator(CartPoleConfig)
-   action (Action)
-   state (GameState)
-end
-
-
-algorithm My_TRPO_Settings
-   is TRPO
-   learning_rate =&gt; 5,
-   network_size =&gt; 48
-end
-
-concept balance is estimator
-   predicts (Action)
-   follows input(GameState)
-   feeds output
-
-end
-
-curriculum balance_curriculum
-   train balance
-   using algorithm My_TRPO_Settings
-      # optional to override parameter with same type
-      learning_rate =&gt; 0.5
-   end
-
-   with simulator the_simulator
-   objective open_ai_gym_default_objective
-
-       lesson balancing
-           configure
-               constrain episode_length with Int8{-1},
-               constrain deque_size with UInt8{1}
-           until
-               maximize open_ai_gym_default_objective
-end
-</code></pre>
-<blockquote>
 <p>Syntax (in the curriculum)</p>
 </blockquote>
 <pre class="highlight plaintext"><code>using algorithm &lt;algorithmIdentifier&gt;
@@ -1935,8 +1868,8 @@ end
 curriculum balance_curriculum
    train balance
    using algorithm TRPO
-      learning_rate =&gt; 5
-      network_size =&gt; 48
+      hidden_layer_descriptor =&gt; [64, 64]
+      hidden_layer_activation_descriptor =&gt; [“tanh”, “tanh”] 
    end
 
    with simulator the_simulator
@@ -1950,7 +1883,74 @@ curriculum balance_curriculum
                maximize open_ai_gym_default_objective
 end
 </code></pre>
-<p>The algorithm clause is for advanced users who want to experiment with changing machine learning algorithms and their tuning parameters. Inkling supports an algorithm definition clause in global scope for use in multiple curriculums as well as an algorithm use clause inside the curriculum statement which applies only to that curriculum. If the user wants, they can define named algorithm settings they can re-use in multiple curriculums (when using multiple concepts). It is also possible to override a global parameter inside of a curriculum if needed.</p>
+<blockquote>
+<p>Syntax (in the global scope)</p>
+</blockquote>
+<pre class="highlight inkling tab-inkling--syntax"><code><span class="nx">algorithm</span> <span class="o">&lt;</span><span class="nx">localAlgorithmId</span><span class="o">&gt;</span>
+   <span class="k">is</span> <span class="o">&lt;</span><span class="nx">globalAlgorithmId</span><span class="o">&gt;</span>
+   <span class="p">[</span>
+     <span class="o">&lt;</span><span class="nx">parameterName</span><span class="o">&gt;</span> <span class="o">=&gt;</span> <span class="o">&lt;</span><span class="nx">literal</span><span class="o">&gt;</span>
+     <span class="p">[</span> <span class="err">‘</span><span class="p">,</span><span class="err">’</span> <span class="o">&lt;</span><span class="nx">parameterName</span><span class="o">&gt;</span> <span class="o">=&gt;</span> <span class="o">&lt;</span><span class="nx">literal</span><span class="o">&gt;</span> <span class="p">]</span><span class="o">*</span>
+   <span class="p">]?</span>
+<span class="k">end</span>
+</code></pre>
+<blockquote>
+<p>Example (in the global scope)</p>
+</blockquote>
+<pre class="highlight plaintext"><code>schema GameState
+   Float32 position,
+   Float32 velocity,
+   Float32 angle,
+   Float32 rotation
+end
+
+schema Action
+   Float32 command
+end
+
+schema CartPoleConfig
+   Int8 episode_length,
+   UInt8 deque_size
+end
+
+simulator the_simulator(CartPoleConfig)
+   action (Action)
+   state (GameState)
+end
+
+
+algorithm My_TRPO_Settings
+   is TRPO
+   hidden_layer_descriptor =&gt; [64, 64]
+   hidden_layer_activation_descriptor =&gt; [“tanh”, “tanh”] 
+end
+
+concept balance is estimator
+   predicts (Action)
+   follows input(GameState)
+   feeds output
+
+end
+
+curriculum balance_curriculum
+   train balance
+   using algorithm My_TRPO_Settings
+      # optional to override parameter with same type
+      hidden_layer_descriptor =&gt; [128, 128]
+   end
+
+   with simulator the_simulator
+   objective open_ai_gym_default_objective
+
+       lesson balancing
+           configure
+               constrain episode_length with Int8{-1},
+               constrain deque_size with UInt8{1}
+           until
+               maximize open_ai_gym_default_objective
+end
+</code></pre>
+<p>The algorithm clause is for advanced users who want to experiment with changing machine learning algorithms and their tuning parameters. Inkling supports an algorithm use clause inside the curriculum statement (the common method) which applies only to that curriculum, as well as an algorithm definition clause in global scope for use in multiple curriculums. In the less common use case, a user can define named algorithm settings they can re-use in multiple curriculums (when using multiple concepts). It is also possible to override a global parameter inside of a curriculum if needed.</p>
 
 <h3 id="valid-algorithm-identifiers">Valid Algorithm Identifiers</h3>
 
