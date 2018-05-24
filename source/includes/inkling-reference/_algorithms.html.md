@@ -1,75 +1,5 @@
 # Advanced: Algorithms
 
-> Syntax (in the global scope)
-
-```inkling--syntax
-algorithm <localAlgorithmId>
-   is <globalAlgorithmId>
-   [
-     <parameterName> => <literal>
-     [ ‘,’ <parameterName> => <literal> ]*
-   ]?
-end
-```
-
-> Example (in the global scope)
-
-```Inkling--code
-schema GameState
-   Float32 position,
-   Float32 velocity,
-   Float32 angle,
-   Float32 rotation
-end
-
-schema Action
-   Float32 command
-end
-
-schema CartPoleConfig
-   Int8 episode_length,
-   UInt8 deque_size
-end
-
-simulator the_simulator(CartPoleConfig)
-   action (Action)
-   state (GameState)
-end
-
-
-algorithm My_TRPO_Settings
-   is TRPO
-   learning_rate => 5,
-   network_size => 48
-end
-
-concept balance is estimator
-   predicts (Action)
-   follows input(GameState)
-   feeds output
-
-end
-
-curriculum balance_curriculum
-   train balance
-   using algorithm My_TRPO_Settings
-      # optional to override parameter with same type
-      learning_rate => 0.5
-   end
-
-   with simulator the_simulator
-   objective open_ai_gym_default_objective
-
-       lesson balancing
-           configure
-               constrain episode_length with Int8{-1},
-               constrain deque_size with UInt8{1}
-           until
-               maximize open_ai_gym_default_objective
-end
-```
-
-
 > Syntax (in the curriculum)
 
 ```inkling-syntax
@@ -115,8 +45,8 @@ end
 curriculum balance_curriculum
    train balance
    using algorithm TRPO
-      learning_rate => 5
-      network_size => 48
+      hidden_layer_descriptor => [64, 64]
+      hidden_layer_activation_descriptor => [“tanh”, “tanh”] 
    end
 
    with simulator the_simulator
@@ -131,7 +61,78 @@ curriculum balance_curriculum
 end
 ```
 
-The algorithm clause is for advanced users who want to experiment with changing machine learning algorithms and their tuning parameters. Inkling supports an algorithm definition clause in global scope for use in multiple curriculums as well as an algorithm use clause inside the curriculum statement which applies only to that curriculum. If the user wants, they can define named algorithm settings they can re-use in multiple curriculums (when using multiple concepts). It is also possible to override a global parameter inside of a curriculum if needed.
+
+
+> Syntax (in the global scope)
+
+```inkling--syntax
+algorithm <localAlgorithmId>
+   is <globalAlgorithmId>
+   [
+     <parameterName> => <literal>
+     [ ‘,’ <parameterName> => <literal> ]*
+   ]?
+end
+```
+
+> Example (in the global scope)
+
+```Inkling--code
+schema GameState
+   Float32 position,
+   Float32 velocity,
+   Float32 angle,
+   Float32 rotation
+end
+
+schema Action
+   Float32 command
+end
+
+schema CartPoleConfig
+   Int8 episode_length,
+   UInt8 deque_size
+end
+
+simulator the_simulator(CartPoleConfig)
+   action (Action)
+   state (GameState)
+end
+
+
+algorithm My_TRPO_Settings
+   is TRPO
+   hidden_layer_descriptor => [64, 64]
+   hidden_layer_activation_descriptor => [“tanh”, “tanh”] 
+end
+
+concept balance is estimator
+   predicts (Action)
+   follows input(GameState)
+   feeds output
+
+end
+
+curriculum balance_curriculum
+   train balance
+   using algorithm My_TRPO_Settings
+      # optional to override parameter with same type
+      hidden_layer_descriptor => [128, 128]
+   end
+
+   with simulator the_simulator
+   objective open_ai_gym_default_objective
+
+       lesson balancing
+           configure
+               constrain episode_length with Int8{-1},
+               constrain deque_size with UInt8{1}
+           until
+               maximize open_ai_gym_default_objective
+end
+```
+
+The algorithm clause is for advanced users who want to experiment with changing machine learning algorithms and their tuning parameters. Inkling supports an algorithm use clause inside the curriculum statement (the common method) which applies only to that curriculum, as well as an algorithm definition clause in global scope for use in multiple curriculums. In the less common use case, a user can define named algorithm settings they can re-use in multiple curriculums (when using multiple concepts). It is also possible to override a global parameter inside of a curriculum if needed.
 
 ### Valid Algorithm Identifiers
 
