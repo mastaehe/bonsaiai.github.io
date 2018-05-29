@@ -17,6 +17,7 @@ includes:
   - library-reference/simulator.html.md
   - library-reference/predictor.html.md
   - library-reference/logger.html.md
+  - library-reference/event.html.md
 
 
 search: true
