@@ -14,65 +14,74 @@ BRAIN name in at least one of these places will result in a friendly error.
 
 ## Brain(config, name)
 
-```python
-config = bonsai_ai.Config(sys.argv)
-brain = bonsai_ai.Brain(config)
-print(brain)
+```cpp
+auto config = make_shared<bonsai::Config>(argc, argv);
+auto brain = make_shared<bonsai::Brain>(config);
+std::cout << brain << std::endl;
 ```
 
 Creates a local object for interacting with an existing BRAIN on the server.
 
 | Argument | Description |
 | ---      | ---         |
-| `config` | Object returned by previously created `bonsai_ai.Config()`. |
+| `config` | Object returned by previously created `Bonsai::Config`. |
 | `name`   | BRAIN name as specified on the server. If name is empty, the BRAIN name in `config` is used instead. |
 
 ## update()
 
-```python
-brain.update()
+```cpp
+brain.update();
 ```
 
 Refreshes description, status, and other information with the current state of the BRAIN on the server.
 Called by default when constructing a new Brain object.
 
-## name()
+## string name()
 
-```python
-print(brain.name)
+```cpp
+std::cout << brain.name() << endl;
 ```
 
 Returns the name of the BRAIN as specified when it was created.
 
-## description()
+## string description()
 
-```python
-print(brain.description)
+```cpp
+std::cout << brain.description() << endl;
 ```
 
 Returns the user-provided description for the BRAIN.
 
-## version()
+## int version()
 
-```python
-print(brain.version)
+```cpp
+std::cout << brain.version() << endl;
 ```
 
 Returns the current version number of the BRAIN.
 
-## latest_version()
+## int latest_version()
 
-```python
-print(brain.latest_version)
+```cpp
+std::cout << brain.latest_version() << endl;
 ```
 
 Returns latest version number of the BRAIN.
 
 ## Config config()
 
-```python
-print(brain.config)
+```cpp
+std::cout << brain.config() << endl;
 ```
 
 Returns the configuration used to locate this BRAIN.
+
+## operator<<(ostream, brain)
+
+Prints out a representation of Brain that is useful for debugging.
+
+| Argument  | Description |
+| ---       | ---         |
+| `ostream` | A std C++ stream operator. |
+| `brain`   | A `bonsai::Brain` object to print out. |
 
