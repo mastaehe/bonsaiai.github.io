@@ -41,7 +41,7 @@ Use a bridge model when your Simulation environment is already in a self contain
 * Dependant on getting messages into/out of the simulator environment
 * The separate bridge application will act as a mini server to translate simulation environment messages into bonsai messages.
 
-[1]: ./examples.html#basic-python-c-simulation
-[2]: ./examples.html#openai-gym-cartpole
-[3]: ./examples.html#simulink-examples
-[4]: ./examples.html#energyplus-hvac-optimization
+[1]: ./../examples.html#basic-python-c-simulation
+[2]: ./../examples.html#openai-gym-cartpole
+[3]: ./../examples.html#simulink-examples
+[4]: ./../examples.html#energyplus-hvac-optimization
