@@ -1,6 +1,6 @@
 # Logging Class
 
-Runtime logging is accomplished using the `BONSAI_LOG` macro, which `BONSAI_LOG` may be invoked
+Runtime logging is accomplished using the `BONSAI_LOG` macro; `BONSAI_LOG` may be invoked
 freely on log domains of your choosing, but the accompanying messages will only be printed if
 a given domain has been enabled either through command line flags (see `bonsai::Config`) or
 through `bonsai::logging::set_enabled`.
@@ -76,7 +76,7 @@ bonsai::logging::log().set_enable_all(true);
 
 Switch to enable/disable verbose logging.
 
-## use_colors
+## use_colors()
 
 ```cpp
 bonsai::logging::log().use_colors() == true;

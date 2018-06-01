@@ -73,7 +73,7 @@ of Simulator and implement the `episode_start` and `simulate` callbacks.
 | `brain`  |  A Brain object for the BRAIN you wish to train against. |
 | `name`   |  The name of simulator as specified in the Inkling for the BRAIN. |
 
-## Brain brain()
+## Brain brain
 
 ```python
 print(sim.brain)
@@ -81,14 +81,14 @@ print(sim.brain)
 
 Returns the BRAIN being used for this simulation.
 
-## name()
+## name
 
 ```python
 print("Starting ", sim.name)
 ```
 Returns the simulator name that was passed in when constructed.
 
-## predict()
+## predict
 
 ```python
 def simulate(self, action):
@@ -100,7 +100,7 @@ def simulate(self, action):
 
 Returns a value indicating whether the simulation is set up to run in predict mode or training mode.
 
-## objective_name()
+## objective_name
 
 ```python
 def episode_start(self, params):
@@ -235,7 +235,7 @@ def episode_finish(self):
 This callback is called at the end of each episode. You can use it to log
 out statistical information, or perform post episode cleanup.
 
-## record_file()
+## record_file
 
 ```python
 my_sim.record_file == "/path/to/foobar.json"

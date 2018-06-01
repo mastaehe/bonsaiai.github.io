@@ -24,7 +24,7 @@ Creates a local object for interacting with an existing BRAIN on the server.
 
 | Argument | Description |
 | ---      | ---         |
-| `config` | Object returned by previously created `bonsai_ai.Config()`. |
+| `config` | Object returned by previously created `bonsai_ai.Config`. |
 | `name`   | BRAIN name as specified on the server. If name is empty, the BRAIN name in `config` is used instead. |
 
 ## update()
@@ -36,7 +36,7 @@ brain.update()
 Refreshes description, status, and other information with the current state of the BRAIN on the server.
 Called by default when constructing a new Brain object.
 
-## name()
+## name
 
 ```python
 print(brain.name)
@@ -44,7 +44,7 @@ print(brain.name)
 
 Returns the name of the BRAIN as specified when it was created.
 
-## description()
+## description
 
 ```python
 print(brain.description)
@@ -52,7 +52,7 @@ print(brain.description)
 
 Returns the user-provided description for the BRAIN.
 
-## version()
+## version
 
 ```python
 print(brain.version)
@@ -60,7 +60,7 @@ print(brain.version)
 
 Returns the current version number of the BRAIN.
 
-## latest_version()
+## latest_version
 
 ```python
 print(brain.latest_version)
@@ -68,7 +68,7 @@ print(brain.latest_version)
 
 Returns latest version number of the BRAIN.
 
-## Config config()
+## Config config
 
 ```python
 print(brain.config)

@@ -12,7 +12,7 @@ Brain() >> --brain >> .brains >> .bonsai[profile] >> .bonsai[DEFAULT] >> env[BON
 such that ">>" indicates a decreasing order of precedence. Note that failure to set
 BRAIN name in at least one of these places will result in a friendly error.
 
-## Brain(config, name)
+## `Brain(config, name)`
 
 ```cpp
 auto config = make_shared<bonsai::Config>(argc, argv);

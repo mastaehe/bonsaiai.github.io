@@ -1,7 +1,10 @@
 # Event Class
 
-Abstract base class for encapsulating Simulator state. Event types correspond to different
-procedures in client code (see `enum class Type`).
+Internally, the Bonsai library uses a state machine to drive activity in user code (i.e. advancing and recording simulator state, resetting a simulator, etc). State transfer is driven primarily by a websocket-based messaging protocol shared between the library and the Bonsai AI platform. For your convenience, the details of this protocol have been hidden behind a pair of API's, one based on callbacks in `bonsai_ai.Simulator` and the other event driven.
+
+Filling out the callbacks in `bonsai_ai.Simulator` and relying on `Simulator.run` to invoke them at the appropriate time will be sufficient for many use cases. For example, if you have a simulator which can be advanced, reset, and observed in a synchronous manner from Python or C++ code, your application is likely amenable to our callback API. However, if, for example, your simulator is free running and communicates with your application code asynchronously, your application will likely need to employ the event driven API described below.
+
+In the **event-driven mode of operation**, you application code should implement its own run loop by requesting successive events from the Bonsai library and handling them in a way that is appropriate to your particular simulation or deployment architecture. For example, if your simulator invokes callbacks into your code and is reset in response to some outgoing signal (i.e. not via a method call), you might respond to an `EpisodeStartEvent` by setting the appropriate flag, returning control to the simulator, and returning the resulting state to the Bonsai platform the next time your callback gets invoked.
 
 ### enum class Type
 
@@ -24,6 +27,9 @@ if (event->type() == Type::Episode_Start) {
 }
 ```
 
+Event is an abstract base class for encapsulating Simulator state. Event types correspond to different
+procedures in client code as shown in the table below.
+
 | Value          | Description |
 | ----           | ----        |
 | `Episode_Start`|  Reset the simulator and set initial state. |
@@ -44,7 +50,7 @@ Settings used when resetting the simulation environment.
 ###### std::shared_ptr<InklingMessage> initial_state
 Directly manipulate to reflect the state resulting from sim environment reset.
 
-See `InklingMessage` API for detail.
+See `InklingMessage` header for details.
 
 ## SimulateEvent Class
 Signals that the **BRAIN** is ready to receive the simulator state resulting from
@@ -57,7 +63,7 @@ The prediction (action) intended for the next simulation step.
 Directly manipulate to reflect the state resulting from applying `prediction`
 to the simulation environment.
 
-See `InklingMessage` API for detail.
+See `InklingMessage` header for details.
 
 ###### std::shared_ptr<float> reward
 Directly manipulate to reflect the reward corresponding to `state`.
