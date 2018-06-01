@@ -1014,7 +1014,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <h3 id="stand-alone-application">Stand-alone Application</h3>
 
-<p><em>Example: <a href="./examples.html#basic-python-c-simulation">Find the Center</a></em></p>
+<p><em>Example: <a href="../examples.html#basic-python-c-simulation">Find the Center</a></em></p>
 
 <p>A Standalone application contains a model, simulator, simulator connector and other support code necessary to train a BRAIN against the model. It’s great when you’re first learning, or writing your own simulator and model from scratch.</p>
 
@@ -1027,7 +1027,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <h3 id="stand-alone-application-w-simulation-framework">Stand-alone Application w/ Simulation Framework</h3>
 
-<p><em>Example: <a href="./examples.html#openai-gym-cartpole">Cartpole + OpenAI Gym</a></em></p>
+<p><em>Example: <a href="../examples.html#openai-gym-cartpole">Cartpole + OpenAI Gym</a></em></p>
 
 <p>If your simulator &amp; model are coming from another framework and you instantiate them as a class, this pattern is good for integrating a framework with the platform.</p>
 
@@ -1040,7 +1040,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <h3 id="plug-in">Plug-in</h3>
 
-<p><em>Example: <a href="./examples.html#simulink-examples">Simulink</a></em></p>
+<p><em>Example: <a href="../examples.html#simulink-examples">Simulink</a></em></p>
 
 <p>If your simulation environment is a standalone application that can load plugins and those plugins can link C++ or Python code, you may be able to integrate as a Simulator Plugin.</p>
 
@@ -1051,7 +1051,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <h3 id="bridge">Bridge</h3>
 
-<p><em>Example: Unity, <a href="./examples.html#energyplus-hvac-optimization">EnergyPlus</a></em></p>
+<p><em>Example: Unity, <a href="../examples.html#energyplus-hvac-optimization">EnergyPlus</a></em></p>
 
 <p>Use a bridge model when your Simulation environment is already in a self contained application and you’re unable to instantiate a <code class="prettyprint">Simulator</code> class within it. The application will have to have some sort of mechanism for communicate state outward at each step of the simulation model. It also useful when you have a Plug-in environment that doesn’t integrate smoothly with the <code class="prettyprint">Simulator</code> class.</p>
 
