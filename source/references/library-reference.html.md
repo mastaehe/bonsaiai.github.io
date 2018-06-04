@@ -1,14 +1,8 @@
 ---
-title: Library Reference
-
-language_tabs:
-  - python
-  - cpp
+title: Python Library Reference
 
 toc_footers:
   -  <%= partial "partials/footer-links" %>
-
-
 
 includes:
   - library-reference/introduction.html.md
@@ -17,6 +11,7 @@ includes:
   - library-reference/simulator.html.md
   - library-reference/predictor.html.md
   - library-reference/logger.html.md
+  - library-reference/event.html.md
 
 
 search: true
