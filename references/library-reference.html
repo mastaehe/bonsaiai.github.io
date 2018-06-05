@@ -1119,11 +1119,30 @@ was explicitly enabled. Corresponds to the <code class="prettyprint">--verbose</
 
           <h1 id="event-class">Event Class</h1>
 
-<p>Internally, the Bonsai library uses a state machine to drive activity in user code (i.e. advancing and recording simulator state, resetting a simulator, etc). State transfer is driven primarily by a websocket-based messaging protocol shared between the library and the Bonsai AI platform. For your convenience, the details of this protocol have been hidden behind a pair of API&rsquo;s, one based on callbacks in <code class="prettyprint">bonsai_ai.Simulator</code> and the other event driven.</p>
+<p>Internally, the Bonsai library uses a state machine to drive activity in user
+code (i.e. advancing and recording simulator state, resetting a simulator, etc).
+State transfer is driven primarily by a websocket-based messaging protocol
+shared between the library and the Bonsai AI platform. For your convenience,
+the details of this protocol have been hidden behind a pair of API&rsquo;s, one based
+on callbacks in <code class="prettyprint">bonsai_ai.Simulator</code> and the other event driven.</p>
 
-<p>Filling out the callbacks in <code class="prettyprint">bonsai_ai.Simulator</code> and relying on <code class="prettyprint">Simulator.run</code> to invoke them at the appropriate time will be sufficient for many use cases. For example, if you have a simulator which can be advanced, reset, and observed in a synchronous manner from Python or C++ code, your application is likely amenable to our callback API. However, if, for example, your simulator is free running and communicates with your application code asynchronously, your application will likely need to employ the event driven API described below.</p>
+<p>Filling out the callbacks in <code class="prettyprint">bonsai_ai.Simulator</code> and relying on
+<code class="prettyprint">Simulator.run</code> to invoke them at the appropriate time will be sufficient for
+many use cases. For example, if you have a simulator which can be advanced,
+reset, and observed in a synchronous manner from Python or C++ code, your
+application is likely amenable to our callback API. However, if, for example,
+your simulator is free running and communicates with your application code
+asynchronously, your application will likely need to employ the event driven
+API described below.</p>
 
-<p>In the <strong>event-driven mode of operation</strong>, you application code should implement its own run loop by requesting successive events from the Bonsai library and handling them in a way that is appropriate to your particular simulation or deployment architecture. For example, if your simulator invokes callbacks into your code and is reset in response to some outgoing signal (i.e. not via a method call), you might respond to an <code class="prettyprint">EpisodeStartEvent</code> by setting the appropriate flag, returning control to the simulator, and returning the resulting state to the Bonsai platform the next time your callback gets invoked.</p>
+<p>In the <strong>event-driven mode of operation</strong>, you application code should implement
+its own run loop by requesting successive events from the Bonsai library and
+handling them in a way that is appropriate to your particular simulation or
+deployment architecture. For example, if your simulator invokes callbacks into
+your code and is reset in response to some outgoing signal (i.e. not via a
+method call), you might respond to an <code class="prettyprint">EpisodeStartEvent</code> by setting the
+appropriate flag, returning control to the simulator, and returning the
+resulting state to the Bonsai platform the next time your callback gets invoked.</p>
 
 <h2 id="episodestartevent">EpisodeStartEvent</h2>
 <pre class="highlight python tab-python"><code><span class="n">event</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">get_next_event</span><span class="p">()</span>
@@ -1151,6 +1170,9 @@ or by the platform itself.</p>
 </tr>
 </tbody></table>
 
+<p><code class="prettyprint">initial_properties</code> is the configuration sent down from the server
+in the form of a dictionary matching the config specified in Inkling.</p>
+
 <h2 id="simulateevent">SimulateEvent</h2>
 <pre class="highlight python tab-python"><code><span class="n">event</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">get_next_event</span><span class="p">()</span>
 <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">SimulateEvent</span><span class="p">):</span>
@@ -1161,6 +1183,11 @@ or by the platform itself.</p>
 </code></pre>
 <p>This event is generated when an action (prediction) is ready
 to be fed into the simulator.</p>
+
+<p>Assign values to a <code class="prettyprint">SimulateEvent</code> by assigning a dictionary whose fields match
+the state schema. You will need to set the values before the next
+<code class="prettyprint">Simulator.get_next_event</code> call. The values get sent back to the brain during
+the call to Simulator.get_next_event.</p>
 
 <table><thead>
 <tr>

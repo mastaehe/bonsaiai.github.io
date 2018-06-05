@@ -1087,6 +1087,61 @@ does specify a range expression: </p>
 <p>In the examples in the code panel, we show more examples of valid and invalid lesson
 configure constraints for the field <code class="prettyprint">paddle_width</code>.</p>
 
+          <h1 id="constants">Constants</h1>
+
+<p>This is the reference for the keyword <strong>constant</strong>. </p>
+<pre class="highlight inkling tab-inkling--code"><code><span class="nx">constant</span> <span class="kr">Int8</span> <span class="nx">maxVelocity</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="nx">constant</span> <span class="kr">Int8</span> <span class="nx">minVelocity</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">schema</span> <span class="nx">MyOutput</span>
+    <span class="kr">UInt8</span><span class="p">{</span> <span class="nl">minVelocity</span><span class="p">:</span><span class="nx">maxVelocity</span> <span class="p">}</span>  <span class="nx">speed</span>
+<span class="k">end</span> 
+</code></pre>
+<p>Inkling supports named constants for Inkling primitive types, including numeric
+types, String, and Bool. The name can be used wherever the value can appear. </p>
+
+<p>Constants make code easier to understand and modify because the constant name
+conveys the semantics of the constant. They document the logic of the program.</p>
+<pre class="highlight inkling tab-inkling--code"><code><span class="nx">constant</span> <span class="kr">Int8</span> <span class="nx">right</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="nx">constant</span> <span class="kr">Int8</span> <span class="nx">left</span> <span class="o">=</span> <span class="mi">1</span> 
+<span class="nx">constant</span> <span class="kr">Int8</span> <span class="nx">up</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="nx">constant</span> <span class="kr">Int8</span> <span class="nx">down</span> <span class="o">=</span> <span class="mi">4</span> 
+<span class="k">schema</span> <span class="nx">Action</span>
+    <span class="kr">Int8</span><span class="p">{</span><span class="nx">right</span><span class="p">,</span> <span class="nx">left</span><span class="p">,</span> <span class="nx">up</span><span class="p">,</span> <span class="nx">down</span><span class="p">}</span> <span class="nx">move</span>
+<span class="k">end</span>
+</code></pre>
+<p>Some constant declarations and an example of their use are shown in the
+accompanying panel.</p>
+
+<p>The constants declaration syntax is shown in the accompanying panel.</p>
+
+<blockquote>
+<p>Constant Syntax</p>
+</blockquote>
+<pre class="highlight inkling tab-inkling--syntax"><code><span class="nx">constantDeclaration</span> <span class="p">::</span><span class="o">=</span>
+  <span class="nx">constant</span>  <span class="nx">primitiveType</span> <span class="o">&lt;</span><span class="nx">name</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nx">literal</span>
+</code></pre><pre class="highlight inkling tab-inkling--syntax"><code><span class="nx">primitiveType</span> <span class="p">::</span><span class="o">=</span>
+  <span class="kr">Float32</span> <span class="o">|</span> <span class="kr">Int8</span> <span class="o">|</span> <span class="kr">Int16</span> <span class="o">|</span> <span class="kr">Int32</span> <span class="o">|</span> <span class="kr">Int64</span> <span class="o">|</span> <span class="kr">UInt8</span> <span class="o">|</span> <span class="kr">UInt16</span> <span class="o">|</span> <span class="kr">UInt32</span>  <span class="o">|</span> <span class="kr">UInt64</span> <span class="o">|</span> <span class="kr">Bool</span> <span class="o">|</span> <span class="kr">String</span>
+</code></pre>
+<h3 id="usage">Usage</h3>
+
+<ul>
+<li>A constant declaration can appear only in the outermost program scope. It cannot be nested within another statement. </li>
+<li>A named constant does not have to be declared before it is used. </li>
+<li>A named constant can be used anywhere a literal can be used. That includes 
+being used in range expressions. </li>
+<li>The initialized value of the constant must be compatible with the declared
+type of the constant. </li>
+<li>The declared type of the constant must be compatible with the type 
+of the context where it is used. Some examples of
+invalid usage are shown in the accompanying panel. </li>
+</ul>
+<pre class="highlight inkling tab-inkling--code"><code><span class="nx">constant</span> <span class="kr">UInt32</span> <span class="nx">BigNum</span> <span class="o">=</span> <span class="mi">100000</span>
+<span class="nx">constant</span> <span class="kr">Float32</span> <span class="nx">AFloat</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="k">schema</span> <span class="nx">Foo</span>
+  <span class="kr">UInt8</span> <span class="nx">field1</span>  <span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="nx">BigNum</span><span class="p">}</span>          <span class="c1"># invalid</span>
+  <span class="kr">UInt32</span> <span class="nx">field2</span> <span class="p">{</span><span class="nl">Afloat</span><span class="p">:</span><span class="mi">10000</span><span class="p">}</span>      <span class="c1"># invalid</span>
+<span class="k">end</span>
+</code></pre>
           <h1 id="concepts">Concepts</h1>
 
 <p>The <code class="prettyprint">concept</code> keyword declares an abstract concept that is to be learned by the system. It could be a feature (such as a curvy line in an image) or a goal (such as high score in a game).  Ultimately, a concept takes the form of a transformation of data, but no information need be provided about how to perform the calculation. By declaring a concept, you are instructing the BRAIN server that this is a node in the basic recurrent artificial intelligence network that must be learned. Consequently, concept nodes must have corresponding curricula to teach them.</p>
