@@ -44,7 +44,9 @@ Every simulator must be declared with a simulator clause.
 The `train` keyword indicates which concept this curriculum trains.
 
 The `objective` keyword specifies the objective function.  This function
-specifies the termination condition for training. It is always required. 
+specifies the termination condition for training. It is required to have one
+objective function per curriculum, so if you have multiple concepts you may have
+multiple objectives. More information on objectives is in the [Inkling Guide][6].
 
 If the curriculum uses one simulator, the `using simulator` clause is optional. 
 Currently, only one simulator per curriculum is supported, but support for 
@@ -190,3 +192,4 @@ overall.
 [3]: ../guides/ai-engine-guide.html#architect
 [4]: ../guides/ai-engine-guide.html#instructor
 [5]: #constrained-types-and-range-expressions
+[6]: ../guides/inkling-guide.html#objectives
