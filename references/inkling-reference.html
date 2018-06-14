@@ -1354,7 +1354,9 @@ The <a href="#lessons">lessons</a> defined within the curriculum are used to tra
 <p>The <code class="prettyprint">train</code> keyword indicates which concept this curriculum trains.</p>
 
 <p>The <code class="prettyprint">objective</code> keyword specifies the objective function.  This function
-specifies the termination condition for training. It is always required. </p>
+specifies the termination condition for training. It is required to have one
+objective function per curriculum, so if you have multiple concepts you may have
+multiple objectives. More information on objectives is in the <a href="../guides/inkling-guide.html#objectives">Inkling Guide</a>.</p>
 
 <p>If the curriculum uses one simulator, the <code class="prettyprint">using simulator</code> clause is optional. 
 Currently, only one simulator per curriculum is supported, but support for 
