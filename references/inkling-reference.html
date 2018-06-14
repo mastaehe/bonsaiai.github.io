@@ -809,6 +809,14 @@ Machine Learning types. The only Machine Learning type currently supported is
 <code class="prettyprint">Luminance</code>. This support will be expanded to <code class="prettyprint">Matrix</code> and <code class="prettyprint">Vector</code>, among
 others in the future.</p>
 
+<p><code class="prettyprint">Luminance</code> is a structured type for inputing a matrix of pixels in an Inkling
+schema. If given a small image, as in <code class="prettyprint">Luminance(9, 9)</code> then likely one
+convolutional layer will be built. In the Breakout example, a larger image of <code class="prettyprint">Luminance( 84, 336)</code>
+will cause the AI Engine to build multiple layers and stack them to
+aggressively reduce the dimensionality of the output. You can configure
+these convolutional layers and filters yourself by using the advanced
+<a href="#advanced-algorithms">algorithm clause</a>.</p>
+
 <h6 id="constrained-types-and-range-expressions">Constrained Types and Range Expressions</h6>
 <pre class="highlight inkling tab-inkling--code"><code>  <span class="k">schema</span> <span class="nx">my_schema</span>
     <span class="kr">Int32</span><span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="p">}</span> <span class="nx">z</span>            <span class="c1"># primitive type with type constraint</span>
