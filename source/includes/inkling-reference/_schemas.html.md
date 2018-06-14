@@ -186,6 +186,14 @@ Machine Learning types. The only Machine Learning type currently supported is
 `Luminance`. This support will be expanded to `Matrix` and `Vector`, among
 others in the future.
 
+`Luminance` is a structured type for inputing a matrix of pixels in an Inkling
+schema. If given a small image, as in `Luminance(9, 9)` then likely one
+convolutional layer will be built. In the Breakout example, a larger image of `Luminance( 84, 336)`
+will cause the AI Engine to build multiple layers and stack them to
+aggressively reduce the dimensionality of the output. You can configure
+these convolutional layers and filters yourself by using the advanced
+[algorithm clause][6].
+
 ###### Constrained Types and Range Expressions
 
 ```inkling--code
@@ -481,3 +489,4 @@ configure constraints for the field `paddle_width`.
 [3]:#types
 [4]:#primitive-types
 [5]:#anonymous-schema
+[6]:#advanced-algorithms
