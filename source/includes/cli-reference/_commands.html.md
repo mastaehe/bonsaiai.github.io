@@ -51,7 +51,8 @@ Usage: bonsai configure [OPTIONS]
   Authenticate with the BRAIN Server.
 
 Options:
-  --key TEXT  Provide an access key.
+  --username TEXT    Provide username.
+  --access_key TEXT  Provide an access key.
   --show      Prints active profile information.
   -h, --help  Show this message and exit.
 ```
