@@ -117,3 +117,6 @@ Various bug fixes, including:
 * Fixed issue where training graph would overlap older and newer training sessions
 * Fix for bonsai push command not correctly uploading files to beta portal
 
+# Open Source Attribution
+
+The Bonsai Platform and associated tools utilize open source code. We thank the authors of these libraries on our [Open Source Attribution](./open-source.html) page.
