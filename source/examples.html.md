@@ -13,8 +13,9 @@ includes:
 - examples/find-the-center.html.md
 - examples/simpy-elevator.html.md
 - examples/tic-tac-toe.html.md
-- examples/cartpole.html.md
 - examples/mountain-car.html.md
+- examples/cartpole.html.md
+- examples/event-cartpole.html.md
 - examples/energyplus.html.md
 - examples/simulink.html.md
 
