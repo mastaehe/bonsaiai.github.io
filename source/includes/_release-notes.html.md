@@ -4,10 +4,10 @@ This is a list of Bonsai's currently supported versions of its software packages
 
 | Software               | Package Name | Versions | Last Updated |
 | -                      | -            | -        | -            |
-| Command Line Interface | bonsai-cli   | 0.8.24   | 2018.06.05   |
-| Gym Common             | bonsai-gym   | 2.0.6    | 2018.06.05   |
-| Python Library         | bonsai-ai    | 2.0.8    | 2018.06.05   |
-| C++ Library            | libbonsai    | 2.0.2    | 2018.06.05   |
+| Command Line Interface | bonsai-cli   | 0.8.25   | 2018.06.18   |
+| Gym Common             | bonsai-gym   | 2.0.7    | 2018.06.18   |
+| Python Library         | bonsai-ai    | 2.0.9    | 2018.06.18   |
+| C++ Library            | libbonsai    | 2.0.3    | 2018.06.18   |
 
 # Product Release Notes
 
@@ -15,9 +15,46 @@ These release notes combine releases for the web (BRAIN Dashboard), the backend 
 
 Release Notes for CLI: [https://github.com/BonsaiAI/bonsai-cli/blob/master/CHANGELOG.md]()
 
-Release Notes for Python SDK (bonsai-ai, bonsai-cli, and bonsai-gym libraries): [https://github.com/BonsaiAI/bonsai-sdk/blob/master/bonsai-ai/CHANGELOG.md]()
+Release Notes for Python SDK (bonsai-ai and bonsai-gym libraries): [https://github.com/BonsaiAI/bonsai-sdk/blob/master/bonsai-ai/CHANGELOG.md]()
 
 Release Notes for C++ SDK (libbonsai): [https://github.com/BonsaiAI/libbonsai/blob/master/libbonsai/CHANGELOG.md]()
+
+### 2018.06.22
+
+Various bug fixes, including: 
+
+* Stability improvements for simulations when training a BRAIN
+
+More security enhancements were included in this release.
+
+### 2018.06.14
+
+Notable features:
+
+* Updated Access Keys to be single use for security purposes
+* Your username is now required for `bonsai configure` to support storing encrypted keys
+
+Various bug fixes, including:
+
+* An incorrect `is` clause in Inkling was being silently ignored, rather than causing a compile-time error
+* Lunar Lander sample was missing dependencies in requirements.txt
+* Using `Estimator` vs. `estimator` in Inkling will no longer cause silent failure
+
+A variety of security updates were also included in this release.
+
+### 2018.05.22
+
+Notable features:
+
+* Proxy Support for Bonsai CLI
+
+Various bug fixes, including:
+
+* Fix so that OpenAI Gym's Taxi simulator runs correctly with bonsai-ai
+* Fixed a segfault happening when accessing `Simulator::record_file()` if no record file had been set
+* The install instructions for bonsai-ai now work on Windows!
+* There is now a friendly error when you try to upload more than one Inkling file to a BRAIN
+* You will not longer get an error when you try `bonsai sims list` before training starts
 
 ### 2018.05.01
 
