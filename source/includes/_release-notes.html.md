@@ -32,12 +32,11 @@ More security enhancements were included in this release.
 Notable features:
 
 * Updated Access Keys to be single use for security purposes
-* Your username is now required for `bonsai configure` to support storing encrypted keys
+* Your username is now required for `bonsai configure`
 
 Various bug fixes, including:
 
 * An incorrect `is` clause in Inkling was being silently ignored, rather than causing a compile-time error
-* Lunar Lander sample was missing dependencies in requirements.txt
 * Using `Estimator` vs. `estimator` in Inkling will no longer cause silent failure
 
 A variety of security updates were also included in this release.
