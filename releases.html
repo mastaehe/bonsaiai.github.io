@@ -394,26 +394,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <tr>
 <td>Command Line Interface</td>
 <td>bonsai-cli</td>
-<td>0.8.24</td>
-<td>2018.06.05</td>
+<td>0.8.25</td>
+<td>2018.06.18</td>
 </tr>
 <tr>
 <td>Gym Common</td>
 <td>bonsai-gym</td>
-<td>2.0.6</td>
-<td>2018.06.05</td>
+<td>2.0.7</td>
+<td>2018.06.18</td>
 </tr>
 <tr>
 <td>Python Library</td>
 <td>bonsai-ai</td>
-<td>2.0.8</td>
-<td>2018.06.05</td>
+<td>2.0.9</td>
+<td>2018.06.18</td>
 </tr>
 <tr>
 <td>C++ Library</td>
 <td>libbonsai</td>
-<td>2.0.2</td>
-<td>2018.06.05</td>
+<td>2.0.3</td>
+<td>2018.06.18</td>
 </tr>
 </tbody></table>
 
@@ -423,9 +423,55 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <p>Release Notes for CLI: <a href="#">https://github.com/BonsaiAI/bonsai-cli/blob/master/CHANGELOG.md</a></p>
 
-<p>Release Notes for Python SDK (bonsai-ai, bonsai-cli, and bonsai-gym libraries): <a href="#">https://github.com/BonsaiAI/bonsai-sdk/blob/master/bonsai-ai/CHANGELOG.md</a></p>
+<p>Release Notes for Python SDK (bonsai-ai and bonsai-gym libraries): <a href="#">https://github.com/BonsaiAI/bonsai-sdk/blob/master/bonsai-ai/CHANGELOG.md</a></p>
 
 <p>Release Notes for C++ SDK (libbonsai): <a href="#">https://github.com/BonsaiAI/libbonsai/blob/master/libbonsai/CHANGELOG.md</a></p>
+
+<h3 id="2018-06-22">2018.06.22</h3>
+
+<p>Various bug fixes, including: </p>
+
+<ul>
+<li>Stability improvements for simulations when training a BRAIN</li>
+</ul>
+
+<p>More security enhancements were included in this release.</p>
+
+<h3 id="2018-06-14">2018.06.14</h3>
+
+<p>Notable features:</p>
+
+<ul>
+<li>Updated Access Keys to be single use for security purposes</li>
+<li>Your username is now required for <code class="prettyprint">bonsai configure</code></li>
+</ul>
+
+<p>Various bug fixes, including:</p>
+
+<ul>
+<li>An incorrect <code class="prettyprint">is</code> clause in Inkling was being silently ignored, rather than causing a compile-time error</li>
+<li>Using <code class="prettyprint">Estimator</code> vs. <code class="prettyprint">estimator</code> in Inkling will no longer cause silent failure</li>
+</ul>
+
+<p>A variety of security updates were also included in this release.</p>
+
+<h3 id="2018-05-22">2018.05.22</h3>
+
+<p>Notable features:</p>
+
+<ul>
+<li>Proxy Support for Bonsai CLI</li>
+</ul>
+
+<p>Various bug fixes, including:</p>
+
+<ul>
+<li>Fix so that OpenAI Gym&rsquo;s Taxi simulator runs correctly with bonsai-ai</li>
+<li>Fixed a segfault happening when accessing <code class="prettyprint">Simulator::record_file()</code> if no record file had been set</li>
+<li>The install instructions for bonsai-ai now work on Windows!</li>
+<li>There is now a friendly error when you try to upload more than one Inkling file to a BRAIN</li>
+<li>You will not longer get an error when you try <code class="prettyprint">bonsai sims list</code> before training starts</li>
+</ul>
 
 <h3 id="2018-05-01">2018.05.01</h3>
 
