@@ -13,11 +13,11 @@ This is a list of Bonsai's currently supported versions of its software packages
 
 These release notes combine releases for the web (BRAIN Dashboard), the backend services (Bonsai AI Engine), the Inkling language, and Bonsai's API. All releases are tagged by date for the web, backend, Inkling, and API. SDK and CLI are released separately and have different version numbers. They are available on GitHub.
 
-Release Notes for CLI: [https://github.com/BonsaiAI/bonsai-cli/blob/master/CHANGELOG.md]()
+Release Notes for CLI: <https://github.com/BonsaiAI/bonsai-cli/blob/master/CHANGELOG.md>
 
-Release Notes for Python SDK (bonsai-ai and bonsai-gym libraries): [https://github.com/BonsaiAI/bonsai-sdk/blob/master/bonsai-ai/CHANGELOG.md]()
+Release Notes for Python SDK (bonsai-ai and bonsai-gym libraries): <https://github.com/BonsaiAI/bonsai-sdk/blob/master/bonsai-ai/CHANGELOG.md>
 
-Release Notes for C++ SDK (libbonsai): [https://github.com/BonsaiAI/libbonsai/blob/master/libbonsai/CHANGELOG.md]()
+Release Notes for C++ SDK (libbonsai): <https://github.com/BonsaiAI/libbonsai/blob/master/libbonsai/CHANGELOG.md>
 
 ### 2018.06.22
 
