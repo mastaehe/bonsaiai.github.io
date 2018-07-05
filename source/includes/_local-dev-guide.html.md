@@ -162,19 +162,20 @@ After your BRAIN is finished training it can play the Mountain Car game. How wel
 
 Now that you've completed this guide, you can:
 
-**Check out our [Learn the Inkling Language][6] Guide.**
+**Check out Tutorial 1 - [Running Simulations and Writing Inkling][6]**
 
-It contains all of the concepts and components of our unique programming language. You'll learn:
+It contains all of the information you need to get up and running with your own projects on the Bonsai Platform. You'll learn:
 
-* How to assess a simulation and write an Inkling file to teach a BRAIN.
-* The core concepts behind the Inkling language.
-* The components of the Inkling language.
+* The basics of reinforcement learning 
+* How to hook up a simulation to the Bonsai Platform
+* The core components of the Inkling language
+* How to train a BRAIN with custom Inkling code
 
 And we have these other resources that will enable you to maximize your AI development experience:
 
 * [Understand BRAIN Graphs][7] Guide
 * VIDEO: [Writing Great Reward Functions][8]
-* [Bonsai's Blog][9]
+* [Learn the Inkling Language][9] Guide
 
 
 [1]: getting-started.html#overview
@@ -182,10 +183,10 @@ And we have these other resources that will enable you to maximize your AI devel
 [3]: ../references/cli-reference.html
 [4]: https://gym.openai.com/envs/MountainCar-v0
 [5]: https://beta.bons.ai
-[6]: ./inkling-guide.html
+[6]: ../tutorials/tutorial1.html
 [7]: ./web-graphs-guide.html
 [8]: https://www.youtube.com/watch?v=0R3PnJEisqk&list=PLAktfMEMCsOY9HUZKIuGI6yqefGBuszAV&index=4
-[9]: https://bons.ai/blog
+[9]: ./inkling-guide.html
 [16]: ../images/graph-mountaincar-training.png
 [17]: ../references/cli-reference.html#bonsai-configure
 [18]: ../references/cli-reference.html#bonsai-create
