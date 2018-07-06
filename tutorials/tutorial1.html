@@ -1,0 +1,833 @@
+
+
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Tutorial 1 - Running Simulations and Writing Inkling - Bonsai</title>
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .gh {
+  color: #999999;
+}
+.highlight .sr {
+  color: #f6aa11;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #75715e;
+}
+.highlight .c1 {
+  color: #75715e;
+}
+.highlight .cs {
+  color: #75715e;
+}
+.highlight .c, .highlight .cd {
+  color: #75715e;
+}
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
+}
+.highlight .gd {
+  color: #49483e;
+}
+.highlight .gi {
+  color: #49483e;
+}
+.highlight .ge {
+  color: #49483e;
+}
+.highlight .kc {
+  color: #66d9ef;
+}
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
+}
+.highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s {
+  color: #e6db74;
+}
+.highlight .na {
+  color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+}
+.highlight .nn {
+  color: #ffffff;
+}
+.highlight .nl {
+  color: #ffffff;
+}
+.highlight .ni {
+  color: #ffffff;
+}
+.highlight .bp {
+  color: #ffffff;
+}
+.highlight .vg {
+  color: #ffffff;
+}
+.highlight .vi {
+  color: #ffffff;
+}
+.highlight .nv {
+  color: #ffffff;
+}
+.highlight .w {
+  color: #ffffff;
+}
+.highlight {
+  color: #ffffff;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
+}
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+    <link href="../stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="../stylesheets/print.css" rel="stylesheet" media="print" />
+	  <link href="../stylesheets/test.css" rel="stylesheet" media="screen" />
+    <link href="../favicon.ico" rel="icon" type="image/ico" />
+      <script src="../javascripts/all.js"></script>
+
+    <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WVB6MG2');</script>
+<!-- End Google Tag Manager -->
+      <!-- start Mixpanel -->
+<script type="text/javascript">(function(e,a){if(!a.__SV){var b=window;try{var c,l,i,j=b.location,g=j.hash;c=function(a,b){return(l=a.match(RegExp(b+"=([^&]*)")))?l[1]:null};g&&c(g,"state")&&(i=JSON.parse(decodeURIComponent(c(g,"state"))),"mpeditor"===i.action&&(b.sessionStorage.setItem("_mpcehash",g),history.replaceState(i.desiredHash||"",e.title,j.pathname+j.search)))}catch(m){}var k,h;window.mixpanel=a;a._i=[];a.init=function(b,c,f){function e(b,a){var c=a.split(".");2==c.length&&(b=b[c[0]],a=c[1]);b[a]=function(){b.push([a].concat(Array.prototype.slice.call(arguments,
+0)))}}var d=a;"undefined"!==typeof f?d=a[f]=[]:f="mixpanel";d.people=d.people||[];d.toString=function(b){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);b||(a+=" (stub)");return a};d.people.toString=function(){return d.toString(1)+".people (stub)"};k="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config reset people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+for(h=0;h<k.length;h++)e(d,k[h]);a._i.push([b,c,f])};a.__SV=1.2;b=e.createElement("script");b.type="text/javascript";b.async=!0;b.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";c=e.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c)}})(document,window.mixpanel||[]);
+mixpanel.init("91fbf7b68fb2356f91916026f221ddd5", {
+    loaded: function(mixpanel) {
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+
+        distinct_id = getParameterByName('refUserId');
+        if (distinct_id) {
+          mixpanel.identify(distinct_id);
+        }
+    }
+});</script>
+<!-- end Mixpanel -->
+
+  </head>
+
+  <body class="tutorials tutorials_tutorial1" data-languages="[&quot;inkling--exercise&quot;,&quot;inkling--solution&quot;]">
+
+
+	  <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WVB6MG2"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) --> 
+
+  <div id="flex-container">
+
+	<nav id="primary-nav">
+
+
+
+	<div id="logo"> <a href="../"><img class="bonsai-logo" src="../images/bonsai-logo.svg"></a></div>
+
+	<label for="drop" class="toggle"><img class="menu-ham" src="../images/menu.svg"></label>
+	<input type="checkbox" id="drop" />
+
+	<ul class="menu">
+
+		<li class="header_menu_item "> <a href="../guides/getting-started.html">Quick Start</a></li>
+
+		<li class="header_menu_item"> <!-- First Tier Drop Down --> <label for="drop-1" class="toggle">Tutorials +</label><a  href="#">Tutorials</a>
+			<input type="checkbox" id="drop-1"/>
+			<ul id="tutorials">
+				<li class=""> <a href="../guides/cli-install-guide.html">Install the CLI</a>  </li>
+				<li class=""> <a href="../guides/sdk-install-guide.html">Install the SDK</a>  </li>
+				<li class="selected"> <a href="tutorial1.html">Running Simulations and Writing Inkling</a>  </li>
+				<li class=""> <a href="../guides/local-dev-guide.html">Run the Platform Locally</a>  </li>
+				<li class=""> <a href="../guides/jupyter-api-guide.html">Use Bonsai's API with Jupyter</a>  </li>
+			</ul>
+		</li>
+
+		<li class="header_menu_item"> <!-- First Tier Drop Down --> <label for="drop-2" class="toggle">Guides +</label><a  href="#">Guides</a>
+			<input type="checkbox" id="drop-2"/>
+			<ul id="guides">
+				<li class=""> <a href="../guides/simulation-guide.html">Learn About Simulation Requirements</a>  </li>
+				<li class=""> <a href="../guides/inkling-guide.html">Learn the Inkling Language</a>  </li>
+				<li class=""> <a href="../guides/machine-teaching.html">Programming Machine Teaching</a>  </li>
+				<li class=""> <a href="../guides/ai-engine-guide.html">Understand AI Engine Components</a>  </li>
+				<li class=""> <a href="../guides/web-graphs-guide.html">Understand BRAIN Graphs</a>  </li>
+			</ul>
+		</li>
+
+		<li class="header_menu_item"> <!-- First Tier Drop Down --> <label for="drop-3" class="toggle">References +</label><a  href="#">References</a>
+			<input type="checkbox" id="drop-3"/>
+			<ul id="references">
+				<li class=""> <a href="../references/api-reference.html">API Reference</a>  </li>
+				<li class=""> <a href="../references/cli-reference.html">CLI Reference</a>  </li>
+				<li class=""> <a href="../references/inkling-reference.html">Inkling Reference</a>  </li>
+				<li class=""> <a href="../references/simulator-reference.html">Simulator Reference</a>
+				<li class=""> <a href="../references/library-reference.html">Python Library</a>  </li>
+				<li class=""> <a href="../references/cpp-library-reference.html">C++ Library</a>  </li>
+				
+			</ul> 
+		</li>
+
+		<li class="header_menu_item "> <a href="../examples.html">Examples</a></li>
+
+		<li>
+			<input type="search" id="docs-search" placeholder="Search Bonsai Docs">
+		</li>
+
+
+	</ul>
+
+</nav>
+
+
+	<div id="main-wrapper">
+
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="../images/navbar.png" alt="Navbar" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+
+        <div class="lang-selector">
+              <a href="#" data-language-name="inkling--exercise">Exercise</a>
+              <a href="#" data-language-name="inkling--solution">Solution</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <div class="page-title">Tutorial 1 - Running Simulations and Writing Inkling</div>
+      <div id="toc">
+      </div>
+
+			 
+<ul class="toc-footer">
+
+<li><a href='https://bons.ai'>Bonsai Home</a></li>
+<li><a href='https://beta.bons.ai'>BRAIN Dashboard</a></li>
+<li><a href='https://github.com/BonsaiAI/slate'>Contribute to the Docs</a></li>
+<li><a href='http://pages.bons.ai/apply.html'>Apply for Bonsai Platform Preview</a></li>
+<li><a href="/releases.html">Product Release Notes</a></li>
+<li><a href='https://bons.ai/contact-us#contact-page-form'>Contact Us</a></li>
+
+</ul>
+
+
+	   <div class="cc-bottom">
+	
+	<div class="toc-footer bottom cc-info">
+
+		<a href='https://creativecommons.org/licenses/by-sa/4.0/' class="cc-icon-width" >
+			<svg class="cc" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+			viewBox="0 0 70.7 13.4" style="enable-background:new 0 0 70.7 13.4;" xml:space="preserve">
+
+				<g>
+
+				<g>
+				<circle class="st0" cx="6.8" cy="6.7" r="6.1"/>
+				<path d="M6.7,0c1.9,0,3.5,0.7,4.8,2c0.6,0.6,1.1,1.4,1.4,2.2c0.3,0.8,0.5,1.7,0.5,2.6c0,0.9-0.2,1.8-0.5,2.6
+				c-0.3,0.8-0.8,1.5-1.4,2.1c-0.7,0.6-1.4,1.1-2.2,1.5c-0.8,0.3-1.7,0.5-2.6,0.5S5,13.3,4.2,12.9c-0.8-0.3-1.5-0.8-2.2-1.5
+				s-1.1-1.4-1.5-2.2S0,7.6,0,6.7C0,5.8,0.2,5,0.5,4.2S1.3,2.6,2,2C3.3,0.7,4.8,0,6.7,0z M6.7,1.2c-1.5,0-2.8,0.5-3.9,1.6
+				C2.3,3.4,1.9,4,1.6,4.6C1.4,5.3,1.2,6,1.2,6.7c0,0.7,0.1,1.4,0.4,2.1c0.3,0.7,0.7,1.3,1.2,1.8c0.5,0.5,1.1,0.9,1.8,1.2
+				c0.7,0.3,1.4,0.4,2.1,0.4c0.7,0,1.4-0.1,2.1-0.4c0.7-0.3,1.3-0.7,1.8-1.2c1-1,1.6-2.3,1.6-3.9c0-0.7-0.1-1.4-0.4-2.1
+				c-0.3-0.7-0.7-1.3-1.2-1.8C9.5,1.8,8.2,1.2,6.7,1.2z M6.6,5.6L5.7,6.1C5.6,5.9,5.5,5.7,5.4,5.6C5.3,5.6,5.1,5.5,5,5.5
+				c-0.6,0-0.9,0.4-0.9,1.2c0,0.4,0.1,0.6,0.2,0.9C4.5,7.8,4.7,7.9,5,7.9c0.4,0,0.7-0.2,0.8-0.6l0.8,0.4C6.5,8.1,6.2,8.3,5.9,8.5
+				c-0.3,0.2-0.7,0.3-1,0.3c-0.6,0-1.1-0.2-1.5-0.6C3.1,7.9,2.9,7.4,2.9,6.7c0-0.6,0.2-1.1,0.6-1.5c0.4-0.4,0.8-0.6,1.4-0.6
+				C5.7,4.6,6.3,5,6.6,5.6z M10.5,5.6L9.6,6.1C9.5,5.9,9.4,5.7,9.3,5.6C9.1,5.6,9,5.5,8.9,5.5C8.3,5.5,8,5.9,8,6.7
+				c0,0.4,0.1,0.6,0.2,0.9c0.2,0.2,0.4,0.3,0.7,0.3c0.4,0,0.7-0.2,0.8-0.6l0.8,0.4c-0.2,0.3-0.4,0.6-0.7,0.8c-0.3,0.2-0.7,0.3-1,0.3
+				c-0.6,0-1.1-0.2-1.5-0.6C7,7.9,6.8,7.4,6.8,6.7c0-0.6,0.2-1.1,0.6-1.5c0.4-0.4,0.8-0.6,1.4-0.6C9.6,4.6,10.2,5,10.5,5.6z"/>
+				</g>
+
+				</g>
+			</svg>
+		</a>
+		
+		<a href='https://creativecommons.org/licenses/by-sa/4.0/'>Content:
+		CC-BY-SA </a>
+		
+	</div>
+
+</div>
+
+    </div>
+
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        
+          <h1 id="problem-overview">Problem Overview</h1>
+
+<blockquote>
+<p><img src="../images/tutorial1-rl-overview.png" alt="RL Overview Image" /></p>
+</blockquote>
+
+<p>In this tutorial you will learn about reinforcement learning (RL), and using RL to solve a simple simulated problem using Inkling and the Bonsai Platform. This will include learning the essential components of the Inkling language needed to connect the simulation to the platform.  You will familiarize yourself with the simulation, test it, then fill in the necessary Inkling schemas (states and actions) needed to connect the simulation to the platform. By the end of this tutorial, you can expect to be comfortable with the relationship between a BRAIN and a simulation, as well as how to train a BRAIN inside the Bonsai Platform using custom Inkling code, and basic knowledge of Bonsai’s Command Line Interface (CLI).</p>
+
+<p>We expect you to already have read the <a href="../guides/getting-started.html">Quick Start tutorial overview</a> and <a href="../guides/cli-install-guide.html">install the CLI</a> before following this tutorial so you have a general understanding of how the platform works and have installed and configured the Bonsai CLI. Please do so before continuing with this tutorial.</p>
+
+<p>The problem we are trying to solve using this simulation is to teach an agent (the Bonsai BRAIN) to move to a target point in a simple planar world. The agent is told where it is relative to the goal, and has to decide which way to move. The agent sends its chosen action to the simulation, which simulates the step, moving the agent to a new location, and this repeats until the agent makes it to the goal, or time runs out.</p>
+
+<p>First, we’ll cover a bit about reinforcement learning for those who are unfamiliar with this style of machine learning.</p>
+
+<h2 id="how-reinforcement-learning-works">How Reinforcement Learning Works</h2>
+
+<blockquote>
+<p>Visualization of one iteration on the Bonsai Platform
+<img src="../images/tutorial1-iterations.png" alt="Iteration visualization" /></p>
+</blockquote>
+
+<p>Reinforcement learning (RL), illustrated here, is a machine learning technique for controlling or optimizing a system or process. In RL, an <em>agent</em> takes <em>actions</em> in an <em>environment</em>, getting feedback in the form of <em>reward</em>. The agent explores different action strategies or policies and learns to maximize cumulative reward. One cycle from the environment to the agent and back is called an iteration.</p>
+
+<h3 id="terminology">Terminology</h3>
+
+<p>This table describes the key terms used in RL:</p>
+
+<table><thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>state</td>
+<td>The state of the environment at each iteration (ex: current agent position relative to the target). The agent uses this to decide what action to select.</td>
+</tr>
+<tr>
+<td>action</td>
+<td>Actions define what the agent can do at each iteration (ex: which direction to move in). The goal of RL is to learn to select the right series of actions to achieve an objective.</td>
+</tr>
+<tr>
+<td>reward</td>
+<td>The reward at each iteration gives the agent feedback that helps it learn (ex: higher reward when moving toward the target). An important note is that the agent&rsquo;s goal is to maximize <em>cumulative</em> future reward, not the instantaneous reward at each iteration.</td>
+</tr>
+<tr>
+<td>iteration</td>
+<td>An iteration is one state → action → reward → new-state transition in the environment. The agent uses the state to select an action, which causes the environment to transition to a new state, and results in a reward.</td>
+</tr>
+<tr>
+<td>episode</td>
+<td>An episode is a series of iterations, starting in some initial state and ending when the environment hits a termination condition and the environment resets for the next episode. (ex: episode is terminated either when agent reaches the target (success) or time runs out (failure)) Episodes can vary in length, with termination conditions typically defined based on succeeding at the task, failing at the task, getting too far from success, or running out of time.</td>
+</tr>
+<tr>
+<td>cumulative reward</td>
+<td>Cumulative reward is the sum of the per-iteration rewards over an episode. The agent&rsquo;s goal is to select actions that maximize cumulative future reward through the end of the episode.</td>
+</tr>
+<tr>
+<td>terminal condition</td>
+<td>Terminal conditions specify when to end an episode.</td>
+</tr>
+<tr>
+<td>policy</td>
+<td>A policy determines what action the agent selects for every possible state. The goal of RL is to learn a policy that maximizes cumulative future reward.</td>
+</tr>
+</tbody></table>
+
+<p>To learn more about reinforcement learning, watch our <a href="https://www.youtube.com/watch?v=VcwzDqReLPk&amp;index=1&amp;list=PLAktfMEMCsOY9HUZKIuGI6yqefGBuszAV">training video</a> about types of machine learning.</p>
+
+<h1 id="create-a-brain">Create a BRAIN</h1>
+
+<p>Now that you’ve gotten a taste of Reinforcement Learning, let us begin by downloading the code for this tutorial and creating a new BRAIN on the Bonsai Platform for training.</p>
+
+<p>As mentioned in the introduction, you’ll need to have the Bonsai CLI installed before you can run these commands. If you haven’t already done so, please <a href="../guides/cli-install-guide.html">Install the CLI</a>.</p>
+<pre class="highlight shell tab-shell"><code>git clone https://github.com/BonsaiAI/bonsai-tutorials.git
+<span class="nb">cd </span>bonsai-tutorials/tutorial1
+</code></pre>
+<p>If you don’t have git installed on your computer you can <a href="https://github.com/BonsaiAI/bonsai-tutorials/archive/master.zip">download a .zip file</a> of the materials instead.</p>
+<pre class="highlight shell tab-shell"><code><span class="c"># The name of your BRAIN will be move-a-point</span>
+bonsai create move-a-point
+</code></pre>
+<p>Once you have either git cloned or downloaded the files for this tutorial, navigate on your command prompt inside of the tutorial1 folder and run <code class="prettyprint">bonsai create move-a-point</code> which will create a new BRAIN for your account called move-a-point. This command also silently uploads your project files to the server so it’s important to use this command within the tutorial1 folder where your Inkling and simulation files are.</p>
+
+<aside class="notice">
+The CLI will ask you to run a push command to upload your files after you create your BRAIN. If you do this you will get an Inkling compile error since your Inkling code is not yet complete. Don&rsquo;t worry! We will do this a few sections later in this tutorial.
+</aside>
+
+          <h1 id="simulation-overview">Simulation Overview</h1>
+
+<p>The simulation we will be running in this tutorial is called Move a Point. Start by skimming over <code class="prettyprint">move_a_point_sim.py</code> which is found within the <strong>tutorial1</strong> folder of <strong>bonsai-tutorials</strong>. The simulation, in the <code class="prettyprint">PointSimulation</code> class, models the problem described in the introduction &ndash; in each episode (started by a call to <code class="prettyprint">reset()</code>), an agent starts in a location (<code class="prettyprint">current</code>), and has to get within <code class="prettyprint">PRECISION</code> of a target point <code class="prettyprint">target</code>. At each step of the simulation, the agent moves a distance <code class="prettyprint">STEP_SIZE</code> in a specified direction.</p>
+
+<p>The simulation ends (i.e., <code class="prettyprint">game_over()</code> returns <code class="prettyprint">True</code>) when the agent is close enough to the target. </p>
+
+<p>The <code class="prettyprint">PointSimulation</code> class is a simple example of a common integration pattern: some often pre-existing code simulates a process, and we write additional code to control the simulation, read out the state, and reset periodically. Next, let&rsquo;s review how to connect a simulation to a BRAIN using the Bonsai SDK (Software Development Kit).</p>
+
+<h2 id="using-the-bonsai-sdk-to-connect-to-the-brain">Using the Bonsai SDK to connect to the BRAIN</h2>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">bonsai_ai</span>
+
+<span class="k">class</span> <span class="nc">PointBonsaiBridge</span><span class="p">(</span><span class="n">bonsai_ai</span><span class="o">.</span><span class="n">Simulator</span><span class="p">):</span>
+</code></pre>
+<p>The integration of the simulation with the Bonsai SDK includes three pieces. First, take a look at how we import the <code class="prettyprint">bonsai_ai</code> module and derive the simulator class from <code class="prettyprint">bonsai_ai.Simulator</code>.</p>
+
+<p>Implementing the <code class="prettyprint">Simulator</code> interface requires coding two functions, <code class="prettyprint">episode_start()</code> and <code class="prettyprint">simulate()</code>.</p>
+
+<blockquote>
+<p>Implementing the Simulator interface</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="k">def</span> <span class="nf">episode_start</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="s">"""Set up the simulation for a new episode. Returns the initial state."""</span>
+    <span class="o">...</span>
+
+<span class="k">def</span> <span class="nf">simulate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">):</span>
+    <span class="s">"""Given an action, run one simulation iteration and return a tuple:
+           (state, reward, is_terminal)"""</span> 
+    <span class="o">...</span>
+</code></pre>
+<p>The <code class="prettyprint">action</code> parameter to <code class="prettyprint">simulate</code> is a dictionary, with a key for each action variable defined in your Inkling code. In our case, this is <code class="prettyprint">action[&quot;direction_radians&quot;]</code>. The <code class="prettyprint">state</code> returned is a dictionary with one key for each state variable defined in your Inkling. In our case, this is implemented by the code in <code class="prettyprint">_get_state(self)</code>.</p>
+
+<p>In addition to the &ldquo;game over&rdquo; condition specified by the simulation, our SDK connection bridge adds a maximum number of steps (<code class="prettyprint">MAX_STEPS</code>) per episode in <code class="prettyprint">_is_terminal()</code>. Having a time limit like this helps ensure that episodes end even if the agent keeps moving in the wrong direction.</p>
+
+<p>The <code class="prettyprint">episode_start</code> and <code class="prettyprint">simulate</code> functions together define the action loop, which can be written as shown in the code panel.</p>
+
+<blockquote>
+<p>Action loop</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="n">state</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">episode_start</span><span class="p">()</span>
+<span class="n">is_terminal</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="k">while</span> <span class="ow">not</span> <span class="n">is_terminal</span><span class="p">:</span>
+    <span class="n">action</span> <span class="o">=</span> <span class="n">policy</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>   <span class="c"># decide what to do next. When connected to a BRAIN, the BRAIN chooses the action.</span>
+    <span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">is_terminal</span><span class="p">)</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
+    <span class="c"># Learning from the new state and the obtained reward happens here</span>
+</code></pre>
+<p>Finally, we need to instantiate the simulator class and run it.</p>
+
+<blockquote>
+<p>Instantiate the Simulator class</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">bonsai_ai</span><span class="o">.</span><span class="n">Config</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
+    <span class="n">brain</span> <span class="o">=</span> <span class="n">bonsai_ai</span><span class="o">.</span><span class="n">Brain</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+    <span class="n">sim</span> <span class="o">=</span> <span class="n">PointBonsaiBridge</span><span class="p">(</span><span class="n">brain</span><span class="p">,</span> <span class="s">"move_a_point_sim"</span><span class="p">)</span>
+    <span class="k">while</span> <span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">():</span>
+        <span class="k">continue</span>
+</code></pre>
+<p>The configuration includes the BRAIN name and url, your Bonsai API key, and whether to train the BRAIN or run it in prediction mode (sometimes called test mode). The name passed to the <code class="prettyprint">PointBonsaiBridge</code> constructor, <code class="prettyprint">&quot;move_a_point_sim&quot;</code> here, identifies the simulation file to the BRAIN, and must match your Inkling code (described in a later section).</p>
+
+<h2 id="run-your-simulator">Run Your Simulator</h2>
+
+<p>To test the simulator, we can create a <code class="prettyprint">PointSimulator</code> object and directly call <code class="prettyprint">episode_start()</code> and <code class="prettyprint">simulate()</code>, as described above. You can see an example of how to test the simulator before connecting it to the Bonsai Platform in <a href="https://github.com/BonsaiAI/bonsai-tutorials/blob/master/tutorial1/test_simulator.ipynb"><code class="prettyprint">test_simulator.ipynb</code></a> (requires <a href="../guides/jupyter-api-guide.html">Jupyter Notebook</a>), or in the <a href="https://github.com/BonsaiAI/bonsai-tutorials/blob/master/tutorial1/test_sim.py"><code class="prettyprint">test_sim.py</code></a> Python script, both of which can be found within the tutorial1 folder.</p>
+
+<blockquote>
+<p>Episode loop</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="k">def</span> <span class="nf">run_sim_episode</span><span class="p">(</span><span class="n">sim</span><span class="p">,</span> <span class="n">policy</span><span class="p">):</span>
+    <span class="s">"""
+    Given a sim and a policy, step through some iterations 
+    of the simulator, returning the history of states.
+
+    Args:
+        sim: a PointBonsaiBridge
+        policy: a function (SimState -&gt; action dictionary)
+    """</span>
+    <span class="n">state_history</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">reward_history</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">episode_start</span><span class="p">()</span>
+    <span class="n">state_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+
+    <span class="n">is_terminal</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">is_terminal</span><span class="p">:</span>
+        <span class="n">action</span> <span class="o">=</span> <span class="n">policy</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+        <span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">is_terminal</span><span class="p">)</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
+        <span class="n">state_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+        <span class="n">reward_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">reward</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">state_history</span><span class="p">,</span> <span class="n">reward_history</span>
+</code></pre>
+<p>The key code is the episode loop, shown in the code panel.</p>
+
+<p>Then we can define some policies, defining what action to take for a given state. If you&rsquo;d like to test with other silly policies or define your own, change line 56 in <code class="prettyprint">test_sim.py</code>: <code class="prettyprint">states, rewards = run_sim_episode(point_sim, random_policy</code>.</p>
+
+<p>After that the code will run some episodes, plotting the results.</p>
+
+<blockquote>
+<p>Define policies</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="c"># Some silly policies</span>
+<span class="k">def</span> <span class="nf">random_policy</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+    <span class="s">"""
+    Ignore the state, move randomly.
+    """</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s">'direction_radians'</span><span class="p">:</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="p">}</span>
+
+<span class="k">def</span> <span class="nf">go_up_policy</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s">'direction_radians'</span><span class="p">:</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">}</span>
+</code></pre>
+<blockquote>
+<p>Run episode and plot results</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="n">states</span><span class="p">,</span> <span class="n">rewards</span> <span class="o">=</span> <span class="n">run_sim_episode</span><span class="p">(</span><span class="n">point_sim</span><span class="p">,</span> <span class="n">random_policy</span><span class="p">)</span>
+    <span class="n">plot_state_history</span><span class="p">(</span><span class="n">states</span><span class="p">)</span>
+</code></pre>
+<p>When making or integrating simulations, it is always a good idea to run some sanity checks and verifications before starting BRAIN training.</p>
+
+<h4 id="exercises">Exercises</h4>
+
+<ul>
+<li>Run the simulator via the above code, either via <code class="prettyprint">test_sim.py</code> or, if you have <a href="../guides/jupyter-api-guide.html">Jupyter Notebook</a>, using <code class="prettyprint">test_simulator.ipynb</code>, both in the tutorial1 folder.</li>
+<li>Write two different policy functions for moving in different directions, and plot their behavior.</li>
+</ul>
+
+          <h1 id="connecting-your-brain">Connecting Your BRAIN</h1>
+
+<blockquote>
+<p>Adaptation of previous RL image to show the translation onto the Bonsai Platform
+<img src="../images/tutorial1-overview.png" alt="Overview Image" /></p>
+</blockquote>
+
+<p>To connect our simulation to a BRAIN in the Bonsai platform, we will need an Inkling program that describes the problem and how to teach the AI to solve it. Inkling is a programming language specifically designed for artificial intelligence (AI). It abstracts away the vast world of dynamic AI algorithms that require expertise in machine learning and enables more developers and subject matter experts to create AI.</p>
+
+<p>The problem description includes schemas for the states the BRAIN will receive and the actions it will need to send. The description of how to teach the BRAIN includes the reward, as well as any decomposition of the problem into <em>concepts</em> and the sequencing of learning using <em>lessons</em>. This first tutorial will use a single concept and a single lesson.</p>
+
+<h2 id="schemas">Schemas</h2>
+
+<p>A <code class="prettyprint">schema</code> in Inkling describes a named record and its contained fields. Each field in a schema has a name and a type. A field may also have a <a href="../references/inkling-reference.html#constrained-types-and-range-expressions">constraint</a> on values that the data described by this field will take.</p>
+
+<h4 id="exercises">Exercises</h4>
+
+<ul>
+<li>Fill in the state schema</li>
+<li>Fill in the action schema</li>
+</ul>
+
+<h6 id="fill-in-the-state-schema">Fill in the state schema</h6>
+<pre class="highlight inkling tab-inkling--exercise"><code><span class="k">schema</span> <span class="nx">GameState</span>
+    <span class="c1"># EXERCISE: Add a name (and type) for each variable of x and y position.</span>
+    <span class="c1"># These have to match the dictionary returned by _get_state() in our simulator.</span>
+    <span class="c1"># &lt;Your code goes here&gt;</span>
+<span class="k">end</span>
+</code></pre><pre class="highlight inkling tab-inkling--solution"><code><span class="k">schema</span> <span class="nx">GameState</span>
+    <span class="c1"># X and Y direction of the point. These names (and types) have to match the</span>
+    <span class="c1"># dictionary returned by _get_state() our simulator.</span>
+    <span class="kr">Float32</span> <span class="nx">dx</span><span class="p">,</span>
+    <span class="kr">Float32</span> <span class="nx">dy</span>
+<span class="k">end</span>
+</code></pre>
+<p>The state schema describes the state of the environment, and must match the state values returned from the simulator. In this case, the state consists of two floating point numbers, named <code class="prettyprint">dx</code> and <code class="prettyprint">dy</code>. Now, fill in the state schema (refer to the <a href="../references/inkling-reference.html#schema-references">Inkling reference</a> if you&rsquo;re not sure how).</p>
+
+<aside class="notice">
+Click the &ldquo;Solution&rdquo; tab of the code panel to see the answer to this exercise.
+</aside>
+
+<h6 id="fill-in-the-action-schema">Fill in the action schema</h6>
+<pre class="highlight inkling tab-inkling--exercise"><code><span class="k">schema</span> <span class="nx">PlayerMove</span>
+    <span class="c1"># EXERCISE: This name (and type) has to match the parameter to advance() in</span>
+    <span class="c1"># our simulator. You need to specify the range and step size for the action.</span>
+    <span class="c1"># &lt;Your code goes here&gt;</span>
+<span class="k">end</span>
+</code></pre><pre class="highlight inkling tab-inkling--solution"><code><span class="k">schema</span> <span class="nx">PlayerMove</span>
+    <span class="c1"># This name (and type) has to match the parameter to advance() in our</span>
+    <span class="c1"># simulator. We specify the range and step size for the action.</span>
+    <span class="kr">Float32</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="mf">1.575</span><span class="p">:</span><span class="mf">6.283</span><span class="p">}</span> <span class="nx">direction_radians</span>  <span class="c1"># a constraint {0,1.575,3.142, 4.712} would also work</span>
+<span class="k">end</span>
+</code></pre>
+<p>Next, let&rsquo;s fill in the action schema. The action in our problem corresponds to picking a direction, specified as a floating point number in radians, and named <code class="prettyprint">direction_radians</code>. In this case, we want the system to pick from the four cardinal directions: 0, pi/2, pi, 3*pi/2. Use the Inkling reference to look up the syntax for schema constraints, and fill in the action schema (bonus: there are at least two ways to do it).</p>
+
+<aside class="notice">
+Click the &ldquo;Solution&rdquo; tab of the code panel to see the answer to this exercise.
+</aside>
+
+<h2 id="concepts">Concepts</h2>
+<pre class="highlight inkling tab-inkling"><code><span class="k">concept</span> <span class="nx">find_the_target</span>
+    <span class="k">is</span> <span class="nx">classifier</span>      <span class="c1"># We're picking one of a few options</span>
+    <span class="k">predicts</span> <span class="p">(</span><span class="nx">PlayerMove</span><span class="p">)</span>
+    <span class="k">follows</span> <span class="kr">input</span><span class="p">(</span><span class="nx">GameState</span><span class="p">)</span>
+    <span class="k">feeds</span> <span class="kr">output</span>
+<span class="k">end</span>
+</code></pre>
+<p>A <code class="prettyprint">concept</code> in Inkling defines what you are going to teach the AI. By declaring a concept, you are instructing the BRAIN server that this a part of the BRAIN&rsquo;s <em>mental model</em> that must be learned. Consequently, concept nodes must have corresponding curricula to teach them.</p>
+
+<p>In this simulation we are asking the agent to learn the concept <code class="prettyprint">find_the_target</code> by choosing a direction (<code class="prettyprint">predicts (PlayerMove)</code>) after seeing the current state (<code class="prettyprint">follows input(GameState)</code>) of the simulation.</p>
+
+<p>For more information about using the concept keyword, refer to the <a href="../references/inkling-reference.html#concepts">Concept Reference</a>.</p>
+
+<h2 id="curriculum-and-lessons">Curriculum and Lessons</h2>
+<pre class="highlight inkling tab-inkling"><code><span class="k">curriculum</span> <span class="nx">learn_curriculum</span>
+    <span class="c1"># this is the name of our concept from above</span>
+    <span class="k">train</span> <span class="nx">find_the_target</span>
+    <span class="c1"># this is our simulator name</span>
+    <span class="k">with</span> <span class="k">simulator</span> <span class="nx">move_a_point_sim</span>
+    <span class="c1"># This is the name of our objective function in the simulator</span>
+    <span class="k">objective</span> <span class="nx">reward_shaped</span>
+        <span class="k">lesson</span> <span class="nx">get_close</span> 
+            <span class="k">configure</span>
+                <span class="k">constrain</span> <span class="nx">dummy</span> <span class="k">with</span> <span class="kr">Int8</span><span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">}</span>
+            <span class="k">until</span>
+                <span class="c1"># This is again the name of the objective function</span>
+                <span class="k">maximize</span> <span class="nx">reward_shaped</span>
+<span class="k">end</span>
+</code></pre>
+<p>A <code class="prettyprint">curriculum</code> in Inkling is used to define what and how to teach a concept. Each concept needs a corresponding curriculum to teach it. A <code class="prettyprint">lesson</code> is part of a curriculum; it teaches a specific piece of the concept by specifying training and testing parameters and a stopping point (<code class="prettyprint">until</code>). Lessons enable the BRAIN to learn the concept bit-by-bit instead of all at once (using multiple lessons will be covered in a future tutorial). Lessons are contained within curriculum statements. Each curriculum must contain at least one lesson.</p>
+
+<p>A curriculum contains information the Bonsai AI Engine uses to train your BRAIN on the concept you&rsquo;ve specified. They also specify the reward function (<code class="prettyprint">objective</code>) for teaching a given concept. The reward function is a way the system concretely measures the AI&rsquo;s performance as it learns the concept. For this tutorial we will only using one concept, and therefore, one curriculum. </p>
+
+<p>Every lesson must have a configuration. In this case, we have a simple example that doesn’t need a configuration, so the config schema is named <code class="prettyprint">dummy</code> with a default value of <code class="prettyprint">-1</code> which in this case does nothing to configure the lesson.</p>
+
+<p>For more information about using these keywords, refer to the <a href="../references/inkling-reference.html#curriculums">Curriculums Reference</a> and <a href="../references/inkling-reference.html#lessons">Lessons Reference</a>.</p>
+
+<h1 id="the-inkling-simulation-relationship">The Inkling/Simulation Relationship</h1>
+
+<p>Your Inkling code and your simulation are tightly coupled &ndash; through the SDK bridge class. The Inkling describes what to expect from the simulation as state, and what actions and configurations to send to the simulation. The bridge class does any conversion needed to make this match the simulation. This section describes how the different parts of your Inkling program and your simulation relate to each other through the bridge. The colors in the table below indicate which parts are connected. </p>
+
+<blockquote>
+<p><img src="../images/tutorial1-inksim.png" alt="Inkling/Simulator Graphic" /></p>
+</blockquote>
+
+<table><thead>
+<tr>
+<th>Color</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Purple (dark/light)</td>
+<td>The Inkling state schema field names and types must match the state dictionaries returned from <code class="prettyprint">episode_start</code> and <code class="prettyprint">simulate</code> in the simulator.</td>
+</tr>
+<tr>
+<td>Blue (dark/light)</td>
+<td>The Inkling action schema field names will match the keys in the action dictionary passed to <code class="prettyprint">simulate</code> in the simulator, and the values will have the types specified in Inkling, and will obey the specified constraints (<code class="prettyprint">{0:1.575:6.283}</code> in the example).</td>
+</tr>
+<tr>
+<td>Orange (dark/light)</td>
+<td>The simulator&rsquo;s configuration passes as <code class="prettyprint">parameters</code> to the <code class="prettyprint">episode_start</code>, and will take values from the <code class="prettyprint">constrain</code> clause in Inkling (if used).</td>
+</tr>
+<tr>
+<td>Red</td>
+<td>The name of the concept must match the <code class="prettyprint">train</code> clause in the curriculum for that concept.</td>
+</tr>
+<tr>
+<td>Green</td>
+<td>The simulator name must match between the <code class="prettyprint">simulator</code> clause and the <code class="prettyprint">with simulator</code> clause in the curriculum. The simulator must pass the same name to the constructor of the <code class="prettyprint">Simulator</code> class, so the AI engine knows which simulator is connected.</td>
+</tr>
+<tr>
+<td>Turquoise</td>
+<td>The name of the optimization objective or reward function appears twice in the Inkling, and is available as <code class="prettyprint">self.objective_name</code> in the simulator.</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+Note that config in __main__ is the brain configuration and remains the same throughout, whereas goal_config (highlighted in orange) is used at the beginning of every episode and must be named the same as it is in Inkling. These configs are unrelated.
+</aside>
+
+          <h1 id="train-your-brain">Train Your BRAIN</h1>
+
+<p>Now that you’ve written a curriculum of machine teaching (through your Inkling code) to connect your simulation to the Bonsai AI Engine, it’s time to prepare a new version for training. Since we previously created a new BRAIN for training, the <code class="prettyprint">--brain</code> argument in the below commands is optional, but we’ve left it in to remind you which BRAIN the CLI is targeting.</p>
+<pre class="highlight shell tab-shell"><code><span class="c"># Push the edited files to the server</span>
+bonsai push
+
+<span class="c"># Start a new BRAIN version</span>
+bonsai train start
+</code></pre>
+<p>Use <a href="../references/cli-reference.html#bonsai-push"><code class="prettyprint">bonsai push</code></a> to upload your edited Inkling file to the server whenever you make changes (make sure you filled in the action and state schemas first or you will get an error!).</p>
+
+<blockquote>
+<p>Python 2</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>python move_a_point_sim.py --brain<span class="o">=</span>move-a-point
+</code></pre>
+<blockquote>
+<p>Python 3</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>python3 move_a_point_sim.py --brain<span class="o">=</span>move-a-point
+</code></pre>
+<p>Once you have started training mode with <a href="../references/cli-reference.html#bonsai-train-start"><code class="prettyprint">bonsai train start</code></a> it&rsquo;s time to start your simulation. Training will begin automatically after you connect your simulator.</p>
+
+<h2 id="view-your-brain-training-status">View your BRAIN training status</h2>
+
+<blockquote>
+<p><img src="../images/tutorial1-training.png" alt="Training BRAIN" /></p>
+</blockquote>
+
+<p>View your BRAIN&rsquo;s training status as it trains on the simulator by going to the BRAIN&rsquo;s Dashboard page on <a href="https://beta.bons.ai">beta.bons.ai</a>. Training move-a-point takes about a minute to get sufficient training to find the goal quickly.</p>
+
+<p>There is no automatic ending to training, you can train this brain for hours, but there will be diminishing returns after a few minutes because of how simple of a problem this is to solve. You should wait until the reward approaches and stabilizes around 18 (with the max being 20 if the AI is perfect every episode). This should only take about a minute.</p>
+
+<h2 id="stop-training">Stop Training</h2>
+<pre class="highlight shell tab-shell"><code>bonsai train stop
+</code></pre>
+<p>Once the BRAIN has gotten to this level of performance (or sooner if you prefer), CTRL-C to disconnect the simulator, then <a href="../references/cli-reference.html#bonsai-train-stop"><code class="prettyprint">bonsai train stop</code></a> will end the training, and proceed to prediction.</p>
+
+<h1 id="predict-with-your-brain">Predict with Your BRAIN</h1>
+
+<blockquote>
+<p>Python 2</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>python move_a_point_sim.py --predict<span class="o">=</span>latest
+</code></pre>
+<blockquote>
+<p>Python 3</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>python3 move_a_point_sim.py --predict<span class="o">=</span>latest
+</code></pre>
+<p>After your BRAIN is finished training you can use it to move to a point as quickly as it can. How well it does depends on how long you let it train! Using your BRAIN involves starting your simulation, but now in prediction mode with <code class="prettyprint">--predict=latest</code> which will use the version of the latest training session that you just ran.</p>
+
+<blockquote>
+<p><img src="../images/tutorial1-predicting.png" alt="Predicting BRAIN" /></p>
+</blockquote>
+
+<p>Now you can see how fast the simulation can move to a point depending on how far away from the point it started. The higher the distance the more steps the agent will likely take to reach the point.</p>
+
+<p>And that’s it! You have now successfully learned how to test out a simulation, write your own schemas to connect a BRAIN, train, and predict from that BRAIN! </p>
+
+          <h1 id="next-steps">Next Steps</h1>
+
+<p>Next tutorial coming soon! In the meantime you can check out our <a href="../guides/machine-teaching.html"><strong>Programming Machine Teaching</strong></a> guide for more detailed information on the topics we have covered in this tutorial.</p>
+
+<p>And we have these other resources that will enable you to maximize your AI development experience:</p>
+
+<ul>
+<li>REFERENCE: <a href="../references/inkling-reference.html">Inkling Reference</a></li>
+<li>VIDEO: <a href="https://www.youtube.com/watch?v=E_JtPzT5-dg&amp;index=3&amp;list=PLAktfMEMCsOY9HUZKIuGI6yqefGBuszAV">Advanced Platform Techniques</a></li>
+<li>TUTORIAL: <a href="../guides/jupyter-api-guide.html">Use Bonsai’s API with Jupyter</a></li>
+</ul>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="inkling--exercise">Exercise</a>
+                <a href="#" data-language-name="inkling--solution">Solution</a>
+          </div>
+      </div>
+    </div>
+
+    </div>
+
+  </div>
+  <!-- at the end of the BODY -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+  <script type="text/javascript"> docsearch({
+  apiKey: '49fa6f01d7ff94a85b9b7434b1c2b7cf',
+  indexName: 'bon-sai',
+  inputSelector: '#docs-search',
+  debug: false // Set debug to true if you want to inspect the dropdown
+  });
+  </script>
+  </body>
+</html>
