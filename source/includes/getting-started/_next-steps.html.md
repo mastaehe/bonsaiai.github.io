@@ -2,21 +2,22 @@
 
 Now that you've completed this guide, you can:
 
-**Check out our [Learn the Inkling Language][1] Guide.**
+**Check out Tutorial 1 - [Running Simulations and Writing Inkling][1]**
 
-It contains all of the concepts and components of our unique programming language. You'll learn:
+It contains all of the information you need to get up and running with your own projects on the Bonsai Platform. You'll learn:
 
-* How to assess a simulation and write an Inkling file to teach a BRAIN.
-* The core concepts behind the Inkling language.
-* The components of the Inkling language.
+* The basics of reinforcement learning 
+* How to hook up a simulation to the Bonsai Platform
+* The core components of the Inkling language
+* How to train a BRAIN with custom Inkling code
 
 And we have these other resources that will enable you to maximize your AI development experience:
 
 * [Understand BRAIN Graphs][2] Guide
 * VIDEO: [Writing Great Reward Functions][3]
-* [Bonsai's Blog][4]
+* [Learn the Inkling Language][4] Guide
 
-[1]: ./inkling-guide.html
+[1]: ../tutorials/tutorial1.html
 [2]: ./web-graphs-guide.html
 [3]: https://www.youtube.com/watch?v=0R3PnJEisqk&list=PLAktfMEMCsOY9HUZKIuGI6yqefGBuszAV&index=4
-[4]: https://bons.ai/blog
+[4]: ./inkling-guide.html
