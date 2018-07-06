@@ -76,7 +76,7 @@ def run_sim_episode(sim, policy):
     of the simulator, returning the history of states.
     
     Args:
-        sim: a PointSimulator
+        sim: a PointBonsaiBridge
         policy: a function (SimState -> action dictionary)
     """
     state_history = []

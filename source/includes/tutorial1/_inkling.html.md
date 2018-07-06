@@ -118,7 +118,7 @@ Your Inkling code and your simulation are tightly coupled -- through the SDK bri
 | Color               | Description  |
 | -                   | -  |
 | Purple (dark/light) | The Inkling state schema field names and types must match the state dictionaries returned from `episode_start` and `simulate` in the simulator. |
-| Blue (dark/light)   | The Inkling action schema field names will match the keys in the action dictionary passed to `simulate` in the simulator, and the values will have the types specified in Inkling, and will obey the specified constraints (`{-1, 0, 1}` in the example). |
+| Blue (dark/light)   | The Inkling action schema field names will match the keys in the action dictionary passed to `simulate` in the simulator, and the values will have the types specified in Inkling, and will obey the specified constraints (`{0:1.575:6.283}` in the example). |
 | Orange (dark/light) | The simulator's configuration passes as `parameters` to the `episode_start`, and will take values from the `constrain` clause in Inkling (if used). |
 | Red                 | The name of the concept must match the `train` clause in the curriculum for that concept. |
 | Green               | The simulator name must match between the `simulator` clause and the `with simulator` clause in the curriculum. The simulator must pass the same name to the constructor of the `Simulator` class, so the AI engine knows which simulator is connected. |

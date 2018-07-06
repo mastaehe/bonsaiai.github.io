@@ -4,7 +4,7 @@
 
 In this tutorial you will learn about reinforcement learning (RL), and using RL to solve a simple simulated problem using Inkling and the Bonsai Platform. This will include learning the essential components of the Inkling language needed to connect the simulation to the platform.  You will familiarize yourself with the simulation, test it, then fill in the necessary Inkling schemas (states and actions) needed to connect the simulation to the platform. By the end of this tutorial, you can expect to be comfortable with the relationship between a BRAIN and a simulation, as well as how to train a BRAIN inside the Bonsai Platform using custom Inkling code, and basic knowledge of Bonsai’s Command Line Interface (CLI).
 
-We expect you to already have read the [Quick Start tutorial overview][1] and [install the CLI][2] before following this tutorial so you have a general understanding of how the platform works and have installed and configured the Bonsai CLI first. Please do those two things before continuing with this tutorial.
+We expect you to already have read the [Quick Start tutorial overview][1] and [install the CLI][2] before following this tutorial so you have a general understanding of how the platform works and have installed and configured the Bonsai CLI. Please do so before continuing with this tutorial.
 
 The problem we are trying to solve using this simulation is to teach an agent (the Bonsai BRAIN) to move to a target point in a simple planar world. The agent is told where it is relative to the goal, and has to decide which way to move. The agent sends its chosen action to the simulation, which simulates the step, moving the agent to a new location, and this repeats until the agent makes it to the goal, or time runs out.
 
@@ -38,7 +38,7 @@ To learn more about reinforcement learning, watch our [training video][3] about 
 
 Now that you’ve gotten a taste of Reinforcement Learning, let us begin by downloading the code for this tutorial and creating a new BRAIN on the Bonsai Platform for training.
 
-As mentioned in the introduction, you’ll need to have the Bonsai CLI installed before you can run these commands. If you haven’t previously done so, please [Install the CLI][4].
+As mentioned in the introduction, you’ll need to have the Bonsai CLI installed before you can run these commands. If you haven’t already done so, please [Install the CLI][4].
 
 ```shell
 git clone https://github.com/BonsaiAI/bonsai-tutorials.git
