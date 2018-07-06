@@ -61,7 +61,7 @@ if __name__ == "__main__":
         continue
 ```
 
-The configuration includes the brain name and url, your Bonsai API key, and whether to train the brain or run it in prediction mode (sometimes called test mode). The name passed to the `PointBonsaiBridge` constructor, `"move_a_point_sim"` here, identifies the simulation file to the BRAIN, and must match your Inkling code (described in a later section).
+The configuration includes the BRAIN name and url, your Bonsai API key, and whether to train the BRAIN or run it in prediction mode (sometimes called test mode). The name passed to the `PointBonsaiBridge` constructor, `"move_a_point_sim"` here, identifies the simulation file to the BRAIN, and must match your Inkling code (described in a later section).
 
 ## Run Your Simulator
 
@@ -96,11 +96,14 @@ def run_sim_episode(sim, policy):
 
 The key code is the episode loop, shown in the code panel.
 
-Then we can define some policies, defining what action to take for a given state. After that the code will run some episodes, plotting the results.
+Then we can define some policies, defining what action to take for a given state. If you'd like to test with other silly policies or define your own, change line 56 in `test_sim.py`: `states, rewards = run_sim_episode(point_sim, random_policy`.
+
+After that the code will run some episodes, plotting the results.
 
 > Define policies
 
 ```python
+# Some silly policies
 def random_policy(state):
     """
     Ignore the state, move randomly.
@@ -123,7 +126,7 @@ When making or integrating simulations, it is always a good idea to run some san
 
 #### Exercises
 
-* Run the simulator via the above code, either via `test_sim.py` or, if you have Jupyter Notebook, using `test_simulator.ipynb`, both in the tutorial1 folder.
+* Run the simulator via the above code, either via `test_sim.py` or, if you have [Jupyter Notebook][2], using `test_simulator.ipynb`, both in the tutorial1 folder.
 * Write two different policy functions for moving in different directions, and plot their behavior.
 
 [1]: https://github.com/BonsaiAI/bonsai-tutorials/blob/master/tutorial1/test_simulator.ipynb

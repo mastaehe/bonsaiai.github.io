@@ -52,7 +52,11 @@ If you don’t have git installed on your computer you can [download a .zip file
 bonsai create move-a-point
 ```
 
-Once you have either git cloned or downloaded the files for this tutorial, navigate on your command prompt inside of the tutorial1 folder and run `bonsai create move-a-point` which will create a new BRAIN for your account called move-a-point. This command also automatically uploads your project files to the server so it’s important to use this command within the tutorial1 folder where your Inkling and simulation files are.
+Once you have either git cloned or downloaded the files for this tutorial, navigate on your command prompt inside of the tutorial1 folder and run `bonsai create move-a-point` which will create a new BRAIN for your account called move-a-point. This command also silently uploads your project files to the server so it’s important to use this command within the tutorial1 folder where your Inkling and simulation files are.
+
+<aside class="notice">
+The CLI will ask you to run a push command to upload your files after you create your BRAIN. If you do this you will get an Inkling compile error since your Inkling code is not yet complete. Don't worry! We will do this a few sections later in this tutorial.
+</aside>
 
 [1]: ../guides/getting-started.html
 [2]: ../guides/cli-install-guide.html

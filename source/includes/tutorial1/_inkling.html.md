@@ -1,6 +1,7 @@
 # Connecting Your BRAIN
 
-> ![Overview Image](../images/machine-teaching-flow.png)
+> Adaptation of previous RL image to show the translation onto the Bonsai Platform
+> ![Overview Image](../images/tutorial1-overview.png)
 
 To connect our simulation to a BRAIN in the Bonsai platform, we will need an Inkling program that describes the problem and how to teach the AI to solve it. Inkling is a programming language specifically designed for artificial intelligence (AI). It abstracts away the vast world of dynamic AI algorithms that require expertise in machine learning and enables more developers and subject matter experts to create AI.
 
@@ -108,9 +109,9 @@ Every lesson must have a configuration. In this case, we have a simple example t
 
 For more information about using these keywords, refer to the [Curriculums Reference][4] and [Lessons Reference][5].
 
-# The Inkling/Simulator Relationship
+# The Inkling/Simulation Relationship
 
-Your Inkling code and your simulator are tightly coupled -- the Inkling describes what to expect from the simulator as state, and what actions and configurations to send to the simulator. This section describes how the different parts of your Inkling program and your simulator relate to each other. The colors in the table below indicate which parts are connected. 
+Your Inkling code and your simulation are tightly coupled -- through the SDK bridge class. The Inkling describes what to expect from the simulation as state, and what actions and configurations to send to the simulation. The bridge class does any conversion needed to make this match the simulation. This section describes how the different parts of your Inkling program and your simulation relate to each other through the bridge. The colors in the table below indicate which parts are connected. 
 
 > ![Inkling/Simulator Graphic](../images/tutorial1-inksim.png)
 
@@ -129,6 +130,6 @@ Note that config in __main__ is the brain configuration and remains the same thr
 
 [1]: ../references/inkling-reference.html#constrained-types-and-range-expressions
 [2]: ../references/inkling-reference.html#schema-references
-[3]: ./../references/inkling-reference.html#concepts
-[4]: ./../references/inkling-reference.html#curriculums
-[5]: ./../references/inkling-reference.html#lessons
+[3]: ../references/inkling-reference.html#concepts
+[4]: ../references/inkling-reference.html#curriculums
+[5]: ../references/inkling-reference.html#lessons
