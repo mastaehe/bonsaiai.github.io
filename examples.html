@@ -403,8 +403,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <h3 id="openai-gym-examples">OpenAI Gym Examples</h3>
 
 <ul>
-<li><strong>Cartpole</strong>: A simple control problem where a cart must make a simple move to keep a pole balanced on top.</li>
 <li><strong>Mountain Car</strong>: A simple control problem where a car must build up enough momentum to climb a hill.</li>
+<li><strong>Cartpole</strong>: A simple control problem where a cart must make a simple move to keep a pole balanced on top.</li>
+<li><strong>Event Driven Cartpole</strong>: Using the same Inkling at normal Cartpole, but using the Event class to drive the simulation.</li>
 </ul>
 
 <h3 id="real-world-example">Real World Example</h3>
@@ -419,8 +420,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <li><strong>Simulink Cartpole</strong>: The compiled Simulink version of a pole balancing on a cart.</li>
 <li><strong>Simulink Househeat</strong>: The compiled Simulink version of an HVAC system taking into account the outdoor environment, the thermal characteristics of the house, and the house heating system.</li>
 </ul>
-
-<h3 id="luminance-example">Luminance Example</h3>
 
           <h1 id="basic-python-c-simulation">Basic Python/C++ Simulation</h1>
 
@@ -917,6 +916,110 @@ It can be used in this case to find the center between two numbers.
 
 <p>For more information on the functions inside of this simulator file and how to implement them see the <a href="references/library-reference.html">Library Reference</a>.</p>
 
+          <h1 id="openai-gym-mountain-car">OpenAI Gym: Mountain Car</h1>
+
+<blockquote>
+<p><img src="images/mountain-car-control.gif" alt="Mountain Car Control" /></p>
+</blockquote>
+
+<p><a href="https://github.com/BonsaiAI/bonsai-sdk/tree/master/samples/openai-gym/gym-mountaincar-continuous-sample"><strong>Download the full source code on GitHub</strong></a> if you want to run this simulator locally. If you want to run Mountain Car remotely on the Bonsai Platform as a managed simulator, create a new BRAIN selecting the Mountain Car demo on <a href="https://beta.bons.ai/new">beta.bons.ai</a></p>
+
+<p>We&rsquo;ve used pieces of code from this example in several places, but here we&rsquo;ll walk you through all the various statements that are part of the Mountain Car Inkling file. Each statement is followed by an explanation of the statement.</p>
+
+<p>Mountain Car is a classic control problem. <a href="https://gym.openai.com/envs/MountainCarContinuous-v0/">OpenAI Gym</a> describes it as:</p>
+
+<p><em>A car is on a one-dimensional track, positioned between two &ldquo;mountains&rdquo;. The goal is to drive up the mountain on the right; however, the car&rsquo;s engine is not strong enough to scale the mountain in a single pass. Therefore, the only way to succeed is to drive back and forth to build up momentum.</em></p>
+
+<h2 id="inkling-file">Inkling File</h2>
+
+<h6 id="schema">Schema</h6>
+<pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">GameState</span>
+    <span class="kr">Float32</span> <span class="nx">x_position</span><span class="p">,</span>
+    <span class="kr">Float32</span> <span class="nx">x_velocity</span>
+<span class="k">end</span>
+</code></pre>
+<p>The <code class="prettyprint">GameState</code> schema names two records — <code class="prettyprint">x_position</code> and <code class="prettyprint">y_position</code> — and assigns a type to them.</p>
+<pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">Action</span>
+    <span class="kr">Float32</span><span class="p">{</span><span class="o">-</span><span class="mf">1.0</span><span class="p">:</span><span class="mf">1.0</span><span class="p">}</span> <span class="nx">command</span>
+<span class="k">end</span>
+</code></pre>
+<p>The <code class="prettyprint">Action</code> schema names a single record — <code class="prettyprint">command</code> — and assigns a constrained type to it.</p>
+<pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">MountainCarConfig</span>
+    <span class="kr">UInt8</span> <span class="nx">deque_size</span>
+<span class="k">end</span>
+</code></pre>
+<p>The <code class="prettyprint">MountainCarConfig</code> schema names a single record - <code class="prettyprint">deque_size</code> - and assigns an unconstrained type to it.</p>
+
+<h6 id="concept">Concept</h6>
+<pre class="highlight inkling tab-inkling"><code><span class="k">concept</span> <span class="nx">high_score</span> <span class="k">is</span> <span class="nx">classifier</span>
+    <span class="k">predicts</span> <span class="p">(</span><span class="nx">Action</span><span class="p">)</span>
+    <span class="k">follows</span> <span class="kr">input</span><span class="p">(</span><span class="nx">GameState</span><span class="p">)</span>
+    <span class="k">feeds</span> <span class="kr">output</span>
+<span class="k">end</span>
+</code></pre>
+<p>The concept is named <code class="prettyprint">high_score</code>, and it takes input from the simulator about the state of the game (<code class="prettyprint">GameState</code> schema). It outputs to the <code class="prettyprint">Action</code> schema. This is the AI&rsquo;s next move in the game.</p>
+
+<h6 id="simulator">Simulator</h6>
+<pre class="highlight inkling tab-inkling"><code><span class="k">simulator</span> <span class="nx">mountaincar_continuous_simulator</span><span class="p">(</span><span class="nx">MountainCarConfig</span><span class="p">)</span>
+   <span class="k">action</span>  <span class="p">(</span><span class="nx">Action</span><span class="p">)</span>
+   <span class="k">state</span>  <span class="p">(</span><span class="nx">GameState</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
+<p>The <code class="prettyprint">mountaincar_continuous_simulator</code> gets information from two schemas. The first schema, <code class="prettyprint">MountainCarConfig</code>, specifies the schema for configuration of the simulation. The second schema contains the state of the simulator that is sent to the lesson.</p>
+
+<h6 id="curriculum">Curriculum</h6>
+<pre class="highlight inkling tab-inkling"><code><span class="k">curriculum</span> <span class="nx">high_score_curriculum</span>
+    <span class="k">train</span> <span class="nx">high_score</span>
+    <span class="k">with</span> <span class="k">simulator</span> <span class="nx">mountaincar_continuous_simulator</span>
+    <span class="k">objective</span> <span class="nx">open_ai_gym_default_objective</span>
+
+        <span class="k">lesson</span> <span class="nx">get_high_score</span>
+            <span class="k">configure</span>
+                <span class="k">constrain</span> <span class="nx">deque_size</span> <span class="k">with</span> <span class="kr">UInt8</span><span class="p">{</span><span class="mi">1</span><span class="p">}</span>
+            <span class="k">until</span>
+                <span class="k">maximize</span> <span class="nx">open_ai_gym_default_objective</span>
+<span class="k">end</span>
+</code></pre>
+<p>The curriculum is named <code class="prettyprint">high_score_curriculum</code>, and it trains the <code class="prettyprint">high_score</code> concept using the <code class="prettyprint">mountaincar_simulator</code>. This curriculum contains one lesson, called <code class="prettyprint">get_high_score</code>. It configures the simulation, by setting two constraints for the state of the simulator.</p>
+
+<p>The lesson trains until the AI has maximized the objective named <code class="prettyprint">score</code>.</p>
+
+<h2 id="simulator-file">Simulator File</h2>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">bonsai_ai</span> <span class="kn">import</span> <span class="n">Brain</span><span class="p">,</span> <span class="n">Config</span>
+<span class="kn">from</span> <span class="nn">bonsai_gym</span> <span class="kn">import</span> <span class="n">GymSimulator</span>
+
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s">'gym_simulator'</span><span class="p">)</span>
+<span class="n">log</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">MountainCarContinuous</span><span class="p">(</span><span class="n">GymSimulator</span><span class="p">):</span>
+    <span class="n">environment_name</span> <span class="o">=</span> <span class="s">'MountainCarContinuous-v0'</span>
+    <span class="n">simulator_name</span> <span class="o">=</span> <span class="s">'mountaincar_continuous_simulator'</span>
+
+    <span class="k">def</span> <span class="nf">gym_to_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">observation</span><span class="p">):</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="p">{</span><span class="s">'x_position'</span><span class="p">:</span> <span class="n">observation</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                 <span class="s">'x_velocity'</span><span class="p">:</span> <span class="n">observation</span><span class="p">[</span><span class="mi">1</span><span class="p">]}</span>
+        <span class="k">return</span> <span class="n">state</span>
+
+    <span class="c"># As an Estimator, continuous mountaincar returns the command</span>
+    <span class="c"># as a numpy array.</span>
+    <span class="k">def</span> <span class="nf">action_to_gym</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">actions</span><span class="p">):</span>
+        <span class="c"># return actions['command']</span>
+        <span class="k">return</span> <span class="n">numpy</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="n">actions</span><span class="p">[</span><span class="s">'command'</span><span class="p">]])</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="c"># create a brain, openai-gym environment, and simulator</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">Config</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
+    <span class="n">brain</span> <span class="o">=</span> <span class="n">Brain</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+    <span class="n">sim</span> <span class="o">=</span> <span class="n">MountainCarContinuous</span><span class="p">(</span><span class="n">brain</span><span class="p">)</span>
+    <span class="n">sim</span><span class="o">.</span><span class="n">run_gym</span><span class="p">()</span>
+</code></pre>
+<p>This is an OpenAI Gym example which uses the OpenAI environment as its simulator. For more information about the simulator used see the <a href="https://github.com/BonsaiAI/bonsai-sdk/tree/master/bonsai-gym">Bonsai Gym Common GitHub repo</a> which is a python library for integrating a Bonsai BRAIN with OpenAI Gym environments.</p>
+
           <h1 id="openai-gym-cartpole">OpenAI Gym: Cartpole</h1>
 
 <blockquote>
@@ -1045,109 +1148,146 @@ It can be used in this case to find the center between two numbers.
 </code></pre>
 <p>This is an OpenAI Gym example which uses the OpenAI environment as its simulator. For more information about the simulator used see the <a href="https://github.com/BonsaiAI/bonsai-sdk/tree/master/bonsai-gym">Bonsai Gym Common GitHub repo</a> which is a python library for integrating a Bonsai BRAIN with OpenAI Gym environments.</p>
 
-          <h1 id="openai-gym-mountain-car">OpenAI Gym: Mountain Car</h1>
+          <h1 id="event-pump-cartpole">Event Pump Cartpole</h1>
 
 <blockquote>
-<p><img src="images/mountain-car-control.gif" alt="Mountain Car Control" /></p>
+<p><img src="images/cart-pole-balance.gif" alt="Cartpole Balance" /></p>
 </blockquote>
 
-<p><a href="https://github.com/BonsaiAI/bonsai-sdk/tree/master/samples/openai-gym/gym-mountaincar-continuous-sample"><strong>Download the full source code on GitHub</strong></a> if you want to run this simulator locally. If you want to run Mountain Car remotely on the Bonsai Platform as a managed simulator, create a new BRAIN selecting the Mountain Car demo on <a href="https://beta.bons.ai/new">beta.bons.ai</a></p>
+<p><a href="https://github.com/BonsaiAI/bonsai-sdk/tree/master/samples/openai-gym/gym-cartpole-event-sample"><strong>Download the full source code on GitHub</strong></a> if you want to run this simulator.</p>
 
-<p>We&rsquo;ve used pieces of code from this example in several places, but here we&rsquo;ll walk you through all the various statements that are part of the Mountain Car Inkling file. Each statement is followed by an explanation of the statement.</p>
+<p>This example demonstrates how instances of the <code class="prettyprint">Event</code> class can be used to drive a custom simulation loop. Rather than relying on machinery internal to <code class="prettyprint">bonsai_ai.Simulator</code>, the <code class="prettyprint">CartPoleTrainer</code> class advances the simulation event by event, which, in turn, allows for custom logic at each stage.</p>
 
-<p>Mountain Car is a classic control problem. <a href="https://gym.openai.com/envs/MountainCarContinuous-v0/">OpenAI Gym</a> describes it as:</p>
+<p>This event driven interface is for when you can&rsquo;t squeeze your particular application logic into the prescribed callback interface. If this is the case, your implementation may benefit from employing this pattern.</p>
 
-<p><em>A car is on a one-dimensional track, positioned between two &ldquo;mountains&rdquo;. The goal is to drive up the mountain on the right; however, the car&rsquo;s engine is not strong enough to scale the mountain in a single pass. Therefore, the only way to succeed is to drive back and forth to build up momentum.</em></p>
+<p>Cartpole is a classic control problem. <a href="https://gym.openai.com/envs/CartPole-v1">OpenAI Gym</a> describes it as:</p>
+
+<p><em>A pole is attached by an un-actuated joint to a cart, which moves along a frictionless track. The system is controlled by applying a force of +1 or -1 to the cart. The pendulum starts upright, and the goal is to prevent it from falling over. A reward of +1 is provided for every timestep that the pole remains upright. The episode ends when the pole is more than 15 degrees from vertical, or the cart moves more than 2.4 units from the center.</em></p>
 
 <h2 id="inkling-file">Inkling File</h2>
 
-<h6 id="schema">Schema</h6>
-<pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">GameState</span>
-    <span class="kr">Float32</span> <span class="nx">x_position</span><span class="p">,</span>
-    <span class="kr">Float32</span> <span class="nx">x_velocity</span>
-<span class="k">end</span>
-</code></pre>
-<p>The <code class="prettyprint">GameState</code> schema names two records — <code class="prettyprint">x_position</code> and <code class="prettyprint">y_position</code> — and assigns a type to them.</p>
-<pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">Action</span>
-    <span class="kr">Float32</span><span class="p">{</span><span class="o">-</span><span class="mf">1.0</span><span class="p">:</span><span class="mf">1.0</span><span class="p">}</span> <span class="nx">command</span>
-<span class="k">end</span>
-</code></pre>
-<p>The <code class="prettyprint">Action</code> schema names a single record — <code class="prettyprint">command</code> — and assigns a constrained type to it.</p>
-<pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">MountainCarConfig</span>
-    <span class="kr">UInt8</span> <span class="nx">deque_size</span>
-<span class="k">end</span>
-</code></pre>
-<p>The <code class="prettyprint">MountainCarConfig</code> schema names a single record - <code class="prettyprint">deque_size</code> - and assigns an unconstrained type to it.</p>
-
-<h6 id="concept">Concept</h6>
-<pre class="highlight inkling tab-inkling"><code><span class="k">concept</span> <span class="nx">high_score</span> <span class="k">is</span> <span class="nx">classifier</span>
-    <span class="k">predicts</span> <span class="p">(</span><span class="nx">Action</span><span class="p">)</span>
-    <span class="k">follows</span> <span class="kr">input</span><span class="p">(</span><span class="nx">GameState</span><span class="p">)</span>
-    <span class="k">feeds</span> <span class="kr">output</span>
-<span class="k">end</span>
-</code></pre>
-<p>The concept is named <code class="prettyprint">high_score</code>, and it takes input from the simulator about the state of the game (<code class="prettyprint">GameState</code> schema). It outputs to the <code class="prettyprint">Action</code> schema. This is the AI&rsquo;s next move in the game.</p>
-
-<h6 id="simulator">Simulator</h6>
-<pre class="highlight inkling tab-inkling"><code><span class="k">simulator</span> <span class="nx">mountaincar_continuous_simulator</span><span class="p">(</span><span class="nx">MountainCarConfig</span><span class="p">)</span>
-   <span class="k">action</span>  <span class="p">(</span><span class="nx">Action</span><span class="p">)</span>
-   <span class="k">state</span>  <span class="p">(</span><span class="nx">GameState</span><span class="p">)</span>
-<span class="k">end</span>
-</code></pre>
-<p>The <code class="prettyprint">mountaincar_continuous_simulator</code> gets information from two schemas. The first schema, <code class="prettyprint">MountainCarConfig</code>, specifies the schema for configuration of the simulation. The second schema contains the state of the simulator that is sent to the lesson.</p>
-
-<h6 id="curriculum">Curriculum</h6>
-<pre class="highlight inkling tab-inkling"><code><span class="k">curriculum</span> <span class="nx">high_score_curriculum</span>
-    <span class="k">train</span> <span class="nx">high_score</span>
-    <span class="k">with</span> <span class="k">simulator</span> <span class="nx">mountaincar_continuous_simulator</span>
-    <span class="k">objective</span> <span class="nx">open_ai_gym_default_objective</span>
-
-        <span class="k">lesson</span> <span class="nx">get_high_score</span>
-            <span class="k">configure</span>
-                <span class="k">constrain</span> <span class="nx">deque_size</span> <span class="k">with</span> <span class="kr">UInt8</span><span class="p">{</span><span class="mi">1</span><span class="p">}</span>
-            <span class="k">until</span>
-                <span class="k">maximize</span> <span class="nx">open_ai_gym_default_objective</span>
-<span class="k">end</span>
-</code></pre>
-<p>The curriculum is named <code class="prettyprint">high_score_curriculum</code>, and it trains the <code class="prettyprint">high_score</code> concept using the <code class="prettyprint">mountaincar_simulator</code>. This curriculum contains one lesson, called <code class="prettyprint">get_high_score</code>. It configures the simulation, by setting two constraints for the state of the simulator.</p>
-
-<p>The lesson trains until the AI has maximized the objective named <code class="prettyprint">score</code>.</p>
+<p>The Inkling for this example is exactly the same as the original <a href="#openai-gym-cartpole">Cartpole OpenAI Gym example</a> above. See the previous example for details on how the Inkling works for training cartpole.</p>
 
 <h2 id="simulator-file">Simulator File</h2>
-<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">import</span> <span class="nn">numpy</span>
-<span class="kn">import</span> <span class="nn">logging</span>
+
+<blockquote>
+<p>cartpole_simulator.py</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">gym</span>
+<span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">from</span> <span class="nn">bonsai_ai</span> <span class="kn">import</span> <span class="n">Brain</span><span class="p">,</span> <span class="n">Config</span>
 <span class="kn">from</span> <span class="nn">bonsai_gym</span> <span class="kn">import</span> <span class="n">GymSimulator</span>
+<span class="kn">from</span> <span class="nn">bonsai_ai.logger</span> <span class="kn">import</span> <span class="n">Logger</span>
+<span class="kn">from</span> <span class="nn">bonsai_ai</span> <span class="kn">import</span> <span class="n">EpisodeStartEvent</span><span class="p">,</span> <span class="n">SimulateEvent</span><span class="p">,</span> \
+    <span class="n">EpisodeFinishEvent</span><span class="p">,</span> <span class="n">FinishedEvent</span><span class="p">,</span> <span class="n">UnknownEvent</span>
 
-<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s">'gym_simulator'</span><span class="p">)</span>
-<span class="n">log</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">star</span> <span class="kn">import</span> <span class="n">state</span><span class="p">,</span> <span class="n">terminal</span><span class="p">,</span> <span class="n">action</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">params</span>
+
+<span class="n">log</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">()</span>
 
 
-<span class="k">class</span> <span class="nc">MountainCarContinuous</span><span class="p">(</span><span class="n">GymSimulator</span><span class="p">):</span>
-    <span class="n">environment_name</span> <span class="o">=</span> <span class="s">'MountainCarContinuous-v0'</span>
-    <span class="n">simulator_name</span> <span class="o">=</span> <span class="s">'mountaincar_continuous_simulator'</span>
+<span class="k">class</span> <span class="nc">CartPole</span><span class="p">(</span><span class="n">GymSimulator</span><span class="p">):</span>
+    <span class="c"># Environment name, from openai-gym</span>
+    <span class="n">environment_name</span> <span class="o">=</span> <span class="s">'CartPole-v0'</span>
 
-    <span class="k">def</span> <span class="nf">gym_to_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">observation</span><span class="p">):</span>
-        <span class="n">state</span> <span class="o">=</span> <span class="p">{</span><span class="s">'x_position'</span><span class="p">:</span> <span class="n">observation</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-                 <span class="s">'x_velocity'</span><span class="p">:</span> <span class="n">observation</span><span class="p">[</span><span class="mi">1</span><span class="p">]}</span>
-        <span class="k">return</span> <span class="n">state</span>
+    <span class="c"># simulator name from Inkling</span>
+    <span class="c"># Example Inkling:</span>
+    <span class="c">#   curriculum balance_curriculum</span>
+    <span class="c">#       train balance</span>
+    <span class="c">#       with simulator cartpole_simulator</span>
+    <span class="c">#       ....</span>
+    <span class="n">simulator_name</span> <span class="o">=</span> <span class="s">'cartpole_simulator'</span>
 
-    <span class="c"># As an Estimator, continuous mountaincar returns the command</span>
-    <span class="c"># as a numpy array.</span>
-    <span class="k">def</span> <span class="nf">action_to_gym</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">actions</span><span class="p">):</span>
-        <span class="c"># return actions['command']</span>
-        <span class="k">return</span> <span class="n">numpy</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="n">actions</span><span class="p">[</span><span class="s">'command'</span><span class="p">]])</span>
+    <span class="k">def</span> <span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_env</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
+
+
+<span class="k">class</span> <span class="nc">CartPoleTrainer</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sim</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sim</span> <span class="o">=</span> <span class="n">sim</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_episode_count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_episode_reward</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">event</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sim</span><span class="o">.</span><span class="n">get_next_event</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">EpisodeStartEvent</span><span class="p">):</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">event</span><span class="p">(</span><span class="s">"Episode Start"</span><span class="p">)</span>
+            <span class="n">observation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sim</span><span class="o">.</span><span class="n">gym_episode_start</span><span class="p">(</span><span class="n">params</span><span class="p">(</span><span class="n">event</span><span class="p">))</span>
+            <span class="n">event</span><span class="o">.</span><span class="n">initial_state</span> <span class="o">=</span> <span class="n">state</span><span class="p">(</span><span class="n">observation</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">SimulateEvent</span><span class="p">):</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">event</span><span class="p">(</span><span class="s">"Simulate"</span><span class="p">)</span>
+            <span class="n">obs</span><span class="p">,</span> <span class="n">rwd</span><span class="p">,</span> <span class="n">done</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sim</span><span class="o">.</span><span class="n">gym_simulate</span><span class="p">(</span><span class="n">action</span><span class="p">(</span><span class="n">event</span><span class="p">))</span>
+            <span class="n">event</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="n">state</span><span class="p">(</span><span class="n">obs</span><span class="p">)</span>
+            <span class="n">event</span><span class="o">.</span><span class="n">reward</span> <span class="o">=</span> <span class="n">reward</span><span class="p">(</span><span class="n">rwd</span><span class="p">)</span>
+            <span class="n">event</span><span class="o">.</span><span class="n">terminal</span> <span class="o">=</span> <span class="n">terminal</span><span class="p">(</span><span class="n">done</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_episode_reward</span> <span class="o">+=</span> <span class="n">rwd</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_sim</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
+
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">EpisodeFinishEvent</span><span class="p">):</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">event</span><span class="p">(</span><span class="s">"Episode Finish"</span><span class="p">)</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">"Episode {} reward: {}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_episode_count</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_episode_reward</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_episode_count</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_episode_reward</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">FinishedEvent</span><span class="p">):</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">event</span><span class="p">(</span><span class="s">"Finished"</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">elif</span> <span class="n">event</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>
+
+        <span class="k">return</span> <span class="bp">True</span>
 
 
 <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
     <span class="c"># create a brain, openai-gym environment, and simulator</span>
     <span class="n">config</span> <span class="o">=</span> <span class="n">Config</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
     <span class="n">brain</span> <span class="o">=</span> <span class="n">Brain</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
-    <span class="n">sim</span> <span class="o">=</span> <span class="n">MountainCarContinuous</span><span class="p">(</span><span class="n">brain</span><span class="p">)</span>
-    <span class="n">sim</span><span class="o">.</span><span class="n">run_gym</span><span class="p">()</span>
+    <span class="n">sim</span> <span class="o">=</span> <span class="n">CartPole</span><span class="p">(</span><span class="n">brain</span><span class="p">)</span>
+    <span class="n">trainer</span> <span class="o">=</span> <span class="n">CartPoleTrainer</span><span class="p">(</span><span class="n">sim</span><span class="p">)</span>
+    <span class="k">while</span> <span class="n">trainer</span><span class="o">.</span><span class="n">run</span><span class="p">():</span>
+        <span class="k">pass</span>
+
 </code></pre>
-<p>This is an OpenAI Gym example which uses the OpenAI environment as its simulator. For more information about the simulator used see the <a href="https://github.com/BonsaiAI/bonsai-sdk/tree/master/bonsai-gym">Bonsai Gym Common GitHub repo</a> which is a python library for integrating a Bonsai BRAIN with OpenAI Gym environments.</p>
+<p>This is an OpenAI Gym example which uses the OpenAI environment as its simulator. For more information about the simulator used see the <a href="https://github.com/BonsaiAI/bonsai-sdk/tree/master/bonsai-gym">Bonsai Gym</a> folder in the bonsai-sdk GitHub repo which is a python library for integrating a Bonsai BRAIN with OpenAI Gym environments.</p>
+
+<p>You will notice that unlike the original cartpole example, this example imports <code class="prettyprint">EpisodeStartEvent</code>, <code class="prettyprint">SimulateEvent</code>, <code class="prettyprint">EpisodeFinishEvent</code>, <code class="prettyprint">FinishedEvent</code>, <code class="prettyprint">UnknownEvent</code> from the <code class="prettyprint">bonsai-ai</code> library. These classes are subclasses of the <a href="references/library-reference.html#event-class">Event class</a> which drive the simulation event by event, allowing for custom logic at each stage.</p>
+
+<h2 id="machine-teaching-file">Machine Teaching File</h2>
+
+<blockquote>
+<p>star.py</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="k">def</span> <span class="nf">state</span><span class="p">(</span><span class="n">observation</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s">'position'</span><span class="p">:</span> <span class="n">observation</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+            <span class="s">'velocity'</span><span class="p">:</span> <span class="n">observation</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+            <span class="s">'angle'</span><span class="p">:</span>    <span class="n">observation</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+            <span class="s">'rotation'</span><span class="p">:</span> <span class="n">observation</span><span class="p">[</span><span class="mi">3</span><span class="p">]}</span>
+
+
+<span class="k">def</span> <span class="nf">action</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">event</span><span class="o">.</span><span class="n">action</span><span class="p">[</span><span class="s">'command'</span><span class="p">]</span>
+
+
+<span class="c"># included for completeness w.r.t. the "STAR" pattern</span>
+<span class="k">def</span> <span class="nf">terminal</span><span class="p">(</span><span class="n">val</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+
+
+<span class="c"># included for completeness w.r.t. the "STAR" pattern</span>
+<span class="k">def</span> <span class="nf">reward</span><span class="p">(</span><span class="n">val</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">params</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">event</span><span class="o">.</span><span class="n">initial_properties</span>
+</code></pre>
+<p>This <code class="prettyprint">star.py</code> file houses the machine teaching aspects of the Bonsai Platform in a single file, instead of keeping them combined with the rest of the simulator code, or hiding inside of the Gym Common library (which is where it is in the original Cartpole file). This is a useful tool when experimenting with different reward functions, terminal conditions, or other aspects of machine teaching.</p>
+
+<p>You will notice that the terminal conditions and reward function are still maintained within the default gym environment for Cartpole, but they have been included here for completeness.</p>
 
           <h1 id="energyplus-hvac-optimization">EnergyPlus HVAC Optimization</h1>
 
