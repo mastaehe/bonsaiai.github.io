@@ -36,7 +36,7 @@ $lang-select-active-bg: $examples-bg !default; // feel free to change this to bl
 $lang-select-pressed-bg: #111 !default; // color of language tab bg when mouse is pressed
 $main-bg: #fff !default;
 $aside-notice-bg: #8fbcd4 !default;
-$aside-warning-bg: #c97a7e !default;
+$aside-warning-bg: lighten(#c97a7e, 10%) !default;
 $aside-success-bg: #6ac174 !default;
 $search-notice-bg: #c97a7e !default;
 
@@ -69,7 +69,7 @@ $phone-width: $tablet-width - $nav-width !default; // min width before reverting
 // FONTS
 ////////////////////
 %default-font {
-  font-family: "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei","微软雅黑", STXihei, "华文细黑", sans-serif;
+  font-family: 'Open Sans',sans-serif;
   font-size: 13px;
 }
 
