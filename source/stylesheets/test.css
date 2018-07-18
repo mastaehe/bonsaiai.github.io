@@ -1,7 +1,7 @@
 #flex-container{display:-ms-flexbox;display:flex;-ms-flex-direction:column;flex-direction:column;/* margin: 0 30px; */height:100vh;background-color:#ffffff;/* max-width: 1350px; *//* margin: 0 auto; */}
 
 #primary-nav {
-  background-color: #fffdf0;
+  background-color: #fff;
   padding: 18px 30px;
   left: 0;
   top: 0;
@@ -64,7 +64,6 @@ body{font-size:16px;}
 	.flex-desktop-center-rows.row-override {-ms-flex-direction:row !important;flex-direction:row !important; }
 	
 	.more-help-links img {width:15vw;}
-	.flex-desktop-center-rows a.green-button {padding:15px !important;}
 	.stretched {padding-left: 15px !important;padding-right: 15px !important;padding-top: 45px !important;}
 	
 }.flex-desktop-center-rows a:last-of-type {border:none;}
@@ -167,7 +166,7 @@ nav ul li a,
 nav ul li a:visited {
   display: block;
   /* padding: 0 20px; */
-  background: #fffdf0;
+  background: #fff;
   /* color: #ffffff; */
   text-decoration: none;
 }
@@ -217,7 +216,7 @@ nav ul li ul li {
 	#primary-nav #___gcse_0 .gsc-search-button .gsc-search-button-v2 {height:50px !important;padding: 16px;/* margin-right: 13px; */}
 	
 	
-	#primary-nav #___gcse_0 {width:auto !important;margin-left: 0 !important;/* padding-top: 5px !important; */padding-bottom: 9px !important;/* margin-top: 17px !important; *//* margin-bottom: 40px !important; */margin-bottom: -3px !important;background-color: #fffdf0;}
+	#primary-nav #___gcse_0 {width:auto !important;margin-left: 0 !important;/* padding-top: 5px !important; */padding-bottom: 9px !important;/* margin-top: 17px !important; *//* margin-bottom: 40px !important; */margin-bottom: -3px !important;background-color: #fff;}
   .nav-mobile {
     display: block;
   }
@@ -239,7 +238,7 @@ nav ul li ul li {
     flex-direction: column;
     display: none;
     padding-bottom: 28px;
-    background-color: #fffdf0;
+    background-color: #fff;
   }
   nav ul li {
     float: none;
@@ -545,7 +544,7 @@ nav ul li ul li:hover {/* background: #000000; */}
 
 /* Background color change on Hover */
 nav a:hover {
-	background-color: #fffdf0;
+	background-color: #fff;
 }
 
 /* Hide Dropdowns by Default
@@ -557,7 +556,7 @@ nav ul ul {
 	/* top: 48px; */
 	padding-top: 20px;
 	/* box-sizing: border-box; */
-	background-color: #fffdf0;
+	background-color: #fff;
 }
 	
 /* Display Dropdowns on Hover */
@@ -597,14 +596,10 @@ nav li > a:only-child:after {content: '';}
 	
 	.flex-desktop-center-rows a {margin:0 auto; }
 	
-	.cc {display:none;}
 	.footer-links-home a:last-of-type {-ms-flex-positive: 0 !important;flex-grow: 0 !important;/* justify-content: flex-start !important; */}
 
 	.stretched {-ms-flex-pack: justify !important;justify-content: space-between !important;-ms-flex-align: inherit;align-items: inherit;}
 .footer-links-home a {width: 40%; padding-bottom: 20px;}
-
-
-a {}
 
 .flex-footer {-ms-flex-direction: column !important;flex-direction: row !important;-ms-flex-wrap: wrap;flex-wrap: wrap;}
 
@@ -638,7 +633,7 @@ a {}
 	/* Stylinf the toggle lable */
 	.toggle {
 		display: block;
-		background-color: #fffdf0;
+		background-color: #fff;
 		/* padding: 6px 20px; */
 		/* color:#FFF; */
 		font-size:17px;
@@ -668,7 +663,7 @@ a {}
 
 	#primary-nav  ul li a {
 			margin-right:0 !important;
-			background-color: #fffdf0;
+			background-color: #fff;
 			}
 
 
@@ -798,7 +793,7 @@ a {}
 	padding: 30px;
 }
 
-.border-top-ccc {border-top:solid 1px #ccc;background-color: #fffdf0;}
+.border-top-ccc {border-top:solid 1px #ccc;background-color: #fff;}
 
 .more-padding-1 {/* margin-top: 70px; *//* padding-bottom: 46px; */height: auto;/* display: -webkit-inline-box; */padding-top: 80px !important;padding-bottom: 80px !important;background-color: #fafafa;padding-right: 30px;padding-left: 30px;}
 
@@ -827,16 +822,12 @@ a {}
 .footer-links-home a:hover {color:#3B453B;}
 /* ui */
 
-.green-button {padding: 15px;background-color: #47AB48;border-radius: 3px;width: 150px;text-align: center;color: #fff;text-decoration: none;font-size: 120%;font-weight: 500;letter-spacing: 0.03em;transition: all 0.3s ease 0s;}
-
-.green-button:hover {background-color: #3A8A3B;}
 
 
 @media (max-width: 450px) {
 	.flex-desktop-center-rows.row-override {-ms-flex-direction:column;flex-direction: column !important;}
 	.flex-footer {-ms-flex-direction:column !important;flex-direction:column !important;padding-top: 55px !important;}
 	.footer-links-home a {width:inherit;border: none !important;padding-bottom: 24px;font-size: 115%;}
-	.green-button {width: 71vw !important;margin-bottom: 10px !important;}
 	.welcome {font-size:200%;}
 	.sub-text-1 {font-size:100%;line-height: 1.4em;}
 	.more-padding-1 {padding: 30px !important;padding-bottom: 20px;}
