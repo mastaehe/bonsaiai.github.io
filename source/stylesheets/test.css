@@ -802,7 +802,6 @@ nav li > a:only-child:after {content: '';}
 
 .margin-top-1 {margin-top: 45px;}
 
-.more-help-padding {/* padding: 30px; */}
 .more-help-links {margin-top: 40px !important;max-width: 730px;}
 .more-help-links img { display:block; margin: 0 auto; padding-bottom:10px;}
 
