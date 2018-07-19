@@ -24,8 +24,8 @@
 	<% else %>
 	<%= javascript_include_tag  "all_nosearch" %>
 	<% end %>
-	<%= partial "partials/google-gtm" %>
 	<% if config[:app_config] == 'production' %>
+		<%= partial "partials/google-gtm" %>
 		<%= partial "partials/mixpanel" %>
 	<% end %>
 </head>
@@ -112,7 +112,7 @@
 								<li><%= link_to 'Simulator Reference', "/references/simulator-reference.html" %></li>
 								<li><%= link_to 'Python Library', "/references/library-reference.html" %> </li>
 								<li><%= link_to 'C++ Library', "/references/cpp-library-reference.html" %></li>
-								
+
 							</ul>
 						</div>
 					</div>

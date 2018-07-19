@@ -24,9 +24,8 @@
     <% else %>
       <%= javascript_include_tag  "all_nosearch" %>
     <% end %>
-
-    <%= partial "partials/google-gtm" %>
     <% if config[:app_config] == 'production' %>
+      <%= partial "partials/google-gtm" %>
       <%= partial "partials/mixpanel" %>
     <% end %>
   </head>
