@@ -26,12 +26,14 @@ end
 The schema `GameState` names four records — `position`, `velocity`, `angle`, and `rotation` — and assigns a type to them. This information is input from the simulation.
 
 ```inkling
+constant Int8 left = 0
+constant Int8 right = 1
 schema Action
-    Int8{0, 1} command
+    Int8{left, right} command
 end
 ```
 
-The schema `Action` names a record — `action` —  and assigns it a constrained type.
+The schema `Action` names a record — `action` —  and assigns it a constrained type. We have added constants to this schema to demonstrate how they can be optionally used.
 
 ```inkling
 schema CartPoleConfig

@@ -24,12 +24,14 @@ end
 The `GameState` schema names two records — `x_position` and `y_position` — and assigns a type to them.
 
 ```inkling
+constant Float32 throttleMin = -1.0
+constant Float32 throttleMax = 1.0
 schema Action
-    Float32{-1.0:1.0} command
+    Float32{throttleMin:throttleMax} command
 end
 ```
 
-The `Action` schema names a single record — `command` — and assigns a constrained type to it.
+The `Action` schema names a single record — `command` — and assigns a constrained type to it. We have added constants to this schema to demonstrate how they can be optionally used.
 
 ```inkling
 schema MountainCarConfig
