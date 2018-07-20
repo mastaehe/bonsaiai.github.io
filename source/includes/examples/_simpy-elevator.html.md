@@ -35,12 +35,15 @@ The `FloorState` schema defines the dictionary returned from the Python simulati
 
 ```inkling
 # command options: up, open, down
+constant Int8 up = 0
+constant Int8 open = 1
+constant Int8 down = 2
 schema Action
-    Int8{0, 1, 2} command
+    Int8{up, open, down} command
 end
 ```
 
-The `Action` schema defines the possible actions the elevator can take. In this case the command given to the elevator is '0' is open, '1' is go up a floor, and '2' is go down a floor.
+The `Action` schema defines the possible actions the elevator can take. We have added constants to this schema to demonstrate how they can be optionally used. In this case the command given to the elevator is '0' is open, '1' is go up a floor, and '2' is go down a floor.
 
 ```inkling
 # Possible option for configuration

@@ -13,12 +13,14 @@ While this BRAIN is training, the Bonsai AI Engine launches the EnergyPlus simul
 ###### Schema
 
 ```inkling
+constant Int32 minIrradiation = 0
+constant Int32 maxIrradiation = 10
 schema SimState
-    Int32{0:10} SolarIrradiation
+    Int32{minIrradiation:maxIrradiation} SolarIrradiation
 end
 ```
 
-The `SimState` schema defines the dictionary returned from the Python simulation's `advance` method to the BRAIN.
+The `SimState` schema defines the dictionary returned from the Python simulation's `advance` method to the BRAIN. We have added constants to this schema to demonstrate how they can be optionally used. They can be used in all or none of the schemas you define.
 
 ```inkling
 schema SimAction

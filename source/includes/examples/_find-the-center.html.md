@@ -21,12 +21,15 @@ end
 The `GameState` schema has one field, `value`, with type `Int8`.
 
 ```inkling
+constant Int8 dec = -1
+constant Int8 stay = 0
+constant Int8 inc = 1
 schema PlayerMove
-    Int8{-1, 0, 1} delta
+    Int8{dec, stay, inc} delta
 end
 ```
 
-The `PlayerMove` schema has one field, `delta`, with type `Int8`. The `Int8` type is constrained to three possible values: -1, 0, and 1.
+The `PlayerMove` schema has one field, `delta`, with type `Int8`. The `Int8` type is constrained to three possible values: -1, 0, and 1. We have added constants to this schema to demonstrate how they can be optionally used.
 
 ```inkling
 schema SimConfig
