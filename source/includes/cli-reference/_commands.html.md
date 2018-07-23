@@ -10,7 +10,7 @@ Usage: bonsai [OPTIONS] COMMAND [ARGS]...
 
 Options:
   --debug / --no-debug  Enable/disable verbose debugging output.
-  --version             Show the version and check if bonsai is up to date.
+  --version             Show the version and check if Bonsai is up to date.
   --sysinfo             Show system information.
   --timeout INTEGER     Set timeout for CLI API requests.
   -h, --help            Show this message and exit.
@@ -22,7 +22,6 @@ Commands:
   download   Downloads all the files related to a BRAIN.
   help       Show this message and exit.
   list       Lists BRAINs owned by current user.
-  log        Display logs from remote training.
   pull       Downloads project file(s) from a BRAIN.
   push       Uploads project file(s) to a BRAIN.
   sims       Retrieve information about simulators.
@@ -134,27 +133,6 @@ Options:
 ```
 
 `bonsai list` shows you the BRAINs on your account. You must have your Bonsai account configured with `bonsai configure` before you can see this list.
-
-## bonsai log
-
-```
-$ bonsai log --help
-Usage: bonsai log [OPTIONS]
-
-  Displays last 1000 lines of the running simulator's output.
-
-Options:
-  --brain TEXT    Override to target another BRAIN.
-  --project TEXT  Override to target another project directory.
-  --follow        Continually follow simulator's output.
-  -h, --help      Show this message and exit.
-```
-
-Displays *stderr* and *stdout* from the current running simulator. This will display the last 1000 lines of the running simulator's output. You can override the BRAIN you want to log if multiple are running at the same time or the project.
-
-This command is meant for simulators running remotely on Bonsai's servers using `bonsai train start --remote`. Simulators running locally will generally output this information at the command prompt.
-
-If using `bonsai log --follow` then display will update when new logs exist.  Use `Ctrl-c` to stop this command.
 
 ## bonsai pull
 
