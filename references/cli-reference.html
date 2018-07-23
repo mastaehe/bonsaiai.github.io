@@ -435,7 +435,7 @@ Usage: bonsai [OPTIONS] COMMAND [ARGS]...
 
 Options:
   --debug / --no-debug  Enable/disable verbose debugging output.
-  --version             Show the version and check if bonsai is up to date.
+  --version             Show the version and check if Bonsai is up to date.
   --sysinfo             Show system information.
   --timeout INTEGER     Set timeout for CLI API requests.
   -h, --help            Show this message and exit.
@@ -447,7 +447,6 @@ Commands:
   download   Downloads all the files related to a BRAIN.
   help       Show this message and exit.
   list       Lists BRAINs owned by current user.
-  log        Display logs from remote training.
   pull       Downloads project file(s) from a BRAIN.
   push       Uploads project file(s) to a BRAIN.
   sims       Retrieve information about simulators.
@@ -547,24 +546,6 @@ Options:
   -h, --help  Show this message and exit.
 </code></pre>
 <p><code class="prettyprint">bonsai list</code> shows you the BRAINs on your account. You must have your Bonsai account configured with <code class="prettyprint">bonsai configure</code> before you can see this list.</p>
-
-<h2 id="bonsai-log">bonsai log</h2>
-<pre class="highlight plaintext"><code>$ bonsai log --help
-Usage: bonsai log [OPTIONS]
-
-  Displays last 1000 lines of the running simulator's output.
-
-Options:
-  --brain TEXT    Override to target another BRAIN.
-  --project TEXT  Override to target another project directory.
-  --follow        Continually follow simulator's output.
-  -h, --help      Show this message and exit.
-</code></pre>
-<p>Displays <em>stderr</em> and <em>stdout</em> from the current running simulator. This will display the last 1000 lines of the running simulator&rsquo;s output. You can override the BRAIN you want to log if multiple are running at the same time or the project.</p>
-
-<p>This command is meant for simulators running remotely on Bonsai&rsquo;s servers using <code class="prettyprint">bonsai train start --remote</code>. Simulators running locally will generally output this information at the command prompt.</p>
-
-<p>If using <code class="prettyprint">bonsai log --follow</code> then display will update when new logs exist.  Use <code class="prettyprint">Ctrl-c</code> to stop this command.</p>
 
 <h2 id="bonsai-pull">bonsai pull</h2>
 <pre class="highlight plaintext"><code>$ bonsai pull --help
