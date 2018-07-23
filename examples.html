@@ -442,11 +442,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <span class="k">end</span>
 </code></pre>
 <p>The <code class="prettyprint">GameState</code> schema has one field, <code class="prettyprint">value</code>, with type <code class="prettyprint">Int8</code>.</p>
-<pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">PlayerMove</span>
-    <span class="kr">Int8</span><span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">}</span> <span class="nx">delta</span>
+<pre class="highlight inkling tab-inkling"><code><span class="nx">constant</span> <span class="kr">Int8</span> <span class="nx">dec</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="nx">constant</span> <span class="kr">Int8</span> <span class="nx">stay</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="nx">constant</span> <span class="kr">Int8</span> <span class="nx">inc</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">schema</span> <span class="nx">PlayerMove</span>
+    <span class="kr">Int8</span><span class="p">{</span><span class="nx">dec</span><span class="p">,</span> <span class="nx">stay</span><span class="p">,</span> <span class="nx">inc</span><span class="p">}</span> <span class="nx">delta</span>
 <span class="k">end</span>
 </code></pre>
-<p>The <code class="prettyprint">PlayerMove</code> schema has one field, <code class="prettyprint">delta</code>, with type <code class="prettyprint">Int8</code>. The <code class="prettyprint">Int8</code> type is constrained to three possible values: -1, 0, and 1.</p>
+<p>The <code class="prettyprint">PlayerMove</code> schema has one field, <code class="prettyprint">delta</code>, with type <code class="prettyprint">Int8</code>. The <code class="prettyprint">Int8</code> type is constrained to three possible values: -1, 0, and 1. We have added constants to this schema to demonstrate how they can be optionally used.</p>
 <pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">SimConfig</span>
     <span class="kr">Int8</span> <span class="nx">dummy</span>
 <span class="k">end</span>
@@ -493,6 +496,7 @@ It can be used in this case to find the center between two numbers.
 """</span>
 <span class="kn">import</span> <span class="nn">bonsai_ai</span>
 <span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">clock</span>
 
 
 <span class="k">class</span> <span class="nc">BasicSimulator</span><span class="p">(</span><span class="n">bonsai_ai</span><span class="o">.</span><span class="n">Simulator</span><span class="p">):</span>
@@ -531,6 +535,7 @@ It can be used in this case to find the center between two numbers.
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">goal</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">goal_count</span> <span class="o">+=</span> <span class="mi">1</span>
 
+        <span class="bp">self</span><span class="o">.</span><span class="n">record_append</span><span class="p">({</span><span class="s">"goal_count"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">goal_count</span><span class="p">},</span> <span class="s">"ftc"</span><span class="p">)</span>
         <span class="c"># is this episode finished?</span>
         <span class="n">terminal</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="nb">min</span> <span class="ow">or</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="nb">max</span> <span class="ow">or</span>
@@ -539,24 +544,45 @@ It can be used in this case to find the center between two numbers.
         <span class="n">reward</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">goal_count</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">terminal</span><span class="p">)</span>
 
+    <span class="k">def</span> <span class="nf">episode_finish</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'Episode'</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">episode_count</span><span class="p">,</span>
+              <span class="s">'reward:'</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">episode_reward</span><span class="p">,</span>
+              <span class="s">'eps:'</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">episode_rate</span><span class="p">,</span>
+              <span class="s">'ips:'</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">iteration_rate</span><span class="p">,</span>
+              <span class="s">'iters:'</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">iteration_count</span><span class="p">)</span>
+
 
 <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
     <span class="n">config</span> <span class="o">=</span> <span class="n">bonsai_ai</span><span class="o">.</span><span class="n">Config</span><span class="p">()</span>
+    <span class="c"># Analytics recording can be enabled in code or at the command line.</span>
+    <span class="c"># The commented lines would have the same effect as invoking this</span>
+    <span class="c"># script with "--record=find_the_center.json".</span>
+    <span class="c"># Alternatively, invoking with "--record=find_the_center.csv" enables</span>
+    <span class="c"># recording to CSV.</span>
+    <span class="c"># config-&gt;set_record_enabled(true);</span>
+    <span class="c"># config-&gt;set_record_file("find_the_center.json");</span>
+
     <span class="n">brain</span> <span class="o">=</span> <span class="n">bonsai_ai</span><span class="o">.</span><span class="n">Brain</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
     <span class="n">sim</span> <span class="o">=</span> <span class="n">BasicSimulator</span><span class="p">(</span><span class="n">brain</span><span class="p">,</span> <span class="s">"find_the_center_sim"</span><span class="p">)</span>
+    <span class="n">sim</span><span class="o">.</span><span class="n">enable_keys</span><span class="p">([</span><span class="s">"delta_t"</span><span class="p">,</span> <span class="s">"goal_count"</span><span class="p">],</span> <span class="s">"ftc"</span><span class="p">)</span>
 
     <span class="k">print</span><span class="p">(</span><span class="s">'starting...'</span><span class="p">)</span>
+    <span class="n">last</span> <span class="o">=</span> <span class="n">clock</span><span class="p">()</span> <span class="o">*</span> <span class="mi">1000000</span>
     <span class="k">while</span> <span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">():</span>
+        <span class="n">now</span> <span class="o">=</span> <span class="n">clock</span><span class="p">()</span> <span class="o">*</span> <span class="mi">1000000</span>
+        <span class="n">sim</span><span class="o">.</span><span class="n">record_append</span><span class="p">(</span>
+            <span class="p">{</span><span class="s">"delta_t"</span><span class="p">:</span> <span class="n">now</span> <span class="o">-</span> <span class="n">last</span><span class="p">},</span> <span class="s">"ftc"</span><span class="p">)</span>
+        <span class="n">last</span> <span class="o">=</span> <span class="n">clock</span><span class="p">()</span> <span class="o">*</span> <span class="mi">1000000</span>
         <span class="k">continue</span>
-
 </code></pre><pre class="highlight cpp tab-cpp"><code><span class="c1">// Copyright (C) 2017 Bonsai, Inc.
 </span>
 <span class="cp">#include &lt;iostream&gt;
 #include &lt;memory&gt;
 #include &lt;string&gt;
 #include &lt;random&gt;
+#include &lt;chrono&gt;
 </span>
-<span class="cp">#include "bonsai/bonsai.hpp"
+<span class="cp">#include "bonsai.hpp"
 </span>
 <span class="c1">// std
 </span><span class="k">using</span> <span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="p">;</span>
@@ -565,6 +591,9 @@ It can be used in this case to find the center between two numbers.
 <span class="k">using</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">;</span>
 <span class="k">using</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="p">;</span>
 <span class="k">using</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">duration_cast</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">microseconds</span><span class="p">;</span>
 
 <span class="k">using</span> <span class="n">std</span><span class="o">::</span><span class="n">random_device</span><span class="p">;</span>
 <span class="k">using</span> <span class="n">std</span><span class="o">::</span><span class="n">mt19937</span><span class="p">;</span>
@@ -630,6 +659,7 @@ It can be used in this case to find the center between two numbers.
 
     <span class="c1">// output
 </span>    <span class="n">state</span><span class="p">.</span><span class="n">set_int8</span><span class="p">(</span><span class="s">"value"</span><span class="p">,</span> <span class="n">_value</span><span class="p">);</span>
+    <span class="n">record_append</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"goal_count"</span><span class="p">,</span> <span class="n">_goal_count</span><span class="p">,</span> <span class="s">"ftc"</span><span class="p">);</span>
     <span class="n">terminal</span> <span class="o">=</span> <span class="n">_value</span> <span class="o">&lt;</span> <span class="n">_min</span> <span class="o">||</span> <span class="n">_value</span> <span class="o">&gt;</span> <span class="n">_max</span> <span class="o">||</span> <span class="n">_goal_count</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">;</span>
     <span class="n">reward</span> <span class="o">=</span> <span class="n">_goal_count</span><span class="p">;</span>
 <span class="p">}</span>
@@ -637,19 +667,39 @@ It can be used in this case to find the center between two numbers.
 
 <span class="kt">int</span> <span class="n">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">auto</span> <span class="n">config</span> <span class="o">=</span> <span class="n">make_shared</span><span class="o">&lt;</span><span class="n">Config</span><span class="o">&gt;</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">);</span>
-    <span class="k">auto</span> <span class="n">brain</span> <span class="o">=</span> <span class="n">make_shared</span><span class="o">&lt;</span><span class="n">Brain</span><span class="o">&gt;</span><span class="p">(</span><span class="n">config</span><span class="p">);</span>
 
+
+    <span class="c1">// Analytics recording can be enabled in code or at the command line.
+</span>    <span class="c1">// The commented lines have the same effect as invoking this simulator with
+</span>    <span class="c1">// "--record=find_the_center.json".
+</span>    <span class="c1">// Alternatively, invoking with "--record=find_the_center.csv" enables recording
+</span>    <span class="c1">// to CSV.
+</span>    <span class="c1">// config-&gt;set_record_enabled(true);
+</span>    <span class="c1">// config-&gt;set_record_file("find_the_center.json");
+</span>
+    <span class="k">auto</span> <span class="n">brain</span> <span class="o">=</span> <span class="n">make_shared</span><span class="o">&lt;</span><span class="n">Brain</span><span class="o">&gt;</span><span class="p">(</span><span class="n">config</span><span class="p">);</span>
     <span class="n">BasicSimulator</span> <span class="n">sim</span><span class="p">(</span><span class="n">brain</span><span class="p">,</span> <span class="s">"find_the_center_sim"</span><span class="p">);</span>
 
+    <span class="c1">// enable the specified keys, prepending each with "ftc" in the final log line
+</span>    <span class="n">sim</span><span class="p">.</span><span class="n">enable_keys</span><span class="p">({</span><span class="s">"delta_t"</span><span class="p">,</span> <span class="s">"goal_count"</span><span class="p">},</span> <span class="s">"ftc"</span><span class="p">);</span>
+
     <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"starting..."</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-    <span class="k">while</span> <span class="p">(</span> <span class="n">sim</span><span class="p">.</span><span class="n">run</span><span class="p">()</span> <span class="p">)</span> <span class="p">{</span>
-        <span class="k">continue</span><span class="p">;</span>
+    <span class="k">auto</span> <span class="n">last</span> <span class="o">=</span> <span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">sim</span><span class="p">.</span><span class="n">run</span><span class="p">())</span> <span class="p">{</span>
+        <span class="c1">// You can add data to the currently active record from your top level run loop.
+</span>        <span class="c1">// You can also add data to the record in your Simulator callbacks (see above).
+</span>        <span class="c1">// The record gets flushed to disk at the end of each call to Simulator::run.
+</span>        <span class="k">auto</span> <span class="n">millis</span> <span class="o">=</span> <span class="n">duration_cast</span><span class="o">&lt;</span><span class="n">microseconds</span><span class="o">&gt;</span><span class="p">(</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">last</span><span class="p">).</span><span class="n">count</span><span class="p">();</span>
+        <span class="n">sim</span><span class="p">.</span><span class="n">record_append</span><span class="o">&lt;</span><span class="kt">int64_t</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"delta_t"</span><span class="p">,</span> <span class="n">millis</span><span class="p">,</span> <span class="s">"ftc"</span><span class="p">);</span>
+        <span class="n">last</span> <span class="o">=</span> <span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
     <span class="p">}</span>
 
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre>
 <p>This is a basic simulator for learning the simulator library. In this case it is used to find the center between two numbers, 0 and 2. The goal, as outlined in the Inkling file, is to reach 1. The moves that the simulator is able to make are sent from the Inkling file to the simulator and the state of the simulator is sent back to Inkling.</p>
+
+<p>This example also includes a demonstration of how to use the record data file functionality. Analytics recording can be enabled in code or at the command line. Usage is explained in the <a href="references/simulator-reference.html#recording-data-to-file">Recording Data to File</a> section of the Simulator Reference.</p>
 
 <p>The <a href="https://github.com/BonsaiAI/bonsai-sdk/blob/master/samples/find-the-center-py/README.md">README file</a> contained in the project has instructions for running this simulator in either Python or C++.</p>
 
@@ -687,11 +737,14 @@ It can be used in this case to find the center between two numbers.
 </code></pre>
 <p>The <code class="prettyprint">FloorState</code> schema defines the dictionary returned from the Python simulation&rsquo;s <code class="prettyprint">advance</code> method to the BRAIN.</p>
 <pre class="highlight inkling tab-inkling"><code><span class="c1"># command options: up, open, down</span>
+<span class="nx">constant</span> <span class="kr">Int8</span> <span class="nx">up</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="nx">constant</span> <span class="kr">Int8</span> <span class="nx">open</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="nx">constant</span> <span class="kr">Int8</span> <span class="nx">down</span> <span class="o">=</span> <span class="mi">2</span>
 <span class="k">schema</span> <span class="nx">Action</span>
-    <span class="kr">Int8</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span> <span class="nx">command</span>
+    <span class="kr">Int8</span><span class="p">{</span><span class="nx">up</span><span class="p">,</span> <span class="nx">open</span><span class="p">,</span> <span class="nx">down</span><span class="p">}</span> <span class="nx">command</span>
 <span class="k">end</span>
 </code></pre>
-<p>The <code class="prettyprint">Action</code> schema defines the possible actions the elevator can take. In this case the command given to the elevator is &lsquo;0&rsquo; is open, &lsquo;1&rsquo; is go up a floor, and &lsquo;2&rsquo; is go down a floor.</p>
+<p>The <code class="prettyprint">Action</code> schema defines the possible actions the elevator can take. We have added constants to this schema to demonstrate how they can be optionally used. In this case the command given to the elevator is &lsquo;0&rsquo; is open, &lsquo;1&rsquo; is go up a floor, and &lsquo;2&rsquo; is go down a floor.</p>
 <pre class="highlight inkling tab-inkling"><code><span class="c1"># Possible option for configuration</span>
 <span class="k">schema</span> <span class="nx">ElevatorConfig</span>
     <span class="kr">Int8</span> <span class="nx">episode_length</span>
@@ -940,11 +993,13 @@ It can be used in this case to find the center between two numbers.
 <span class="k">end</span>
 </code></pre>
 <p>The <code class="prettyprint">GameState</code> schema names two records — <code class="prettyprint">x_position</code> and <code class="prettyprint">y_position</code> — and assigns a type to them.</p>
-<pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">Action</span>
-    <span class="kr">Float32</span><span class="p">{</span><span class="o">-</span><span class="mf">1.0</span><span class="p">:</span><span class="mf">1.0</span><span class="p">}</span> <span class="nx">command</span>
+<pre class="highlight inkling tab-inkling"><code><span class="nx">constant</span> <span class="kr">Float32</span> <span class="nx">throttleMin</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span>
+<span class="nx">constant</span> <span class="kr">Float32</span> <span class="nx">throttleMax</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="k">schema</span> <span class="nx">Action</span>
+    <span class="kr">Float32</span><span class="p">{</span><span class="nl">throttleMin</span><span class="p">:</span><span class="nx">throttleMax</span><span class="p">}</span> <span class="nx">command</span>
 <span class="k">end</span>
 </code></pre>
-<p>The <code class="prettyprint">Action</code> schema names a single record — <code class="prettyprint">command</code> — and assigns a constrained type to it.</p>
+<p>The <code class="prettyprint">Action</code> schema names a single record — <code class="prettyprint">command</code> — and assigns a constrained type to it. We have added constants to this schema to demonstrate how they can be optionally used.</p>
 <pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">MountainCarConfig</span>
     <span class="kr">UInt8</span> <span class="nx">deque_size</span>
 <span class="k">end</span>
@@ -1046,11 +1101,13 @@ It can be used in this case to find the center between two numbers.
 <span class="k">end</span>
 </code></pre>
 <p>The schema <code class="prettyprint">GameState</code> names four records — <code class="prettyprint">position</code>, <code class="prettyprint">velocity</code>, <code class="prettyprint">angle</code>, and <code class="prettyprint">rotation</code> — and assigns a type to them. This information is input from the simulation.</p>
-<pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">Action</span>
-    <span class="kr">Int8</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">}</span> <span class="nx">command</span>
+<pre class="highlight inkling tab-inkling"><code><span class="nx">constant</span> <span class="kr">Int8</span> <span class="nx">left</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="nx">constant</span> <span class="kr">Int8</span> <span class="nx">right</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">schema</span> <span class="nx">Action</span>
+    <span class="kr">Int8</span><span class="p">{</span><span class="nx">left</span><span class="p">,</span> <span class="nx">right</span><span class="p">}</span> <span class="nx">command</span>
 <span class="k">end</span>
 </code></pre>
-<p>The schema <code class="prettyprint">Action</code> names a record — <code class="prettyprint">action</code> —  and assigns it a constrained type.</p>
+<p>The schema <code class="prettyprint">Action</code> names a record — <code class="prettyprint">action</code> —  and assigns it a constrained type. We have added constants to this schema to demonstrate how they can be optionally used.</p>
 <pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">CartPoleConfig</span>
     <span class="kr">Int8</span> <span class="nx">episode_length</span><span class="p">,</span>
     <span class="kr">UInt8</span> <span class="nx">deque_size</span>
@@ -1305,11 +1362,13 @@ It can be used in this case to find the center between two numbers.
 <h2 id="inkling-file">Inkling File</h2>
 
 <h6 id="schema">Schema</h6>
-<pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">SimState</span>
-    <span class="kr">Int32</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">}</span> <span class="nx">SolarIrradiation</span>
+<pre class="highlight inkling tab-inkling"><code><span class="nx">constant</span> <span class="kr">Int32</span> <span class="nx">minIrradiation</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="nx">constant</span> <span class="kr">Int32</span> <span class="nx">maxIrradiation</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="k">schema</span> <span class="nx">SimState</span>
+    <span class="kr">Int32</span><span class="p">{</span><span class="nl">minIrradiation</span><span class="p">:</span><span class="nx">maxIrradiation</span><span class="p">}</span> <span class="nx">SolarIrradiation</span>
 <span class="k">end</span>
 </code></pre>
-<p>The <code class="prettyprint">SimState</code> schema defines the dictionary returned from the Python simulation&rsquo;s <code class="prettyprint">advance</code> method to the BRAIN.</p>
+<p>The <code class="prettyprint">SimState</code> schema defines the dictionary returned from the Python simulation&rsquo;s <code class="prettyprint">advance</code> method to the BRAIN. We have added constants to this schema to demonstrate how they can be optionally used. They can be used in all or none of the schemas you define.</p>
 <pre class="highlight inkling tab-inkling"><code><span class="k">schema</span> <span class="nx">SimAction</span>
     <span class="kr">Int32</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">}</span> <span class="nx">shade</span>
 <span class="k">end</span>

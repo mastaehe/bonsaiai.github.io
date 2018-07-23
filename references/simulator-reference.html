@@ -469,9 +469,9 @@ Note that config in __main__ is the brain configuration and remains the same thr
 </blockquote>
 <pre class="highlight plaintext"><code>$ python &lt;simulator_file&gt;.py --help
 usage: &lt;simulator_file&gt;.py [-h] [--accesskey ACCESSKEY] [--username USERNAME]
-                      [--url URL] [--proxy PROXY] [--brain BRAIN]
-                      [--predict [PREDICT]] [--verbose VERBOSE]
-                      [--performance PERFORMANCE]
+                 [--url URL] [--proxy PROXY] [--brain BRAIN]
+                 [--predict [PREDICT]] [--verbose] [--performance]
+                 [--log LOG [LOG ...]] [--record RECORD]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -489,15 +489,24 @@ optional arguments:
                         specified version. May be a positive integer number or
                         'latest' for the most recent version. For example:
                         --predict=latest or --predict=3
-  --verbose VERBOSE     Enables logging. Alias for --log=all
-  --performance PERFORMANCE
-                        Enables time delta logging. Alias for --log=perf.all
+  --verbose             Enables logging. Alias for --log=all
+  --performance         Enables time delta logging. Alias for --log=perf.all
+  --log LOG [LOG ...]   Enable logging. Parameters are a list of log domains.
+                        Using --log=all will enable all domains. Using
+                        --log=none will disable logging.
+  --record RECORD       Enable record simulation data to a file (current) or
+                        external service (not yet implemented). Parameter is
+                        the target file for recorded data. Data format will be
+                        inferred from the file extension. Currently supports
+                        ".json" and ".csv".
 </code></pre>
 <p>Currently, all connectors use a Python program to bootstrap the simulation and connect it to the Bonsai AI Engine. To run any simulation, you call a Python program (shown in the code panel).</p>
 
 <p>During development, you will need to iterate efficiently on your simulation, reward function, and lesson plans. You may also need to connect a debugger, or do additional logging to help you get your simulation ready to train.</p>
 
 <p>During the course of normal operation, one should only need to specify the prediction/training mode on the command line. The rest of the options will be read from configuration files.</p>
+
+<p>The following sections explain further how to use the <code class="prettyprint">--proxy</code>, <code class="prettyprint">--predict</code>, and <code class="prettyprint">--record</code> command line options.</p>
 
 <p>To speed up training, you can run multiple simulators in parallel. See <a href="#running-simulators-in-parallel">Running Simulations in Parallel</a> below.</p>
 
@@ -553,6 +562,38 @@ optional arguments:
 <span class="n">Python</span> <span class="o">&lt;</span><span class="n">simulator_file</span><span class="o">&gt;.</span><span class="n">py</span> <span class="o">--</span><span class="n">predict</span><span class="o">=</span><span class="mi">1</span>
 </code></pre>
 <p>After your BRAIN is finished training it can be used to &ldquo;predict&rdquo; or perform in the simulation. How well it does depends on how long you let it train! Using your BRAIN involves running your simulator file as you did when training, but now in prediction mode with <code class="prettyprint">--predict</code>. The default is <code class="prettyprint">--predict=latest</code> which will use the version of the latest training session that you just ran. You can use a different version of your BRAIN if you have trained it multiple times by replacing <code class="prettyprint">latest</code> with the version number.</p>
+
+<h2 id="recording-data-to-file">Recording Data to File</h2>
+
+<blockquote>
+<p>Record file example</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="c"># Excerpt of find_the_center_sim.py</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">bonsai_ai</span><span class="o">.</span><span class="n">Config</span><span class="p">()</span>
+
+    <span class="n">config</span><span class="o">-&gt;</span><span class="n">set_record_enabled</span><span class="p">(</span><span class="n">true</span><span class="p">);</span>
+    <span class="n">config</span><span class="o">-&gt;</span><span class="n">set_record_file</span><span class="p">(</span><span class="s">"find_the_center.json"</span><span class="p">);</span>
+
+    <span class="n">brain</span> <span class="o">=</span> <span class="n">bonsai_ai</span><span class="o">.</span><span class="n">Brain</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+    <span class="n">sim</span> <span class="o">=</span> <span class="n">BasicSimulator</span><span class="p">(</span><span class="n">brain</span><span class="p">,</span> <span class="s">"find_the_center_sim"</span><span class="p">)</span>
+    <span class="n">sim</span><span class="o">.</span><span class="n">enable_keys</span><span class="p">([</span><span class="s">"delta_t"</span><span class="p">,</span> <span class="s">"goal_count"</span><span class="p">],</span> <span class="s">"ftc"</span><span class="p">)</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s">'starting...'</span><span class="p">)</span>
+    <span class="n">last</span> <span class="o">=</span> <span class="n">clock</span><span class="p">()</span> <span class="o">*</span> <span class="mi">1000000</span>
+    <span class="k">while</span> <span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">():</span>
+        <span class="n">now</span> <span class="o">=</span> <span class="n">clock</span><span class="p">()</span> <span class="o">*</span> <span class="mi">1000000</span>
+        <span class="n">sim</span><span class="o">.</span><span class="n">record_append</span><span class="p">(</span>
+            <span class="p">{</span><span class="s">"delta_t"</span><span class="p">:</span> <span class="n">now</span> <span class="o">-</span> <span class="n">last</span><span class="p">},</span> <span class="s">"ftc"</span><span class="p">)</span>
+        <span class="n">last</span> <span class="o">=</span> <span class="n">clock</span><span class="p">()</span> <span class="o">*</span> <span class="mi">1000000</span>
+        <span class="k">continue</span>
+</code></pre>
+<p>The full code for how to use this feature within an example can be found in the <a href="../examples.html#simulator-file">find-the-center example</a>.</p>
+
+<p>Analytics recording can be enabled in code (shown in the code panel) or at the command line. The code example shown has the same effect as invoking this script with <code class="prettyprint">--record=find_the_center.json</code>. Alternatively, invoking with <code class="prettyprint">--record=find_the_center.csv</code> enables recording to CSV.</p>
+
+<p>The syntax for how to use this feature within the SDK libraries see <a href="library-reference.html#record_file"><code class="prettyprint">record_file</code></a> for Python and <a href="cpp-library-reference.html#record_file"><code class="prettyprint">record_file()</code></a> for C++.</p>
 
 <h1 id="cloud-hosted-simulators">Cloud Hosted Simulators</h1>
 
