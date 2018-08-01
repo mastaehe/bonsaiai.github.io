@@ -3,7 +3,8 @@ title: Install the SDK
 
 language_tabs:
     - powershell: Windows
-    - shell: macOS
+    - shell--macos: macOS
+    - shell--ubuntu: Ubuntu
 
 toc_footers:
   -  <%= partial "partials/footer-links" %>    
