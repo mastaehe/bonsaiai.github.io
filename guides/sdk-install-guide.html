@@ -238,7 +238,7 @@ mixpanel.init("91fbf7b68fb2356f91916026f221ddd5", {
 
   </head>
 
-  <body class="guides guides_sdk-install-guide" data-languages="[&quot;powershell&quot;,&quot;shell&quot;]">
+  <body class="guides guides_sdk-install-guide" data-languages="[&quot;powershell&quot;,&quot;shell--macos&quot;,&quot;shell--ubuntu&quot;]">
 
 
 	  <!-- Google Tag Manager (noscript) -->
@@ -320,7 +320,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         <div class="lang-selector">
               <a href="#" data-language-name="powershell">Windows</a>
-              <a href="#" data-language-name="shell">macOS</a>
+              <a href="#" data-language-name="shell--macos">macOS</a>
+              <a href="#" data-language-name="shell--ubuntu">Ubuntu</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -476,12 +477,28 @@ environments. For more information, refer to the <a href="https://www.anaconda.c
           <h1 id="install-libbonsai-for-c">Install libbonsai for C++</h1>
 
 <aside class="warning">
-The C++ library is still in beta and currently only available on macOS.
+The C++ library is still in beta and currently only available on macOS and Ubuntu 16.04.
 </aside>
 <pre class="highlight powershell tab-powershell"><code><span class="c1"># Currently unavailable on Windows</span>
-</code></pre><pre class="highlight shell tab-shell"><code><span class="gp">$ </span>brew install BonsaiAI/homebrew-bonsai/bonsai
+</code></pre><pre class="highlight shell tab-shell--macos"><code><span class="gp">$ </span>brew install BonsaiAI/homebrew-bonsai/bonsai
+</code></pre><pre class="highlight shell tab-shell--ubuntu"><code><span class="c"># Add url of libbonsai apt-repo to sources.list</span>
+<span class="gp">$ </span><span class="nb">echo</span> <span class="s2">"deb [trusted=yes] https://libbonsai-debian.s3.amazonaws.com xenial main"</span> &gt;&gt; /etc/apt/sources.list
+<span class="gp">$ </span><span class="nb">echo</span> <span class="s2">"deb-src [trusted=yes] https://libbonsai-debian.s3.amazonaws.com xenial main"</span> &gt;&gt; /etc/apt/sources.list
+
+<span class="c"># Update package lists</span>
+<span class="gp">$ </span>apt-get update
+
+<span class="c"># Install libbonsai</span>
+<span class="gp">$ </span>apt-get install libbonsai
+
+<span class="c"># Get source</span>
+<span class="gp">$ </span>apt-get <span class="nb">source </span>libbonsai
 </code></pre>
-<p>The C++ library <code class="prettyprint">libbonsai</code> can currently be installed via Homebrew. The formula is hosted on BonsaiAI&rsquo;s GitHub, therefore the full link to the formula must be specified when using <code class="prettyprint">brew</code> while it is in beta.</p>
+<p>The C++ library <code class="prettyprint">libbonsai</code> can currently be installed via Homebrew on macOS or via APT on Ubuntu. </p>
+
+<p>The Homebrew formula is hosted on BonsaiAI&rsquo;s GitHub, therefore the full link to the formula must be specified when using <code class="prettyprint">brew</code> while it is in beta.</p>
+
+<p>The APT package is in an apt-repo which is hosted on Amazon S3. The url of the apt-repo must be added to your <code class="prettyprint">sources.list</code> before using <code class="prettyprint">apt-get</code>.</p>
 
 <p>See the <a href="../references/library-reference.html?cpp">C++ Library Reference</a> for full details on usage of this library.</p>
 
@@ -500,7 +517,8 @@ The C++ library is still in beta and currently only available on macOS.
       <div class="dark-box">
           <div class="lang-selector">
                 <a href="#" data-language-name="powershell">Windows</a>
-                <a href="#" data-language-name="shell">macOS</a>
+                <a href="#" data-language-name="shell--macos">macOS</a>
+                <a href="#" data-language-name="shell--ubuntu">Ubuntu</a>
           </div>
       </div>
     </div>
