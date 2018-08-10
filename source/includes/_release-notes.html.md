@@ -6,7 +6,7 @@ This is a list of Bonsai's currently supported versions of its software packages
 | -                      | -            | -        | -            |
 | Command Line Interface | bonsai-cli   | 0.8.25   | 2018.06.18   |
 | Gym Common             | bonsai-gym   | 2.0.7    | 2018.06.18   |
-| Python Library         | bonsai-ai    | 2.0.9    | 2018.06.18   |
+| Python Library         | bonsai-ai    | 2.0.10   | 2018.07.13   |
 | C++ Library            | libbonsai    | 2.0.3    | 2018.06.18   |
 
 # Product Release Notes
