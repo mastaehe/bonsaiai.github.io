@@ -1,0 +1,673 @@
+
+
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Train a Simulink Model with Bonsai - Bonsai</title>
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .gh {
+  color: #999999;
+}
+.highlight .sr {
+  color: #f6aa11;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #75715e;
+}
+.highlight .c1 {
+  color: #75715e;
+}
+.highlight .cs {
+  color: #75715e;
+}
+.highlight .c, .highlight .cd {
+  color: #75715e;
+}
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
+}
+.highlight .gd {
+  color: #49483e;
+}
+.highlight .gi {
+  color: #49483e;
+}
+.highlight .ge {
+  color: #49483e;
+}
+.highlight .kc {
+  color: #66d9ef;
+}
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
+}
+.highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s {
+  color: #e6db74;
+}
+.highlight .na {
+  color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+}
+.highlight .nn {
+  color: #ffffff;
+}
+.highlight .nl {
+  color: #ffffff;
+}
+.highlight .ni {
+  color: #ffffff;
+}
+.highlight .bp {
+  color: #ffffff;
+}
+.highlight .vg {
+  color: #ffffff;
+}
+.highlight .vi {
+  color: #ffffff;
+}
+.highlight .nv {
+  color: #ffffff;
+}
+.highlight .w {
+  color: #ffffff;
+}
+.highlight {
+  color: #ffffff;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
+}
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js" type="text/javascript"></script>
+    <script type="text/javascript">WebFont.load({  google: {    families: ["Open Sans:300,300italic,400,400italic,600,600italic,700,700italic,800,800italic"]  }});</script>
+    <link href="../stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="../stylesheets/print.css" rel="stylesheet" media="print" />
+	  <link href="../stylesheets/test.css" rel="stylesheet" media="screen" />
+    <link href="../favicon.ico" rel="icon" type="image/ico" />
+      <script src="../javascripts/all.js"></script>
+      <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WVB6MG2');</script>
+<!-- End Google Tag Manager -->
+      <!-- start Mixpanel -->
+<script type="text/javascript">(function(e,a){if(!a.__SV){var b=window;try{var c,l,i,j=b.location,g=j.hash;c=function(a,b){return(l=a.match(RegExp(b+"=([^&]*)")))?l[1]:null};g&&c(g,"state")&&(i=JSON.parse(decodeURIComponent(c(g,"state"))),"mpeditor"===i.action&&(b.sessionStorage.setItem("_mpcehash",g),history.replaceState(i.desiredHash||"",e.title,j.pathname+j.search)))}catch(m){}var k,h;window.mixpanel=a;a._i=[];a.init=function(b,c,f){function e(b,a){var c=a.split(".");2==c.length&&(b=b[c[0]],a=c[1]);b[a]=function(){b.push([a].concat(Array.prototype.slice.call(arguments,
+0)))}}var d=a;"undefined"!==typeof f?d=a[f]=[]:f="mixpanel";d.people=d.people||[];d.toString=function(b){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);b||(a+=" (stub)");return a};d.people.toString=function(){return d.toString(1)+".people (stub)"};k="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config reset people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+for(h=0;h<k.length;h++)e(d,k[h]);a._i.push([b,c,f])};a.__SV=1.2;b=e.createElement("script");b.type="text/javascript";b.async=!0;b.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";c=e.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c)}})(document,window.mixpanel||[]);
+mixpanel.init("91fbf7b68fb2356f91916026f221ddd5", {
+    loaded: function(mixpanel) {
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+
+        distinct_id = getParameterByName('refUserId');
+        if (distinct_id) {
+          mixpanel.identify(distinct_id);
+        }
+    }
+});</script>
+<!-- end Mixpanel -->
+
+  </head>
+
+  <body class="tutorials tutorials_simulink" data-languages="[]">
+
+
+	  <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WVB6MG2"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) --> 
+
+  <div id="flex-container">
+
+	<nav id="primary-nav">
+
+
+
+	<div id="logo"> <a href="../"><img class="bonsai-logo" src="../images/bonsai-logo.svg"></a></div>
+
+	<label for="drop" class="toggle"><img class="menu-ham" src="../images/menu.svg"></label>
+	<input type="checkbox" id="drop" />
+
+	<ul class="menu">
+
+		<li class="header_menu_item "> <a href="../guides/getting-started.html">Quick Start</a></li>
+
+		<li class="header_menu_item"> <!-- First Tier Drop Down --> <label for="drop-1" class="toggle">Tutorials +</label><a  href="#">Tutorials</a>
+			<input type="checkbox" id="drop-1"/>
+			<ul id="tutorials">
+				<li class=""> <a href="../guides/cli-install-guide.html">Install the CLI</a>  </li>
+				<li class=""> <a href="../guides/sdk-install-guide.html">Install the SDK</a>  </li>
+				<li class=""> <a href="tutorial1.html">Running Simulations and Writing Inkling</a>  </li>
+				<li class=""> <a href="../guides/local-dev-guide.html">Run the Platform Locally</a>  </li>
+				<li class=""> <a href="../guides/jupyter-api-guide.html">Use Bonsai's API with Jupyter</a>  </li>
+			</ul>
+		</li>
+
+		<li class="header_menu_item"> <!-- First Tier Drop Down --> <label for="drop-2" class="toggle">Guides +</label><a  href="#">Guides</a>
+			<input type="checkbox" id="drop-2"/>
+			<ul id="guides">
+				<li class=""> <a href="../guides/simulation-guide.html">Learn About Simulation Requirements</a>  </li>
+				<li class=""> <a href="../guides/inkling-guide.html">Learn the Inkling Language</a>  </li>
+				<li class=""> <a href="../guides/machine-teaching.html">Programming Machine Teaching</a>  </li>
+				<li class=""> <a href="../guides/ai-engine-guide.html">Understand AI Engine Components</a>  </li>
+				<li class=""> <a href="../guides/web-graphs-guide.html">Understand BRAIN Graphs</a>  </li>
+			</ul>
+		</li>
+
+		<li class="header_menu_item"> <!-- First Tier Drop Down --> <label for="drop-3" class="toggle">References +</label><a  href="#">References</a>
+			<input type="checkbox" id="drop-3"/>
+			<ul id="references">
+				<li class=""> <a href="../references/api-reference.html">API Reference</a>  </li>
+				<li class=""> <a href="../references/cli-reference.html">CLI Reference</a>  </li>
+				<li class=""> <a href="../references/inkling-reference.html">Inkling Reference</a>  </li>
+				<li class=""> <a href="../references/simulator-reference.html">Simulator Reference</a>
+				<li class=""> <a href="../references/library-reference.html">Python Library</a>  </li>
+				<li class=""> <a href="../references/cpp-library-reference.html">C++ Library</a>  </li>
+				
+			</ul> 
+		</li>
+
+		<li class="header_menu_item "> <a href="../examples.html">Examples</a></li>
+
+		<li>
+			<input type="search" id="docs-search" placeholder="Search Bonsai Docs">
+		</li>
+
+
+	</ul>
+
+</nav>
+
+
+	<div id="main-wrapper">
+
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="../images/navbar.png" alt="Navbar" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <div class="page-title">Train a Simulink Model with Bonsai</div>
+      <div id="toc">
+      </div>
+
+			 
+<ul class="toc-footer">
+
+<li><a href='https://bons.ai'>Bonsai Home</a></li>
+<li><a href='https://beta.bons.ai'>BRAIN Dashboard</a></li>
+<li><a href='https://github.com/BonsaiAI/slate'>Contribute to the Docs</a></li>
+<li><a href='http://pages.bons.ai/apply.html'>Apply for Bonsai Platform Preview</a></li>
+<li><a href="/releases.html">Product Release Notes</a></li>
+<li><a href='https://bons.ai/contact-us#contact-page-form'>Contact Us</a></li>
+
+</ul>
+
+
+	   <div class="cc-bottom">
+	
+	<div class="toc-footer bottom cc-info">
+
+		<a href='https://creativecommons.org/licenses/by-sa/4.0/' class="cc-icon-width" >
+			<svg class="cc" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+			viewBox="0 0 70.7 13.4" style="enable-background:new 0 0 70.7 13.4;" xml:space="preserve">
+
+				<g>
+
+				<g>
+				<circle class="st0" cx="6.8" cy="6.7" r="6.1"/>
+				<path d="M6.7,0c1.9,0,3.5,0.7,4.8,2c0.6,0.6,1.1,1.4,1.4,2.2c0.3,0.8,0.5,1.7,0.5,2.6c0,0.9-0.2,1.8-0.5,2.6
+				c-0.3,0.8-0.8,1.5-1.4,2.1c-0.7,0.6-1.4,1.1-2.2,1.5c-0.8,0.3-1.7,0.5-2.6,0.5S5,13.3,4.2,12.9c-0.8-0.3-1.5-0.8-2.2-1.5
+				s-1.1-1.4-1.5-2.2S0,7.6,0,6.7C0,5.8,0.2,5,0.5,4.2S1.3,2.6,2,2C3.3,0.7,4.8,0,6.7,0z M6.7,1.2c-1.5,0-2.8,0.5-3.9,1.6
+				C2.3,3.4,1.9,4,1.6,4.6C1.4,5.3,1.2,6,1.2,6.7c0,0.7,0.1,1.4,0.4,2.1c0.3,0.7,0.7,1.3,1.2,1.8c0.5,0.5,1.1,0.9,1.8,1.2
+				c0.7,0.3,1.4,0.4,2.1,0.4c0.7,0,1.4-0.1,2.1-0.4c0.7-0.3,1.3-0.7,1.8-1.2c1-1,1.6-2.3,1.6-3.9c0-0.7-0.1-1.4-0.4-2.1
+				c-0.3-0.7-0.7-1.3-1.2-1.8C9.5,1.8,8.2,1.2,6.7,1.2z M6.6,5.6L5.7,6.1C5.6,5.9,5.5,5.7,5.4,5.6C5.3,5.6,5.1,5.5,5,5.5
+				c-0.6,0-0.9,0.4-0.9,1.2c0,0.4,0.1,0.6,0.2,0.9C4.5,7.8,4.7,7.9,5,7.9c0.4,0,0.7-0.2,0.8-0.6l0.8,0.4C6.5,8.1,6.2,8.3,5.9,8.5
+				c-0.3,0.2-0.7,0.3-1,0.3c-0.6,0-1.1-0.2-1.5-0.6C3.1,7.9,2.9,7.4,2.9,6.7c0-0.6,0.2-1.1,0.6-1.5c0.4-0.4,0.8-0.6,1.4-0.6
+				C5.7,4.6,6.3,5,6.6,5.6z M10.5,5.6L9.6,6.1C9.5,5.9,9.4,5.7,9.3,5.6C9.1,5.6,9,5.5,8.9,5.5C8.3,5.5,8,5.9,8,6.7
+				c0,0.4,0.1,0.6,0.2,0.9c0.2,0.2,0.4,0.3,0.7,0.3c0.4,0,0.7-0.2,0.8-0.6l0.8,0.4c-0.2,0.3-0.4,0.6-0.7,0.8c-0.3,0.2-0.7,0.3-1,0.3
+				c-0.6,0-1.1-0.2-1.5-0.6C7,7.9,6.8,7.4,6.8,6.7c0-0.6,0.2-1.1,0.6-1.5c0.4-0.4,0.8-0.6,1.4-0.6C9.6,4.6,10.2,5,10.5,5.6z"/>
+				</g>
+
+				</g>
+			</svg>
+		</a>
+		
+		<a href='https://creativecommons.org/licenses/by-sa/4.0/'>Content:
+		CC-BY-SA </a>
+		
+	</div>
+
+</div>
+
+    </div>
+
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        
+          <h1 id="simulink-overview">Simulink Overview</h1>
+
+<aside class="warning">
+This guide is under construction and for internal eyes only until public Bonsai Toolbox release.
+</aside>
+
+<blockquote>
+<p><img src="../images/simulink-model.png" alt="Simulink Model" /></p>
+</blockquote>
+
+<p>Simulink, developed by MathWorks, is a graphical programming environment for modeling, simulating and analyzing multi-domain dynamical systems. Simulink is one of the environments (simulators) you can use to train a BRAIN on the Bonsai Platform. We’re supporting a wide range of control and optimization use cases. Please review our <a href="./simulation-guide.html">Simulator requirements guide</a> to determine whether your model will be trainable on the Bonsai Platform.</p>
+
+<p>This tutorial will walk you through how to setup a project using the Bonsai Simulink Adapter and running the cartpole demo. Installing MATLAB/Simulink is not covered in this tutorial, as it is targeting existing users of Simulink who have previous experience with the software.</p>
+
+<aside class="notice">
+The Bonsai Toolbox is currently in beta release, which means that you may encounter product crashes or other bugs. Specifically, we are currently working on adding better error handling and reporting to make the Toolbox (and the enclosing Simulink process) more resilient to both user error and errors originating from the Bonsai platform.
+</aside>
+
+<h3 id="approach">Approach</h3>
+
+<p>MATLAB/Simulink offers a variety of <a href="https://www.mathworks.com/help/simulink/sfg/what-type-of-s-function-should-you-use.html">mechanisms</a> for incorporating custom code into Simulink models. Each has its advantages and disadvantages, but the C MEX S-Function is both the most performant and offers the most flexible access to model internals. S-functions of this kind exist as shared libraries, native to the host system and implementing a callback interface which is consumed by the Simulink runtime.</p>
+
+<p>To implement the S-Function callback interface, we use <code class="prettyprint">libbonsai</code>, a C++ library which exposes a high level API around the Bonsai platform’s network protocol. In this way, we allow the Simulink model to &ldquo;drive&rdquo; <code class="prettyprint">libbonsai</code>&lsquo;s internal event loop, passing states and actions back and forth between the Simulink runtime and the Bonsai backend.</p>
+
+<h1 id="setup-your-project">Setup Your Project</h1>
+
+<h2 id="install-the-bonsai-cli-and-sdk">Install the Bonsai CLI and SDK</h2>
+
+<p>If you are using Windows, the contents of the Bonsai Toolbox should be enough to get started. If using Mac OS or Linux, you will first need to install <code class="prettyprint">libbonsai</code>.</p>
+
+<h3 id="all-platforms">All Platforms</h3>
+
+<p>Install the Bonsai CLI by typing <code class="prettyprint">pip install bonsai-cli</code> at your command line.</p>
+
+<p>If you don’t already have one, create a Bonsai profile that points to the current beta deployment of the Bonsai platform:</p>
+<pre class="highlight plaintext"><code>$ bonsai switch &lt;profile&gt; --url https://api.bons.ai
+$ bonsai configure
+</code></pre>
+<h3 id="mac-os">Mac OS</h3>
+
+<p>If you haven’t already, you can use <code class="prettyprint">homebrew</code> to install <code class="prettyprint">libbonsai</code> as follows:</p>
+<pre class="highlight plaintext"><code>$ brew tap BonsaiAI/homebrew-bonsai
+$ brew install bonsai
+</code></pre>
+<p>This may take awhile as homebrew resolves any additional dependencies that may be missing from your system.</p>
+
+<h3 id="linux-experimental">Linux (Experimental)</h3>
+
+<p>For Linux (we’ve tested on Ubuntu 16.04), you’ll need to install <code class="prettyprint">libbonsai</code> from source. To get started, clone the most recent release as follows:</p>
+<pre class="highlight plaintext"><code>$ git clone https://github.com/BonsaiAI/libbonsai.git
+</code></pre>
+<p>You’ll find detailed instructions for building <code class="prettyprint">libbonsai</code> in <code class="prettyprint">libbonsai/libbonsai/how-to-build/BUILD-Ubuntu.md</code>. </p>
+
+<p>NOTE: The document listed above may be easier to read if you view it on <a href="https://github.com/BonsaiAI/libbonsai/blob/master/libbonsai/how-to-build/BUILD-Ubuntu.md">github</a>.</p>
+
+<p>Skip directly to the section titled “Build with Static Dependencies” and follow the instructions therein. This may take awhile. Seriously. Go get a cup of coffee.</p>
+
+<p>Once everything is done building, you’ll need to install the library by typing <code class="prettyprint">sudo make install</code> form the <code class="prettyprint">build</code> directory.</p>
+
+<h2 id="install-the-bonsai-toolbox">Install the Bonsai Toolbox</h2>
+
+<aside class="warning">
+The Bonsai Toolbox is currently in beta release, which means that you may encounter behavior which is unexpected or frustrating. Please contact support for any issues you encounter or feature requests.
+</aside>
+
+<p>Currently, while the Bonsai Toolbox is in beta, you will need to contact support@bons.ai for access to the Bonsai Toolbox archive that corresponds to your development platform. When you download the archive, you will find a number of files:</p>
+
+<ul>
+<li>The Bonsai Toolbox installer (.mltbx)</li>
+<li>Two example models:
+
+<ul>
+<li>Househeat - Thermal model of a house and a mechanism to control its HVAC system, targeting a comfortable internal temperature.</li>
+<li>Cartpole - A simple implementation of the classic control problem, implemented in low-level Simulink and with a Bonsai BRAIN in place of the usual controller.</li>
+<li>Engine Model - Model of an internal combustion engine. Bonsai can be used to tune the gains in the control block. Also serves as an example of controlling action frequency.</li>
+</ul></li>
+<li>This document.</li>
+</ul>
+
+<p>To install the Toolbox for the your default MATLAB/Simulink version simply double click on the toolbox installer and follow the prompts that appear on your screen, see Fig.1. When this is done, you’re ready to go! Move on to the next steps, where you’ll train a Bonsai BRAIN to control a model of a home HVAC unit.</p>
+
+<p>At its core, the Bonsai Toolbox is driven by a Level 2 C-MEX S-Function exposing a native binary interface to the Simulink runtime. When you install the Toolbox, both a MEX file and the source code that produced it will be installed to your MATLAB path.</p>
+
+<h1 id="create-your-brain">Create Your BRAIN</h1>
+<pre class="highlight plaintext"><code>$ cd /path/to/simulink-househeat
+$ bonsai create sl-house
+$ bonsai push
+</code></pre>
+<p>Create your BRAIN (and its related project file) with <a href="../references/cli-reference.html#bonsai-create"><code class="prettyprint">bonsai create</code></a> and give it a name. We used <em>sl-house</em> in the example code but you can name it whatever you&rsquo;d like. You will view your BRAIN&rsquo;s training progress on the BRAIN&rsquo;s Details page which can be found on the <a href="https://beta.bons.ai">BRAIN dashboard</a>.</p>
+
+<p>Next, use <a href="../references/cli-reference.html#bonsai-push"><code class="prettyprint">bonsai push</code></a> to upload the cloned househeat project and its associated files to the Bonsai AI Engine for training.</p>
+
+<h1 id="configure-simulink-adapter">Configure Simulink Adapter</h1>
+
+<blockquote>
+<p>Bonsai Block Parameters</p>
+
+<p><img src="../images/simulink-block-parameters.png" alt="Bonsai Block Parameters" /></p>
+</blockquote>
+
+<p>A full description of every field found in the <a href="#the-bonsai-block">Block Parameters window</a> is at the end of this tutorial for reference.</p>
+
+<ol>
+<li>Start MATLAB/Simulink</li>
+<li>Open the example model “simulink_househeat.slx”</li>
+<li>Double click the bonsai block.</li>
+<li>Fill in the <code class="prettyprint">BRAIN</code> field with the name of the BRAIN you just created. If you used the name suggested by this document, that should already be reflected in the <code class="prettyprint">BRAIN</code> field.</li>
+<li>Leave the rest of the fields as-is.</li>
+</ol>
+
+<p>Here is an example of <code class="prettyprint">bonsai_block</code>:</p>
+
+<p><img src="../images/simulink-bonsai-block.png" alt="bonsai_block" /></p>
+
+<h1 id="train-your-brain">Train Your BRAIN</h1>
+
+<p>Almost there! Time to tell the Bonsai AI Engine to prepare a new BRAIN version for training.</p>
+<pre class="highlight plaintext"><code>$ cd /path/to/simulink-househeat
+$ bonsai train start
+</code></pre>
+<p>In concept, what we have now is a Bonsai BRAIN that aims to keep the inside temperature of the “house” within a comfortable range while the “outside” temperature varies as a sinusoid over the course of the “day”. The control signal is a single bit, indicating whether the heater inside the house should be ON or OFF at a given time step. You can observe the dynamics of this process (and the resulting predictions) through the various oscilloscopes scattered throughout the model.</p>
+
+<h2 id="view-your-brain-training-status">View your BRAIN training status</h2>
+
+<blockquote>
+<p><img src="../images/simulink-data.png" alt="Bonsai Example Data" /></p>
+</blockquote>
+
+<p>Navigate to the Bonsai <a href="https://beta.bons.ai">web interface</a> and select the BRAIN you’ve created from the Dashboard. You should see a blank training graph and a message indicating that the selected BRAIN is awaiting simulation data. Head back to Simulink, make sure to accept any changes you made to the block configuration, save your model, and click <code class="prettyprint">Run</code>. Navigate back to the web interface to confirm that data is flowing from your Simulink model to the AI Engine. You can also confirm this by checking that episode rewards are being logged to the Simulink diagnostic window.</p>
+
+<h2 id="stop-training">Stop Training</h2>
+<pre class="highlight plaintext"><code>bonsai train stop
+</code></pre>
+<p>After around 30,000 episodes (or about 300,000 iterations), you should see the training graph level off at a reward of between 200 and 220. At this point you can stop your Simulink model and prepare for prediction using the CLI.</p>
+
+<h1 id="predict-with-your-brain">Predict with Your BRAIN</h1>
+
+<p>After your BRAIN is finished training it will be able to run through a simulation of househeat, choosing what to do when the temperature changes. How well it does depends on how long you let it train!</p>
+
+<p>To enable prediction mode in Simulink, simply double click the Bonsai block in your model, check the <code class="prettyprint">Predict</code> box, click ok, and Run the model again. As long as your BRAIN is stopped (you can confirm this by running <code class="prettyprint">bonsai list</code> at the command line and looking for the entry corresponding to your trained BRAIN), it should immediately start serving predictions to your model. You can see this reflected either in the diagnostic window (by observing episode rewards of approximately the reward converged upon by your training session) or in the various oscilloscopes littered throughout the example model.</p>
+
+<p>The scope in the upper right of the model labelled “BLOCK OUTPUT AND STATE” can be particularly useful in observing the dynamics of the model under Bonsai’s control. Try zooming in on the plot horizontally, using two Reset pulses as your boundaries.</p>
+
+<h1 id="model-integration">Model Integration</h1>
+
+<h2 id="the-bonsai-block">The Bonsai Block</h2>
+
+<p>The Bonsai Block exposes 3 input ports for drawing data from the enclosing model:</p>
+
+<ul>
+<li>The state of the model, corresponding with the state schema defined in Inkling and that used to configure the block (see Block Parameters, below). This will usually comprise several values that should be multiplexed into a flat, numeric vector before hitting the block input port</li>
+<li>The reward relative to the current state in the form of a single real number. E.g. <code class="prettyprint">room_temp &lt; abs(set_temp - 10)</code></li>
+<li>The boolean result of applying your chosen terminal condition to the current state. E.g. <code class="prettyprint">reward &lt; 0</code>.</li>
+</ul>
+
+<p>Similarly, the Bonsai Block exposes 3 output ports for communicating data back to the enclosing model:</p>
+
+<ul>
+<li>The prediction to be applied to the enclosing model in response to the given state. That is, the action recommended by the BRAIN given the current state of its associated neural net. This takes the form of a numeric array. If the <code class="prettyprint">Prediction Schema</code> contains more than one item, you will need a demux to extract them as individual signals.</li>
+<li>The configuration parameters. As above, these are emitted as a numeric vector which may or may not need demuxing. For more information about this signal, see <insert link to docs here></li>
+<li>The reset signal. This signal goes high either on the iteration following a terminal condition or when a training BRAIN updates configuration parameters as a way to avoid local optima. In practice, the former is the type of reset signal you will see the most frequently. For more information about responding to Reset signals, see the section titled “Resetting Your Model”.</li>
+</ul>
+
+<h3 id="block-parameters">Block Parameters</h3>
+
+<p>Access the Bonsai S-function parameter dialog by double clicking the corresponding block in the model.</p>
+
+<p>Block configuration fields should contain valid MATLAB and will be evaluated as such. “Char Array” indicates a native MATLAB type denoted by enclosing a string of characters in <em>single quotes</em>. If you use double quotes or leave out the quotes all together, Simulink will complain when Apply your changes.</p>
+
+<p>Schema fields (see below) represent lists of properties, log flags, etc. In order to support the widest possible variety of platforms and MATLAB/Simulink versions, we configure such fields as character arrays with list elements delimited by commas, semicolons, or single spaces (or any combination thereof. For example, any of the following are valid schemas:</p>
+<pre class="highlight plaintext"><code>‘foo;bar;baz’
+‘zab, rab, oof
+‘any;;combo;, at,,,all’
+</code></pre>
+<p>NOTE: with the exception of the log schema, which has no analog in Inkling, the schemas you configure here must precisely match those defined in you Inkling file. Failure to maintain a precise match may cause MATLAB to crash.</p>
+
+<blockquote>
+<p><img src="../images/simulink-block-parameters.png" alt="Bonsai Block Parameters" /></p>
+</blockquote>
+
+<table><thead>
+<tr>
+<th>parameter</th>
+<th>type</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">BRAIN</code></td>
+<td>Char Array</td>
+<td>The name of the BRAIN (as reflected in the Bonsai web interface).</td>
+</tr>
+<tr>
+<td><code class="prettyprint">Simulator Name</code></td>
+<td>Char Array</td>
+<td>As defined in the Inkling file associated with the target BRAIN.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">State Schema</code></td>
+<td>Char Array</td>
+<td>As defined in the Inkling file associated with the target BRAIN.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">Action schema</code></td>
+<td>Char Array</td>
+<td>As defined in the Inkling file associated with the target BRAIN.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">Config Schema</code></td>
+<td>Char Array</td>
+<td>As defined in the Inkling file associated with the target BRAIN.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">Log Schema</code></td>
+<td>Char Array</td>
+<td>A list of log domains to enable.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">Bonsai profile</code></td>
+<td>Char Array</td>
+<td>Select header from global Bonsai config. If left blank (i.e. empty single quotes, as in <code class="prettyprint">’’</code>), configuration will reflect whichever profile has been selected in the Bonsai CLI.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">Sample rate</code></td>
+<td>Numeric</td>
+<td>Either use a float to set the sample rate for the block or <code class="prettyprint">-1</code> for inherited sample time.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">Predict Mode</code></td>
+<td>Check Box</td>
+<td>Indicates whether the block should connect to the BRAIN in predict mode (will fail if BRAIN training is not stopped).</td>
+</tr>
+<tr>
+<td><code class="prettyprint">Verbose Logging</code></td>
+<td>Check Box</td>
+<td>When checked, the block’s internal log messages are printed to the MATLAB debug console.</td>
+</tr>
+</tbody></table>
+
+<h2 id="guidance-for-terminal-conditions-and-reward-functions">Guidance for Terminal Conditions and Reward Functions</h2>
+
+<p>Both the terminal and reward functions for your training session should be implemented in Simulink and should be included in your model. The reward input on the Bonsai block expects a Numeric type, while the terminal input expects a boolean.</p>
+
+<p>For more information on how to construct reward functions and terminal conditions see <a href="../guides/machine-teaching.html#constructing-reward-functions">Constructing Reward Functions</a> in our Programming Machine Teaching guide.</p>
+
+<p>In the example models, we use the following pattern:</p>
+
+<ul>
+<li>Implement your reward function in pure MATLAB, and enclose it in a MATLAB Function block.</li>
+<li>Implement your terminal condition using whatever means you find most convenient. If your terminal condition depends on the value of your reward function split the output of the reward block, sending one copy to the Bonsai block and the other to your terminal condition logic.</li>
+<li>Send the terminal condition to the Bonsai block.</li>
+</ul>
+
+<h2 id="customer-model-integration">Customer Model Integration</h2>
+
+<h3 id="resetting-your-model">Resetting Your Model</h3>
+
+<p>The Bonsai Block is designed to run in a feedback loop with your Simulink model. The Block Responds to the state, terminal, and reward conditions of its environment by sending those data to the Bonsai backend, which returns a suggested action based on the current state of the RL model it encapsulates.</p>
+
+<p>The terminal condition for a particular model is entirely at the discretion of the end user. It lets the BRAIN know when a particular state is outside the bounds of useful operation. The implications of this in the context of Reinforcement Learning and Bonsai’s implementation in particular are many, but the important thing to remember is that <em>the environment should be reset to a well-known set of default values after every terminal condition</em>. In normal operation, the Reset output port on the Bonsai Block should go high on the major time step immediately following a rising edge on the Terminal input port. The next major time step will contain the first action applied to the resulting initial state.</p>
+
+<p>In the case of the Househeat model, this is fairly straightforward. We pass the reset signal into our plant, and distribute it to the various integrators therein to reset the model to a state functionally identical to that immediately following model initialization.</p>
+
+<p>Unfortunately, things are not always so simple. As we progress with our own experiments (and receive feedback about yours) we will continue to build a collection of verified model integration patterns and use cases.</p>
+
+<h3 id="controlling-action-frequency">Controlling Action Frequency</h3>
+
+<p>In standard operation, the Bonsai Block operates in a 1:1 feedback loop with the enclosing model, which is to say that each major time step triggers the block to transfer the current state of the model to the Bonsai backend and request a prediction in return.</p>
+
+<p>Some use cases may require that the ratio of state transfers to major time steps be less than 1:1. In these cases, we recommend placing the Bonsai Block inside a Triggered Subsystem. This way, your model can explicitly indicate when it requires an action from the Bonsai platform. For an example of this workflow, see the Engine Model included alongside the toolbox archive.</p>
+
+      </div>
+      <div class="dark-box">
+      </div>
+    </div>
+
+    </div>
+
+  </div>
+  <!-- at the end of the BODY -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+  <script type="text/javascript"> docsearch({
+  apiKey: '49fa6f01d7ff94a85b9b7434b1c2b7cf',
+  indexName: 'bon-sai',
+  inputSelector: '#docs-search',
+  debug: false // Set debug to true if you want to inspect the dropdown
+  });
+  </script>
+  </body>
+</html>
