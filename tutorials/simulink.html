@@ -501,6 +501,8 @@ $ bonsai push
 <pre class="highlight plaintext"><code>$ cd /path/to/simulink-househeat
 $ bonsai train start
 </code></pre>
+<p>In Simulink, make sure to accept any changes you may have made to the block configuration, save your model, and click <code class="prettyprint">Run</code>. This will connect the simulation up to the Bonsai AI Engine and start providing data to the BRAIN.</p>
+
 <p>In concept, what we have now is a Bonsai BRAIN that aims to keep the inside temperature of the “house” within a comfortable range while the “outside” temperature varies as a sinusoid over the course of the “day”. The control signal is a single bit, indicating whether the heater inside the house should be ON or OFF at a given time step. You can observe the dynamics of this process (and the resulting predictions) through the various oscilloscopes scattered throughout the model.</p>
 
 <h2 id="view-your-brain-training-status">View your BRAIN training status</h2>
@@ -509,12 +511,14 @@ $ bonsai train start
 <p><img src="../images/simulink-data.png" alt="Bonsai Example Data" /></p>
 </blockquote>
 
-<p>Navigate to the Bonsai <a href="https://beta.bons.ai">web interface</a> and select the BRAIN you’ve created from the Dashboard. You should see a blank training graph and a message indicating that the selected BRAIN is awaiting simulation data. Head back to Simulink, make sure to accept any changes you made to the block configuration, save your model, and click <code class="prettyprint">Run</code>. Navigate back to the web interface to confirm that data is flowing from your Simulink model to the AI Engine. You can also confirm this by checking that episode rewards are being logged to the Simulink diagnostic window.</p>
+<p>Navigate to the Bonsai <a href="https://beta.bons.ai">web interface</a> and select the BRAIN you’ve created from the Dashboard. You may see a blank training graph and a message indicating that the selected BRAIN is awaiting simulation data if your simulation connection is slow. As soon as Simulink has finished connecting to the Bonsai AI Engine you will be able to confirm that data is flowing from your Simulink model with the Simulation tab of the graph. You can also confirm this by checking that episode rewards are being logged to the Simulink diagnostic window (example shown).</p>
 
 <h2 id="stop-training">Stop Training</h2>
+
+<p>After around 30,000 episodes (or about 300,000 iterations), you should see the training graph level off at a reward of between 200 and 220. At this point you can stop your Simulink model within Simulink and prepare for prediction using the CLI.</p>
 <pre class="highlight plaintext"><code>bonsai train stop
 </code></pre>
-<p>After around 30,000 episodes (or about 300,000 iterations), you should see the training graph level off at a reward of between 200 and 220. At this point you can stop your Simulink model and prepare for prediction using the CLI.</p>
+<p>Signal to the Bonsai AI Engine that you are done with this version of the BRAIN you just trained by running <code class="prettyprint">bonsai train stop</code> in the CLI.</p>
 
 <h1 id="predict-with-your-brain">Predict with Your BRAIN</h1>
 
