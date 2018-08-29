@@ -396,26 +396,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <tr>
 <td>Command Line Interface</td>
 <td>bonsai-cli</td>
-<td>0.8.25</td>
-<td>2018.06.18</td>
+<td>0.8.26</td>
+<td>2018.08.28</td>
 </tr>
 <tr>
 <td>Gym Common</td>
 <td>bonsai-gym</td>
-<td>2.0.7</td>
-<td>2018.06.18</td>
+<td>2.0.8</td>
+<td>2018.08.28</td>
 </tr>
 <tr>
 <td>Python Library</td>
 <td>bonsai-ai</td>
-<td>2.0.10</td>
-<td>2018.07.13</td>
+<td>2.0.11</td>
+<td>2018.08.28</td>
 </tr>
 <tr>
 <td>C++ Library</td>
 <td>libbonsai</td>
-<td>2.0.3</td>
-<td>2018.06.18</td>
+<td>2.0.4</td>
+<td>2018.08.28</td>
 </tr>
 </tbody></table>
 
@@ -423,11 +423,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <p>These release notes combine releases for the web (BRAIN Dashboard), the backend services (Bonsai AI Engine), the Inkling language, and Bonsai&rsquo;s API. All releases are tagged by date for the web, backend, Inkling, and API. SDK and CLI are released separately and have different version numbers. They are available on GitHub.</p>
 
-<p>Release Notes for CLI: <a href="https://github.com/BonsaiAI/bonsai-cli/blob/master/CHANGELOG.md">https://github.com/BonsaiAI/bonsai-cli/blob/master/CHANGELOG.md</a></p>
+<p>Release Notes for CLI: <a href="https://github.com/BonsaiAI/bonsai-cli/blob/master/bonsaicli/CHANGELOG.md">https://github.com/BonsaiAI/bonsai-cli/blob/master/bonsaicli/CHANGELOG.md</a></p>
 
 <p>Release Notes for Python SDK (bonsai-ai and bonsai-gym libraries): <a href="https://github.com/BonsaiAI/bonsai-sdk/blob/master/bonsai-ai/CHANGELOG.md">https://github.com/BonsaiAI/bonsai-sdk/blob/master/bonsai-ai/CHANGELOG.md</a></p>
 
 <p>Release Notes for C++ SDK (libbonsai): <a href="https://github.com/BonsaiAI/libbonsai/blob/master/libbonsai/CHANGELOG.md">https://github.com/BonsaiAI/libbonsai/blob/master/libbonsai/CHANGELOG.md</a></p>
+
+<h3 id="2018-08-02">2018.08.02</h3>
+
+<p>Various bug fixes, including: </p>
+
+<ul>
+<li>The TRPO algorithm now works with Luminance</li>
+<li>Fixed websocket disconnect issues</li>
+<li>You can now scroll up/down on the page after creating an access key</li>
+<li>Fixed client 503/504 errors in CLI</li>
+<li>Fixed issue with an internal server error appearing after creating a new account on beta</li>
+<li>Reset password emails were not being delivered for a short time, this has been fixed</li>
+</ul>
 
 <h3 id="2018-06-22">2018.06.22</h3>
 
