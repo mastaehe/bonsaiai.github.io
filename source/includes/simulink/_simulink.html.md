@@ -8,7 +8,7 @@ This guide is under construction and for internal eyes only until public Bonsai 
 
 Simulink, developed by MathWorks, is a graphical programming environment for modeling, simulating and analyzing multi-domain dynamical systems. Simulink is one of the environments (simulators) you can use to train a BRAIN on the Bonsai Platform. We’re supporting a wide range of control and optimization use cases. Please review our [Simulator requirements guide][6] to determine whether your model will be trainable on the Bonsai Platform.
 
-This tutorial will walk you through how to setup a project using the Bonsai Simulink Adapter and running the cartpole demo. Installing MATLAB/Simulink is not covered in this tutorial, as it is targeting existing users of Simulink who have previous experience with the software.
+This tutorial will walk you through how to setup a project using the Bonsai Simulink Adapter and running the cartpole demo. Installing MATLAB/Simulink is not covered in this tutorial, as it is targeting existing users of Simulink who have previous experience with the software. As of this writing, we provide support for only the latest version of MATLAB/Simulink.
 
 <aside class="notice">
 The Bonsai Toolbox is currently in beta release, which means that you may encounter product crashes or other bugs. Specifically, we are currently working on adding better error handling and reporting to make the Toolbox (and the enclosing Simulink process) more resilient to both user error and errors originating from the Bonsai platform.
@@ -71,6 +71,8 @@ Once everything is done building, you’ll need to install the library by typing
 <aside class="warning">
 The Bonsai Toolbox is currently in beta release, which means that you may encounter behavior which is unexpected or frustrating. Please contact support for any issues you encounter or feature requests.
 </aside>
+
+> ![Simulink Files](simulink-files.png)
 
 Currently, while the Bonsai Toolbox is in beta, you will need to contact support@bons.ai for access to the Bonsai Toolbox archive that corresponds to your development platform. When you download the archive, you will find a number of files:
 
@@ -188,10 +190,11 @@ Block configuration fields should contain valid MATLAB and will be evaluated as 
 Schema fields (see below) represent lists of properties, log flags, etc. In order to support the widest possible variety of platforms and MATLAB/Simulink versions, we configure such fields as character arrays with list elements delimited by commas, semicolons, or single spaces (or any combination thereof. For example, any of the following are valid schemas:
 
 ```
-‘foo;bar;baz’
-‘zab, rab, oof
-‘any;;combo;, at,,,all’
+‘field1;field2;field3’
+‘field1, field2, field3
+‘field1;;field2;, field3,,,field4’
 ```
+
 
 NOTE: with the exception of the log schema, which has no analog in Inkling, the schemas you configure here must precisely match those defined in you Inkling file. Failure to maintain a precise match may cause MATLAB to crash.
 
@@ -234,7 +237,7 @@ The terminal condition for a particular model is entirely at the discretion of t
 
 In the case of the Househeat model, this is fairly straightforward. We pass the reset signal into our plant, and distribute it to the various integrators therein to reset the model to a state functionally identical to that immediately following model initialization.
 
-Unfortunately, things are not always so simple. As we progress with our own experiments (and receive feedback about yours) we will continue to build a collection of verified model integration patterns and use cases.
+As we progress with our own experiments (and receive feedback about yours) we will continue to build a collection of verified model integration patterns and use cases.
 
 ### Controlling Action Frequency
 
