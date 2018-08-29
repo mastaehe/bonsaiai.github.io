@@ -9,11 +9,13 @@ Usage: bonsai [OPTIONS] COMMAND [ARGS]...
   Command line interface for the Bonsai Artificial Intelligence Engine.
 
 Options:
-  --debug / --no-debug  Enable/disable verbose debugging output.
-  --version             Show the version and check if Bonsai is up to date.
-  --sysinfo             Show system information.
-  --timeout INTEGER     Set timeout for CLI API requests.
-  -h, --help            Show this message and exit.
+  --debug                           Enable verbose debugging output.
+  --version                         Show the version and check if Bonsai is up
+                                    to date.
+  --sysinfo                         Show system information.
+  --timeout INTEGER                 Set timeout for CLI API requests.
+  --enable-color / --disable-color  Enable/disable color printing.
+  -h, --help                        Show this message and exit.
 
 Commands:
   configure  Authenticate with the BRAIN Server.
@@ -165,7 +167,9 @@ Options:
   -h, --help      Show this message and exit.
 ```
 
-`bonsai push` uploads the entire project file contents and all accompanying files to the Bonsai AI Engine and can be viewed on [beta.bons.ai][2]. You can override the BRAIN you want to push to or the project directory you want to push.
+`bonsai push` uploads the project file contents specified in the .bproj file to the Bonsai AI Engine and can be viewed on [beta.bons.ai][2]. You can override the BRAIN you want to push to or the project directory you want to push.
+
+You can not push files exceeding 640KB to the server.
 
 ## bonsai sims list
 
