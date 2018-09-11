@@ -157,7 +157,7 @@ file, in predict mode, and `--predict=latest` will use the latest training sessi
 
 
 
-[1]: http://pages.bons.ai/apply.html
+[1]: https://bons.ai/get-started
 [2]: ../examples.html#openai-gym-cartpole
 [3]: https://github.com/BonsaiAI/bonsai-sdk/tree/master/samples/openai-gym/gym-cartpole-sample
 [4]: https://gym.openai.com/envs/CartPole-v1

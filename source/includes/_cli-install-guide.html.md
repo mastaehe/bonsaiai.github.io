@@ -156,7 +156,7 @@ Now that you've installed the Bonsai CLI you can follow the local development gu
 If you have already trained a BRAIN on the web and are looking to use the Bonsai CLI to get predictions from your BRAIN you can either follow the instructions on the web to connect your local environment to your BRAIN or see [Predict with Your BRAIN][16] for an example.
 
 [1]: ../references/cli-reference.html
-[2]: http://pages.bons.ai/apply.html
+[2]: https://bons.ai/get-started
 [3]: #install-the-bonsai-cli
 [4]: https://www.python.org
 [5]: local-dev-guide.html
