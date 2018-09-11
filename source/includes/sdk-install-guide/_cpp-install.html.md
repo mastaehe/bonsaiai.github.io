@@ -1,11 +1,17 @@
 # Install libbonsai for C++
 
-<aside class="warning">
-The C++ library is still in beta and currently only available on macOS and Ubuntu 16.04.
-</aside>
+```powershell
+# Build VCPKG
+cd C:\
+git clone https://github.com/BonsaiAI/vcpkg.git
+cd vcpkg
+.\bootstrap-vcpkg.bat
+.\vcpkg.exe integrate install
+```
 
 ```powershell
-# Currently unavailable on Windows
+# Build/Install libbonsai (incl dependencies):
+.\vcpkg.exe install bonsai:x64-windows-bns
 ```
 
 ```shell--macos
@@ -27,7 +33,9 @@ $ apt-get install libbonsai
 $ apt-get source libbonsai
 ```
 
-The C++ library `libbonsai` can currently be installed via Homebrew on macOS or via APT on Ubuntu. 
+The C++ library `libbonsai` can currently be installed via VCPKG on Windows, via Homebrew on macOS, or via APT on Ubuntu.
+
+The VCPKG is hosted on BonsaiAI's GitHub and must be cloned before you can build and install `libbonsai`.
 
 The Homebrew formula is hosted on BonsaiAI's GitHub, therefore the full link to the formula must be specified when using `brew` while it is in beta.
 
