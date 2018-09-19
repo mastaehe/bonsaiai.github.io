@@ -16,7 +16,7 @@ The Bonsai Toolbox is currently in beta release, which means that you may encoun
 
 ### Approach
 
-MATLAB/Simulink offers a variety of [mechanisms](https://www.mathworks.com/help/simulink/sfg/what-type-of-s-function-should-you-use.html) for incorporating custom code into Simulink models. Each has its advantages and disadvantages, but the C MEX S-Function is both the most performant and offers the most flexible access to model internals. S-functions of this kind exist as shared libraries, native to the host system and implementing a callback interface which is consumed by the Simulink runtime.
+MATLAB/Simulink offers a variety of [mechanisms][1] for incorporating custom code into Simulink models. Each has its advantages and disadvantages, but the C MEX S-Function is both the most performant and offers the most flexible access to model internals. S-functions of this kind exist as shared libraries, native to the host system and implementing a callback interface which is consumed by the Simulink runtime.
 
 To implement the S-Function callback interface, we use `libbonsai`, a C++ library which exposes a high level API around the Bonsai platform’s network protocol. In this way, we allow the Simulink model to "drive" `libbonsai`'s internal event loop, passing states and actions back and forth between the Simulink runtime and the Bonsai backend.
 
@@ -26,18 +26,9 @@ To implement the S-Function callback interface, we use `libbonsai`, a C++ librar
 
 ## Install the Bonsai CLI and SDK
 
-If you are using Windows, the contents of the Bonsai Toolbox should be enough to get started. If using Mac OS or Linux, you will first need to install `libbonsai`.
+If you haven't yet done development on the Bonsai Platform before this, please follow our guide to [Install the CLI][2]. This guide will walk you through any prerequisites you may need and then you can come back to this tutorial to install the SDK.
 
-### All Platforms
-
-Install the Bonsai CLI by typing `pip install bonsai-cli` at your command line.
-
-If you don’t already have one, create a Bonsai profile that points to the current beta deployment of the Bonsai platform:
-
-```
-$ bonsai switch <profile> --url https://api.bons.ai
-$ bonsai configure
-```
+If you are using Windows, the contents of the Bonsai Toolbox will get you up and running with the SDK. If using Mac OS or Linux, you will first need to install `libbonsai`.
 
 ### Mac OS
 
@@ -77,13 +68,13 @@ The Bonsai Toolbox is currently in beta release, which means that you may encoun
 Currently, while the Bonsai Toolbox is in beta, you will need to contact support@bons.ai for access to the Bonsai Toolbox archive that corresponds to your development platform. When you download the archive, you will find a number of files:
 
 - The Bonsai Toolbox installer (.mltbx)
-- Two example models:
+- Three example models:
     - Househeat - Thermal model of a house and a mechanism to control its HVAC system, targeting a comfortable internal temperature.
     - Cartpole - A simple implementation of the classic control problem, implemented in low-level Simulink and with a Bonsai BRAIN in place of the usual controller.
     - Engine Model - Model of an internal combustion engine. Bonsai can be used to tune the gains in the control block. Also serves as an example of controlling action frequency.
 - This document.
 
-To install the Toolbox for the your default MATLAB/Simulink version simply double click on the toolbox installer and follow the prompts that appear on your screen, see Fig.1. When this is done, you’re ready to go! Move on to the next steps, where you’ll train a Bonsai BRAIN to control a model of a home HVAC unit.
+To install the Toolbox for your default MATLAB/Simulink version simply double click on the toolbox installer and follow the prompts that appear on your screen, see Fig.1. When this is done, you’re ready to go! Move on to the next steps, where you’ll train a Bonsai BRAIN to control a model of a home HVAC unit.
 
 At its core, the Bonsai Toolbox is driven by a Level 2 C-MEX S-Function exposing a native binary interface to the Simulink runtime. When you install the Toolbox, both a MEX file and the source code that produced it will be installed to your MATLAB path.
 
@@ -245,10 +236,8 @@ In standard operation, the Bonsai Block operates in a 1:1 feedback loop with the
 
 Some use cases may require that the ratio of state transfers to major time steps be less than 1:1. In these cases, we recommend placing the Bonsai Block inside a Triggered Subsystem. This way, your model can explicitly indicate when it requires an action from the Bonsai platform. For an example of this workflow, see the Engine Model included alongside the toolbox archive.
 
-[1]: getting-started.html#overview
+[1]: https://www.mathworks.com/help/simulink/sfg/what-type-of-s-function-should-you-use.html
 [2]: cli-install-guide.html#install-prerequisites
-[3]: ../references/cli-reference.html
-[4]: https://gym.openai.com/envs/MountainCar-v0
 [5]: https://beta.bons.ai
 [6]: ./simulation-guide.html
 [7]: ../guides/machine-teaching.html#constructing-reward-functions
