@@ -22,6 +22,10 @@ Check out [Slate](lord.github.io/slate).
 ## If You Want to Contribute
 ------------------------------
 
+## Style Guide
+
+Please read STYLEGUIDE.md to understand the folder structure, how Bonsai's Slate flavored markdown works, and other tips for keeping cohesive with the current documentation.
+
 ### Prerequisites
 
 You're going to need:

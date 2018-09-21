@@ -4,7 +4,11 @@ Hello! We are very excited and grateful for your interest in contributing to Bon
 
 ## If You Want to Contribute
 ----------------------------
-This information is copied over from our README
+This information is copied over from our README.
+
+## Style Guide
+
+Please read STYLEGUIDE.md to understand the folder structure, how Bonsai's Slate flavored markdown works, and other tips for keeping cohesive with the current documentation.
 
 ### Prerequisites
 
