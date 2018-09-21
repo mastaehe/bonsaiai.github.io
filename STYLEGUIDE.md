@@ -7,8 +7,15 @@ This guide is to describe how Bonsai's usage may be different than what you'll s
 
 SLATE FOLDER STRUCTURE
 
-Each part of the docs (examples, references, guides) have their own folders within the /source folder to group their parent files. The parent file contains the location of each partial file within the /includes folder, the order to display them in, and which (if any) language tabs to display. 
+Each part of the docs (examples, tutorials, references, guides) have their own folders within the /source folder to group their parent files. The parent file contains the location of each partial file within the /includes folder, the order to display them in, and which (if any) language tabs to display. 
 
+WARNING: If you ever move an existing parent file you will create a 404 page for anyone who tries to access that link. Be 100% sure that you have found and changed all references to that link or create a forwarding fragment (not recommended), an example of this is the `getting-started.html.md` file in the source root.
+
+Other important folders:
+
+* All images used anywhere in the docs can be found in the /images folder.
+* The /partials folder contains the primary navigation code and the footer links which are constant on all content pages.
+* The /layouts folder contains the code for the homepage and the main layout of every other content page in the docs.
 
 SLATE MARKDOWN HEADINGS
 
