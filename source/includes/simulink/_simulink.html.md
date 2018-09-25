@@ -1,9 +1,5 @@
 # Simulink Overview
 
-<aside class="warning">
-This guide is under construction and for internal eyes only until public Bonsai Toolbox release.
-</aside>
-
 >![Simulink Model](simulink-model.png)
 
 Simulink, developed by MathWorks, is a graphical programming environment for modeling, simulating and analyzing multi-domain dynamical systems. Simulink is one of the environments (simulators) you can use to train a BRAIN on the Bonsai Platform. We’re supporting a wide range of control and optimization use cases. Please review our [Simulator requirements guide][6] to determine whether your model will be trainable on the Bonsai Platform.
@@ -68,13 +64,12 @@ The Bonsai Toolbox is currently in beta release, which means that you may encoun
 Currently, while the Bonsai Toolbox is in beta, you will need to contact support@bons.ai for access to the Bonsai Toolbox archive that corresponds to your development platform. When you download the archive, you will find a number of files:
 
 - The Bonsai Toolbox installer (.mltbx)
-- Three example models:
+- An example Simulink model:
     - Househeat - Thermal model of a house and a mechanism to control its HVAC system, targeting a comfortable internal temperature.
-    - Cartpole - A simple implementation of the classic control problem, implemented in low-level Simulink and with a Bonsai BRAIN in place of the usual controller.
-    - Engine Model - Model of an internal combustion engine. Bonsai can be used to tune the gains in the control block. Also serves as an example of controlling action frequency.
-- This document.
+- A macOS and Windows project file
+- A README (this content)
 
-To install the Toolbox for your default MATLAB/Simulink version simply double click on the toolbox installer and follow the prompts that appear on your screen, see Fig.1. When this is done, you’re ready to go! Move on to the next steps, where you’ll train a Bonsai BRAIN to control a model of a home HVAC unit.
+To install the Toolbox for your default MATLAB/Simulink version simply double click on the toolbox installer and follow the prompts that appear on your screen. When this is done, you’re ready to go! Move on to the next steps, where you’ll train a Bonsai BRAIN to control a model of a home HVAC unit.
 
 At its core, the Bonsai Toolbox is driven by a Level 2 C-MEX S-Function exposing a native binary interface to the Simulink runtime. When you install the Toolbox, both a MEX file and the source code that produced it will be installed to your MATLAB path.
 
@@ -106,7 +101,8 @@ A full description of every field found in the [Block Parameters window](#the-bo
 2. Open the example model “simulink_househeat.slx”
 3. Double click the bonsai block.
 4. Fill in the `BRAIN` field with the name of the BRAIN you just created. If you used the name suggested by this document, that should already be reflected in the `BRAIN` field.
-5. Leave the rest of the fields as-is.
+5. Make sure your Bonsai profile is filled in. If you haven't changed your profile before this will be `DEFAULT` as shown in the image.
+6. Leave the rest of the fields as-is.
 
 Here is an example of `bonsai_block`:
 
@@ -116,21 +112,25 @@ Here is an example of `bonsai_block`:
 
 # Train Your BRAIN
 
-Almost there! Time to tell the Bonsai AI Engine to prepare a new BRAIN version for training.
+Almost there! Time to tell the Bonsai AI Engine to prepare a new BRAIN version for training. Follow the commands to start training on the Bonsai Platform **before** you do anything in Simulink.
 
 ```
 $ cd /path/to/simulink-househeat
 $ bonsai train start
 ```
 
-In Simulink, make sure to accept any changes you may have made to the block configuration, save your model, and click `Run`. This will connect the simulation up to the Bonsai AI Engine and start providing data to the BRAIN.
+Then, in Simulink, make sure to accept any changes you may have made to the block configuration, save your model, and click `Run`. This will connect the simulation up to the Bonsai AI Engine and start providing data to the BRAIN.
 
 In concept, what we have now is a Bonsai BRAIN that aims to keep the inside temperature of the “house” within a comfortable range while the “outside” temperature varies as a sinusoid over the course of the “day”. The control signal is a single bit, indicating whether the heater inside the house should be ON or OFF at a given time step. You can observe the dynamics of this process (and the resulting predictions) through the various oscilloscopes scattered throughout the model.
+
+<aside class="warning">
+Make sure you have started training on the Bonsai Platform, then hit the run button in Simulink, before you proceed to the next step.
+</aside>
 
 
 ## View your BRAIN training status
 
->![Bonsai Example Data](simulink-data.png)
+>![Bonsai Training Graph](simulink-training-graph.png)
 
 Navigate to the Bonsai [web interface][5] and select the BRAIN you’ve created from the Dashboard. You may see a blank training graph and a message indicating that the selected BRAIN is awaiting simulation data if your simulation connection is slow. As soon as Simulink has finished connecting to the Bonsai AI Engine you will be able to confirm that data is flowing from your Simulink model with the Simulation tab of the graph. You can also confirm this by checking that episode rewards are being logged to the Simulink diagnostic window (example shown).
 
@@ -147,6 +147,8 @@ Signal to the Bonsai AI Engine that you are done with this version of the BRAIN 
 
 
 # Predict with Your BRAIN
+
+>![Bonsai Example Data](simulink-data.png)
 
 After your BRAIN is finished training it will be able to run through a simulation of househeat, choosing what to do when the temperature changes. How well it does depends on how long you let it train!
 
@@ -169,7 +171,7 @@ The Bonsai Block exposes 3 input ports for drawing data from the enclosing model
 Similarly, the Bonsai Block exposes 3 output ports for communicating data back to the enclosing model:
 
 - The prediction to be applied to the enclosing model in response to the given state. That is, the action recommended by the BRAIN given the current state of its associated neural net. This takes the form of a numeric array. If the `Prediction Schema` contains more than one item, you will need a demux to extract them as individual signals.
-- The configuration parameters. As above, these are emitted as a numeric vector which may or may not need demuxing. For more information about this signal, see <insert link to docs here>
+- The configuration parameters. As above, these are emitted as a numeric vector which may or may not need demuxing.
 - The reset signal. This signal goes high either on the iteration following a terminal condition or when a training BRAIN updates configuration parameters as a way to avoid local optima. In practice, the former is the type of reset signal you will see the most frequently. For more information about responding to Reset signals, see the section titled “Resetting Your Model”.
 
 ### Block Parameters
