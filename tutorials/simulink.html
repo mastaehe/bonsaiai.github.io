@@ -268,6 +268,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 				<li class=""> <a href="../guides/sdk-install-guide.html">Install the SDK</a>  </li>
 				<li class=""> <a href="tutorial1.html">Running Simulations and Writing Inkling</a>  </li>
 				<li class=""> <a href="../guides/local-dev-guide.html">Run the Platform Locally</a>  </li>
+				<li class="selected"> <a href="simulink.html">Train a Simulink Model with Bonsai</a>  </li>
 				<li class=""> <a href="../guides/jupyter-api-guide.html">Use Bonsai's API with Jupyter</a>  </li>
 			</ul>
 		</li>
@@ -440,20 +441,9 @@ The Bonsai Toolbox is currently in beta release, which means that you may encoun
 <p><img src="../images/simulink-files.png" alt="Simulink Files" /></p>
 </blockquote>
 
-<p>Currently, while the Bonsai Toolbox is in beta, you will need to contact support@bons.ai for access to the Bonsai Toolbox archive that corresponds to your development platform. When you download the archive, you will find a number of files:</p>
+<p>Currently, while the Bonsai Toolbox is in beta, you will need to contact support@bons.ai for access to the Bonsai Toolbox archive that corresponds to your development platform.</p>
 
-<ul>
-<li>The Bonsai Toolbox installer (.mltbx)</li>
-<li>An example Simulink model:
-
-<ul>
-<li>Househeat - Thermal model of a house and a mechanism to control its HVAC system, targeting a comfortable internal temperature.</li>
-</ul></li>
-<li>A macOS and Windows project file</li>
-<li>A README (this content)</li>
-</ul>
-
-<p>To install the Toolbox for your default MATLAB/Simulink version simply double click on the toolbox installer and follow the prompts that appear on your screen. When this is done, you’re ready to go! Move on to the next steps, where you’ll train a Bonsai BRAIN to control a model of a home HVAC unit.</p>
+<p>To install the Toolbox for your default MATLAB/Simulink version simply double click on the toolbox installer (.mltbx) and follow the prompts that appear on your screen. When this is done, you’re ready to go! Move on to the next steps, where you’ll train a Bonsai BRAIN to control a model of a home HVAC unit.</p>
 
 <p>At its core, the Bonsai Toolbox is driven by a Level 2 C-MEX S-Function exposing a native binary interface to the Simulink runtime. When you install the Toolbox, both a MEX file and the source code that produced it will be installed to your MATLAB path.</p>
 
@@ -469,8 +459,6 @@ $ bonsai push
 <h1 id="configure-simulink-adapter">Configure Simulink Adapter</h1>
 
 <blockquote>
-<p>Bonsai Block Parameters</p>
-
 <p><img src="../images/simulink-block-parameters.png" alt="Bonsai Block Parameters" /></p>
 </blockquote>
 
