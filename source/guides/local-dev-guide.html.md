@@ -1,5 +1,5 @@
 ---
-title: Run the Platform Locally
+title: Use the CLI for Training
 
 language_tabs:
     - powershell: Windows

@@ -4,7 +4,7 @@ This guide will familiarize you with the two training graphs displayed on every 
 
 > ![Cartpole Balance](../images/cart-pole-balance.gif)
 
-In this guide we'll be walking through the graphs for OpenAI Gym's [Cartpole][3] environment to illustrate how to best use the information gathered in the Performance and Simulator graphs. If you need instruction on how to create a demo on the Platform you can follow the [web guide][4]. You may also choose to [Run the Platform Locally][5]. OpenAI Gym describes Cartpole as:
+In this guide we'll be walking through the graphs for OpenAI Gym's [Cartpole][3] environment to illustrate how to best use the information gathered in the Performance and Simulator graphs. If you need instruction on how to create a demo on the Platform you can follow the [web guide][4]. You may also choose to [Use the CLI for Training][5]. OpenAI Gym describes Cartpole as:
 
 _A pole is attached by an un-actuated joint to a cart, which moves along a frictionless track. The system is controlled by applying a force of +1 or -1 to the cart. The pendulum starts upright, and the goal is to prevent it from falling over. A reward of +1 is provided for every timestep that the pole remains upright. The episode ends when the pole is more than 15 degrees from vertical, or the cart moves more than 2.4 units from the center._
 

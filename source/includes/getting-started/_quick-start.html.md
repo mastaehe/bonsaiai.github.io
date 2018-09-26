@@ -11,8 +11,8 @@ Cartpole, a simple balance control problem. The walkthrough of the Inkling code 
 interface can be found in our [Examples][2] and the full source code for you to take a look at
 is on [Bonsai's GitHub][3].
 
-If you'd prefer not to use our web interface, instead follow [Run the Platform Locally][11] for a similar guide
-to this one on your local computer.
+If you'd prefer not to use our web interface, instead you can [Use the CLI for Training][7] for a similar guide
+to this one on your local computer or virtual machine.
 
 ## BRAIN Dashboard
 

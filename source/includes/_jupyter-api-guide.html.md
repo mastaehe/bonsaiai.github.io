@@ -5,7 +5,7 @@
 
 This guide contains basic instructions for how to setup the [Jupyter Notebook App][1] and contains an example notebook for how to access Bonsai's API through the notebook environment. Instructions for how to setup and use the APIs are contained within the notebook itself.
 
-**Before you read this guide** you will need to have successfully trained a BRAIN using either the [Quick Start][2] web guide or have [Run the Platform Locally][3]. This Jupyter Notebook will access information about the BRAINs you have trained and their training data.
+**Before you read this guide** you will need to have successfully trained a BRAIN using either the [Quick Start][2] web tutorial or [Use the CLI for Training][3] tutorial. This Jupyter Notebook will access information about the BRAINs you have trained and their training data.
 
 Jupyter Notebooks are often used in the data science community to access, analyze, and visualize data. This notebook will guide you through how to access Bonsai's API so that you have access to your Bonsai BRAIN's raw data for plotting and analysis. After following this guide you should be able to:
 
