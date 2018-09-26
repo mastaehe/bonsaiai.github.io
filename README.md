@@ -1,5 +1,8 @@
 # The Bonsai Platform Documentation
 
+[![](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](./LICENSE)
+[![](https://img.shields.io/badge/framework-Slate-orange.svg)](http://lord.github.io/slate)
+
 This project is the public home for the source code for the Bonsai Platform documentation. You can find our documentation at http://docs.bons.ai/.
 
 Our hope is that open-sourcing our documentation on GitHub helps our docs stay a living, breathing, constantly evolving project that users feel empowered to contribute to. If any documentation is unclear/missing we invite you to submit an issue or a pull request. But if you’d rather give us feedback directly, [send us an email](mailto:support@bons.ai).
