@@ -11,8 +11,8 @@ however, **skip down to [Create Your BRAIN][1]** below. We'll guide you through 
 first BRAIN with the Cartpole template, how to get that BRAIN training, and then explain what
 to do with it!
 
-If you'd prefer not to use our web interface, instead follow [Run the Platform Locally][7] for a similar guide
-to this one on your local computer.
+If you'd prefer not to use our web interface, instead you can [Use the CLI for Training][7] for a similar guide
+to this one on your local computer or virtual machine.
 
 ## The Bonsai Platform
 
@@ -22,7 +22,7 @@ to this one on your local computer.
 
 * **Bonsai Command Line Interface (CLI):** is a command line tool that enables you to configure and
 control The Bonsai Artificial Intelligence (AI) Engine. This is an alternative to using the Web
-Interface and is not covered in this guide. See how to [Run the Platform Locally][7] if you prefer CLI development.
+Interface and is not covered in this guide. See how to [Use the CLI for Training][7] if you prefer CLI development.
 * **Web Interface:** is the browser-based tool found at [beta.bons.ai][3] for creating and analyzing
 BRAINs stored in The Bonsai AI Engine. You can also visualize the BRAIN's training on this page.
 This is what we will use for this Quick Start guide because you can get up and running on the

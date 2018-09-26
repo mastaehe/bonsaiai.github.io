@@ -231,9 +231,9 @@ In standard operation, the Bonsai Block operates in a 1:1 feedback loop with the
 Some use cases may require that the ratio of state transfers to major time steps be less than 1:1. In these cases, we recommend placing the Bonsai Block inside a Triggered Subsystem. This way, your model can explicitly indicate when it requires an action from the Bonsai platform. For an example of this workflow, see the Engine Model included alongside the toolbox archive.
 
 [1]: https://www.mathworks.com/help/simulink/sfg/what-type-of-s-function-should-you-use.html
-[2]: cli-install-guide.html#install-prerequisites
+[2]: ../guides/cli-install-guide.html#install-prerequisites
 [5]: https://beta.bons.ai
-[6]: ./simulation-guide.html
+[6]: ../guides/simulation-guide.html
 [7]: ../guides/machine-teaching.html#constructing-reward-functions
 [16]: ../images/fully_trained_brain.png
 [17]: ../references/cli-reference.html#bonsai-configure

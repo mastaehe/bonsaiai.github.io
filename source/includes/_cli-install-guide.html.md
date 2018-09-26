@@ -151,7 +151,7 @@ From your command prompt, install the Bonsai Command Line Interface tool and con
 
 # Next Steps
 
-Now that you've installed the Bonsai CLI you can follow the local development guide [Run the Platform Locally][5] to get started with the Bonsai Platform.
+Now that you've installed the Bonsai CLI you can [Use the CLI for Training][5] tutorial to get started with the Bonsai Platform.
 
 If you have already trained a BRAIN on the web and are looking to use the Bonsai CLI to get predictions from your BRAIN you can either follow the instructions on the web to connect your local environment to your BRAIN or see [Predict with Your BRAIN][16] for an example.
 
@@ -164,7 +164,7 @@ If you have already trained a BRAIN on the web and are looking to use the Bonsai
 [7]: #install-with-chocolatey-or-homebrew
 [8]: https://beta.bons.ai/accounts/key
 [9]: #install-with-anaconda
-[10]: https://www.continuum.io/anaconda-overview
+[10]: https://www.anaconda.com/what-is-anaconda/
 [11]: https://git-for-windows.github.io/
 [12]: https://pip.pypa.io/en/stable/installing/
 [13]: https://github.com/MacPython/wiki/wiki/Which-Python
