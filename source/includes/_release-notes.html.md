@@ -4,10 +4,10 @@ This is a list of Bonsai's currently supported versions of its software packages
 
 | Software               | Package Name | Versions | Last Updated |
 | -                      | -            | -        | -            |
-| Command Line Interface | bonsai-cli   | 0.8.26   | 2018.08.28   |
-| Gym Common             | bonsai-gym   | 2.0.8    | 2018.08.28   |
-| Python Library         | bonsai-ai    | 2.0.11   | 2018.08.28   |
-| C++ Library            | libbonsai    | 2.0.4    | 2018.08.28   |
+| Command Line Interface | bonsai-cli   | 0.8.28   | 2018.09.24   |
+| Gym Common             | bonsai-gym   | 2.0.9    | 2018.09.24   |
+| Python Library         | bonsai-ai    | 2.0.13   | 2018.09.24   |
+| C++ Library            | libbonsai    | 2.0.5    | 2018.09.24   |
 
 # Product Release Notes
 
@@ -19,6 +19,58 @@ Release Notes for Python SDK (bonsai-ai and bonsai-gym libraries): <https://gith
 
 Release Notes for C++ SDK (libbonsai): <https://github.com/BonsaiAI/libbonsai/blob/master/libbonsai/CHANGELOG.md>
 
+### 2018.09.25
+
+Notable features:
+
+* Admin interface for product account management
+
+Various bug fixes, including:
+
+* Increased backend CPU resources
+* Other various backend stability improvements
+* Fixed a crashing issue with Lundar Lander
+
+### 2018.09.04
+
+Notable features:
+
+* You may now start/stop training from the web for all simulator types
+* The cartpole demo BRAIN has been updated to use better machine teaching
+* Added logger and logging to the CLI
+
+Various bug fixes, including:
+
+* Improved error reporting for bonsai create/delete
+* Improved handling of output constraints for TRPO
+* Fixed a bug with TRPO missing data for action in notify_state
+* Fixed source of some 500 server and 400 client errors
+
+### 2018.08.15
+
+Notable features:
+
+* A new example of using Predictor class with Cartpole is available
+
+Various bug fixes, including: 
+
+* Improved error reporting for bonsai delete, train resume, and train stop
+* bonsai switch --show will now show output for DEFAULT profile
+* Improved stability of backend services
+
+### 2018.08.08
+
+Notable features:
+
+* There is now a tooltip on the sim graph tab of the BRAIN Details page
+* The starter BRAIN template now uses SDK2
+
+Various bug fixes, including: 
+
+* Capacity and stability improvements on beta / gamma2
+* Fix for Docker ingress networking
+* Issue with TRPO and Luminance fixed
+
 ### 2018.08.02
 
 Various bug fixes, including: 
@@ -29,6 +81,10 @@ Various bug fixes, including:
 * Fixed client 503/504 errors in CLI
 * Fixed issue with an internal server error appearing after creating a new account on beta
 * Reset password emails were not being delivered for a short time, this has been fixed
+
+### 2018.07.03
+
+Various bug fixes and internal stability improvements.
 
 ### 2018.06.22
 
