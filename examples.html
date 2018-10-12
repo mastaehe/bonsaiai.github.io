@@ -408,7 +408,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <ul>
 <li><strong>Mountain Car</strong>: A simple control problem where a car must build up enough momentum to climb a hill.</li>
 <li><strong>Cartpole</strong>: A simple control problem where a cart must make a simple move to keep a pole balanced on top.</li>
-<li><strong>Event Driven Cartpole</strong>: Using the same Inkling at normal Cartpole, but using the Event class to drive the simulation.</li>
+<li><strong>Predictor Class Cartpole</strong>: Using the same Inkling as original Cartpole, but using the Predictor Class to obtain simulation predictions via Python script.</li>
+<li><strong>Event Driven Cartpole</strong>: Using the same Inkling as original Cartpole, but using the Event class to drive the simulation.</li>
 </ul>
 
 <h3 id="real-world-example">Real World Example</h3>
@@ -1200,6 +1201,150 @@ It can be used in this case to find the center between two numbers.
     <span class="n">sim</span><span class="o">.</span><span class="n">run_gym</span><span class="p">()</span>
 </code></pre>
 <p>This is an OpenAI Gym example which uses the OpenAI environment as its simulator. For more information about the simulator used see the <a href="https://github.com/BonsaiAI/bonsai-sdk/tree/master/bonsai-gym">Bonsai Gym Common GitHub repo</a> which is a python library for integrating a Bonsai BRAIN with OpenAI Gym environments.</p>
+
+          <h1 id="predictor-class-cartpole">Predictor Class Cartpole</h1>
+
+<blockquote>
+<p><img src="images/cart-pole-balance.gif" alt="Cartpole Balance" /></p>
+</blockquote>
+
+<p><a href="https://github.com/BonsaiAI/bonsai-sdk/tree/master/samples/openai-gym/gym-cartpole-predictor-sample"><strong>Download the full source code on GitHub</strong></a> if you want to run this simulator.</p>
+
+<p>This example demonstrates how the <code class="prettyprint">Predictor</code> class can be used to obtain predictions from a trained BRAIN. This is an alternative method to using the CLI to obtain predictions using the <code class="prettyprint">--predict</code> flag with Bonsai&rsquo;s Python SDK.</p>
+
+<p>Cartpole is a classic control problem. <a href="https://gym.openai.com/envs/CartPole-v1">OpenAI Gym</a> describes it as:</p>
+
+<p><em>A pole is attached by an un-actuated joint to a cart, which moves along a frictionless track. The system is controlled by applying a force of +1 or -1 to the cart. The pendulum starts upright, and the goal is to prevent it from falling over. A reward of +1 is provided for every timestep that the pole remains upright. The episode ends when the pole is more than 15 degrees from vertical, or the cart moves more than 2.4 units from the center.</em></p>
+
+<h2 id="inkling-file">Inkling File</h2>
+
+<p>The Inkling for this example is exactly the same as the original <a href="#openai-gym-cartpole">Cartpole OpenAI Gym example</a> above. See the previous example for details on how the Inkling works for training cartpole.</p>
+
+<h2 id="simulator-file">Simulator File</h2>
+
+<blockquote>
+<p>cartpole_simulator.py</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">bonsai_ai</span> <span class="kn">import</span> <span class="n">Brain</span><span class="p">,</span> <span class="n">Config</span>
+<span class="kn">from</span> <span class="nn">bonsai_gym</span> <span class="kn">import</span> <span class="n">GymSimulator</span>
+
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s">'gym_simulator'</span><span class="p">)</span>
+<span class="n">log</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">CartPole</span><span class="p">(</span><span class="n">GymSimulator</span><span class="p">):</span>
+    <span class="c"># Environment name, from openai-gym</span>
+    <span class="n">environment_name</span> <span class="o">=</span> <span class="s">'CartPole-v0'</span>
+
+    <span class="c"># simulator name from Inkling</span>
+    <span class="c"># Example Inkling:</span>
+    <span class="c">#   curriculum balance_curriculum</span>
+    <span class="c">#       train balance</span>
+    <span class="c">#       with simulator cartpole_simulator</span>
+    <span class="c">#       ....</span>
+    <span class="n">simulator_name</span> <span class="o">=</span> <span class="s">'cartpole_simulator'</span>
+
+    <span class="c"># convert openai gym observation to our state schema</span>
+    <span class="c"># Example Inkling:</span>
+    <span class="c">#   schema GameState</span>
+    <span class="c">#       Float32 position,</span>
+    <span class="c">#       Float32 velocity,</span>
+    <span class="c">#       Float32 angle,</span>
+    <span class="c">#       Float32 rotation</span>
+    <span class="c">#   end</span>
+    <span class="k">def</span> <span class="nf">gym_to_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">observation</span><span class="p">):</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="p">{</span><span class="s">'position'</span><span class="p">:</span> <span class="n">observation</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                 <span class="s">'velocity'</span><span class="p">:</span> <span class="n">observation</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                 <span class="s">'angle'</span><span class="p">:</span>    <span class="n">observation</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                 <span class="s">'rotation'</span><span class="p">:</span> <span class="n">observation</span><span class="p">[</span><span class="mi">3</span><span class="p">]}</span>
+        <span class="k">return</span> <span class="n">state</span>
+
+    <span class="c"># convert our action schema into openai gym action</span>
+    <span class="c"># Example Inkling:</span>
+    <span class="c">#   schema Action</span>
+    <span class="c">#       Int8{0, 1} command</span>
+    <span class="c">#   end</span>
+    <span class="k">def</span> <span class="nf">action_to_gym</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">action</span><span class="p">[</span><span class="s">'command'</span><span class="p">]</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="c"># create a brain, openai-gym environment, and simulator</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">Config</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
+    <span class="n">brain</span> <span class="o">=</span> <span class="n">Brain</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+    <span class="n">sim</span> <span class="o">=</span> <span class="n">CartPole</span><span class="p">(</span><span class="n">brain</span><span class="p">)</span>
+    <span class="n">sim</span><span class="o">.</span><span class="n">run_gym</span><span class="p">()</span>
+
+</code></pre>
+<p>This is an OpenAI Gym example which uses the OpenAI environment as its simulator. For more information about the simulator used see the <a href="https://github.com/BonsaiAI/bonsai-sdk/tree/master/bonsai-gym">Bonsai Gym</a> folder in the bonsai-sdk GitHub repo which is a python library for integrating a Bonsai BRAIN with OpenAI Gym environments.</p>
+
+<h2 id="predictor-file">Predictor File</h2>
+
+<blockquote>
+<p>cartpole_predictor.py</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">gym</span>
+<span class="kn">from</span> <span class="nn">bonsai_ai</span> <span class="kn">import</span> <span class="n">Brain</span><span class="p">,</span> <span class="n">Config</span><span class="p">,</span> <span class="n">Predictor</span>
+<span class="kn">from</span> <span class="nn">bonsai_ai.logger</span> <span class="kn">import</span> <span class="n">Logger</span>
+
+<span class="n">log</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">()</span>
+<span class="n">log</span><span class="o">.</span><span class="n">set_enabled</span><span class="p">(</span><span class="s">"info"</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_state</span><span class="p">(</span><span class="n">observation</span><span class="p">):</span>
+    <span class="s">""" Converts gym observation into Inkling state dictionary """</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="p">{</span><span class="s">'position'</span><span class="p">:</span> <span class="n">observation</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+             <span class="s">'velocity'</span><span class="p">:</span> <span class="n">observation</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+             <span class="s">'angle'</span><span class="p">:</span>    <span class="n">observation</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+             <span class="s">'rotation'</span><span class="p">:</span> <span class="n">observation</span><span class="p">[</span><span class="mi">3</span><span class="p">]}</span>
+    <span class="k">return</span> <span class="n">state</span>
+
+
+<span class="k">def</span> <span class="nf">_action</span><span class="p">(</span><span class="n">action</span><span class="p">):</span>
+    <span class="s">""" Converts Inkling action into a gym action """</span>
+    <span class="k">return</span> <span class="n">action</span><span class="p">[</span><span class="s">'command'</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">_log_state_and_action</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">action</span><span class="p">):</span>
+    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">"The BRAIN received the following state: {}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">state</span><span class="p">))</span>
+    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">"The BRAIN returned the following action: {}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">action</span><span class="p">))</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="c"># Set up predictor</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">Config</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
+    <span class="n">brain</span> <span class="o">=</span> <span class="n">Brain</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+    <span class="n">predictor</span> <span class="o">=</span> <span class="n">Predictor</span><span class="p">(</span><span class="n">brain</span><span class="p">,</span> <span class="s">'cartpole_simulator'</span><span class="p">)</span>
+
+    <span class="c"># Set up cartpole simulator</span>
+    <span class="n">episode_count</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="n">env</span> <span class="o">=</span> <span class="n">gym</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="s">'CartPole-v0'</span><span class="p">)</span>
+
+    <span class="c"># Reset, get state, exchange state for action, and then step the sim</span>
+    <span class="n">observation</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">_state</span><span class="p">(</span><span class="n">observation</span><span class="p">)</span>
+    <span class="n">action</span> <span class="o">=</span> <span class="n">_action</span><span class="p">(</span><span class="n">predictor</span><span class="o">.</span><span class="n">get_action</span><span class="p">(</span><span class="n">state</span><span class="p">))</span>
+    <span class="n">_log_state_and_action</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">action</span><span class="p">)</span>
+    <span class="n">observation</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">done</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
+    <span class="n">env</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
+
+    <span class="c"># Loop until episode_count is reached</span>
+    <span class="k">while</span> <span class="n">episode_count</span><span class="p">:</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="n">_state</span><span class="p">(</span><span class="n">observation</span><span class="p">)</span>
+        <span class="n">action</span> <span class="o">=</span> <span class="n">_action</span><span class="p">(</span><span class="n">predictor</span><span class="o">.</span><span class="n">get_action</span><span class="p">(</span><span class="n">state</span><span class="p">))</span>
+        <span class="n">_log_state_and_action</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">action</span><span class="p">)</span>
+        <span class="n">observation</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">done</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
+        <span class="n">env</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">done</span><span class="p">:</span>
+            <span class="n">episode_count</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="n">observation</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+
+</code></pre>
+<p>This <code class="prettyprint">cartpole_predictor.py</code> file contains all the code necessary to obtain predictions from a trained BRAIN. This predictor file converts the action and state spaces from the cartpole simulator (this is the same simulator as the original OpenAI Gym example) and logs the prediction results.</p>
 
           <h1 id="event-pump-cartpole">Event Pump Cartpole</h1>
 
