@@ -14,7 +14,8 @@ If you have any suggestions of examples you'd like to see us implement please [c
 ### OpenAI Gym Examples
 * **Mountain Car**: A simple control problem where a car must build up enough momentum to climb a hill.
 * **Cartpole**: A simple control problem where a cart must make a simple move to keep a pole balanced on top.
-* **Event Driven Cartpole**: Using the same Inkling at normal Cartpole, but using the Event class to drive the simulation.
+* **Predictor Class Cartpole**: Using the same Inkling as original Cartpole, but using the Predictor Class to obtain simulation predictions via Python script.
+* **Event Driven Cartpole**: Using the same Inkling as original Cartpole, but using the Event class to drive the simulation.
 
 ### Real World Example
 * **HVAC with EnergyPlus**: An example of climate control machine teaching using EnergyPlus and BCVTB for simulation.

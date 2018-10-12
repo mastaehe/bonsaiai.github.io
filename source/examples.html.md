@@ -15,6 +15,7 @@ includes:
 - examples/tic-tac-toe.html.md
 - examples/mountain-car.html.md
 - examples/cartpole.html.md
+- examples/predictor-cartpole.html.md
 - examples/event-cartpole.html.md
 - examples/energyplus.html.md
 
