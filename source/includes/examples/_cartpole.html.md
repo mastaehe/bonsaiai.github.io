@@ -2,7 +2,11 @@
 
 > ![Cartpole Balance](../images/cart-pole-balance.gif)
 
-[**Download the full source code on GitHub**][1] if you want to run this simulator locally. If you want to run Cartpole remotely on the Bonsai Platform as a managed simulator, create a new BRAIN selecting the Cartpole demo on [beta.bons.ai][4].
+[**Download the full source code on GitHub**][1] if you want to run this simulator locally.
+
+<aside class="notice">
+This example has now been replaced by the Stellar Cartpole example as the default Cartpole when you create a "Cartpole" demo on the platform.
+</aside>
 
 In this example, we'll walk you through the various statements that are part of the Cartpole Inkling file. Each statement is followed by an explanation of the statement.
 
@@ -67,7 +71,7 @@ simulator cartpole_simulator(CartPoleConfig)
 end
 ```
 
-The `cartpole_simulator` gets information from two schemas. The first schema, `CartPoleConfig`, specifies the schema for configuration of the simulation. The second schema contains the state of the simulator that is sent to the lesson.
+Simulator `cartpole_simulator` gets information from three schemas. The first schema, `CartPoleConfig`, specifies the schema for configuration of the simulation. The second schema `Action` specifies the action that the AI will take in the simulation. The third schema `GameState` contains the state of the simulator that is sent to the lesson.
 
 ###### Curriculum
 

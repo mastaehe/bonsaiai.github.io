@@ -11,6 +11,7 @@ toc_footers:
 includes:
 - examples/overview.html.md
 - examples/find-the-center.html.md
+- examples/stellar-cartpole.html.md
 - examples/simpy-elevator.html.md
 - examples/tic-tac-toe.html.md
 - examples/mountain-car.html.md
