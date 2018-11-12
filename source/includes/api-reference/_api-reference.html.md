@@ -540,26 +540,6 @@ GET /v1/{userName}/{brainName}/sims
 | connected | Count of how many simulators are connected |
 | instances | Array of connected simulators with their status and episode count |
 
-## Simulator Logs
-
-GET log messages from platform-managed simulators.
-
-> Request
-
-```text
-GET /v1/{userName}/{brainName}/{brainVersion}/sims/1/logs
-```
-
-| Parameter | Description |
-| --- | --- |
-| userName | Name of the user who has the BRAIN |
-| brainName | Name of the BRAIN |
-| brainVersion | Version of the BRAIN |
-
-### Response
-
-The request will return an array of strings (each string representing one log message). 
-
 ## Simulator Logs Websocket
 
 Use the websocket connection to get real-time simulator messages during training.
