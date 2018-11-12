@@ -1224,39 +1224,6 @@ BRAIN. You cannot PUT new file contents while a BRAIN is training.</p>
 </tr>
 </tbody></table>
 
-<h2 id="simulator-logs">Simulator Logs</h2>
-
-<p>GET log messages from platform-managed simulators.</p>
-
-<blockquote>
-<p>Request</p>
-</blockquote>
-<pre class="highlight plaintext"><code>GET /v1/{userName}/{brainName}/{brainVersion}/sims/1/logs
-</code></pre>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>userName</td>
-<td>Name of the user who has the BRAIN</td>
-</tr>
-<tr>
-<td>brainName</td>
-<td>Name of the BRAIN</td>
-</tr>
-<tr>
-<td>brainVersion</td>
-<td>Version of the BRAIN</td>
-</tr>
-</tbody></table>
-
-<h3 id="response">Response</h3>
-
-<p>The request will return an array of strings (each string representing one log message). </p>
-
 <h2 id="simulator-logs-websocket">Simulator Logs Websocket</h2>
 
 <p>Use the websocket connection to get real-time simulator messages during training.</p>
